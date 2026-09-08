@@ -1,0 +1,10 @@
+{
+  "status": "BLOCKED",
+  "local_http_route_valid": true,
+  "local_fixture_status": "COMPLETE",
+  "request_id_propagated": true,
+  "workflow_id_propagated": true,
+  "render_execution_attempted": false,
+  "supabase_to_render_execution_valid": false,
+  "real_provider_result_claimed": false
+}

@@ -1,0 +1,173 @@
+{
+  "artifact_count": 28,
+  "artifacts": [
+    {
+      "path": "agent_loop/AGENT_STATE.md",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "d0c4178d3593e4a7278f132b800132629da8538a0161453e12394c15a89e273d",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "agent_loop/HANDOFF_ASTRA_03C_METHOD_REMAP_AND_METADATA_ADJUDICATION.md",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "3cff241fb8e169c974548e6f63a2b3920bd0f1dc6bbdaa650cec296db5e7dfb7",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/ASTRA_03C_METHOD_REMAP_AND_METADATA_ADJUDICATION_REPORT.md",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "692a3b9efe1b5f9344301368cbe614a12380792e0ccdcaf2f8df80150057c6b6",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/ASTRA_03C_TEST_RESULTS.md",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "7f780b588a6993ba7d214f4dd17564020bfe4f5f2818647f9831b986b69328b5",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/CURRENT_TASK.md",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "51d221950738f80befbbc4dd40d0f8f7e04305e72e086eae7f47523c6c76e1e2",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "astra/HANDOFF_LATEST.md",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "fc05badb3bfd28936f0ca8c3ee05c5d095c319d8f81ee831cc34da268df326ab",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "astra/method_remap/adjudicator_test_cases.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "702a7f7fceea8c0562cbe1dfdf89dd67a0767da7faa4b71bcc7228f5fe3898ba",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/adjudicator_test_results.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "52559b21f563012067aafaa32b482ff34f5f94b2261d5236a3f7c06baea21833",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/alias_resolution.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "255e5f02c78f47d2bea590c5ad84e655dd576fe7911c6bf08741d8c33f657fa9",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/astra04_readiness.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "8b34e961844e44098ac49d7b88cea2c86ebcffc7a35e52ef17ba53a1cbe2b257",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/build_manifest.py",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "5b04c2b8a0074a88dda4aea9316fc17fc057cfd3368c01b301a1afc6ed69d963",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/confidence_recalculation.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "c63f0d212eb0e6c895dd94128531d7f786292517517d6e7a5defc27bf455721e",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/coverage_after_remap.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "28b05467e5967967572bcda0f75c5da65f7fdb4addb18a20cc3984c7db5ee133",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/cross_method_discrimination.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "dcba114c9bd7e1731d8a2f95b7fab77027a72eb442333789ef535f29dcd735e8",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/evidence_remap.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "cea31d5748a92727d426641375bd58441acbe1b072c9b7a34db326864fe97db3",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/finalize_astra03c.py",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "c217d8316bf609be89ab97430959bd1d4c8efb7d0caf67c1388018fd11354681",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/method_relationships.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "9b1743945206fa50b87b2b85dbe05add9bff6c3ba8ac894a3e03b1da22101ea6",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/normalized_methods.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "79f2cc11cdd989851023a7bf5a264215ed99bfcf36265f1689190ca2374a8aad",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/protection_before.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "5f42042693fb4ab8d66e84a19dab63b7f77e7e7ab92940006a217a2e23e94c79",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/protection_validation.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "720ac50357a179fccc9df176b48f986232260c9fec602c4985001e6e8137b4c7",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/rediscovered_methods.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "c968b6b209a387123438a51e5a24d2df6ccd20db6136e103bceb2411100d24fc",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/rediscovery_queries.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "081e20f9e2b8bbf3c9a677301e19055e6493c99b81ad8344e63ff6ad07c532af",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/registry_before.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "798769bd8fb01a2f9dede1e0d294356e435f8f2dee1b1d85a74bf83a5c24d7d8",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/run_adjudicator_cases.js",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "eadfe8e737ddc5339f06eb0ef0de79c2e4119447407b7f172524ed9db16ccb64",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/run_astra03c.py",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "c7063be12a2288e0103a3ce88e8b6c8e7bed4c287b0df78b0508bc70dc9ebad4",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/method_remap/test_results.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "83d85c88ae65918454abfc6482efd2f97c3c4dd14285174f8bed2aefe13b1524",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/methods/registry.json",
+      "purpose": "ASTRA-03C registry/remap/adjudication/protection evidence",
+      "sha256": "2d62079e90230e57cd258e1055c6763071478357da05b748a562b8580a80c81f",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "astra/method_remap/artifact_manifest.json",
+      "purpose": "Self manifest",
+      "sha256": null,
+      "created_or_modified": "created"
+    }
+  ]
+}

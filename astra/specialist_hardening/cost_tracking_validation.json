@@ -1,0 +1,295 @@
+{
+  "generated_at": "2026-09-07T02:37:04.847Z",
+  "by_scenario": {
+    "laser": {
+      "mode": "llm",
+      "model_calls": 8,
+      "retries": 0,
+      "by_tier": {
+        "MEDIUM_REASONING": 7,
+        "HIGH_REASONING": 2
+      },
+      "tokens": {
+        "prompt": 13256,
+        "completion": 21080
+      },
+      "evidence_chars_total": 55054,
+      "per_node": {
+        "market_context": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "icp": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "offer": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "funnel": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "creative_strategy": {
+          "tier": "HIGH_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "ads": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "whatsapp_conversion": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "measurement": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        }
+      }
+    },
+    "infoproduct": {
+      "mode": "llm",
+      "model_calls": 8,
+      "retries": 0,
+      "by_tier": {
+        "MEDIUM_REASONING": 7,
+        "HIGH_REASONING": 2
+      },
+      "tokens": {
+        "prompt": 13693,
+        "completion": 21477
+      },
+      "evidence_chars_total": 57081,
+      "per_node": {
+        "market_context": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "icp": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "offer": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "funnel": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "creative_strategy": {
+          "tier": "HIGH_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "ads": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "whatsapp_conversion": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        },
+        "measurement": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "LLM"
+        }
+      }
+    },
+    "dental": {
+      "mode": "deterministic",
+      "model_calls": 0,
+      "retries": 0,
+      "by_tier": {
+        "MEDIUM_REASONING": 7,
+        "HIGH_REASONING": 2
+      },
+      "tokens": {
+        "prompt": 0,
+        "completion": 0
+      },
+      "evidence_chars_total": 56945,
+      "per_node": {
+        "market_context": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "icp": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "offer": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "funnel": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "creative_strategy": {
+          "tier": "HIGH_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "ads": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "whatsapp_conversion": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "measurement": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        }
+      }
+    },
+    "restaurant": {
+      "mode": "deterministic",
+      "model_calls": 0,
+      "retries": 0,
+      "by_tier": {
+        "MEDIUM_REASONING": 7,
+        "HIGH_REASONING": 2
+      },
+      "tokens": {
+        "prompt": 0,
+        "completion": 0
+      },
+      "evidence_chars_total": 57387,
+      "per_node": {
+        "market_context": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "icp": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "offer": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "funnel": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "creative_strategy": {
+          "tier": "HIGH_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "ads": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "whatsapp_conversion": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "measurement": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        }
+      }
+    },
+    "b2b": {
+      "mode": "deterministic",
+      "model_calls": 0,
+      "retries": 0,
+      "by_tier": {
+        "MEDIUM_REASONING": 7,
+        "HIGH_REASONING": 2
+      },
+      "tokens": {
+        "prompt": 0,
+        "completion": 0
+      },
+      "evidence_chars_total": 58267,
+      "per_node": {
+        "market_context": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "icp": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "offer": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "funnel": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "creative_strategy": {
+          "tier": "HIGH_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "ads": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "whatsapp_conversion": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        },
+        "measurement": {
+          "tier": "MEDIUM_REASONING",
+          "evidence_count": 5,
+          "generation": "DETERMINISTIC"
+        }
+      }
+    }
+  },
+  "tracks": [
+    "mode",
+    "model_calls",
+    "retries",
+    "by_tier",
+    "tokens",
+    "evidence_chars_total",
+    "per_node"
+  ],
+  "monetary_cost_invented": false
+}

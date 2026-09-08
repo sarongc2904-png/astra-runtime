@@ -1,0 +1,37 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "image_provider abstraction",
+  "date": "2026-09-07",
+  "results": {
+    "provider_factory": {
+      "status": "PASS",
+      "tests": 2,
+      "details": [
+        "createProvider(kind: 'mock') returns mock provider with is_mock=true",
+        "createProvider(kind: 'live', cfg: {}) returns ENVIRONMENT_NOT_AVAILABLE status"
+      ]
+    },
+    "mock_provider": {
+      "status": "PASS",
+      "tests": 3,
+      "details": [
+        "validates request; rejects null prompt with MALFORMED status",
+        "generates deterministic asset with qa_features vector",
+        "respects defect_profile: applies LOW_CONTRAST degradation to qa_features"
+      ]
+    },
+    "provider_integration": {
+      "status": "PASS",
+      "tests": 3,
+      "details": [
+        "orchestrator uses mock provider when opts.provider supplied",
+        "mock provider never fabricates live generation",
+        "provider abstraction transparent to orchestrator"
+      ]
+    },
+    "environment_availability": {
+      "status": "PASS",
+      "details": "Live provider returns ENVIRONMENT_NOT_AVAILABLE (never fake success)"
+    }
+  }
+}

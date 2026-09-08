@@ -1,0 +1,9 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "scenario": "premium editorial dental creatives",
+  "mode": "CREATIVE_VARIANTS",
+  "result": "COMPLETE",
+  "astra08b_rebuilt_in_adapter": false
+}

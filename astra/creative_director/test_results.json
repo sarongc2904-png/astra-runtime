@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "gate": "ASTRA_08B_CREATIVE_DIRECTOR",
+  "primary_suite": {
+    "suite": "astra/tests/astra08b.test.js",
+    "pass": 36,
+    "fail": 0
+  },
+  "regression": [
+    {
+      "suite": "astra/tests/astra07.test.js",
+      "pass": 23,
+      "fail": 0
+    },
+    {
+      "suite": "astra/tests/astra05.test.js",
+      "pass": 24,
+      "fail": 0
+    },
+    {
+      "suite": "astra/tests/astra04.test.js",
+      "pass": 20,
+      "fail": 0
+    },
+    {
+      "suite": "astra/tests/run_all.test.js (ASTRA-02)",
+      "pass": 38,
+      "fail": 1,
+      "remaining_failure": "registry loads seed (all DISCOVERED)",
+      "remaining_failure_classification": "PRE-EXISTING / EXPECTED — stale ASTRA-02 assertion; registry remapped to PARTIALLY_MAPPED in ASTRA-03E; registry.json frozen and out of 08B scope; not modified.",
+      "handoff_tests_fixed_by_08b": [
+        "handoff CURRENT_TASK complete",
+        "handoff operational"
+      ]
+    }
+  ],
+  "agent_v1_protection": {
+    "agent_v1_modified": false,
+    "image_provider_invoked": false,
+    "new_knowledge_ingested": false
+  }
+}

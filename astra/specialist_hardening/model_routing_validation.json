@@ -1,0 +1,28 @@
+{
+  "captured_at": "2026-09-07T02:39:08.897020+00:00",
+  "task_classes": [
+    "DETERMINISTIC_TRANSFORM",
+    "LOW_COST_EXECUTION",
+    "MEDIUM_REASONING",
+    "HIGH_REASONING"
+  ],
+  "per_node_tier_laser": {
+    "market_context": "MEDIUM_REASONING",
+    "icp": "MEDIUM_REASONING",
+    "offer": "MEDIUM_REASONING",
+    "funnel": "MEDIUM_REASONING",
+    "creative_strategy": "HIGH_REASONING",
+    "ads": "MEDIUM_REASONING",
+    "whatsapp_conversion": "MEDIUM_REASONING",
+    "measurement": "MEDIUM_REASONING"
+  },
+  "by_tier_counts_laser": {
+    "MEDIUM_REASONING": 7,
+    "HIGH_REASONING": 2
+  },
+  "single_expensive_model_hardcoded": false,
+  "model_ids_configurable": true,
+  "note": "Tiers routed via MODEL_ROUTER per node (SPECIALIST_EXECUTION / STRATEGIC_SYNTHESIS for creative+synthesis). The configured provider currently resolves all tiers to openai/gpt-5-mini (single available provider); model ids remain config-driven and per-tier-overridable. DETERMINISTIC_TRANSFORM used for DAG/state/schema (no LLM).",
+  "llm_calls_laser": 8,
+  "llm_calls_infoproduct": 8
+}

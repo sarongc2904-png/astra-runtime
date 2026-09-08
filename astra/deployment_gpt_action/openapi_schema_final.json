@@ -1,0 +1,630 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ASTRA GPT Tools",
+    "version": "1.0.0",
+    "description": "GPT interface for narrow KB lookup and authoritative ASTRA workflows."
+  },
+  "servers": [
+    {
+      "url": "https://ftoxermwkfebmnrudiuu.supabase.co"
+    }
+  ],
+  "paths": {
+    "/functions/v1/search-kb": {
+      "post": {
+        "operationId": "searchKnowledgeBase",
+        "summary": "Search the existing knowledge base for a narrow factual lookup.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "query"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 12000
+                  },
+                  "top_k": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "default": 5
+                  },
+                  "filter_domain": {
+                    "type": "string",
+                    "maxLength": 128
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result with ASTRA status preserved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Oversized or semantically invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Runtime failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Runtime unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/functions/v1/astra-tools/campaign-360": {
+      "post": {
+        "operationId": "runAstraCampaign360",
+        "summary": "Run the complete ASTRA 360 campaign workflow.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CampaignRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result with ASTRA status preserved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Oversized or semantically invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Runtime failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Runtime unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/functions/v1/astra-tools/creative-director": {
+      "post": {
+        "operationId": "runAstraCreativeDirector",
+        "summary": "Create concepts, art direction, and copy-visual planning.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreativeDirectorRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result with ASTRA status preserved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Oversized or semantically invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Runtime failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Runtime unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/functions/v1/astra-tools/creative-generation": {
+      "post": {
+        "operationId": "runAstraCreativeGeneration",
+        "summary": "Generate or revise an approved creative direction with visual QA.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreativeGenerationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tool result with ASTRA status preserved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Oversized or semantically invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Runtime failure",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Runtime unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "status",
+          "error"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "FAILED"
+            ]
+          },
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "details": {}
+            }
+          }
+        }
+      },
+      "CampaignRequest": {
+        "type": "object",
+        "required": [
+          "input"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "input": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "project_id": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "user_context": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "CampaignResponse": {
+        "type": "object",
+        "required": [
+          "status",
+          "workflow_id",
+          "completed_nodes",
+          "selected_methods",
+          "final_synthesis",
+          "current_research_required",
+          "limitations",
+          "usage"
+        ],
+        "properties": {
+          "request_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "COMPLETE",
+              "WAITING_FOR_INPUT",
+              "BLOCKED",
+              "FAILED"
+            ]
+          },
+          "workflow_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "completed_nodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selected_methods": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "final_synthesis": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          },
+          "current_research_required": {
+            "type": "array",
+            "items": {}
+          },
+          "limitations": {
+            "type": "array",
+            "items": {}
+          },
+          "usage": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "required_inputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreativeDirectorRequest": {
+        "type": "object",
+        "required": [
+          "input",
+          "mode"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "input": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "SINGLE_CREATIVE",
+              "CREATIVE_VARIANTS",
+              "CREATIVE_SYSTEM"
+            ]
+          },
+          "brand_constraints": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "reference_assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "maxItems": 20
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 20
+          },
+          "project_id": {
+            "type": "string",
+            "maxLength": 128
+          }
+        }
+      },
+      "CreativeGenerationRequest": {
+        "type": "object",
+        "required": [
+          "creative_director_output",
+          "generation_mode"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "creative_director_output": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "generation_mode": {
+            "type": "string",
+            "enum": [
+              "SINGLE_GENERATION",
+              "VARIANT_GENERATION",
+              "REVISION_GENERATION"
+            ]
+          },
+          "reference_assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "maxItems": 20
+          },
+          "project_id": {
+            "type": "string",
+            "maxLength": 128
+          }
+        }
+      }
+    }
+  }
+}

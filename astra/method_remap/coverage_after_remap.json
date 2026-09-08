@@ -1,0 +1,135 @@
+{
+  "domains": [
+    {
+      "domain": "creative strategy",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_AD_EXECUTION_CRAFT"
+      ],
+      "evidence_quality": "HIGH",
+      "confidence": 0.86,
+      "remaining_gap": ""
+    },
+    {
+      "domain": "copy",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT",
+        "METHOD_COPYWRITING_TONE"
+      ],
+      "evidence_quality": "HIGH",
+      "confidence": 0.88,
+      "remaining_gap": ""
+    },
+    {
+      "domain": "target audience / ICP",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_ICP",
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ],
+      "evidence_quality": "MODERATE",
+      "confidence": 0.82,
+      "remaining_gap": "ASR warnings; no business-stage doctrine asserted"
+    },
+    {
+      "domain": "offer",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "evidence_quality": "MODERATE",
+      "confidence": 0.78,
+      "remaining_gap": "ASR warnings"
+    },
+    {
+      "domain": "funnels",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_FUNNEL"
+      ],
+      "evidence_quality": "MODERATE",
+      "confidence": 0.82,
+      "remaining_gap": "ASR warnings"
+    },
+    {
+      "domain": "sales conversion",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_SALES_ACCELERATION"
+      ],
+      "evidence_quality": "MODERATE",
+      "confidence": 0.82,
+      "remaining_gap": "ASR warnings"
+    },
+    {
+      "domain": "infoproducts",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_INFOPRODUCT"
+      ],
+      "evidence_quality": "MODERATE",
+      "confidence": 0.82,
+      "remaining_gap": "Course pedagogy not covered"
+    },
+    {
+      "domain": "CRO",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_CRO"
+      ],
+      "evidence_quality": "MODERATE",
+      "confidence": 0.82,
+      "remaining_gap": "ASR warnings"
+    },
+    {
+      "domain": "positioning",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_MIDAS",
+        "METHOD_GROWTH_MARKETING"
+      ],
+      "evidence_quality": "MODERATE",
+      "confidence": 0.82,
+      "remaining_gap": "No direct relationship claims"
+    },
+    {
+      "domain": "pricing",
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_MIDAS"
+      ],
+      "evidence_quality": "MODERATE",
+      "confidence": 0.82,
+      "remaining_gap": "No universal pricing doctrine asserted"
+    },
+    {
+      "domain": "Meta Ads",
+      "coverage": "NONE",
+      "methods_available": [],
+      "evidence_quality": "NONE",
+      "confidence": 0,
+      "remaining_gap": "No dedicated platform operations source"
+    },
+    {
+      "domain": "WhatsApp sales",
+      "coverage": "NONE",
+      "methods_available": [],
+      "evidence_quality": "NONE",
+      "confidence": 0,
+      "remaining_gap": "No dedicated WhatsApp conversion source"
+    },
+    {
+      "domain": "course creation",
+      "coverage": "NONE",
+      "methods_available": [],
+      "evidence_quality": "NONE",
+      "confidence": 0,
+      "remaining_gap": "No curriculum/pedagogy source"
+    }
+  ]
+}

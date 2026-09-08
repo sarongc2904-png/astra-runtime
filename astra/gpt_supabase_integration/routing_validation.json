@@ -1,0 +1,13 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "unique_operation_ids": true,
+  "intent_routes": {
+    "narrow_knowledge_lookup": "searchKnowledgeBase",
+    "full_campaign": "runAstraCampaign360",
+    "concepts_and_art_direction": "runAstraCreativeDirector",
+    "approved_generation_or_revision": "runAstraCreativeGeneration"
+  },
+  "unnecessary_all_tool_chain": false
+}

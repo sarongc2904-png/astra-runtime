@@ -1,0 +1,47 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "visual QA engine",
+  "date": "2026-09-07",
+  "results": {
+    "qa_evaluation": {
+      "status": "PASS",
+      "criteria_count": 20,
+      "verdict_types": ["PASS", "PASS_WITH_WARNINGS", "FAIL"],
+      "tests": [
+        "visual_qa evaluate PASS",
+        "visual_qa evaluate FAIL on low contrast",
+        "visual_qa detects unsupported claims via claim_guard"
+      ]
+    },
+    "source_class_distinction": {
+      "status": "PASS",
+      "classes": [
+        "DESIGN_EVIDENCE",
+        "CREATIVE_DIRECTOR_DECISION",
+        "USER_CONSTRAINT",
+        "VISUAL_INFERENCE",
+        "CURRENT_RESEARCH_REQUIRED"
+      ],
+      "rule": "VISUAL_INFERENCE never converted into evidence; properly tagged"
+    },
+    "remediation_targets": {
+      "status": "PASS",
+      "description": "QA failures map to specific remediation targets",
+      "targets": [
+        "OFF_BRIEF_VISUAL",
+        "LOW_CONTRAST",
+        "VISUAL_CLUTTER",
+        "WEAK_CTA",
+        "UNSAFE_TEXT_PLACEMENT",
+        "MOBILE_UNREADABLE",
+        "BROKEN_TYPOGRAPHY",
+        "FABRICATED_CLAIM"
+      ]
+    },
+    "claim_detection": {
+      "status": "PASS",
+      "integration": "visual_creative_qa calls claim_guard for generated_text",
+      "behavior": "Blocks unsupported medical, guarantee, testimonial, certification claims"
+    }
+  }
+}

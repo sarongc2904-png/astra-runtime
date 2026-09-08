@@ -1,0 +1,20 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "PASS",
+  "project_ref": "ftoxermwkfebmnrudiuu",
+  "functions": {
+    "search-kb": {
+      "status": "ACTIVE",
+      "version": 5,
+      "verify_jwt": false
+    },
+    "astra-tools": {
+      "status": "ACTIVE",
+      "version": 1,
+      "verify_jwt": false
+    }
+  },
+  "deployment_method": "Supabase CLI --use-api",
+  "destructive_changes": 0
+}

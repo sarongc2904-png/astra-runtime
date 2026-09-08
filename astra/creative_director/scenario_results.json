@@ -1,0 +1,132 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "gate": "ASTRA_08B_CREATIVE_DIRECTOR",
+  "scenario_count": 5,
+  "scenarios": [
+    {
+      "id": "S1_laser",
+      "business_type": "laser hair removal clinic",
+      "mode": "SINGLE_CREATIVE",
+      "status": "COMPLETE",
+      "smp": "Single-minded proposition: 6-session laser hair removal package",
+      "big_idea": "One dramatized moment that makes \"6-session laser hair removal package\" instantly felt",
+      "creative_concept": "A single visual mechanism that stages the 6-session laser hair removal package outcome as a before/after beat, carried by one hero subject",
+      "visual_metaphor": "Hero subject embodies the payoff of 6-session laser hair removal package; the mechanism shows change, not a description of it",
+      "angle_count": 4,
+      "variant_count": 0,
+      "evidence_used_count": 16,
+      "qa_status": "PASS",
+      "qa_score": 1,
+      "ready_for_visual_generation": true,
+      "limitations_count": 1,
+      "current_research_required": [
+        "current Meta platform mechanics (UI, Advantage+, CAPI, attribution defaults)"
+      ],
+      "image_provider_invoked": false,
+      "applied_commands": [
+        "/oneidea",
+        "/highcontrast"
+      ]
+    },
+    {
+      "id": "S2_dental",
+      "business_type": "dental clinic",
+      "mode": "CREATIVE_VARIANTS",
+      "status": "COMPLETE",
+      "smp": "Single-minded proposition: dental implant consultation",
+      "big_idea": "One dramatized moment that makes \"dental implant consultation\" instantly felt",
+      "creative_concept": "A single visual mechanism that stages the dental implant consultation outcome as a before/after beat, carried by one hero subject",
+      "visual_metaphor": "Hero subject embodies the payoff of dental implant consultation; the mechanism shows change, not a description of it",
+      "angle_count": 4,
+      "variant_count": 4,
+      "evidence_used_count": 16,
+      "qa_status": "PASS",
+      "qa_score": 1,
+      "ready_for_visual_generation": true,
+      "limitations_count": 1,
+      "current_research_required": [
+        "current Meta platform mechanics (UI, Advantage+, CAPI, attribution defaults)"
+      ],
+      "image_provider_invoked": false,
+      "applied_commands": [
+        "/minimalcopy"
+      ]
+    },
+    {
+      "id": "S3_restaurant",
+      "business_type": "local restaurant",
+      "mode": "SINGLE_CREATIVE",
+      "status": "COMPLETE",
+      "smp": "Single-minded proposition: weekend tasting menu",
+      "big_idea": "One dramatized moment that makes \"weekend tasting menu\" instantly felt",
+      "creative_concept": "A single visual mechanism that stages the weekend tasting menu outcome as a before/after beat, carried by one hero subject",
+      "visual_metaphor": "Hero subject embodies the payoff of weekend tasting menu; the mechanism shows change, not a description of it",
+      "angle_count": 4,
+      "variant_count": 0,
+      "evidence_used_count": 16,
+      "qa_status": "PASS",
+      "qa_score": 1,
+      "ready_for_visual_generation": true,
+      "limitations_count": 5,
+      "current_research_required": [
+        "mobile-first creative",
+        "current Meta platform mechanics (UI, Advantage+, CAPI, attribution defaults)"
+      ],
+      "image_provider_invoked": false,
+      "applied_commands": [
+        "/editorialad",
+        "/mobilefirst"
+      ]
+    },
+    {
+      "id": "S4_infoproduct",
+      "business_type": "digital infoproduct",
+      "mode": "CREATIVE_SYSTEM",
+      "status": "COMPLETE",
+      "smp": "Single-minded proposition: online course on paid ads",
+      "big_idea": "One dramatized moment that makes \"online course on paid ads\" instantly felt",
+      "creative_concept": "A single visual mechanism that stages the online course on paid ads outcome as a before/after beat, carried by one hero subject",
+      "visual_metaphor": "Hero subject embodies the payoff of online course on paid ads; the mechanism shows change, not a description of it",
+      "angle_count": 4,
+      "variant_count": 4,
+      "evidence_used_count": 16,
+      "qa_status": "PASS",
+      "qa_score": 1,
+      "ready_for_visual_generation": true,
+      "limitations_count": 1,
+      "current_research_required": [
+        "current Meta platform mechanics (UI, Advantage+, CAPI, attribution defaults)"
+      ],
+      "image_provider_invoked": false,
+      "applied_commands": [
+        "/ugcstyle",
+        "/creator-ad"
+      ]
+    },
+    {
+      "id": "S5_b2b",
+      "business_type": "B2B marketing service",
+      "mode": "CREATIVE_VARIANTS",
+      "status": "COMPLETE",
+      "smp": "Single-minded proposition: performance lead-gen retainer",
+      "big_idea": "One dramatized moment that makes \"performance lead-gen retainer\" instantly felt",
+      "creative_concept": "A single visual mechanism that stages the performance lead-gen retainer outcome as a before/after beat, carried by one hero subject",
+      "visual_metaphor": "Hero subject embodies the payoff of performance lead-gen retainer; the mechanism shows change, not a description of it",
+      "angle_count": 4,
+      "variant_count": 3,
+      "evidence_used_count": 16,
+      "qa_status": "PASS",
+      "qa_score": 1,
+      "ready_for_visual_generation": true,
+      "limitations_count": 3,
+      "current_research_required": [
+        "scroll-stopping principles",
+        "current Meta platform mechanics (UI, Advantage+, CAPI, attribution defaults)"
+      ],
+      "image_provider_invoked": false,
+      "applied_commands": [
+        "/3secondread"
+      ]
+    }
+  ]
+}

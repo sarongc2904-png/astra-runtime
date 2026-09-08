@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "styles": [
+    {
+      "style": "editorial premium",
+      "applied_commands": [
+        "/editorialad"
+      ],
+      "supporting_domain_coverage": [
+        {
+          "domain": "editorial design",
+          "coverage_class": "WEAK"
+        },
+        {
+          "domain": "typography",
+          "coverage_class": "MODERATE"
+        },
+        {
+          "domain": "negative space",
+          "coverage_class": "STRONG"
+        }
+      ],
+      "honestly_bounded": true,
+      "claimed_strongly_supported": false,
+      "status": "COMPLETE",
+      "qa_status": "PASS"
+    },
+    {
+      "style": "minimalist",
+      "applied_commands": [
+        "/minimalcopy"
+      ],
+      "supporting_domain_coverage": [
+        {
+          "domain": "information density",
+          "coverage_class": "MODERATE"
+        },
+        {
+          "domain": "negative space",
+          "coverage_class": "STRONG"
+        }
+      ],
+      "honestly_bounded": true,
+      "claimed_strongly_supported": true,
+      "status": "COMPLETE",
+      "qa_status": "PASS"
+    },
+    {
+      "style": "high contrast",
+      "applied_commands": [
+        "/highcontrast"
+      ],
+      "supporting_domain_coverage": [
+        {
+          "domain": "contrast",
+          "coverage_class": "STRONG"
+        },
+        {
+          "domain": "visual hierarchy",
+          "coverage_class": "STRONG"
+        }
+      ],
+      "honestly_bounded": true,
+      "claimed_strongly_supported": true,
+      "status": "COMPLETE",
+      "qa_status": "PASS"
+    },
+    {
+      "style": "UGC/native",
+      "applied_commands": [
+        "/ugcstyle",
+        "/native-content"
+      ],
+      "supporting_domain_coverage": [
+        {
+          "domain": "social / meta ad creative",
+          "coverage_class": "MODERATE"
+        },
+        {
+          "domain": "photography / image direction",
+          "coverage_class": "STRONG"
+        }
+      ],
+      "honestly_bounded": true,
+      "claimed_strongly_supported": true,
+      "status": "COMPLETE",
+      "qa_status": "PASS"
+    },
+    {
+      "style": "conceptual advertising",
+      "applied_commands": [
+        "/oneidea",
+        "/strategy-sketch"
+      ],
+      "supporting_domain_coverage": [
+        {
+          "domain": "advertising concept",
+          "coverage_class": "STRONG"
+        },
+        {
+          "domain": "visual metaphor",
+          "coverage_class": "STRONG"
+        }
+      ],
+      "honestly_bounded": true,
+      "claimed_strongly_supported": true,
+      "status": "COMPLETE",
+      "qa_status": "PASS"
+    },
+    {
+      "style": "mobile-first performance creative",
+      "applied_commands": [
+        "/mobilefirst",
+        "/3secondread"
+      ],
+      "supporting_domain_coverage": [
+        {
+          "domain": "mobile-first creative",
+          "coverage_class": "NONE"
+        },
+        {
+          "domain": "scroll-stopping principles",
+          "coverage_class": "NONE"
+        },
+        {
+          "domain": "performance creative",
+          "coverage_class": "WEAK"
+        }
+      ],
+      "honestly_bounded": true,
+      "claimed_strongly_supported": false,
+      "status": "COMPLETE",
+      "qa_status": "PASS"
+    }
+  ]
+}

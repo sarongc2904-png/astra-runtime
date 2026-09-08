@@ -1,0 +1,51 @@
+{
+  "captured_at": "2026-09-07T02:04:32.281970+00:00",
+  "workflow": "MARKETING_CAMPAIGN_360",
+  "node_order": [
+    "market_context",
+    "icp",
+    "offer",
+    "funnel",
+    "creative_strategy",
+    "ads",
+    "whatsapp_conversion",
+    "measurement",
+    "final_synthesis"
+  ],
+  "dependencies": {
+    "market_context": [],
+    "icp": [
+      "market_context"
+    ],
+    "offer": [
+      "icp"
+    ],
+    "funnel": [
+      "offer",
+      "icp"
+    ],
+    "creative_strategy": [
+      "icp",
+      "offer"
+    ],
+    "ads": [
+      "offer",
+      "funnel",
+      "creative_strategy"
+    ],
+    "whatsapp_conversion": [
+      "funnel"
+    ],
+    "measurement": [
+      "funnel",
+      "ads",
+      "whatsapp_conversion"
+    ],
+    "final_synthesis": [
+      "ALL"
+    ]
+  },
+  "context_rule": "READ_MINIMUM_NECESSARY_CONTEXT (targeted Strategy-F top5 per node)",
+  "specialists_thin_deterministic": true,
+  "llm_generation": false
+}

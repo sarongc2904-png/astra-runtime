@@ -1,0 +1,12 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "PASS",
+  "secret_values_in_artifacts": 0,
+  "stack_traces_in_live_responses": 0,
+  "unauthenticated_access": false,
+  "cors": true,
+  "arbitrary_shell": false,
+  "arbitrary_filesystem": false,
+  "service_role_returned": false
+}

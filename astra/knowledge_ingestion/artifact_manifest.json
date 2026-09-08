@@ -1,0 +1,181 @@
+{
+  "gate": "ASTRA_03B_MULTI_DOMAIN_KNOWLEDGE_SOURCE_INGESTION",
+  "artifact_count": 29,
+  "artifacts": [
+    {
+      "path": "astra/knowledge_ingestion/build_manifest.py",
+      "purpose": "Deterministic artifact-manifest builder",
+      "sha256": "a8d331a755c98bd97f27957ee76ef374ac9794d9657c6d47577aaaca09034592",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/candidate_sources.json",
+      "purpose": "Bounded local source inventory and evidence fields",
+      "sha256": "62d02162e20d89364f81a555b2f6df9868058c3fb554845081d17a61adda2eed",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/chunk_qa.json",
+      "purpose": "Chunk integrity and distribution evidence",
+      "sha256": "763d90503d79fe0ac147bd98110330168ab2f5b49e33435512c61cfd21fda1db",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/corpus_snapshot.before.json",
+      "purpose": "Rollback/reconciliation copy of prior 763-row data snapshot",
+      "sha256": "70e5c4aed7d4a6ba9aa8ac14f7d7c4fc0d51959d8e15aa980c326eebc6213521",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/embedding_validation.json",
+      "purpose": "Canonical model/vector validation and usage",
+      "sha256": "932ac5c3555cc495528b15a54c1560a25f9b388424f3a56d0f455246ce54d6f2",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/extraction_qa.json",
+      "purpose": "Per-source extraction quality evidence",
+      "sha256": "0c9d9613e497919777da8e9b8f8b2f8b5c35b26a4dd31690236398e20ee86dbf",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/ingestion_batches.json",
+      "purpose": "Atomic batch and conflict policy plan",
+      "sha256": "a81a79988c73d55f9d26501e8d231b633fc54a1fd9c14e18f362e71ecff5d7e3",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/ingestion_execution.json",
+      "purpose": "Remote additive insertion ledger",
+      "sha256": "06a05d6ff800d4a082f0920f900c0a6a3372702af2169d189b7d8345f6bca4c7",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/method_registry_impact.json",
+      "purpose": "ASTRA-03C evidence readiness without registry mutation",
+      "sha256": "cf4915dbed0be324a4613cc45785f5a2489bebc317f4ce070c72d9e37c039784",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/new_chunks.json",
+      "purpose": "Validated additive chunk payload without vectors",
+      "sha256": "da01b8b296677016b0e810624864ede65848d53baa569c808961ccb380a48513",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/new_embeddings.npy",
+      "purpose": "Validated vectors for the 617 new chunks",
+      "sha256": "9a919b7344dd23a19656f4837880aab8275a1a1a5fb29509fca339b4c61f49ec",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/post_ingestion_coverage.json",
+      "purpose": "Before/after domain coverage",
+      "sha256": "9ea8d249e18b9eab1a1d4549f3ec63e8e3a5b214c216b7d0ce661f394d419eae",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/protection_snapshot_before.json",
+      "purpose": "Protected before-state fingerprints",
+      "sha256": "356d64728ac61e24f6590fec5ef023a52b3ffefed46b2271c53c53e52ff85174",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/protection_validation.json",
+      "purpose": "Protected after-state and preservation comparison",
+      "sha256": "6d45c4ea36d759b8a96424c2eb94a5d13bb7e868d4328c31f43f34981edade91",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/retrieval_validation.json",
+      "purpose": "Unchanged Strategy-F ten-domain results",
+      "sha256": "ec11ba18b367c7d4daf6fc315832800903e2de988c73ec1d84915d86330a0703",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/run_astra03b.py",
+      "purpose": "Gate-specific preparation/embedding/ingestion script",
+      "sha256": "f5d52f944148209e13b4af4164ff15a83ada38ce13c45e9ed45f3a222a6a8d87",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/source_admission.json",
+      "purpose": "ADMIT/DEFER/REJECT decisions",
+      "sha256": "23c348442896c0a96209adafc6be1abfc25d4ea897c21b573e0227d162e90df6",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/source_coverage_plan.json",
+      "purpose": "Pre-ingestion coverage plan",
+      "sha256": "0a4fc3e1c3afde1a9807deea833586d3691176260fe3535344d6374daa022a5d",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/test_astra03b.py",
+      "purpose": "Deterministic local acceptance suite",
+      "sha256": "af114dd981ab2c918355168f7344c6d0ad00a37b4066b0baecd6a9611734d37d",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/test_results.json",
+      "purpose": "Machine-readable 23-check acceptance suite",
+      "sha256": "7b8867b5efdf6e604055954d5f5c046558a74df69f89b9259bad8dc380847457",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/knowledge_ingestion/validate_astra03b.py",
+      "purpose": "Post-ingestion unchanged-Strategy-F and protection validator",
+      "sha256": "39e1145c74e0d0753160068111b73efb69f0c67889836fd4d2d2501f9bacbad4",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/ASTRA_03B_MULTI_DOMAIN_KNOWLEDGE_SOURCE_INGESTION_REPORT.md",
+      "purpose": "Final gate report",
+      "sha256": "b436f028b65d87b8473599fdfeb27fca305eb226f7aff5f55ce4a27820aef407",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/ASTRA_03B_TEST_RESULTS.md",
+      "purpose": "Human-readable test report",
+      "sha256": "ce9f0b79c8c4733d720da1aa4b89beab0361095e12ed9ee6406e74b502bbfe5f",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/CURRENT_TASK.md",
+      "purpose": "Completed operational task state",
+      "sha256": "ff1907cd73127809e5fea1209f171f0e5b100205a1950dd396b07f850c81a5cf",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "astra/HANDOFF_LATEST.md",
+      "purpose": "Latest operational handoff",
+      "sha256": "afda43b5b3b55d18cbd2456c78d5fcf098a233b4630793d5ee0914b6293ae2db",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "agent_loop/HANDOFF_ASTRA_03B_MULTI_DOMAIN_KNOWLEDGE_SOURCE_INGESTION.md",
+      "purpose": "Dedicated final handoff",
+      "sha256": "a7a64ba079c3f0bc04abf82dc0da4589d463d9fccd17daa6fca6eacaa08c3711",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "agent_loop/AGENT_STATE.md",
+      "purpose": "Additive durable execution record",
+      "sha256": "33fda69f714dffd15d345342eab9aaf0e9a19ea8e65b1df7b3a6538b320c35f7",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "rag_retrieval_refinement/corpus_snapshot.json",
+      "purpose": "Authorized additive Strategy-F corpus-data snapshot",
+      "sha256": "58ff5ac2dd47da6af5317f7930ac1ff7b3ab142be1a35f9fb9ff6a7e0e9eb60c",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "astra/knowledge_ingestion/artifact_manifest.json",
+      "purpose": "This manifest",
+      "sha256": null,
+      "created_or_modified": "created",
+      "hash_note": "Self-hash omitted because inclusion changes the file hash"
+    }
+  ]
+}

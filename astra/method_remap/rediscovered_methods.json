@@ -1,0 +1,949 @@
+{
+  "count": 9,
+  "methods": [
+    {
+      "method_id": "METHOD_SALES_ACCELERATION",
+      "raw_name": "Venta Elegante Sales Conversion",
+      "canonical_name": "Venta Elegante Sales Conversion",
+      "aliases_observed": [
+        "Venta Elegante Sales Conversion"
+      ],
+      "primary_source": "Velocity — La Venta Elegante",
+      "supporting_sources": [
+        "Velocity — La Venta Elegante [transcript bundle]"
+      ],
+      "source_type": "COURSE",
+      "domain": "SALES",
+      "subdomain": "sales conversation and conversion",
+      "evidence_refs": [
+        {
+          "query_id": "Q03",
+          "evidence_id": "E1",
+          "chunk_id": "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6126067243058606,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q03",
+          "evidence_id": "E2",
+          "chunk_id": "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6190822316027752,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q03",
+          "evidence_id": "E3",
+          "chunk_id": "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5948725300782236,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "evidence_id": "E1",
+          "chunk_id": "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.7721302122307648,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "evidence_id": "E2",
+          "chunk_id": "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5845415476452347,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "evidence_id": "E3",
+          "chunk_id": "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6089897583904528,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "existence_confidence": 0.82
+    },
+    {
+      "method_id": "METHOD_DIGITAL_MARKETING",
+      "raw_name": "Growth Marketing",
+      "canonical_name": "Growth Marketing",
+      "aliases_observed": [
+        "Growth Marketing"
+      ],
+      "primary_source": "Protégé — Growth Marketing",
+      "supporting_sources": [
+        "Protégé — Growth Marketing [transcript bundle]"
+      ],
+      "source_type": "COURSE",
+      "domain": "ADS",
+      "subdomain": "growth strategy excluding platform-specific ads operations",
+      "evidence_refs": [
+        {
+          "query_id": "Q13",
+          "evidence_id": "E1",
+          "chunk_id": "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6562685147826564,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E2",
+          "chunk_id": "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.538696823667013,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E3",
+          "chunk_id": "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5143752814184723,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E1",
+          "chunk_id": "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5533427191796035,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E2",
+          "chunk_id": "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5647821411413874,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E3",
+          "chunk_id": "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5198808309070964,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "existence_confidence": 0.82
+    },
+    {
+      "method_id": "METHOD_OFFER_DESIGN",
+      "raw_name": "Propuesta Irresistible",
+      "canonical_name": "Propuesta Irresistible",
+      "aliases_observed": [
+        "Propuesta Irresistible"
+      ],
+      "primary_source": "Velocity — Taller de Propuesta Irresistible",
+      "supporting_sources": [
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Taller de Propuesta Irresistible [transcript bundle]"
+      ],
+      "source_type": "MIXED",
+      "domain": "OFFER",
+      "subdomain": "value proposition and funnel-stage offer",
+      "evidence_refs": [
+        {
+          "query_id": "Q09",
+          "evidence_id": "E3",
+          "chunk_id": "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+          "source_pdf_name": "Velocity — Taller de Propuesta Irresistible [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6901023453449773,
+          "source_id": "SRC_VEL_OFFER",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "evidence_id": "E1",
+          "chunk_id": "b696eb7e844f49dacd9fd752acfee63c44e99646d8623eb66a07f154e9fe96c2",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.7123536640710004,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "evidence_id": "E2",
+          "chunk_id": "470102b912bf5286fb76a9e9a305e9456f2c24587ccd9140bdf7198daff06f19",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6350629679247313,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "evidence_id": "E3",
+          "chunk_id": "d53c564c7b32600ca577ed3ffcc74f89877dcd9ee9349d2c2ec42ab2bca54de5",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.7015004737633606,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "existence_confidence": 0.78
+    },
+    {
+      "method_id": "METHOD_CRO",
+      "raw_name": "CRO Máxima",
+      "canonical_name": "CRO Máxima",
+      "aliases_observed": [
+        "CRO Máxima"
+      ],
+      "primary_source": "Protégé — CRO Máxima",
+      "supporting_sources": [
+        "Protégé — CRO Máxima [transcript bundle]"
+      ],
+      "source_type": "COURSE",
+      "domain": "CRO",
+      "subdomain": "conversion research and experimentation",
+      "evidence_refs": [
+        {
+          "query_id": "Q11",
+          "evidence_id": "E1",
+          "chunk_id": "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6766883824352607,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E2",
+          "chunk_id": "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6388788819884266,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E3",
+          "chunk_id": "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.635542765479661,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "evidence_id": "E1",
+          "chunk_id": "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.636918667484424,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "evidence_id": "E2",
+          "chunk_id": "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6284588419335153,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "evidence_id": "E3",
+          "chunk_id": "da231f65b0cabbcf73b00cdf747f3d81e123399ae05559c24f02659cffec6e93",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5956595402476095,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "existence_confidence": 0.82
+    },
+    {
+      "method_id": "METHOD_ICP",
+      "raw_name": "Audience and Customer Definition",
+      "canonical_name": "Audience and Customer Definition",
+      "aliases_observed": [
+        "Audience and Customer Definition"
+      ],
+      "primary_source": "MIXED",
+      "supporting_sources": [
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]"
+      ],
+      "source_type": "MIXED",
+      "domain": "ICP",
+      "subdomain": "audience, avatar and market customer",
+      "evidence_refs": [
+        {
+          "query_id": "Q14",
+          "evidence_id": "E1",
+          "chunk_id": "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5533427191796035,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E2",
+          "chunk_id": "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5647821411413874,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E3",
+          "chunk_id": "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5198808309070964,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q22",
+          "evidence_id": "E1",
+          "chunk_id": "3c0bd5599fba42c65e9afc90b3b2cc3379d51ee8e6b50a6f60a532cb244ae114",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5506599359935916,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q22",
+          "evidence_id": "E2",
+          "chunk_id": "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.4501721424688939,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q22",
+          "evidence_id": "E4",
+          "chunk_id": "fb354abc51f8a9ae921e96bfd8914356e699c77317593d0614ddff5a5ad60a71",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.42949480386888395,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "existence_confidence": 0.85
+    },
+    {
+      "method_id": "METHOD_FUNNEL",
+      "raw_name": "Velocity Funnel Method",
+      "canonical_name": "Velocity Funnel Method",
+      "aliases_observed": [
+        "Velocity Funnel Method"
+      ],
+      "primary_source": "Velocity — Cursos Amplify: Funnels",
+      "supporting_sources": [
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]"
+      ],
+      "source_type": "COURSE",
+      "domain": "FUNNEL",
+      "subdomain": "funnel strategy, economics and implementation",
+      "evidence_refs": [
+        {
+          "query_id": "Q01",
+          "evidence_id": "E1",
+          "chunk_id": "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6115571315455892,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q01",
+          "evidence_id": "E2",
+          "chunk_id": "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5635554543221566,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q01",
+          "evidence_id": "E3",
+          "chunk_id": "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5712105821057297,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E1",
+          "chunk_id": "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.639444189108815,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E2",
+          "chunk_id": "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5876658789017009,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E4",
+          "chunk_id": "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.616548208339074,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "existence_confidence": 0.82
+    },
+    {
+      "method_id": "METHOD_MIDAS",
+      "raw_name": "MIDAS",
+      "canonical_name": "MIDAS",
+      "aliases_observed": [
+        "MIDAS"
+      ],
+      "primary_source": "Velocity — Curso MIDAS",
+      "supporting_sources": [
+        "Velocity — Curso MIDAS [transcript bundle]"
+      ],
+      "source_type": "COURSE",
+      "domain": "RESEARCH",
+      "subdomain": "demand, pricing, business model/LTV and intangible assets",
+      "evidence_refs": [
+        {
+          "query_id": "Q05",
+          "evidence_id": "E1",
+          "chunk_id": "58bad94434984c2b61caab1bc6e1f142a88de665a61f93e23396da22bca630bf",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5463498740820546,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E2",
+          "chunk_id": "7b0d0bd2813591242ac3daf53dd35cac7955f21c37154b416f75023eef733f52",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5381162056312305,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E3",
+          "chunk_id": "f52740637426debb618a0a92e4ee464d3a7efe2e9ba0b9a9c7210a5821c252fb",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5722168995776011,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E1",
+          "chunk_id": "2969124a61a2a00161920f8c1cd5842ceb07d35613731355f2014312e9dd8b7b",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5422450674220916,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E2",
+          "chunk_id": "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5391945949726953,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E3",
+          "chunk_id": "bfe47635e7291c9f64afbdb6a562fff9acede2a18380f96d78286200712637f2",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5814643883071317,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "existence_confidence": 0.82
+    },
+    {
+      "method_id": "METHOD_INFOPRODUCT",
+      "raw_name": "Negocio de Infoproductos A-Z",
+      "canonical_name": "Negocio de Infoproductos A-Z",
+      "aliases_observed": [
+        "Negocio de Infoproductos A-Z"
+      ],
+      "primary_source": "Velocity — Negocio de infoproductos de la A a la Z",
+      "supporting_sources": [
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]"
+      ],
+      "source_type": "COURSE",
+      "domain": "INFOPRODUCT",
+      "subdomain": "audience, proposition, launch and growth",
+      "evidence_refs": [
+        {
+          "query_id": "Q07",
+          "evidence_id": "E1",
+          "chunk_id": "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6235598156483552,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q07",
+          "evidence_id": "E2",
+          "chunk_id": "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6072185352562766,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q07",
+          "evidence_id": "E3",
+          "chunk_id": "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.601673298285325,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E1",
+          "chunk_id": "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6775084170867239,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E2",
+          "chunk_id": "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6266039110607184,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E3",
+          "chunk_id": "34421dcc63514aacb41e5ca4bd17aed9893467722d9c4b66d63685128a645784",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.7130843062220689,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "existence_confidence": 0.82
+    },
+    {
+      "method_id": "METHOD_GROWTH_MARKETING",
+      "raw_name": "Growth Marketing",
+      "canonical_name": "Growth Marketing",
+      "aliases_observed": [
+        "Growth Marketing"
+      ],
+      "primary_source": "Protégé — Growth Marketing",
+      "supporting_sources": [
+        "Protégé — Growth Marketing [transcript bundle]"
+      ],
+      "source_type": "COURSE",
+      "domain": "RESEARCH",
+      "subdomain": "market, growth loops, positioning and prioritization",
+      "evidence_refs": [
+        {
+          "query_id": "Q13",
+          "evidence_id": "E1",
+          "chunk_id": "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6562685147826564,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E2",
+          "chunk_id": "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.538696823667013,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E3",
+          "chunk_id": "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5143752814184723,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E1",
+          "chunk_id": "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5533427191796035,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E2",
+          "chunk_id": "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5647821411413874,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E3",
+          "chunk_id": "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5198808309070964,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "existence_confidence": 0.82
+    }
+  ]
+}

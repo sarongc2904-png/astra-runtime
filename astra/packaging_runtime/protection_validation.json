@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-09-07T03:36:48.0444339Z",
+  "agent_v1_protected": true,
+  "current_sha256": {
+    "knowledge.js": "0596f096fe8c628e2e69142e558ffbc69fd4b607967eb7099d86f01627a62c3d",
+    "classifier_decision_cache.js": "273b40eefac54b17d33357460ff459f96ec5cb896c1517c9ddbf720b3370fbfa",
+    "retrieval_strategy_f.py": "cdbbc9b2b779b751bbd9c8031f7057c12f29fe2702bbe5f0d4b0b3a42012e1de",
+    "rag_answer_policy_runtime.js": "f76d620795170b61af202907eba70c9f7d470b795467db985682359e9aeb8aab"
+  },
+  "matches_astra06_baseline": true,
+  "canonical_state": {
+    "chunks": 1454,
+    "embeddings": 1454,
+    "sources": 11,
+    "legacy_kb_chunks": 7584,
+    "classifier_cache_records": 20,
+    "ann": 0
+  },
+  "canonical_state_evidence": "ASTRA-06 protected baseline plus matching frozen runtime hashes; ASTRA-07 performed no database or ingestion writes.",
+  "live_database_recount_performed": false,
+  "protected_files_modified": 0,
+  "corpus_or_embedding_writes": 0,
+  "supabase_schema_writes": 0,
+  "adapter_corpus": "kb_chunks_v2",
+  "adapter_pipeline": "Strategy-F",
+  "adapter_read_only": true
+}

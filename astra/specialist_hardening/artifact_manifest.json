@@ -1,0 +1,107 @@
+{
+  "gate": "ASTRA_05_SPECIALIST_HARDENING",
+  "generated_at": "2026-09-07T02:39:08.897020+00:00",
+  "artifact_count": 20,
+  "artifacts": [
+    {
+      "path": "astra/specialist_hardening/context_budget_validation.json",
+      "hash": "4aa6ab15e213be19",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/cost_tracking_validation.json",
+      "hash": "414235dbc42a746c",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/deterministic_vs_llm_comparison.json",
+      "hash": "0662630c646bc095",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/evidence_grounding_validation.json",
+      "hash": "ff20a93d07151f1e",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/hardening_contract.json",
+      "hash": "c470749ae98991aa",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/infoproduct_llm_full.json",
+      "hash": "aad01e2389c073d8",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/laser_llm_full.json",
+      "hash": "88f299213a11beb4",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/method_scoring_validation.json",
+      "hash": "2fcaa135dfdacbef",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/model_routing_validation.json",
+      "hash": "ac91c0924781d7f5",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/protection_validation.json",
+      "hash": "00e6191e8d5cda02",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/run_scenarios.js",
+      "hash": "c094a66f5348d4b4",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/scenario_results.json",
+      "hash": "3118c0dd8b687470",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/synthesis_validation.json",
+      "hash": "ed5ba061cbc108e2",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/specialist_hardening/test_results.json",
+      "hash": "e07e9099950cf965",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/llm/llm_executor.js",
+      "hash": "32f1aafd26d92e18",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/specialists/llm_specialists.js",
+      "hash": "9a4082e85708a6cf",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/router/method_scorer_v2.js",
+      "hash": "1255edc3cd544a41",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/synthesis/synthesis_engine_v2.js",
+      "hash": "9e93246a895cfa55",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/workflows/marketing_campaign_360_hardened.js",
+      "hash": "9fd0c19c62280c2d",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/tests/astra05.test.js",
+      "hash": "8499f6092245ed64",
+      "created_or_modified": "created"
+    }
+  ]
+}

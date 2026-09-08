@@ -1,0 +1,21 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "PASS_WITH_DEPLOYMENT_BLOCKER",
+  "astra10": {
+    "passed": 10,
+    "failed": 0
+  },
+  "astra09": {
+    "passed": 25,
+    "failed": 0
+  },
+  "live_search": true,
+  "live_astra": false,
+  "external_calls": {
+    "supabase_deploy": 1,
+    "search_probe": 1,
+    "openrouter_health": 1,
+    "campaign_attempts": 1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "status": "BLOCKED",
+  "local_http_route_valid": true,
+  "local_behavior": "BLOCKED",
+  "generated_assets": 0,
+  "honest_environment_not_available_preserved": true,
+  "render_execution_attempted": false,
+  "supabase_to_render_execution_valid": false
+}

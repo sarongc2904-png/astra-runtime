@@ -1,0 +1,83 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "test_suite": "astra/tests/astra08c.test.js",
+  "date": "2026-09-07",
+  "summary": {
+    "total_tests": 23,
+    "passed": 23,
+    "failed": 0,
+    "status": "PASS"
+  },
+  "test_categories": {
+    "provider_abstraction": {
+      "count": 5,
+      "passed": 5,
+      "tests": [
+        "image_provider createProvider(mock)",
+        "image_provider createProvider(live) returns ENVIRONMENT_NOT_AVAILABLE",
+        "mock provider validates request",
+        "mock provider generates deterministic asset",
+        "mock provider respects defect_profile"
+      ]
+    },
+    "visual_qa": {
+      "count": 3,
+      "passed": 3,
+      "tests": [
+        "visual_qa evaluate PASS",
+        "visual_qa evaluate FAIL on low contrast",
+        "visual_qa detects unsupported claims via claim_guard"
+      ]
+    },
+    "typography_overlay": {
+      "count": 2,
+      "passed": 2,
+      "tests": [
+        "typography_overlay_spec build",
+        "typography_overlay_spec validate"
+      ]
+    },
+    "claim_guard": {
+      "count": 3,
+      "passed": 3,
+      "tests": [
+        "claim_guard scan detects medical claim",
+        "claim_guard scan passes approved claims",
+        "claim_guard guard detects fabricated testimonials"
+      ]
+    },
+    "prompt_fidelity": {
+      "count": 1,
+      "passed": 1,
+      "tests": [
+        "prompt_fidelity validate preserves constraints"
+      ]
+    },
+    "revision_planner": {
+      "count": 2,
+      "passed": 2,
+      "tests": [
+        "revision_planner LOW_CONTRAST applies lighting delta",
+        "revision_planner MAX_REVISIONS enforced"
+      ]
+    },
+    "orchestrator": {
+      "count": 7,
+      "passed": 7,
+      "tests": [
+        "orchestrator SINGLE_GENERATION completes",
+        "orchestrator VARIANT_GENERATION produces variants",
+        "orchestrator REVISION_GENERATION forces at least one revision",
+        "orchestrator WAITING_FOR_INPUT on missing reference",
+        "orchestrator detects unsupported claims in QA feedback",
+        "orchestrator FAILED when all QA attempts fail after revision budget",
+        "orchestrator does not modify ASTRA-08B"
+      ]
+    }
+  },
+  "regression_tests": {
+    "astra_08b": { "passed": 36, "status": "PASS" },
+    "astra_07": { "passed": 23, "status": "PASS" },
+    "astra_05": { "passed": 24, "status": "PASS" }
+  }
+}

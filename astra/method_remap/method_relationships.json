@@ -1,0 +1,151 @@
+{
+  "methods": [
+    {
+      "method_id": "METHOD_VELOCITY",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_SALES_ACCELERATION",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_DIGITAL_MARKETING",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_OFFER_DESIGN",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_CRO",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_META_ADS",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_WHATSAPP_SALES",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_ICP",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_FUNNEL",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_CREATIVE_STRATEGY",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_SINGLE_MINDED_PROPOSITION",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_TAGLINE_CRAFT",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_COPYWRITING_TONE",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_VISUAL_IDEAS",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_AMBIENT_ADVERTISING",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_AD_EXECUTION_CRAFT",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_TARGET_AUDIENCE_DEFINITION",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_MIDAS",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_INFOPRODUCT",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_GROWTH_MARKETING",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    },
+    {
+      "method_id": "METHOD_COURSE_DESIGN",
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "dependencies": [],
+      "reason": "No direct relationship claim found in bounded evidence; left empty."
+    }
+  ]
+}

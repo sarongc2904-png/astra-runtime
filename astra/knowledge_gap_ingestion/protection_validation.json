@@ -1,0 +1,72 @@
+{
+  "checked_at": "2026-09-07T00:40:30.223394+00:00",
+  "protected_files_before": {
+    "knowledge.js": "0596f096fe8c628e2e69142e558ffbc69fd4b607967eb7099d86f01627a62c3d",
+    "classifier_decision_cache.js": "273b40eefac54b17d33357460ff459f96ec5cb896c1517c9ddbf720b3370fbfa",
+    "retrieval_strategy_f.py": "cdbbc9b2b779b751bbd9c8031f7057c12f29fe2702bbe5f0d4b0b3a42012e1de",
+    "rag_retrieval_refinement/recommended_pipeline.json": "fc0acafce2c4650513392deac06ef57f9cba3f837f0e89b9aa8ff62a5abea742",
+    "rag_retrieval_qa/benchmark.json": "5bedc0bb819e1d2f1e3878abd0bc3f11218446dfc233f2c9ecfc0da774ea0cf5",
+    "rag_retrieval_qa/benchmark_ground_truth.json": "5c6f7b1a79f5db78ea20002e392f25a24bd8c8f3ba2a70082871388836588872",
+    "e2e_benchmark_evidence_rebuild/rebuilt_evidence.json": "02cbd455470b2ea83cc705468fd6c65ac7352e568fce255e39e57e66c2599c3e",
+    "rag_answer_policy_runtime.js": "f76d620795170b61af202907eba70c9f7d470b795467db985682359e9aeb8aab",
+    "config.json": "bf6c30098abd12ddf0f2cca028c9263fdec8c123b0f90f221bc7958efcc6bf6a",
+    "evaluator_reselection/selected_evaluator.json": "81e2ae6e2195347f34d294389c609c08ddc1b4aab43ec05f615aa2976991b76e",
+    "evaluator_reselection/evaluator_rubric.json": "5a8f61d3c4cd3cd9e0bf02bb582a2b714b91ea9d01d44b93b98f9500f72b0385"
+  },
+  "protected_files_after": {
+    "knowledge.js": "0596f096fe8c628e2e69142e558ffbc69fd4b607967eb7099d86f01627a62c3d",
+    "classifier_decision_cache.js": "273b40eefac54b17d33357460ff459f96ec5cb896c1517c9ddbf720b3370fbfa",
+    "retrieval_strategy_f.py": "cdbbc9b2b779b751bbd9c8031f7057c12f29fe2702bbe5f0d4b0b3a42012e1de",
+    "rag_retrieval_refinement/recommended_pipeline.json": "fc0acafce2c4650513392deac06ef57f9cba3f837f0e89b9aa8ff62a5abea742",
+    "rag_retrieval_qa/benchmark.json": "5bedc0bb819e1d2f1e3878abd0bc3f11218446dfc233f2c9ecfc0da774ea0cf5",
+    "rag_retrieval_qa/benchmark_ground_truth.json": "5c6f7b1a79f5db78ea20002e392f25a24bd8c8f3ba2a70082871388836588872",
+    "e2e_benchmark_evidence_rebuild/rebuilt_evidence.json": "02cbd455470b2ea83cc705468fd6c65ac7352e568fce255e39e57e66c2599c3e",
+    "rag_answer_policy_runtime.js": "f76d620795170b61af202907eba70c9f7d470b795467db985682359e9aeb8aab",
+    "config.json": "bf6c30098abd12ddf0f2cca028c9263fdec8c123b0f90f221bc7958efcc6bf6a",
+    "evaluator_reselection/selected_evaluator.json": "81e2ae6e2195347f34d294389c609c08ddc1b4aab43ec05f615aa2976991b76e",
+    "evaluator_reselection/evaluator_rubric.json": "5a8f61d3c4cd3cd9e0bf02bb582a2b714b91ea9d01d44b93b98f9500f72b0385"
+  },
+  "protected_code_and_policy_unchanged": true,
+  "classifier_cache_records_before_after": [
+    20,
+    20
+  ],
+  "classifier_cache_aggregate_before_after": [
+    "6a6664eefeb1268bd3e63661e70e465bc6555577eb58cc392a48100f3da7acc0",
+    "6a6664eefeb1268bd3e63661e70e465bc6555577eb58cc392a48100f3da7acc0"
+  ],
+  "classifier_cache_unchanged": true,
+  "existing_canonical_chunks_before_after": [
+    1380,
+    1380
+  ],
+  "existing_chunks_missing": [],
+  "prior_content_and_vector_fingerprint_before_after": [
+    "41fd53cab386b44d84c3467b1bbefec5896c3b7933f0e5d67a320fc46c677e7f",
+    "41fd53cab386b44d84c3467b1bbefec5896c3b7933f0e5d67a320fc46c677e7f"
+  ],
+  "existing_chunks_and_embeddings_preserved": true,
+  "canonical_rows_before_after": [
+    1380,
+    1415
+  ],
+  "canonical_embeddings_before_after": [
+    1380,
+    1415
+  ],
+  "canonical_sources_before_after": [
+    8,
+    9
+  ],
+  "legacy_kb_chunks_before_after": [
+    7584,
+    7584
+  ],
+  "ann_indexes_before_after": [
+    0,
+    0
+  ],
+  "strategy_f_data_snapshot_change_authorization": "Authorized additive knowledge growth: 1380 -> 1415; runtime code and ranking unchanged",
+  "specialists_executed": false,
+  "AGENT_V1_PROTECTED": true
+}

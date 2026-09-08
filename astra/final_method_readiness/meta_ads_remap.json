@@ -1,0 +1,92 @@
+{
+  "method_id": "METHOD_META_ADS",
+  "method_name": "Meta Ads (Facebook/Instagram paid acquisition)",
+  "canonical_name": "meta ads",
+  "aliases": [
+    "facebook ads",
+    "instagram ads"
+  ],
+  "primary_source": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+  "supporting_sources": [],
+  "domain": "ADS",
+  "subdomain": "paid social acquisition strategy",
+  "primary_jobs": [
+    "plan Meta ad campaign structure and objectives",
+    "frame acquisition economics for paid social"
+  ],
+  "business_stage": [],
+  "funnel_stage": [
+    "acquisition",
+    "conversion"
+  ],
+  "best_for": [
+    "strategy-level Meta Ads campaign planning and acquisition economics"
+  ],
+  "not_recommended_for": [
+    "authoritative current-platform operations: CAPI, Advantage+, current attribution mechanics, current UI/interface setup, downstream lead-qualification specifics"
+  ],
+  "required_inputs": [
+    "offer",
+    "target audience",
+    "acquisition budget"
+  ],
+  "expected_outputs": [
+    "campaign structure/objective plan"
+  ],
+  "strengths": [],
+  "limitations": [
+    "MODERATE coverage; single dedicated local course; ASR-derived; current-platform mechanics not authoritative/current"
+  ],
+  "dependencies": [],
+  "compatible_methods": [],
+  "conflicting_methods": [],
+  "evidence_refs": [
+    {
+      "chunk_id": "9a8c2ea98387788349d14e4b5b300def0b67d2b5002e7e91347cc4e579ca8aad",
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "discovery_query": "estrategia de campañas Meta Ads objetivos y economía de adquisición"
+    },
+    {
+      "chunk_id": "09ac04c5370d16507f7d8b3d0ea6a198cc512ab73cca05bf888e1452d24ed954",
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "discovery_query": "estrategia de campañas Meta Ads objetivos y economía de adquisición"
+    },
+    {
+      "chunk_id": "586eaa1f65b3d150b9be8b3e2066a39e7dd9f72d10fa29b7eb48a9ebc4b1819e",
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "discovery_query": "estructura de campaña conjunto de anuncios ABO CBO"
+    },
+    {
+      "chunk_id": "1ced200e68b79b8c621b82948a3f11f1b6a4db9766c0d70874ea1a1d0032ff9d",
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "discovery_query": "estructura de campaña conjunto de anuncios ABO CBO"
+    },
+    {
+      "chunk_id": "199e329deb4041c1fbc3d306d6a52fad745633d902649b8dd88cd9cc221ac570",
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "discovery_query": "estructura de campaña conjunto de anuncios ABO CBO"
+    },
+    {
+      "chunk_id": "67764b7d4f02fde057335a3bd8e29f1ad5d68d38cdbcf4c0d2e8d76bd14e86f7",
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "discovery_query": "estructura de campaña conjunto de anuncios ABO CBO"
+    },
+    {
+      "chunk_id": "8e5af3fd51526d63d6c53d3f338eebb74205357514c1287ceaf35ae07fcb5cba",
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "discovery_query": "estrategia de audiencias Facebook Ads públicos similares lookalike"
+    },
+    {
+      "chunk_id": "b856c60855661527159ae349024775bae36f03311ae1efee12e5b5539cc5b80c",
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "discovery_query": "estrategia de audiencias Facebook Ads públicos similares lookalike"
+    }
+  ],
+  "confidence": 0.5,
+  "mapping_status": "PARTIALLY_MAPPED",
+  "coverage": "MODERATE",
+  "coverage_basis": {
+    "dedicated_hits": 42,
+    "queries": 11
+  }
+}

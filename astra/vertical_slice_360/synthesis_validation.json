@@ -1,0 +1,21 @@
+{
+  "section_count": 18,
+  "missing_sections": [],
+  "coherent": true,
+  "not_a_concatenation": true,
+  "methods_preserved": true,
+  "evidence_preserved": true,
+  "conflicts_surfaced": 0,
+  "current_research_required": [
+    "authoritative current-platform operations: CAPI, Advantage+, current attribution mechanics, current UI/interface setup, downstream lead-qualification specifics",
+    "provider-independent WhatsApp API operations and current policy",
+    "deep multi-channel CRM integration",
+    "regulated-industry qualification",
+    "long-cycle nurture beyond the compact base workflow"
+  ],
+  "known_limitations": [
+    "MODERATE coverage; single dedicated local course; ASR-derived; current-platform mechanics not authoritative/current",
+    "coverage=MODERATE",
+    "MODERATE coverage; curated + workshop sources; authority/currentness/ASR limitations; not STRONG until a fully-attributed current provider-independent source exists"
+  ]
+}

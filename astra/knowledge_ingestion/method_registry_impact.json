@@ -1,0 +1,18 @@
+{
+  "gate": "ASTRA_03B_MULTI_DOMAIN_KNOWLEDGE_SOURCE_INGESTION",
+  "registry_modified": false,
+  "methods": [
+    {"method_id": "METHOD_VELOCITY", "evidence_for_astra_03c": "SUFFICIENT", "source_ids": ["SRC_VEL_FUNNELS", "SRC_VEL_SALES", "SRC_VEL_MIDAS", "SRC_VEL_INFO_AZ", "SRC_VEL_OFFER"]},
+    {"method_id": "METHOD_SALES_ACCELERATION", "evidence_for_astra_03c": "SUFFICIENT", "source_ids": ["SRC_VEL_SALES", "SRC_VEL_OFFER"]},
+    {"method_id": "METHOD_DIGITAL_MARKETING", "evidence_for_astra_03c": "SUFFICIENT", "source_ids": ["SRC_PRO_GROWTH", "SRC_VEL_FUNNELS", "SRC_VEL_INFO_AZ"]},
+    {"method_id": "METHOD_OFFER_DESIGN", "evidence_for_astra_03c": "SUFFICIENT", "source_ids": ["SRC_VEL_OFFER", "SRC_VEL_FUNNELS", "SRC_VEL_INFO_AZ"]},
+    {"method_id": "METHOD_CRO", "evidence_for_astra_03c": "SUFFICIENT", "source_ids": ["SRC_PRO_CRO", "SRC_PRO_GROWTH"]},
+    {"method_id": "METHOD_META_ADS", "evidence_for_astra_03c": "INSUFFICIENT", "source_ids": [], "reason": "No dedicated admissible local platform-method source."},
+    {"method_id": "METHOD_WHATSAPP_SALES", "evidence_for_astra_03c": "INSUFFICIENT", "source_ids": [], "reason": "No dedicated admissible local WhatsApp-sales source."},
+    {"method_id": "METHOD_ICP", "evidence_for_astra_03c": "SUFFICIENT", "source_ids": ["SRC_VEL_FUNNELS", "SRC_VEL_INFO_AZ", "SRC_PRO_GROWTH"]},
+    {"method_id": "METHOD_FUNNEL", "evidence_for_astra_03c": "SUFFICIENT", "source_ids": ["SRC_VEL_FUNNELS"]}
+  ],
+  "READY_FOR_ASTRA_03C_METHOD_REMAP": true,
+  "READY_FOR_ASTRA_04_VERTICAL_SLICE_360": false,
+  "astra_04_reason": "ASTRA-03C remapping is still required and Meta Ads, WhatsApp sales, and course creation remain uncovered."
+}

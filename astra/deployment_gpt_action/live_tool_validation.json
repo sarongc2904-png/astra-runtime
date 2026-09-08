@@ -1,0 +1,24 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "BLOCKED",
+  "searchKnowledgeBase": {
+    "live": true,
+    "http": 200,
+    "result_count": 2
+  },
+  "runAstraCampaign360": {
+    "live": false,
+    "reason": "public ASTRA runtime missing"
+  },
+  "runAstraCreativeDirector": {
+    "live": false,
+    "reason": "public ASTRA runtime missing"
+  },
+  "runAstraCreativeGeneration": {
+    "live": false,
+    "reason": "public ASTRA runtime and live image provider missing; production mock disabled"
+  },
+  "local_provider_health": "READY",
+  "local_campaign_attempt": "stopped after over 70 seconds without response; no success claimed"
+}

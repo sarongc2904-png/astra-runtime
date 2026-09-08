@@ -1,0 +1,9 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "scenario": "generate approved creative",
+  "provider": "mock_image_provider",
+  "result": "COMPLETE",
+  "live_provider_faked": false
+}

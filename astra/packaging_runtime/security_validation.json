@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-09-07T03:36:48.0444339Z",
+  "files_scanned": 24,
+  "project_key_present_for_exact_comparison": true,
+  "exact_project_key_leaks": 0,
+  "literal_secret_assignments": 0,
+  "env_openrouter_key_is_empty_placeholder": true,
+  "project_config_secret_fallback_removed": true,
+  "diagnostics_expose_key_presence_only": true,
+  "provider_errors_redacted": true,
+  "reports_store_real_keys": false
+}

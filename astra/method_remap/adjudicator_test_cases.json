@@ -1,0 +1,137 @@
+{
+  "cases": [
+    {
+      "task_id": "MR-ACQ",
+      "task_description": "client acquisition across audience, offer and funnel",
+      "expected_supported_domain": "FUNNEL",
+      "expected_possible_methods": [
+        "METHOD_FUNNEL",
+        "METHOD_OFFER_DESIGN",
+        "METHOD_ICP",
+        "METHOD_GROWTH_MARKETING"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-OFFER",
+      "task_description": "design an irresistible offer",
+      "expected_supported_domain": "OFFER",
+      "expected_possible_methods": [
+        "METHOD_OFFER_DESIGN",
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_FUNNEL"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-FUNNEL",
+      "task_description": "design a multi-step sales funnel",
+      "expected_supported_domain": "FUNNEL",
+      "expected_possible_methods": [
+        "METHOD_FUNNEL",
+        "METHOD_OFFER_DESIGN"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-SALES",
+      "task_description": "improve sales conversation conversion",
+      "expected_supported_domain": "SALES",
+      "expected_possible_methods": [
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_FUNNEL"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-CREATIVE",
+      "task_description": "develop advertising creative strategy",
+      "expected_supported_domain": "CREATIVE",
+      "expected_possible_methods": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AD_EXECUTION_CRAFT"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-COPY",
+      "task_description": "write a single clear advertising proposition",
+      "expected_supported_domain": "COPY",
+      "expected_possible_methods": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_COPYWRITING_TONE",
+        "METHOD_TAGLINE_CRAFT"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-INFO",
+      "task_description": "create and launch an infoproduct business",
+      "expected_supported_domain": "INFOPRODUCT",
+      "expected_possible_methods": [
+        "METHOD_INFOPRODUCT",
+        "METHOD_FUNNEL",
+        "METHOD_OFFER_DESIGN"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-CRO",
+      "task_description": "research and prioritize conversion experiments",
+      "expected_supported_domain": "CRO",
+      "expected_possible_methods": [
+        "METHOD_CRO",
+        "METHOD_SALES_ACCELERATION"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-POSITION",
+      "task_description": "define market positioning and growth opportunities",
+      "expected_supported_domain": "RESEARCH",
+      "expected_possible_methods": [
+        "METHOD_GROWTH_MARKETING",
+        "METHOD_MIDAS"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-PRICING",
+      "task_description": "design pricing connected to business model and LTV",
+      "expected_supported_domain": "RESEARCH",
+      "expected_possible_methods": [
+        "METHOD_MIDAS",
+        "METHOD_GROWTH_MARKETING"
+      ],
+      "known_missing_domain_if_any": null
+    },
+    {
+      "task_id": "MR-META",
+      "task_description": "configure and optimize Meta Ads campaigns",
+      "expected_supported_domain": "ADS",
+      "expected_possible_methods": [
+        "METHOD_META_ADS"
+      ],
+      "known_missing_domain_if_any": "META ADS"
+    },
+    {
+      "task_id": "MR-WA",
+      "task_description": "build WhatsApp follow-up and closing process",
+      "expected_supported_domain": "SALES",
+      "expected_possible_methods": [
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "known_missing_domain_if_any": "WHATSAPP SALES"
+    },
+    {
+      "task_id": "MR-COURSE",
+      "task_description": "design curriculum and learning sequence",
+      "expected_supported_domain": "COURSE",
+      "expected_possible_methods": [
+        "METHOD_COURSE_DESIGN"
+      ],
+      "known_missing_domain_if_any": "COURSE CREATION"
+    }
+  ]
+}

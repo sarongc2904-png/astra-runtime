@@ -1,0 +1,87 @@
+{
+  "gate": "ASTRA_06_ORCHESTRATOR_E2E_QA",
+  "generated_at": "2026-09-07T02:59:55.894984+00:00",
+  "artifact_count": 16,
+  "artifacts": [
+    {
+      "path": "astra/orchestrator_e2e_qa/consistency_validation.json",
+      "hash": "bbfd8a9377894d99",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/evidence_provenance_validation.json",
+      "hash": "d9e17e6844349f25",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/fail_closed_validation.json",
+      "hash": "4a04f5d1db41158b",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/final_readiness.json",
+      "hash": "b8f27644e046dffb",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/llm_resilience_validation.json",
+      "hash": "0080b17e08736684",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/method_adjudication_validation.json",
+      "hash": "604af4003fc66e10",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/protection_validation.json",
+      "hash": "3553cdf3b7c5e232",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/qa_contract.json",
+      "hash": "f3b25b1145429e1f",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/regression_results.json",
+      "hash": "756b3674bbdeffc3",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/robustness_validation.json",
+      "hash": "500d41249e9dbfb5",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/run_qa.js",
+      "hash": "8b679f3929b38c49",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/scenario_matrix.json",
+      "hash": "1a8450d4c61669e9",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/scenario_results.json",
+      "hash": "f74c2e1dad07f761",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/orchestrator_e2e_qa/synthesis_validation.json",
+      "hash": "ff9041f9c20dc43f",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/workflows/marketing_campaign_360_hardened.js",
+      "hash": "b9b9d06286fb0e84",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "astra/src/state/workflow_state.js",
+      "hash": "c582631636823ab7",
+      "created_or_modified": "modified"
+    }
+  ]
+}

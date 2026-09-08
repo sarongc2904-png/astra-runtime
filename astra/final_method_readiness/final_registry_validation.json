@@ -1,0 +1,16 @@
+{
+  "captured_at": "2026-09-07T01:26:30.000128+00:00",
+  "version": "mr-0.4-astra03e",
+  "method_count": 21,
+  "unique_ids": true,
+  "duplicate_ids": [],
+  "status_counts": {
+    "DISCOVERED": 2,
+    "PARTIALLY_MAPPED": 19
+  },
+  "methods_with_evidence": 19,
+  "schema_key_set_consistent": true,
+  "no_universal_winner_field": true,
+  "errors": [],
+  "valid": true
+}

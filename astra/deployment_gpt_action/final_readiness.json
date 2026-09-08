@@ -1,0 +1,18 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "BLOCKED",
+  "supabase_deployment_valid": true,
+  "public_endpoint_valid": false,
+  "gpt_action_configured": false,
+  "search_kb_live_valid": true,
+  "gpt_campaign_live_valid": false,
+  "gpt_creative_director_live_valid": false,
+  "gpt_creative_generation_live_valid": false,
+  "authorization_valid": true,
+  "state_propagation_valid": false,
+  "security_valid": true,
+  "agent_v1_protected": true,
+  "astra_ready_for_chatgpt_use": false,
+  "next_user_action": "Provide a durable public HTTPS host for the Node plus Python ASTRA runtime, set ASTRA_RUNTIME_URL and ASTRA_RUNTIME_API_KEY in Supabase, then import the final schema and paste the clipboard Bearer secret into the existing GPT Action."
+}

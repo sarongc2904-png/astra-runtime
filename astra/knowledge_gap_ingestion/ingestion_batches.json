@@ -1,0 +1,24 @@
+{
+  "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01",
+  "total_chunks": 35,
+  "batch_size": 20,
+  "batches": [
+    {
+      "batch_id": "ASTRA03D-INGEST-20260906-01-001",
+      "row_start": 0,
+      "row_end_exclusive": 20,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge or overwrite"
+    },
+    {
+      "batch_id": "ASTRA03D-INGEST-20260906-01-002",
+      "row_start": 20,
+      "row_end_exclusive": 35,
+      "chunk_count": 15,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge or overwrite"
+    }
+  ],
+  "rollback_fail_closed": "Preflight rejects unexpected ID/content collisions. Each insert request is atomic. Traceable IDs make partial completion resumable without overwrites."
+}

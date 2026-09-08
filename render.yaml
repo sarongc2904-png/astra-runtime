@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: astra-runtime
+    runtime: docker
+    dockerfilePath: ./astra/runtime_host/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    maxShutdownDelaySeconds: 30
+    envVars:
+      - key: ASTRA_RUNTIME_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: ASTRA_LLM_PROVIDER
+        value: openrouter
+      - key: ASTRA_LLM_MODEL
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ASTRA_ALLOWED_PROJECT_IDS
+        sync: false
+      - key: ASTRA_IMAGE_PROVIDER_LIVE
+        value: "true"

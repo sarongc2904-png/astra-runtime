@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-09-07T03:19:18.007Z",
+  "schema_bounded_retry_fail_closed": true,
+  "provider_failure_fail_closed": true,
+  "truncation_class_note": "ASTRA-05 truncation fixed via 16000-token budget + brevity; malformed still fail-closed",
+  "model_id_configurable": true,
+  "usage_tracked": true,
+  "monetary_cost_fabricated": false
+}

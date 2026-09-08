@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "brief": "laser hair removal clinic",
+  "dimensions": {
+    "specificity": {
+      "base": 1,
+      "director": 1
+    },
+    "art_direction_depth": {
+      "base": 0,
+      "director": 1
+    },
+    "composition_usefulness": {
+      "base": 0,
+      "director": 1
+    },
+    "visual_hierarchy_quality": {
+      "base": 0,
+      "director": 1
+    },
+    "copy_visual_coordination": {
+      "base": 0,
+      "director": 1
+    },
+    "evidence_grounding": {
+      "base": 0,
+      "director": 16
+    },
+    "actionability": {
+      "base": 0.3,
+      "director": 0.9
+    },
+    "image_prompt_usefulness": {
+      "base": 0,
+      "director": 1
+    },
+    "creative_qa_usefulness": {
+      "base": 0,
+      "director": 1
+    },
+    "fabrication_risk": {
+      "base": "unbounded (no claim scrub / no coverage limits)",
+      "director": "bounded (claim scrub + WEAK/NONE limits + fail-closed)"
+    }
+  },
+  "verdict": "Creative Director materially outperforms base creative strategy on art direction, composition, hierarchy, copy/visual coordination, image-prompt and QA usefulness WITHOUT increasing unsupported-claim risk (claim scrub + coverage-bounded tags + fail-closed).",
+  "director_adds_unsupported_claims": false
+}

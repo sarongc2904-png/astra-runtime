@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "evidence_backed_methods": [
+    {
+      "name": "Strategy → Concept/Idea → Campaign",
+      "best_for": "advertising campaign development",
+      "confidence": 0.88,
+      "single_source": true,
+      "evidence_count": 3
+    },
+    {
+      "name": "Single-Minded Proposition (SMP)",
+      "best_for": "advertising proposition",
+      "confidence": 0.88,
+      "single_source": true,
+      "evidence_count": 3
+    },
+    {
+      "name": "Tagline Craft",
+      "best_for": "campaign tagline",
+      "confidence": 0.88,
+      "single_source": true,
+      "evidence_count": 3
+    },
+    {
+      "name": "Advertising Copywriting and Tone of Voice",
+      "best_for": "advertising copy and tone",
+      "confidence": 0.88,
+      "single_source": true,
+      "evidence_count": 4
+    },
+    {
+      "name": "Visual Idea Development",
+      "best_for": "visual advertising",
+      "confidence": 0.84,
+      "single_source": true,
+      "evidence_count": 2
+    },
+    {
+      "name": "Ambient Advertising",
+      "best_for": "ambient and non-traditional media",
+      "confidence": 0.88,
+      "single_source": true,
+      "evidence_count": 4
+    },
+    {
+      "name": "Final Ad Execution and Craft",
+      "best_for": "art direction and production",
+      "confidence": 0.88,
+      "single_source": true,
+      "evidence_count": 3
+    },
+    {
+      "name": "Target Audience Definition",
+      "best_for": "advertising audience definition",
+      "confidence": 0.88,
+      "single_source": true,
+      "evidence_count": 3
+    }
+  ],
+  "no_universal_method": true,
+  "routing_cases": [
+    {
+      "signals": {
+        "objective": "awareness",
+        "medium": "meta_feed",
+        "funnel_stage": "acquisition"
+      },
+      "primary": "Strategy → Concept/Idea → Campaign",
+      "primary_reasons": [
+        "core method for evidence-backed creative direction",
+        "objective/funnel matches 'awareness'"
+      ],
+      "supporting": [
+        "Single-Minded Proposition (SMP)",
+        "Advertising Copywriting and Tone of Voice",
+        "Final Ad Execution and Craft",
+        "Target Audience Definition"
+      ]
+    },
+    {
+      "signals": {
+        "objective": "conversion",
+        "medium": "reel",
+        "funnel_stage": "conversion"
+      },
+      "primary": "Single-Minded Proposition (SMP)",
+      "primary_reasons": [
+        "core method for evidence-backed creative direction",
+        "objective/funnel matches 'conversion'"
+      ],
+      "supporting": [
+        "Advertising Copywriting and Tone of Voice",
+        "Final Ad Execution and Craft",
+        "Strategy → Concept/Idea → Campaign",
+        "Target Audience Definition"
+      ]
+    },
+    {
+      "signals": {
+        "objective": "brand",
+        "medium": "ooh",
+        "funnel_stage": "awareness"
+      },
+      "primary": "Strategy → Concept/Idea → Campaign",
+      "primary_reasons": [
+        "core method for evidence-backed creative direction",
+        "objective/funnel matches 'awareness'",
+        "objective/funnel matches 'brand'"
+      ],
+      "supporting": [
+        "Single-Minded Proposition (SMP)",
+        "Final Ad Execution and Craft",
+        "Advertising Copywriting and Tone of Voice",
+        "Tagline Craft"
+      ]
+    }
+  ],
+  "forced_unsupported_blocked": true
+}

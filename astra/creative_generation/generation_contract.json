@@ -1,0 +1,59 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "version": "1.0.0",
+  "date": "2026-09-07",
+  "contract": {
+    "input": {
+      "creative_director_output": {
+        "type": "CREATIVE_DIRECTOR decision",
+        "required": true,
+        "description": "Frozen CD output from ASTRA-08B; must not be reinterpreted"
+      },
+      "task_brief": {
+        "type": "structured brief",
+        "required": true,
+        "fields": ["task_id", "business_type", "objective", "offer", "channels", "format"]
+      }
+    },
+    "output": {
+      "status": {
+        "type": "enum",
+        "values": ["COMPLETE", "WAITING_FOR_INPUT", "BLOCKED", "FAILED"]
+      },
+      "final_approved_asset": {
+        "type": "GENERATED_CREATIVE descriptor or null",
+        "rule": "Never set if all QA attempts failed; null only on FAILED status"
+      },
+      "visual_qa_results": {
+        "type": "array of QA evaluations",
+        "length": "at least 1"
+      },
+      "revision_history": {
+        "type": "array of revision records",
+        "maxRevisions": 2,
+        "description": "Initial generation + up to 2 targeted revisions"
+      }
+    },
+    "pipeline": [
+      "TASK_BRIEF",
+      "CREATIVE_DIRECTOR (canonical; no redesign)",
+      "reference asset check (fail closed)",
+      "claim pre-guard (block unsupported claims)",
+      "typography overlay build",
+      "prompt fidelity validation",
+      "IMAGE_PROVIDER_ADAPTER dispatch",
+      "GENERATED_CREATIVE descriptor",
+      "VISUAL_CREATIVE_QA evaluation",
+      "revision decision (if FAIL)",
+      "FINAL_CREATIVE_PACKAGE"
+    ],
+    "fail_closed_scenarios": [
+      "WAITING_FOR_INPUT: missing critical reference identity",
+      "BLOCKED: unsupported claim detected pre-generation",
+      "BLOCKED: invalid typography overlay spec",
+      "BLOCKED: prompt fidelity invalid",
+      "BLOCKED: ENVIRONMENT_NOT_AVAILABLE and live generation required",
+      "FAILED: all QA attempts fail after revision budget exhausted"
+    ]
+  }
+}

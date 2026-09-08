@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "pass_case": {
+    "status": "PASS",
+    "score": 1,
+    "failures": 0
+  },
+  "fail_case_empty": {
+    "status": "FAIL",
+    "self_praise": false
+  },
+  "warn_case": {
+    "status": "PASS_WITH_WARNINGS"
+  },
+  "claim_case_detected": true,
+  "criteria_evaluated": [
+    "one_dominant_idea",
+    "angle_distinct_from_concept",
+    "execution_instantiates_concept",
+    "hierarchy_clarity",
+    "message_clarity_smp",
+    "audience_relevance",
+    "offer_alignment",
+    "visual_copy_relationship",
+    "composition",
+    "contrast",
+    "readability",
+    "information_density",
+    "cta_clarity",
+    "method_alignment",
+    "evidence_grounding",
+    "no_unsupported_claims",
+    "limitations_preserved"
+  ],
+  "not_self_praising": true
+}

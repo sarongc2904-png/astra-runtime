@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-09-07T04:00:33.382624+00:00",
+  "tests_total": 21,
+  "tests_passed": 21,
+  "tests_failed": 0,
+  "tests": [
+    {
+      "name": "exact_active_source_inventory",
+      "status": "PASS",
+      "detail": "11 live sources; counts={'SRC_VEL_INFO_AZ': 62, 'acb-7efda14cb56f': 763, 'SRC_VEL_MIDAS': 79, 'SRC_PRO_GROWTH': 132, 'SRC_VEL_SALES': 51, 'SRC_VEL_OFFER': 21, 'SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT': 36, 'SRC_META_VELOCITY_FACEBOOK_COURSE': 35, 'SRC_VEL_FUNNELS': 186, 'SRC_PRO_CRO': 86, 'SRC_WA_SALES_OS_LEGACY_CURATED': 3}"
+    },
+    {
+      "name": "active_source_count_equals_canonical",
+      "status": "PASS",
+      "detail": "1454 chunks / 1454 embeddings / 7584 legacy"
+    },
+    {
+      "name": "source_titles_resolved",
+      "status": "PASS",
+      "detail": "11/11 non-empty"
+    },
+    {
+      "name": "design_sources_explicit",
+      "status": "PASS",
+      "detail": "1 material design source; 2 limited adjacent contributors"
+    },
+    {
+      "name": "candidate_activation_exact",
+      "status": "PASS",
+      "detail": "ACB active; Graphic Design Solutions, Hey Whipple, Elements not active"
+    },
+    {
+      "name": "all_30_domains_audited",
+      "status": "PASS",
+      "detail": "30/30"
+    },
+    {
+      "name": "targeted_query_trails",
+      "status": "PASS",
+      "detail": "75 queries; >=2/domain"
+    },
+    {
+      "name": "coverage_reproducible",
+      "status": "PASS",
+      "detail": "{'MODERATE': 8, 'STRONG': 15, 'WEAK': 4, 'NONE': 3}"
+    },
+    {
+      "name": "provenance_retained",
+      "status": "PASS",
+      "detail": "all non-NONE representative evidence has chunk/source/title"
+    },
+    {
+      "name": "no_unsupported_source_active",
+      "status": "PASS",
+      "detail": "activation comes from live metadata only"
+    },
+    {
+      "name": "no_unsupported_method_invented",
+      "status": "PASS",
+      "detail": "8 prior evidence-backed methods"
+    },
+    {
+      "name": "source_domain_matrix_complete",
+      "status": "PASS",
+      "detail": "11 x 30 = 330 unique pairs"
+    },
+    {
+      "name": "gap_analysis_present",
+      "status": "PASS",
+      "detail": "30 domain gaps"
+    },
+    {
+      "name": "future_specialist_readiness_present",
+      "status": "PASS",
+      "detail": "5/5 specialists"
+    },
+    {
+      "name": "creative_director_decision_present",
+      "status": "PASS",
+      "detail": "READY_WITH_LIMITATIONS"
+    },
+    {
+      "name": "ingestion_plan_non_destructive",
+      "status": "PASS",
+      "detail": "recommendation only; executed=false"
+    },
+    {
+      "name": "canonical_corpus_unchanged",
+      "status": "PASS",
+      "detail": "1454; writes=0"
+    },
+    {
+      "name": "embeddings_unchanged",
+      "status": "PASS",
+      "detail": "1454; creations=0"
+    },
+    {
+      "name": "agent_v1_frozen_hashes",
+      "status": "PASS",
+      "detail": "11/11"
+    },
+    {
+      "name": "classifier_cache_unchanged",
+      "status": "PASS",
+      "detail": "20 before/after"
+    },
+    {
+      "name": "ann_remains_zero",
+      "status": "PASS",
+      "detail": "0 before/after"
+    }
+  ]
+}

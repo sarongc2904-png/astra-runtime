@@ -1,0 +1,97 @@
+{
+  "generated_at": "2026-09-06T23:13:18.292512+00:00",
+  "sources": [
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "pages_or_units": 16,
+      "extracted_units": 16,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "Lexical ASR errors may remain; provenance and warning status retained"
+      ],
+      "status": "PASS_WITH_WARNING"
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "pages_or_units": 5,
+      "extracted_units": 5,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "Lexical ASR errors may remain; provenance and warning status retained"
+      ],
+      "status": "PASS_WITH_WARNING"
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "pages_or_units": 9,
+      "extracted_units": 9,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "Lexical ASR errors may remain; provenance and warning status retained"
+      ],
+      "status": "PASS_WITH_WARNING"
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "pages_or_units": 6,
+      "extracted_units": 6,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "Lexical ASR errors may remain; provenance and warning status retained"
+      ],
+      "status": "PASS_WITH_WARNING"
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "pages_or_units": 1,
+      "extracted_units": 1,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "Lexical ASR errors may remain; provenance and warning status retained"
+      ],
+      "status": "PASS_WITH_WARNING"
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "pages_or_units": 7,
+      "extracted_units": 7,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "Lexical ASR errors may remain; provenance and warning status retained"
+      ],
+      "status": "PASS_WITH_WARNING"
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "pages_or_units": 20,
+      "extracted_units": 20,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "Lexical ASR errors may remain; provenance and warning status retained"
+      ],
+      "status": "PASS_WITH_WARNING"
+    }
+  ],
+  "all_sources_pass_or_pass_with_warning": true
+}

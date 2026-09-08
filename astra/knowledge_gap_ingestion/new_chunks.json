@@ -1,0 +1,2116 @@
+{
+  "authorization_id": "HUMAN_AUTHORIZATION_ASTRA_03D_TARGETED_GAP_INGESTION_META_ADS_WHATSAPP_2026-09-06",
+  "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01",
+  "count": 35,
+  "chunks": [
+    {
+      "chunk_id": "9bd328476d0d5ac7b8fc27c1f48d257fcca52d8ee28f00508ad11fd90aefc6d2",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "827e34b520209d322b664b99d352e6838508e7502636c2dcefc6073ce3379d04",
+      "render_sha256": "0bc89d7cbc258ee5047befd337f07d314376f2cce303311c25676c91f580d08e",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 0,
+      "content": "De la bienvenida nuestra formación sprint de Facebook marketing. Nuestro objetivo en esta formación es darte las pautas para crear campañas de éxito. Durante las próximas cinco clases que tenemos por delante vamos a ver una visión de Facebook ads no sólo táctica sino más bien una visión estratégica. En este sprint de 30 días no vamos a ver cómo montar los anuncios en Facebook o cómo buscar ciertos informes. Nuestro objetivo es darte una visión estratégica duradera en el tiempo independiente de los cambios que se están dando y que se van a dar a lo largo del tiempo en la plataforma. De esta manera podrás adquirir una visión que te va a permitir incluso hacer cambios y tener campañas rentables cuando la plataforma evolucione. Esto es lo que tenemos por delante en las cinco clases de esta formación de Facebook marketing. Clase 1, visión estratégica. Aquí veremos los fundamentos y las mentalidades correctas para acertar en tu estrategia. Una visión completa estratégica que va desde los diferentes procesos de monetización hasta los factores clave a nivel de comunicación para tener campañas rentables. Clase 2, segmentación y selección de audiencias. Veremos cómo llegar a la mejor segmentación y a una correcta selección de audiencias. Clase 3, creación de anuncios ganadores. En esta clase veremos cuáles son las claves para tener anuncios ganadores en Facebook. Clase 4, tipos de campañas.",
+      "content_sha256": "6adfe7337095a6844a126866024dba2bd28f516415446ae634c9756cbbfd6da2",
+      "heading": "01_Clase de introducción",
+      "section": "01_Clase de introducción.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/01_Clase de introducción.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/01_Clase de introducción.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "0bc89d7cbc258ee5047befd337f07d314376f2cce303311c25676c91f580d08e",
+        "transcript_sha256": "ce5c54ec0955bd59d92d100530e892c5522a1bcd0776a123fcc05c902c2e0873",
+        "chunk_id": "9bd328476d0d5ac7b8fc27c1f48d257fcca52d8ee28f00508ad11fd90aefc6d2",
+        "content_sha256": "6adfe7337095a6844a126866024dba2bd28f516415446ae634c9756cbbfd6da2",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "cb15910566e4d86c5762106dc8c38940c99d9853275f29dbde7f5aa0e0d11180",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "827e34b520209d322b664b99d352e6838508e7502636c2dcefc6073ce3379d04",
+      "render_sha256": "0bc89d7cbc258ee5047befd337f07d314376f2cce303311c25676c91f580d08e",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 1,
+      "content": "Verás que diferentes tipos de campañas hay y cuáles son óptimas, dependiendo del momento en el que estés con tu proceso de venta. Aquí también vamos a ver las campañas de avio y civio cuando usarlas y cuando no. Y cómo entrenar al pixel de Facebook para tener mejores resultados con el tiempo. Y clase 5, escalando anuncios y optimización. En esta última clase veremos la mejor manera de escalar y a la vez mantener los mejores costes posibles cuando tengas un anuncio ganador y quieras escalarlo. En definitiva, en este sprint tenemos por delante 5 clases para darte una visión clara y a largo plazo para que sepas cómo crear campañas de éxito en Facebook.",
+      "content_sha256": "b5e8172a03c66bfb0cda5d49ac2636a6f0fd7552d318f85094d11d3bc6b77a6d",
+      "heading": "01_Clase de introducción",
+      "section": "01_Clase de introducción.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/01_Clase de introducción.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/01_Clase de introducción.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "0bc89d7cbc258ee5047befd337f07d314376f2cce303311c25676c91f580d08e",
+        "transcript_sha256": "ce5c54ec0955bd59d92d100530e892c5522a1bcd0776a123fcc05c902c2e0873",
+        "chunk_id": "cb15910566e4d86c5762106dc8c38940c99d9853275f29dbde7f5aa0e0d11180",
+        "content_sha256": "b5e8172a03c66bfb0cda5d49ac2636a6f0fd7552d318f85094d11d3bc6b77a6d",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "189da528794745a753b3da4446a8f3a57d141de0196ff1bdbebe1bd3079c633d",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 0,
+      "content": "En esta primera clase de Facebook marketing vamos a ver una visión más global de la plataforma, una visión estratégica y realista. Empezaremos viendo cinco mentalidades que debemos tener en Facebook. Uno, el papel de los modelos. Una mentalidad sana a tener en marketing digital en general y en Facebook en concreto es que existen modelos. Modelos que podemos probar que han funcionado o que otros han dicho que funcionan, pero al final tenemos que recordar que son modelos, por lo que nos toca experimentar y probarlos para ver si a nosotros nos funcionan. Debemos comprender que un modelo no implica garantía de éxito en Facebook, puede hacer más probable que funcione, pero esto no es igual a una garantía, porque un modelo de proceso de venta ya ha funcionado para otra persona no le necesariamente significa que puede funcionar para ti simplemente porque ahora tú lo implementes. Lo que hace un modelo es darte un camino y una manera de medir resultados, pero como en todo con el marketing habrá que hacer pruebas. Dos, mentalidad sobre la inversión. Un punto de realismo que debemos tener es la idea de que hay que estar dispuesto a invertir. Es imposible tener buenos resultados en Facebook si no inviertes. Cuando inviertes y haces experimentos sacas información. Esto en su lugar te permite optimizar y aprender más. Es un círculo virtuoso que hace que aprendas y tengas mejores resultados.",
+      "content_sha256": "50d49e2ac614e1d3fe817f217d9751d88e683b074836b7f0414460696013f659",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "189da528794745a753b3da4446a8f3a57d141de0196ff1bdbebe1bd3079c633d",
+        "content_sha256": "50d49e2ac614e1d3fe817f217d9751d88e683b074836b7f0414460696013f659",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "986cc731a30f95d556120355d2287bb5aeb18979f3496bd6fdecd4b562e59dc4",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 1,
+      "content": "Si por ejemplo inviertes solo 3 euros al día en tus campañas, el proceso para obtener información será más largo, por lo tanto más lento va a ser tener los resultados que tú quieres. Tres, mentalidad sobre escalar. Cuando tienes algo funcionando debes invertir en escalarlo. No es fácil encontrar ganadores, por lo tanto cuando tengas anuncios ganadores busca escalar las campañas, ganas clientes y creces tu lista. Piensa que las cosas pueden cambiar y rápido. Una campaña lo mejor deja de funcionar con el tiempo. Mientras esté funcionando, tú estás creciendo tus activos, así que no desaproveches la oportunidad. Cuatro, mentalidad sobre lo que quiere Facebook. La mejor manera de tener éxito en Facebook e incluso en Google Ads es dar a las plataformas lo que quieren. Cuando nos alineamos con las plataformas es más fácil tener éxito y evitamos riesgos innecesarios, como por ejemplo que ahora desactiven nuestra cuenta. En el caso de Facebook, su objetivo es que las personas pasen más tiempo en la plataforma y que tengan una experiencia positiva. Esto significa que hay cosas que para Facebook son preferibles. Por ejemplo, Facebook prefiere el vídeo a la imagen. Si tú tienes dos anuncios, uno de imagen y otro de vídeo y tienes costes similares, de cara a Facebook el anuncio de vídeo siempre va a ser mejor. El vídeo, de hecho, es una de las grandes apuestas en la plataforma.",
+      "content_sha256": "d09996414f401be44bd0afaaf44ef485eb958e7a391a73080016c204fe387a32",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "986cc731a30f95d556120355d2287bb5aeb18979f3496bd6fdecd4b562e59dc4",
+        "content_sha256": "d09996414f401be44bd0afaaf44ef485eb958e7a391a73080016c204fe387a32",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "09ac04c5370d16507f7d8b3d0ea6a198cc512ab73cca05bf888e1452d24ed954",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 2,
+      "content": "Si tú enfocas tus anuncios para cumplir tu objetivo, que es generar ventas o leads y a la vez las personas están contentas con el marketing que les pones delante y disfrutan de lo que publicas, tú estás dando a Facebook lo que quiere, por lo que tendrás mejores costes y menos riesgos con tu cuenta. Cinco, mentalidad fuera de la plataforma de Facebook. No podemos confundir cuál es el trabajo de Facebook y dónde tenemos que entrar nosotros. Tú puedes tener una campaña funcionando perfectamente bien en Facebook a un coste de adquisición razonable, pero no tienes una estrategia para revender a estos clientes. En este caso el problema no es Facebook, el problema es que tú no tienes una estrategia para volver a vender a estos clientes. A veces es imposible bajar los costes por adquisición de leads o de clientes y nos toca remangarnos para hacer los números salgan. En escenarios como este somos nosotros quienes tenemos que buscar estrategias y tácticas para incrementar nuestro tamaño de transacción y hacer la plataforma de Facebook rentable y este no es el trabajo de Facebook. Si por ejemplo generamos llamadas y no cerramos ventas, Facebook funciona perfectamente, nos está dando los leads, simplemente es que nosotros no estamos siendo buenos cerrando la venta. Es importante entender qué tiene que hacer Facebook y qué tenemos que hacer nosotros para que el proceso funcione. Elementos estratégicos en el proceso de venta.",
+      "content_sha256": "47215375c80ea85208757d3a9d7bf90ab0a205fd28fba2b33c3dfd1dca40df83",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "09ac04c5370d16507f7d8b3d0ea6a198cc512ab73cca05bf888e1452d24ed954",
+        "content_sha256": "47215375c80ea85208757d3a9d7bf90ab0a205fd28fba2b33c3dfd1dca40df83",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "da91e7cb780f905290fd35c56f0f8500a13ca943a6af088366e8eabc452bc7e6",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 3,
+      "content": "Para tener éxito con tus campañas es importante tener una visión clara de cómo es la parte estratégica en Facebook, la parte estratégica de todo el proceso de venta. Tu proceso de monetización es clave para hacer que tus anuncios funcionen, esta idea suena muy básica, pero pocas personas piensan primero en el modelo económico antes de lanzar un montón de anuncios. Por ejemplo, algo que es muy claro es que si tus números económicos son buenos y tienes por ejemplo un curso que vendes a 2.000 euros pues va a ser más fácil hacer que Facebook funcione. Sin embargo si el curso que vendes vale 100 euros ya es otro escenario totalmente distinto. Lo mismo pasa si tienes un producto que vale 30 euros pero tú tienes potencial de recurrencia, entonces también será más fácil hacer que las campañas de Facebook funcionen. No puedes pensar en tener éxito con tus campañas en Facebook si tú no estás teniendo en cuenta la parte económica. Comprender el concepto de frontend y de backend te permite saber cómo mejorar la rentabilidad de tus anuncios y esto es fundamental. Ambos conceptos son términos que vienen del inglés. El frontend se refiere a productos o servicios con transacción baja. Son para abrir la puerta a una relación con el objetivo de vender un producto con un ticket más alto luego como segunda transacción.",
+      "content_sha256": "01d5d58357e13bbb275d6ce155500cd6bb62ae7d9513e270bf20c3206d8cc16a",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "da91e7cb780f905290fd35c56f0f8500a13ca943a6af088366e8eabc452bc7e6",
+        "content_sha256": "01d5d58357e13bbb275d6ce155500cd6bb62ae7d9513e270bf20c3206d8cc16a",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "54fe18e8cb28a092907f89f72ae3641f314ae5a8d1de588643af26f949596949",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 4,
+      "content": "Cuando tienes una estrategia donde primero va al frontend tu objetivo es generar un cliente para luego hacer múltiples intentos y obtener otra venta o varias ventas. Por ejemplo para un e-commerce un frontend puede ser simplemente una primera transacción para luego generar un recurrente del cliente. En este caso el frontend es el producto y el recurrente es el backend. Un coach por ejemplo puede vender un curso muy económico de 30 euros para luego ofrecer sus servicios o una agencia puede ofrecer un diagnóstico hacia euros para luego ofrecer un backend de servicios de 3.000 euros. Lo importante a tener en cuenta es que debes tener claro qué modelo de monetización estás usando. Si tienes una estrategia de frontend tu objetivo no es ganar dinero en el inicio aquí ganas dinero con el backend. Ahora bien otro modelo es empezar con un producto o un servicio a un precio más alto. Aquí no tienes un frontend y vas directamente a un producto grande que tu ofreces. En cualquier caso ambas estrategias son válidas simplemente tienes que tener claro cuál es tu estrategia de monetización. Si por ejemplo tú vendes un producto o un servicio con una transacción baja tú estás obligado a tener una estrategia con un backend porque si no va a ser muy difícil hacer que las campañas funcionen. El modelo frontend conlleva que tenemos un producto barato y luego un producto en la parte de atrás viendo una transacción alta o de múltiples transacciones.",
+      "content_sha256": "6a1fcf5f95303eda87bad65373a3f7c62c86215c86e2bb8c7cd457c9806429e8",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "54fe18e8cb28a092907f89f72ae3641f314ae5a8d1de588643af26f949596949",
+        "content_sha256": "6a1fcf5f95303eda87bad65373a3f7c62c86215c86e2bb8c7cd457c9806429e8",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "e2f7f0bd6d6a3a3110050e68a6b40b44bf14e73bf9259ad55e9ed14415d46129",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 5,
+      "content": "Cuando usamos el modelo frontend podemos no ganar dinero en la primera transacción. La rentabilidad la sacamos luego con el producto o con los productos en la parte de atrás. El modelo backend conlleva que tenemos un producto caro. Luego aprovechamos de la lista que hemos creado y que hemos crecido y en este modelo debemos ganar desde el primer momento. Factores estratégicos en la comunicación. Para tener éxito con la comunicación en Facebook tú tienes que tener en cuenta siempre estas tres áreas el segmento la propuesta y el mensaje. El segmento es la audiencia que decides tocar dentro de la plataforma. Está claro que si no hablas con las personas correctas por muy bueno que sea tu mensaje o por muy potente que sea tu propuesta no vas a tener éxito. Por eso es una de las primeras áreas en las que debes hacer pruebas hasta que des con un segmento que es válido. Si empiezas con activos con listas de clientes o leads tienes opción de hacer públicos similares. Veremos más sobre esto cuando lleguemos al módulo de segmentación. Pero es crítico que aciertes con el segmento si tú quieres tener campañas que funcionan. La propuesta. Pi principal en Facebook. Cualquier anuncio que lanzas en Facebook tendrá una propuesta. Desde la más sencilla ver esta masterclass, comprar esta prenda, descargar esta guía, etc.",
+      "content_sha256": "658cb0cecc88c2bb957853900e0b8a9e7b88cd952f58a6d939e9182776f291a3",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "e2f7f0bd6d6a3a3110050e68a6b40b44bf14e73bf9259ad55e9ed14415d46129",
+        "content_sha256": "658cb0cecc88c2bb957853900e0b8a9e7b88cd952f58a6d939e9182776f291a3",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "166a6ebb481048c5bad57789edb673fc7efafbcb80a4fb8beb54bed59cfe556e",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 6,
+      "content": "Cuando tú pones en marcha un anuncio estás pidiendo que las personas ejecuten una acción para comprar de ti o registrarse para algo. Cuanto más atractivas tu propuesta, más posibilidades de éxito tendrán tus anuncios. Si tú tienes un e-commerce tienes opción de proponer un producto u otro. Tu objetivo debe ser poner delante lo más atractivo para tus potenciales. Si tienes un proceso de venta con masterclass, las inscripciones serán mejor o peor en función de cómo es de atractiva la idea del proceso de venta. Por ejemplo, en nuestro caso una masterclass para vender más sería una propuesta. Una masterclass para crear sobre demanda en tu negocio es otra propuesta. Sobre demanda es mucho más interesante como propuesta y esto hace que la posibilidad de éxito sea más grande. Cuando hablamos del mensaje hablamos de tu copy, hablamos también del diseño y de la calidad que hay detrás. Las imágenes, si usas vídeo como lo usas. En fin, todos estos elementos generan un mensaje a tus potenciales. Si tú tienes ese segmento correcto, tu propuesta es sólida y el mensaje es acertado. El éxito en Facebook está claro. Dentro de tu mensaje tú debes contemplar el copy. Aquí hay que seguir los fundamentos del buen copy, hablando a tu potencial en la lengua que entiende. Tiene que haber ideas buenas detrás, buenos títulos, buenas entradillas, textos de cuerpos. Todos los elementos se influyen para tener un buen mensaje.",
+      "content_sha256": "7317ae87a3f62d2585ee963d4c9c384df2c004a8d8fb29e48b2bab237b0f7ce6",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "166a6ebb481048c5bad57789edb673fc7efafbcb80a4fb8beb54bed59cfe556e",
+        "content_sha256": "7317ae87a3f62d2585ee963d4c9c384df2c004a8d8fb29e48b2bab237b0f7ce6",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "b7456f6e5d0508312729af329577bad9080e1b8ab17f69582302619f56113c23",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 7,
+      "content": "Luego tenemos el diseño y la calidad. Dependiendo de tu competencia y de tu nicho, tú estarás obligado de tener un cierto nivel de calidad y de diseño para ser competitivo en Facebook. Las personas responden ante lo que ven como marcas. Si tú, por ejemplo, estás en el nicho de la cosmética, pues vas a estar obligado a crear anuncios, ya sea con imágenes o vídeos, que corresponden al mínimo nivel que ven los potenciales en el mercado. Porque si no haces esto, los anuncios no van a funcionar igual de bien. El mercado decide qué mínimo debes tener. Por lo tanto, tener clara la calidad que hay en el mercado es clave para estar siempre alineado con las expectativas del mercado. El diseño y la calidad en algunos nichos tienen un impacto directo en el éxito de un proceso de venta desde Facebook. En algunos casos no tener suficiente calidad implica más costes y esto ahora hace que el modelo ya no sea sostenible. Vamos a hablar ahora del pixel de Facebook. El pixel de Facebook es un elemento estratégico. Cuanto mejor entrenas al pixel, más fácil es que tu cuenta rinda bien. Porque los datos se convierten en un activo. Por ejemplo, un e-commerce que ha logrado mil conversiones de venta tiene un potente activo en Facebook. Ahora la cuenta tiene información que hace que sea más fácil para Facebook encontrar a más de estos clientes. Por lo tanto, el entrenamiento del pixel de Facebook es clave.",
+      "content_sha256": "05615ecf3279604d85f210ee95e210be0ec07f4894ff4c7beb3c64c94b94696f",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "b7456f6e5d0508312729af329577bad9080e1b8ab17f69582302619f56113c23",
+        "content_sha256": "05615ecf3279604d85f210ee95e210be0ec07f4894ff4c7beb3c64c94b94696f",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "4d74305a5ecc9ae9ad3056d24743b2c48f26a86409520855f5aa7301ea8dc08b",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 8,
+      "content": "En función de tus primeros anuncios y en función de tus primeras conversiones, tú vas a entrenar al pixel. Por eso es importante usar la mejor audiencia posible para generar tus conversiones. De esta manera, los datos que recibe Facebook son los más acertados posibles y no están contaminados. Se considera que un pixel entrenado con una conversión personalizada ha obtenido un mínimo de 500 registros. Lo ideal es que gran parte de estos registros sean lo más cercanos a tus clientes. Y si no tienes clientes, entonces lo más cerca posible de tus registros de clientes potenciales. Pero en cualquiera de los casos debes dar a Facebook buenos datos. Lo que buscas no es necesariamente el coste por lit, es la calidad del lit. Por lo tanto, tu enfoque al inicio debe ser poner adelante el mensaje correcto a la audiencia correcta para entrenar al pixel correctamente. Misión estratégica de audiencia. Un aspecto importante cuando hablamos de estrategia es la idea de crear una audiencia, independiente de si tienes un e-commerce o tu negocio implica la generación de lits. Crear una audiencia de emails suscriptores desde Facebook es un área importante para el futuro de tu negocio. Si por ejemplo tienes un e-commerce y generas la venta directamente debes mirar la opción de usar una pequeña parte de tu presupuesto en generar también lits con una visión más a largo plazo para poder cultivarles.",
+      "content_sha256": "202710e948f6931153d254520d1ee2a62afa416b8380a5ed6870ce514f6567a4",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "4d74305a5ecc9ae9ad3056d24743b2c48f26a86409520855f5aa7301ea8dc08b",
+        "content_sha256": "202710e948f6931153d254520d1ee2a62afa416b8380a5ed6870ce514f6567a4",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "bf733d6b6b1e634457bd9c012e6e4edc55b9816f250390c659dfc8e9cd282f82",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "a30fb83f38546a764eeb463d46f1d2a784e51759af658b3355a694d03da4d80f",
+      "render_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 9,
+      "content": "Si generas lits no solo debes estar pensando en vender a los lits debes buscar la manera de cultivar estos lits para tener un activo importante con los años con todos los lits que ha sido generando en el tiempo. En esta clase hemos visto las áreas estratégicas clave en Facebook marketing. En la siguiente clase veremos la segmentación y selección de la audiencia.",
+      "content_sha256": "d3801317df7c6881cfb919d6c7a7ca99f09af40511aa375827a02cef1d8eccc2",
+      "heading": "02_Clase 1 - Visión estratégica y Mentalidad",
+      "section": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+        "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+        "chunk_id": "bf733d6b6b1e634457bd9c012e6e4edc55b9816f250390c659dfc8e9cd282f82",
+        "content_sha256": "d3801317df7c6881cfb919d6c7a7ca99f09af40511aa375827a02cef1d8eccc2",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign strategy",
+          "campaign economics",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "6c260e0ef44b66c749b650802d4b795e404a7f32e78f90afa0a66ddf53ed01bc",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "b8099fadad74c2e931ef791f71d51030c201349be6c06ee89c9a26475b92257d",
+      "render_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 0,
+      "content": "En esta clase vamos a hablar de cómo crear anuncios ganadores y para comprender mejor cómo crear anuncios ganadores vamos a hablar de cinco fundamentos. Si en cualquier momento ves que tus anuncios no están dando los resultados que te gustaría, analiza uno de estos fundamentos para ver si falla alguno de ellos. Fundamento 1, los primeros tres segundos. Independiente de si usas vídeo o imágenes, tienes que captar la atención de los potenciales en los primeros tres segundos. Pasan tus anuncios por la prueba de los tres segundos. Estás siendo capaz de captar la atención con tu anuncio en los primeros tres segundos. Fundamento 2, tu propuesta. Lo hemos comentado en otras ocasiones, no es nada nuevo, pero vamos a hablar de ello porque es importante. Tus anuncios van a ser ganadores en función de cómo de sólida es tu propuesta. Cuanto más atractiva sea la propuesta de atrás, más fácil va a ser que tus anuncios funcionen bien. Fundamento 3, la idea. Usa ideas llamativas que son diferentes a lo que hay en tu nicho y que de cara a tus potenciales son interesantes. Esto es clave. Sin ideas interesantes muchos anuncios nunca acaban de generar el suficiente interés de los potenciales y pasan desapercibidos. Fundamento 4, da la plataforma lo que quiere. Facebook tiene claro que su producto son los usuarios. Los usuarios contentos son los que vuelven a la plataforma. Esto es lo que hace que sea viable como negocio.",
+      "content_sha256": "2c37fda857f9b7042b1b6d0318df3aa170752b7b2681b8aa2ccba569561308c2",
+      "heading": "04_Clase 3 - Creación de anuncios ganadores",
+      "section": "04_Clase 3 - Creación de anuncios ganadores.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/04_Clase 3 - Creación de anuncios ganadores.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/04_Clase 3 - Creación de anuncios ganadores.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+        "transcript_sha256": "ad1c25c526ddf71b40681a9b1f3acabdb6b9d9d36ba297aaca15b3186a6ec3a7",
+        "chunk_id": "6c260e0ef44b66c749b650802d4b795e404a7f32e78f90afa0a66ddf53ed01bc",
+        "content_sha256": "2c37fda857f9b7042b1b6d0318df3aa170752b7b2681b8aa2ccba569561308c2",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "b8cd41d61b7217f4d0f5f98dbb35a2b1cf9cc3b0f10ca24644483e376fa0e31a",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "b8099fadad74c2e931ef791f71d51030c201349be6c06ee89c9a26475b92257d",
+      "render_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 1,
+      "content": "Por eso Facebook siempre va a premiar a los anunciantes que dan a la plataforma lo que quiere. Anuncios que generan más interacciones y que son de más calidad serán más económicos y tu como anunciante pagarás menos. Para tener anuncios ganadores es importante enfocar tus anuncios hacia la calidad y el interés de los usuarios. Fundamento 5, tu proceso de iteración. El proceso de crear anuncios ganadores no se va a imponer un anuncio y luego esperar a que funcione. Se va a santanar un proceso. Un proceso con el que cuando tienes un anuncio que funciona bien buscas para llevarlo a otro nivel y que funcione todavía mejor. Actualmente tienes un proceso para optimizar tus anuncios que funcionan o que funcionan medio bien. Del mismo modo que descartas lo que no funciona para probar otra cosa, si tú tienes un anuncio que funciona bien puedes optimizarlo para hacer que funcione mejor. Este proceso interactivo e iterativo constante es lo que hace que tengas anuncios ganadores en el tiempo que puedes sostener. Te pongo un ejemplo nuestro. Si tienes una imagen que funciona puedes optimizar los textos en la imagen puedes agregar color. En fin debes cuestionarte cómo puedes hacer que resalte todavía más. Y en el caso del vídeo pasa exactamente lo mismo si tienes un vídeo que funciona mira cómo optimizarlo. Mejora el inicio para captar mejor la atención. Invierte en una mejor producción para llevarlo a otro nivel.",
+      "content_sha256": "2098609ca483c34fbd8911e8c70636204965881fd7b7195f77f29992f368d88c",
+      "heading": "04_Clase 3 - Creación de anuncios ganadores",
+      "section": "04_Clase 3 - Creación de anuncios ganadores.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/04_Clase 3 - Creación de anuncios ganadores.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/04_Clase 3 - Creación de anuncios ganadores.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+        "transcript_sha256": "ad1c25c526ddf71b40681a9b1f3acabdb6b9d9d36ba297aaca15b3186a6ec3a7",
+        "chunk_id": "b8cd41d61b7217f4d0f5f98dbb35a2b1cf9cc3b0f10ca24644483e376fa0e31a",
+        "content_sha256": "2098609ca483c34fbd8911e8c70636204965881fd7b7195f77f29992f368d88c",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "2356ee22f9196135b7382ece873b6deb3b70e7a1d9d6268619887a309ad9d3f3",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "b8099fadad74c2e931ef791f71d51030c201349be6c06ee89c9a26475b92257d",
+      "render_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 2,
+      "content": "Optimiza el guión para hacerlo más potente. Vamos a hablar ahora de tipos de anuncios. Empezamos hablando de imágenes versus vídeo. En una situación de igualdad donde tienes el mismo coste por registro o incluso un poco más caro con vídeo debes usar vídeo siempre. Porque el vídeo te abre la posibilidad de crear audiencias de retargeting de personas que lo han visto y eso hará que tus costes totales sean más bajos. Otra opción es combinar imágenes estáticas con vídeo. Una buena herramienta para hacer esto es animoto. Si tienes una campaña que ya está funcionando con imágenes una buena táctica es coger la misma imagen y el texto y ahora combinarlo con otras imágenes para crear un vídeo animado con imágenes estáticas. Esto te permite tener la ventaja de vídeo con una imagen que de entrada ya sabes que funciona. ¿Y qué tipo de imágenes suelen funcionar? Imágenes que generan contraste, imágenes en blanco y negro, imágenes en las que aparecen personas reales, imágenes que son realmente relevantes a nicho al que te estás dirigiendo. Combinaciones de imágenes por ejemplo si tienes un e-commerce puedes tener un montaje de dos imágenes juntas. El producto con alguien usando el producto. Ilustraciones coloridas. Vamos a hablar ahora de vídeos de atención. Por un lado tienes vídeos que combinan la educación con el entretenimiento, es decir que enseñan y a la vez son interesantes. Te permiten ahora captar la atención.",
+      "content_sha256": "75fb493ddc3fc94be6b3b3d441dc95ea23d4b45943df4bee49b02ead44cf9e73",
+      "heading": "04_Clase 3 - Creación de anuncios ganadores",
+      "section": "04_Clase 3 - Creación de anuncios ganadores.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/04_Clase 3 - Creación de anuncios ganadores.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/04_Clase 3 - Creación de anuncios ganadores.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+        "transcript_sha256": "ad1c25c526ddf71b40681a9b1f3acabdb6b9d9d36ba297aaca15b3186a6ec3a7",
+        "chunk_id": "2356ee22f9196135b7382ece873b6deb3b70e7a1d9d6268619887a309ad9d3f3",
+        "content_sha256": "75fb493ddc3fc94be6b3b3d441dc95ea23d4b45943df4bee49b02ead44cf9e73",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "b91fe53c3137b72dd0d8b39b6cbd0adbd73c02bf0ec930e980967799310c1ad6",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "b8099fadad74c2e931ef791f71d51030c201349be6c06ee89c9a26475b92257d",
+      "render_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 3,
+      "content": "Los vídeos de demostración del producto es lo mismo. Videos muy personales de tus clientes contigo hablando de manera personal y cercana a tus potenciales también son vídeos interesantes que captan la atención. Y vídeos muy cortos con citas similar a un anuncio de imagen pero con movimiento breve para captar la atención pueden funcionar muy bien. De hecho este ejemplo que estás viendo aquí es un ejemplo de animoto. Vámonos ahora al copy. Cuando hablamos de copy dentro de Facebook tienes tres enfoques. Un copy corto, un copy largo o trabajar historias. El copy corto es el que usas en tus anuncios cuando tienes el vídeo y con el vídeo pues tú puedes hacer llegar al mensaje sin necesidad de tener que explicar mucho en el copy. El copy largo es una buena idea si tienes una imagen y tu propuesta requiere venderla más para fomentar la acción. Y las historias son muy válidas porque catan bien la atención y el potencial siente que es de valor es contenido. En resumen te dejo con tres ideas importantes con las que nos gustaría que te quedases en esta clase. Uno enfócate en estar implementando los fundamentos de buenos anuncios que hemos visto en esta primera parte de la clase. Dos prueba diferentes tipos de anuncios tanto en vídeo como en imágenes para encontrar tus ganadores.",
+      "content_sha256": "332ae610f3e98e6e9001ff377d7e3e38f43fec6fd54810b2fc59c6e3f8c876af",
+      "heading": "04_Clase 3 - Creación de anuncios ganadores",
+      "section": "04_Clase 3 - Creación de anuncios ganadores.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/04_Clase 3 - Creación de anuncios ganadores.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/04_Clase 3 - Creación de anuncios ganadores.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+        "transcript_sha256": "ad1c25c526ddf71b40681a9b1f3acabdb6b9d9d36ba297aaca15b3186a6ec3a7",
+        "chunk_id": "b91fe53c3137b72dd0d8b39b6cbd0adbd73c02bf0ec930e980967799310c1ad6",
+        "content_sha256": "332ae610f3e98e6e9001ff377d7e3e38f43fec6fd54810b2fc59c6e3f8c876af",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "adcf515e097a01eb7c33d9c7625e531e1dcb09803ec3c01415f7ddb3f594ea76",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "b8099fadad74c2e931ef791f71d51030c201349be6c06ee89c9a26475b92257d",
+      "render_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 4,
+      "content": "Y tres si puedes usar vídeo y el coste es muy similar a con imagen usa mejor vídeo porque vas a poder crear públicos que te sirvan para retargeting y le estás dando a la plataforma de Facebook lo que quiere que es que los usuarios pasen más tiempo en Facebook consumiendo contenido en vídeo.",
+      "content_sha256": "f70d73b2d5efa55e6ba89874b281dc95b20647ee39b1ce92a72a90d4b679f36d",
+      "heading": "04_Clase 3 - Creación de anuncios ganadores",
+      "section": "04_Clase 3 - Creación de anuncios ganadores.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/04_Clase 3 - Creación de anuncios ganadores.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/04_Clase 3 - Creación de anuncios ganadores.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+        "transcript_sha256": "ad1c25c526ddf71b40681a9b1f3acabdb6b9d9d36ba297aaca15b3186a6ec3a7",
+        "chunk_id": "adcf515e097a01eb7c33d9c7625e531e1dcb09803ec3c01415f7ddb3f594ea76",
+        "content_sha256": "f70d73b2d5efa55e6ba89874b281dc95b20647ee39b1ce92a72a90d4b679f36d",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "creative testing",
+          "lead generation"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "9a8c2ea98387788349d14e4b5b300def0b67d2b5002e7e91347cc4e579ca8aad",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "c46281acc7979e6b029f66632abf5a149f1bfbd8df71a4a52bddf03d6ab1c851",
+      "render_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 0,
+      "content": "Esta clase vamos a hablar de dos áreas clave, una vez que tus anuncios están funcionando bien. ¿Cómo escalar cuando tienes un Roi positivo para generar más ventas? ¿Y cómo otimizar las campañas? ¿Y qué números? Tener en cuenta la hora de medir. Uno de los grandes retos en Facebook es que cuando empiezas con un presupuesto pequeño puedes tener un coste de registro o de compra más bajo. Y esto conlleva un retorno mejor que luego podrás sacar al tener un coste más bajo. Esto pasa porque inicialmente Facebook muestra tus anuncios a las personas más potenciales para convertir. Pero así que vas escalando más la audiencia con más potencial de conversión va bajando y en consecuencia tu coste va empeorando porque incrementa. Por eso no es realista pensar que puedes mantener ciertos costes de adquisición que has tenido inicialmente. Vamos a ver alguna de las mejores maneras de escalar y poder mantener el mejor coste posible en Facebook. Cuando buscas escalar tus anuncios estas son las diferentes maneras que tienes para hacerlo. Escalar verticalmente. Cuando hablamos de escalar verticalmente hablamos de un mismo anuncio que está funcionando y buscas incrementar el presupuesto. Bien en el mismo conjunto de anuncios o a través de la duplicación de campañas o del conjunto de anuncios. Esto lo puedes hacer con las campañas bien siendo y vio o sí vio.",
+      "content_sha256": "865d9a6ac1b37529a08cca4c94cc236e6c02d400f8e2c6d4ac38782fac7e2d0a",
+      "heading": "06_Clase 5 - Escala de anuncios y optimización",
+      "section": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+        "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+        "chunk_id": "9a8c2ea98387788349d14e4b5b300def0b67d2b5002e7e91347cc4e579ca8aad",
+        "content_sha256": "865d9a6ac1b37529a08cca4c94cc236e6c02d400f8e2c6d4ac38782fac7e2d0a",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "199e329deb4041c1fbc3d306d6a52fad745633d902649b8dd88cd9cc221ac570",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "c46281acc7979e6b029f66632abf5a149f1bfbd8df71a4a52bddf03d6ab1c851",
+      "render_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 1,
+      "content": "Lo que siempre hay que tener en cuenta por la manera en la que funciona el algoritmo es que si subes directamente el presupuesto demasiado rápido no estás dando tiempo al algoritmo a adaptarse y el presupuesto se acaba gastando rápidamente. Por lo que es aconsejable escalar de la siguiente manera. Por duplicación. Duplicas un conjunto o una campaña que está funcionando con las mismas condiciones y con el mismo presupuesto y vas viendo cómo funciona. Si da los mismos resultados como el original lo dejas. Si los resultados son peores lo eliminas y vuelves a duplicar el original de nuevo hasta que tengas unos resultados estables. Por subida de presupuesto. Otra manera de escalar los anuncios es por subida de presupuesto. Puedes ir subiendo el presupuesto con pequeños incrementos. Cada dos días vas haciendo una subida de un 20%. Y sigues subiendo hasta que llegues al objetivo del itzo de compras que buscas. También puedes combinar a más estrategias. Tienes más margen en subir el presupuesto si hablamos de una campaña de sí vio y los resultados suelen ser más estables. Hablemos ahora de escalar horizontalmente. Cuando escalas horizontalmente buscas escalar bien con nuevos segmentos o con nuevas creatividades por segmentos. En este caso vas a nuevos segmentos cuando has pasado la cantidad de 500 lits o 500 ventas. En el caso de ventas incluso con unas 200 puedes empezar ya a probar nuevos segmentos de público similares.",
+      "content_sha256": "67edf22aecd02328ada29878ef9fb4adc9f7143777a506763be2f0efe1965402",
+      "heading": "06_Clase 5 - Escala de anuncios y optimización",
+      "section": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+        "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+        "chunk_id": "199e329deb4041c1fbc3d306d6a52fad745633d902649b8dd88cd9cc221ac570",
+        "content_sha256": "67edf22aecd02328ada29878ef9fb4adc9f7143777a506763be2f0efe1965402",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "9899c0da71c0cd2a18d31a674aa3d4f871f5e524752b469269e3fcddcde0067d",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "c46281acc7979e6b029f66632abf5a149f1bfbd8df71a4a52bddf03d6ab1c851",
+      "render_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 2,
+      "content": "Puedes probar diferentes segmentos como un 2%, un 3%, un 4%, un 5%, o incluso un 10% similar para ver si puedes escalar manteniendo tu coste objetivo. Por creatividades. Puedes escalar por diferentes ideas de creatividades. Por propuestas y procesos de venta. Tu puedes tener un proceso de venta de guía, de webinar, de masterclass y todo estar funcionando a la vez. Es cuestión de hacer pruebas e ir sacando un retorno positivo. Una vez que lo tengas ahora es dejarlo puesto. Por ideas. Por ejemplo, en nuestro caso tenemos tres diferentes enfoques actualmente funcionando a la vez. Comunicación desutiva, simplicidad y sobre demanda. También puedes escalar horizontalmente por mismas ideas y diferentes creatividades de imágenes o vídeos. Tú puedes trabajar una misma idea y buscar ganadores con diferentes imágenes o vídeos. O puedes trabajar varios ideas con varios vídeos e imágenes. Por ejemplo, nosotros tenemos dos vídeos a la vez funcionando para nuestra idea de sobre demanda. En una campaña actual que tenemos tenemos el vídeo de Diamante Rubí y por otro lado tenemos el vídeo de Listerine. De esta manera tenemos leads entrando para una misma idea con dos creatividades distintas. Numero clave para medir. Cuando mides en Facebook es crítico que domines tus números de todo el proceso de venta. Porque si no puedes estar invirtiendo tiempo en optimizar cuando no es lo que toca.",
+      "content_sha256": "404e2fc884470f4cb1a0b2b164cdc0a25e41080dbd4054a3ff2efd7ee32a6ce8",
+      "heading": "06_Clase 5 - Escala de anuncios y optimización",
+      "section": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+        "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+        "chunk_id": "9899c0da71c0cd2a18d31a674aa3d4f871f5e524752b469269e3fcddcde0067d",
+        "content_sha256": "404e2fc884470f4cb1a0b2b164cdc0a25e41080dbd4054a3ff2efd7ee32a6ce8",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "a9c2fc46389b498b5a48d9469a4f111891c343825289eb70703c934a23440f85",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "c46281acc7979e6b029f66632abf5a149f1bfbd8df71a4a52bddf03d6ab1c851",
+      "render_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 3,
+      "content": "Puedes estar optimizando lo incorrecto o directamente puedes estar preocupándote cuando en realidad tus números están bien. Por eso es crítico que definas claramente cuánto estás dispuesto a pagar por cliente, cuánto estás dispuesto a pagar por llamada o cuánto estás dispuesto a pagar por compra. Si estás llegando a tu coste objetivo de ventas, de leads o de llamadas, las únicas métricas de las que debes estar pendiente son las siguientes. Volumen, es decir el alcance, el volumen que buscas y frecuencia. Que no pase de tres, cuatro veces en frecuencia porque si no el anuncio empieza a tener menos eficacia y en este caso deberías tener bien un segmento nuevo o cambiar la creatividad porque se van a disparar tus costes. En el caso de retargetin puedes pasar este número de frecuencia pero tengan cuenta simplemente que vas a cansar a tu audiencia. Las métricas importantes en este escenario que acabamos de ver son que cumples tu coste objetivo, bien coste por lito, coste de compra que estás dispuesto a pagar y que tu frecuencia está controlada para que si sube mucho tengas creatividades preparadas para reemplazar el anuncio. Optimización, cuando hablamos de optimización siempre estás buscando optimizar en función del punto más débil en tu proceso de venta. Un error que muchos hacen es obsesionarse con optimizar en Facebook cuando en realidad el problema o la oportunidad está fuera de Facebook.",
+      "content_sha256": "50fc9e7081c1cc3e15dfdff16b795e7285866ae0bbaa3188342b10066501a753",
+      "heading": "06_Clase 5 - Escala de anuncios y optimización",
+      "section": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+        "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+        "chunk_id": "a9c2fc46389b498b5a48d9469a4f111891c343825289eb70703c934a23440f85",
+        "content_sha256": "50fc9e7081c1cc3e15dfdff16b795e7285866ae0bbaa3188342b10066501a753",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "ec2b404f2f5890372a514c52cf445e40f4028698c1b22752006e3e94c07d69c6",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "c46281acc7979e6b029f66632abf5a149f1bfbd8df71a4a52bddf03d6ab1c851",
+      "render_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 4,
+      "content": "Analiza tu ruta, cuál es la ruta ahora y define claramente las métricas macro de tu proceso de venta. Por ejemplo, con un proceso de venta de masterclass desde Facebook a llamada la ruta podría ser la siguiente. Tengo un anuncio, las personas van a una landing, se inscriben para ver una masterclass, genero llamadas, estas llamadas me dan una serie de llamadas cualificadas realizadas y esto me da un cierre en ventas. Con e-commerce podría ser un anuncio a una ficha de producto, personas meten producto en carrito, van al checkout, compran y en los primeros 30 días busco una repetición de la compra. Como ves, hay varios pasos en los que tienes la posibilidad de optimizar fuera de Facebook. Por ejemplo, en el caso de una tienda online, a veces no es fácil bajar el coste de adquisición, pero si es más fácil incrementar el tamaño de transacción, de esta manera puedes permitirte pagar más por cada cliente. Métricas clave en Facebook. Hay muchas métricas que puedes ver en Facebook. Vamos a hablar de las imprescindibles para que solo tengas que enfocarte en lo crítico. CTR clicks, este es el porcentaje de los clicks directos a tu landing o a ficha de producto. CTR todos, esta es la cantidad de clicks e interacción con tu anuncio. Es un indicador de si las personas están respondiendo o no a la creatividad y al gancho y al copio de tu anuncio. Interacción con el vídeo. ¿Qué porcentaje del vídeo han visto tus potenciales?",
+      "content_sha256": "31e10f733bb8608f855e31b736ce28559659864ef9bc1d719d09b789de5befe1",
+      "heading": "06_Clase 5 - Escala de anuncios y optimización",
+      "section": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+        "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+        "chunk_id": "ec2b404f2f5890372a514c52cf445e40f4028698c1b22752006e3e94c07d69c6",
+        "content_sha256": "31e10f733bb8608f855e31b736ce28559659864ef9bc1d719d09b789de5befe1",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "bc05e5996ccc8391b50efc77c01fef13013887d0c6c56927d58a40ddae80241a",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "c46281acc7979e6b029f66632abf5a149f1bfbd8df71a4a52bddf03d6ab1c851",
+      "render_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 5,
+      "content": "Esto también te permite calcular cuánto estás pagando para que las personas vean un vídeo entero tuyo. Frecuencia, esta es la cantidad de veces que se ve tus anuncios. Coste por registro, coste que pagas por cada registro. Y coste por compra, que es el coste que pagas por cada cliente, por cada compra. Aunque hay otras métricas que puedes mirar como el ROAS en el caso de un e-commerce o impresiones, alcance, tu objetivo debe ser reducir la cantidad de métricas que miras, no incrementarlas. El objetivo es entender las métricas críticas y centrarte en ellas. ¿Y qué hacer cuando tienes estos problemas? Imagínate que tienes un CTR bajo de clicks. Si tienes un CTR bajo y tienes un coste de registro alto o un coste de compra altra, si estás llegando a tu objetivo no es un problema. Puede ser que quieras optimizar, pero tienes que hacer la distinción entre un problema de que debes apagar anuncios porque no están funcionando y hay que probar otra cosa o de que debes dejar tus anuncios activos porque estás llegando a tu objetivo. Y mientras vas probando otras cosas para optimizar. Un CTR bajo de clicks sería por debajo de un 1%, aunque esto es orientativo porque depende de tu sector y de tu producto o servicio. Si, por ejemplo, has creado los segmentos por intereses, puede ser que no estés tocando al mejor segmento. En este caso, prueba con nuevos segmentos para ver si puedes encontrar uno mejor.",
+      "content_sha256": "7bd706c8bed716af03e2a2e7c4e0b34bb3e23030aac78bcf354648c99cf18a15",
+      "heading": "06_Clase 5 - Escala de anuncios y optimización",
+      "section": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+        "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+        "chunk_id": "bc05e5996ccc8391b50efc77c01fef13013887d0c6c56927d58a40ddae80241a",
+        "content_sha256": "7bd706c8bed716af03e2a2e7c4e0b34bb3e23030aac78bcf354648c99cf18a15",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "04ac566c7c907a3ecc33a25e37f355617709273537b8b658326737d4d93c261b",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "c46281acc7979e6b029f66632abf5a149f1bfbd8df71a4a52bddf03d6ab1c851",
+      "render_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 6,
+      "content": "Otro problema puede ser que el anuncio simplemente no sea lo suficientemente bueno. Puede ser el copy, la idea detrás, la creatividad o la propuesta que estás poniendo delante del potencial. En este caso deberás probar con otras variantes en estas áreas, empezando con lo que más puedes probar, que es el copy y la creatividad. Cuando tienes CTRs altos, como a las conversiones, este es un indicador de que el anuncio está funcionando, llama la atención, pero cuando las personas van a la landing no están lo suficiente vendidas. En este caso debes optimizar la landing o la ficha de producto, agregando testimonios, cambiando el enfoque de la propuesta en la landing, probando diferentes títulos y también beneficios. Trabaja comentarios en el propio anuncio, porque esto también suele ayudar a la hora de generar más credibilidad para ir a un siguiente paso. Frecuencia alta. Si tienes una frecuencia alta, puedes crear anuncios con otros segmentos, excluyendo a los que tienen la frecuencia alta, si hablamos de públicos similares. Si tienes video, debes excluir a todas las personas que han visto algunos segundos del video. Si tienes un anuncio con imagen, puedes probar con excluir a todas las personas que han interactuado con el anuncio en 360 días. La mejor solución si tienes un segmento que funciona bien es simplemente lanzar nuevos vídeos, nuevas imágenes, nuevas creatividades a este segmento.",
+      "content_sha256": "8d8396222762a1b9a042b098949b71001c56b521c2a6b4d3c284f8894876ad69",
+      "heading": "06_Clase 5 - Escala de anuncios y optimización",
+      "section": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+        "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+        "chunk_id": "04ac566c7c907a3ecc33a25e37f355617709273537b8b658326737d4d93c261b",
+        "content_sha256": "8d8396222762a1b9a042b098949b71001c56b521c2a6b4d3c284f8894876ad69",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "92c796c3447301cbf0f9d06c8f30363df6aaf22b4970c04b73f758a332a8ad28",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "c46281acc7979e6b029f66632abf5a149f1bfbd8df71a4a52bddf03d6ab1c851",
+      "render_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 7,
+      "content": "Como enfoque estratégico en Facebook, siempre debes estar probando nuevas creatividades para encontrar la siguiente creatividad ganadora. Coste alto por compra o por lit. Si tienes un coste alto, ya sea de compra o de lit, los factores que influyen y que puedes testear son los siguientes. En Facebook, la idea detrás de la campaña, la propuesta que tienes, la calidad de las creatividades, usar calidad de vídeo si no lo estás haciendo, probar nuevos segmentos, campañas de retargeting para bajar la media de coste. Y fuera de Facebook, puedes probar en optimizar tu landing page o ficha de producto, optimizar el proceso de checkout en el caso de ser un e-commerce, agregar e-mails para los carritos abandonados, trabajar los primeros 30 días de las personas que no han comprado para subir tu media de transacción y mejorar tu roi o roas. Calidad por debajo de la media. Esto puede pasar. Si tú tienes algún anuncio que tiene una calidad por debajo de la media según Facebook, pero tu retorno es bueno, no es un problema. Ahora bien, si todos los anuncios que tienes suelen estar por debajo del nivel de calidad, esto sí puede ser problemático para ti a la larga. Porque acabarás teniendo una cuenta considerada de mala calidad bajo el criterio de Facebook y esto incrementa el riesgo de cierre de tu cuenta.",
+      "content_sha256": "9d73e46f05f7b94b7ab9862d960e472205833b0e3245494b75de062d797343dd",
+      "heading": "06_Clase 5 - Escala de anuncios y optimización",
+      "section": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+        "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+        "chunk_id": "92c796c3447301cbf0f9d06c8f30363df6aaf22b4970c04b73f758a332a8ad28",
+        "content_sha256": "9d73e46f05f7b94b7ab9862d960e472205833b0e3245494b75de062d797343dd",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "609a556e534746adc9b369f071abc9658e469f5a6bb4b70fda85f5db3ecb4a69",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "c46281acc7979e6b029f66632abf5a149f1bfbd8df71a4a52bddf03d6ab1c851",
+      "render_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 8,
+      "content": "Puede ser que la audiencia no sea la correcta, puede ser que la calidad del anuncio realmente no sea buena e igual tendrás que mejorar la calidad del copy de la imagen o del vídeo. Antes de terminar con esta última clase, hagamos un resumen de algunas ideas importantes a tener en cuenta. Que empiezas con buenos costes de adquisición no significa necesariamente que vayas a poder mantenerlos. Por eso es importante trabajar fuera de Facebook para que puedas pagar más por cliente. Cuanto mejores ideas y mejor calidad tengas detrás de tus vídeos y de tus imágenes, más fácil va a ser escalar. No solo debes escalar verticalmente subiendo presupuesto, debes escalar también de manera horizontal con nuevas creatividades, propuestas e ideas. Cuando optimizas, tienes que mirar toda la ruta. Tienes que mirar toda la optimización no solo dentro de Facebook, sino también fuera de Facebook. Y hay que reducir el número de métricas que miras para no brumarte con datos que no son relevantes.",
+      "content_sha256": "f8af6ee6f44a2046f95b043e54440ae992d7e18ada5caac6235662f9a0b49cdf",
+      "heading": "06_Clase 5 - Escala de anuncios y optimización",
+      "section": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+        "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+        "chunk_id": "609a556e534746adc9b369f071abc9658e469f5a6bb4b70fda85f5db3ecb4a69",
+        "content_sha256": "f8af6ee6f44a2046f95b043e54440ae992d7e18ada5caac6235662f9a0b49cdf",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "optimization",
+          "scaling",
+          "measurement"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "586eaa1f65b3d150b9be8b3e2066a39e7dd9f72d10fa29b7eb48a9ebc4b1819e",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "d00d5a0d4c29bd491ca7f6a4f27b5259e80cc64bde75ca76cb239d679da5e803",
+      "render_sha256": "a6663e8d23eadc6f4e2b7e506d72f41576ab949753eae580a7bb78474b73b533",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 0,
+      "content": "En esta clase vamos a hablar de campañas y de la mejor manera de crearlas. Cuando hablamos de crear campañas, es importante comprender que hay dos tipos de campañas. Campañas ABO y campañas CBO. ABO significa en inglés asset budget optimization. Es decir, que optimizamos a nivel de conjunto de anuncios. Si tú, por ejemplo, tienes un presupuesto de 20 euros y cuatro conjuntos de anuncios, podrías dividir el presupuesto entre los cuatro conjuntos de anuncios con una inversión de 5 euros para cada uno. En este caso, Facebook gasta tu presupuesto en función de cada conjunto de anuncios. Y luego tenemos CBO, que en este caso significa campaign budget optimization. En este caso, con el CBO, el presupuesto se optimiza por la campaña entera. Los 20 euros se irían a la campaña y Facebook lo reparte en función de lo que ve que te va a dar mejores resultados. Ahora bien, ¿cuándo Sara y BIO y CBO? Cuando estás arrancando un anuncio con una creatividad y un segmento que nunca has probado, es buena idea empezar con ABO. Cuando tienes ya creatividades ganadoras, tienes claros varios segmentos que sabes que van a funcionar, entonces ahora puedes crear campañas de CBO. La gran diferencia en resultados es que con CBO, si ya has validado las creatividades o los segmentos, pues los resultados suelen ser muy estables en el tiempo y las campañas ahora ya no requieren tanta gestión. ¿Y cómo montar campañas a ABO?",
+      "content_sha256": "8df7c59cd94a33e887bcd0cf6b3b8e7c3ddb2a6a512221fb0a4ea7c7a8eed785",
+      "heading": "05_Clase 4 - Tipos de campañas y estructura",
+      "section": "05_Clase 4 - Tipos de campañas y estructura.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign structure",
+          "retargeting"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/05_Clase 4 - Tipos de campañas y estructura.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/05_Clase 4 - Tipos de campañas y estructura.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "a6663e8d23eadc6f4e2b7e506d72f41576ab949753eae580a7bb78474b73b533",
+        "transcript_sha256": "7cbb83a7b3cb46eea6d1a1700b2f84d1153f1218d0aa17e9edd7f58b1f6aeb07",
+        "chunk_id": "586eaa1f65b3d150b9be8b3e2066a39e7dd9f72d10fa29b7eb48a9ebc4b1819e",
+        "content_sha256": "8df7c59cd94a33e887bcd0cf6b3b8e7c3ddb2a6a512221fb0a4ea7c7a8eed785",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign structure",
+          "retargeting"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "1ced200e68b79b8c621b82948a3f11f1b6a4db9766c0d70874ea1a1d0032ff9d",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "d00d5a0d4c29bd491ca7f6a4f27b5259e80cc64bde75ca76cb239d679da5e803",
+      "render_sha256": "a6663e8d23eadc6f4e2b7e506d72f41576ab949753eae580a7bb78474b73b533",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 1,
+      "content": "Estos son enfoques buenos para crear anuncios de ABO. Mismo segmento pero con pequeños cambios. En este tipo de campaña usas un mismo segmento, por ejemplo, un público similar al 1% a tus clientes y vas haciendo pequeñas variaciones de edad. Y ahora lo que haces es duplicarlos conjuntos. Por ejemplo, tengo 5 anuncios a 5 euros cada uno, todos son similares al 1% a los clientes con pequeñas variaciones en la edad. Unos de 27 a 50, otros de 28 a 50, otros de 29 a 50, etc. También puedes agrupar varios públicos similares y crear un segmento más grande, que esto es algo que también a Facebook le gusta. Por ejemplo, puedes juntar el 1% similar a clientes más el 1% similar a la página de Gracias tras haberse registrado la landing, más el 1% similar a tu base de datos, etc. Otro enfoque de ABO es tener los diferentes públicos similares aparte. En este caso tendrías por un lado el público similar a clientes del 1%. En otro lado tendrías el 1% similar a personas que visitan la página de Gracias después de haberse registrado la landing. En otro lado tendrías el 1% similar a la base de datos. Cada segmento como un conjunto individual. En este caso, para que te funcionan mejor los anuncios, deberás excluir cada público similar a los otros.",
+      "content_sha256": "63d3459d95158eb4e9671c2142da142e300eee0d5d8429a0c41f9768b532cd5c",
+      "heading": "05_Clase 4 - Tipos de campañas y estructura",
+      "section": "05_Clase 4 - Tipos de campañas y estructura.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign structure",
+          "retargeting"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/05_Clase 4 - Tipos de campañas y estructura.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/05_Clase 4 - Tipos de campañas y estructura.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "a6663e8d23eadc6f4e2b7e506d72f41576ab949753eae580a7bb78474b73b533",
+        "transcript_sha256": "7cbb83a7b3cb46eea6d1a1700b2f84d1153f1218d0aa17e9edd7f58b1f6aeb07",
+        "chunk_id": "1ced200e68b79b8c621b82948a3f11f1b6a4db9766c0d70874ea1a1d0032ff9d",
+        "content_sha256": "63d3459d95158eb4e9671c2142da142e300eee0d5d8429a0c41f9768b532cd5c",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign structure",
+          "retargeting"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "67764b7d4f02fde057335a3bd8e29f1ad5d68d38cdbcf4c0d2e8d76bd14e86f7",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "d00d5a0d4c29bd491ca7f6a4f27b5259e80cc64bde75ca76cb239d679da5e803",
+      "render_sha256": "a6663e8d23eadc6f4e2b7e506d72f41576ab949753eae580a7bb78474b73b533",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 2,
+      "content": "Por ejemplo, si queramos un conjunto de anuncios para el 1% similar a clientes, excluiremos el 1% similar a Gracias en landing page y excluiremos el 1% similar a la base de datos, para que en todo momento el segmento no se contamina y está limpio. O si queramos un conjunto de anuncios con el 1% similar a personas que visitan la página de Gracias después de registrarse la landing, entonces excluiríamos el 1% similar a la base de datos y el 1% similar a clientes. La razón de esto es que haciendo esta exclusión los conjuntos de anuncios no compiten entre ellos. Ambas opciones de IVIO son válidas. Lo importante es que vayas probando para que tú veas que te da mejores resultados. ¿Y cómo montar anuncios de IVIO? Cuando montas anuncios de IVIO, necesitas entre 3 a 5 segmentos grandes, con más o menos el mismo tamaño de audiencia. Por ejemplo, un 5% similar a clientes, un 5% similar a la base de datos, etc. Hablamos de 5 segmentos del mismo tamaño, más o menos, y nunca más de 5 y nunca menos de 3 segmentos. ¿Cómo montar anuncios de retargeting? Los anuncios de retargeting se deben montar como IVIO. Es buena idea montarlo siempre por separado para que puedas ver claramente que segmentos te funcionan mejor. Estos son algunos segmentos para retargeting que suelen funcionar bien y puedes probar. Personas que han visitado tu landing pero no se han inscrito. He to' 25% personas que han ido a tu página web.",
+      "content_sha256": "738bdb83a715d91ce7e19ddfac86eee35a6832d277d52392816b134162ed8e14",
+      "heading": "05_Clase 4 - Tipos de campañas y estructura",
+      "section": "05_Clase 4 - Tipos de campañas y estructura.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign structure",
+          "retargeting"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/05_Clase 4 - Tipos de campañas y estructura.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/05_Clase 4 - Tipos de campañas y estructura.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "a6663e8d23eadc6f4e2b7e506d72f41576ab949753eae580a7bb78474b73b533",
+        "transcript_sha256": "7cbb83a7b3cb46eea6d1a1700b2f84d1153f1218d0aa17e9edd7f58b1f6aeb07",
+        "chunk_id": "67764b7d4f02fde057335a3bd8e29f1ad5d68d38cdbcf4c0d2e8d76bd14e86f7",
+        "content_sha256": "738bdb83a715d91ce7e19ddfac86eee35a6832d277d52392816b134162ed8e14",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign structure",
+          "retargeting"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "8e5af3fd51526d63d6c53d3f338eebb74205357514c1287ceaf35ae07fcb5cba",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "d00d5a0d4c29bd491ca7f6a4f27b5259e80cc64bde75ca76cb239d679da5e803",
+      "render_sha256": "a6663e8d23eadc6f4e2b7e506d72f41576ab949753eae580a7bb78474b73b533",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 3,
+      "content": "Personas que han visto tu vídeo a un 95%. Personas que han interactuado con tu fanpage o con tu perfil de Instagram. Personas que han agregado producto a carrito pero no han comprado. Son muy válidas para campañas de retargeting dinámicas. ¿Cómo entrenar el pixel de Facebook? Necesitas unos 500 registros o unas 500 compras para que Facebook tenga suficiente información. Una vez que tengas este volumen de registros o de compras, tú puedes ir a audiencias mucho más grandes. Por ejemplo, un 5% similar a tus clientes es una audiencia grande. Si ya has generado los 500 registros, tú ahora puedes probar este tipo de tamaño de audiencia. Cuanto mejor entrenado está tu pixel, más fácil es para Facebook encontrar a tus clientes o a tus potenciales en audiencias cada vez más grandes. Ahora bien, tus primeros anuncios deben estar dirigidos lo más cerca posible a tus clientes potenciales. Por ejemplo, en este caso, empiezas a lo mejor con un 1% similar a clientes para generar tus primeros 500 registros o tus primeras 500 compras y estar lo más cerca posible de tu cliente. Esto ahora le dará Facebook información óptima. En la siguiente clase vamos a ver cómo escalar tus campañas, cómo optimizarlas y cuáles son las métricas más importantes que debes estar mirando.",
+      "content_sha256": "3fe865449cdbd71d26834446f21019f0e1f4934137be884633f243690fbbf3df",
+      "heading": "05_Clase 4 - Tipos de campañas y estructura",
+      "section": "05_Clase 4 - Tipos de campañas y estructura.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign structure",
+          "retargeting"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/05_Clase 4 - Tipos de campañas y estructura.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/05_Clase 4 - Tipos de campañas y estructura.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "a6663e8d23eadc6f4e2b7e506d72f41576ab949753eae580a7bb78474b73b533",
+        "transcript_sha256": "7cbb83a7b3cb46eea6d1a1700b2f84d1153f1218d0aa17e9edd7f58b1f6aeb07",
+        "chunk_id": "8e5af3fd51526d63d6c53d3f338eebb74205357514c1287ceaf35ae07fcb5cba",
+        "content_sha256": "3fe865449cdbd71d26834446f21019f0e1f4934137be884633f243690fbbf3df",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "campaign structure",
+          "retargeting"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "b856c60855661527159ae349024775bae36f03311ae1efee12e5b5539cc5b80c",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "d3312c3b16125fe44f2cfff610a3253a57092b75420f163003a3e625514900fd",
+      "render_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 0,
+      "content": "En esta clase vamos a ver un elemento clave en tu estrategia, como hacer una segmentación y una selección acertada de audiencia. Meremos dos áreas aquí, como encontrar la mejor segmentación en la plataforma y cualificar para entrenar al pixel con la mejor audiencia posible. Empezamos con la primera área, encontrar la mejor segmentación en la plataforma. Cuando hablamos de segmentación y de selección de la audiencia, encontramos dos escenarios, ¿cubian empezar con activos que ya tenemos o empezar desde cero sin activos? En cada escenario, evidentemente, el enfoque es diferente. Cuando tenemos activos, hablamos de que tenemos una lista de clientes, una base de datos de potenciales, una fan page con más de mil fans, que son similares a nuestros potenciales. Activos que nos permiten crear un público similar y un público que siempre va a funcionar mejor que un público frío por intereses. Cuando no tenemos activos, nuestro objetivo es crear anuncios enfocados en intereses y en comportamientos, que puedan tener nuestros potenciales. Para que de esta manera, ahora podamos crear un activo que nos permita su vez crear un público similar sobre el mismo. Los pasos serían crear anuncios con intereses y luego usar los activos generados para crear un público similar. ¿Y cómo encontrar los intereses? Usa Audiense Insight, la herramienta para buscar intereses en Facebook.",
+      "content_sha256": "2136309577e485ae4ccee9ff9b1fbc7fa62e6644c306e90ebf19620fbbca6d88",
+      "heading": "03_Clase 2 - Segmentación y selección de audiencia",
+      "section": "03_Clase 2 - Segmentación y selección de audiencia.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/03_Clase 2 - Segmentación y selección de audiencia.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/03_Clase 2 - Segmentación y selección de audiencia.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+        "transcript_sha256": "1ebd6db679962a5e64afc3f824c261d73d051feff16c9e404c2e121d0f3aec9e",
+        "chunk_id": "b856c60855661527159ae349024775bae36f03311ae1efee12e5b5539cc5b80c",
+        "content_sha256": "2136309577e485ae4ccee9ff9b1fbc7fa62e6644c306e90ebf19620fbbca6d88",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "2488a16c36628db3120c45b295cf320234e51c6685819d5aae5fa9b6920cbce7",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "d3312c3b16125fe44f2cfff610a3253a57092b75420f163003a3e625514900fd",
+      "render_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 1,
+      "content": "Facebook tiene publicados varios artículos de cómo usar esta herramienta. Y también tienes otras formas de encontrar intereses. Puedes empezar por los intereses más obvios de tu cliente ideal final. Por ejemplo, si tú vendes al nicho de marcas de perro, busca marcas en el nicho. Si vendes en el nicho de coach, busca celebridades obvias que son reconocidas en el nicho. Si vendes en el nicho del emprendimiento, busca portales, revistas y blogs más importantes. Siempre hay una serie de intereses que son obvios, así que mira esto para empezar. En definitiva debes mirar marcas del nicho, revistas y portales, personas, cargos por trabajo o comportamientos obvios. Como por ejemplo, novios, padres, empresarios, emprendedores, etc. Cuando quieres lanzar las campañas, tu objetivo es siempre tener la segmentación más cualificada. Y lo más cualificado es el público similar a clientes. Por debajo de esto, en la jerarquía tendríamos lo siguiente. Público similar a base de datos de potenciales que no son clientes. Un público similar a tráfico web, ese top 25% de visitantes que se ha quedado más tiempo en la web. Público similar que ha visto al 95% un vídeo nuestro, de más de dos minutos. Y luego por debajo estaría el público similar a la fanpage y por debajo de todo tendríamos los intereses más cercanos a nuestra audiencia. Pudiendo elegir, siempre es mejor usar el público similar a tus clientes.",
+      "content_sha256": "108c169a6220f6bdcfe088dc48cdd8e164d64c8c42e0ef50c8d0499122f0a896",
+      "heading": "03_Clase 2 - Segmentación y selección de audiencia",
+      "section": "03_Clase 2 - Segmentación y selección de audiencia.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/03_Clase 2 - Segmentación y selección de audiencia.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/03_Clase 2 - Segmentación y selección de audiencia.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+        "transcript_sha256": "1ebd6db679962a5e64afc3f824c261d73d051feff16c9e404c2e121d0f3aec9e",
+        "chunk_id": "2488a16c36628db3120c45b295cf320234e51c6685819d5aae5fa9b6920cbce7",
+        "content_sha256": "108c169a6220f6bdcfe088dc48cdd8e164d64c8c42e0ef50c8d0499122f0a896",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "c1cf79bd927896c9096faf43b97286f1c9f83842b367dc9c64b7dddc27e315f9",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "d3312c3b16125fe44f2cfff610a3253a57092b75420f163003a3e625514900fd",
+      "render_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 2,
+      "content": "Ahora bien, si no tienes este activo para crear un público similar, entonces usaremos otras opciones en función de lo que tengamos, siguiendo la jerarquía que acabamos de ver. Mámonos ahora a la segunda área. Qualificar para entrenar al pixel con la mejor audiencia posible. Uno de los grandes errores que hacen muchos es usar un copy y unos ganchos que atraen a las personas incorrectas. Esto hace que acaben creando audiencias que no son óptimas para convertir luego hacia la venta en un segundo paso. Cuanto más afín es tu propuesta al cliente que buscas, mejor estás entrenando al pixel de Facebook. Por ejemplo, imagínate que vendes antiguidades. Si tú creas un gancho que es una guía de decoración, lo más probable es que tengas leads baratos con personas que quieren la guía, pero no serán muy cualificados y estarás entrenando al pixel con las personas incorrectas. Sin embargo, si haces como gancho una guía de cómo comprar buenas antiguidades para personas interesadas en comprar antiguidades, ahora la calidad será mucho mejor y estarás entrenando al pixel hacia el tipo de cliente que a ti te interesa. Cuando hablamos de segmentación, no es solo cuando montas los anuncios. Es lo que tú haces para entrenar al pixel y las audiencias que luego vas a poder crear en base a las visitas que has llevado a la página de Gracias, las visualizaciones de los vídeos que generas, los registros que catas.",
+      "content_sha256": "f4c771edb58a8adf575d311e5ddb50bc9232263f9783727a842c18a6e416e6a0",
+      "heading": "03_Clase 2 - Segmentación y selección de audiencia",
+      "section": "03_Clase 2 - Segmentación y selección de audiencia.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/03_Clase 2 - Segmentación y selección de audiencia.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/03_Clase 2 - Segmentación y selección de audiencia.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+        "transcript_sha256": "1ebd6db679962a5e64afc3f824c261d73d051feff16c9e404c2e121d0f3aec9e",
+        "chunk_id": "c1cf79bd927896c9096faf43b97286f1c9f83842b367dc9c64b7dddc27e315f9",
+        "content_sha256": "f4c771edb58a8adf575d311e5ddb50bc9232263f9783727a842c18a6e416e6a0",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "88202f7b1d218ea2a1922fba6c4e23f058c7b8246f93cd7a0fefbf964a7c71f2",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "d3312c3b16125fe44f2cfff610a3253a57092b75420f163003a3e625514900fd",
+      "render_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 3,
+      "content": "Por lo que es crítico buscar la mejor manera de entrenar bien al pixel desde el inicio. Lo mismo con el tipo de copy y los títulos que usas. Tú puedes atraer a las personas que quieres o a otros dependiendo de cómo enfocas tu copy. Si vemos nuestro caso, por ejemplo, no es lo mismo poner delante un copy en el que se vende una formación gratuita de marketing digital que una formación para crear sobre demanda en un negocio de servicios. Cada copy va a atraer a un cierto tipo de registro y tú acabarás creando segmentos que pueden ser buenos para ti o no. Un segmento podría ser personas interesadas en marketing digital. Otro segmento mejor sería interesados en marketing digital, abrumados con las opciones que hay del marketing digital, e interesados en la idea de sobre demanda porque tienen un negocio de servicios. Cuanto mejor entrenado está el pixel, mejor segmentos acabas creando para tus campañas. En resumen, cuando hablamos de segmentación y de selección de la audiencia, tenemos dos escenarios. Cuando tenemos activos y cuando empezamos desde cero sin activos y en cada escenario el enfoque es diferente.",
+      "content_sha256": "fe9876ba0cee78f37b558fe32ee7dd29c15645c2e928d77b57ecd8a1d2000da0",
+      "heading": "03_Clase 2 - Segmentación y selección de audiencia",
+      "section": "03_Clase 2 - Segmentación y selección de audiencia.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/03_Clase 2 - Segmentación y selección de audiencia.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/03_Clase 2 - Segmentación y selección de audiencia.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+        "transcript_sha256": "1ebd6db679962a5e64afc3f824c261d73d051feff16c9e404c2e121d0f3aec9e",
+        "chunk_id": "88202f7b1d218ea2a1922fba6c4e23f058c7b8246f93cd7a0fefbf964a7c71f2",
+        "content_sha256": "fe9876ba0cee78f37b558fe32ee7dd29c15645c2e928d77b57ecd8a1d2000da0",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    },
+    {
+      "chunk_id": "c7708417fa4e2e02a2363b0d9bffb472d5a159fcd423d777cb8c66e802e4c011",
+      "document_id": "src_meta_velocity_facebook_course-64b3c5ca6dbb",
+      "source_pdf_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_pdf_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+      "freeze_id": "ASTRA03D-INGEST-20260906-01",
+      "freeze_unit_key": "d3312c3b16125fe44f2cfff610a3253a57092b75420f163003a3e625514900fd",
+      "render_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+      "pdf_page_refs": [],
+      "xobject_xref": null,
+      "chunk_index": 4,
+      "content": "Cuando hay activos hablamos de que tenemos una lista de clientes, una base de datos de potenciales o una fan page con más de mil fans que son similares a nuestros potenciales, en definitiva activos que nos permiten crear un público similar, un público que siempre va a funcionar mejor que creando desde cero un público por intereses. Cuando no hay activos, nuestro objetivo es crear anuncios por intereses y comportamientos que pueden tener nuestros potenciales, para así crear de esta manera un activo que nos permita luego ir hacia un público similar. Hay una jerarquía de públicos y los clientes siempre nos van a permitir crear el mejor público. Debemos cualificar para tener entrenado el pixel con la mejor audiencia posible. Y los títulos y el copy van a traer a un cierto tipo de registro, creando segmentos que van a poder ser buenos para ti o no.",
+      "content_sha256": "6c86338e250a23d4b5fe61b8754b46adbb72e10bcbd1a6f3ba4df53f0d305ff4",
+      "heading": "03_Clase 2 - Segmentación y selección de audiencia",
+      "section": "03_Clase 2 - Segmentación y selección de audiencia.mp4",
+      "content_type": "transcript_text",
+      "extraction_status": "REVIEW_REQUIRED",
+      "quality_status": "INCLUDE_WITH_WARNING",
+      "rag_decision": "INCLUDE_WITH_WARNING",
+      "warning_flags": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "NO_PAGE_NUMBERS",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "provenance": {
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_name": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "source_path": "velocity_media/cursos/75_facebook",
+        "unit_path": "velocity_media/cursos/75_facebook/03_Clase 2 - Segmentación y selección de audiencia.mp4",
+        "transcript_path": "astra/knowledge_gap_ingestion/meta_course_transcripts/03_Clase 2 - Segmentación y selección de audiencia.txt",
+        "source_sha256": "64b3c5ca6dbb335e48d96fa004fb09ec0fda7c896c4e649f2220b7dcbfe0c9a9",
+        "unit_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+        "transcript_sha256": "1ebd6db679962a5e64afc3f824c261d73d051feff16c9e404c2e121d0f3aec9e",
+        "chunk_id": "c7708417fa4e2e02a2363b0d9bffb472d5a159fcd423d777cb8c66e802e4c011",
+        "content_sha256": "6c86338e250a23d4b5fe61b8754b46adbb72e10bcbd1a6f3ba4df53f0d305ff4",
+        "ingestion_batch_id": "ASTRA03D-INGEST-20260906-01"
+      },
+      "source_metadata": {
+        "source_document": "Velocity — Facebook Marketing / Facebook Ads",
+        "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+        "domain": "Meta Ads",
+        "subdomains": [
+          "audiences",
+          "prospecting",
+          "Pixel"
+        ],
+        "extraction_method": "faster-whisper-small Spanish CPU int8 then normalized local UTF-8 transcript",
+        "license_or_usage_status": "Local/user-provided project resource; external redistribution rights not determined"
+      },
+      "ingestion_schema_version": "kb_chunks/1.0"
+    }
+  ]
+}

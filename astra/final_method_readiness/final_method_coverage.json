@@ -1,0 +1,138 @@
+{
+  "captured_at": "2026-09-07T01:30:56.573182+00:00",
+  "scale": "STRONG|MODERATE|WEAK|NONE",
+  "domains": {
+    "market_context": {
+      "coverage": "MODERATE",
+      "methods_available": [
+        "METHOD_MIDAS",
+        "METHOD_GROWTH_MARKETING"
+      ],
+      "evidence_quality": "evidence-backed research/growth methods",
+      "limitations": "general marketing research, not live market data",
+      "blocking_for_astra04": false
+    },
+    "icp": {
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_ICP",
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ],
+      "evidence_quality": "multi-source",
+      "limitations": "",
+      "blocking_for_astra04": false
+    },
+    "offer": {
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "evidence_quality": "ASTRA-03B multi-source",
+      "limitations": "",
+      "blocking_for_astra04": false
+    },
+    "funnel": {
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_FUNNEL"
+      ],
+      "evidence_quality": "ASTRA-03B multi-source",
+      "limitations": "METHOD_VELOCITY remains DISCOVERED (umbrella, no single doctrine)",
+      "blocking_for_astra04": false
+    },
+    "sales_conversion": {
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_SALES_ACCELERATION"
+      ],
+      "evidence_quality": "ASTRA-03B",
+      "limitations": "",
+      "blocking_for_astra04": false
+    },
+    "creative_strategy": {
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_AD_EXECUTION_CRAFT"
+      ],
+      "evidence_quality": "Advertising Concept Book",
+      "limitations": "",
+      "blocking_for_astra04": false
+    },
+    "copy_proposition": {
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_COPYWRITING_TONE",
+        "METHOD_TAGLINE_CRAFT"
+      ],
+      "evidence_quality": "Advertising Concept Book",
+      "limitations": "",
+      "blocking_for_astra04": false
+    },
+    "meta_ads": {
+      "coverage": "MODERATE",
+      "methods_available": [
+        "METHOD_META_ADS",
+        "METHOD_DIGITAL_MARKETING"
+      ],
+      "evidence_quality": "single dedicated course, ASR, current-platform gaps",
+      "limitations": "not authoritative for CAPI/Advantage+/current attribution/UI",
+      "blocking_for_astra04": false
+    },
+    "whatsapp_conversion": {
+      "coverage": "MODERATE",
+      "methods_available": [
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "evidence_quality": "curated OS + workshop, authority/currentness limits",
+      "limitations": "not provider-independent/current API",
+      "blocking_for_astra04": false
+    },
+    "measurement_cro": {
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_CRO"
+      ],
+      "evidence_quality": "ASTRA-03B",
+      "limitations": "",
+      "blocking_for_astra04": false
+    },
+    "positioning": {
+      "coverage": "MODERATE",
+      "methods_available": [
+        "METHOD_SINGLE_MINDED_PROPOSITION"
+      ],
+      "evidence_quality": "SMP nearest; no dedicated METHOD_POSITIONING",
+      "limitations": "no dedicated positioning method",
+      "blocking_for_astra04": false
+    },
+    "pricing": {
+      "coverage": "WEAK",
+      "methods_available": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "evidence_quality": "offer design touches pricing; no dedicated method",
+      "limitations": "no dedicated pricing method",
+      "blocking_for_astra04": false
+    },
+    "infoproduct_creation": {
+      "coverage": "STRONG",
+      "methods_available": [
+        "METHOD_INFOPRODUCT"
+      ],
+      "evidence_quality": "ASTRA-03B",
+      "limitations": "",
+      "blocking_for_astra04": false
+    },
+    "course_creation": {
+      "coverage": "NONE",
+      "methods_available": [],
+      "evidence_quality": "no evidence; METHOD_COURSE_DESIGN DISCOVERED",
+      "limitations": "uncovered domain",
+      "blocking_for_astra04": false
+    }
+  }
+}

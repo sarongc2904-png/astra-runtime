@@ -1,0 +1,109 @@
+{
+  "captured_at": "2026-09-06",
+  "strategy_f_corpus": "kb_chunks_v2",
+  "corpus_chunks": 763,
+  "distinct_sources_in_corpus": 1,
+  "sources": [
+    {
+      "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_title": "The Advertising Concept Book — Think Now, Design Later",
+      "source_type": "BOOK",
+      "chunks": 763,
+      "domains_covered": [
+        "CREATIVE",
+        "COPY",
+        "advertising audience definition"
+      ],
+      "discovered_method_candidates": 8,
+      "coverage_sufficient_for_intended_multi_domain_orchestrator": false
+    }
+  ],
+  "registry_placeholders": [
+    {
+      "method_id": "METHOD_VELOCITY",
+      "currently_evidence_supported": false,
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0
+    },
+    {
+      "method_id": "METHOD_SALES_ACCELERATION",
+      "currently_evidence_supported": false,
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0
+    },
+    {
+      "method_id": "METHOD_DIGITAL_MARKETING",
+      "currently_evidence_supported": false,
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0
+    },
+    {
+      "method_id": "METHOD_OFFER_DESIGN",
+      "currently_evidence_supported": false,
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0
+    },
+    {
+      "method_id": "METHOD_CRO",
+      "currently_evidence_supported": false,
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0
+    },
+    {
+      "method_id": "METHOD_META_ADS",
+      "currently_evidence_supported": false,
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0
+    },
+    {
+      "method_id": "METHOD_WHATSAPP_SALES",
+      "currently_evidence_supported": false,
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0
+    },
+    {
+      "method_id": "METHOD_ICP",
+      "currently_evidence_supported": false,
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0
+    },
+    {
+      "method_id": "METHOD_FUNNEL",
+      "currently_evidence_supported": false,
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0
+    }
+  ],
+  "note": "kb_chunks_v2 (the validated Strategy-F corpus) contains a single advertising/creative book. Course-domain placeholders (FUNNEL/SALES/ADS/CRO/ICP business-course doctrine) are not expected to have evidence here; creative/copy method concepts may.",
+  "source_coverage_verified": true,
+  "coverage_assessment": {
+    "strong": [
+      "creative advertising and campaign development",
+      "copywriting, proposition, and tagline craft"
+    ],
+    "partial": [
+      "target-audience definition within advertising"
+    ],
+    "weak_or_absent": [
+      "client acquisition",
+      "commercial offer design",
+      "funnels",
+      "sales conversion",
+      "Meta Ads platform operations",
+      "WhatsApp sales",
+      "infoproduct/course creation",
+      "CRO",
+      "pricing"
+    ]
+  },
+  "promoted_existing_seed": "METHOD_CREATIVE_STRATEGY"
+}

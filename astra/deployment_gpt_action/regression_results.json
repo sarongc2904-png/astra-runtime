@@ -1,0 +1,14 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "PASS",
+  "suites": {
+    "astra10": "10/10 PASS",
+    "astra09": "25/25 PASS",
+    "astra08c": "23/23 PASS",
+    "astra08b": "36/36 PASS",
+    "astra07": "23/23 PASS"
+  },
+  "search_live": "PASS",
+  "obsolete_registry_assertion": "DOCUMENTED_ONLY"
+}

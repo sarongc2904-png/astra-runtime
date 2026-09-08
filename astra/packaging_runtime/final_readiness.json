@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-09-07T03:36:48.0444339Z",
+  "ASTRA_07_PACKAGING_AND_LOCAL_RUNTIME": "PASS",
+  "RUNTIME_PACKAGING_VALID": true,
+  "OPENROUTER_ADAPTER_VALID": true,
+  "LMSTUDIO_ADAPTER_VALID": true,
+  "CLI_VALID": true,
+  "GPT_PACKAGE_VALID": true,
+  "SECURITY_VALID": true,
+  "REGRESSION_VALID": true,
+  "AGENT_V1_PROTECTED": true,
+  "CODEX_HANDOFF_OPERATIONAL": true,
+  "ASTRA_READY_FOR_USER_RUNTIME": true,
+  "live_environment": {
+    "openrouter": "READY",
+    "lmstudio": "ENVIRONMENT_NOT_AVAILABLE"
+  },
+  "live_environment_unavailability_is_product_failure": false,
+  "stop_after_astra07": true
+}

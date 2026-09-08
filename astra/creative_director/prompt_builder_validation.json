@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "operational_fields": [
+    "subject",
+    "environment",
+    "composition",
+    "framing",
+    "camera_perspective",
+    "lighting",
+    "palette",
+    "materials_textures",
+    "visual_hierarchy",
+    "negative_space",
+    "typography_placement_zones",
+    "aspect_ratio",
+    "brand_constraints",
+    "safe_zones",
+    "prohibited_elements",
+    "style"
+  ],
+  "has_negative_prompt": true,
+  "provider_invoked": false,
+  "claim_safety": {
+    "scrubbed_from_subject": [],
+    "policy": "no unsupported factual claims embedded in prompt"
+  },
+  "prohibited_elements": [
+    "fabricated logos",
+    "invented certifications or awards",
+    "fake testimonials",
+    "unverified statistics",
+    "competitor trademarks",
+    "text claims not provided by the user"
+  ],
+  "aspect_ratio": "1:1",
+  "deferred_to_08c": true
+}

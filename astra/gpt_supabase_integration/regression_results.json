@@ -1,0 +1,18 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "suites": {
+    "astra09": "24/24 PASS",
+    "astra08c": "23/23 PASS",
+    "astra08b": "36/36 PASS",
+    "astra07": "23/23 PASS",
+    "astra05": "24/24 PASS",
+    "astra04": "20/20 PASS",
+    "astra02_run_all": "38 PASS / 1 known obsolete historical assertion"
+  },
+  "astra02_notes": [
+    "obsolete registry-seed assertion expects all methods DISCOVERED although the frozen registry was validly remapped in ASTRA-03E",
+    "CURRENT_TASK and HANDOFF_LATEST checks PASS; handoff operational=true"
+  ]
+}

@@ -1,0 +1,266 @@
+{
+  "generated_at": "2026-09-07T02:37:25.859Z",
+  "dimensions": [
+    "specificity",
+    "business_term_hits",
+    "evidence_grounding",
+    "evidence_used",
+    "method_used",
+    "current_research_count",
+    "fabrication_risk",
+    "downstream_usefulness"
+  ],
+  "per_node": [
+    {
+      "node": "market_context",
+      "deterministic": {
+        "node": "market_context",
+        "specificity": 6,
+        "business_term_hits": 4,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_GROWTH_MARKETING",
+        "current_research_count": 0,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 1,
+        "generation": "DETERMINISTIC"
+      },
+      "llm": {
+        "node": "market_context",
+        "specificity": 10,
+        "business_term_hits": 4,
+        "evidence_grounding": 5,
+        "evidence_used": 5,
+        "method_used": "METHOD_GROWTH_MARKETING",
+        "current_research_count": 4,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 3,
+        "generation": "LLM"
+      },
+      "llm_more_specific": true,
+      "grounding_equal_or_better": true,
+      "no_fabrication_either": true,
+      "method_aligned": true
+    },
+    {
+      "node": "icp",
+      "deterministic": {
+        "node": "icp",
+        "specificity": 6,
+        "business_term_hits": 0,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_ICP",
+        "current_research_count": 0,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 1,
+        "generation": "DETERMINISTIC"
+      },
+      "llm": {
+        "node": "icp",
+        "specificity": 9,
+        "business_term_hits": 3,
+        "evidence_grounding": 3,
+        "evidence_used": 5,
+        "method_used": "METHOD_ICP",
+        "current_research_count": 5,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 6,
+        "generation": "LLM"
+      },
+      "llm_more_specific": true,
+      "grounding_equal_or_better": false,
+      "no_fabrication_either": true,
+      "method_aligned": true
+    },
+    {
+      "node": "offer",
+      "deterministic": {
+        "node": "offer",
+        "specificity": 6,
+        "business_term_hits": 0,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_OFFER_DESIGN",
+        "current_research_count": 0,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 1,
+        "generation": "DETERMINISTIC"
+      },
+      "llm": {
+        "node": "offer",
+        "specificity": 7,
+        "business_term_hits": 3,
+        "evidence_grounding": 3,
+        "evidence_used": 5,
+        "method_used": "METHOD_OFFER_DESIGN",
+        "current_research_count": 3,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 6,
+        "generation": "LLM"
+      },
+      "llm_more_specific": true,
+      "grounding_equal_or_better": false,
+      "no_fabrication_either": true,
+      "method_aligned": true
+    },
+    {
+      "node": "funnel",
+      "deterministic": {
+        "node": "funnel",
+        "specificity": 6,
+        "business_term_hits": 0,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_FUNNEL",
+        "current_research_count": 0,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 1,
+        "generation": "DETERMINISTIC"
+      },
+      "llm": {
+        "node": "funnel",
+        "specificity": 11,
+        "business_term_hits": 1,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_FUNNEL",
+        "current_research_count": 4,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 6,
+        "generation": "LLM"
+      },
+      "llm_more_specific": true,
+      "grounding_equal_or_better": true,
+      "no_fabrication_either": true,
+      "method_aligned": true
+    },
+    {
+      "node": "creative_strategy",
+      "deterministic": {
+        "node": "creative_strategy",
+        "specificity": 5,
+        "business_term_hits": 0,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_CREATIVE_STRATEGY",
+        "current_research_count": 0,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 1,
+        "generation": "DETERMINISTIC"
+      },
+      "llm": {
+        "node": "creative_strategy",
+        "specificity": 10,
+        "business_term_hits": 1,
+        "evidence_grounding": 3,
+        "evidence_used": 5,
+        "method_used": "METHOD_CREATIVE_STRATEGY",
+        "current_research_count": 5,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 7,
+        "generation": "LLM"
+      },
+      "llm_more_specific": true,
+      "grounding_equal_or_better": false,
+      "no_fabrication_either": true,
+      "method_aligned": true
+    },
+    {
+      "node": "ads",
+      "deterministic": {
+        "node": "ads",
+        "specificity": 6,
+        "business_term_hits": 0,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_META_ADS",
+        "current_research_count": 1,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 1,
+        "generation": "DETERMINISTIC"
+      },
+      "llm": {
+        "node": "ads",
+        "specificity": 8,
+        "business_term_hits": 0,
+        "evidence_grounding": 2,
+        "evidence_used": 5,
+        "method_used": "METHOD_META_ADS",
+        "current_research_count": 4,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 7,
+        "generation": "LLM"
+      },
+      "llm_more_specific": true,
+      "grounding_equal_or_better": false,
+      "no_fabrication_either": true,
+      "method_aligned": true
+    },
+    {
+      "node": "whatsapp_conversion",
+      "deterministic": {
+        "node": "whatsapp_conversion",
+        "specificity": 11,
+        "business_term_hits": 0,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_WHATSAPP_SALES",
+        "current_research_count": 4,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 1,
+        "generation": "DETERMINISTIC"
+      },
+      "llm": {
+        "node": "whatsapp_conversion",
+        "specificity": 9,
+        "business_term_hits": 1,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_WHATSAPP_SALES",
+        "current_research_count": 5,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 8,
+        "generation": "LLM"
+      },
+      "llm_more_specific": false,
+      "grounding_equal_or_better": true,
+      "no_fabrication_either": true,
+      "method_aligned": true
+    },
+    {
+      "node": "measurement",
+      "deterministic": {
+        "node": "measurement",
+        "specificity": 6,
+        "business_term_hits": 0,
+        "evidence_grounding": 4,
+        "evidence_used": 5,
+        "method_used": "METHOD_CRO",
+        "current_research_count": 0,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 1,
+        "generation": "DETERMINISTIC"
+      },
+      "llm": {
+        "node": "measurement",
+        "specificity": 9,
+        "business_term_hits": 0,
+        "evidence_grounding": 2,
+        "evidence_used": 5,
+        "method_used": "METHOD_CRO",
+        "current_research_count": 4,
+        "fabrication_risk": 0,
+        "downstream_usefulness": 7,
+        "generation": "LLM"
+      },
+      "llm_more_specific": true,
+      "grounding_equal_or_better": false,
+      "no_fabrication_either": true,
+      "method_aligned": true
+    }
+  ],
+  "llm_materially_improved": true,
+  "fabrication_risk_total_llm": 0,
+  "fabrication_risk_total_det": 0
+}

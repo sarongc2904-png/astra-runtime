@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-09-07T00:40:30.221394+00:00",
+  "METHOD_META_ADS": {
+    "META_ADS_EVIDENCE_READY_FOR_REMAP": true,
+    "basis": "Dedicated source is retrievable across core strategic subdomains with provenance; later remap must retain limits."
+  },
+  "METHOD_WHATSAPP_SALES": {
+    "WHATSAPP_SALES_EVIDENCE_READY_FOR_REMAP": false,
+    "basis": "No admitted dedicated source; general sales evidence cannot be relabeled as WhatsApp-specific."
+  },
+  "READY_FOR_ASTRA_03E_FINAL_REMAP_AND_READINESS": false,
+  "exact_missing_source_requirement": "One dedicated, provenance-identifiable, parseable WhatsApp conversational-sales curriculum or manual with material coverage of the representative workflow.",
+  "READY_FOR_ASTRA_04_VERTICAL_SLICE_360": false
+}

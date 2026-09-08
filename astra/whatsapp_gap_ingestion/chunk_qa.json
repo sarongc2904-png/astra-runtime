@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-09-07T00:59:30.146952+00:00",
+  "chunk_count": 39,
+  "blank_chunks": 0,
+  "duplicate_chunk_ids": 0,
+  "exact_content_duplicates_skipped": 0,
+  "near_duplicate_diagnostics": "Exact normalized SHA-256 enforced. Duplicate aggregate source rejected before chunking; no fuzzy deletion used.",
+  "oversize_chunks": 0,
+  "undersize_chunks": 0,
+  "provenance_incomplete": 0,
+  "provenance_completeness": 1.0,
+  "source_distribution": {
+    "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT": 36,
+    "SRC_WA_SALES_OS_LEGACY_CURATED": 3
+  },
+  "topic_distribution": {
+    "CRM flow": 36,
+    "booking": 3,
+    "conversation automation": 36,
+    "conversational conversion": 36,
+    "discovery": 3,
+    "first response": 3,
+    "follow-up": 39,
+    "human handoff": 36,
+    "lead recovery": 36,
+    "lead tagging": 36,
+    "metrics": 3,
+    "no-show prevention": 3,
+    "nurture": 36,
+    "objections": 3,
+    "pipeline": 39,
+    "pricing": 3,
+    "qualification": 3
+  },
+  "status": "PASS"
+}

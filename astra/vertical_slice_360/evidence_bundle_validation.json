@@ -1,0 +1,100 @@
+{
+  "captured_at": "2026-09-07T02:04:32.281970+00:00",
+  "per_node": [
+    {
+      "node": "market_context",
+      "evidence_count": 5,
+      "chunk_ids": [
+        "a2f93596a26d034778b77998b5ee60e9ea480468d8efdeaa81948d886f0859ba",
+        "b0e67ad35bc44dbf58653404ce143fd894aa44d42236cac2190f4f3b054b7ca3",
+        "7b9b55581511947337540d581921335ffc8970ea7a30643ac7ec7c5a64a22fa9",
+        "ac6cd8a9001c2ca64185be3c4924b37483339e6743d2548b523f1c8e1714611a",
+        "13e234cbeccdb2536a7d8be5b91e8b45ec16c6cef413cd3d5d8e0a0d35145703"
+      ]
+    },
+    {
+      "node": "icp",
+      "evidence_count": 5,
+      "chunk_ids": [
+        "4f0c67316607eb556dd0caab883364119eb57bc089090af8d96343c0e93877e4",
+        "5104ecffaf7bdfe4aa918a27fc33580e411ad1fa7ed8e32ac2d973d3047109e2",
+        "ac6cd8a9001c2ca64185be3c4924b37483339e6743d2548b523f1c8e1714611a",
+        "4042f1d10e35da9afa23b6ee284d51324a8bd986089377e7d686f4fc64a22e54",
+        "33b0b0fa50151a357ff42b413307dd0e3597f64f90117f2b9ffad2a92c1a8727"
+      ]
+    },
+    {
+      "node": "offer",
+      "evidence_count": 5,
+      "chunk_ids": [
+        "e28d8781ad99307855f88973602cbe38dde324b531dcbac0b40094c40d4a920c",
+        "ac6cd8a9001c2ca64185be3c4924b37483339e6743d2548b523f1c8e1714611a",
+        "6b37e6e74c3a341f2b279384ad50f9986a7a1a02476f342253b2c3dd53fb11d2",
+        "d105e4804493d1f61fbad7d3b2439118a42ff9f06a0999cfdb459cbfdc902719",
+        "3c56b9dc80925d6353971ea4bbea9dbe61d370fc78ad2306bf99fcdc2b74d0b2"
+      ]
+    },
+    {
+      "node": "funnel",
+      "evidence_count": 5,
+      "chunk_ids": [
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "b93e18150c96bafe96ba2a22edc29983b483abfdacdd1591d9f25c69fc400073",
+        "7d9a46c19a01c6babd26e133ba9464c987f6bb1290006613693555d6d42dbeed",
+        "62be9c1f5b1cf569b3193c2b4eb34a41f499af20169037eb966b886810d1cb03",
+        "85ffcd9c7d1979685425565ef619db25d1a9a5262e24b9f1cddcae6d9f9f01d7"
+      ]
+    },
+    {
+      "node": "creative_strategy",
+      "evidence_count": 5,
+      "chunk_ids": [
+        "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+        "abf648127f82ce1985c4e55556ea88bbc70e44d9fc97750bc48dc24b4869f6dc",
+        "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28",
+        "8a5a79dc4ce91952a9106e2324c65bd6de9140defddb62f0f1f2110a71bd7397",
+        "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e"
+      ]
+    },
+    {
+      "node": "ads",
+      "evidence_count": 5,
+      "chunk_ids": [
+        "81b7f132d9a3986afb3f405630dec05c224e1a630fe549483959a8bab22bb190",
+        "b87aedbd10f957a8a25821d16fa3d2377d243112451b9ffd0ea5e807ed714a43",
+        "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+        "69feb1a04fdb11e9de406bd5d4dd7a71d0ed53e662ff8582fff51a6fc3be2b83",
+        "3d80eea11f82066c2d58530a9ab0155c879cf8328b95a1bf6febd222fa185508"
+      ]
+    },
+    {
+      "node": "whatsapp_conversion",
+      "evidence_count": 5,
+      "chunk_ids": [
+        "3452ef206f89c3091ce18b1bc1689136217d9f3638ba15e24b513eb1b1a87fd2",
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+        "3aa3fb3727d42e1ac2dba98f3a5cdf65d6e79173d62633f31e2e6e6b48dfe22b",
+        "0e2f4372855a7bc1d6dd89ebb1d6b76cb65684024065aa58308a3a77aeb7ac16",
+        "deb0eb2c1d3d9588bb6858503e176d8553d3520eec311d19b89fb824d264134c"
+      ]
+    },
+    {
+      "node": "measurement",
+      "evidence_count": 5,
+      "chunk_ids": [
+        "f7be06a2fe0e658bc38a33c75833ced0e2471ab50ac9ca372a4c8a60ca1b9413",
+        "555d8e1b0e736b01eb913771ffbe3bd84a44bfe6b48157b7ce8813b25ace809f",
+        "ac6cd8a9001c2ca64185be3c4924b37483339e6743d2548b523f1c8e1714611a",
+        "6c13102b88f2dfb99028a6d5abe6229abd37e9235ca20ec7f65dae0b0f35ee22",
+        "f1ea8036c06e740c0b1c624e0b1c085a8b6905789ea0159f894576e5d04dcefc"
+      ]
+    }
+  ],
+  "all_nodes_bounded_top5": true,
+  "no_full_kb_leakage": true,
+  "total_evidence_chunks": 36,
+  "provenance_source_class": "INTERNAL_KNOWLEDGE",
+  "live_retrieval": true,
+  "corpus": "kb_chunks_v2",
+  "pipeline": "Strategy-F"
+}

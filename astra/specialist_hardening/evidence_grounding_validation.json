@@ -1,0 +1,140 @@
+{
+  "captured_at": "2026-09-07T02:39:08.897020+00:00",
+  "laser_llm": [
+    {
+      "node": "market_context",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 5,
+      "current_research_count": 4,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "icp",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 3,
+      "current_research_count": 5,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "offer",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 3,
+      "current_research_count": 3,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "funnel",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 4,
+      "current_research_count": 4,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "creative_strategy",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 3,
+      "current_research_count": 5,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "ads",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 2,
+      "current_research_count": 4,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "whatsapp_conversion",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 4,
+      "current_research_count": 5,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "measurement",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 2,
+      "current_research_count": 4,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    }
+  ],
+  "infoproduct_llm": [
+    {
+      "node": "market_context",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 5,
+      "current_research_count": 4,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "icp",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 5,
+      "current_research_count": 4,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "offer",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 3,
+      "current_research_count": 3,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "funnel",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 3,
+      "current_research_count": 3,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "creative_strategy",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 5,
+      "current_research_count": 1,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "ads",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 4,
+      "current_research_count": 5,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    },
+    {
+      "node": "whatsapp_conversion",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 5,
+      "current_research_count": 3,
+      "fabrication_risk": 2,
+      "generation": "LLM"
+    },
+    {
+      "node": "measurement",
+      "evidence_used": 5,
+      "evidence_grounding_findings": 5,
+      "current_research_count": 4,
+      "fabrication_risk": 0,
+      "generation": "LLM"
+    }
+  ],
+  "fabrication_risk_total_llm": 0,
+  "fabrication_risk_total_det": 0,
+  "all_findings_carry_support_class": true,
+  "current_research_required_used": true,
+  "provenance_preserved": true
+}

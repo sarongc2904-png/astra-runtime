@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-09-07T00:59:30.138953+00:00",
+  "sources": [
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "units_total": 12,
+      "units_extracted": 12,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "Original Markdown absent; stable active legacy rows retained verbatim in snapshot",
+        "Curated source authorship is incomplete"
+      ],
+      "status": "PASS_WITH_WARNING"
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "units_total": 2,
+      "units_extracted": 2,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "ASR lexical errors may remain",
+        "Product UI/policies may be stale",
+        "Provider/title attribution incomplete"
+      ],
+      "unit_details": [
+        {
+          "unit_ref": "transcripciones/Video 20.txt#L685-end",
+          "file_sha256": "5dd8729f56964549fd88ed1ecfb0c6d143abea4f186becd19f096d70ba2f2b44",
+          "start_line": 685,
+          "characters": 1692,
+          "blank": false,
+          "garbled_markers": 0
+        },
+        {
+          "unit_ref": "transcripciones/Video 21.txt#L1-end",
+          "file_sha256": "bdc453d98353eba68c92b8d4f8f90c9f17c4382d9e3866ae3de41d0f28cd9dd7",
+          "start_line": 1,
+          "characters": 55483,
+          "blank": false,
+          "garbled_markers": 0
+        }
+      ],
+      "status": "PASS_WITH_WARNING"
+    }
+  ],
+  "units_total": 14,
+  "units_extracted": 14,
+  "blank_units": 0,
+  "garbled_units": 0,
+  "all_sources_pass_or_pass_with_warning": true
+}

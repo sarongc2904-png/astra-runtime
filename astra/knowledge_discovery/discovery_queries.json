@@ -1,0 +1,21 @@
+{
+  "captured_at": "2026-09-06",
+  "policy": "READ_MINIMUM_NECESSARY_CONTEXT — bounded, top5 Strategy-F, provenance preserved, no full-KB dump",
+  "corpus": "kb_chunks_v2 (single source: The Advertising Concept Book)",
+  "queries": [
+    { "id": "Q01", "category": "advertising_concept", "domain": "CREATIVE", "query": "what is an advertising concept or big idea" },
+    { "id": "Q02", "category": "creative_strategy", "domain": "CREATIVE", "query": "creative strategy and campaign thinking in advertising" },
+    { "id": "Q03", "category": "visual_idea", "domain": "CREATIVE", "query": "visual metaphor visual pun and visual ideas in advertising" },
+    { "id": "Q04", "category": "copy_persuasion", "domain": "COPY", "query": "headline copywriting and persuasion techniques" },
+    { "id": "Q05", "category": "tone_voice", "domain": "COPY", "query": "tone of voice and brand voice in advertising copy" },
+    { "id": "Q06", "category": "positioning", "domain": "CREATIVE", "query": "positioning and single-minded proposition" },
+    { "id": "Q07", "category": "storytelling", "domain": "CREATIVE", "query": "storytelling and narrative in advertising" },
+    { "id": "Q08", "category": "craft_execution", "domain": "CREATIVE", "query": "craft and execution turning idea into finished ad" },
+    { "id": "Q09", "category": "ambient_guerrilla", "domain": "CREATIVE", "query": "ambient and guerrilla marketing non-traditional media" },
+    { "id": "Q10", "category": "offer_framing", "domain": "OFFER", "query": "offer and value proposition framing" },
+    { "id": "Q11", "category": "audience_insight", "domain": "ICP", "query": "audience insight and understanding the target consumer" },
+    { "id": "Q12", "category": "campaign_idea", "domain": "CREATIVE", "query": "campaignable idea that scales across executions" },
+    { "id": "Q13", "category": "tagline", "domain": "COPY", "query": "tagline and slogan writing" },
+    { "id": "Q14", "category": "idea_generation", "domain": "CREATIVE", "query": "how to generate advertising ideas brainstorming techniques" }
+  ]
+}

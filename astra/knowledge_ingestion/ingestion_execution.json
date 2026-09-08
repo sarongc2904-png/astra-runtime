@@ -1,0 +1,231 @@
+{
+  "executed_at": "2026-09-06T23:15:00.177683+00:00",
+  "pre_ingestion_count": 763,
+  "post_ingestion_count": 1380,
+  "attempted_new_chunks": 617,
+  "inserted_this_run": 617,
+  "duplicates_skipped_this_run": 0,
+  "failures": [],
+  "completed_batches": [
+    {
+      "batch": 1,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 2,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 3,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 4,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 5,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 6,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 7,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 8,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 9,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 10,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 11,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 12,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 13,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 14,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 15,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 16,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 17,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 18,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 19,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 20,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 21,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 22,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 23,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 24,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 25,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 26,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 27,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 28,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 29,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 30,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 31,
+      "attempted": 17,
+      "inserted": 17,
+      "skipped_existing": 0,
+      "status": "PASS"
+    }
+  ],
+  "conflict_policy": "ignore-duplicates; no overwrite",
+  "transaction_semantics": "each 20-row PostgREST insert request atomic",
+  "status": "PASS"
+}

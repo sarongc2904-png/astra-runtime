@@ -1,0 +1,10 @@
+{
+  "status": "PASS_LOCAL",
+  "runtime_auth_valid": true,
+  "missing_token_status": 401,
+  "wrong_token_status": 401,
+  "valid_token_route_status": 200,
+  "comparison": "crypto.timingSafeEqual with equal-width padded buffers plus exact original-length check",
+  "gpt_facing_key_accepted_by_runtime": false,
+  "secret_value_persisted": false
+}

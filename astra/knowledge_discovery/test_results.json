@@ -1,0 +1,51 @@
+{
+  "tests_total": 11,
+  "tests_passed": 11,
+  "tests_failed": 0,
+  "results": [
+    {
+      "test": "registry_schema_valid",
+      "status": "PASS"
+    },
+    {
+      "test": "mapped_doctrine_has_evidence_refs",
+      "status": "PASS"
+    },
+    {
+      "test": "material_fields_have_field_level_evidence",
+      "status": "PASS"
+    },
+    {
+      "test": "unsupported_placeholders_conservative",
+      "status": "PASS"
+    },
+    {
+      "test": "different_supported_tasks_choose_different_candidates",
+      "status": "PASS"
+    },
+    {
+      "test": "no_method_universally_selected",
+      "status": "PASS"
+    },
+    {
+      "test": "evidence_poor_methods_penalized",
+      "status": "PASS"
+    },
+    {
+      "test": "alias_ambiguity_handled_safely",
+      "status": "PASS"
+    },
+    {
+      "test": "no_retrieval_score_only_selection",
+      "status": "PASS"
+    },
+    {
+      "test": "unsupported_domains_return_insufficient",
+      "status": "PASS"
+    },
+    {
+      "test": "no_specialists_executed",
+      "status": "PASS"
+    }
+  ]
+}

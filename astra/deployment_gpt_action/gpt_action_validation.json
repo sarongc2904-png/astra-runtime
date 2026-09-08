@@ -1,0 +1,16 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "WAITING_FOR_INPUT",
+  "schema": "openapi_schema_final.json",
+  "operation_ids": [
+    "searchKnowledgeBase",
+    "runAstraCampaign360",
+    "runAstraCreativeDirector",
+    "runAstraCreativeGeneration"
+  ],
+  "schema_valid": true,
+  "gpt_ui_configured": false,
+  "manual_configuration_required": true,
+  "credential_location": "system clipboard; value not persisted"
+}

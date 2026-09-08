@@ -1,0 +1,59 @@
+{
+  "resolutions": [
+    {
+      "status": "MERGED",
+      "terms": [
+        "Velocity Funnel Method",
+        "Funnel Design"
+      ],
+      "canonical_method_id": "METHOD_FUNNEL",
+      "rationale": "Same coherent funnel curriculum and source package.",
+      "evidence_refs": [
+        "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+        "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8"
+      ]
+    },
+    {
+      "status": "KEPT_SEPARATE",
+      "terms": [
+        "MIDAS",
+        "Growth Marketing"
+      ],
+      "rationale": "Distinct named curricula and different core process scopes.",
+      "evidence_refs": [
+        "58bad94434984c2b61caab1bc6e1f142a88de665a61f93e23396da22bca630bf",
+        "7b0d0bd2813591242ac3daf53dd35cac7955f21c37154b416f75023eef733f52",
+        "f52740637426debb618a0a92e4ee464d3a7efe2e9ba0b9a9c7210a5821c252fb",
+        "2969124a61a2a00161920f8c1cd5842ceb07d35613731355f2014312e9dd8b7b",
+        "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+        "bfe47635e7291c9f64afbdb6a562fff9acede2a18380f96d78286200712637f2",
+        "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+        "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+        "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+        "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+        "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+        "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+      ]
+    },
+    {
+      "status": "AMBIGUOUS",
+      "terms": [
+        "Velocity",
+        "Velocity Funnel Method"
+      ],
+      "rationale": "Velocity is a source/brand umbrella across multiple courses; evidence does not establish one universal Velocity method.",
+      "evidence_refs": [
+        "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+        "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8"
+      ]
+    }
+  ]
+}

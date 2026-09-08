@@ -1,0 +1,208 @@
+{
+  "status": "LIVE_VERIFIED",
+  "captured_at": "2026-09-07T03:55:15.022962+00:00",
+  "project_ref": "ftoxermwkfebmnrudiuu",
+  "corpus": "public.kb_chunks_v2",
+  "active_source_count": 11,
+  "chunk_count": 1454,
+  "embedding_count": 1454,
+  "legacy_kb_chunks": 7584,
+  "live_local_chunk_ids_match": true,
+  "live_local_content_hashes_match": true,
+  "sources": [
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "source_title": "Velocity — Facebook Marketing / Facebook Ads",
+      "source_pdf_name": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+      "source_type": "COURSE_VIDEO_TRANSCRIPTS",
+      "category": "Meta Ads",
+      "subdomains": [
+        "optimization",
+        "scaling",
+        "measurement"
+      ],
+      "chunk_count": 35,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "LIMITED",
+      "primary_orientation": "Meta Ads campaign strategy; limited creative craft"
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "source_title": "Protégé — CRO Máxima [transcript bundle]",
+      "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+      "source_type": "COURSE_TRANSCRIPTS",
+      "category": "CRO",
+      "subdomains": [],
+      "chunk_count": 86,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "NO_MATERIAL_CONTRIBUTION",
+      "primary_orientation": "CRO"
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "source_title": "Protégé — Growth Marketing [transcript bundle]",
+      "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+      "source_type": "COURSE_TRANSCRIPTS",
+      "category": "positioning",
+      "subdomains": [
+        "pricing",
+        "CRO",
+        "growth"
+      ],
+      "chunk_count": 132,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "NO_MATERIAL_CONTRIBUTION",
+      "primary_orientation": "positioning"
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "source_title": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+      "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+      "source_type": "COURSE_TRANSCRIPTS",
+      "category": "funnel design",
+      "subdomains": [
+        "offer design",
+        "positioning"
+      ],
+      "chunk_count": 186,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "LIMITED",
+      "primary_orientation": "funnel/landing-page structure with isolated CTA/layout guidance"
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "source_title": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+      "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+      "source_type": "COURSE_TRANSCRIPTS",
+      "category": "infoproducts",
+      "subdomains": [
+        "offer design",
+        "positioning"
+      ],
+      "chunk_count": 62,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "NO_MATERIAL_CONTRIBUTION",
+      "primary_orientation": "infoproducts"
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "source_title": "Velocity — Curso MIDAS [transcript bundle]",
+      "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+      "source_type": "COURSE_TRANSCRIPTS",
+      "category": "positioning",
+      "subdomains": [
+        "pricing",
+        "business model"
+      ],
+      "chunk_count": 79,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "NO_MATERIAL_CONTRIBUTION",
+      "primary_orientation": "positioning"
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "source_title": "Velocity — Taller de Propuesta Irresistible [transcript bundle]",
+      "source_pdf_name": "Velocity — Taller de Propuesta Irresistible [transcript bundle]",
+      "source_type": "WORKSHOP_TRANSCRIPT",
+      "category": "offer design",
+      "subdomains": [
+        "sales conversion"
+      ],
+      "chunk_count": 21,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "NO_MATERIAL_CONTRIBUTION",
+      "primary_orientation": "offer design"
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "source_title": "Velocity — La Venta Elegante [transcript bundle]",
+      "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+      "source_type": "COURSE_TRANSCRIPTS",
+      "category": "sales conversion",
+      "subdomains": [
+        "sales acceleration"
+      ],
+      "chunk_count": 51,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "NO_MATERIAL_CONTRIBUTION",
+      "primary_orientation": "sales conversion"
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "source_title": "Local workshop — FunnelChat WhatsApp automation",
+      "source_pdf_name": "Local workshop — FunnelChat WhatsApp automation",
+      "source_type": "WORKSHOP_ASR_TRANSCRIPT",
+      "category": "WhatsApp Sales",
+      "subdomains": [
+        "conversation automation",
+        "lead tagging",
+        "follow-up",
+        "nurture",
+        "lead recovery",
+        "CRM flow",
+        "pipeline",
+        "human handoff",
+        "conversational conversion"
+      ],
+      "chunk_count": 36,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "NO_MATERIAL_CONTRIBUTION",
+      "primary_orientation": "WhatsApp Sales"
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "source_title": "WhatsApp Sales OS — 21_WHATSAPP_SALES_OS.md",
+      "source_pdf_name": "WhatsApp Sales OS — 21_WHATSAPP_SALES_OS.md",
+      "source_type": "LEGACY_CURATED_MARKDOWN_CHUNKS",
+      "category": "WhatsApp Sales",
+      "subdomains": [
+        "first response",
+        "qualification",
+        "discovery",
+        "pricing",
+        "booking",
+        "objections",
+        "follow-up",
+        "no-show prevention",
+        "pipeline",
+        "metrics"
+      ],
+      "chunk_count": 3,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "NO_MATERIAL_CONTRIBUTION",
+      "primary_orientation": "WhatsApp Sales"
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_type": "PDF_BOOK",
+      "category": "advertising creative/design",
+      "subdomains": [],
+      "chunk_count": 763,
+      "activation_evidence": "current live public.kb_chunks_v2 metadata",
+      "design_creative_contribution": "MATERIAL",
+      "primary_orientation": "advertising creative, concept, copy, art direction, and print design"
+    }
+  ],
+  "candidate_source_status": {
+    "The Advertising Concept Book": {
+      "status": "ACTIVE",
+      "source_id": "acb-7efda14cb56f"
+    },
+    "Graphic Design Solutions": {
+      "status": "NOT_ACTIVE",
+      "source_id": null
+    },
+    "Hey, Whipple, Squeeze This": {
+      "status": "NOT_ACTIVE",
+      "source_id": null
+    },
+    "The Elements of Graphic Design": {
+      "status": "NOT_ACTIVE",
+      "source_id": null
+    }
+  },
+  "design_sources_identified": 1,
+  "design_adjacent_sources_with_limited_contribution": 2
+}

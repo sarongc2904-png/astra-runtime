@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-09-06T23:13:17.394549+00:00",
+  "domains": [
+    {
+      "DOMAIN": "offer design",
+      "CURRENT_COVERAGE": "WEAK",
+      "CANDIDATE_SOURCES": [
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_OFFER",
+        "SRC_VEL_INFO_AZ"
+      ],
+      "ADMITTED_SOURCES": [
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_OFFER",
+        "SRC_VEL_INFO_AZ"
+      ],
+      "EXPECTED_POST_INGESTION_COVERAGE": "STRONG",
+      "UNRESOLVED_GAP": false
+    },
+    {
+      "DOMAIN": "funnel design",
+      "CURRENT_COVERAGE": "NONE",
+      "CANDIDATE_SOURCES": [
+        "SRC_VEL_FUNNELS"
+      ],
+      "ADMITTED_SOURCES": [
+        "SRC_VEL_FUNNELS"
+      ],
+      "EXPECTED_POST_INGESTION_COVERAGE": "STRONG",
+      "UNRESOLVED_GAP": false
+    },
+    {
+      "DOMAIN": "sales conversion",
+      "CURRENT_COVERAGE": "NONE",
+      "CANDIDATE_SOURCES": [
+        "SRC_VEL_SALES",
+        "SRC_VEL_OFFER"
+      ],
+      "ADMITTED_SOURCES": [
+        "SRC_VEL_SALES",
+        "SRC_VEL_OFFER"
+      ],
+      "EXPECTED_POST_INGESTION_COVERAGE": "STRONG",
+      "UNRESOLVED_GAP": false
+    },
+    {
+      "DOMAIN": "Meta Ads",
+      "CURRENT_COVERAGE": "NONE",
+      "CANDIDATE_SOURCES": [],
+      "ADMITTED_SOURCES": [],
+      "EXPECTED_POST_INGESTION_COVERAGE": "NONE",
+      "UNRESOLVED_GAP": true
+    },
+    {
+      "DOMAIN": "WhatsApp sales",
+      "CURRENT_COVERAGE": "NONE",
+      "CANDIDATE_SOURCES": [],
+      "ADMITTED_SOURCES": [],
+      "EXPECTED_POST_INGESTION_COVERAGE": "NONE",
+      "UNRESOLVED_GAP": true
+    },
+    {
+      "DOMAIN": "infoproducts",
+      "CURRENT_COVERAGE": "NONE",
+      "CANDIDATE_SOURCES": [
+        "SRC_VEL_INFO_AZ"
+      ],
+      "ADMITTED_SOURCES": [
+        "SRC_VEL_INFO_AZ"
+      ],
+      "EXPECTED_POST_INGESTION_COVERAGE": "STRONG",
+      "UNRESOLVED_GAP": false
+    },
+    {
+      "DOMAIN": "course creation",
+      "CURRENT_COVERAGE": "NONE",
+      "CANDIDATE_SOURCES": [],
+      "ADMITTED_SOURCES": [],
+      "EXPECTED_POST_INGESTION_COVERAGE": "NONE",
+      "UNRESOLVED_GAP": true
+    },
+    {
+      "DOMAIN": "CRO",
+      "CURRENT_COVERAGE": "NONE",
+      "CANDIDATE_SOURCES": [
+        "SRC_PRO_CRO",
+        "SRC_PRO_GROWTH"
+      ],
+      "ADMITTED_SOURCES": [
+        "SRC_PRO_CRO",
+        "SRC_PRO_GROWTH"
+      ],
+      "EXPECTED_POST_INGESTION_COVERAGE": "STRONG",
+      "UNRESOLVED_GAP": false
+    },
+    {
+      "DOMAIN": "positioning",
+      "CURRENT_COVERAGE": "WEAK",
+      "CANDIDATE_SOURCES": [
+        "SRC_VEL_MIDAS",
+        "SRC_PRO_GROWTH",
+        "SRC_VEL_FUNNELS"
+      ],
+      "ADMITTED_SOURCES": [
+        "SRC_VEL_MIDAS",
+        "SRC_PRO_GROWTH",
+        "SRC_VEL_FUNNELS"
+      ],
+      "EXPECTED_POST_INGESTION_COVERAGE": "STRONG",
+      "UNRESOLVED_GAP": false
+    },
+    {
+      "DOMAIN": "pricing",
+      "CURRENT_COVERAGE": "NONE",
+      "CANDIDATE_SOURCES": [
+        "SRC_VEL_MIDAS",
+        "SRC_PRO_GROWTH"
+      ],
+      "ADMITTED_SOURCES": [
+        "SRC_VEL_MIDAS",
+        "SRC_PRO_GROWTH"
+      ],
+      "EXPECTED_POST_INGESTION_COVERAGE": "STRONG",
+      "UNRESOLVED_GAP": false
+    }
+  ],
+  "note": "Expected coverage is a planning estimate; post-ingestion status requires retrieval evidence."
+}

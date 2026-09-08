@@ -1,0 +1,12 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "bounded_input_chars": 12000,
+  "bounded_body_bytes": 256000,
+  "arbitrary_command_execution": false,
+  "arbitrary_filesystem_access": false,
+  "service_role_returned": false,
+  "secret_redaction": "PASS",
+  "raw_stack_returned": false
+}

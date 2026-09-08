@@ -1,0 +1,43 @@
+{
+  "captured_at": "2026-09-07T02:39:08.897020+00:00",
+  "scorer": "astra/src/router/method_scorer_v2.js (orchestration-level; ASTRA-02 adjudicator unchanged)",
+  "dimensions": [
+    "problem_fit",
+    "sub_intent_fit",
+    "funnel_stage_fit",
+    "business_stage_fit",
+    "evidence_quality",
+    "best_for_match",
+    "limitation_penalty",
+    "required_inputs_fit"
+  ],
+  "specific_beats_generic": true,
+  "verified_by_test": "scorer v2: specific method beats generic same-domain (astra05.test.js)",
+  "no_universal_winner": true,
+  "evidence_poor_excluded": true,
+  "forced_bindings_preserved": {
+    "ads": "METHOD_META_ADS",
+    "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+  },
+  "laser_selected_methods": {
+    "market_context": "METHOD_GROWTH_MARKETING",
+    "icp": "METHOD_ICP",
+    "offer": "METHOD_OFFER_DESIGN",
+    "funnel": "METHOD_FUNNEL",
+    "creative_strategy": "METHOD_CREATIVE_STRATEGY",
+    "ads": "METHOD_META_ADS",
+    "whatsapp_conversion": "METHOD_WHATSAPP_SALES",
+    "measurement": "METHOD_CRO"
+  },
+  "infoproduct_selected_methods": {
+    "market_context": "METHOD_GROWTH_MARKETING",
+    "icp": "METHOD_ICP",
+    "offer": "METHOD_OFFER_DESIGN",
+    "funnel": "METHOD_FUNNEL",
+    "creative_strategy": "METHOD_CREATIVE_STRATEGY",
+    "ads": "METHOD_META_ADS",
+    "whatsapp_conversion": "METHOD_WHATSAPP_SALES",
+    "measurement": "METHOD_CRO"
+  },
+  "velocity_or_course_selected": false
+}

@@ -1,0 +1,44 @@
+{
+  "captured_at": "2026-09-07T02:04:32.281970+00:00",
+  "required_bindings": {
+    "ads": "METHOD_META_ADS",
+    "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+  },
+  "observed": {
+    "market_context": {
+      "method_used": "METHOD_GROWTH_MARKETING",
+      "forced": false
+    },
+    "icp": {
+      "method_used": "METHOD_ICP",
+      "forced": false
+    },
+    "offer": {
+      "method_used": "METHOD_OFFER_DESIGN",
+      "forced": false
+    },
+    "funnel": {
+      "method_used": "METHOD_FUNNEL",
+      "forced": false
+    },
+    "creative_strategy": {
+      "method_used": "METHOD_AD_EXECUTION_CRAFT",
+      "forced": false
+    },
+    "ads": {
+      "method_used": "METHOD_META_ADS",
+      "forced": true
+    },
+    "whatsapp_conversion": {
+      "method_used": "METHOD_WHATSAPP_SALES",
+      "forced": true
+    },
+    "measurement": {
+      "method_used": "METHOD_CRO",
+      "forced": false
+    }
+  },
+  "ads_binding_valid": true,
+  "whatsapp_binding_valid": true,
+  "note": "forced evidence-backed bindings enforced over the coarse same-domain scorer"
+}

@@ -1,0 +1,35 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "astra09": {
+    "passed": 24,
+    "failed": 0
+  },
+  "regressions": {
+    "astra08c": [
+      23,
+      0
+    ],
+    "astra08b": [
+      36,
+      0
+    ],
+    "astra07": [
+      23,
+      0
+    ],
+    "astra05": [
+      24,
+      0
+    ],
+    "astra04": [
+      20,
+      0
+    ]
+  },
+  "core_external_dependencies_required": false,
+  "live_openrouter_calls": 0,
+  "live_lmstudio_calls": 0,
+  "live_supabase_calls": 0
+}

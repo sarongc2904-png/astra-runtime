@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-09-07T00:40:30.220395+00:00",
+  "META_ADS": {
+    "before": "NONE",
+    "after": "MODERATE",
+    "supporting_sources": [
+      "SRC_META_VELOCITY_FACEBOOK_COURSE"
+    ],
+    "evidence_quality": "Dedicated six-part local course; broad strategic depth; ASR and current-platform limitations retained",
+    "remaining_gap": "Authoritative/current operational coverage for CAPI, Advantage+, attribution changes, interface setup and lead qualification downstream of ad capture."
+  },
+  "WHATSAPP_SALES": {
+    "before": "NONE",
+    "after": "NONE",
+    "supporting_sources": [],
+    "evidence_quality": "No candidate met dedicated-depth and provenance requirements",
+    "remaining_gap": "A dedicated, provenance-identifiable WhatsApp conversational-sales source covering qualification, discovery, appointments, objections, closing, follow-up, recovery, nurture and CRM flow."
+  }
+}

@@ -1,0 +1,1993 @@
+{
+  "generated_at": "2026-09-07T03:59:18.471187+00:00",
+  "sources": 11,
+  "domains": 30,
+  "pair_count": 330,
+  "classes": [
+    "DIRECT",
+    "PARTIAL",
+    "NONE"
+  ],
+  "matrix": [
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "24",
+      "classification": "PARTIAL",
+      "retrieved_slots": 1
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "27",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 1
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "24",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 1
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "27",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_CRO",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 1
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "24",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "27",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_PRO_GROWTH",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "24",
+      "classification": "NONE",
+      "retrieved_slots": 1
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "27",
+      "classification": "PARTIAL",
+      "retrieved_slots": 1
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_FUNNELS",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "24",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "27",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_INFO_AZ",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "24",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "27",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_MIDAS",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "24",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "27",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_OFFER",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "24",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "27",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_VEL_SALES",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "24",
+      "classification": "NONE",
+      "retrieved_slots": 1
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "27",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "01",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "02",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "03",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "04",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "05",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "06",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "07",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "08",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "10",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "11",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "12",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "13",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "14",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "15",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "16",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "17",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "18",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "19",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "20",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "21",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "22",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "23",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "24",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "27",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "28",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "29",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "domain_id": "30",
+      "classification": "NONE",
+      "retrieved_slots": 0
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "01",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "02",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "03",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "04",
+      "classification": "PARTIAL",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "05",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "06",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "07",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "08",
+      "classification": "PARTIAL",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "09",
+      "classification": "NONE",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "10",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "11",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "12",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "13",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "14",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "15",
+      "classification": "DIRECT",
+      "retrieved_slots": 15
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "16",
+      "classification": "DIRECT",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "17",
+      "classification": "DIRECT",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "18",
+      "classification": "DIRECT",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "19",
+      "classification": "DIRECT",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "20",
+      "classification": "PARTIAL",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "21",
+      "classification": "DIRECT",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "22",
+      "classification": "DIRECT",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "23",
+      "classification": "PARTIAL",
+      "retrieved_slots": 8
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "24",
+      "classification": "DIRECT",
+      "retrieved_slots": 7
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "25",
+      "classification": "NONE",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "26",
+      "classification": "NONE",
+      "retrieved_slots": 9
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "27",
+      "classification": "DIRECT",
+      "retrieved_slots": 9
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "28",
+      "classification": "DIRECT",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "29",
+      "classification": "DIRECT",
+      "retrieved_slots": 10
+    },
+    {
+      "source_id": "acb-7efda14cb56f",
+      "domain_id": "30",
+      "classification": "DIRECT",
+      "retrieved_slots": 10
+    }
+  ]
+}

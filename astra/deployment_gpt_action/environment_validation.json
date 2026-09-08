@@ -1,0 +1,24 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "BLOCKED",
+  "supabase_cli": {
+    "installed": true,
+    "version": "2.116.0",
+    "authenticated": true,
+    "linked": true
+  },
+  "local": {
+    "OPENROUTER_API_KEY": "PRESENT",
+    "ASTRA_PROVIDER_HEALTH": "READY",
+    "STRATEGY_F_PYTHON": "AVAILABLE"
+  },
+  "remote": {
+    "KB_API_KEY": "PRESENT",
+    "OPENAI_API_KEY": "PRESENT",
+    "ASTRA_GPT_API_KEY": "PRESENT",
+    "ASTRA_RUNTIME_URL": "MISSING",
+    "ASTRA_RUNTIME_API_KEY": "MISSING"
+  },
+  "secret_values_recorded": false
+}

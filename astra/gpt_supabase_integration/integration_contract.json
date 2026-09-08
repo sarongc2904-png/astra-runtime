@@ -1,0 +1,16 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "architecture": [
+    "GPT",
+    "Supabase Edge gateway",
+    "compatible Node API",
+    "ASTRA runtime",
+    "Agent V1 / Strategy-F"
+  ],
+  "core_rule": "GPT_IS_INTERFACE_NOT_KNOWLEDGE_ENGINE",
+  "runtime_boundary": "Deno gateway cannot execute the local CommonJS/Node plus Python runtime in-process",
+  "schema_migration_required": false,
+  "persistence": "optional injected metadata sink; no KB duplication"
+}

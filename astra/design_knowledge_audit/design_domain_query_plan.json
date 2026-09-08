@@ -1,0 +1,266 @@
+{
+  "generated_at": "2026-09-07T03:55:15.462045+00:00",
+  "pipeline": "Strategy-F",
+  "corpus": "kb_chunks_v2",
+  "top_k_per_query": 5,
+  "read_minimum_necessary_context": true,
+  "domain_count": 30,
+  "query_count": 75,
+  "domains": [
+    {
+      "domain_id": "01",
+      "domain_name": "visual composition",
+      "queries": [
+        "visual composition advertising",
+        "composition in graphic design",
+        "visual balance layout"
+      ]
+    },
+    {
+      "domain_id": "02",
+      "domain_name": "visual hierarchy",
+      "queries": [
+        "visual hierarchy advertising",
+        "hierarchy graphic design",
+        "focal point hierarchy"
+      ]
+    },
+    {
+      "domain_id": "03",
+      "domain_name": "layout",
+      "queries": [
+        "layout principles graphic design",
+        "advertising layout composition",
+        "organizing elements on a page"
+      ]
+    },
+    {
+      "domain_id": "04",
+      "domain_name": "grids",
+      "queries": [
+        "grid systems graphic design",
+        "advertising layout grid",
+        "columns modular grid design"
+      ]
+    },
+    {
+      "domain_id": "05",
+      "domain_name": "typography",
+      "queries": [
+        "typography hierarchy",
+        "type legibility advertising",
+        "typography visual communication"
+      ]
+    },
+    {
+      "domain_id": "06",
+      "domain_name": "color",
+      "queries": [
+        "color principles advertising",
+        "color graphic design communication",
+        "color palette brand advertising"
+      ]
+    },
+    {
+      "domain_id": "07",
+      "domain_name": "contrast",
+      "queries": [
+        "visual contrast graphic design",
+        "contrast advertising layout",
+        "contrast creates emphasis"
+      ]
+    },
+    {
+      "domain_id": "08",
+      "domain_name": "balance",
+      "queries": [
+        "visual balance design",
+        "asymmetrical balance advertising",
+        "balance composition layout"
+      ]
+    },
+    {
+      "domain_id": "09",
+      "domain_name": "rhythm",
+      "queries": [
+        "visual rhythm graphic design",
+        "rhythm repetition layout",
+        "movement rhythm advertising design"
+      ]
+    },
+    {
+      "domain_id": "10",
+      "domain_name": "negative space",
+      "queries": [
+        "negative space advertising",
+        "white space graphic design",
+        "empty space visual communication"
+      ]
+    },
+    {
+      "domain_id": "11",
+      "domain_name": "branding",
+      "queries": [
+        "branding principles visual communication",
+        "brand consistency advertising",
+        "brand expression design"
+      ]
+    },
+    {
+      "domain_id": "12",
+      "domain_name": "visual identity",
+      "queries": [
+        "visual identity system",
+        "brand identity graphic design",
+        "identity elements logo typography color"
+      ]
+    },
+    {
+      "domain_id": "13",
+      "domain_name": "art direction",
+      "queries": [
+        "art direction principles",
+        "visual direction advertising",
+        "art director advertising execution"
+      ]
+    },
+    {
+      "domain_id": "14",
+      "domain_name": "advertising concept",
+      "queries": [
+        "advertising concept development",
+        "visual advertising idea",
+        "creative concept advertising"
+      ]
+    },
+    {
+      "domain_id": "15",
+      "domain_name": "single-minded proposition / SMP",
+      "queries": [
+        "single minded proposition",
+        "single-minded proposition advertising",
+        "one proposition creative brief"
+      ]
+    },
+    {
+      "domain_id": "16",
+      "domain_name": "headline-image relationship",
+      "queries": [
+        "headline image relationship",
+        "copy and visual relationship advertising"
+      ]
+    },
+    {
+      "domain_id": "17",
+      "domain_name": "visual metaphor",
+      "queries": [
+        "visual metaphor advertising",
+        "metaphor image creative concept"
+      ]
+    },
+    {
+      "domain_id": "18",
+      "domain_name": "copywriting for visual ads",
+      "queries": [
+        "copywriting for visual advertising",
+        "headline body copy visual ad"
+      ]
+    },
+    {
+      "domain_id": "19",
+      "domain_name": "photography / image direction",
+      "queries": [
+        "photography direction advertising",
+        "image selection art direction"
+      ]
+    },
+    {
+      "domain_id": "20",
+      "domain_name": "editorial design",
+      "queries": [
+        "editorial design principles",
+        "magazine page layout typography"
+      ]
+    },
+    {
+      "domain_id": "21",
+      "domain_name": "print advertising",
+      "queries": [
+        "print advertising design",
+        "print ad layout headline visual"
+      ]
+    },
+    {
+      "domain_id": "22",
+      "domain_name": "digital advertising",
+      "queries": [
+        "digital advertising creative design",
+        "online ad creative principles"
+      ]
+    },
+    {
+      "domain_id": "23",
+      "domain_name": "performance creative",
+      "queries": [
+        "performance creative advertising",
+        "conversion-oriented creative"
+      ]
+    },
+    {
+      "domain_id": "24",
+      "domain_name": "social / Meta ad creative",
+      "queries": [
+        "social ad creative",
+        "Meta Facebook ad creative"
+      ]
+    },
+    {
+      "domain_id": "25",
+      "domain_name": "mobile-first creative",
+      "queries": [
+        "mobile-first ad creative",
+        "mobile advertising design"
+      ]
+    },
+    {
+      "domain_id": "26",
+      "domain_name": "scroll-stopping principles",
+      "queries": [
+        "scroll stopping creative",
+        "attention grabbing social advertising"
+      ]
+    },
+    {
+      "domain_id": "27",
+      "domain_name": "CTA visual hierarchy",
+      "queries": [
+        "call to action visual hierarchy",
+        "CTA placement contrast advertising"
+      ]
+    },
+    {
+      "domain_id": "28",
+      "domain_name": "information density",
+      "queries": [
+        "information density graphic design",
+        "reduce clutter advertising layout"
+      ]
+    },
+    {
+      "domain_id": "29",
+      "domain_name": "readability / legibility",
+      "queries": [
+        "readability legibility graphic design",
+        "legible type advertising"
+      ]
+    },
+    {
+      "domain_id": "30",
+      "domain_name": "creative evaluation / critique",
+      "queries": [
+        "evaluate advertising creative",
+        "creative critique criteria"
+      ]
+    }
+  ]
+}

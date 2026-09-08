@@ -1,0 +1,248 @@
+{
+  "request": "Create a client acquisition campaign for a laser hair removal clinic.",
+  "mock_flow": {
+    "intent": "MULTI_STEP_MARKETING",
+    "objective": "CLIENT_ACQUISITION",
+    "business_type": "LASER HAIR REMOVAL CLINIC",
+    "workflow_order": [
+      "market_context",
+      "icp",
+      "offer",
+      "creative_strategy",
+      "funnel",
+      "ads",
+      "whatsapp_conversion",
+      "measurement"
+    ],
+    "query_plan": {
+      "total_queries": 9,
+      "bounded": true,
+      "policy": "READ_MINIMUM_NECESSARY_CONTEXT"
+    },
+    "per_step": [
+      {
+        "name": "market_context",
+        "domain": "MARKET_RESEARCH",
+        "primary_query": "market context and positioning for LASER HAIR REMOVAL CLINIC",
+        "retrieval": {
+          "corpus": "kb_chunks_v2",
+          "pipeline": "Strategy-F",
+          "evidence_count": 1,
+          "top_chunk_ids": [
+            "mock_market"
+          ],
+          "read_only": true
+        },
+        "sufficiency": {
+          "decision": "PARTIAL",
+          "cache_status": "CACHE_HIT"
+        },
+        "candidate_method_ids": [],
+        "primary_method": null,
+        "adjudication_state": "INSUFFICIENT_EVIDENCE",
+        "selection_confidence": 0,
+        "model_tier": "MEDIUM_REASONING"
+      },
+      {
+        "name": "icp",
+        "domain": "ICP",
+        "primary_query": "ideal customer profile and buyer pains for LASER HAIR REMOVAL CLINIC",
+        "retrieval": {
+          "corpus": "kb_chunks_v2",
+          "pipeline": "Strategy-F",
+          "evidence_count": 1,
+          "top_chunk_ids": [
+            "mock_ideal "
+          ],
+          "read_only": true
+        },
+        "sufficiency": {
+          "decision": "PARTIAL",
+          "cache_status": "CACHE_HIT"
+        },
+        "candidate_method_ids": [
+          "METHOD_ICP"
+        ],
+        "primary_method": "METHOD_ICP",
+        "adjudication_state": "RESOLVED",
+        "selection_confidence": 0.68,
+        "model_tier": "MEDIUM_REASONING"
+      },
+      {
+        "name": "offer",
+        "domain": "OFFER",
+        "primary_query": "offer design and value proposition for LASER HAIR REMOVAL CLINIC",
+        "retrieval": {
+          "corpus": "kb_chunks_v2",
+          "pipeline": "Strategy-F",
+          "evidence_count": 1,
+          "top_chunk_ids": [
+            "mock_offer "
+          ],
+          "read_only": true
+        },
+        "sufficiency": {
+          "decision": "PARTIAL",
+          "cache_status": "CACHE_HIT"
+        },
+        "candidate_method_ids": [
+          "METHOD_OFFER_DESIGN"
+        ],
+        "primary_method": "METHOD_OFFER_DESIGN",
+        "adjudication_state": "RESOLVED",
+        "selection_confidence": 0.68,
+        "model_tier": "MEDIUM_REASONING"
+      },
+      {
+        "name": "funnel",
+        "domain": "FUNNEL",
+        "primary_query": "funnel design and lead sequencing for LASER HAIR REMOVAL CLINIC",
+        "retrieval": {
+          "corpus": "kb_chunks_v2",
+          "pipeline": "Strategy-F",
+          "evidence_count": 1,
+          "top_chunk_ids": [
+            "mock_funnel"
+          ],
+          "read_only": true
+        },
+        "sufficiency": {
+          "decision": "PARTIAL",
+          "cache_status": "CACHE_HIT"
+        },
+        "candidate_method_ids": [
+          "METHOD_VELOCITY",
+          "METHOD_FUNNEL"
+        ],
+        "primary_method": "METHOD_FUNNEL",
+        "adjudication_state": "RESOLVED",
+        "selection_confidence": 0.34,
+        "model_tier": "MEDIUM_REASONING"
+      },
+      {
+        "name": "creative_strategy",
+        "domain": "CREATIVE",
+        "primary_query": "creative angles and hooks for LASER HAIR REMOVAL CLINIC",
+        "retrieval": {
+          "corpus": "kb_chunks_v2",
+          "pipeline": "Strategy-F",
+          "evidence_count": 1,
+          "top_chunk_ids": [
+            "mock_creati"
+          ],
+          "read_only": true
+        },
+        "sufficiency": {
+          "decision": "PARTIAL",
+          "cache_status": "CACHE_HIT"
+        },
+        "candidate_method_ids": [
+          "METHOD_CREATIVE_STRATEGY"
+        ],
+        "primary_method": "METHOD_CREATIVE_STRATEGY",
+        "adjudication_state": "RESOLVED",
+        "selection_confidence": 0.68,
+        "model_tier": "MEDIUM_REASONING"
+      },
+      {
+        "name": "ads",
+        "domain": "ADS",
+        "primary_query": "meta ads lead qualification and targeting for LASER HAIR REMOVAL CLINIC",
+        "retrieval": {
+          "corpus": "kb_chunks_v2",
+          "pipeline": "Strategy-F",
+          "evidence_count": 1,
+          "top_chunk_ids": [
+            "mock_meta a"
+          ],
+          "read_only": true
+        },
+        "sufficiency": {
+          "decision": "PARTIAL",
+          "cache_status": "CACHE_HIT"
+        },
+        "candidate_method_ids": [
+          "METHOD_DIGITAL_MARKETING",
+          "METHOD_META_ADS"
+        ],
+        "primary_method": "METHOD_DIGITAL_MARKETING",
+        "adjudication_state": "RESOLVED",
+        "selection_confidence": 0.34,
+        "model_tier": "MEDIUM_REASONING"
+      },
+      {
+        "name": "whatsapp_conversion",
+        "domain": "SALES",
+        "primary_query": "whatsapp appointment conversion and objection handling",
+        "retrieval": {
+          "corpus": "kb_chunks_v2",
+          "pipeline": "Strategy-F",
+          "evidence_count": 1,
+          "top_chunk_ids": [
+            "mock_whatsa"
+          ],
+          "read_only": true
+        },
+        "sufficiency": {
+          "decision": "PARTIAL",
+          "cache_status": "CACHE_HIT"
+        },
+        "candidate_method_ids": [
+          "METHOD_SALES_ACCELERATION",
+          "METHOD_WHATSAPP_SALES"
+        ],
+        "primary_method": "METHOD_SALES_ACCELERATION",
+        "adjudication_state": "RESOLVED",
+        "selection_confidence": 0.34,
+        "model_tier": "MEDIUM_REASONING"
+      },
+      {
+        "name": "measurement",
+        "domain": "CRO",
+        "primary_query": "conversion measurement and optimization for LASER HAIR REMOVAL CLINIC",
+        "retrieval": {
+          "corpus": "kb_chunks_v2",
+          "pipeline": "Strategy-F",
+          "evidence_count": 1,
+          "top_chunk_ids": [
+            "mock_conver"
+          ],
+          "read_only": true
+        },
+        "sufficiency": {
+          "decision": "PARTIAL",
+          "cache_status": "CACHE_HIT"
+        },
+        "candidate_method_ids": [
+          "METHOD_CRO"
+        ],
+        "primary_method": "METHOD_CRO",
+        "adjudication_state": "RESOLVED",
+        "selection_confidence": 0.68,
+        "model_tier": "MEDIUM_REASONING"
+      }
+    ],
+    "workflow_state_status": "PLANNED",
+    "specialists_executed": false,
+    "stopped_before": "SPECIALIST_EXECUTION"
+  },
+  "live_agent_v1": {
+    "health_ok": true,
+    "exposes_api_key": false,
+    "corpus": "kb_chunks_v2",
+    "pipeline": "Strategy-F",
+    "evidence_count": 5,
+    "top_chunk_ids": [
+      "e28d8781ad99307855f88973602cbe38dde324b531dcbac0b40094c40d4a920c",
+      "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+      "ac6cd8a9001c2ca64185be3c4924b37483339e6743d2548b523f1c8e1714611a",
+      "3c56b9dc80925d6353971ea4bbea9dbe61d370fc78ad2306bf99fcdc2b74d0b2",
+      "d105e4804493d1f61fbad7d3b2439118a42ff9f06a0999cfdb459cbfdc902719"
+    ],
+    "first_source": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+    "first_source_class": "INTERNAL_KNOWLEDGE",
+    "read_only": true
+  },
+  "FIRST_ROUTING_PROOF": "PASS"
+}
+FIRST_ROUTING_PROOF=PASS

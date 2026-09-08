@@ -1,0 +1,806 @@
+{
+  "version": "mr-0.2-astra03",
+  "note": "ASTRA-03 evidence-backed registry. Eight advertising-domain methods are partially mapped from one validated Agent V1 book. Unsupported ASTRA-02 placeholders remain conservative with empty evidence and confidence 0; no global ranking.",
+  "methods": [
+    {
+      "method_id": "METHOD_VELOCITY",
+      "method_name": "Velocity",
+      "source": "VELOCITY training",
+      "source_type": "COURSE",
+      "domain": "FUNNEL",
+      "subdomain": null,
+      "primary_jobs": [],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [],
+      "not_recommended_for": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [],
+      "confidence": 0,
+      "version": "mr-0.1",
+      "mapping_status": "DISCOVERED"
+    },
+    {
+      "method_id": "METHOD_SALES_ACCELERATION",
+      "method_name": "Sales Acceleration",
+      "source": "Aceleración en Ventas",
+      "source_type": "COURSE",
+      "domain": "SALES",
+      "subdomain": null,
+      "primary_jobs": [],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [],
+      "not_recommended_for": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [],
+      "confidence": 0,
+      "version": "mr-0.1",
+      "mapping_status": "DISCOVERED"
+    },
+    {
+      "method_id": "METHOD_DIGITAL_MARKETING",
+      "method_name": "Digital Marketing",
+      "source": "mixed",
+      "source_type": "MIXED",
+      "domain": "ADS",
+      "subdomain": null,
+      "primary_jobs": [],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [],
+      "not_recommended_for": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [],
+      "confidence": 0,
+      "version": "mr-0.1",
+      "mapping_status": "DISCOVERED"
+    },
+    {
+      "method_id": "METHOD_OFFER_DESIGN",
+      "method_name": "Offer Design",
+      "source": "mixed",
+      "source_type": "MIXED",
+      "domain": "OFFER",
+      "subdomain": null,
+      "primary_jobs": [],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [],
+      "not_recommended_for": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [],
+      "confidence": 0,
+      "version": "mr-0.1",
+      "mapping_status": "DISCOVERED"
+    },
+    {
+      "method_id": "METHOD_CRO",
+      "method_name": "CRO",
+      "source": "mixed",
+      "source_type": "MIXED",
+      "domain": "CRO",
+      "subdomain": null,
+      "primary_jobs": [],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [],
+      "not_recommended_for": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [],
+      "confidence": 0,
+      "version": "mr-0.1",
+      "mapping_status": "DISCOVERED"
+    },
+    {
+      "method_id": "METHOD_META_ADS",
+      "method_name": "Meta Ads",
+      "source": "mixed",
+      "source_type": "MIXED",
+      "domain": "ADS",
+      "subdomain": null,
+      "primary_jobs": [],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [],
+      "not_recommended_for": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [],
+      "confidence": 0,
+      "version": "mr-0.1",
+      "mapping_status": "DISCOVERED"
+    },
+    {
+      "method_id": "METHOD_WHATSAPP_SALES",
+      "method_name": "WhatsApp Sales",
+      "source": "mixed",
+      "source_type": "MIXED",
+      "domain": "SALES",
+      "subdomain": null,
+      "primary_jobs": [],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [],
+      "not_recommended_for": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [],
+      "confidence": 0,
+      "version": "mr-0.1",
+      "mapping_status": "DISCOVERED"
+    },
+    {
+      "method_id": "METHOD_ICP",
+      "method_name": "ICP / Customer Analysis",
+      "source": "mixed",
+      "source_type": "MIXED",
+      "domain": "ICP",
+      "subdomain": null,
+      "primary_jobs": [],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [],
+      "not_recommended_for": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [],
+      "confidence": 0,
+      "version": "mr-0.1",
+      "mapping_status": "DISCOVERED"
+    },
+    {
+      "method_id": "METHOD_FUNNEL",
+      "method_name": "Funnel Design",
+      "source": "mixed",
+      "source_type": "MIXED",
+      "domain": "FUNNEL",
+      "subdomain": null,
+      "primary_jobs": [],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [],
+      "not_recommended_for": [],
+      "required_inputs": [],
+      "expected_outputs": [],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [],
+      "confidence": 0,
+      "version": "mr-0.1",
+      "mapping_status": "DISCOVERED"
+    },
+    {
+      "method_id": "METHOD_CREATIVE_STRATEGY",
+      "method_name": "Creative Strategy",
+      "source": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_type": "BOOK",
+      "domain": "CREATIVE",
+      "subdomain": "advertising campaign development",
+      "primary_jobs": [
+        "develop advertising strategy, concept/idea, campaign, tagline, and executions in sequence"
+      ],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [
+        "advertising campaign development"
+      ],
+      "not_recommended_for": [],
+      "required_inputs": [
+        "strategy statement",
+        "proposition",
+        "target audience",
+        "tone of voice",
+        "market research and insights"
+      ],
+      "expected_outputs": [
+        "strategy",
+        "concept/idea",
+        "campaign and tagline",
+        "executions"
+      ],
+      "strengths": [
+        "keeps the campaign grounded in a relevant, coherent, differentiated strategy"
+      ],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [
+        {
+          "query_id": "Q02",
+          "evidence_id": "E1",
+          "chunk_id": "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            86,
+            87
+          ],
+          "retrieval_cosine_diagnostic": 0.6639059474683946
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E2",
+          "chunk_id": "77df5102bd9f4e0d40e8b413105dec32c8a3b475dd3407d83969a1e0e18c0008",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            216,
+            217
+          ],
+          "retrieval_cosine_diagnostic": 0.6549388835462916
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E3",
+          "chunk_id": "8a5a79dc4ce91952a9106e2324c65bd6de9140defddb62f0f1f2110a71bd7397",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            216,
+            217
+          ],
+          "retrieval_cosine_diagnostic": 0.6336137792180777
+        }
+      ],
+      "confidence": 0.88,
+      "version": "mr-0.2-astra03",
+      "mapping_status": "PARTIALLY_MAPPED"
+    },
+    {
+      "method_id": "METHOD_SINGLE_MINDED_PROPOSITION",
+      "method_name": "Single-Minded Proposition",
+      "source": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_type": "BOOK",
+      "domain": "COPY",
+      "subdomain": "advertising proposition",
+      "primary_jobs": [
+        "define one differentiated, consumer-relevant product proposition"
+      ],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [
+        "focusing an advertising message on one benefit"
+      ],
+      "not_recommended_for": [],
+      "required_inputs": [
+        "product benefit",
+        "consumer relevance",
+        "competitive distinctiveness"
+      ],
+      "expected_outputs": [
+        "single-minded proposition"
+      ],
+      "strengths": [
+        "reduces message dilution from communicating multiple benefits"
+      ],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [
+        {
+          "query_id": "Q06",
+          "evidence_id": "E1",
+          "chunk_id": "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            38,
+            39
+          ],
+          "retrieval_cosine_diagnostic": 0.6311100684890598
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E2",
+          "chunk_id": "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "retrieval_cosine_diagnostic": 0.5720401172508832
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E3",
+          "chunk_id": "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "retrieval_cosine_diagnostic": 0.5589489523960092
+        }
+      ],
+      "confidence": 0.88,
+      "version": "mr-0.2-astra03",
+      "mapping_status": "PARTIALLY_MAPPED"
+    },
+    {
+      "method_id": "METHOD_TAGLINE_CRAFT",
+      "method_name": "Tagline Craft",
+      "source": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_type": "BOOK",
+      "domain": "COPY",
+      "subdomain": "campaign tagline",
+      "primary_jobs": [
+        "create a tagline that supports the campaign idea and helps generate executions"
+      ],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [
+        "campaign and brand expression"
+      ],
+      "not_recommended_for": [],
+      "required_inputs": [
+        "campaign idea",
+        "product relevance",
+        "brand name or function when appropriate"
+      ],
+      "expected_outputs": [
+        "tagline"
+      ],
+      "strengths": [
+        "can harness the campaign idea and help define the brand"
+      ],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [
+        {
+          "query_id": "Q13",
+          "evidence_id": "E1",
+          "chunk_id": "64d4537ef55ccd2a5353481881178ed04ceaf3b9ca5f0027c0ce32dea44467ee",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            198,
+            199
+          ],
+          "retrieval_cosine_diagnostic": 0.6158136404167266
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E3",
+          "chunk_id": "9c11822916ed233dd7896dfe21b1e0cdae1d4a90997b0c7eb1a898cc553338e6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            208,
+            209
+          ],
+          "retrieval_cosine_diagnostic": 0.5292154349645963
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E5",
+          "chunk_id": "67e957d59cef3a54f60123f86070a7616a8ccce5c0c796f90b53ce50da66d7c9",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            206,
+            207
+          ],
+          "retrieval_cosine_diagnostic": 0.5349204161377878
+        }
+      ],
+      "confidence": 0.88,
+      "version": "mr-0.2-astra03",
+      "mapping_status": "PARTIALLY_MAPPED"
+    },
+    {
+      "method_id": "METHOD_COPYWRITING_TONE",
+      "method_name": "Copywriting and Tone",
+      "source": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_type": "BOOK",
+      "domain": "COPY",
+      "subdomain": "advertising copy and tone",
+      "primary_jobs": [
+        "write simple, pithy, persuasive advertising copy",
+        "select and maintain a consistent tone of voice"
+      ],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [
+        "advertising copy across print, TV, radio, web, and other media"
+      ],
+      "not_recommended_for": [],
+      "required_inputs": [
+        "client or product personality",
+        "idea",
+        "target audience",
+        "research"
+      ],
+      "expected_outputs": [
+        "advertising copy",
+        "consistent tone of voice"
+      ],
+      "strengths": [
+        "uses simplicity and evidence such as facts, statistics, demonstrations, and quotes to improve persuasion"
+      ],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [
+        {
+          "query_id": "Q04",
+          "evidence_id": "E1",
+          "chunk_id": "86b865c6a26afab409c84fae5a2bdc7f7b17ce1d451dfe2fa23ed618180654df",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            474,
+            475
+          ],
+          "retrieval_cosine_diagnostic": 0.6384943862930924
+        },
+        {
+          "query_id": "Q04",
+          "evidence_id": "E4",
+          "chunk_id": "44a3a07fbcafdec4992a3215a6b52d567a250a0fb640d234bbd02b04158a7d66",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            488,
+            489
+          ],
+          "retrieval_cosine_diagnostic": 0.5796162620722142
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E1",
+          "chunk_id": "cc9848040c2c4c56778a6b4db1d38c943a0cdffb79b7479a56976c9bb3a57366",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            486,
+            487
+          ],
+          "retrieval_cosine_diagnostic": 0.683448387401624
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E4",
+          "chunk_id": "179fa95928d15799e974239c114030d84d83db7876aed0f7bcb1b1e16aa7664b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            102,
+            103
+          ],
+          "retrieval_cosine_diagnostic": 0.6102344872255583
+        }
+      ],
+      "confidence": 0.88,
+      "version": "mr-0.2-astra03",
+      "mapping_status": "PARTIALLY_MAPPED"
+    },
+    {
+      "method_id": "METHOD_VISUAL_IDEAS",
+      "method_name": "Visual Ideas",
+      "source": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_type": "BOOK",
+      "domain": "CREATIVE",
+      "subdomain": "visual advertising",
+      "primary_jobs": [
+        "develop visual puns and visual twists for advertising ideas"
+      ],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [
+        "visual advertising concepts"
+      ],
+      "not_recommended_for": [],
+      "required_inputs": [
+        "advertising idea",
+        "image or visual element"
+      ],
+      "expected_outputs": [
+        "visual pun or visual twist execution"
+      ],
+      "strengths": [],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [
+        {
+          "query_id": "Q03",
+          "evidence_id": "E1",
+          "chunk_id": "e6a28d288025962b1bf62184c0f1e212f4bdec721d0da20276647292ef298843",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            138,
+            139
+          ],
+          "retrieval_cosine_diagnostic": 0.6637062143183798
+        },
+        {
+          "query_id": "Q03",
+          "evidence_id": "E3",
+          "chunk_id": "df864d4a1485a60c44a4513db6804bef71a2b7c7e96a066c4a37f4a11cf8ea32",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            170,
+            171
+          ],
+          "retrieval_cosine_diagnostic": 0.5960681890764383
+        }
+      ],
+      "confidence": 0.84,
+      "version": "mr-0.2-astra03",
+      "mapping_status": "PARTIALLY_MAPPED"
+    },
+    {
+      "method_id": "METHOD_AMBIENT_ADVERTISING",
+      "method_name": "Ambient Advertising",
+      "source": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_type": "BOOK",
+      "domain": "CREATIVE",
+      "subdomain": "ambient and non-traditional media",
+      "primary_jobs": [
+        "develop advertising ideas near a point of purchase or in unexpected places"
+      ],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [
+        "reaching evasive or unsuspecting audiences through surprise and non-traditional placement"
+      ],
+      "not_recommended_for": [],
+      "required_inputs": [
+        "product or service",
+        "target market",
+        "client budget",
+        "media context"
+      ],
+      "expected_outputs": [
+        "ambient advertising concept"
+      ],
+      "strengths": [
+        "can get under audience ad radar through unexpected placement"
+      ],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [
+        {
+          "query_id": "Q09",
+          "evidence_id": "E1",
+          "chunk_id": "151336cbb836226218a5bac22de997d8c4d262c046b487f8e495b82bc570a712",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            362,
+            363
+          ],
+          "retrieval_cosine_diagnostic": 0.7212372060415615
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E2",
+          "chunk_id": "11bdae59df8d753227557529a09af319d2e37b7c8cb8543bd1401215bde96566",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "retrieval_cosine_diagnostic": 0.5263852663634586
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E4",
+          "chunk_id": "3d5e0c6493fd721764ce74b1c90314c9ea8f9f0f15a34cdb76a7b1200c0b09d9",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            364,
+            365
+          ],
+          "retrieval_cosine_diagnostic": 0.7203263218495208
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E5",
+          "chunk_id": "5fdc9a8f246fbb185cdda22f057c2120fbe6e229c08124b18f1c8971ee358158",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            362,
+            363
+          ],
+          "retrieval_cosine_diagnostic": 0.6898862072692787
+        }
+      ],
+      "confidence": 0.88,
+      "version": "mr-0.2-astra03",
+      "mapping_status": "PARTIALLY_MAPPED"
+    },
+    {
+      "method_id": "METHOD_AD_EXECUTION_CRAFT",
+      "method_name": "Advertising Execution Craft",
+      "source": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_type": "BOOK",
+      "domain": "CREATIVE",
+      "subdomain": "art direction and production",
+      "primary_jobs": [
+        "turn established conceptual elements into a finished advertisement"
+      ],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [
+        "art direction, layout, design, and production after the concept is established"
+      ],
+      "not_recommended_for": [],
+      "required_inputs": [
+        "headline",
+        "tagline",
+        "basic layout",
+        "final body copy",
+        "logo"
+      ],
+      "expected_outputs": [
+        "finished advertisement"
+      ],
+      "strengths": [
+        "makes the ad visually compelling and supports branding through craft"
+      ],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [
+        {
+          "query_id": "Q08",
+          "evidence_id": "E1",
+          "chunk_id": "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "retrieval_cosine_diagnostic": 0.6505355422261108
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E2",
+          "chunk_id": "a7a7f3aeeae187fbf12152a7edfda1cf6cfa8751d7f216a4e2e0b19b85c9667a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "retrieval_cosine_diagnostic": 0.6578562127118507
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E3",
+          "chunk_id": "e2e9ade3298c12e8b8a7459e45effb9a8c67373183f0a78b311cc700b05d2bc6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            186,
+            187
+          ],
+          "retrieval_cosine_diagnostic": 0.5904862511231274
+        }
+      ],
+      "confidence": 0.88,
+      "version": "mr-0.2-astra03",
+      "mapping_status": "PARTIALLY_MAPPED"
+    },
+    {
+      "method_id": "METHOD_TARGET_AUDIENCE_DEFINITION",
+      "method_name": "Target Audience Definition",
+      "source": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+      "source_type": "BOOK",
+      "domain": "ICP",
+      "subdomain": "advertising audience definition",
+      "primary_jobs": [
+        "define and understand a specific target audience for advertising"
+      ],
+      "business_stage": [],
+      "funnel_stage": [],
+      "best_for": [
+        "making advertising more relevant and persuasive and generating audience-relevant ideas"
+      ],
+      "not_recommended_for": [],
+      "required_inputs": [
+        "age",
+        "income",
+        "education",
+        "family status",
+        "occupation",
+        "behavior, tastes, and attitudes",
+        "product relationship"
+      ],
+      "expected_outputs": [
+        "specific target-audience definition",
+        "typical individual within the target group"
+      ],
+      "strengths": [
+        "improves relevance by grounding communication in an understood audience"
+      ],
+      "limitations": [],
+      "dependencies": [],
+      "compatible_methods": [],
+      "conflicting_methods": [],
+      "evidence_refs": [
+        {
+          "query_id": "Q11",
+          "evidence_id": "E1",
+          "chunk_id": "4042f1d10e35da9afa23b6ee284d51324a8bd986089377e7d686f4fc64a22e54",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            40,
+            41
+          ],
+          "retrieval_cosine_diagnostic": 0.5492152427609106
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E3",
+          "chunk_id": "4f0c67316607eb556dd0caab883364119eb57bc089090af8d96343c0e93877e4",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "retrieval_cosine_diagnostic": 0.5981435440527898
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E4",
+          "chunk_id": "5104ecffaf7bdfe4aa918a27fc33580e411ad1fa7ed8e32ac2d973d3047109e2",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "retrieval_cosine_diagnostic": 0.4722967204575258
+        }
+      ],
+      "confidence": 0.88,
+      "version": "mr-0.2-astra03",
+      "mapping_status": "PARTIALLY_MAPPED"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "status": "BLOCKED",
+  "local_http_validation": {
+    "request_id": "REQ_STATE",
+    "workflow_id": "WF_RUNTIME",
+    "completed_nodes": ["market_context"],
+    "valid": true
+  },
+  "public_gateway_validation": false,
+  "final_state_propagation_valid": false
+}

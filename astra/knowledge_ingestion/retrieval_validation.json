@@ -1,0 +1,268 @@
+{
+  "executed_at": "2026-09-06T23:16:46.845699+00:00",
+  "runtime_code_modified": false,
+  "query_count": 10,
+  "results": [
+    {
+      "domain": "offer design",
+      "query": "¿Cómo se diseña una propuesta de valor irresistible y qué elementos debe incluir?",
+      "returned_source_ids": [
+        "SRC_VEL_OFFER",
+        "SRC_VEL_OFFER",
+        "SRC_VEL_OFFER",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_OFFER"
+      ],
+      "returned_chunk_ids": [
+        "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+        "7bb7a8a24848c1efed1be51b02645348a32c322657ec313778e729abad86b664",
+        "022e422ba183018f8689e49c96e0256fcefbd2fcbcb65de6e24ec2439871c0e5",
+        "b7b31bf7bb02e3bd6c4c93c9123c89203108be43328f12445167c75723d8ca25",
+        "79d227e099e878639656ee421d05ba318393c04acc9e75ab5b9e05b426429537"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "STRONG",
+      "notes": "At least four of five results come from admitted domain sources.",
+      "advisory_top1_cosine": 0.7559262878770119,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    },
+    {
+      "domain": "funnel design",
+      "query": "¿Cuáles son los pilares de un funnel de ventas y cómo se elige el funnel adecuado?",
+      "returned_source_ids": [
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS"
+      ],
+      "returned_chunk_ids": [
+        "85ffcd9c7d1979685425565ef619db25d1a9a5262e24b9f1cddcae6d9f9f01d7",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+        "b93e18150c96bafe96ba2a22edc29983b483abfdacdd1591d9f25c69fc400073"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "STRONG",
+      "notes": "At least four of five results come from admitted domain sources.",
+      "advisory_top1_cosine": 0.7030415476262253,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    },
+    {
+      "domain": "sales conversion",
+      "query": "¿Cómo se estructura un guion de ventas y se conduce una conversación de venta elegante?",
+      "returned_source_ids": [
+        "SRC_VEL_SALES",
+        "SRC_VEL_SALES",
+        "SRC_VEL_SALES",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_SALES"
+      ],
+      "returned_chunk_ids": [
+        "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+        "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+        "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+        "8c7e68e717508fc951f94feb64c85c6d41956f4a4ebee1eed9feae62fbc80b9c",
+        "836969f66133df57ae6ce753c6ff19a4a4c1bd00d4d5571756259ae2da634618"
+      ],
+      "subject_hits": 4,
+      "provenance_ok": true,
+      "coverage_assessment": "STRONG",
+      "notes": "At least four of five results come from admitted domain sources.",
+      "advisory_top1_cosine": 0.7522298156625136,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    },
+    {
+      "domain": "Meta Ads",
+      "query": "¿Cómo configurar, segmentar y optimizar campañas de Meta Ads en Ads Manager?",
+      "returned_source_ids": [
+        "SRC_PRO_GROWTH",
+        "SRC_VEL_MIDAS",
+        "SRC_VEL_MIDAS",
+        "SRC_VEL_FUNNELS",
+        "SRC_PRO_GROWTH"
+      ],
+      "returned_chunk_ids": [
+        "5e88e39680d3f8031f2ca0c72a0d9ec930668cf1da3f9a355d1a4c5734b9cb7f",
+        "0203a9c76d9d1191cf122c1a28721993b4b43b19e17ef8788d7db2e30f14c303",
+        "0d16118ac49657a36dfaacd0c1130103fb4f75d72488cc61ab8e8598eb4a02f7",
+        "46a23102662fe41898efe23cc45926a63b64736114ffd0c2a63e1abd0ad80b22",
+        "5a13316bdf9f7c3bb0c0b65c1da6ae1e12829ab6343431f0ef5c7a69f66055bf"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NONE",
+      "notes": "No dedicated admitted source exists; returned incidental/general material is not counted as domain coverage.",
+      "advisory_top1_cosine": 0.5206688114263729,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    },
+    {
+      "domain": "WhatsApp sales",
+      "query": "¿Cómo diseñar un proceso de ventas por WhatsApp con seguimiento y cierre?",
+      "returned_source_ids": [
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_SALES",
+        "SRC_VEL_SALES",
+        "SRC_PRO_GROWTH"
+      ],
+      "returned_chunk_ids": [
+        "8c7e68e717508fc951f94feb64c85c6d41956f4a4ebee1eed9feae62fbc80b9c",
+        "eb29dd82d2047b293d388047cf73993fbde7506514d5f5573fe65e9727bbb944",
+        "870e03f19d904af699f7c5fa3f7327147c531b68931599c341ccb75941e3b7da",
+        "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+        "5e88e39680d3f8031f2ca0c72a0d9ec930668cf1da3f9a355d1a4c5734b9cb7f"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NONE",
+      "notes": "No dedicated admitted source exists; returned incidental/general material is not counted as domain coverage.",
+      "advisory_top1_cosine": 0.5071129147041478,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    },
+    {
+      "domain": "infoproducts",
+      "query": "¿Cómo crear y lanzar un negocio de infoproductos desde la audiencia hasta el crecimiento?",
+      "returned_source_ids": [
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_INFO_AZ"
+      ],
+      "returned_chunk_ids": [
+        "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+        "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+        "6be25fb0e81fcad3a842d191b00abe89934d9601816da6699a5bb367205350a4",
+        "52f52e83e7a7b28a938724854407ac50421b3a8631c42c306db14ea3e3f9c169",
+        "8b84e5fd888715eff741dad755ef46c2dd01a0d4d64146d2b4a028a81cd074e1"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "STRONG",
+      "notes": "At least four of five results come from admitted domain sources.",
+      "advisory_top1_cosine": 0.6852792310193219,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    },
+    {
+      "domain": "course creation",
+      "query": "¿Cómo crear el temario, las lecciones y la experiencia pedagógica de un curso online?",
+      "returned_source_ids": [
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_FUNNELS",
+        "SRC_PRO_GROWTH",
+        "SRC_PRO_CRO",
+        "SRC_PRO_GROWTH"
+      ],
+      "returned_chunk_ids": [
+        "7e37c46931dcbecae9c28b18e955a271db00b72e6785ca6f0e67e0777a1927ec",
+        "3b0d97758310b63385958f62ff89ae3a0cc2363fe000346f2c8369e68c3ba0ef",
+        "44f9e98c71f212044e3ddd325ed04f84514ac0b04539e7fc65e8bb67d24d6f3b",
+        "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+        "1eddecfd2848d2efc6696956faaf84dc2665f1f641c1266789600edfc3c768b7"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NONE",
+      "notes": "No dedicated admitted source exists; returned incidental/general material is not counted as domain coverage.",
+      "advisory_top1_cosine": 0.467184498006505,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    },
+    {
+      "domain": "CRO",
+      "query": "¿Cómo ejecutar un proceso de CRO desde la investigación hasta la experimentación y priorización?",
+      "returned_source_ids": [
+        "SRC_PRO_CRO",
+        "SRC_PRO_CRO",
+        "SRC_PRO_CRO",
+        "SRC_PRO_CRO",
+        "SRC_PRO_CRO"
+      ],
+      "returned_chunk_ids": [
+        "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+        "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+        "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+        "324d7b279dcdea1aac631bf051a72c61bf7d2f4fa2d173c349ef4c0d35644c33",
+        "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "STRONG",
+      "notes": "At least four of five results come from admitted domain sources.",
+      "advisory_top1_cosine": 0.6211831817930826,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    },
+    {
+      "domain": "positioning",
+      "query": "¿Cómo definir el posicionamiento de un negocio dentro de un mercado atractivo?",
+      "returned_source_ids": [
+        "SRC_PRO_GROWTH",
+        "SRC_PRO_GROWTH",
+        "SRC_PRO_GROWTH",
+        "SRC_PRO_GROWTH",
+        "SRC_PRO_GROWTH"
+      ],
+      "returned_chunk_ids": [
+        "c269ff880edc12ff33092d9de51f13223fd14d4a782e57323b730a67db2b466a",
+        "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+        "2faeeebd2e87b6b90f40ce42c04535384960511f14ed77147b626bf5389b53e2",
+        "5bc134c0f53f111d812d096fa9df274f74436fa6599ff4fe46b2bd08493cc160",
+        "5ea605262dbf82b3f231bb7b5d25d24e741cd3351bdc5f7a18bc3bfb85d8f160"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "STRONG",
+      "notes": "At least four of five results come from admitted domain sources.",
+      "advisory_top1_cosine": 0.6897454855397952,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    },
+    {
+      "domain": "pricing",
+      "query": "¿Cómo diseñar una estrategia de precios conectada con el valor y el modelo de negocio?",
+      "returned_source_ids": [
+        "SRC_VEL_MIDAS",
+        "SRC_VEL_MIDAS",
+        "SRC_VEL_MIDAS",
+        "SRC_PRO_GROWTH",
+        "SRC_VEL_MIDAS"
+      ],
+      "returned_chunk_ids": [
+        "91e77baf96a35e3daac955814041a780632238b78ec4a72d4ba8e76556131485",
+        "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+        "c7bbae8a646a72013561fff03aebc8470c9cee89e622efc061c09910e0e6f1e1",
+        "5e545aceab2044357c2b5c3d5c8b43fd69e4b8197ffa68fbb09ed44706e3594d",
+        "106d2317df18b0efe120d680940eb12aca3cd138042351b03d2ae8d67705dcc8"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "STRONG",
+      "notes": "At least four of five results come from admitted domain sources.",
+      "advisory_top1_cosine": 0.670502485757603,
+      "pipeline": "Strategy-F",
+      "corpus": "kb_chunks_v2",
+      "corpus_rows": 1380
+    }
+  ],
+  "status": "PASS"
+}

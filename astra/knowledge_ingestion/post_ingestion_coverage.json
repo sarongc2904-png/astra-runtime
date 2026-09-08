@@ -1,0 +1,182 @@
+{
+  "evaluated_at": "2026-09-06T23:16:48.222552+00:00",
+  "domains": [
+    {
+      "DOMAIN": "offer design",
+      "BEFORE": "WEAK",
+      "AFTER": "STRONG",
+      "EVIDENCE": {
+        "subject_hits_top5": 5,
+        "returned_source_ids": [
+          "SRC_VEL_OFFER",
+          "SRC_VEL_OFFER",
+          "SRC_VEL_OFFER",
+          "SRC_VEL_INFO_AZ",
+          "SRC_VEL_OFFER"
+        ],
+        "query": "¿Cómo se diseña una propuesta de valor irresistible y qué elementos debe incluir?"
+      },
+      "STATUS": "IMPROVED"
+    },
+    {
+      "DOMAIN": "funnel design",
+      "BEFORE": "NONE",
+      "AFTER": "STRONG",
+      "EVIDENCE": {
+        "subject_hits_top5": 5,
+        "returned_source_ids": [
+          "SRC_VEL_FUNNELS",
+          "SRC_VEL_FUNNELS",
+          "SRC_VEL_FUNNELS",
+          "SRC_VEL_FUNNELS",
+          "SRC_VEL_FUNNELS"
+        ],
+        "query": "¿Cuáles son los pilares de un funnel de ventas y cómo se elige el funnel adecuado?"
+      },
+      "STATUS": "IMPROVED"
+    },
+    {
+      "DOMAIN": "sales conversion",
+      "BEFORE": "NONE",
+      "AFTER": "STRONG",
+      "EVIDENCE": {
+        "subject_hits_top5": 4,
+        "returned_source_ids": [
+          "SRC_VEL_SALES",
+          "SRC_VEL_SALES",
+          "SRC_VEL_SALES",
+          "SRC_VEL_INFO_AZ",
+          "SRC_VEL_SALES"
+        ],
+        "query": "¿Cómo se estructura un guion de ventas y se conduce una conversación de venta elegante?"
+      },
+      "STATUS": "IMPROVED"
+    },
+    {
+      "DOMAIN": "Meta Ads",
+      "BEFORE": "NONE",
+      "AFTER": "NONE",
+      "EVIDENCE": {
+        "subject_hits_top5": 0,
+        "returned_source_ids": [
+          "SRC_PRO_GROWTH",
+          "SRC_VEL_MIDAS",
+          "SRC_VEL_MIDAS",
+          "SRC_VEL_FUNNELS",
+          "SRC_PRO_GROWTH"
+        ],
+        "query": "¿Cómo configurar, segmentar y optimizar campañas de Meta Ads en Ads Manager?"
+      },
+      "STATUS": "UNCHANGED"
+    },
+    {
+      "DOMAIN": "WhatsApp sales",
+      "BEFORE": "NONE",
+      "AFTER": "NONE",
+      "EVIDENCE": {
+        "subject_hits_top5": 0,
+        "returned_source_ids": [
+          "SRC_VEL_INFO_AZ",
+          "SRC_VEL_INFO_AZ",
+          "SRC_VEL_SALES",
+          "SRC_VEL_SALES",
+          "SRC_PRO_GROWTH"
+        ],
+        "query": "¿Cómo diseñar un proceso de ventas por WhatsApp con seguimiento y cierre?"
+      },
+      "STATUS": "UNCHANGED"
+    },
+    {
+      "DOMAIN": "infoproducts",
+      "BEFORE": "NONE",
+      "AFTER": "STRONG",
+      "EVIDENCE": {
+        "subject_hits_top5": 5,
+        "returned_source_ids": [
+          "SRC_VEL_INFO_AZ",
+          "SRC_VEL_INFO_AZ",
+          "SRC_VEL_INFO_AZ",
+          "SRC_VEL_INFO_AZ",
+          "SRC_VEL_INFO_AZ"
+        ],
+        "query": "¿Cómo crear y lanzar un negocio de infoproductos desde la audiencia hasta el crecimiento?"
+      },
+      "STATUS": "IMPROVED"
+    },
+    {
+      "DOMAIN": "course creation",
+      "BEFORE": "NONE",
+      "AFTER": "NONE",
+      "EVIDENCE": {
+        "subject_hits_top5": 0,
+        "returned_source_ids": [
+          "SRC_VEL_INFO_AZ",
+          "SRC_VEL_FUNNELS",
+          "SRC_PRO_GROWTH",
+          "SRC_PRO_CRO",
+          "SRC_PRO_GROWTH"
+        ],
+        "query": "¿Cómo crear el temario, las lecciones y la experiencia pedagógica de un curso online?"
+      },
+      "STATUS": "UNCHANGED"
+    },
+    {
+      "DOMAIN": "CRO",
+      "BEFORE": "NONE",
+      "AFTER": "STRONG",
+      "EVIDENCE": {
+        "subject_hits_top5": 5,
+        "returned_source_ids": [
+          "SRC_PRO_CRO",
+          "SRC_PRO_CRO",
+          "SRC_PRO_CRO",
+          "SRC_PRO_CRO",
+          "SRC_PRO_CRO"
+        ],
+        "query": "¿Cómo ejecutar un proceso de CRO desde la investigación hasta la experimentación y priorización?"
+      },
+      "STATUS": "IMPROVED"
+    },
+    {
+      "DOMAIN": "positioning",
+      "BEFORE": "WEAK",
+      "AFTER": "STRONG",
+      "EVIDENCE": {
+        "subject_hits_top5": 5,
+        "returned_source_ids": [
+          "SRC_PRO_GROWTH",
+          "SRC_PRO_GROWTH",
+          "SRC_PRO_GROWTH",
+          "SRC_PRO_GROWTH",
+          "SRC_PRO_GROWTH"
+        ],
+        "query": "¿Cómo definir el posicionamiento de un negocio dentro de un mercado atractivo?"
+      },
+      "STATUS": "IMPROVED"
+    },
+    {
+      "DOMAIN": "pricing",
+      "BEFORE": "NONE",
+      "AFTER": "STRONG",
+      "EVIDENCE": {
+        "subject_hits_top5": 5,
+        "returned_source_ids": [
+          "SRC_VEL_MIDAS",
+          "SRC_VEL_MIDAS",
+          "SRC_VEL_MIDAS",
+          "SRC_PRO_GROWTH",
+          "SRC_VEL_MIDAS"
+        ],
+        "query": "¿Cómo diseñar una estrategia de precios conectada con el valor y el modelo de negocio?"
+      },
+      "STATUS": "IMPROVED"
+    }
+  ],
+  "DOMAIN_COVERAGE_IMPROVED": true,
+  "unresolved_gaps": [
+    "Meta Ads",
+    "WhatsApp sales",
+    "course creation"
+  ],
+  "status": "PASS"
+}

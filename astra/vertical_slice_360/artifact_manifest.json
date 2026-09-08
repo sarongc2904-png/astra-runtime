@@ -1,0 +1,82 @@
+{
+  "gate": "ASTRA_04_VERTICAL_SLICE_360",
+  "generated_at": "2026-09-07T02:04:57.135161+00:00",
+  "artifact_count": 15,
+  "artifacts": [
+    {
+      "path": "astra/vertical_slice_360/evidence_bundle_validation.json",
+      "hash": "2fceda92c7c37ea8",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/vertical_slice_360/node_bindings.json",
+      "hash": "7e99857bc4433968",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/vertical_slice_360/node_execution_results.json",
+      "hash": "3fd188fae32b1a77",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/vertical_slice_360/protection_validation.json",
+      "hash": "0824c23cc9084e29",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/vertical_slice_360/run_acceptance.js",
+      "hash": "70238ed5034f54ae",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/vertical_slice_360/synthesis_validation.json",
+      "hash": "25ab588761f48a6b",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/vertical_slice_360/test_results.json",
+      "hash": "be4ad86fab667242",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/vertical_slice_360/vertical_slice_test_input.json",
+      "hash": "ab786b8602128b5f",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/vertical_slice_360/vertical_slice_test_output.json",
+      "hash": "ee9790d79927bd70",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/vertical_slice_360/workflow_contract.json",
+      "hash": "c3a44e6df109e274",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/specialists/base_specialist.js",
+      "hash": "e8cbd71b1d691206",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/specialists/specialists.js",
+      "hash": "564cce62b7262764",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/synthesis/synthesis_engine.js",
+      "hash": "5a4f207d3ec29b2d",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/src/workflows/marketing_campaign_360.js",
+      "hash": "6da6883e8e687373",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/tests/astra04.test.js",
+      "hash": "ad381357f3590d6f",
+      "created_or_modified": "created"
+    }
+  ]
+}

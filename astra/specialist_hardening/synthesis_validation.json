@@ -1,0 +1,11 @@
+{
+  "captured_at": "2026-09-07T02:39:08.897020+00:00",
+  "laser_sections": 18,
+  "laser_coherent": true,
+  "infoproduct_sections": 18,
+  "infoproduct_coherent": true,
+  "engine": "astra/src/synthesis/synthesis_engine_v2.js",
+  "reconciled_not_concatenation": true,
+  "current_research_preserved": true,
+  "eighteen_section_contract": true
+}

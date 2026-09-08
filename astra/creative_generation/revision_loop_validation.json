@@ -1,0 +1,39 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "revision loop (bounded, targeted)",
+  "date": "2026-09-07",
+  "results": {
+    "revision_budget": {
+      "status": "PASS",
+      "max_revisions": 2,
+      "description": "Initial generation + up to 2 targeted revisions = max 3 attempts",
+      "test": "revision_planner MAX_REVISIONS enforced",
+      "assertion": "MAX_REVISIONS === 2"
+    },
+    "revision_playbook": {
+      "status": "PASS",
+      "description": "Targeted remediation deltas; never full rewrite",
+      "test": "revision_planner LOW_CONTRAST applies lighting delta",
+      "targets": {
+        "LOW_CONTRAST": "Modify lighting/background separation/typography contrast",
+        "VISUAL_CLUTTER": "Reduce secondary objects; isolate hero subject",
+        "WEAK_CTA": "Strengthen CTA zone prominence",
+        "OFF_BRIEF_VISUAL": "Restore approved subject/mechanism",
+        "UNSAFE_TEXT_PLACEMENT": "Move reserved typography area",
+        "MOBILE_UNREADABLE": "Increase type scale for small-screen legibility",
+        "BROKEN_TYPOGRAPHY": "Reserve clean empty text zones",
+        "FABRICATED_CLAIM": "Strip unsupported language; keep approved copy"
+      }
+    },
+    "approval_logic": {
+      "status": "PASS",
+      "rule": "Approve first PASS or PASS_WITH_WARNINGS cycle",
+      "fail_closed": "Never mark FAIL asset as final_approved_asset"
+    },
+    "fail_after_budget": {
+      "status": "PASS",
+      "test": "orchestrator FAILED when all QA attempts fail after revision budget",
+      "behavior": "Return FAILED status with final_approved_asset = null"
+    }
+  }
+}

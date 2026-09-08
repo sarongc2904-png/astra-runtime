@@ -1,0 +1,14 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "BLOCKED",
+  "base_url": "https://ftoxermwkfebmnrudiuu.supabase.co",
+  "https_reachable": true,
+  "cors_preflight": 204,
+  "no_auth": 401,
+  "malformed_auth": 401,
+  "valid_auth_reaches_search": true,
+  "valid_auth_search_http": 200,
+  "valid_auth_astra_http": 503,
+  "blocking_code": "ENVIRONMENT_NOT_AVAILABLE"
+}

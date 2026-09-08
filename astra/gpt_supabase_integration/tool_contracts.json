@@ -1,0 +1,41 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "tools": {
+    "searchKnowledgeBase": {
+      "input": [
+        "query",
+        "top_k?",
+        "filter_domain?"
+      ],
+      "route": "/functions/v1/search-kb"
+    },
+    "runAstraCampaign360": {
+      "input": [
+        "input",
+        "project_id?",
+        "user_context?"
+      ],
+      "route": "/functions/v1/astra-tools/campaign-360"
+    },
+    "runAstraCreativeDirector": {
+      "input": [
+        "input",
+        "mode",
+        "brand_constraints?",
+        "reference_assets?",
+        "commands?"
+      ],
+      "route": "/functions/v1/astra-tools/creative-director"
+    },
+    "runAstraCreativeGeneration": {
+      "input": [
+        "creative_director_output",
+        "generation_mode",
+        "reference_assets?"
+      ],
+      "route": "/functions/v1/astra-tools/creative-generation"
+    }
+  }
+}

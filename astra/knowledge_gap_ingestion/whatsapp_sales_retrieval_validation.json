@@ -1,0 +1,221 @@
+{
+  "generated_at": "2026-09-07T00:40:30.218394+00:00",
+  "strategy": "Strategy-F unchanged",
+  "queries": [
+    {
+      "query": "calificación de leads por WhatsApp",
+      "returned_source_ids": [
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_SALES",
+        "SRC_VEL_FUNNELS"
+      ],
+      "returned_chunk_ids": [
+        "965abd113c2a0b5ea6a707b22be28f10062b1307ac0a79e7979074d41b673fed",
+        "d39775cbd58c0919147080bdffa987e900d2e9ef8d89a154e5c0db57df10f73b",
+        "1e08c38ea2a0278f10ad86bca321c899122385968ee7b0e920fa0c4a3e181fb2",
+        "a42278abd610fc4127b7edef4735758fe6e5326a47d5e0dee8473c8b77a7c111",
+        "7d9a46c19a01c6babd26e133ba9464c987f6bb1290006613693555d6d42dbeed"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "conversación de descubrimiento de ventas por WhatsApp",
+      "returned_source_ids": [
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_FUNNELS"
+      ],
+      "returned_chunk_ids": [
+        "965abd113c2a0b5ea6a707b22be28f10062b1307ac0a79e7979074d41b673fed",
+        "8c7e68e717508fc951f94feb64c85c6d41956f4a4ebee1eed9feae62fbc80b9c",
+        "eb29dd82d2047b293d388047cf73993fbde7506514d5f5573fe65e9727bbb944",
+        "c27403205e2f776f70ff2eadb32bc1714cb9b87d5c67527fb43cc76638e5556f",
+        "1a502f7515ff46143b9e3b606247516c58c2a7f053ac95cccd96a92ff5e4d804"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "agendamiento de citas mediante WhatsApp",
+      "returned_source_ids": [
+        "SRC_VEL_INFO_AZ",
+        "SRC_PRO_CRO",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_INFO_AZ"
+      ],
+      "returned_chunk_ids": [
+        "eb29dd82d2047b293d388047cf73993fbde7506514d5f5573fe65e9727bbb944",
+        "4a9fbe4d333291cdfdc688a4cfc6c3fb63da23b3d6a73c2b1b33528eef459119",
+        "bb75b08fc895651dce09c836a0eb66df37161d529fa0ca57986215854d516094",
+        "b8ae0df36413fb0305096009e4f1d217d47b16031a9f9b7a3518a3ec9d926070",
+        "5778d8844c6488418d5c72745ba9a24dd67ee5182e61bcec413a22d7417983de"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "manejo de objeciones en WhatsApp",
+      "returned_source_ids": [
+        "SRC_VEL_SALES",
+        "SRC_VEL_SALES",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_INFO_AZ"
+      ],
+      "returned_chunk_ids": [
+        "ab35420097db12b20ed13b4ca5e96216a89c318f69c55a711ccebb8eaf219c18",
+        "1c269c9f78f6355030cca016dd77370fed5c95906ba6e4e39a902e880af35566",
+        "15c27f78f5ab101ea030bb1c895a62863eb09946281de9a9c668441b36d5dcae",
+        "d90b3d940563b21dd0a59a0b8d364911e66c1597098d3e7c3dd12a8568e5986f",
+        "5778d8844c6488418d5c72745ba9a24dd67ee5182e61bcec413a22d7417983de"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "cierre de ventas conversacional por WhatsApp",
+      "returned_source_ids": [
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_SALES",
+        "SRC_VEL_SALES",
+        "SRC_VEL_SALES",
+        "SRC_VEL_SALES"
+      ],
+      "returned_chunk_ids": [
+        "8c7e68e717508fc951f94feb64c85c6d41956f4a4ebee1eed9feae62fbc80b9c",
+        "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+        "305bdfa2685b684b17de7a270dd9902c375dd3d0b002a1fab2ad0b086a43a34c",
+        "ab2890de2438416f71a22b90aebf95dd10a13a1b6fe40a9ada21ba82d4dc5486",
+        "870e03f19d904af699f7c5fa3f7327147c531b68931599c341ccb75941e3b7da"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "seguimiento de prospectos por WhatsApp",
+      "returned_source_ids": [
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS"
+      ],
+      "returned_chunk_ids": [
+        "965abd113c2a0b5ea6a707b22be28f10062b1307ac0a79e7979074d41b673fed",
+        "5be1576fb5fe9a02659ce8c59a9e1603efcda99df152eb9e6b894cab9bafa1f2",
+        "5778d8844c6488418d5c72745ba9a24dd67ee5182e61bcec413a22d7417983de",
+        "ce394d0d229a2d6b8e7e7542e0d6d5d2705f1bc9deb239adabf39a4cc8cfb4f4",
+        "4729007fd931edbcd0493565b7150e399392e63faffe7a2f0538b877f56f5d85"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "recuperación de leads fríos por WhatsApp",
+      "returned_source_ids": [
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_SALES"
+      ],
+      "returned_chunk_ids": [
+        "60fa4dd6f548a6e76d0d1f997f53d0de39c0037b57985313b7d5b9f0de5b8f70",
+        "7d9a46c19a01c6babd26e133ba9464c987f6bb1290006613693555d6d42dbeed",
+        "1e08c38ea2a0278f10ad86bca321c899122385968ee7b0e920fa0c4a3e181fb2",
+        "d39775cbd58c0919147080bdffa987e900d2e9ef8d89a154e5c0db57df10f73b",
+        "a42278abd610fc4127b7edef4735758fe6e5326a47d5e0dee8473c8b77a7c111"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "nutrición de leads con mensajes de WhatsApp",
+      "returned_source_ids": [
+        "SRC_VEL_INFO_AZ",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_SALES",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS"
+      ],
+      "returned_chunk_ids": [
+        "da7cb8a9f141541b758c31663980be5981b59744f6cb091f7a9d009d63675481",
+        "5fad6d5b517544c46cb187a32947bb7b795b20bcbabe2df3918b5c87ce97b171",
+        "db66cd5385ba11bfadc69f99f31eec3a0a087f71140122d6f7513a9999a6532e",
+        "7d9a46c19a01c6babd26e133ba9464c987f6bb1290006613693555d6d42dbeed",
+        "60fa4dd6f548a6e76d0d1f997f53d0de39c0037b57985313b7d5b9f0de5b8f70"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "flujo CRM y pipeline de ventas WhatsApp",
+      "returned_source_ids": [
+        "SRC_PRO_GROWTH",
+        "SRC_VEL_INFO_AZ",
+        "SRC_PRO_GROWTH",
+        "SRC_VEL_MIDAS",
+        "SRC_PRO_CRO"
+      ],
+      "returned_chunk_ids": [
+        "5e88e39680d3f8031f2ca0c72a0d9ec930668cf1da3f9a355d1a4c5734b9cb7f",
+        "b639fe495ef1f1616794ce2aa943e7e40069ed385256faaba798b9575baeb165",
+        "336f6aaf6d4769a3d6f76be3c96f9314c54c959410ade6bbc5f28880ebbc1080",
+        "f62133435d4608a07d2f8d61df53bfba0bba0f83196ddd02559d4a2533ca7df5",
+        "96ce913d2c1e6380510a98eae517bd0879a1296d8f3677e17359ba5e843380a0"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "conversión conversacional en WhatsApp",
+      "returned_source_ids": [
+        "SRC_PRO_CRO",
+        "SRC_PRO_GROWTH",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_INFO_AZ",
+        "SRC_PRO_CRO"
+      ],
+      "returned_chunk_ids": [
+        "554717de9613bd52d7763711f448eb93c10246d32a9c2667e9d2ef2bc548b277",
+        "41452420b2cdb8397412a6d737ec65f3dbba38982232b3be75a0a20691fbabf4",
+        "08a01dcbc1f70384a357633777157d79aa8fa4addb82a2af6e7e2eeb10810b2f",
+        "5778d8844c6488418d5c72745ba9a24dd67ee5182e61bcec413a22d7417983de",
+        "87ee1c9f5e204ac01c22ec9f9de4b14302bf0b9b7566580ee7622ab1df68e576"
+      ],
+      "subject_hits": 0,
+      "provenance_ok": true,
+      "coverage_assessment": "NO_DEDICATED_SOURCE_HIT",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    }
+  ],
+  "queries_with_dedicated_subject_hit": 0,
+  "total_dedicated_subject_hits": 0,
+  "coverage": "NONE",
+  "rationale": "No dedicated WhatsApp Sales source passed admission. General-sales or incidental WhatsApp hits do not count as domain support.",
+  "status": "PASS_HONEST_GAP_PRESERVED"
+}

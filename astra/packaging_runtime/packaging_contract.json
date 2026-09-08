@@ -1,0 +1,17 @@
+{
+  "gate": "ASTRA_07_PACKAGING_AND_LOCAL_RUNTIME",
+  "authorization_id": "HUMAN_AUTHORIZATION_ASTRA_07_PACKAGING_AND_LOCAL_RUNTIME_2026-09-06",
+  "generated_at": "2026-09-07T03:36:48.0444339Z",
+  "workflow": "MARKETING_CAMPAIGN_360",
+  "entrypoint": "astra/run_campaign_360.js",
+  "providers": ["openrouter", "lmstudio"],
+  "provider_abstraction": "astra/src/runtime/llm_provider.js",
+  "configuration_source": "process environment or Node --env-file",
+  "input_modes": ["--input", "--input-file"],
+  "output_modes": ["text", "--json"],
+  "health_mode": "--health",
+  "shared_business_logic": true,
+  "agent_v1_access": "read-only Strategy-F adapter",
+  "public_deployment_included": false,
+  "new_ingestion_included": false
+}

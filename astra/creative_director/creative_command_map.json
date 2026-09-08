@@ -1,0 +1,229 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "total_commands": 16,
+  "commands": [
+    {
+      "command": "/creativo",
+      "expansion_note": "Full creative-direction mode: develop concept, art direction, copy direction, and QA.",
+      "explicit_constraints": {
+        "mode_hint": "SINGLE_CREATIVE",
+        "develop_concept": true
+      },
+      "touches_domains": [
+        "advertising concept",
+        "art direction"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/editorialad",
+      "expansion_note": "Editorial/premium ad look: refined type, generous negative space, restrained palette.",
+      "explicit_constraints": {
+        "style": "editorial_premium",
+        "typography_emphasis": "refined",
+        "negative_space": "generous",
+        "information_density": "low"
+      },
+      "touches_domains": [
+        "editorial design",
+        "typography",
+        "negative space"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/minimalcopy",
+      "expansion_note": "Reduce information density; one dominant headline; preserve exactly one primary CTA.",
+      "explicit_constraints": {
+        "information_density": "minimal",
+        "dominant_headline": true,
+        "max_copy_blocks": 1,
+        "primary_cta_count": 1
+      },
+      "touches_domains": [
+        "information density",
+        "copywriting for visual ads"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/oneidea",
+      "expansion_note": "Enforce one dominant idea; reject competing secondary concepts.",
+      "explicit_constraints": {
+        "single_idea": true,
+        "reject_secondary_concepts": true
+      },
+      "touches_domains": [
+        "advertising concept",
+        "single-minded proposition / smp"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/highcontrast",
+      "expansion_note": "Strong foreground/background separation; clear focal hierarchy; readable typography.",
+      "explicit_constraints": {
+        "contrast": "high",
+        "focal_hierarchy": "clear",
+        "typography_legibility": "high"
+      },
+      "touches_domains": [
+        "contrast",
+        "visual hierarchy",
+        "readability / legibility"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/mobilefirst",
+      "expansion_note": "Optimize small-screen readability; reduce complexity; preserve safe zones.",
+      "explicit_constraints": {
+        "primary_surface": "mobile",
+        "information_density": "low",
+        "safe_zones": true,
+        "min_text_scale": "large"
+      },
+      "touches_domains": [
+        "mobile-first creative"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/3secondread",
+      "expansion_note": "Dominant message understandable at first glance; eliminate copy that competes with the headline.",
+      "explicit_constraints": {
+        "first_glance_clarity": true,
+        "dominant_headline": true,
+        "suppress_competing_copy": true
+      },
+      "touches_domains": [
+        "scroll-stopping principles",
+        "visual hierarchy"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/safezone",
+      "expansion_note": "Reserve edge margins and UI-safe regions; keep critical content away from crop/interface areas.",
+      "explicit_constraints": {
+        "safe_zones": true,
+        "edge_margin_reserve": true
+      },
+      "touches_domains": [
+        "information density"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/ugcstyle",
+      "expansion_note": "User-generated / native look: authentic, unpolished, creator-shot framing.",
+      "explicit_constraints": {
+        "style": "ugc_native",
+        "production_polish": "low",
+        "framing": "handheld_authentic"
+      },
+      "touches_domains": [
+        "social / meta ad creative",
+        "photography / image direction"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/creator-ad",
+      "expansion_note": "Creator-led ad: person-to-camera, personal endorsement framing.",
+      "explicit_constraints": {
+        "style": "creator_led",
+        "framing": "direct_to_camera",
+        "subject": "creator_persona"
+      },
+      "touches_domains": [
+        "social / meta ad creative"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/native-content",
+      "expansion_note": "Native/editorial-content feel that matches the surrounding feed rather than a hard ad.",
+      "explicit_constraints": {
+        "style": "native_content",
+        "ad_signals": "reduced"
+      },
+      "touches_domains": [
+        "social / meta ad creative",
+        "editorial design"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/direct-to-camera",
+      "expansion_note": "Subject addresses camera directly; eye contact; single dominant subject.",
+      "explicit_constraints": {
+        "framing": "direct_to_camera",
+        "subject_count": 1
+      },
+      "touches_domains": [
+        "photography / image direction"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/napkin-sketch",
+      "expansion_note": "Rough hand-sketch aesthetic used to foreground the idea over polish.",
+      "explicit_constraints": {
+        "style": "sketch",
+        "production_polish": "rough",
+        "idea_over_polish": true
+      },
+      "touches_domains": [
+        "visual metaphor",
+        "advertising concept"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/strategy-sketch",
+      "expansion_note": "Concept-first schematic: show the mechanism/idea structure, minimal finish.",
+      "explicit_constraints": {
+        "style": "schematic",
+        "idea_over_polish": true,
+        "show_mechanism": true
+      },
+      "touches_domains": [
+        "advertising concept",
+        "visual metaphor"
+      ],
+      "is_user_preset": false
+    },
+    {
+      "command": "/retro",
+      "expansion_note": "Retro visual treatment mapped ONLY to supported style constraints (palette, type tone); no claimed historical doctrine.",
+      "explicit_constraints": {
+        "style": "retro",
+        "palette_bias": "vintage",
+        "typography_tone": "vintage"
+      },
+      "touches_domains": [
+        "color",
+        "typography"
+      ],
+      "is_user_preset": true
+    },
+    {
+      "command": "/fantasma",
+      "expansion_note": "User-provided art-direction preset \"fantasma\"; treated as a user preference, not evidence-backed design theory.",
+      "explicit_constraints": {
+        "style_preset": "fantasma"
+      },
+      "touches_domains": [],
+      "is_user_preset": true
+    }
+  ],
+  "aliases": {
+    "/creative": "/creativo",
+    "/1idea": "/oneidea",
+    "/mobile": "/mobilefirst",
+    "/3s": "/3secondread",
+    "/ugc": "/ugcstyle"
+  },
+  "note": "Every command maps to explicit machine-usable constraints; none is an opaque token. Preset commands (/retro,/fantasma) are ASSUMPTION-tagged, not evidence-backed doctrine."
+}

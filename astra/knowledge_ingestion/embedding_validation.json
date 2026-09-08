@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-09-06T23:14:11.836110+00:00",
+  "existing_embeddings_before": 763,
+  "new_chunks": 617,
+  "new_embeddings_created": 617,
+  "embedding_failures": 0,
+  "dimension_validation": {
+    "expected": 1536,
+    "shape": [
+      617,
+      1536
+    ],
+    "finite": true,
+    "nonzero": true
+  },
+  "model": "text-embedding-3-small",
+  "version": "openai:text-embedding-3-small:1536:input/1.0",
+  "usage": {
+    "resumed_from_saved_vectors": false,
+    "requests": 10,
+    "input_tokens": 196977
+  },
+  "existing_embeddings_after_expected": 1380,
+  "existing_embeddings_after_actual": 1380,
+  "status": "PASS"
+}

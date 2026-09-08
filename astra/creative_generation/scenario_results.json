@@ -1,0 +1,43 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "end-to-end scenarios",
+  "date": "2026-09-07",
+  "scenarios": {
+    "single_generation_complete": {
+      "status": "MOCK_VALIDATED",
+      "mode": "SINGLE_GENERATION",
+      "assertion": "status = COMPLETE, final_approved_asset set"
+    },
+    "variant_generation_complete": {
+      "status": "MOCK_VALIDATED",
+      "mode": "VARIANT_GENERATION",
+      "variants": 3,
+      "assertion": "status = COMPLETE, generated_assets.length >= 2"
+    },
+    "revision_generation_forced": {
+      "status": "MOCK_VALIDATED",
+      "mode": "REVISION_GENERATION",
+      "assertion": "revision_history.length >= 1"
+    },
+    "waiting_for_input": {
+      "status": "MOCK_VALIDATED",
+      "scenario": "Missing critical reference asset (logo)",
+      "assertion": "status = WAITING_FOR_INPUT, missing_reference_kinds includes logo"
+    },
+    "claim_detection_and_revision": {
+      "status": "MOCK_VALIDATED",
+      "scenario": "Generated asset contains unsupported claim",
+      "assertion": "QA FAIL triggered, revision attempted, visual_qa_results.length > 0"
+    },
+    "failed_after_budget": {
+      "status": "MOCK_VALIDATED",
+      "scenario": "All QA attempts fail after revision budget",
+      "assertion": "status = FAILED, final_approved_asset = null"
+    },
+    "astra_08b_preserved": {
+      "status": "MOCK_VALIDATED",
+      "scenario": "Creative Director output not modified",
+      "assertion": "creative_director_output.specialist_type = CREATIVE_DIRECTOR"
+    }
+  }
+}

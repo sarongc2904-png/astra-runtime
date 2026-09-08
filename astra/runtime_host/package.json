@@ -1,0 +1,13 @@
+{
+  "name": "astra-runtime-host",
+  "version": "10.0.0",
+  "private": true,
+  "description": "Minimal authenticated ASTRA Node and Strategy-F runtime host",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "start": "node astra/run_gpt_api.js",
+    "test": "node astra/tests/astra10r.test.js"
+  }
+}

@@ -1,0 +1,934 @@
+{
+  "captured_at": "2026-09-06T22:30:57.758Z",
+  "corpus": "kb_chunks_v2",
+  "pipeline": "Strategy-F",
+  "results": [
+    {
+      "id": "Q01",
+      "category": "advertising_concept",
+      "domain": "CREATIVE",
+      "query": "what is an advertising concept or big idea",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "bb83873561faa0a4d5168dabf43d42756e38c7a14b3b7325b8435469b92a08d5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            16,
+            17
+          ],
+          "cosine": 0.6921841187276658,
+          "snippet": "*Note: some designers and advertising creatives, including the ingenious Bob Gill, prefer the term “ideas” rather than “concept,” believing the latter should be reserved for Einstein-sized thinking only. One could easily argue that advertis"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "b517ecca46041da7974fd2e1f911f4427d112e101b4476c413c1d818a762e1b9",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            430,
+            431
+          ],
+          "cosine": 0.5933831631510258,
+          "snippet": "Many post-digital branding people argue further that a small idea is always best—with execution being more important than the size of the concept. Let’s think about that. Firstly, any execution has to be conceived, so you could argue that b"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "581bad97127eda082fa14589718235ce8956c2a639711ddf625685d87cd244eb",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            16,
+            17
+          ],
+          "cosine": 0.5816212545491265,
+          "snippet": "Without a great concept you have nothing but mutton dressed as lamb. The best choice of type or color palette or photography or illustration can’t save a bad idea. (Or as someone once crudely put it: “You can’t polish a turd.”) Concept is t"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            180,
+            181
+          ],
+          "cosine": 0.5932311041326265,
+          "snippet": "In the case of advertising design, its goal is very different. The primary objective for someone in this discipline is to create a strategy and concept that will help sell a product or service. Advertising professionals as a whole (i.e., ac"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "2537e16d5505d62326b9cf2770e01e2b24cee7ec76f9e39021bf1672093aa644",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            430,
+            431
+          ],
+          "cosine": 0.6203409047931208,
+          "snippet": "Exercise: writers: rewrite a long-form copy print ad for a website landing page (for the same brand), e.g., headline, subhead, body copy. (Total copy length: 3–5 sentences.) Big Ideas vs. Small Ideas vs. Growing Ideas Size wise, there are t"
+        }
+      ]
+    },
+    {
+      "id": "Q02",
+      "category": "creative_strategy",
+      "domain": "CREATIVE",
+      "query": "creative strategy and campaign thinking in advertising",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            86,
+            87
+          ],
+          "cosine": 0.6639059474683946,
+          "snippet": "02 The Strategy Despite the subtitle of this book, the correct “order” in terms of the advertising creative process is: Strategy first Concept/idea second Campaign third In other words, each campaign comes from a concept, which comes from a"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "77df5102bd9f4e0d40e8b413105dec32c8a3b475dd3407d83969a1e0e18c0008",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            216,
+            217
+          ],
+          "cosine": 0.6549388835462916,
+          "snippet": "06 Generating Strategies and Ideas This chapter sets out to explore the origins of strategies and ideas, which will in turn help you to create campaigns (now that you have an understanding of the function of both campaigns and taglines). Re"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "8a5a79dc4ce91952a9106e2324c65bd6de9140defddb62f0f1f2110a71bd7397",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            216,
+            217
+          ],
+          "cosine": 0.6336137792180777,
+          "snippet": "Every strategy should have an element of distinction (small or large) from the competition’s strategies, as should the subsequent concept and campaign. Note: if you are still unclear about the difference between strategies and ideas, re-rea"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "b87aedbd10f957a8a25821d16fa3d2377d243112451b9ffd0ea5e807ed714a43",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            184,
+            185
+          ],
+          "cosine": 0.6506585004126597,
+          "snippet": "That said, as with a one-shot ad, never approach a new project thinking, “I’m going to do a ‘headline only’ campaign” (or “visual only,” or “headline and visual,” etc.) Think in terms of ideas first, and then try executing your ideas in eac"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "bb83873561faa0a4d5168dabf43d42756e38c7a14b3b7325b8435469b92a08d5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            16,
+            17
+          ],
+          "cosine": 0.5933852890076471,
+          "snippet": "*Note: some designers and advertising creatives, including the ingenious Bob Gill, prefer the term “ideas” rather than “concept,” believing the latter should be reserved for Einstein-sized thinking only. One could easily argue that advertis"
+        }
+      ]
+    },
+    {
+      "id": "Q03",
+      "category": "visual_idea",
+      "domain": "CREATIVE",
+      "query": "visual metaphor visual pun and visual ideas in advertising",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "e6a28d288025962b1bf62184c0f1e212f4bdec721d0da20276647292ef298843",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            138,
+            139
+          ],
+          "cosine": 0.6637062143183798,
+          "snippet": "For some reason, the other type of puns, visual puns are less despised than word puns, perhaps because they tend to be simpler, cleverer, based on a truth, or are a little more intriguing and lateral. Being wordless, visuals are by definiti"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "f38a7a16f74f8f7cd60a5544ad2c6ec7a7502a7b82655d6a4f75da6db02216df",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            242,
+            243
+          ],
+          "cosine": 0.5850801682876257,
+          "snippet": "GAME BOY ADVANCE SP further by a tagline. As long as the communication isn’t being clouded in any way, the ads will be just as effective. Conversely, any of the general ideas could literally be the campaign idea itself, and nothing more. In"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "df864d4a1485a60c44a4513db6804bef71a2b7c7e96a066c4a37f4a11cf8ea32",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            170,
+            171
+          ],
+          "cosine": 0.5960681890764383,
+          "snippet": "This is different from a visual pun. A visual twist is a clever spin on an idea or an image. It might be a simple case of turning the visual on its head (see the Basic Tools chapter). For example, the ad for Tide, Stain Remover Pen (overlea"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "cc2dd9c981c9fe22abc41389d3d087345ee714d56a20f361beb71d2e877431f1",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            625,
+            626
+          ],
+          "cosine": 0.5450378927520532,
+          "snippet": "Viral films and viral commercials Two forms of video produced specifically for web viewing, and differentiated by their relative time lengths. Also known as “webisodes.” Visual simile When one thing looks similar to something else (in print"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "61cf5ff7b5bf286a49fb6940d0f18c64da83ff31a2e959227318b684a4822c98",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            250,
+            251
+          ],
+          "cosine": 0.5467409212434358,
+          "snippet": "vogue.com Any food tastes supreme with HEINZ Salad Cream NOTHING BUT FISH JOHN WEST % FAT FREE Lean pork is only 4% fat Pork VOLVO Visual simile: belly button looks like a dot. Client: Vogue. Agency: M&C Saatchi, London. Creatives: Tiger Sa"
+        }
+      ]
+    },
+    {
+      "id": "Q04",
+      "category": "copy_persuasion",
+      "domain": "COPY",
+      "query": "headline copywriting and persuasion techniques",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "86b865c6a26afab409c84fae5a2bdc7f7b17ce1d451dfe2fa23ed618180654df",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            474,
+            475
+          ],
+          "cosine": 0.6384943862930924,
+          "snippet": "11 Copy Robert Sawyer describes copywriting as “Not exactly prose, not exactly poetry.” Headlines, sub-headlines and taglines (i.e., short copy) were covered in the Print, The Tagline, and Generating Strategies and Ideas chapters. Plus, tho"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "e2e25520fa29ec791f5dc7b4183b18fb399f3561316e0e2ae013adfdade0e24c",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            296,
+            297
+          ],
+          "cosine": 0.547451683479002,
+          "snippet": "For WWF a student once had a visual simile idea: bar codes look like zebra stripes. It took three attempts to push it visually into the perfect ad. (Tag: Animals are not products) • Bar code next to zebra, e.g., left side/right side (longwi"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "de90abae848d7cc4dd822344a8232a624a45c3cf6a521dc638d0132d273cf0f3",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            122,
+            123
+          ],
+          "cosine": 0.5291458424118212,
+          "snippet": "These people are all someone’s colleague, neighbour, brother, sister, mother, father or friend. Please take the time to listen to them, use your instinct, if you think someone you know needs help they probably do. Finding that someone actua"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "44a3a07fbcafdec4992a3215a6b52d567a250a0fb640d234bbd02b04158a7d66",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            488,
+            489
+          ],
+          "cosine": 0.5796162620722142,
+          "snippet": "Using facts, stats, demonstrations, and quotes within an ad help to create a convincing argument for the client. More so than opinion. Whether used within the body copy or elsewhere, these create an important sense of objectivity, as if say"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "42ce11d8ddc15f4628f51e7fe3ba5847e2926e0522b2da89a20b9ba57ce69bfc",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            486,
+            487
+          ],
+          "cosine": 0.5320294375596502,
+          "snippet": "Depending on your idea, you might be able to extend it into your body copy. In other words, take an opening idea right through to the end. But choose carefully: if it seems contrived or tedious to continue a theme throughout an entire ad, d"
+        }
+      ]
+    },
+    {
+      "id": "Q05",
+      "category": "tone_voice",
+      "domain": "COPY",
+      "query": "tone of voice and brand voice in advertising copy",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "cc9848040c2c4c56778a6b4db1d38c943a0cdffb79b7479a56976c9bb3a57366",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            486,
+            487
+          ],
+          "cosine": 0.683448387401624,
+          "snippet": "Nowhere is tone more evident (and therefore more important) than in long copy. Tone can vary tremendously, but matching the unique personality of the client/product is a good place to start. Two other factors that can determine how you want"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "3b1aa6bbd4504c075278184e807170090b6454d141bf18e9d1545a5fc68ff513",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            102,
+            103
+          ],
+          "cosine": 0.6165233563318975,
+          "snippet": "Note: tone of voice can be general (e.g., humorous), or specific (think of all the types/brands of humor there are). However, you may only have a rough idea of tone before your initial thinking starts. Don’t worry. If it frees you up, use a"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "b70da06de33f352604094686a9536a220fc66c37b9c322265f9d6f852d034c81",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            328,
+            329
+          ],
+          "cosine": 0.5797142709221921,
+          "snippet": "Avoid writing clichéd, “addy” voice overs unless it relates to your idea. Having been exposed to so many commercials during their lives (and mostly bad ones), many students have a tendency to copy this common, cheesy style of voiceover. The"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "179fa95928d15799e974239c114030d84d83db7876aed0f7bcb1b1e16aa7664b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            102,
+            103
+          ],
+          "cosine": 0.6102344872255583,
+          "snippet": "But whether your idea is expressed as a headline only, visual only, or headline and visual (in the case of print), the tone should be evident. In fact, it’s really important that each execution within a campaign has the same tone of voice t"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "67f327858ee65ec39448fdd51d882811dcdd361110ef7f14a1a50a0ef924ef1e",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            102,
+            103
+          ],
+          "cosine": 0.5017763493463899,
+          "snippet": "GRACE CLASSIC fm 100·102 Proposition Support Points These are concrete reasons or facts that allow the proposition to exist. It supports its claim, giving the consumer permission to accept the product benefit. Each list contains between one"
+        }
+      ]
+    },
+    {
+      "id": "Q06",
+      "category": "positioning",
+      "domain": "CREATIVE",
+      "query": "positioning and single-minded proposition",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            38,
+            39
+          ],
+          "cosine": 0.6311100684890598,
+          "snippet": "This sounds simple, but it’s amazing how often clients will try (or want) to say more than one thing: “but our product is fast and durable.” This may be true—but it doesn’t matter. You only have seconds to get your message across. You have "
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "cosine": 0.5720401172508832,
+          "snippet": "Note: there are rare exceptions to the single-minded benefit. One example is the long-running Miller Lite campaign. Its creators found a novel (yet arguably contrived) way to communicate the two propositions of “great taste” and “less filli"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "cosine": 0.5589489523960092,
+          "snippet": "The term “proposition” is sometimes referred to as advertising promise, or selling proposition, or abbreviated to single-minded benefit, single-minded proposition (SMP), or “value prop”. The key is to say one thing that’s different about yo"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "2730d601188bb6ecbc42b3d18909bab8d3f78091291257e1e6fbd4bab2b2dd7f",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            623,
+            624
+          ],
+          "cosine": 0.46926310895501677,
+          "snippet": "Product/service The client’s product or service that is being advertised. Often “product” is used to mean either product or service. It could be due to the way the product is being used, targeted, packaged, distributed, or even advertised. "
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "8c84e581b7c2f4a9913da99b973a5ea1c323bd3f68ef057c5badf826a81a93c5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            292,
+            293
+          ],
+          "cosine": 0.4512386069892065,
+          "snippet": "Occasionally you may be faced with what I call, “the Variety Proposition.” These are products or services that have “something for everyone.” Examples include things like a department store, a cruise line, and a “listings” magazine (such as"
+        }
+      ]
+    },
+    {
+      "id": "Q07",
+      "category": "storytelling",
+      "domain": "CREATIVE",
+      "query": "storytelling and narrative in advertising",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "8338cea814f2d9013a46a2729306cc7521ffba810d1b76c379600cf3bf63db8b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            404,
+            405
+          ],
+          "cosine": 0.5935230766023669,
+          "snippet": "Tom Himpe recognizes that “new tools for [brand] storytelling are gaining ground. New, more immersive media are giving brands the opportunity to convey stories with a level of complexity and depth previously unimaginable.” Part of this proc"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "32bf7d28df8008cbb1edfb93836081b96bb0979c91e86bfec5b4cc911352b3e2",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            404,
+            405
+          ],
+          "cosine": 0.5141721309018761,
+          "snippet": "Today’s copywriter has an incredible opportunity to push brand narrative to interactive, dynamic places. Social media allows for a two-way conversation, meaning that you can actually converse instead of pitch or “copywrite.” Nicke Bergstrom"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "1c2adb0cdc486b866a84cbc5a80b0efa1bed86160ed544957952606603d1eba5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            631
+          ],
+          "cosine": 0.35340859510376454,
+          "snippet": "Wrangler 182 WWF 148, 236, 236 www.campaignforrealbeauty.com 196, 197 www.flowersonly.com 141 www.gnuf.com 217 www.match.com 189 www.monster.com 172, 173 www.naa.org 60 www.nikeplus.com 194 www.subservientchicken.com 207, 207 www.thewildern"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "bf69cb175df703311d39bdf46227f865b71e4b2b376c0f5a14d48a70c0257b97",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            340,
+            341
+          ],
+          "cosine": 0.4652892746169554,
+          "snippet": "The Dramatic Medium As a “moving” medium, TV gives you the freedom to dramatize an idea (even a simple fact) in ways that print cannot. For example, a TV spot for Womankind Worldwide was based around the fact that “1 in 4 women in the UK wi"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "93a7175cc1662ebfdccb3759b21f31f16ecfea7339619800a750874056d432f8",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            633,
+            634
+          ],
+          "cosine": 0.544471090513455,
+          "snippet": "traditional advertising 49 transport posters 59 Trott, Dave 101 truisms 136–38, 139 truth, finding the 18; see also truisms TV advertising 160–80 audio mnemonics 170, 174 best ever spots 179, 180 clichés 174 demonstration 174, 174, 175 diff"
+        }
+      ]
+    },
+    {
+      "id": "Q08",
+      "category": "craft_execution",
+      "domain": "CREATIVE",
+      "query": "craft and execution turning idea into finished ad",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "cosine": 0.6505355422261108,
+          "snippet": "Once all the conceptual elements of a print ad or campaign are in place (i.e., headline, tagline, basic layout, final body copy, logo, etc.) it’s time to art direct and design it into a stylish finished ad, using digital artwork. This is no"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "a7a7f3aeeae187fbf12152a7edfda1cf6cfa8751d7f216a4e2e0b19b85c9667a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "cosine": 0.6578562127118507,
+          "snippet": "14 Execution In advertising, the word “execution” can mean more than one thing. In previous chapters concerning concept, an execution meant “each separate, individual ad that is derived from a campaign thought.” But in the context of this c"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "e2e9ade3298c12e8b8a7459e45effb9a8c67373183f0a78b311cc700b05d2bc6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            186,
+            187
+          ],
+          "cosine": 0.5904862511231274,
+          "snippet": "Note: people often incorrectly refer to an ad “execution” as an ad “campaign.” (“Hey, did you see that ad campaign for Nike on TV last night?,” when they mean one ad.) A campaign is typically made up of three or more ads/executions; it is n"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "ab8f786893809b2682e625eb21569b8a8430438a3c471c978617d28d51f8d6d6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            593,
+            594
+          ],
+          "cosine": 0.5690988730165437,
+          "snippet": "Whether showing adcepts or mood boards, the key is to explain to a client that these are not final ads or even ad concepts, but general ideas and impressions. Otherwise they may like—and want to use—what they think is an actual ad. Converse"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "04b185dec9449480112a776432b75f009d7b1aafe8b4776a9e6abac7dcbe03d4",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            549,
+            550
+          ],
+          "cosine": 0.44631603075968934,
+          "snippet": "Many good art directors are like visual magpies, often keeping a scrapbook-type folder full of various visual materials that happen to catch their eye. These can include photos, paintings, drawings, typefaces, film and TV clips, animation, "
+        }
+      ]
+    },
+    {
+      "id": "Q09",
+      "category": "ambient_guerrilla",
+      "domain": "CREATIVE",
+      "query": "ambient and guerrilla marketing non-traditional media",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "151336cbb836226218a5bac22de997d8c4d262c046b487f8e495b82bc570a712",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            362,
+            363
+          ],
+          "cosine": 0.7212372060415615,
+          "snippet": "“Under the radar” is another term that is sometimes used for ambient media. Its name refers to its ability to target its message to a relatively wide-reaching, often unsuspecting audience, as a different way to get under their “ad radar.” A"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "11bdae59df8d753227557529a09af319d2e37b7c8cb8543bd1401215bde96566",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "cosine": 0.5263852663634586,
+          "snippet": "Media The choice of media depends upon the type of product or service being advertised, the target market, and the client’s budget. Each campaign can be in one form of media, or multiple forms. Traditional advertising media includes print, "
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "64ca12dd1fd5e7af702788ecacb50500771284c05741f94a18c92e73deba546c",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            82,
+            83
+          ],
+          "cosine": 0.5247822675101854,
+          "snippet": "an unsolicited media-specific concept might be presented and sold to the client (e.g., an idea that only works in radio). In this case, the choice of media comes second, not first. The amount of money spent on media space (the “media spend”"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "3d5e0c6493fd721764ce74b1c90314c9ea8f9f0f15a34cdb76a7b1200c0b09d9",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            364,
+            365
+          ],
+          "cosine": 0.7203263218495208,
+          "snippet": "Guerrilla ads often have a serious message, for a “serious” product or service. The “Truth” anti-smoking work is a good example of this. What makes this work interesting is its decision to film the concepts and “performances” of, and reacti"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "5fdc9a8f246fbb185cdda22f057c2120fbe6e229c08124b18f1c8971ee358158",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            362,
+            363
+          ],
+          "cosine": 0.6898862072692787,
+          "snippet": "08 Ambient The word ambient literally means “in the immediately surrounding area.” By strict definition, therefore, ambient media ideas appear near or at the point of purchase. But as ambient has evolved, it (less strictly) refers to those "
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "category": "offer_framing",
+      "domain": "OFFER",
+      "query": "offer and value proposition framing",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "cosine": 0.48233539844552137,
+          "snippet": "The term “proposition” is sometimes referred to as advertising promise, or selling proposition, or abbreviated to single-minded benefit, single-minded proposition (SMP), or “value prop”. The key is to say one thing that’s different about yo"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "8c84e581b7c2f4a9913da99b973a5ea1c323bd3f68ef057c5badf826a81a93c5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            292,
+            293
+          ],
+          "cosine": 0.42300383288188503,
+          "snippet": "Occasionally you may be faced with what I call, “the Variety Proposition.” These are products or services that have “something for everyone.” Examples include things like a department store, a cruise line, and a “listings” magazine (such as"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "04f2e32f161f4323227bab60f8db655e3e92a0e59b70ffd1686264a498ef9055",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            288,
+            289
+          ],
+          "cosine": 0.41505367564563367,
+          "snippet": "Although not easy to pull off, a campaign idea could feasibly come from a combination of the approaches listed above, rather than just one. A perfect example of this is shown left for Naugahyde vinyl fabric. The geniuses behind this ad foun"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "5977ff7debacb62fd19192535a089825de88dfcb9eb01a56e0868f19f473bd1f",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            124,
+            125
+          ],
+          "cosine": 0.2516259760505967,
+          "snippet": "You're freezing your arse off in some doorway every night, you've got no job, no money, and sod all chance of any of it changing. You haven't got any answers but someone's got heroin. There's always someone who's got heroin. Risks? You have"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "1ffa6eeec5a76824b25b8bbe2b86f54c3c8c6973729e17c47aa2d59099b087ae",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            254,
+            255
+          ],
+          "cosine": 0.3606840633637106,
+          "snippet": "Exercise: look at the visual simile examples opposite for McDonald’s (“Fish,” “Net”). Create ten more examples using things that look like the famous McDonald’s “arches,” either a special offer/menu item or an organization/sponsorship ad th"
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "category": "audience_insight",
+      "domain": "ICP",
+      "query": "audience insight and understanding the target consumer",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "4042f1d10e35da9afa23b6ee284d51324a8bd986089377e7d686f4fc64a22e54",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            40,
+            41
+          ],
+          "cosine": 0.5492152427609106,
+          "snippet": "The final piece of the advertising puzzle: how to make a good ad great. Client: The Economist. Agency: Abbott Mead Vickers BBDO, London. Creatives: Matthew Abbott, Martin Casson. A target audience (also known as “target group” or “target ma"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "4913ff7d993bd6241347d0ef78e724c06e8911ce4009a0db955ba8a10df42c27",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            228,
+            229
+          ],
+          "cosine": 0.4716426565662391,
+          "snippet": "The campaign idea that stems from the “knowledge” strategy can be lateral. For example, a mattress company could perhaps devise a campaign not around the knowledge of mattresses per se, but the knowledge of dreams. This idea still communica"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "4f0c67316607eb556dd0caab883364119eb57bc089090af8d96343c0e93877e4",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "cosine": 0.5981435440527898,
+          "snippet": "The more you understand the people you are talking to, the more relevant and persuasive the advertising will be. In the industry, the target group is defined through extensive market research. The audience can be general or specific. But re"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "5104ecffaf7bdfe4aa918a27fc33580e411ad1fa7ed8e32ac2d973d3047109e2",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "cosine": 0.4722967204575258,
+          "snippet": "Often half the battle of creating a new strategy is finding a new target audience for the product. For example, to sell flowers all year round (rather than Valentine’s Day, birthdays, funerals, “get well soons,” apologies, etc.), the UK’s F"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "f6edaf10362012295d369c7c5cb5560c9347c38cdaaedf5eb43b1b8a28a5fff0",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            390,
+            391
+          ],
+          "cosine": 0.4330107487885241,
+          "snippet": "Broadcast media (first radio, and then TV) made the world seem smaller. The web, web-based applications, and its related technology, has done the same—and then some. One could say it’s a www.evensmallerworld.com. But its real power goes bey"
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "category": "campaign_idea",
+      "domain": "CREATIVE",
+      "query": "campaignable idea that scales across executions",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "30bb75876381801e231ddc19399ec2d4b95767cc902291daa52beec9a4fec94b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            188,
+            189
+          ],
+          "cosine": 0.5307251905650063,
+          "snippet": "So even though campaigns are bigger ideas than one-shots, there are two basic size variations within the definition of a campaign: those that start to run out of steam after three executions are “small” campaign ideas while those that can e"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "501b3fe591b0197a1c0dacd91a1a567ca22376c32bf5f47037f62aeeff9a23d6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            512,
+            513
+          ],
+          "cosine": 0.5303871844767432,
+          "snippet": "B A big idea for a single client/project with multiple executions (some “repeats”), translated into multiple media. C A big idea for a single client/project with multiple executions (all “repeats”), translated into multiple media. D A serie"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "ee68a6469a7c9e4d8478b6bd3e257ba5c1ddbfa5f5aadfbb64207e0cb57f8bf1",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            186,
+            187
+          ],
+          "cosine": 0.5090075759130279,
+          "snippet": "potential to produce more than three executions. Rarely are these triplet ideas any good because it’s another idea in itself, leaving you with two ideas instead of one. The One-Shot vs. the Campaign Before we start examining the campaign, l"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "81b7f132d9a3986afb3f405630dec05c224e1a630fe549483959a8bab22bb190",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            184,
+            185
+          ],
+          "cosine": 0.49315715747904054,
+          "snippet": "04 The Campaign What is a Campaign? A campaign is a series of ads that make up a concept/idea, i.e., an idea that has more than one execution (technically three or more, although sometimes two). Campaigns are therefore considered to be “big"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "845c60552b26379df386f0f3f5b389ca9e708cf8142b881025a71c09908212c0",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            190,
+            191
+          ],
+          "cosine": 0.503019994133836,
+          "snippet": "Big campaign ideas: • The Economist • MasterCard’s “Priceless” • John Smith’s “No Nonsense” • Nike’s “Just Do It” • BT’s “It’s Good To Talk” • Heineken “Refreshes the Parts Other Beers Cannot Reach” • Hamlet’s “Happiness is a Cigar Called H"
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "category": "tagline",
+      "domain": "COPY",
+      "query": "tagline and slogan writing",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "64d4537ef55ccd2a5353481881178ed04ceaf3b9ca5f0027c0ce32dea44467ee",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            198,
+            199
+          ],
+          "cosine": 0.6158136404167266,
+          "snippet": "05 The Tagline Alternative Terms for “Tagline” • Tag • Endline (since it is the last line to be read) • Theme line • Strapline (UK) • Pay-off • Slogan (which can also refer to a headline) Don’t worry about the different terminology: they al"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "468f967b7dd0954aeceb8c2029b5a67996b26fb9b0efeecf1742b8c2ad7018b3",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            126,
+            127
+          ],
+          "cosine": 0.5422183431379499,
+          "snippet": "Say this version out loud. Suddenly you can hear the shout of a bad car salesman or an over enthusiastic aerobics instructor. (And that’s without even using quotation marks.) Just do it! is simply trying too hard to get noticed; trying to d"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "9c11822916ed233dd7896dfe21b1e0cdae1d4a90997b0c7eb1a898cc553338e6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            208,
+            209
+          ],
+          "cosine": 0.5292154349645963,
+          "snippet": "You could argue that a rhyming tagline is more poetic, colloquial or catchy. But such lines only work when they express a relevance to the product and/or what it’s trying to say about itself. Some good examples of this include: • See the US"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "abf648127f82ce1985c4e55556ea88bbc70e44d9fc97750bc48dc24b4869f6dc",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            104,
+            105
+          ],
+          "cosine": 0.570389955950239,
+          "snippet": "Exercise: turn on the TV, or grab a magazine or paper. Better yet, use an awards annual. Look at each ad, and try to identify the tone of voice. Write down a few adjectives for each. “Mandatories” (Inclusions/Exclusions) These are defined b"
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "67e957d59cef3a54f60123f86070a7616a8ccce5c0c796f90b53ce50da66d7c9",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            206,
+            207
+          ],
+          "cosine": 0.5349204161377878,
+          "snippet": "TAMPAX Compak life size • Include the brand name • Describe the function of the product • Be very short and catchy Two examples that followed this system were “Oxycutem,” for Oxy pimple cream (a pun on the phrase “execute them”) and “Good N"
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "category": "idea_generation",
+      "domain": "CREATIVE",
+      "query": "how to generate advertising ideas brainstorming techniques",
+      "corpus": "kb_chunks_v2",
+      "pipeline": "Strategy-F",
+      "evidence_count": 5,
+      "hits": [
+        {
+          "evidence_id": "E1",
+          "chunk_id": "5b7fbfe4d24f2043b9a045ac11c2f3badddb8d24563b16cee5d412d17b7a1db0",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            316,
+            317
+          ],
+          "cosine": 0.525175123957995,
+          "snippet": "After all, if you can silence an angry barfly, you can silence anyone. The brave client ad (“On/Off”), above, for Orange takes the argument tool to the next level by making an argument for and against use of mobile cell phones. Brainstormin"
+        },
+        {
+          "evidence_id": "E2",
+          "chunk_id": "6b302bf07f9d26dbe5dbc3a64e9614e5075bbde1f484fe082648baae262a2203",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            374,
+            375
+          ],
+          "cosine": 0.6088383486890369,
+          "snippet": "Another good source of inspiration for ambient ideas is places and locations. A student once sat on some steps and came up with the idea of using them for Alcoholics Anonymous’s “12 Step Program” (overleaf). A mirrored changing room in a cl"
+        },
+        {
+          "evidence_id": "E3",
+          "chunk_id": "8e0bc45cce866b30ce51820d7801904bb87c7001bbed8961796561e32e1dafaa",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            46,
+            47
+          ],
+          "cosine": 0.5306249320474863,
+          "snippet": "It’s highly unrealistic for even the greatest creative person to expect every one of his or her ideas to be an instant award-winner. The higher the level of expectancy, the more pressure you put on yourself, the more frustrating the creativ"
+        },
+        {
+          "evidence_id": "E4",
+          "chunk_id": "d153444665cc1068bc5bdb5c74f65d2b07b5e143f0c13e5f7b320abe9c8c8656",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            34,
+            35
+          ],
+          "cosine": 0.5944804598525847,
+          "snippet": "a pair, or part of a larger team. This isn’t always a bad thing, as outlined above. If possible, try to work with as many people as you can, until you find someone that you work really well with. The Greatest Barriers to Creativity Whether "
+        },
+        {
+          "evidence_id": "E5",
+          "chunk_id": "89a460fb2af87aaf1b8f027772a094d19f0e8a6a09191676f67cd6d85c049a62",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            627,
+            628
+          ],
+          "cosine": 0.4675045096692938,
+          "snippet": "Johnson, Michael, Problem Solved: A Primer in Design and Communication, New York, 2002 Monahan, Tom, The Do-It-Yourself Lobotomy: Open Your Mind to Greater Creative Thinking, New York, 2002 Müller-Brockmann, Josef, Grid Systems in Graphic D"
+        }
+      ]
+    }
+  ],
+  "health": {
+    "ok": true,
+    "exposes_api_key": false
+  }
+}

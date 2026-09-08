@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-09-07T00:59:21.852166+00:00",
+  "counts": {
+    "ADMIT": 2,
+    "REJECT": 2,
+    "DEFER": 2
+  },
+  "decisions": [
+    {
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "decision": "ADMIT",
+      "rationale": "Dedicated concise WhatsApp sales process covering the representative funnel. Original Markdown is not present locally, so legacy row identity and a read-only snapshot are retained as provenance.",
+      "criteria": {
+        "direct_and_substantial": "HIGH",
+        "depth": "HIGH",
+        "provenance": "12 active legacy rows with stable chunk_id/source_file/topic/subtopic",
+        "parseability": "HIGH",
+        "redundancy": "LOW_IN_CANONICAL",
+        "conflict_risk": "MODERATE"
+      }
+    },
+    {
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "decision": "ADMIT",
+      "rationale": "Dedicated operational workshop on WhatsApp Business/FunnelChat flows, qualification tags, payment follow-up, reminders and human escalation. Product UI/currentness and incomplete attribution warnings are mandatory.",
+      "criteria": {
+        "direct_and_substantial": "HIGH",
+        "depth": "HIGH",
+        "provenance": "Two exact local file/range units with SHA-256 and line references",
+        "parseability": "HIGH_WITH_ASR_WARNINGS",
+        "redundancy": "LOW_IN_CANONICAL",
+        "conflict_risk": "MODERATE"
+      }
+    },
+    {
+      "source_id": "SRC_WA_SYSTEM_PROMPT",
+      "decision": "REJECT",
+      "rationale": "Instruction template without substantive supporting doctrine; cannot independently establish coverage.",
+      "criteria": {
+        "direct_and_substantial": "MODERATE",
+        "depth": "LOW",
+        "provenance": "Local project file",
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "conflict_risk": "HIGH"
+      }
+    },
+    {
+      "source_id": "SRC_WA_BIBLIA_VENDEDOR",
+      "decision": "DEFER",
+      "rationale": "General sales evidence is not dedicated to WhatsApp and overlaps canonical Venta Elegante content.",
+      "criteria": {
+        "direct_and_substantial": "MODERATE",
+        "depth": "LOW",
+        "provenance": "Local file with incomplete upstream attribution",
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "conflict_risk": "MODERATE"
+      }
+    },
+    {
+      "source_id": "SRC_WA_VENTA_ELEGANTE_PODCAST",
+      "decision": "DEFER",
+      "rationale": "Not WhatsApp-specific and overlaps the already ingested Venta Elegante course.",
+      "criteria": {
+        "direct_and_substantial": "MODERATE",
+        "depth": "LOW",
+        "provenance": "Local transcript bundle",
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "conflict_risk": "LOW"
+      }
+    },
+    {
+      "source_id": "SRC_WA_COMBINED_TRANSCRIPT_DUPLICATE",
+      "decision": "REJECT",
+      "rationale": "Rejected as a duplicate container; exact unit files provide more precise provenance.",
+      "criteria": {
+        "direct_and_substantial": "HIGH",
+        "depth": "NONE",
+        "provenance": "Local aggregate file",
+        "parseability": "HIGH",
+        "redundancy": "TOTAL",
+        "conflict_risk": "HIGH"
+      }
+    }
+  ],
+  "dedicated_source_requirement_satisfied": true,
+  "rule": "Only the curated WhatsApp Sales OS and bounded dedicated workshop units are admitted; generic sales, prompts and duplicate aggregates are excluded."
+}

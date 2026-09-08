@@ -1,0 +1,65 @@
+{
+  "gate": "ASTRA_03_KNOWLEDGE_METHOD_DISCOVERY",
+  "artifacts": [
+    {
+      "path": "astra/knowledge_discovery/source_inventory.json",
+      "sha256": "42ae6b2455e58e5915f64cd18c9bffbc552f926e072832a6e6c96b04a027b35b",
+      "bytes": 3323
+    },
+    {
+      "path": "astra/knowledge_discovery/discovery_queries.json",
+      "sha256": "8d3d1108d5808a316344a8aa90e60bcabcae85e5447340c0bbcf8759817fc62b",
+      "bytes": 2073
+    },
+    {
+      "path": "astra/knowledge_discovery/retrieval_raw.json",
+      "sha256": "3afcc37e3da55c3fe0826a34f663aa3c48836f91e50567e46792c6c487e91b29",
+      "bytes": 47693
+    },
+    {
+      "path": "astra/knowledge_discovery/discovered_methods.json",
+      "sha256": "5069fde070c5da3c07292cae3d3315f66379141fce64e8bc85d7b780036c1f5f",
+      "bytes": 14284
+    },
+    {
+      "path": "astra/knowledge_discovery/normalized_methods.json",
+      "sha256": "05fd17f3f837b83ad72dd616cb062d903d604e15e63699da79bde1a80fb0079b",
+      "bytes": 16424
+    },
+    {
+      "path": "astra/knowledge_discovery/evidence_mapping.json",
+      "sha256": "601fac69e92dab6e810c8376ea73b4c5ac1f3ead1f754fb2f7f9eb64b9616188",
+      "bytes": 68918
+    },
+    {
+      "path": "astra/knowledge_discovery/alias_resolution.json",
+      "sha256": "84c8a497c38f0dc0fbe05d3238993860e9fe116b495430746fce5c05a5fed204",
+      "bytes": 6087
+    },
+    {
+      "path": "astra/knowledge_discovery/mapping_coverage.json",
+      "sha256": "34a2c99548cb9871311b1f1747f96fb84d57d202e6876d336b20a0c9d475062a",
+      "bytes": 1270
+    },
+    {
+      "path": "astra/knowledge_discovery/adjudicator_readiness.json",
+      "sha256": "de63e519bd0249cb0f99d17b0d571fd87f986e3292c47b2bc731feeba9d95e04",
+      "bytes": 3917
+    },
+    {
+      "path": "astra/knowledge_discovery/test_results.json",
+      "sha256": "910c29c3b6f7df03a827d47b1d78183e0ce897cad334a21194f03d4b28aee32f",
+      "bytes": 1102
+    },
+    {
+      "path": "astra/knowledge_discovery/protection_fingerprints.json",
+      "sha256": "8c71bddc809e54729184942cfdc14b687ab5c2a31406ca3a79033a50c7da0304",
+      "bytes": 2291
+    },
+    {
+      "path": "astra/methods/registry.json",
+      "sha256": "798769bd8fb01a2f9dede1e0d294356e435f8f2dee1b1d85a74bf83a5c24d7d8",
+      "bytes": 26515
+    }
+  ]
+}

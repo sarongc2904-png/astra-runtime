@@ -1,0 +1,78 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "entries": [
+    {
+      "name": "auth_validation.json",
+      "bytes": 450,
+      "sha256": "da62241af3723beb5d311489277fb905b19d47817ccbf4011fdf483f1951061b"
+    },
+    {
+      "name": "campaign_tool_validation.json",
+      "bytes": 409,
+      "sha256": "eac1d5fb98f51d4f38e86514927fddbb7906b1403a8d33f84db74d680fc34893"
+    },
+    {
+      "name": "creative_director_tool_validation.json",
+      "bytes": 263,
+      "sha256": "d480bf470be4e717cbb21af2f94da421b4798157293bf92aa0e0057716bfeaa5"
+    },
+    {
+      "name": "creative_generation_tool_validation.json",
+      "bytes": 253,
+      "sha256": "bf5be166b567ad9b4a06fa5d1b8d0173e53595c34630e7f6ff52e2e5b68823a7"
+    },
+    {
+      "name": "integration_contract.json",
+      "bytes": 530,
+      "sha256": "77dc96f8b32df7dbe1af334153f7720954b66852ef4a8580cf0308003ca80a26"
+    },
+    {
+      "name": "openapi_schema.json",
+      "bytes": 16181,
+      "sha256": "4414a18c3ff10ab9dc9b70488e0e58ed88fe3d19be45ab6f66836f0898a37d3c"
+    },
+    {
+      "name": "protection_validation.json",
+      "bytes": 1217,
+      "sha256": "3ac838629fd5beefad3e0c171edb1e8229c77e0cff8aab67b837ce1e248da56b"
+    },
+    {
+      "name": "regression_results.json",
+      "bytes": 620,
+      "sha256": "2fa21df210145a54d0cfa52bb58f8b9e36ed7805c4cecfae3e6769c2365e24b6"
+    },
+    {
+      "name": "routing_validation.json",
+      "bytes": 441,
+      "sha256": "01f51d01bd6af492f8c8387c0048b06e464070cfedc84e14764aad3d04ca1c89"
+    },
+    {
+      "name": "security_validation.json",
+      "bytes": 355,
+      "sha256": "d52eb5f42ab1c786dcd02cbc0f9c2b07947232432295b4333c60fa6e9d7d08d8"
+    },
+    {
+      "name": "state_propagation_validation.json",
+      "bytes": 314,
+      "sha256": "209840b4bd35dc599b67d8c7d2b0da4e43823062cf37aee1766c4d86195e2784"
+    },
+    {
+      "name": "supabase_validation.json",
+      "bytes": 402,
+      "sha256": "276aa33127b06f6cccd651a6cd5366e69bb0ce926ff80ff4a26673e1a41f369e"
+    },
+    {
+      "name": "test_results.json",
+      "bytes": 539,
+      "sha256": "5fab5c4838a5d9ae70f983727c1a6978978b758b3e9a8355126fc7137eec104f"
+    },
+    {
+      "name": "tool_contracts.json",
+      "bytes": 941,
+      "sha256": "34c1524ef802ec7f1e3d8aa02b3f9212082e462670a070ab92e209542b9b8896"
+    }
+  ],
+  "missing_required": []
+}

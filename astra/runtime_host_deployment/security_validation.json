@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "runtime_secret_in_source": false,
+  "provider_secret_in_source": false,
+  "config_json_in_docker_context": false,
+  "env_files_in_docker_context": false,
+  "container_user": "astra:astra",
+  "health_exposes_sensitive_data": false,
+  "execution_routes_require_runtime_bearer": true,
+  "db_schema_or_corpus_writes": 0
+}

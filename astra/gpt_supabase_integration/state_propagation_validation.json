@@ -1,0 +1,13 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "states": {
+    "COMPLETE": "PASS",
+    "WAITING_FOR_INPUT": "PASS",
+    "BLOCKED": "PASS",
+    "FAILED": "PASS",
+    "CURRENT_RESEARCH_REQUIRED": "PASS"
+  },
+  "generic_success_collapse": false
+}

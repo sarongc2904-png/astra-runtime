@@ -1,0 +1,473 @@
+{
+  "generated_at": "2026-09-07T03:59:18.476706+00:00",
+  "method_count": 8,
+  "no_generic_advice_promoted": true,
+  "methods": [
+    {
+      "canonical_name": "Strategy → Concept/Idea → Campaign",
+      "aliases": [
+        "Strategy → Concept → Campaign",
+        "Strategy → Idea → Campaign"
+      ],
+      "sources": [
+        {
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+        }
+      ],
+      "evidence_count": 3,
+      "evidence_refs": [
+        {
+          "query_id": "Q02",
+          "evidence_id": "E1",
+          "chunk_id": "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            86,
+            87
+          ],
+          "retrieval_cosine_diagnostic": 0.6639059474683946
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E2",
+          "chunk_id": "77df5102bd9f4e0d40e8b413105dec32c8a3b475dd3407d83969a1e0e18c0008",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            216,
+            217
+          ],
+          "retrieval_cosine_diagnostic": 0.6549388835462916
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E3",
+          "chunk_id": "8a5a79dc4ce91952a9106e2324c65bd6de9140defddb62f0f1f2110a71bd7397",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            216,
+            217
+          ],
+          "retrieval_cosine_diagnostic": 0.6336137792180777
+        }
+      ],
+      "best_for": "advertising campaign development",
+      "limitations": [
+        "Single-source support.",
+        "Readiness limited to the supported advertising subdomain."
+      ],
+      "readiness": "EVIDENCE_BACKED_PARTIALLY_MAPPED",
+      "confidence": 0.88
+    },
+    {
+      "canonical_name": "Single-Minded Proposition (SMP)",
+      "aliases": [
+        "advertising promise",
+        "selling proposition",
+        "single-minded benefit",
+        "SMP",
+        "value prop"
+      ],
+      "sources": [
+        {
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+        }
+      ],
+      "evidence_count": 3,
+      "evidence_refs": [
+        {
+          "query_id": "Q06",
+          "evidence_id": "E1",
+          "chunk_id": "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            38,
+            39
+          ],
+          "retrieval_cosine_diagnostic": 0.6311100684890598
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E2",
+          "chunk_id": "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "retrieval_cosine_diagnostic": 0.5720401172508832
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E3",
+          "chunk_id": "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "retrieval_cosine_diagnostic": 0.5589489523960092
+        }
+      ],
+      "best_for": "advertising proposition",
+      "limitations": [
+        "Single-source support.",
+        "Readiness limited to the supported advertising subdomain."
+      ],
+      "readiness": "EVIDENCE_BACKED_PARTIALLY_MAPPED",
+      "confidence": 0.88
+    },
+    {
+      "canonical_name": "Tagline Craft",
+      "aliases": [
+        "tag",
+        "endline",
+        "theme line",
+        "strapline",
+        "pay-off",
+        "slogan"
+      ],
+      "sources": [
+        {
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+        }
+      ],
+      "evidence_count": 3,
+      "evidence_refs": [
+        {
+          "query_id": "Q13",
+          "evidence_id": "E1",
+          "chunk_id": "64d4537ef55ccd2a5353481881178ed04ceaf3b9ca5f0027c0ce32dea44467ee",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            198,
+            199
+          ],
+          "retrieval_cosine_diagnostic": 0.6158136404167266
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E3",
+          "chunk_id": "9c11822916ed233dd7896dfe21b1e0cdae1d4a90997b0c7eb1a898cc553338e6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            208,
+            209
+          ],
+          "retrieval_cosine_diagnostic": 0.5292154349645963
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E5",
+          "chunk_id": "67e957d59cef3a54f60123f86070a7616a8ccce5c0c796f90b53ce50da66d7c9",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            206,
+            207
+          ],
+          "retrieval_cosine_diagnostic": 0.5349204161377878
+        }
+      ],
+      "best_for": "campaign tagline",
+      "limitations": [
+        "Single-source support.",
+        "Readiness limited to the supported advertising subdomain."
+      ],
+      "readiness": "EVIDENCE_BACKED_PARTIALLY_MAPPED",
+      "confidence": 0.88
+    },
+    {
+      "canonical_name": "Advertising Copywriting and Tone of Voice",
+      "aliases": [
+        "long copy",
+        "long form",
+        "body copy",
+        "body text"
+      ],
+      "sources": [
+        {
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+        }
+      ],
+      "evidence_count": 4,
+      "evidence_refs": [
+        {
+          "query_id": "Q04",
+          "evidence_id": "E1",
+          "chunk_id": "86b865c6a26afab409c84fae5a2bdc7f7b17ce1d451dfe2fa23ed618180654df",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            474,
+            475
+          ],
+          "retrieval_cosine_diagnostic": 0.6384943862930924
+        },
+        {
+          "query_id": "Q04",
+          "evidence_id": "E4",
+          "chunk_id": "44a3a07fbcafdec4992a3215a6b52d567a250a0fb640d234bbd02b04158a7d66",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            488,
+            489
+          ],
+          "retrieval_cosine_diagnostic": 0.5796162620722142
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E1",
+          "chunk_id": "cc9848040c2c4c56778a6b4db1d38c943a0cdffb79b7479a56976c9bb3a57366",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            486,
+            487
+          ],
+          "retrieval_cosine_diagnostic": 0.683448387401624
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E4",
+          "chunk_id": "179fa95928d15799e974239c114030d84d83db7876aed0f7bcb1b1e16aa7664b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            102,
+            103
+          ],
+          "retrieval_cosine_diagnostic": 0.6102344872255583
+        }
+      ],
+      "best_for": "advertising copy and tone",
+      "limitations": [
+        "Single-source support.",
+        "Readiness limited to the supported advertising subdomain."
+      ],
+      "readiness": "EVIDENCE_BACKED_PARTIALLY_MAPPED",
+      "confidence": 0.88
+    },
+    {
+      "canonical_name": "Visual Idea Development",
+      "aliases": [],
+      "sources": [
+        {
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+        }
+      ],
+      "evidence_count": 2,
+      "evidence_refs": [
+        {
+          "query_id": "Q03",
+          "evidence_id": "E1",
+          "chunk_id": "e6a28d288025962b1bf62184c0f1e212f4bdec721d0da20276647292ef298843",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            138,
+            139
+          ],
+          "retrieval_cosine_diagnostic": 0.6637062143183798
+        },
+        {
+          "query_id": "Q03",
+          "evidence_id": "E3",
+          "chunk_id": "df864d4a1485a60c44a4513db6804bef71a2b7c7e96a066c4a37f4a11cf8ea32",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            170,
+            171
+          ],
+          "retrieval_cosine_diagnostic": 0.5960681890764383
+        }
+      ],
+      "best_for": "visual advertising",
+      "limitations": [
+        "Single-source support.",
+        "Readiness limited to the supported advertising subdomain."
+      ],
+      "readiness": "EVIDENCE_BACKED_PARTIALLY_MAPPED",
+      "confidence": 0.84
+    },
+    {
+      "canonical_name": "Ambient Advertising",
+      "aliases": [
+        "under the radar",
+        "alternative media",
+        "unconventional media",
+        "non-traditional media"
+      ],
+      "sources": [
+        {
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+        }
+      ],
+      "evidence_count": 4,
+      "evidence_refs": [
+        {
+          "query_id": "Q09",
+          "evidence_id": "E1",
+          "chunk_id": "151336cbb836226218a5bac22de997d8c4d262c046b487f8e495b82bc570a712",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            362,
+            363
+          ],
+          "retrieval_cosine_diagnostic": 0.7212372060415615
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E2",
+          "chunk_id": "11bdae59df8d753227557529a09af319d2e37b7c8cb8543bd1401215bde96566",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "retrieval_cosine_diagnostic": 0.5263852663634586
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E4",
+          "chunk_id": "3d5e0c6493fd721764ce74b1c90314c9ea8f9f0f15a34cdb76a7b1200c0b09d9",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            364,
+            365
+          ],
+          "retrieval_cosine_diagnostic": 0.7203263218495208
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E5",
+          "chunk_id": "5fdc9a8f246fbb185cdda22f057c2120fbe6e229c08124b18f1c8971ee358158",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            362,
+            363
+          ],
+          "retrieval_cosine_diagnostic": 0.6898862072692787
+        }
+      ],
+      "best_for": "ambient and non-traditional media",
+      "limitations": [
+        "Single-source support.",
+        "Readiness limited to the supported advertising subdomain."
+      ],
+      "readiness": "EVIDENCE_BACKED_PARTIALLY_MAPPED",
+      "confidence": 0.88
+    },
+    {
+      "canonical_name": "Final Ad Execution and Craft",
+      "aliases": [
+        "final layout design and production"
+      ],
+      "sources": [
+        {
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+        }
+      ],
+      "evidence_count": 3,
+      "evidence_refs": [
+        {
+          "query_id": "Q08",
+          "evidence_id": "E1",
+          "chunk_id": "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "retrieval_cosine_diagnostic": 0.6505355422261108
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E2",
+          "chunk_id": "a7a7f3aeeae187fbf12152a7edfda1cf6cfa8751d7f216a4e2e0b19b85c9667a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "retrieval_cosine_diagnostic": 0.6578562127118507
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E3",
+          "chunk_id": "e2e9ade3298c12e8b8a7459e45effb9a8c67373183f0a78b311cc700b05d2bc6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            186,
+            187
+          ],
+          "retrieval_cosine_diagnostic": 0.5904862511231274
+        }
+      ],
+      "best_for": "art direction and production",
+      "limitations": [
+        "Single-source support.",
+        "Readiness limited to the supported advertising subdomain."
+      ],
+      "readiness": "EVIDENCE_BACKED_PARTIALLY_MAPPED",
+      "confidence": 0.88
+    },
+    {
+      "canonical_name": "Target Audience Definition",
+      "aliases": [
+        "target group",
+        "target market"
+      ],
+      "sources": [
+        {
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+        }
+      ],
+      "evidence_count": 3,
+      "evidence_refs": [
+        {
+          "query_id": "Q11",
+          "evidence_id": "E1",
+          "chunk_id": "4042f1d10e35da9afa23b6ee284d51324a8bd986089377e7d686f4fc64a22e54",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            40,
+            41
+          ],
+          "retrieval_cosine_diagnostic": 0.5492152427609106
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E3",
+          "chunk_id": "4f0c67316607eb556dd0caab883364119eb57bc089090af8d96343c0e93877e4",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "retrieval_cosine_diagnostic": 0.5981435440527898
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E4",
+          "chunk_id": "5104ecffaf7bdfe4aa918a27fc33580e411ad1fa7ed8e32ac2d973d3047109e2",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "retrieval_cosine_diagnostic": 0.4722967204575258
+        }
+      ],
+      "best_for": "advertising audience definition",
+      "limitations": [
+        "Single-source support.",
+        "Readiness limited to the supported advertising subdomain."
+      ],
+      "readiness": "EVIDENCE_BACKED_PARTIALLY_MAPPED",
+      "confidence": 0.88
+    }
+  ]
+}

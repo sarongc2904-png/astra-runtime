@@ -1,0 +1,197 @@
+{
+  "ambiguity_count": 2,
+  "resolutions": [
+    {
+      "terms": [
+        "concept",
+        "idea"
+      ],
+      "decision": "MERGED",
+      "canonical": "concept/idea",
+      "evidence_refs": [
+        {
+          "query_id": "Q02",
+          "evidence_id": "E1",
+          "chunk_id": "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            86,
+            87
+          ],
+          "retrieval_cosine_diagnostic": 0.6639059474683946
+        },
+        {
+          "query_id": "Q01",
+          "evidence_id": "E1",
+          "chunk_id": "bb83873561faa0a4d5168dabf43d42756e38c7a14b3b7325b8435469b92a08d5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            16,
+            17
+          ],
+          "retrieval_cosine_diagnostic": 0.6921841187276658
+        }
+      ]
+    },
+    {
+      "terms": [
+        "advertising promise",
+        "selling proposition",
+        "single-minded benefit",
+        "single-minded proposition",
+        "SMP",
+        "value prop"
+      ],
+      "decision": "MERGED",
+      "canonical": "Single-Minded Proposition",
+      "evidence_refs": [
+        {
+          "query_id": "Q06",
+          "evidence_id": "E3",
+          "chunk_id": "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "retrieval_cosine_diagnostic": 0.5589489523960092
+        }
+      ]
+    },
+    {
+      "terms": [
+        "tagline",
+        "tag",
+        "endline",
+        "theme line",
+        "strapline",
+        "pay-off",
+        "slogan"
+      ],
+      "decision": "MERGED",
+      "canonical": "tagline",
+      "evidence_refs": [
+        {
+          "query_id": "Q13",
+          "evidence_id": "E1",
+          "chunk_id": "64d4537ef55ccd2a5353481881178ed04ceaf3b9ca5f0027c0ce32dea44467ee",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            198,
+            199
+          ],
+          "retrieval_cosine_diagnostic": 0.6158136404167266
+        }
+      ]
+    },
+    {
+      "terms": [
+        "target audience",
+        "target group",
+        "target market"
+      ],
+      "decision": "MERGED",
+      "canonical": "target audience",
+      "evidence_refs": [
+        {
+          "query_id": "Q11",
+          "evidence_id": "E1",
+          "chunk_id": "4042f1d10e35da9afa23b6ee284d51324a8bd986089377e7d686f4fc64a22e54",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            40,
+            41
+          ],
+          "retrieval_cosine_diagnostic": 0.5492152427609106
+        }
+      ]
+    },
+    {
+      "terms": [
+        "visual pun",
+        "visual twist"
+      ],
+      "decision": "KEPT_SEPARATE",
+      "canonical": null,
+      "evidence_refs": [
+        {
+          "query_id": "Q03",
+          "evidence_id": "E1",
+          "chunk_id": "e6a28d288025962b1bf62184c0f1e212f4bdec721d0da20276647292ef298843",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            138,
+            139
+          ],
+          "retrieval_cosine_diagnostic": 0.6637062143183798
+        },
+        {
+          "query_id": "Q03",
+          "evidence_id": "E3",
+          "chunk_id": "df864d4a1485a60c44a4513db6804bef71a2b7c7e96a066c4a37f4a11cf8ea32",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            170,
+            171
+          ],
+          "retrieval_cosine_diagnostic": 0.5960681890764383
+        }
+      ]
+    },
+    {
+      "terms": [
+        "ambient advertising",
+        "guerrilla advertising"
+      ],
+      "decision": "AMBIGUOUS",
+      "canonical": null,
+      "reason": "Source describes guerrilla as an aggressive form of ambient and says boundaries are blurred; it does not state simple equivalence.",
+      "evidence_refs": [
+        {
+          "query_id": "Q09",
+          "evidence_id": "E5",
+          "chunk_id": "5fdc9a8f246fbb185cdda22f057c2120fbe6e229c08124b18f1c8971ee358158",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            362,
+            363
+          ],
+          "retrieval_cosine_diagnostic": 0.6898862072692787
+        }
+      ]
+    },
+    {
+      "terms": [
+        "execution as individual ad",
+        "execution as final design/production"
+      ],
+      "decision": "AMBIGUOUS",
+      "canonical": null,
+      "reason": "Source explicitly assigns two meanings; registry entry is narrowly named Final Ad Execution and Craft.",
+      "evidence_refs": [
+        {
+          "query_id": "Q08",
+          "evidence_id": "E2",
+          "chunk_id": "a7a7f3aeeae187fbf12152a7edfda1cf6cfa8751d7f216a4e2e0b19b85c9667a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "retrieval_cosine_diagnostic": 0.6578562127118507
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E3",
+          "chunk_id": "e2e9ade3298c12e8b8a7459e45effb9a8c67373183f0a78b311cc700b05d2bc6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            186,
+            187
+          ],
+          "retrieval_cosine_diagnostic": 0.5904862511231274
+        }
+      ]
+    }
+  ]
+}

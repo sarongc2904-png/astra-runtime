@@ -1,0 +1,504 @@
+{
+  "methods": [
+    {
+      "method_id": "METHOD_SALES_ACCELERATION",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "field_evidence": {
+        "primary_jobs": [
+          "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+          "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97"
+        ],
+        "best_for": [
+          "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+          "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97"
+        ],
+        "required_inputs": [
+          "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+          "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97"
+        ],
+        "expected_outputs": [
+          "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+          "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97"
+        ],
+        "strengths": [
+          "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963",
+          "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+          "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97"
+        ]
+      },
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    },
+    {
+      "method_id": "METHOD_DIGITAL_MARKETING",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "field_evidence": {
+        "primary_jobs": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ],
+        "best_for": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ],
+        "required_inputs": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ],
+        "expected_outputs": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ],
+        "strengths": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ]
+      },
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    },
+    {
+      "method_id": "METHOD_OFFER_DESIGN",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "field_evidence": {
+        "primary_jobs": [
+          "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+          "b696eb7e844f49dacd9fd752acfee63c44e99646d8623eb66a07f154e9fe96c2",
+          "470102b912bf5286fb76a9e9a305e9456f2c24587ccd9140bdf7198daff06f19",
+          "d53c564c7b32600ca577ed3ffcc74f89877dcd9ee9349d2c2ec42ab2bca54de5"
+        ],
+        "best_for": [
+          "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+          "b696eb7e844f49dacd9fd752acfee63c44e99646d8623eb66a07f154e9fe96c2",
+          "470102b912bf5286fb76a9e9a305e9456f2c24587ccd9140bdf7198daff06f19",
+          "d53c564c7b32600ca577ed3ffcc74f89877dcd9ee9349d2c2ec42ab2bca54de5"
+        ],
+        "required_inputs": [
+          "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+          "b696eb7e844f49dacd9fd752acfee63c44e99646d8623eb66a07f154e9fe96c2",
+          "470102b912bf5286fb76a9e9a305e9456f2c24587ccd9140bdf7198daff06f19",
+          "d53c564c7b32600ca577ed3ffcc74f89877dcd9ee9349d2c2ec42ab2bca54de5"
+        ],
+        "expected_outputs": [
+          "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+          "b696eb7e844f49dacd9fd752acfee63c44e99646d8623eb66a07f154e9fe96c2",
+          "470102b912bf5286fb76a9e9a305e9456f2c24587ccd9140bdf7198daff06f19",
+          "d53c564c7b32600ca577ed3ffcc74f89877dcd9ee9349d2c2ec42ab2bca54de5"
+        ],
+        "strengths": [
+          "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+          "b696eb7e844f49dacd9fd752acfee63c44e99646d8623eb66a07f154e9fe96c2",
+          "470102b912bf5286fb76a9e9a305e9456f2c24587ccd9140bdf7198daff06f19",
+          "d53c564c7b32600ca577ed3ffcc74f89877dcd9ee9349d2c2ec42ab2bca54de5"
+        ]
+      },
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    },
+    {
+      "method_id": "METHOD_CRO",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "field_evidence": {
+        "primary_jobs": [
+          "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1",
+          "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "da231f65b0cabbcf73b00cdf747f3d81e123399ae05559c24f02659cffec6e93"
+        ],
+        "best_for": [
+          "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1",
+          "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "da231f65b0cabbcf73b00cdf747f3d81e123399ae05559c24f02659cffec6e93"
+        ],
+        "required_inputs": [
+          "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1",
+          "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "da231f65b0cabbcf73b00cdf747f3d81e123399ae05559c24f02659cffec6e93"
+        ],
+        "expected_outputs": [
+          "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1",
+          "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "da231f65b0cabbcf73b00cdf747f3d81e123399ae05559c24f02659cffec6e93"
+        ],
+        "strengths": [
+          "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1",
+          "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+          "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "da231f65b0cabbcf73b00cdf747f3d81e123399ae05559c24f02659cffec6e93"
+        ]
+      },
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    },
+    {
+      "method_id": "METHOD_ICP",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "field_evidence": {
+        "primary_jobs": [
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "3c0bd5599fba42c65e9afc90b3b2cc3379d51ee8e6b50a6f60a532cb244ae114",
+          "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+          "fb354abc51f8a9ae921e96bfd8914356e699c77317593d0614ddff5a5ad60a71"
+        ],
+        "best_for": [
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "3c0bd5599fba42c65e9afc90b3b2cc3379d51ee8e6b50a6f60a532cb244ae114",
+          "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+          "fb354abc51f8a9ae921e96bfd8914356e699c77317593d0614ddff5a5ad60a71"
+        ],
+        "required_inputs": [
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "3c0bd5599fba42c65e9afc90b3b2cc3379d51ee8e6b50a6f60a532cb244ae114",
+          "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+          "fb354abc51f8a9ae921e96bfd8914356e699c77317593d0614ddff5a5ad60a71"
+        ],
+        "expected_outputs": [
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "3c0bd5599fba42c65e9afc90b3b2cc3379d51ee8e6b50a6f60a532cb244ae114",
+          "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+          "fb354abc51f8a9ae921e96bfd8914356e699c77317593d0614ddff5a5ad60a71"
+        ],
+        "strengths": [
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "3c0bd5599fba42c65e9afc90b3b2cc3379d51ee8e6b50a6f60a532cb244ae114",
+          "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+          "fb354abc51f8a9ae921e96bfd8914356e699c77317593d0614ddff5a5ad60a71"
+        ]
+      },
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    },
+    {
+      "method_id": "METHOD_FUNNEL",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "field_evidence": {
+        "primary_jobs": [
+          "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+          "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+          "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+          "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8"
+        ],
+        "best_for": [
+          "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+          "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+          "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+          "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8"
+        ],
+        "required_inputs": [
+          "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+          "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+          "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+          "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8"
+        ],
+        "expected_outputs": [
+          "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+          "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+          "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+          "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8"
+        ],
+        "strengths": [
+          "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+          "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+          "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+          "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+          "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8"
+        ]
+      },
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    },
+    {
+      "method_id": "METHOD_MIDAS",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "field_evidence": {
+        "primary_jobs": [
+          "58bad94434984c2b61caab1bc6e1f142a88de665a61f93e23396da22bca630bf",
+          "7b0d0bd2813591242ac3daf53dd35cac7955f21c37154b416f75023eef733f52",
+          "f52740637426debb618a0a92e4ee464d3a7efe2e9ba0b9a9c7210a5821c252fb",
+          "2969124a61a2a00161920f8c1cd5842ceb07d35613731355f2014312e9dd8b7b",
+          "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+          "bfe47635e7291c9f64afbdb6a562fff9acede2a18380f96d78286200712637f2"
+        ],
+        "best_for": [
+          "58bad94434984c2b61caab1bc6e1f142a88de665a61f93e23396da22bca630bf",
+          "7b0d0bd2813591242ac3daf53dd35cac7955f21c37154b416f75023eef733f52",
+          "f52740637426debb618a0a92e4ee464d3a7efe2e9ba0b9a9c7210a5821c252fb",
+          "2969124a61a2a00161920f8c1cd5842ceb07d35613731355f2014312e9dd8b7b",
+          "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+          "bfe47635e7291c9f64afbdb6a562fff9acede2a18380f96d78286200712637f2"
+        ],
+        "required_inputs": [
+          "58bad94434984c2b61caab1bc6e1f142a88de665a61f93e23396da22bca630bf",
+          "7b0d0bd2813591242ac3daf53dd35cac7955f21c37154b416f75023eef733f52",
+          "f52740637426debb618a0a92e4ee464d3a7efe2e9ba0b9a9c7210a5821c252fb",
+          "2969124a61a2a00161920f8c1cd5842ceb07d35613731355f2014312e9dd8b7b",
+          "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+          "bfe47635e7291c9f64afbdb6a562fff9acede2a18380f96d78286200712637f2"
+        ],
+        "expected_outputs": [
+          "58bad94434984c2b61caab1bc6e1f142a88de665a61f93e23396da22bca630bf",
+          "7b0d0bd2813591242ac3daf53dd35cac7955f21c37154b416f75023eef733f52",
+          "f52740637426debb618a0a92e4ee464d3a7efe2e9ba0b9a9c7210a5821c252fb",
+          "2969124a61a2a00161920f8c1cd5842ceb07d35613731355f2014312e9dd8b7b",
+          "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+          "bfe47635e7291c9f64afbdb6a562fff9acede2a18380f96d78286200712637f2"
+        ],
+        "strengths": [
+          "58bad94434984c2b61caab1bc6e1f142a88de665a61f93e23396da22bca630bf",
+          "7b0d0bd2813591242ac3daf53dd35cac7955f21c37154b416f75023eef733f52",
+          "f52740637426debb618a0a92e4ee464d3a7efe2e9ba0b9a9c7210a5821c252fb",
+          "2969124a61a2a00161920f8c1cd5842ceb07d35613731355f2014312e9dd8b7b",
+          "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+          "bfe47635e7291c9f64afbdb6a562fff9acede2a18380f96d78286200712637f2"
+        ]
+      },
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    },
+    {
+      "method_id": "METHOD_INFOPRODUCT",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "field_evidence": {
+        "primary_jobs": [
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "34421dcc63514aacb41e5ca4bd17aed9893467722d9c4b66d63685128a645784"
+        ],
+        "best_for": [
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "34421dcc63514aacb41e5ca4bd17aed9893467722d9c4b66d63685128a645784"
+        ],
+        "required_inputs": [
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "34421dcc63514aacb41e5ca4bd17aed9893467722d9c4b66d63685128a645784"
+        ],
+        "expected_outputs": [
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "34421dcc63514aacb41e5ca4bd17aed9893467722d9c4b66d63685128a645784"
+        ],
+        "strengths": [
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "34421dcc63514aacb41e5ca4bd17aed9893467722d9c4b66d63685128a645784"
+        ]
+      },
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    },
+    {
+      "method_id": "METHOD_GROWTH_MARKETING",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "field_evidence": {
+        "primary_jobs": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ],
+        "best_for": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ],
+        "required_inputs": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ],
+        "expected_outputs": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ],
+        "strengths": [
+          "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+        ]
+      },
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    },
+    {
+      "method_id": "METHOD_COURSE_DESIGN",
+      "mapping_status": "DISCOVERED",
+      "field_evidence": {},
+      "unsupported_fields": [
+        "business_stage",
+        "funnel_stage",
+        "not_recommended_for",
+        "limitations",
+        "dependencies",
+        "compatible_methods",
+        "conflicting_methods"
+      ]
+    }
+  ],
+  "rule": "Only populated fields have direct query evidence; absent fields remain empty."
+}

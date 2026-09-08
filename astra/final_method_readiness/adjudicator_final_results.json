@@ -1,0 +1,416 @@
+{
+  "generated_at": "2026-09-07T01:28:44.708Z",
+  "results": [
+    {
+      "task_id": "T01",
+      "description": "client acquisition",
+      "domain": "FUNNEL",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_VELOCITY",
+        "METHOD_FUNNEL"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_FUNNEL"
+      ],
+      "excluded_zero_evidence": [
+        "METHOD_VELOCITY"
+      ],
+      "primary_method": "METHOD_FUNNEL",
+      "secondary_methods": [],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.68,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T02",
+      "description": "ICP definition",
+      "domain": "ICP",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_ICP",
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_ICP",
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_ICP",
+      "secondary_methods": [
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.34,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T03",
+      "description": "offer design",
+      "domain": "OFFER",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_OFFER_DESIGN",
+      "secondary_methods": [],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.68,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T04",
+      "description": "funnel design",
+      "domain": "FUNNEL",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_VELOCITY",
+        "METHOD_FUNNEL"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_FUNNEL"
+      ],
+      "excluded_zero_evidence": [
+        "METHOD_VELOCITY"
+      ],
+      "primary_method": "METHOD_FUNNEL",
+      "secondary_methods": [],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.68,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T05",
+      "description": "sales conversion",
+      "domain": "SALES",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_SALES_ACCELERATION",
+      "secondary_methods": [
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.389,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T06",
+      "description": "creative strategy",
+      "domain": "CREATIVE",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_AD_EXECUTION_CRAFT"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_AD_EXECUTION_CRAFT"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_AD_EXECUTION_CRAFT",
+      "secondary_methods": [
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_CREATIVE_STRATEGY"
+      ],
+      "rejected_methods": [
+        "METHOD_VISUAL_IDEAS"
+      ],
+      "state": "RESOLVED",
+      "selection_confidence": 0.34,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T07",
+      "description": "copy / proposition",
+      "domain": "COPY",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT",
+        "METHOD_COPYWRITING_TONE"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT",
+        "METHOD_COPYWRITING_TONE"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_COPYWRITING_TONE",
+      "secondary_methods": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT"
+      ],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.34,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T08",
+      "description": "Meta Ads",
+      "domain": "ADS",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_DIGITAL_MARKETING",
+        "METHOD_META_ADS"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_DIGITAL_MARKETING",
+        "METHOD_META_ADS"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_DIGITAL_MARKETING",
+      "secondary_methods": [
+        "METHOD_META_ADS"
+      ],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.389,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T09",
+      "description": "WhatsApp conversion",
+      "domain": "SALES",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_SALES_ACCELERATION",
+      "secondary_methods": [
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.389,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T10",
+      "description": "measurement / CRO",
+      "domain": "CRO",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_CRO"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_CRO"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_CRO",
+      "secondary_methods": [],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.68,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T11",
+      "description": "positioning",
+      "domain": "COPY",
+      "note": "no dedicated METHOD_POSITIONING; SMP is nearest evidence-backed",
+      "all_domain_candidates": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT",
+        "METHOD_COPYWRITING_TONE"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT",
+        "METHOD_COPYWRITING_TONE"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_COPYWRITING_TONE",
+      "secondary_methods": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT"
+      ],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.34,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T12",
+      "description": "pricing",
+      "domain": "OFFER",
+      "note": "no dedicated METHOD_PRICING; offer design nearest",
+      "all_domain_candidates": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_OFFER_DESIGN",
+      "secondary_methods": [],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.68,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T13",
+      "description": "infoproduct creation",
+      "domain": "INFOPRODUCT",
+      "note": null,
+      "all_domain_candidates": [
+        "METHOD_INFOPRODUCT"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_INFOPRODUCT"
+      ],
+      "excluded_zero_evidence": [],
+      "primary_method": "METHOD_INFOPRODUCT",
+      "secondary_methods": [],
+      "rejected_methods": [],
+      "state": "RESOLVED",
+      "selection_confidence": 0.68,
+      "method_conflicts": [],
+      "expected_method_available": true,
+      "primary_is_evidence_backed": true
+    },
+    {
+      "task_id": "T14",
+      "description": "generic multi-step marketing",
+      "domain": "MULTI",
+      "note": "composes per-node adjudications",
+      "all_domain_candidates": [
+        "METHOD_VELOCITY",
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_DIGITAL_MARKETING",
+        "METHOD_OFFER_DESIGN",
+        "METHOD_CRO",
+        "METHOD_META_ADS",
+        "METHOD_WHATSAPP_SALES",
+        "METHOD_ICP",
+        "METHOD_FUNNEL",
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT",
+        "METHOD_COPYWRITING_TONE",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_AD_EXECUTION_CRAFT",
+        "METHOD_TARGET_AUDIENCE_DEFINITION",
+        "METHOD_MIDAS",
+        "METHOD_INFOPRODUCT",
+        "METHOD_GROWTH_MARKETING",
+        "METHOD_COURSE_DESIGN"
+      ],
+      "evidence_backed_candidates": [
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_DIGITAL_MARKETING",
+        "METHOD_OFFER_DESIGN",
+        "METHOD_CRO",
+        "METHOD_META_ADS",
+        "METHOD_WHATSAPP_SALES",
+        "METHOD_ICP",
+        "METHOD_FUNNEL",
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT",
+        "METHOD_COPYWRITING_TONE",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_AD_EXECUTION_CRAFT",
+        "METHOD_TARGET_AUDIENCE_DEFINITION",
+        "METHOD_MIDAS",
+        "METHOD_INFOPRODUCT",
+        "METHOD_GROWTH_MARKETING"
+      ],
+      "excluded_zero_evidence": [
+        "METHOD_VELOCITY",
+        "METHOD_COURSE_DESIGN"
+      ],
+      "primary_method": "METHOD_AD_EXECUTION_CRAFT",
+      "secondary_methods": [
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_COPYWRITING_TONE"
+      ],
+      "rejected_methods": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_CRO",
+        "METHOD_DIGITAL_MARKETING",
+        "METHOD_FUNNEL",
+        "METHOD_GROWTH_MARKETING",
+        "METHOD_ICP",
+        "METHOD_INFOPRODUCT",
+        "METHOD_MIDAS",
+        "METHOD_OFFER_DESIGN",
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT",
+        "METHOD_TARGET_AUDIENCE_DEFINITION",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_META_ADS",
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "state": "RESOLVED",
+      "selection_confidence": 0.272,
+      "method_conflicts": [],
+      "expected_method_available": null,
+      "primary_is_evidence_backed": true
+    }
+  ],
+  "analysis": {
+    "distinct_primaries": 9,
+    "velocity_ever_primary": false,
+    "course_design_ever_primary": false,
+    "meta_ads_available_for_ads": true,
+    "whatsapp_available_for_conversion": true,
+    "course_domain_state": "no_evidence_backed_course_method",
+    "any_primary_not_evidence_backed": false
+  }
+}

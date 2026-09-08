@@ -1,0 +1,114 @@
+{
+  "captured_at": "2026-09-07T01:30:56.573182+00:00",
+  "nodes": {
+    "market_context": {
+      "status": "SUPPORTED",
+      "supporting_methods": [
+        "METHOD_MIDAS",
+        "METHOD_GROWTH_MARKETING"
+      ],
+      "supporting_sources": [
+        "ASTRA-03B multi-source"
+      ],
+      "evidence_quality": "evidence-backed",
+      "known_limitations": "general research, not live market data",
+      "blocking": false
+    },
+    "icp": {
+      "status": "SUPPORTED",
+      "supporting_methods": [
+        "METHOD_ICP",
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ],
+      "supporting_sources": [
+        "ASTRA-03B"
+      ],
+      "evidence_quality": "multi-source",
+      "known_limitations": "",
+      "blocking": false
+    },
+    "offer": {
+      "status": "SUPPORTED",
+      "supporting_methods": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "supporting_sources": [
+        "ASTRA-03B"
+      ],
+      "evidence_quality": "multi-source",
+      "known_limitations": "",
+      "blocking": false
+    },
+    "funnel": {
+      "status": "SUPPORTED",
+      "supporting_methods": [
+        "METHOD_FUNNEL"
+      ],
+      "supporting_sources": [
+        "ASTRA-03B"
+      ],
+      "evidence_quality": "multi-source",
+      "known_limitations": "Velocity umbrella stays DISCOVERED",
+      "blocking": false
+    },
+    "creative_strategy": {
+      "status": "SUPPORTED",
+      "supporting_methods": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_AD_EXECUTION_CRAFT"
+      ],
+      "supporting_sources": [
+        "Advertising Concept Book"
+      ],
+      "evidence_quality": "strong",
+      "known_limitations": "",
+      "blocking": false
+    },
+    "ads": {
+      "status": "PARTIALLY_SUPPORTED",
+      "supporting_methods": [
+        "METHOD_META_ADS"
+      ],
+      "supporting_sources": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE"
+      ],
+      "evidence_quality": "MODERATE; ASR + current-platform gaps",
+      "known_limitations": "not authoritative for CAPI/Advantage+/current attribution/UI; ASTRA-04 must bind ads node to METHOD_META_ADS",
+      "blocking": false
+    },
+    "whatsapp_conversion": {
+      "status": "PARTIALLY_SUPPORTED",
+      "supporting_methods": [
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "supporting_sources": [
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT"
+      ],
+      "evidence_quality": "MODERATE; authority/currentness/ASR limits",
+      "known_limitations": "not provider-independent/current API; ASTRA-04 must bind node to METHOD_WHATSAPP_SALES",
+      "blocking": false
+    },
+    "measurement": {
+      "status": "SUPPORTED",
+      "supporting_methods": [
+        "METHOD_CRO"
+      ],
+      "supporting_sources": [
+        "ASTRA-03B"
+      ],
+      "evidence_quality": "strong",
+      "known_limitations": "",
+      "blocking": false
+    }
+  },
+  "mandatory_nodes": 8,
+  "unsupported_count": 0,
+  "partially_supported": [
+    "ads",
+    "whatsapp_conversion"
+  ],
+  "note": "MODERATE on ads/whatsapp is sufficient for a constrained V1 slice that acknowledges limitations and does not fabricate current-platform expertise."
+}

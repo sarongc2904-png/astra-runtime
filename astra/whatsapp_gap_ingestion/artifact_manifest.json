@@ -1,0 +1,146 @@
+{
+  "gate": "ASTRA_03D2_TARGETED_WHATSAPP_SALES_SOURCE_INGESTION",
+  "generated_at": "2026-09-07T01:04:16.597922+00:00",
+  "entry_count": 23,
+  "artifacts": [
+    {
+      "path": "astra/whatsapp_gap_ingestion/../../agent_loop/HANDOFF_ASTRA_03D2_TARGETED_WHATSAPP_SALES_SOURCE_INGESTION.md",
+      "purpose": "Operational gate handoff",
+      "sha256": "a543442849163733cf98fdc1f811fdf78484dac9ebe4c6dff89011349f83a5b2",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/../ASTRA_03D2_TARGETED_WHATSAPP_SALES_SOURCE_INGESTION_REPORT.md",
+      "purpose": "Human-readable gate report",
+      "sha256": "e7f13796735e2fb74f8e51c1175c96366cc2a680f6fc935c532a7bc777dd067a",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/../ASTRA_03D2_TEST_RESULTS.md",
+      "purpose": "Human-readable test report",
+      "sha256": "9c53b8ea388dcd7d2b840fc302f5bf2be03b1de4e6fb7688ffe2ba2bcce27477",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/build_artifact_manifest.py",
+      "purpose": "Deterministic manifest and hash generator",
+      "sha256": "b9240deb1c87e82f8551e7f660cc28cedd68cba207263e0713ab5476ead51fcb",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/candidate_sources.json",
+      "purpose": "WhatsApp-only project candidate inventory",
+      "sha256": "10481f47b8103788f941cdea3412a8834b370b21407102ea586cf70b7beebc1c",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/chunk_qa.json",
+      "purpose": "Chunk integrity, duplicate, size, topic and provenance QA",
+      "sha256": "97df8102bd372334f3636a762f050067027a374fe6ff7764d3d82373369fc323",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/corpus_snapshot.before.json",
+      "purpose": "Rollback/read-only comparison copy of prior canonical snapshot",
+      "sha256": "2929520d7c01b81eeefcf3cdb69efb352ae8a6c25313267975c8df22806be72f",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/embedding_validation.json",
+      "purpose": "New-only embedding model/dimension validation",
+      "sha256": "d7cd2d63d7cadac08dba4db8936b0873e5171e8340c4cb7f74755eac0d61bb43",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/extraction_qa.json",
+      "purpose": "Source/unit extraction validation",
+      "sha256": "eb783f5ee2f5cc70e1d6bb9db7d50eda8890cdb10e1482d73a78c73dac4e6471",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/ingestion_batches.json",
+      "purpose": "Traceable additive batch plan",
+      "sha256": "3916ff6c38b390ac7d9c52de9f4b057e12840cc9a66fb79ea6773b08c61dc44d",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/ingestion_execution.json",
+      "purpose": "Additive PostgREST insertion ledger",
+      "sha256": "32fd9963f5af99e74a60491a85c2e3e153a63e1b9b59dbfd7c857cd5a42d148b",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/legacy_source_snapshot.json",
+      "purpose": "Read-only exact snapshot of the 12 admitted legacy rows",
+      "sha256": "e5362a770deffff490814ae124422e9e98a615ffc23fed374d56895f24e8edc0",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/new_chunks.json",
+      "purpose": "Validated traceable new chunk payloads",
+      "sha256": "ae63a6944ccc5f98d7e12027d399025f79b35b987c9add03c287cef1f44cf1d5",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/new_embeddings.npy",
+      "purpose": "Validated new-only embedding vectors",
+      "sha256": "20d877e285d0556e5a1c4f66e6ef4303251448cd984c3c6ce8d6d156110d2da0",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/post_ingestion_coverage.json",
+      "purpose": "Conservative before/after WhatsApp coverage",
+      "sha256": "936251e2d00ba115fdc8584688884afc46b0ece6e44ae222dac656c667fb0cb6",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/protection_snapshot_before.json",
+      "purpose": "Before-state hashes/counts/prior-vector fingerprint",
+      "sha256": "f57b64cd326461174501dfb7ccf6baa0b0a36c752406c944e4093e8f72aeb4d3",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/protection_validation.json",
+      "purpose": "After-state preservation evidence",
+      "sha256": "0c04973b52a9d670a99ed18b55ac4399dadd30627708c2029535f0210108189c",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/remap_readiness.json",
+      "purpose": "Meta/WhatsApp remap and ASTRA-03E/04 readiness",
+      "sha256": "7a743bca34b2f7e4e68588a6d985e50685288b5e5ad8edde1423f3e540acc13f",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/run_astra03d2.py",
+      "purpose": "Resumable gate prepare/embed/ingest/refresh/validate runner",
+      "sha256": "b1bd5f6ed19fc99ed113ad1c1b45d57597e2f920dc0996fe2c7180b74d7a3605",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/source_admission.json",
+      "purpose": "Dedicated-evidence ADMIT/DEFER/REJECT decisions",
+      "sha256": "c8fb3430e9c7ded0882ebfad425101dcc2439a5e7cfdbc4b33e9ff07bf2f6340",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/test_astra03d2.py",
+      "purpose": "Deterministic ASTRA-03D2 artifact tests",
+      "sha256": "758934fd2b43f034d70b8f120031118050e66d08644087307d90249b357c634e",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/whatsapp_retrieval_validation.json",
+      "purpose": "Unchanged Strategy-F WhatsApp retrieval evidence",
+      "sha256": "c39a471a3281b6bd1cda9017fadb69bfcfe454f6535dbcf1b0308d5488aeadd4",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/whatsapp_gap_ingestion/artifact_manifest.json",
+      "purpose": "Inventory and hashes for ASTRA-03D2 artifacts",
+      "sha256": null,
+      "created_or_modified": "CREATED",
+      "hash_note": "Self-hash omitted because embedding it would change the file"
+    }
+  ]
+}

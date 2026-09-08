@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-09-07T01:00:32.403482+00:00",
+  "WHATSAPP_SALES": {
+    "before": "NONE",
+    "after": "MODERATE",
+    "supporting_sources": [
+      "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "SRC_WA_SALES_OS_LEGACY_CURATED"
+    ],
+    "evidence_quality": "Dedicated curated process plus dedicated operational workshop; complete provenance chain with explicit authority/currentness warnings",
+    "covered_topics": [
+      "first response",
+      "lead qualification",
+      "discovery/diagnosis",
+      "appointment setting",
+      "objection handling",
+      "closing/next step",
+      "follow-up",
+      "lead recovery",
+      "nurture/automation",
+      "CRM/pipeline",
+      "metrics"
+    ],
+    "missing_topics": [
+      "provider-independent WhatsApp API operations and current policy",
+      "multi-channel CRM integration depth",
+      "regulated-industry qualification",
+      "long-cycle nurture beyond the compact base workflow"
+    ],
+    "remaining_gap": "A fully attributed, current, provider-independent source would be required for STRONG coverage."
+  }
+}

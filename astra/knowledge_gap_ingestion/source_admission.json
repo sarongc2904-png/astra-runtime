@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-09-07T00:37:40.058690+00:00",
+  "counts": {
+    "ADMIT": 1,
+    "DEFER": 3,
+    "REJECT": 3
+  },
+  "decisions": [
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "decision": "ADMIT",
+      "rationale": "Dedicated strategic course. It materially covers audiences, creative, campaign structure, retargeting, scaling and metrics. It is not treated as current Meta product documentation; CAPI and Advantage+ are absent.",
+      "criteria": {
+        "direct_relevance": "HIGH",
+        "depth_material": "HIGH",
+        "provenance_identifiable": "Six local MP4 units plus gate-local transcript and fingerprint per unit",
+        "parseability": "HIGH_AFTER_TRANSCRIPTION",
+        "redundancy": "LOW",
+        "conflict_risk": "MODERATE"
+      }
+    },
+    {
+      "source_id": "SRC_META_500_COMMANDS_GEELY",
+      "decision": "DEFER",
+      "rationale": "Useful as a future creative-prompt asset, but it is not authoritative platform methodology and does not close measurement or campaign-operation gaps.",
+      "criteria": {
+        "direct_relevance": "MODERATE",
+        "depth_material": "LOW",
+        "provenance_identifiable": "Local file with internal authorship framing",
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "conflict_risk": "HIGH"
+      }
+    },
+    {
+      "source_id": "SRC_META_THINKIFIC_LANDING",
+      "decision": "REJECT",
+      "rationale": "Marketing/navigation markup is not substantive instructional evidence.",
+      "criteria": {
+        "direct_relevance": "LOW",
+        "depth_material": "LOW",
+        "provenance_identifiable": "Local project file",
+        "parseability": "LOW_FOR_DOCTRINE",
+        "redundancy": "HIGH",
+        "conflict_risk": "MODERATE"
+      }
+    },
+    {
+      "source_id": "SRC_META_SYSTEM_PROMPT",
+      "decision": "REJECT",
+      "rationale": "Instructions cannot substitute for evidence-backed Meta Ads doctrine.",
+      "criteria": {
+        "direct_relevance": "LOW",
+        "depth_material": "LOW",
+        "provenance_identifiable": "Local project file",
+        "parseability": "HIGH",
+        "redundancy": "MODERATE",
+        "conflict_risk": "HIGH"
+      }
+    },
+    {
+      "source_id": "SRC_WA_SYSTEM_PROMPT",
+      "decision": "REJECT",
+      "rationale": "WhatsApp-specific labels are present, but the file is an instruction template without deep supporting doctrine.",
+      "criteria": {
+        "direct_relevance": "MODERATE",
+        "depth_material": "LOW",
+        "provenance_identifiable": "Local project file",
+        "parseability": "HIGH",
+        "redundancy": "MODERATE",
+        "conflict_risk": "HIGH"
+      }
+    },
+    {
+      "source_id": "SRC_WA_BIBLIA_VENDEDOR",
+      "decision": "DEFER",
+      "rationale": "General sales material is not a dedicated WhatsApp conversational-sales system and overlaps admitted Venta Elegante evidence.",
+      "criteria": {
+        "direct_relevance": "MODERATE",
+        "depth_material": "LOW",
+        "provenance_identifiable": "Local file, incomplete upstream provenance",
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "conflict_risk": "MODERATE"
+      }
+    },
+    {
+      "source_id": "SRC_WA_VENTA_ELEGANTE_PODCAST",
+      "decision": "DEFER",
+      "rationale": "Depth is general sales rather than WhatsApp-specific; it overlaps the already ingested canonical Venta Elegante course.",
+      "criteria": {
+        "direct_relevance": "MODERATE",
+        "depth_material": "LOW",
+        "provenance_identifiable": "Local transcript bundle",
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "conflict_risk": "LOW"
+      }
+    }
+  ],
+  "quality_rule": "Only a dedicated source with material domain depth is admitted; incidental mentions and operational prompts are not coverage evidence."
+}

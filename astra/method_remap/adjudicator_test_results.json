@@ -1,0 +1,749 @@
+{
+  "results": [
+    {
+      "task_id": "MR-ACQ",
+      "candidate_methods": [
+        "METHOD_FUNNEL",
+        "METHOD_OFFER_DESIGN",
+        "METHOD_ICP",
+        "METHOD_GROWTH_MARKETING"
+      ],
+      "primary_method": "METHOD_FUNNEL",
+      "secondary_methods": [
+        "METHOD_GROWTH_MARKETING",
+        "METHOD_ICP"
+      ],
+      "rejected_methods": [
+        {
+          "method_id": "METHOD_OFFER_DESIGN",
+          "reason": "lower composite score (0.614)"
+        }
+      ],
+      "hybrid_strategy": null,
+      "selection_confidence": 0.579,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_FUNNEL total=0.75, runner_up=METHOD_GROWTH_MARKETING total=0.614, margin=0.1360",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_FUNNEL infeasible, use METHOD_GROWTH_MARKETING",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_FUNNEL": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_GROWTH_MARKETING": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        },
+        "METHOD_ICP": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        },
+        "METHOD_OFFER_DESIGN": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        }
+      }
+    },
+    {
+      "task_id": "MR-OFFER",
+      "candidate_methods": [
+        "METHOD_OFFER_DESIGN",
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_FUNNEL"
+      ],
+      "primary_method": "METHOD_OFFER_DESIGN",
+      "secondary_methods": [
+        "METHOD_FUNNEL",
+        "METHOD_SINGLE_MINDED_PROPOSITION"
+      ],
+      "rejected_methods": [],
+      "hybrid_strategy": null,
+      "selection_confidence": 0.579,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_OFFER_DESIGN total=0.75, runner_up=METHOD_FUNNEL total=0.614, margin=0.1360",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_OFFER_DESIGN infeasible, use METHOD_FUNNEL",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_OFFER_DESIGN": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_FUNNEL": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        },
+        "METHOD_SINGLE_MINDED_PROPOSITION": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        }
+      }
+    },
+    {
+      "task_id": "MR-FUNNEL",
+      "candidate_methods": [
+        "METHOD_FUNNEL",
+        "METHOD_OFFER_DESIGN"
+      ],
+      "primary_method": "METHOD_FUNNEL",
+      "secondary_methods": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "rejected_methods": [],
+      "hybrid_strategy": null,
+      "selection_confidence": 0.579,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_FUNNEL total=0.75, runner_up=METHOD_OFFER_DESIGN total=0.614, margin=0.1360",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_FUNNEL infeasible, use METHOD_OFFER_DESIGN",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_FUNNEL": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_OFFER_DESIGN": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        }
+      }
+    },
+    {
+      "task_id": "MR-SALES",
+      "candidate_methods": [
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_FUNNEL"
+      ],
+      "primary_method": "METHOD_SALES_ACCELERATION",
+      "secondary_methods": [
+        "METHOD_FUNNEL"
+      ],
+      "rejected_methods": [],
+      "hybrid_strategy": null,
+      "selection_confidence": 0.579,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_SALES_ACCELERATION total=0.75, runner_up=METHOD_FUNNEL total=0.614, margin=0.1360",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_SALES_ACCELERATION infeasible, use METHOD_FUNNEL",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_SALES_ACCELERATION": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_FUNNEL": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        }
+      }
+    },
+    {
+      "task_id": "MR-CREATIVE",
+      "candidate_methods": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AD_EXECUTION_CRAFT"
+      ],
+      "primary_method": "METHOD_AD_EXECUTION_CRAFT",
+      "secondary_methods": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_VISUAL_IDEAS"
+      ],
+      "rejected_methods": [],
+      "hybrid_strategy": "combine METHOD_AD_EXECUTION_CRAFT (primary framing) with METHOD_CREATIVE_STRATEGY where funnel-stage differs; decision boundary must be stated per sub-task",
+      "selection_confidence": 0.375,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_AD_EXECUTION_CRAFT total=0.75, runner_up=METHOD_CREATIVE_STRATEGY total=0.75, margin=0.0000",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_AD_EXECUTION_CRAFT infeasible, use METHOD_CREATIVE_STRATEGY",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_AD_EXECUTION_CRAFT": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_CREATIVE_STRATEGY": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_VISUAL_IDEAS": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        }
+      }
+    },
+    {
+      "task_id": "MR-COPY",
+      "candidate_methods": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_COPYWRITING_TONE",
+        "METHOD_TAGLINE_CRAFT"
+      ],
+      "primary_method": "METHOD_COPYWRITING_TONE",
+      "secondary_methods": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT"
+      ],
+      "rejected_methods": [],
+      "hybrid_strategy": "combine METHOD_COPYWRITING_TONE (primary framing) with METHOD_SINGLE_MINDED_PROPOSITION where funnel-stage differs; decision boundary must be stated per sub-task",
+      "selection_confidence": 0.375,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_COPYWRITING_TONE total=0.75, runner_up=METHOD_SINGLE_MINDED_PROPOSITION total=0.75, margin=0.0000",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_COPYWRITING_TONE infeasible, use METHOD_SINGLE_MINDED_PROPOSITION",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_COPYWRITING_TONE": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_SINGLE_MINDED_PROPOSITION": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_TAGLINE_CRAFT": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        }
+      }
+    },
+    {
+      "task_id": "MR-INFO",
+      "candidate_methods": [
+        "METHOD_INFOPRODUCT",
+        "METHOD_FUNNEL",
+        "METHOD_OFFER_DESIGN"
+      ],
+      "primary_method": "METHOD_INFOPRODUCT",
+      "secondary_methods": [
+        "METHOD_FUNNEL",
+        "METHOD_OFFER_DESIGN"
+      ],
+      "rejected_methods": [],
+      "hybrid_strategy": null,
+      "selection_confidence": 0.579,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_INFOPRODUCT total=0.75, runner_up=METHOD_FUNNEL total=0.614, margin=0.1360",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_INFOPRODUCT infeasible, use METHOD_FUNNEL",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_INFOPRODUCT": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_FUNNEL": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        },
+        "METHOD_OFFER_DESIGN": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        }
+      }
+    },
+    {
+      "task_id": "MR-CRO",
+      "candidate_methods": [
+        "METHOD_CRO",
+        "METHOD_SALES_ACCELERATION"
+      ],
+      "primary_method": "METHOD_CRO",
+      "secondary_methods": [
+        "METHOD_SALES_ACCELERATION"
+      ],
+      "rejected_methods": [],
+      "hybrid_strategy": null,
+      "selection_confidence": 0.579,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_CRO total=0.75, runner_up=METHOD_SALES_ACCELERATION total=0.614, margin=0.1360",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_CRO infeasible, use METHOD_SALES_ACCELERATION",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_CRO": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_SALES_ACCELERATION": {
+          "per_dimension": {
+            "problem_fit": 0.4,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.5,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.614
+        }
+      }
+    },
+    {
+      "task_id": "MR-POSITION",
+      "candidate_methods": [
+        "METHOD_GROWTH_MARKETING",
+        "METHOD_MIDAS"
+      ],
+      "primary_method": "METHOD_GROWTH_MARKETING",
+      "secondary_methods": [
+        "METHOD_MIDAS"
+      ],
+      "rejected_methods": [],
+      "hybrid_strategy": "combine METHOD_GROWTH_MARKETING (primary framing) with METHOD_MIDAS where funnel-stage differs; decision boundary must be stated per sub-task",
+      "selection_confidence": 0.375,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_GROWTH_MARKETING total=0.75, runner_up=METHOD_MIDAS total=0.75, margin=0.0000",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_GROWTH_MARKETING infeasible, use METHOD_MIDAS",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_GROWTH_MARKETING": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_MIDAS": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        }
+      }
+    },
+    {
+      "task_id": "MR-PRICING",
+      "candidate_methods": [
+        "METHOD_MIDAS",
+        "METHOD_GROWTH_MARKETING"
+      ],
+      "primary_method": "METHOD_GROWTH_MARKETING",
+      "secondary_methods": [
+        "METHOD_MIDAS"
+      ],
+      "rejected_methods": [],
+      "hybrid_strategy": "combine METHOD_GROWTH_MARKETING (primary framing) with METHOD_MIDAS where funnel-stage differs; decision boundary must be stated per sub-task",
+      "selection_confidence": 0.375,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_GROWTH_MARKETING total=0.75, runner_up=METHOD_MIDAS total=0.75, margin=0.0000",
+        "evidence gate passed"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [],
+      "fallback_strategy": "if METHOD_GROWTH_MARKETING infeasible, use METHOD_MIDAS",
+      "result_status": "RESOLVED",
+      "scores": {
+        "METHOD_GROWTH_MARKETING": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        },
+        "METHOD_MIDAS": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 1,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.75
+        }
+      }
+    },
+    {
+      "task_id": "MR-META",
+      "candidate_methods": [
+        "METHOD_META_ADS"
+      ],
+      "primary_method": null,
+      "secondary_methods": [],
+      "rejected_methods": [],
+      "hybrid_strategy": null,
+      "selection_confidence": 0.244,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_META_ADS total=0.61",
+        "evidence gate: INSUFFICIENT — primary withheld"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [
+        "Agent V1 evidence INSUFFICIENT for this unit — retrieve stronger evidence or supply user facts before committing a primary method"
+      ],
+      "fallback_strategy": "escalate to RESEARCH_ENGINE or request user facts; do not guess",
+      "result_status": "INSUFFICIENT_EVIDENCE",
+      "scores": {
+        "METHOD_META_ADS": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 0,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.61
+        }
+      }
+    },
+    {
+      "task_id": "MR-WA",
+      "candidate_methods": [
+        "METHOD_WHATSAPP_SALES"
+      ],
+      "primary_method": null,
+      "secondary_methods": [],
+      "rejected_methods": [],
+      "hybrid_strategy": null,
+      "selection_confidence": 0.244,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_WHATSAPP_SALES total=0.61",
+        "evidence gate: INSUFFICIENT — primary withheld"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [
+        "Agent V1 evidence INSUFFICIENT for this unit — retrieve stronger evidence or supply user facts before committing a primary method"
+      ],
+      "fallback_strategy": "escalate to RESEARCH_ENGINE or request user facts; do not guess",
+      "result_status": "INSUFFICIENT_EVIDENCE",
+      "scores": {
+        "METHOD_WHATSAPP_SALES": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 0,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.61
+        }
+      }
+    },
+    {
+      "task_id": "MR-COURSE",
+      "candidate_methods": [
+        "METHOD_COURSE_DESIGN"
+      ],
+      "primary_method": null,
+      "secondary_methods": [],
+      "rejected_methods": [],
+      "hybrid_strategy": null,
+      "selection_confidence": 0.244,
+      "selection_reasons": [
+        "composite score from 9 dimensions (evidence_strength is only one, weight 0.14)",
+        "top=METHOD_COURSE_DESIGN total=0.61",
+        "evidence gate: INSUFFICIENT — primary withheld"
+      ],
+      "method_conflicts": [],
+      "missing_evidence": [
+        "Agent V1 evidence INSUFFICIENT for this unit — retrieve stronger evidence or supply user facts before committing a primary method"
+      ],
+      "fallback_strategy": "escalate to RESEARCH_ENGINE or request user facts; do not guess",
+      "result_status": "INSUFFICIENT_EVIDENCE",
+      "scores": {
+        "METHOD_COURSE_DESIGN": {
+          "per_dimension": {
+            "problem_fit": 1,
+            "business_stage_fit": 0.5,
+            "funnel_stage_fit": 0.5,
+            "evidence_strength": 0,
+            "expected_impact": 0.7,
+            "implementation_complexity": 0.6,
+            "user_constraints": 0.7,
+            "compatibility": 0.7,
+            "contradiction_risk": 0.8
+          },
+          "total": 0.61
+        }
+      }
+    }
+  ],
+  "specialists_executed": false
+}

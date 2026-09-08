@@ -1,0 +1,215 @@
+﻿# Secrets / environment
+.env
+.env.*
+!.env.example
+openai_key_local.txt
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local runtime / caches
+.cache/
+tmp/
+temp/
+*.log
+
+# Local secret/token test scripts - exclude until reviewed
+buscar_video_token.js
+probar_token_lw.js
+probar_user_token.js
+probar_video_token.js
+
+# ---- Sensitive / historical material: NEVER COMMIT ----
+config.json
+openai_key_local.txt
+
+# Historical caches / generated outputs
+rag_answer_generation_model_reselection/gen_cache/
+transcripciones/
+
+# Local research / downloaded session material
+motionarray_facetime.html
+
+# Root credential / ingestion / inspection helpers
+acceso_edteam.js
+actualizar_dominio_biblia.js
+analizar_edteam.js
+analizar_reproductor_ed.js
+analizar_subtopics.js
+comparar_metadatos.js
+comparar_tsv.js
+confirmar_biblia_kb.js
+corregir_subtopic_biblia.js
+corregir_ultimo_biblia.js
+explorar_kb_chunks.js
+ingerir_vault_obsidian.js
+ingestar_biblia_kb_chunks.js
+listar_source_files.js
+listar_tablas.js
+listar_tablas2.js
+llamar_rpc_match.js
+mapear_edteam.js
+probar_edteam.js
+probar_edteam_api.js
+probar_filtro_dominio.js
+probar_openai.js
+probar_search_kb.js
+probar_search_kb_text.js
+probar_search_kb2.js
+probar_udemy.js
+reintentar_estudio_mercado.js
+renombrar_biblia.js
+temario_dekker_udemy.js
+valores_reales.js
+ver_funcion_sql.js
+ver_trafficker_lab.js
+verificar_acceso_ed.js
+verificar_compra_iv.js
+verificar_contenttype.js
+verificar_dominios.js
+verificar_enums.js
+verificar_final.js
+verificar_formato_embedding.js
+verificar_valores_precisos.js
+
+# Already identified token helpers
+buscar_video_token.js
+probar_token_lw.js
+probar_user_token.js
+probar_video_token.js
+
+# Local pilots / disposable outputs
+vision_pilot_20260903/
+xobject_pilot/
+.pytest_cache/
+
+
+# ===== Large local media / downloads =====
+velocity_media/
+tmp_audio/
+descargas_thinkific/
+imagenes/
+mascota/
+
+# ===== Render / extraction freezes and pilots =====
+local_render_freeze_20260904/
+render_v2_authorized_remaining_20260903/
+render_v2_authorized_pilot_20260903/
+render_freeze_20260903/
+mass_vision_validation_20260903/
+vision_pilot_20260903/
+xobject_pilot/
+content_extraction_pilot/
+content_extraction_scale/
+content_extraction_review_policy/
+global_extraction_qa/
+
+# ===== Historical research / transient artifacts =====
+transcripciones/
+transcripciones_velocity/
+transcripciones_protege/
+transcripciones_protege_descargas/
+protege_chunks/
+rag_answer_generation_model_reselection/
+rag_retrieval_refinement/
+rag_retrieval_qa/
+rag_retrieval_qa_v2/
+rag_answer_grounded_qa/
+rag_answer_grounded_qa_resume/
+rag_answer_grounded_qa_resume_v2/
+rag_answer_grounded_qa_resume_v3/
+rag_answer_grounded_qa_v2_adjudication/
+rag_answer_grounded_qa_v2_gate_acceptance/
+rag_answer_grounded_qa_v2_aqa005_adjudication/
+rag_answer_grounded_qa_v2_aqa005_remediation/
+rag_answer_policy_refinement/
+rag_answer_policy_refinement_credit_resume/
+rag_answer_policy_refinement_paid_resume/
+rag_answer_policy_model_interaction_refinement/
+rag_answer_generation_config_refinement/
+e2e_askllm_reasoning_fix/
+e2e_benchmark_evidence_rebuild/
+e2e_classifier_determinism_remediation/
+e2e_classifier_operational_determinism_adjudication/
+e2e_classifier_operational_determinism_implementation/
+e2e_classifier_reevaluation/
+e2e_defect_001_remediation/
+e2e_defect_002_remediation/
+e2e_defect_003_remediation/
+e2e_retrieval_benchmark_adjudication/
+e2e_retrieval_runtime_remediation/
+e2e_runtime_alignment/
+end_to_end_agent_qa/
+end_to_end_agent_qa_final_retry/
+end_to_end_agent_qa_post_defect_002_retry/
+end_to_end_agent_qa_rerun/
+end_to_end_agent_qa_retry/
+evaluator_reselection/
+embedding_execution/
+embedding_model_selection/
+embedding_schema_execution/
+ingestion_readiness/
+kb_chunks_v2_ingestion/
+post_embedding_validation/
+supabase_schema_execution/
+supabase_new_table_execution/
+
+# ===== Local review/support artifacts =====
+biblioteca_review.html
+biblioteca_review_observations.json
+XOBJECT_EXTRACTION_PILOT.json
+CLAUDE_TASK.md.backup-before-cleanup-20260903
+
+# ===== Caches =====
+__pycache__/
+.pytest_cache/
+.cache/
+
+# Temporary exclusions pending secret sanitization
+astra/runtime_host_deployment/deployment_contract.json
+astra/tests/astra07.test.js
+
+
+# Supabase local CLI state
+supabase/.temp/
+
+# Deployment artifact pending sanitization
+astra/deployment_gpt_action/deployment_contract.json
+
+# Agent development/runtime history
+agent_loop/logs/
+agent_loop/runtime/
+agent_loop/*.backup*
+agent_loop/*backup-before*
+
+
+# Agent historical handoffs / review files
+agent_loop/HANDOFF_*.md
+!agent_loop/HANDOFF_LATEST.md
+!agent_loop/HANDOFF_ASTRA_10R_RUNTIME_HOST_DEPLOYMENT.md
+agent_loop/FREEZE_CONTEXT_FOR_REVIEW.txt
+agent_loop/RENDER_V2_SPEC.md
+agent_loop/CLAUDE_TASK.md
+agent_loop/autonomous.py
+agent_loop/*.json
+

@@ -1,0 +1,30 @@
+{
+  "status": "FINAL",
+  "captured_at": "2026-09-07T02:04:57.135161+00:00",
+  "knowledge_js_sha256": "0596f096fe8c628e2e69142e558ffbc69fd4b607967eb7099d86f01627a62c3d",
+  "classifier_decision_cache_sha256": "273b40eefac54b17d33357460ff459f96ec5cb896c1517c9ddbf720b3370fbfa",
+  "retrieval_strategy_f_py_sha256": "cdbbc9b2b779b751bbd9c8031f7057c12f29fe2702bbe5f0d4b0b3a42012e1de",
+  "answer_policy_sha256": "f76d620795170b61af202907eba70c9f7d470b795467db985682359e9aeb8aab",
+  "benchmark_sha256": "ddb566fd3ea1e9f172cc05001bf65e5cbe895a3f0c809858fa990eb25862ad80",
+  "rebuilt_evidence_sha256": "02cbd455470b2ea83cc705468fd6c65ac7352e568fce255e39e57e66c2599c3e",
+  "agent_v1_protected": true,
+  "canonical_chunks": 1454,
+  "canonical_embeddings": 1454,
+  "sources": 11,
+  "legacy_kb_chunks": 7584,
+  "ann": 0,
+  "classifier_cache_records": 20,
+  "mutations": {
+    "corpus": 0,
+    "embeddings": 0,
+    "strategy_f": 0,
+    "classifier": 0,
+    "classifier_cache": 0,
+    "benchmark": 0,
+    "answer_policy": 0,
+    "evaluator": 0,
+    "supabase": 0,
+    "ann": 0
+  },
+  "astra04_changes_scope": "astra/src/{specialists,workflows,synthesis}/*, astra/vertical_slice_360/*, astra/tests/astra04.test.js, docs/handoffs only"
+}

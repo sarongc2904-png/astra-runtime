@@ -1,0 +1,68 @@
+{
+  "canonical_nodes": [
+    {
+      "node": "market context",
+      "status": "PARTIALLY_SUPPORTED",
+      "methods": [
+        "METHOD_GROWTH_MARKETING",
+        "METHOD_MIDAS"
+      ]
+    },
+    {
+      "node": "ICP",
+      "status": "SUPPORTED",
+      "methods": [
+        "METHOD_ICP"
+      ]
+    },
+    {
+      "node": "offer",
+      "status": "SUPPORTED",
+      "methods": [
+        "METHOD_OFFER_DESIGN"
+      ]
+    },
+    {
+      "node": "funnel",
+      "status": "SUPPORTED",
+      "methods": [
+        "METHOD_FUNNEL"
+      ]
+    },
+    {
+      "node": "creative strategy",
+      "status": "SUPPORTED",
+      "methods": [
+        "METHOD_CREATIVE_STRATEGY"
+      ]
+    },
+    {
+      "node": "ads",
+      "status": "UNSUPPORTED",
+      "methods": []
+    },
+    {
+      "node": "WhatsApp conversion",
+      "status": "UNSUPPORTED",
+      "methods": []
+    },
+    {
+      "node": "measurement",
+      "status": "SUPPORTED",
+      "methods": [
+        "METHOD_CRO"
+      ]
+    }
+  ],
+  "contract_allows_stubbed_required_nodes": false,
+  "contract_evidence": "astra/src/router/task_decomposer.js MULTI_STEP_TEMPLATE retains ads and whatsapp_conversion as mandatory nodes feeding measurement; no defer/stub allowance found.",
+  "can_proceed_without_fabricating_expertise": false,
+  "UNSUPPORTED_REQUIRED_DOMAINS": 2,
+  "unsupported_required_domains": [
+    "Meta Ads",
+    "WhatsApp conversion"
+  ],
+  "READY_FOR_ASTRA_04_VERTICAL_SLICE_360": false,
+  "exact_next_gate": "ASTRA_03D_TARGETED_GAP_INGESTION_META_ADS_WHATSAPP",
+  "course_creation_note": "Course creation remains unsupported but is not a node in the canonical first 360 vertical slice."
+}

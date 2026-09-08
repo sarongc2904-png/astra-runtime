@@ -1,0 +1,237 @@
+{
+  "generated_at": "2026-09-07T03:59:18.477703+00:00",
+  "domains": [
+    {
+      "domain_id": "01",
+      "domain_name": "visual composition",
+      "availability": "PARTIAL",
+      "coverage_class": "MODERATE",
+      "reason": "Actionable advertising-layout composition exists, but not a broad composition curriculum."
+    },
+    {
+      "domain_id": "02",
+      "domain_name": "visual hierarchy",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Direct hierarchy purpose, element sizing, reading order, and layout examples."
+    },
+    {
+      "domain_id": "03",
+      "domain_name": "layout",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Multiple directly actionable layout rules and advertising examples."
+    },
+    {
+      "domain_id": "04",
+      "domain_name": "grids",
+      "availability": "PARTIAL",
+      "coverage_class": "WEAK",
+      "reason": "The source explicitly says effective grid use cannot be learned from its brief treatment."
+    },
+    {
+      "domain_id": "05",
+      "domain_name": "typography",
+      "availability": "PARTIAL",
+      "coverage_class": "MODERATE",
+      "reason": "Kerning, letterspacing, lettering tone, consistency, and legibility are useful but incomplete."
+    },
+    {
+      "domain_id": "06",
+      "domain_name": "color",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Direct palette selection, tonal contrast, brand fit, and production guidance."
+    },
+    {
+      "domain_id": "07",
+      "domain_name": "contrast",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Direct tonal contrast and emphasis/readability consequences."
+    },
+    {
+      "domain_id": "08",
+      "domain_name": "balance",
+      "availability": "PARTIAL",
+      "coverage_class": "WEAK",
+      "reason": "Retrieved balance language is mostly campaign consistency, not visual-balance method."
+    },
+    {
+      "domain_id": "09",
+      "domain_name": "rhythm",
+      "availability": "MISSING",
+      "coverage_class": "NONE",
+      "reason": "No meaningful visual-rhythm methodology was retrieved; movement term matches were unrelated."
+    },
+    {
+      "domain_id": "10",
+      "domain_name": "negative space",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Direct good/bad white-space guidance and layout implications."
+    },
+    {
+      "domain_id": "11",
+      "domain_name": "branding",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Direct brand consistency, attributes, look/feel/tone, and integrated communication."
+    },
+    {
+      "domain_id": "12",
+      "domain_name": "visual identity",
+      "availability": "PARTIAL",
+      "coverage_class": "MODERATE",
+      "reason": "Useful logo/identity consistency and campaign use; not a complete identity-system method."
+    },
+    {
+      "domain_id": "13",
+      "domain_name": "art direction",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Direct art-direction decisions, visual references, hierarchy, and execution craft."
+    },
+    {
+      "domain_id": "14",
+      "domain_name": "advertising concept",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Deep concept/idea development sequence with numerous advertising examples."
+    },
+    {
+      "domain_id": "15",
+      "domain_name": "single-minded proposition / SMP",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Explicit definition, aliases, one-message discipline, and exceptions."
+    },
+    {
+      "domain_id": "16",
+      "domain_name": "headline-image relationship",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Dedicated visual-verbal relationship guidance and failure modes."
+    },
+    {
+      "domain_id": "17",
+      "domain_name": "visual metaphor",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Direct visual-metaphor and analogy examples with communication rationale."
+    },
+    {
+      "domain_id": "18",
+      "domain_name": "copywriting for visual ads",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Direct headline/visual interplay, headline forms, and body-copy flow."
+    },
+    {
+      "domain_id": "19",
+      "domain_name": "photography / image direction",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Direct photography-versus-illustration and tonal/execution decisions."
+    },
+    {
+      "domain_id": "20",
+      "domain_name": "editorial design",
+      "availability": "PARTIAL",
+      "coverage_class": "WEAK",
+      "reason": "Print-layout fragments transfer partially, but editorial design is not taught as a domain."
+    },
+    {
+      "domain_id": "21",
+      "domain_name": "print advertising",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Dedicated print-ad formats, concept, layout, and final execution."
+    },
+    {
+      "domain_id": "22",
+      "domain_name": "digital advertising",
+      "availability": "PARTIAL",
+      "coverage_class": "MODERATE",
+      "reason": "Useful digital/interactive principles, but limited current-format and performance depth."
+    },
+    {
+      "domain_id": "23",
+      "domain_name": "performance creative",
+      "availability": "PARTIAL",
+      "coverage_class": "WEAK",
+      "reason": "General creative effectiveness exists; no performance-creative testing/iteration method."
+    },
+    {
+      "domain_id": "24",
+      "domain_name": "social / Meta ad creative",
+      "availability": "PARTIAL",
+      "coverage_class": "MODERATE",
+      "reason": "Social principles and one Meta source are useful, but craft/currentness/testing depth is limited."
+    },
+    {
+      "domain_id": "25",
+      "domain_name": "mobile-first creative",
+      "availability": "MISSING",
+      "coverage_class": "NONE",
+      "reason": "Mobile is mentioned as a medium; no mobile-first creative methodology retrieved."
+    },
+    {
+      "domain_id": "26",
+      "domain_name": "scroll-stopping principles",
+      "availability": "MISSING",
+      "coverage_class": "NONE",
+      "reason": "Scroll/attention term matches concern analytics or unrelated wording, not scroll-stopping craft."
+    },
+    {
+      "domain_id": "27",
+      "domain_name": "CTA visual hierarchy",
+      "availability": "PARTIAL",
+      "coverage_class": "MODERATE",
+      "reason": "Direct CTA placement and hierarchy plus a second funnel source; limited ad-format breadth."
+    },
+    {
+      "domain_id": "28",
+      "domain_name": "information density",
+      "availability": "PARTIAL",
+      "coverage_class": "MODERATE",
+      "reason": "Actionable element-count, organization, hierarchy, and clarity principles."
+    },
+    {
+      "domain_id": "29",
+      "domain_name": "readability / legibility",
+      "availability": "PARTIAL",
+      "coverage_class": "MODERATE",
+      "reason": "Useful tonal contrast, type spacing, and contextual type choices; not a full accessibility method."
+    },
+    {
+      "domain_id": "30",
+      "domain_name": "creative evaluation / critique",
+      "availability": "AVAILABLE_NOW",
+      "coverage_class": "STRONG",
+      "reason": "Explicit effectiveness failure modes and response criteria support bounded critique."
+    }
+  ],
+  "future_specialist_readiness": {
+    "CREATIVE_DIRECTOR": {
+      "readiness": "PARTIALLY_READY",
+      "basis": "Strong advertising concept/SMP/art-direction/copy/print core; foundational and current digital gaps remain."
+    },
+    "ART_DIRECTOR": {
+      "readiness": "PARTIALLY_READY",
+      "basis": "Strong hierarchy/layout/color/art direction; grids, balance, rhythm, and cross-source depth are insufficient."
+    },
+    "GRAPHIC_DESIGN_SPECIALIST": {
+      "readiness": "NOT_READY",
+      "basis": "No full graphic-design foundation across grids, balance, rhythm, typography, identity systems, and editorial design."
+    },
+    "AD_CREATIVE_SPECIALIST": {
+      "readiness": "PARTIALLY_READY",
+      "basis": "Strong concept/copy/print; performance, mobile-first, and scroll-stopping methods are absent or weak."
+    },
+    "CREATIVE_CRITIC_QA": {
+      "readiness": "PARTIALLY_READY",
+      "basis": "Actionable advertising critique criteria exist but are concentrated in one source and lack current performance-validation depth."
+    }
+  }
+}

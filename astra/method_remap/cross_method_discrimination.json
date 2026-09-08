@@ -1,0 +1,132 @@
+{
+  "checks": [
+    {
+      "method_a": "Velocity/Funnel",
+      "method_b": "Offer Design",
+      "method_a_id": "METHOD_FUNNEL",
+      "method_b_id": "METHOD_OFFER_DESIGN",
+      "why_a_fits_and_b_does_not_dominate": "Funnel fits architecture, stages and economics; Offer Design fits proposition construction. Neither title implies dominance.",
+      "evidence_refs": [
+        "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+        "470102b912bf5286fb76a9e9a305e9456f2c24587ccd9140bdf7198daff06f19",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+        "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+        "b696eb7e844f49dacd9fd752acfee63c44e99646d8623eb66a07f154e9fe96c2",
+        "d53c564c7b32600ca577ed3ffcc74f89877dcd9ee9349d2c2ec42ab2bca54de5",
+        "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54"
+      ]
+    },
+    {
+      "method_a": "Sales Acceleration",
+      "method_b": "Funnel Design",
+      "method_a_id": "METHOD_SALES_ACCELERATION",
+      "method_b_id": "METHOD_FUNNEL",
+      "why_a_fits_and_b_does_not_dominate": "Sales fits conversation/script conversion; Funnel fits system and stage sequencing.",
+      "evidence_refs": [
+        "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+        "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+        "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+        "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+        "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+        "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+        "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963"
+      ]
+    },
+    {
+      "method_a": "Growth Marketing",
+      "method_b": "Creative Strategy",
+      "method_a_id": "METHOD_GROWTH_MARKETING",
+      "method_b_id": "METHOD_CREATIVE_STRATEGY",
+      "why_a_fits_and_b_does_not_dominate": "Growth fits market, loops and prioritization; Creative fits strategy-to-campaign development.",
+      "evidence_refs": [
+        "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+        "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+        "77df5102bd9f4e0d40e8b413105dec32c8a3b475dd3407d83969a1e0e18c0008",
+        "8a5a79dc4ce91952a9106e2324c65bd6de9140defddb62f0f1f2110a71bd7397",
+        "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+        "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+        "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+        "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+        "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32"
+      ]
+    },
+    {
+      "method_a": "CRO",
+      "method_b": "Sales Conversion",
+      "method_a_id": "METHOD_CRO",
+      "method_b_id": "METHOD_SALES_ACCELERATION",
+      "why_a_fits_and_b_does_not_dominate": "CRO fits research/tests/measurement; Sales fits human sales conversation and script.",
+      "evidence_refs": [
+        "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+        "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+        "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+        "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+        "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1",
+        "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+        "da231f65b0cabbcf73b00cdf747f3d81e123399ae05559c24f02659cffec6e93",
+        "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+        "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963",
+        "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc"
+      ]
+    },
+    {
+      "method_a": "Infoproduct",
+      "method_b": "Funnel",
+      "method_a_id": "METHOD_INFOPRODUCT",
+      "method_b_id": "METHOD_FUNNEL",
+      "why_a_fits_and_b_does_not_dominate": "Infoproduct fits audience-to-launch business sequence; Funnel fits acquisition/conversion architecture.",
+      "evidence_refs": [
+        "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+        "34421dcc63514aacb41e5ca4bd17aed9893467722d9c4b66d63685128a645784",
+        "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+        "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+        "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+        "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54"
+      ]
+    },
+    {
+      "method_a": "SMP",
+      "method_b": "General Copywriting",
+      "method_a_id": "METHOD_SINGLE_MINDED_PROPOSITION",
+      "method_b_id": "METHOD_COPYWRITING_TONE",
+      "why_a_fits_and_b_does_not_dominate": "SMP fits one clear proposition; general copy fits headlines, body copy and tone.",
+      "evidence_refs": [
+        "179fa95928d15799e974239c114030d84d83db7876aed0f7bcb1b1e16aa7664b",
+        "44a3a07fbcafdec4992a3215a6b52d567a250a0fb640d234bbd02b04158a7d66",
+        "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+        "86b865c6a26afab409c84fae5a2bdc7f7b17ce1d451dfe2fa23ed618180654df",
+        "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+        "cc9848040c2c4c56778a6b4db1d38c943a0cdffb79b7479a56976c9bb3a57366",
+        "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28"
+      ]
+    },
+    {
+      "method_a": "Target Audience",
+      "method_b": "Growth/Digital",
+      "method_a_id": "METHOD_ICP",
+      "method_b_id": "METHOD_GROWTH_MARKETING",
+      "why_a_fits_and_b_does_not_dominate": "ICP fits audience/customer definition; Growth fits market opportunity and growth prioritization.",
+      "evidence_refs": [
+        "3c0bd5599fba42c65e9afc90b3b2cc3379d51ee8e6b50a6f60a532cb244ae114",
+        "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+        "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+        "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+        "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+        "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+        "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+        "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+        "fb354abc51f8a9ae921e96bfd8914356e699c77317593d0614ddff5a5ad60a71"
+      ]
+    }
+  ],
+  "status": "PASS",
+  "note": "Registry evidence supports these distinctions. Current ASTRA-02 scorer uses coarse domain metadata and may tie-break within a domain; no scorer code was changed in this gate."
+}

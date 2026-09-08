@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "gate": "ASTRA_08B_CREATIVE_DIRECTOR",
+  "artifacts": [
+    {
+      "file": "creative_director_contract.json",
+      "sha256": "5b4a18d8c72a660518458aae8758a84aaff0f605a243c76314e561bf87119701"
+    },
+    {
+      "file": "creative_command_map.json",
+      "sha256": "edd76fb21985664fe5e7c3019cd9d8f7d8e2d2f961c45163c1a8d4bfced19e9a"
+    },
+    {
+      "file": "creative_method_routing_validation.json",
+      "sha256": "f8bec9b65442f867c3a89a132632a0ec518be8f9fbb0d0c8e42eca69b33e3310"
+    },
+    {
+      "file": "creative_evidence_validation.json",
+      "sha256": "081dbc7b4780ae5272d336979e6e6d3aeb4ffe3d3a3c9dbb29d9dad2b77c831a"
+    },
+    {
+      "file": "scenario_results.json",
+      "sha256": "c5a4bcaa72084e442f26779f0a0502b0034b11d948ec98ddb38c3fbd7c099e6a"
+    },
+    {
+      "file": "creative_style_validation.json",
+      "sha256": "f850626dc8ffd00659e52be314afc032e301926743fa7e91e0570b9fb673bb83"
+    },
+    {
+      "file": "base_vs_director_comparison.json",
+      "sha256": "098161ad1d6945dca4d18b1a3d1ec2792010aa07134e86fc35275ef2fa577aa0"
+    },
+    {
+      "file": "creative_qa_validation.json",
+      "sha256": "80dc8716cb794d037e6bf86dbb3794068d7e1f0fba98383557aa77376936b0c4"
+    },
+    {
+      "file": "prompt_builder_validation.json",
+      "sha256": "d13039d5b550612dd8011bc9af25a7ff3c6dc0409cbaac5cef2ce987ca6fd973"
+    },
+    {
+      "file": "limitations_validation.json",
+      "sha256": "53baa54920a0d628160f2d51652756be55e38ab42af1cd2746574abafeda7a1f"
+    },
+    {
+      "file": "protection_validation.json",
+      "sha256": "4863e6dcd7dbf19d0bd50be165186dd39a08fa83ee5b8d6cd5cf26b6d2a41952"
+    },
+    {
+      "file": "test_results.json",
+      "sha256": "b996ee9da892623b2a387238a95a7efea30e74d29e7b942369497d5ae5f39573"
+    }
+  ]
+}

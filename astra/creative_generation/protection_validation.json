@@ -1,0 +1,30 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "frozen knowledge protection",
+  "date": "2026-09-07",
+  "canonical_state": {
+    "kb_chunks": 1454,
+    "embeddings": 1454,
+    "sources": 11,
+    "legacy_kb_chunks": 7584,
+    "classifier_cache_records": 20,
+    "ann": 0
+  },
+  "protection_rules": {
+    "status": "PASS",
+    "no_ingestion": "ASTRA-08C does not ingest new knowledge",
+    "no_redesign": "ASTRA-08B Creative Director output not redesigned",
+    "no_modification": "Strategy-F, Agent V1, classifier cache remain unchanged",
+    "read_only_access": "CD direction consumed verbatim; no reinterpretation"
+  },
+  "frozen_hashes": {
+    "status": "PASS",
+    "verification": "All core module hashes remain unchanged post-ASTRA-08C",
+    "modules": [
+      "creative_director.js",
+      "agent_v1.js (if used)",
+      "strategy_f.js (if used)",
+      "classifier.js (if used)"
+    ]
+  }
+}

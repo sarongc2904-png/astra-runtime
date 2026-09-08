@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-09-07T03:36:48.0444339Z",
+  "shared_factory": "astra/src/runtime/llm_provider.js",
+  "shared_runner_contract": "runner(system,user,opts) -> {raw,usage}",
+  "openrouter": {
+    "valid": true,
+    "mock_health": "PASS",
+    "mock_structured_completion": "PASS",
+    "model_discovery": true,
+    "secret_redaction": true
+  },
+  "lmstudio": {
+    "valid": true,
+    "mock_models_endpoint": "PASS",
+    "mock_structured_completion": "PASS",
+    "model_availability_check": true,
+    "json_compatibility_fallback_bounded": true
+  },
+  "workflow_with_injected_provider": {
+    "status": "PASS",
+    "workflow_state": "COMPLETE",
+    "model_calls": 8,
+    "business_logic_duplicated": false
+  }
+}

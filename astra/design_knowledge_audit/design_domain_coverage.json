@@ -1,0 +1,1885 @@
+{
+  "generated_at": "2026-09-07T03:59:18.465185+00:00",
+  "classification_criteria": {
+    "STRONG": "At least 4 distinct directly relevant chunks across at least 2 query formulations, HIGH depth/actionability, and either multiple sources or deep independent passages/examples from one source.",
+    "MODERATE": "At least 2 directly useful chunks and actionable guidance, but incomplete depth, diversity, currentness, or domain breadth.",
+    "WEAK": "Only 1-2 sparse or partially transferable direct passages; insufficient alone for robust specialist behavior.",
+    "NONE": "No meaningful directly relevant evidence; lexical/semantic term collisions are rejected."
+  },
+  "domain_count": 30,
+  "counts": {
+    "MODERATE": 8,
+    "STRONG": 15,
+    "WEAK": 4,
+    "NONE": 3
+  },
+  "domains": [
+    {
+      "domain_id": "01",
+      "domain_name": "visual composition",
+      "queries": [
+        "visual composition advertising",
+        "composition in graphic design",
+        "visual balance layout"
+      ],
+      "retrieved_chunk_ids": [
+        "8af84d90bd99bb640b1696ff368638c961c5d4c41dd86f030cc62c8d586d093a",
+        "985d986e99326457968aa1e9e7c3bfb1ed7434c6f0fbf91fb58231cedfb8a6a8",
+        "f1de335baab77621e0d1b5260bb1f462fb1c3135c379b9973b21ada5ac7c2747",
+        "077f88ef06e7c76b09d168cee5e4b95312ec1e82056705c60475c6b300d6d42f",
+        "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "36729f6e1025c593244a725893242842fedc0c44bae6e61c4edc1b9b5538669b",
+        "7d08fea01699f86bd238ffd2b53be119b9f2a46ff3e79b97df9ece783b6a990f",
+        "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+        "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 4,
+      "representative_evidence": [
+        {
+          "chunk_id": "36729f6e1025c593244a725893242842fedc0c44bae6e61c4edc1b9b5538669b",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            577,
+            578
+          ],
+          "representative_excerpt": "There are an infinite number of compositional opportunities for each layout. This can be overwhelming, but doesn’t have to be. Layouts are simply about asking the right questions. 1. History Research the brand’s previous ads. Are there any layout decisions and brand attributes (visual and typographical choices) that should be kept, or is this a chance to des"
+        },
+        {
+          "chunk_id": "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            569,
+            570
+          ],
+          "representative_excerpt": "• Less elements = more freedom (need for grid is reduced) • More elements = less freedom (need for grid is increased) In other words, a clean and simple layout usually has fewer elements, whereas a complex composition or layered layout has a greater number (see “Look,” page 290). Information presented with clear, logically positioned typography, illustration"
+        },
+        {
+          "chunk_id": "8af84d90bd99bb640b1696ff368638c961c5d4c41dd86f030cc62c8d586d093a",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            579,
+            580
+          ],
+          "representative_excerpt": "and idea. When you look at something, ask yourself: “Can I use this for an ad?” 4. “Look” Will the overall layout have a minimal, “clean” look, or a layered, “collage” look? Or somewhere in between? Clean refers to fewer visual elements, solid colors, etc. Collage refers to a greater number of elements, usually more colorful and/or textural, combined, and la"
+        }
+      ],
+      "methodological_depth": "MEDIUM",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "MODERATE",
+      "confidence": 0.82,
+      "limitations": [
+        "Actionable advertising-layout composition exists, but not a broad composition curriculum.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "02",
+      "domain_name": "visual hierarchy",
+      "queries": [
+        "visual hierarchy advertising",
+        "hierarchy graphic design",
+        "focal point hierarchy"
+      ],
+      "retrieved_chunk_ids": [
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+        "b7bc0f7453ac4f92041cb038211b4efee23ce3554c98d250be755344d6db6082",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "24757494a69170c1cf6c644f9274c00502d2e931fb121860097c2975296d0f90",
+        "84a1a40b35f84a2d379b45793da4e7dbff9bf1902a044cf71f0b069160617867",
+        "36729f6e1025c593244a725893242842fedc0c44bae6e61c4edc1b9b5538669b",
+        "b3425e71b3cc82a4955361c7ca36e19fa5fbfb3849ed6fb09211a468d0901dfe",
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "c6a4e8dd5f030466dc1188ffcf1856e36092878e866451915b7012312bc13882",
+        "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9",
+        "2a6691387163acb88d8f336eebb2bd35cfdce1c47bbb9e88554c0c12f0bb1717",
+        "2274906a86e5e88ae36dd3769ff04c1b1374b9640ee1bfe8d42c154069c7c356"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 6,
+      "representative_evidence": [
+        {
+          "chunk_id": "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            154,
+            155
+          ],
+          "representative_excerpt": "The main reason for hierarchy is so that each element is not competing or fighting with one another for attention. By art directing the layout, you’re basically directing the consumer around the ad. Don’t forget, advertising is all about efficient communication. Some basic layout variations of hierarchy are illustrated on page 78. These thumbnails show diffe"
+        },
+        {
+          "chunk_id": "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            571,
+            572
+          ],
+          "representative_excerpt": "The sizing of the four elements tends to be the most consistent aspect. For example, a logo looks strange at three different sizes, and there’s no logic behind it. Whereas if the headlines within a campaign are set at different sizes, it’s probably because they vary in length. Changing the point sizes merely keeps the proportion with the surrounding white sp"
+        },
+        {
+          "chunk_id": "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            569,
+            570
+          ],
+          "representative_excerpt": "What most people consider to be the “classic” print advertising layout is otherwise known as the VW layout, created by Helmut Krone at DDB, New York around 1960, itself an evolution of a classic three-column Ogilvy layout. Originally intended for single-page press ad, it can be adapted to a spread. It’s a clean, simple, and logical layout, and a template for"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.93,
+      "limitations": [
+        "Direct hierarchy purpose, element sizing, reading order, and layout examples.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "03",
+      "domain_name": "layout",
+      "queries": [
+        "layout principles graphic design",
+        "advertising layout composition",
+        "organizing elements on a page"
+      ],
+      "retrieved_chunk_ids": [
+        "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+        "36729f6e1025c593244a725893242842fedc0c44bae6e61c4edc1b9b5538669b",
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "7d08fea01699f86bd238ffd2b53be119b9f2a46ff3e79b97df9ece783b6a990f",
+        "b4d6fa875a8b42b8766e485525bea2cdbdd4c57d8ca5cbfe7100a3c5f9ecb25a",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+        "8af84d90bd99bb640b1696ff368638c961c5d4c41dd86f030cc62c8d586d093a",
+        "a7a7f3aeeae187fbf12152a7edfda1cf6cfa8751d7f216a4e2e0b19b85c9667a",
+        "24757494a69170c1cf6c644f9274c00502d2e931fb121860097c2975296d0f90",
+        "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9",
+        "e0b9027e93ab142894087479bec7ad4f41efb74ac6de34f02fd485c209e36768",
+        "2274906a86e5e88ae36dd3769ff04c1b1374b9640ee1bfe8d42c154069c7c356"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 7,
+      "representative_evidence": [
+        {
+          "chunk_id": "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            569,
+            570
+          ],
+          "representative_excerpt": "• Less elements = more freedom (need for grid is reduced) • More elements = less freedom (need for grid is increased) In other words, a clean and simple layout usually has fewer elements, whereas a complex composition or layered layout has a greater number (see “Look,” page 290). Information presented with clear, logically positioned typography, illustration"
+        },
+        {
+          "chunk_id": "36729f6e1025c593244a725893242842fedc0c44bae6e61c4edc1b9b5538669b",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            577,
+            578
+          ],
+          "representative_excerpt": "There are an infinite number of compositional opportunities for each layout. This can be overwhelming, but doesn’t have to be. Layouts are simply about asking the right questions. 1. History Research the brand’s previous ads. Are there any layout decisions and brand attributes (visual and typographical choices) that should be kept, or is this a chance to des"
+        },
+        {
+          "chunk_id": "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            567,
+            568
+          ],
+          "representative_excerpt": "All good graphic design, in its most fundamental state, is based on a “grid.” Including this book. You cannot learn how to use a grid system effectively from reading a few paragraphs on the subject. It comes from studying foundation graphic design, and from years of professional experience in designing printed material for 2-D (and perhaps 3-D) applications."
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.94,
+      "limitations": [
+        "Multiple directly actionable layout rules and advertising examples.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "04",
+      "domain_name": "grids",
+      "queries": [
+        "grid systems graphic design",
+        "advertising layout grid",
+        "columns modular grid design"
+      ],
+      "retrieved_chunk_ids": [
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+        "f1de335baab77621e0d1b5260bb1f462fb1c3135c379b9973b21ada5ac7c2747",
+        "c6a4e8dd5f030466dc1188ffcf1856e36092878e866451915b7012312bc13882",
+        "fb487158ca5c64758366ba0aa72fc5ebc274c19df0c1d916d4cbf9d9ab850c9e",
+        "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "1eb5305d6b3c0d5116271a83ce21b8e40f32712782b1bb1d88a359d6519c1fc7"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 2,
+      "representative_evidence": [
+        {
+          "chunk_id": "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            567,
+            568
+          ],
+          "representative_excerpt": "All good graphic design, in its most fundamental state, is based on a “grid.” Including this book. You cannot learn how to use a grid system effectively from reading a few paragraphs on the subject. It comes from studying foundation graphic design, and from years of professional experience in designing printed material for 2-D (and perhaps 3-D) applications."
+        },
+        {
+          "chunk_id": "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            569,
+            570
+          ],
+          "representative_excerpt": "• Less elements = more freedom (need for grid is reduced) • More elements = less freedom (need for grid is increased) In other words, a clean and simple layout usually has fewer elements, whereas a complex composition or layered layout has a greater number (see “Look,” page 290). Information presented with clear, logically positioned typography, illustration"
+        }
+      ],
+      "methodological_depth": "LOW",
+      "actionability_for_creative_director": "MEDIUM",
+      "source_diversity": 1,
+      "coverage_class": "WEAK",
+      "confidence": 0.78,
+      "limitations": [
+        "The source explicitly says effective grid use cannot be learned from its brief treatment.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "05",
+      "domain_name": "typography",
+      "queries": [
+        "typography hierarchy",
+        "type legibility advertising",
+        "typography visual communication"
+      ],
+      "retrieved_chunk_ids": [
+        "fb487158ca5c64758366ba0aa72fc5ebc274c19df0c1d916d4cbf9d9ab850c9e",
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+        "c5d1db180c8b7af276420c4ab215b04ccbc3ba9343fb3903186aca7aefcc21f6",
+        "24757494a69170c1cf6c644f9274c00502d2e931fb121860097c2975296d0f90",
+        "d17a8e4d6d9c9f63f9e9b231fb7f125af7ecc4c08a372dddc37119fbf756bde4",
+        "5c5e7fc0a102dd5b5d9237204fd02bf237169b0565906c869f6f91c4cc015258",
+        "11bdae59df8d753227557529a09af319d2e37b7c8cb8543bd1401215bde96566",
+        "8778176a63a9f28f4b2b903069f944f6e0484043494c1f563b2945919706536d",
+        "5a4fe4be98f32eb6caa4026890b923de2471b52e01d28bb5fd1b35dab53566fd"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 5,
+      "representative_evidence": [
+        {
+          "chunk_id": "5c5e7fc0a102dd5b5d9237204fd02bf237169b0565906c869f6f91c4cc015258",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            555,
+            556
+          ],
+          "representative_excerpt": "The standard typewriter is a one-unit system, meaning that each character and mark occupies the same amount of space. Typesetting effectively “pre-kerns” the characters to occupy varying amounts of space, although further kerning may be required. • Letterspacing: the spacing between the (typically capital) letters of a word, sometimes varied to improve legib"
+        },
+        {
+          "chunk_id": "c5d1db180c8b7af276420c4ab215b04ccbc3ba9343fb3903186aca7aefcc21f6",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            559,
+            560
+          ],
+          "representative_excerpt": "The authors (whose motto is “the hand is mightier than the pixel”) cleverly categorize manual lettering into eight creative themes: • “Scrawl” (raw, splotchy, and untidy) • “Scratch” (scraped, cut, gouged) • “Script” (ornate, curlicue, sinuous) • “Stitch” (sewn, sutured, embroidered) • “Simulate” (redrawn, fake, copied) • “Shadow” (dimensional, voluminous, m"
+        },
+        {
+          "chunk_id": "d17a8e4d6d9c9f63f9e9b231fb7f125af7ecc4c08a372dddc37119fbf756bde4",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            551,
+            552
+          ],
+          "representative_excerpt": "In terms of color, keep your options open. A simple, well-designed logo should work in either all-white, all-black, or its original color(s). This gives you the flexibility to use it in a black-and-white ad, or when your choice of color palette clashes with the all-color logo (in which case, to maximize contrast and legibility, you would use the white logo w"
+        }
+      ],
+      "methodological_depth": "MEDIUM",
+      "actionability_for_creative_director": "MEDIUM",
+      "source_diversity": 1,
+      "coverage_class": "MODERATE",
+      "confidence": 0.85,
+      "limitations": [
+        "Kerning, letterspacing, lettering tone, consistency, and legibility are useful but incomplete.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "06",
+      "domain_name": "color",
+      "queries": [
+        "color principles advertising",
+        "color graphic design communication",
+        "color palette brand advertising"
+      ],
+      "retrieved_chunk_ids": [
+        "efaa890af0694d82dcebc805d814298fe36cbb2e303c5394f00c51b04692e3ff",
+        "bd327eb9da9056517099f577e331d320e71c1fd59929baf818bd51551a54820b",
+        "f1de335baab77621e0d1b5260bb1f462fb1c3135c379b9973b21ada5ac7c2747",
+        "7d08fea01699f86bd238ffd2b53be119b9f2a46ff3e79b97df9ece783b6a990f",
+        "8a11982988af207c2274f71bb27d4a4c34a49a39e7eb8b119dbd8085f1561fe7",
+        "36729f6e1025c593244a725893242842fedc0c44bae6e61c4edc1b9b5538669b",
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+        "d17a8e4d6d9c9f63f9e9b231fb7f125af7ecc4c08a372dddc37119fbf756bde4",
+        "8af84d90bd99bb640b1696ff368638c961c5d4c41dd86f030cc62c8d586d093a",
+        "15909616f266c244761cc6e549ff96e6c4ddf1ef7967248b176e0074a90acfd6"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 5,
+      "representative_evidence": [
+        {
+          "chunk_id": "efaa890af0694d82dcebc805d814298fe36cbb2e303c5394f00c51b04692e3ff",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            573,
+            574
+          ],
+          "representative_excerpt": "Color Palette Two things that make someone a good dresser are: finding clothes that suit them, and finding colors that go well together. The same is true when it comes to art directing an ad campaign. What colors suit the brand personality? What colors go well together, while also complementing the look or feel of the product? What colors reflect the idea an"
+        },
+        {
+          "chunk_id": "d17a8e4d6d9c9f63f9e9b231fb7f125af7ecc4c08a372dddc37119fbf756bde4",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            551,
+            552
+          ],
+          "representative_excerpt": "In terms of color, keep your options open. A simple, well-designed logo should work in either all-white, all-black, or its original color(s). This gives you the flexibility to use it in a black-and-white ad, or when your choice of color palette clashes with the all-color logo (in which case, to maximize contrast and legibility, you would use the white logo w"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.91,
+      "limitations": [
+        "Direct palette selection, tonal contrast, brand fit, and production guidance.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "07",
+      "domain_name": "contrast",
+      "queries": [
+        "visual contrast graphic design",
+        "contrast advertising layout",
+        "contrast creates emphasis"
+      ],
+      "retrieved_chunk_ids": [
+        "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+        "b4d6fa875a8b42b8766e485525bea2cdbdd4c57d8ca5cbfe7100a3c5f9ecb25a",
+        "b3425e71b3cc82a4955361c7ca36e19fa5fbfb3849ed6fb09211a468d0901dfe",
+        "67ca03cf0a07bed32130c9725679b91b20a2ce2796a2866528b49084a8ffa86a",
+        "c6a4e8dd5f030466dc1188ffcf1856e36092878e866451915b7012312bc13882",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "62c98e5b2e0bb73a95be6360e43d9c00961d2a49290437bcd4945a6f4274469b",
+        "8af84d90bd99bb640b1696ff368638c961c5d4c41dd86f030cc62c8d586d093a",
+        "dbaa6e39561bc780d00a3d2e815d9cc10c6e44dcf09d0f6091b4e58765d06f10",
+        "811668f9b0c7888c155597d3e2a0a864f2e596bc571834ff46569c325fb21c09",
+        "e9465f0f4c5f4434480d50b8170502de3ba3eb8dc6d5b30b616f302b5f484021",
+        "8528f16ba995244d8ccc930cb410bdbfdfbf2af3a493cad6fa5469b9eb2ff53c"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 5,
+      "representative_evidence": [
+        {
+          "chunk_id": "b4d6fa875a8b42b8766e485525bea2cdbdd4c57d8ca5cbfe7100a3c5f9ecb25a",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            573,
+            574
+          ],
+          "representative_excerpt": "Note: one of the most common mistakes a student makes when choosing color for a final layout is poor contrast of tone. As a general rule, when you use two colors together (i.e., foreground against background), and particularly when using type/text, be sure that there is enough contrast between the two. Otherwise the ad will be difficult to read, especially w"
+        },
+        {
+          "chunk_id": "b3425e71b3cc82a4955361c7ca36e19fa5fbfb3849ed6fb09211a468d0901dfe",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            178,
+            179
+          ],
+          "representative_excerpt": "A primary objective of the graphic designer is to organize and present information in a compelling way that will be most easily understood by the viewer/user. To achieve this, a graphic designer is trained to spend much of his or her time figuring out how to: build hierarchy of the information being delivered, establish a visual vocabulary that is most inter"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.91,
+      "limitations": [
+        "Direct tonal contrast and emphasis/readability consequences.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "08",
+      "domain_name": "balance",
+      "queries": [
+        "visual balance design",
+        "asymmetrical balance advertising",
+        "balance composition layout"
+      ],
+      "retrieved_chunk_ids": [
+        "f1de335baab77621e0d1b5260bb1f462fb1c3135c379b9973b21ada5ac7c2747",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "36729f6e1025c593244a725893242842fedc0c44bae6e61c4edc1b9b5538669b",
+        "bd3ca1a166e1ecb2f74c89ef6693ee85f04c7416ab1e5e8adc96544424794e9f",
+        "1264c377d7e5d1df835366d62a432192cb11137b270d7b2c002f186c3bcb1966",
+        "1cb939a7d343e45ed50fc432ce89077678bf7cc8eb49f01eb2fbb8a4fc8f4dce",
+        "2c602f41111fcf491c86782bc2d8956a7e0a1f3126651232bc805d81fead8113",
+        "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+        "e0b9027e93ab142894087479bec7ad4f41efb74ac6de34f02fd485c209e36768"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 1,
+      "representative_evidence": [
+        {
+          "chunk_id": "36729f6e1025c593244a725893242842fedc0c44bae6e61c4edc1b9b5538669b",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            577,
+            578
+          ],
+          "representative_excerpt": "There are an infinite number of compositional opportunities for each layout. This can be overwhelming, but doesn’t have to be. Layouts are simply about asking the right questions. 1. History Research the brand’s previous ads. Are there any layout decisions and brand attributes (visual and typographical choices) that should be kept, or is this a chance to des"
+        }
+      ],
+      "methodological_depth": "LOW",
+      "actionability_for_creative_director": "LOW",
+      "source_diversity": 1,
+      "coverage_class": "WEAK",
+      "confidence": 0.77,
+      "limitations": [
+        "Retrieved balance language is mostly campaign consistency, not visual-balance method.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "09",
+      "domain_name": "rhythm",
+      "queries": [
+        "visual rhythm graphic design",
+        "rhythm repetition layout",
+        "movement rhythm advertising design"
+      ],
+      "retrieved_chunk_ids": [
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "7d08fea01699f86bd238ffd2b53be119b9f2a46ff3e79b97df9ece783b6a990f",
+        "b3425e71b3cc82a4955361c7ca36e19fa5fbfb3849ed6fb09211a468d0901dfe",
+        "28d932cb47bee6c1fed4869ec3c2ea564093c14662439a9bf45248dfa403cb79",
+        "c6a4e8dd5f030466dc1188ffcf1856e36092878e866451915b7012312bc13882",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "e0b9027e93ab142894087479bec7ad4f41efb74ac6de34f02fd485c209e36768",
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+        "a9932e79ce78c25a90d5b4817d720343bee068135fd5bfebe0eb15e3d246eca9",
+        "38b2f4756cfa21b3b6d32cd49ec226876b90ffeb3e51ee711fb0d1e10e3dda0c",
+        "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+        "907486ccb249f8bd4ea54897c91524b627f48a5e67586382c9f934376b0042ee",
+        "357f2b09fd98fdaade52316ea0b09b87ed4c8e31abc7beff65104e8fda7927c0",
+        "2c1aef6b36c718c7ebfbe37212eb51f5a843a022f3e0fd5170c30a2d53f0e032",
+        "857531f616276ca97c0423ecf3266fb41cbca12acf78f3339381af217a812f25"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 0,
+      "representative_evidence": [],
+      "methodological_depth": "NONE",
+      "actionability_for_creative_director": "NONE",
+      "source_diversity": 1,
+      "coverage_class": "NONE",
+      "confidence": 0.94,
+      "limitations": [
+        "No meaningful visual-rhythm methodology was retrieved; movement term matches were unrelated.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "10",
+      "domain_name": "negative space",
+      "queries": [
+        "negative space advertising",
+        "white space graphic design",
+        "empty space visual communication"
+      ],
+      "retrieved_chunk_ids": [
+        "8bb7d4f81d7b56db7a6b6c5000955c692b3ce176aa70abf50288cc3451e24b26",
+        "8ec9cfcdeb951d2dc30a85f494a6f0be4de728fe88244e9213b967d8eb1bf7ad",
+        "42e6d123680b754930957d78aa2f0b139096c8178b57d4f3c67901a4ad32577e",
+        "f0e0f875d6af1bc6b875ec536eef61a4068a8ca029e3cb4b74cdd299cf065775",
+        "519aab1b25cb96a7e4fac88f4904a70ddb6613e2b10e28cbdb0387f98513d157",
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "c6a4e8dd5f030466dc1188ffcf1856e36092878e866451915b7012312bc13882",
+        "fa5368ab5ac87ca983b1c0b635661f27d39b080a8c12a00435f129d6415ebccb",
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+        "6cc925565baac7d249af79d98051ec4a6d449e8732848d6573045dcedb0c6487"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 4,
+      "representative_evidence": [
+        {
+          "chunk_id": "8bb7d4f81d7b56db7a6b6c5000955c692b3ce176aa70abf50288cc3451e24b26",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            170,
+            171
+          ],
+          "representative_excerpt": "White space (or negative space) can be a good thing or a bad thing. An example of effective white space is the final “No” ad on page 79. Bad use is where there is lots of unnecessary space, usually in relation to the visual. Use logic to decide which size fits your idea the best: suppose you have a “visual only” ad of a car. If the angle/shot is from the sid"
+        },
+        {
+          "chunk_id": "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            154,
+            155
+          ],
+          "representative_excerpt": "The main reason for hierarchy is so that each element is not competing or fighting with one another for attention. By art directing the layout, you’re basically directing the consumer around the ad. Don’t forget, advertising is all about efficient communication. Some basic layout variations of hierarchy are illustrated on page 78. These thumbnails show diffe"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.91,
+      "limitations": [
+        "Direct good/bad white-space guidance and layout implications.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "11",
+      "domain_name": "branding",
+      "queries": [
+        "branding principles visual communication",
+        "brand consistency advertising",
+        "brand expression design"
+      ],
+      "retrieved_chunk_ids": [
+        "3b7f35d96e7f0ac2451ede56e3c6428c367f3c76d1a543b0682defc50401a63f",
+        "15909616f266c244761cc6e549ff96e6c4ddf1ef7967248b176e0074a90acfd6",
+        "8af84d90bd99bb640b1696ff368638c961c5d4c41dd86f030cc62c8d586d093a",
+        "efaa890af0694d82dcebc805d814298fe36cbb2e303c5394f00c51b04692e3ff",
+        "352bb0ceb84c5cdd0c885894ab3576f0731ad5867c593fc7b463533fb69c42ba",
+        "fbf348dee951679d33e414b9c9780adce587bb6a416369d6d23b0c7735b716a0",
+        "2c602f41111fcf491c86782bc2d8956a7e0a1f3126651232bc805d81fead8113",
+        "36729f6e1025c593244a725893242842fedc0c44bae6e61c4edc1b9b5538669b",
+        "3c56b9dc80925d6353971ea4bbea9dbe61d370fc78ad2306bf99fcdc2b74d0b2",
+        "28f3c1504c27039db63017583eb5fee509626d106d4d2d30901bc2ee8d830f87"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 6,
+      "representative_evidence": [
+        {
+          "chunk_id": "15909616f266c244761cc6e549ff96e6c4ddf1ef7967248b176e0074a90acfd6",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            527,
+            528
+          ],
+          "representative_excerpt": "“Branding” is the process of recognizing, building, and executing a particular brand. The key to branding is consistency. Each element of the advertising, design, and marketing should own the same brand attributes: the same look, feel, tone, and personality. This is easier said than done, especially when you are dealing with a growing number of media. Howeve"
+        },
+        {
+          "chunk_id": "3b7f35d96e7f0ac2451ede56e3c6428c367f3c76d1a543b0682defc50401a63f",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            531,
+            532
+          ],
+          "representative_excerpt": "that 1984 wasn’t like “1984.” This integrity creates further brand loyalty. Another brand that has built integrated product and communication is Mini. Crispin Porter + Bogusky’s “Let’s Motor” campaign has been diligently translated into every conceivable media. [There’s even a mini ad (no pun intended) inside the car next to the sun-roof switch which reads, "
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.93,
+      "limitations": [
+        "Direct brand consistency, attributes, look/feel/tone, and integrated communication.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "12",
+      "domain_name": "visual identity",
+      "queries": [
+        "visual identity system",
+        "brand identity graphic design",
+        "identity elements logo typography color"
+      ],
+      "retrieved_chunk_ids": [
+        "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9",
+        "28f3c1504c27039db63017583eb5fee509626d106d4d2d30901bc2ee8d830f87",
+        "cc606c39afe7b9c941187c238d5947dc059f1772eecbc3620b9c5ed380f88362",
+        "5dfa8f8fc6580c619f2e13892cc909c2f30d8aacb11dc3093269e7495ad1c9c7",
+        "725aaaf679f15ba457a8c24fa6eb9b286884972fbda8e1f12a8e2c51b91f549b",
+        "fbf348dee951679d33e414b9c9780adce587bb6a416369d6d23b0c7735b716a0",
+        "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+        "5617d00c77bc5180a63954c9342ecfdcb6edfe745f29d3d28bcf58a2a1eef01d",
+        "15909616f266c244761cc6e549ff96e6c4ddf1ef7967248b176e0074a90acfd6",
+        "d17a8e4d6d9c9f63f9e9b231fb7f125af7ecc4c08a372dddc37119fbf756bde4",
+        "fb487158ca5c64758366ba0aa72fc5ebc274c19df0c1d916d4cbf9d9ab850c9e",
+        "8af84d90bd99bb640b1696ff368638c961c5d4c41dd86f030cc62c8d586d093a",
+        "11ed558cf790775822f1e11ef8fd4b41822907b30fb0aa79702fc2e06aaaae3b",
+        "efaa890af0694d82dcebc805d814298fe36cbb2e303c5394f00c51b04692e3ff"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 5,
+      "representative_evidence": [
+        {
+          "chunk_id": "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            571,
+            572
+          ],
+          "representative_excerpt": "The sizing of the four elements tends to be the most consistent aspect. For example, a logo looks strange at three different sizes, and there’s no logic behind it. Whereas if the headlines within a campaign are set at different sizes, it’s probably because they vary in length. Changing the point sizes merely keeps the proportion with the surrounding white sp"
+        },
+        {
+          "chunk_id": "28f3c1504c27039db63017583eb5fee509626d106d4d2d30901bc2ee8d830f87",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            284,
+            285
+          ],
+          "representative_excerpt": "Logo/identity usage is not easy to do without being contrived: there are few examples that compare with Absolut’s slick simplicity (see Absolut Inspiration, page 153). So be careful that your concept does not change or cheapen a client’s prized logo or design. One example that keeps the brand intact is the print campaign for Mercedes (opposite above). Note: "
+        },
+        {
+          "chunk_id": "15909616f266c244761cc6e549ff96e6c4ddf1ef7967248b176e0074a90acfd6",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            527,
+            528
+          ],
+          "representative_excerpt": "“Branding” is the process of recognizing, building, and executing a particular brand. The key to branding is consistency. Each element of the advertising, design, and marketing should own the same brand attributes: the same look, feel, tone, and personality. This is easier said than done, especially when you are dealing with a growing number of media. Howeve"
+        }
+      ],
+      "methodological_depth": "MEDIUM",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "MODERATE",
+      "confidence": 0.86,
+      "limitations": [
+        "Useful logo/identity consistency and campaign use; not a complete identity-system method.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "13",
+      "domain_name": "art direction",
+      "queries": [
+        "art direction principles",
+        "visual direction advertising",
+        "art director advertising execution"
+      ],
+      "retrieved_chunk_ids": [
+        "1eb5305d6b3c0d5116271a83ce21b8e40f32712782b1bb1d88a359d6519c1fc7",
+        "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9",
+        "04b185dec9449480112a776432b75f009d7b1aafe8b4776a9e6abac7dcbe03d4",
+        "fc10787038501190356eee61b0ebb01db06d578d7f228e456730ec83ceeee27c",
+        "581bad97127eda082fa14589718235ce8956c2a639711ddf625685d87cd244eb",
+        "f1de335baab77621e0d1b5260bb1f462fb1c3135c379b9973b21ada5ac7c2747",
+        "b7bc0f7453ac4f92041cb038211b4efee23ce3554c98d250be755344d6db6082",
+        "57d2cc2fa9d41636c0d50e6747b26b7ab77e2e6782cb7da9a27a066ed1748e66",
+        "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+        "8bb7d4f81d7b56db7a6b6c5000955c692b3ce176aa70abf50288cc3451e24b26",
+        "a7a7f3aeeae187fbf12152a7edfda1cf6cfa8751d7f216a4e2e0b19b85c9667a",
+        "e1f75bd70ef73c4b52894cf60f1ce6933da4cfb740e935f28b90ed065646ccc6"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 7,
+      "representative_evidence": [
+        {
+          "chunk_id": "1eb5305d6b3c0d5116271a83ce21b8e40f32712782b1bb1d88a359d6519c1fc7",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            571,
+            572
+          ],
+          "representative_excerpt": "“Logos usually go lower right, so put them top left. Product shots are usually small, make them big. Instead of headlines being more prominent than the body copy, do the opposite. It’s perverse, but I’m constantly surprised how many times it works.” Again, as long as there is some logic (a “method to your madness”), an implicit grid system, and a level of co"
+        },
+        {
+          "chunk_id": "04b185dec9449480112a776432b75f009d7b1aafe8b4776a9e6abac7dcbe03d4",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            549,
+            550
+          ],
+          "representative_excerpt": "Many good art directors are like visual magpies, often keeping a scrapbook-type folder full of various visual materials that happen to catch their eye. These can include photos, paintings, drawings, typefaces, film and TV clips, animation, other ads, design pieces, postcards, magazine and newspaper clippings—antique, retro, kitsch, contemporary or futuristic"
+        },
+        {
+          "chunk_id": "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "representative_excerpt": "Once all the conceptual elements of a print ad or campaign are in place (i.e., headline, tagline, basic layout, final body copy, logo, etc.) it’s time to art direct and design it into a stylish finished ad, using digital artwork. This is not only to make the ad “work,” but also to make it look visually compelling. This is when the craft skills of digital lay"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.94,
+      "limitations": [
+        "Direct art-direction decisions, visual references, hierarchy, and execution craft.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "14",
+      "domain_name": "advertising concept",
+      "queries": [
+        "advertising concept development",
+        "visual advertising idea",
+        "creative concept advertising"
+      ],
+      "retrieved_chunk_ids": [
+        "bb83873561faa0a4d5168dabf43d42756e38c7a14b3b7325b8435469b92a08d5",
+        "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+        "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+        "93a4dc4aaa3031bec6166f2ffe9322a8d422395008a62968bcc96e3ef8226d4f",
+        "9491861e5473177bc55e072cb125a9087c9de231b4ab637b0b21525aa5b6455a",
+        "8af84d90bd99bb640b1696ff368638c961c5d4c41dd86f030cc62c8d586d093a",
+        "f644002f50c1817cd1eed1a268527b584dd47eaac7883857bb5ea1566778cabd",
+        "828a04d0ed3761892beddace5728bcc257e32089a590b10ccf4fcd3c6d791da4",
+        "b7bc0f7453ac4f92041cb038211b4efee23ce3554c98d250be755344d6db6082",
+        "86de79124e81abd1690e92e213490e34a7d357526e48788f64f2d1c3a5d5a4aa",
+        "352bb0ceb84c5cdd0c885894ab3576f0731ad5867c593fc7b463533fb69c42ba",
+        "f759a86e7045a9441b6eb388b09fc2f7c186c4f00198b6dc62fb3ba2f9f6735d"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 8,
+      "representative_evidence": [
+        {
+          "chunk_id": "bb83873561faa0a4d5168dabf43d42756e38c7a14b3b7325b8435469b92a08d5",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            16,
+            17
+          ],
+          "representative_excerpt": "*Note: some designers and advertising creatives, including the ingenious Bob Gill, prefer the term “ideas” rather than “concept,” believing the latter should be reserved for Einstein-sized thinking only. One could easily argue that advertising “ideas” sounds too lightweight and general. Depending on their background, some people will use “concept” to mean a "
+        },
+        {
+          "chunk_id": "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            180,
+            181
+          ],
+          "representative_excerpt": "In the case of advertising design, its goal is very different. The primary objective for someone in this discipline is to create a strategy and concept that will help sell a product or service. Advertising professionals as a whole (i.e., across all media) are not concerned if a product doesn’t function well or look good. Their job is to find something (else)"
+        },
+        {
+          "chunk_id": "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            86,
+            87
+          ],
+          "representative_excerpt": "02 The Strategy Despite the subtitle of this book, the correct “order” in terms of the advertising creative process is: Strategy first Concept/idea second Campaign third In other words, each campaign comes from a concept, which comes from a strategy. In advertising, “strategy” refers to the overall marketing or selling approach. It is the thinking behind the"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.96,
+      "limitations": [
+        "Deep concept/idea development sequence with numerous advertising examples.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "15",
+      "domain_name": "single-minded proposition / SMP",
+      "queries": [
+        "single minded proposition",
+        "single-minded proposition advertising",
+        "one proposition creative brief"
+      ],
+      "retrieved_chunk_ids": [
+        "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+        "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+        "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28",
+        "2730d601188bb6ecbc42b3d18909bab8d3f78091291257e1e6fbd4bab2b2dd7f",
+        "d46b573614997268f220f774e44faa68023506d178077bb42545f486300068de",
+        "8c84e581b7c2f4a9913da99b973a5ea1c323bd3f68ef057c5badf826a81a93c5",
+        "338700e5649477128df62f0cadf922361c71bc35692911b68d71c961f3768276",
+        "3479dceb27053bcdedaf6e9ff5a7bf5bbd5972625c53d86eb354fb7b130c5500",
+        "17a67d0ebbc985e5131a771ef7bcbf57e55595384f48066e5a9c08b2cdce0c63",
+        "6cfad3263de1f7d14b44b94b86ceee6d102c0db05e4aebe3a8b162d5f770cdc5",
+        "dcc59a31796a6995e510a31a8ac57543974cf6004f08341347591776a3775cdc"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 6,
+      "representative_evidence": [
+        {
+          "chunk_id": "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            38,
+            39
+          ],
+          "representative_excerpt": "This sounds simple, but it’s amazing how often clients will try (or want) to say more than one thing: “but our product is fast and durable.” This may be true—but it doesn’t matter. You only have seconds to get your message across. You have to be single-minded. It’s hard enough to create something that clearly communicates one benefit in a short time, let alo"
+        },
+        {
+          "chunk_id": "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "representative_excerpt": "The term “proposition” is sometimes referred to as advertising promise, or selling proposition, or abbreviated to single-minded benefit, single-minded proposition (SMP), or “value prop”. The key is to say one thing that’s different about your product (of genuine interest to the consumer), or be the first to say something that the competition could say, but h"
+        },
+        {
+          "chunk_id": "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "representative_excerpt": "Note: there are rare exceptions to the single-minded benefit. One example is the long-running Miller Lite campaign. Its creators found a novel (yet arguably contrived) way to communicate the two propositions of “great taste” and “less filling,” by creating an argument between two people over which was the most important benefit. Another example that broke th"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.97,
+      "limitations": [
+        "Explicit definition, aliases, one-message discipline, and exceptions.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "16",
+      "domain_name": "headline-image relationship",
+      "queries": [
+        "headline image relationship",
+        "copy and visual relationship advertising"
+      ],
+      "retrieved_chunk_ids": [
+        "655e6bb3d7c7630589919365c907c72ab428f2824e22ed4e8b1512fd7a4439b1",
+        "8bb7d4f81d7b56db7a6b6c5000955c692b3ce176aa70abf50288cc3451e24b26",
+        "caec7c1ec06d016da6e49ed69a3d9a6ecdc1b6b2c1f268dcfdbb939532389dcd",
+        "4f71a3933696d233843d2f39150ba4fe797e188525bc199c3395c741ee7dbd56",
+        "d46d94f799889fa5f546c1423a240456b097eb14c21f9682b11b3df697b1d33d",
+        "62c98e5b2e0bb73a95be6360e43d9c00961d2a49290437bcd4945a6f4274469b",
+        "b7bc0f7453ac4f92041cb038211b4efee23ce3554c98d250be755344d6db6082",
+        "677d6057662581e4bebdafe12db6b6187f1eb8d67d0de6a0ff0c6e7fb5992eed",
+        "67ca03cf0a07bed32130c9725679b91b20a2ce2796a2866528b49084a8ffa86a"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 6,
+      "representative_evidence": [
+        {
+          "chunk_id": "655e6bb3d7c7630589919365c907c72ab428f2824e22ed4e8b1512fd7a4439b1",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            142,
+            143
+          ],
+          "representative_excerpt": "This is the relationship between the visual and the verbal: in other words, how the visual part of an ad relates to the verbal (written) part. This section specifically covers the headline-visual relationship. The tagline-visual relationship is examined in The Tagline chapter. Direct and Indirect Visuals When you have an ad with a headline and a visual, the "
+        },
+        {
+          "chunk_id": "b7bc0f7453ac4f92041cb038211b4efee23ce3554c98d250be755344d6db6082",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            623,
+            624
+          ],
+          "representative_excerpt": "Headline repeating visual When part of the headline (or the entire headline) is repeating what the visual is already communicating. This is one of the most common mistakes made by beginner advertising students, although there are rare cases when it’s needed. Also known as a “see spot run” or “see Janet running” ad. Headline twist A common technique used by c"
+        },
+        {
+          "chunk_id": "67ca03cf0a07bed32130c9725679b91b20a2ce2796a2866528b49084a8ffa86a",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            144,
+            145
+          ],
+          "representative_excerpt": "The level of tension is perhaps not as “in your face” as contrast/contradiction (see below), but it will produce a more lateral, dramatic, and interesting ad than a “headline repeating visual.” To illustrate this, simply change a “headline introducing visual” ad into a “headline repeating visual.” For example, Horn & Hardart’s “You can’t eat atmosphere” is i"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.96,
+      "limitations": [
+        "Dedicated visual-verbal relationship guidance and failure modes.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "17",
+      "domain_name": "visual metaphor",
+      "queries": [
+        "visual metaphor advertising",
+        "metaphor image creative concept"
+      ],
+      "retrieved_chunk_ids": [
+        "f38a7a16f74f8f7cd60a5544ad2c6ec7a7502a7b82655d6a4f75da6db02216df",
+        "bfec8bd9d4d6adc9832b7fe324df17cc1e5da270c0de52c67e991b2925c990b2",
+        "f09537463e8e442a98d626a2d4a347a74958b723c015936817bacf148c9b1e58",
+        "61cf5ff7b5bf286a49fb6940d0f18c64da83ff31a2e959227318b684a4822c98",
+        "988bf8e431b08e0968607cf967a137ca19374943cac06b781793c5dce3529574",
+        "e31bec5237a7b2d2ed7053befae60a35900f475b86dcc727a6f8df9d420d34c1",
+        "caec7c1ec06d016da6e49ed69a3d9a6ecdc1b6b2c1f268dcfdbb939532389dcd",
+        "f49b7aa4141cf4026c31dcdc9f9d788837f513147c6a15a74611018e3a675dda"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 5,
+      "representative_evidence": [
+        {
+          "chunk_id": "bfec8bd9d4d6adc9832b7fe324df17cc1e5da270c0de52c67e991b2925c990b2",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            246,
+            247
+          ],
+          "representative_excerpt": "[uncertain: 11] [unreadable] NEWS1 Simple use of analogy explains how it feels to go on a theme park ride. Client: Playland. Agency: Rethink, Vancouver. Creatives: Ian Grais, Natee Likit, Jono Holmes. Visual metaphor: Lewis represents the power and speed of a motorcar and analogy: the precision and control of a tire is like running in high heels. Tagline: Po"
+        },
+        {
+          "chunk_id": "f09537463e8e442a98d626a2d4a347a74958b723c015936817bacf148c9b1e58",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            242,
+            243
+          ],
+          "representative_excerpt": "Pirelli “Carl Lewis” (see overleaf below) could be described as analogy and visual metaphor. Lewis represents power and speed, i.e., a motorcar. High heels on wet terrain represent control, or rather the need for proper control and grip (i.e., Pirelli tires). The idea is summed up by the line, “Power is nothing without control.” Two types of idea, one simple"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.93,
+      "limitations": [
+        "Direct visual-metaphor and analogy examples with communication rationale.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "18",
+      "domain_name": "copywriting for visual ads",
+      "queries": [
+        "copywriting for visual advertising",
+        "headline body copy visual ad"
+      ],
+      "retrieved_chunk_ids": [
+        "de90abae848d7cc4dd822344a8232a624a45c3cf6a521dc638d0132d273cf0f3",
+        "86de79124e81abd1690e92e213490e34a7d357526e48788f64f2d1c3a5d5a4aa",
+        "b7bc0f7453ac4f92041cb038211b4efee23ce3554c98d250be755344d6db6082",
+        "985d986e99326457968aa1e9e7c3bfb1ed7434c6f0fbf91fb58231cedfb8a6a8",
+        "e2e25520fa29ec791f5dc7b4183b18fb399f3561316e0e2ae013adfdade0e24c",
+        "57d2cc2fa9d41636c0d50e6747b26b7ab77e2e6782cb7da9a27a066ed1748e66",
+        "67ca03cf0a07bed32130c9725679b91b20a2ce2796a2866528b49084a8ffa86a",
+        "fc7602ec3e0ca9084f3aa295ce72cc6d5afb0a25bd1d02e903b6f8edb834cda9"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 7,
+      "representative_evidence": [
+        {
+          "chunk_id": "86de79124e81abd1690e92e213490e34a7d357526e48788f64f2d1c3a5d5a4aa",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            144,
+            145
+          ],
+          "representative_excerpt": "This is one of the most common mistakes made by inexperienced advertising students, in which part of the headline (or the entire headline) is repeating what the visual is already communicating. It’s what my ad instructor in the UK called, “see Janet running,” which refers to the technique in children’s early reading books, where a sentence literally repeats "
+        },
+        {
+          "chunk_id": "fc7602ec3e0ca9084f3aa295ce72cc6d5afb0a25bd1d02e903b6f8edb834cda9",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            474,
+            475
+          ],
+          "representative_excerpt": "The Invisible Thread: Make it Flow Your primary goal is to make the body copy flow seamlessly, from line to line, paragraph to paragraph, as if an “invisible thread” is joining everything up. The bulk of ads with considerable body copy use this technique (as well as the other tools in this chapter) to a greater or lesser extent. According to instructor Tony "
+        },
+        {
+          "chunk_id": "b7bc0f7453ac4f92041cb038211b4efee23ce3554c98d250be755344d6db6082",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            623,
+            624
+          ],
+          "representative_excerpt": "Headline repeating visual When part of the headline (or the entire headline) is repeating what the visual is already communicating. This is one of the most common mistakes made by beginner advertising students, although there are rare cases when it’s needed. Also known as a “see spot run” or “see Janet running” ad. Headline twist A common technique used by c"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.94,
+      "limitations": [
+        "Direct headline/visual interplay, headline forms, and body-copy flow.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "19",
+      "domain_name": "photography / image direction",
+      "queries": [
+        "photography direction advertising",
+        "image selection art direction"
+      ],
+      "retrieved_chunk_ids": [
+        "828a04d0ed3761892beddace5728bcc257e32089a590b10ccf4fcd3c6d791da4",
+        "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+        "df68c423ae8d66da832246b61cfa71fbf27c1853eff9b68a4cb2306642d371d0",
+        "d105e4804493d1f61fbad7d3b2439118a42ff9f06a0999cfdb459cbfdc902719",
+        "6d2912e755ba584cc9453079c5a32bf2b94d69ef9b91f59160f37e66117409f2",
+        "8bb7d4f81d7b56db7a6b6c5000955c692b3ce176aa70abf50288cc3451e24b26",
+        "fc10787038501190356eee61b0ebb01db06d578d7f228e456730ec83ceeee27c",
+        "04b185dec9449480112a776432b75f009d7b1aafe8b4776a9e6abac7dcbe03d4",
+        "1925378c8b567d13e5149f9530dcd65bc2594b79fc7eb9d8abb6cc90d5bddbb1",
+        "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 5,
+      "representative_evidence": [
+        {
+          "chunk_id": "828a04d0ed3761892beddace5728bcc257e32089a590b10ccf4fcd3c6d791da4",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            565,
+            566
+          ],
+          "representative_excerpt": "Photography or illustration? If your concept contains a visual, you need to decide whether the visual(s) would work better as a photograph, an illustration, or a combination of the two. Most print advertising uses photography, although illustration is becoming increasingly popular. (As is the TV equivalent of illustration—animation.) Your decision must be ba"
+        },
+        {
+          "chunk_id": "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "representative_excerpt": "Once all the conceptual elements of a print ad or campaign are in place (i.e., headline, tagline, basic layout, final body copy, logo, etc.) it’s time to art direct and design it into a stylish finished ad, using digital artwork. This is not only to make the ad “work,” but also to make it look visually compelling. This is when the craft skills of digital lay"
+        },
+        {
+          "chunk_id": "df68c423ae8d66da832246b61cfa71fbf27c1853eff9b68a4cb2306642d371d0",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            565,
+            566
+          ],
+          "representative_excerpt": "The use of illustration is tonally appropriate for this idea. Photography would be too contrived, and without the same charm and integrity. (The color version has a lovely light blue tear.) Client: Volkswagen. Agency: Arnold Advertising, Boston. Creatives: Alan Pafenbach, Lance Jensen. Illustrator: Carla Siboldi. 2. Shoot or draw the exact, complete visual ("
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.92,
+      "limitations": [
+        "Direct photography-versus-illustration and tonal/execution decisions.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "20",
+      "domain_name": "editorial design",
+      "queries": [
+        "editorial design principles",
+        "magazine page layout typography"
+      ],
+      "retrieved_chunk_ids": [
+        "b4d6fa875a8b42b8766e485525bea2cdbdd4c57d8ca5cbfe7100a3c5f9ecb25a",
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "427496fddc56d1ce1f97cf57ee47e44d2757783d1730f2520fb599a2240af6a3",
+        "b767a5455e4d46892a4f4073299348cdd50faf595ecada9d73b5b8970e79eec6",
+        "352bb0ceb84c5cdd0c885894ab3576f0731ad5867c593fc7b463533fb69c42ba",
+        "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+        "fb487158ca5c64758366ba0aa72fc5ebc274c19df0c1d916d4cbf9d9ab850c9e",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "e0b9027e93ab142894087479bec7ad4f41efb74ac6de34f02fd485c209e36768",
+        "581b51a780e9398b8593a293859174544974ac507fe8b608c11a688e3d7bdbc9"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 2,
+      "representative_evidence": [
+        {
+          "chunk_id": "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            569,
+            570
+          ],
+          "representative_excerpt": "What most people consider to be the “classic” print advertising layout is otherwise known as the VW layout, created by Helmut Krone at DDB, New York around 1960, itself an evolution of a classic three-column Ogilvy layout. Originally intended for single-page press ad, it can be adapted to a spread. It’s a clean, simple, and logical layout, and a template for"
+        },
+        {
+          "chunk_id": "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            567,
+            568
+          ],
+          "representative_excerpt": "All good graphic design, in its most fundamental state, is based on a “grid.” Including this book. You cannot learn how to use a grid system effectively from reading a few paragraphs on the subject. It comes from studying foundation graphic design, and from years of professional experience in designing printed material for 2-D (and perhaps 3-D) applications."
+        }
+      ],
+      "methodological_depth": "LOW",
+      "actionability_for_creative_director": "LOW",
+      "source_diversity": 1,
+      "coverage_class": "WEAK",
+      "confidence": 0.82,
+      "limitations": [
+        "Print-layout fragments transfer partially, but editorial design is not taught as a domain.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "21",
+      "domain_name": "print advertising",
+      "queries": [
+        "print advertising design",
+        "print ad layout headline visual"
+      ],
+      "retrieved_chunk_ids": [
+        "d105e4804493d1f61fbad7d3b2439118a42ff9f06a0999cfdb459cbfdc902719",
+        "20551d15d72fa20b5c5734d43abcc0edee5209f125efde1a40035ee5dfe0a53c",
+        "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+        "c6a4e8dd5f030466dc1188ffcf1856e36092878e866451915b7012312bc13882",
+        "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "67ca03cf0a07bed32130c9725679b91b20a2ce2796a2866528b49084a8ffa86a",
+        "b7bc0f7453ac4f92041cb038211b4efee23ce3554c98d250be755344d6db6082",
+        "24757494a69170c1cf6c644f9274c00502d2e931fb121860097c2975296d0f90",
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 7,
+      "representative_evidence": [
+        {
+          "chunk_id": "d105e4804493d1f61fbad7d3b2439118a42ff9f06a0999cfdb459cbfdc902719",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            178,
+            179
+          ],
+          "representative_excerpt": "print ad. Instead, think of more lateral ways to dramatize the proposition, whether it’s “value for money” or any other benefit. Fallon cleverly avoided using a written version of a “calendar ad” by employing simple visuals to tell the story instead in their award-winning campaign for London’s luxury department store, Harvey Nichols (overleaf). “Dictionary D"
+        },
+        {
+          "chunk_id": "20551d15d72fa20b5c5734d43abcc0edee5209f125efde1a40035ee5dfe0a53c",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            116,
+            117
+          ],
+          "representative_excerpt": "03 Print Print First, TV Second Traditional, “above the line” print ads include: Posters (or Out of Home/OOH): billboards and other outdoor posters (shapes and sizes shown below), transport posters (bus/train shelter ads, exterior bus-side ads, interior posters/subway cards, platform/cross-track posters), scrolling/changing posters (triptych billboards/poste"
+        },
+        {
+          "chunk_id": "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "representative_excerpt": "Once all the conceptual elements of a print ad or campaign are in place (i.e., headline, tagline, basic layout, final body copy, logo, etc.) it’s time to art direct and design it into a stylish finished ad, using digital artwork. This is not only to make the ad “work,” but also to make it look visually compelling. This is when the craft skills of digital lay"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.95,
+      "limitations": [
+        "Dedicated print-ad formats, concept, layout, and final execution.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "22",
+      "domain_name": "digital advertising",
+      "queries": [
+        "digital advertising creative design",
+        "online ad creative principles"
+      ],
+      "retrieved_chunk_ids": [
+        "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+        "357f2b09fd98fdaade52316ea0b09b87ed4c8e31abc7beff65104e8fda7927c0",
+        "56f48f5e08c60b08c01b98220c31db80166b2bd483a7842cbfd87d571a055418",
+        "099de352df49e518a052196d177334e446a3b607111ff064b047c749e39cf0cb",
+        "89a460fb2af87aaf1b8f027772a094d19f0e8a6a09191676f67cd6d85c049a62",
+        "de59df3791d40d1d5ecc0e47eb719b2769f65d4910eadae3bb33f84bb57f430e",
+        "bce0284f84e69a7ad1b8085278d054656d10bf1cb449662328d78f0975e9349b",
+        "9d34d3fe505fce777205647aca602017f91bd48e8072792fab63383bd4c9dd2e",
+        "4dbc246151841e261f2f139e331f35102825fc867229a258862c9f8e63e79f3d",
+        "bd3ca1a166e1ecb2f74c89ef6693ee85f04c7416ab1e5e8adc96544424794e9f"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 5,
+      "representative_evidence": [
+        {
+          "chunk_id": "bce0284f84e69a7ad1b8085278d054656d10bf1cb449662328d78f0975e9349b",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            420,
+            421
+          ],
+          "representative_excerpt": "* Note that if a digital ad is 100% static (i.e., no animation), it is little more than a traditional print ad, and may not therefore be benefiting from any of the additional qualities the media has to offer. That said, some of the best pieces of online advertising to date have been in static gif form."
+        },
+        {
+          "chunk_id": "9d34d3fe505fce777205647aca602017f91bd48e8072792fab63383bd4c9dd2e",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            438,
+            439
+          ],
+          "representative_excerpt": "The Replication Problem Although not exclusive to online advertising, a common mistake occurs when agencies and clients try to replicate (i.e., plagiarize) previously successful interactive ideas. The problem is that these ideas rarely compare with the original, brand-tailored concept. The reason interactive replication happens is partly because the client k"
+        },
+        {
+          "chunk_id": "357f2b09fd98fdaade52316ea0b09b87ed4c8e31abc7beff65104e8fda7927c0",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            388,
+            389
+          ],
+          "representative_excerpt": "The bottom line is that both disciplines (interactive and advertising) perform the same basic task: to create ideas for brands (executed through various media) that make people like them more. And as the lines between the two continue to blur, the combined term “interactive advertising” will undoubtedly become more acceptable. P. J. Pereira puts it this way:"
+        }
+      ],
+      "methodological_depth": "MEDIUM",
+      "actionability_for_creative_director": "MEDIUM",
+      "source_diversity": 1,
+      "coverage_class": "MODERATE",
+      "confidence": 0.86,
+      "limitations": [
+        "Useful digital/interactive principles, but limited current-format and performance depth.",
+        "Evidence is concentrated in one advertising book.",
+        "Current platform/form-factor behavior is incomplete or absent."
+      ]
+    },
+    {
+      "domain_id": "23",
+      "domain_name": "performance creative",
+      "queries": [
+        "performance creative advertising",
+        "conversion-oriented creative"
+      ],
+      "retrieved_chunk_ids": [
+        "4bf3382b1939604260ce556753381ee2f025472aeb1a8c4da50c351a8f38ad55",
+        "656200b8eea81712a0bad47678a681965118bc9f59cabd37b21624a7f20ca58f",
+        "3a5e3091cfcf923302b93f028d2b7a5c5031a6563d6bce1cce2c70340eebf0dd",
+        "90eab8c8cc8a8ccb76050868ce45b9a82582335b7782e911f5087217b33236fe",
+        "7e1d51461bf719c658013731dfc85dfdfe3ed82df576e38328000569e80b59e7",
+        "57676b2a018a8e9321038a412abc113c8ecf7608b9dc4410c119deaeeef51036",
+        "41452420b2cdb8397412a6d737ec65f3dbba38982232b3be75a0a20691fbabf4",
+        "dbaa6e39561bc780d00a3d2e815d9cc10c6e44dcf09d0f6091b4e58765d06f10",
+        "554717de9613bd52d7763711f448eb93c10246d32a9c2667e9d2ef2bc548b277",
+        "082d7a09abe2e5a2fbf682b028fbd804d3c54f57eebbdfc79a9f10fe9f0c3de2"
+      ],
+      "source_ids": [
+        "SRC_PRO_CRO",
+        "SRC_PRO_GROWTH",
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "Protégé — CRO Máxima [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 1,
+      "representative_evidence": [
+        {
+          "chunk_id": "4bf3382b1939604260ce556753381ee2f025472aeb1a8c4da50c351a8f38ad55",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            46,
+            47
+          ],
+          "representative_excerpt": "(In)effective Creative Advertising: What was the Product? Many ads are so unoriginal and uncreative, making them instantly forgettable and totally fruitless. These ads have no impact or resonance, invisible in every sense. Neither the ad, the message, nor the product is retained by consumers. There are also many ads that are memorable as an ad (concept recal"
+        }
+      ],
+      "methodological_depth": "LOW",
+      "actionability_for_creative_director": "LOW",
+      "source_diversity": 3,
+      "coverage_class": "WEAK",
+      "confidence": 0.84,
+      "limitations": [
+        "General creative effectiveness exists; no performance-creative testing/iteration method.",
+        "Evidence is concentrated in one advertising book.",
+        "Current platform/form-factor behavior is incomplete or absent."
+      ]
+    },
+    {
+      "domain_id": "24",
+      "domain_name": "social / Meta ad creative",
+      "queries": [
+        "social ad creative",
+        "Meta Facebook ad creative"
+      ],
+      "retrieved_chunk_ids": [
+        "de59df3791d40d1d5ecc0e47eb719b2769f65d4910eadae3bb33f84bb57f430e",
+        "ef77a7c5568683bf5cdb9825882b0a7d9a03d7d86a179cf2904fa0637f278722",
+        "32bf7d28df8008cbb1edfb93836081b96bb0979c91e86bfec5b4cc911352b3e2",
+        "bc17ed37be5790a16134dce91df8f0edd4ea7a69d98bb736089136b2ef89b229",
+        "1da694c602883a8c93b4e5252daa96023e96d9ba12d8d7bfba0675a569ae1906",
+        "9a9e15791814b2e6e4109475975a09cbdf0102d01d76d65fec888df967255243",
+        "09ac04c5370d16507f7d8b3d0ea6a198cc512ab73cca05bf888e1452d24ed954",
+        "10ff0665b12986e434b08261e97a75aab45595dd1c20ccc988f505751a30bdab",
+        "bcdb9bcc4bf38d7249645fdf7b604aa47540355896db6d769c50871f47291eae"
+      ],
+      "source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_VEL_FUNNELS",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "Velocity — Facebook Marketing / Facebook Ads",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Local workshop — FunnelChat WhatsApp automation",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 5,
+      "representative_evidence": [
+        {
+          "chunk_id": "09ac04c5370d16507f7d8b3d0ea6a198cc512ab73cca05bf888e1452d24ed954",
+          "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+          "source_title": "Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]",
+          "pdf_page_refs": [],
+          "representative_excerpt": "Si tú enfocas tus anuncios para cumplir tu objetivo, que es generar ventas o leads y a la vez las personas están contentas con el marketing que les pones delante y disfrutan de lo que publicas, tú estás dando a Facebook lo que quiere, por lo que tendrás mejores costes y menos riesgos con tu cuenta. Cinco, mentalidad fuera de la plataforma de Facebook. No pod"
+        },
+        {
+          "chunk_id": "32bf7d28df8008cbb1edfb93836081b96bb0979c91e86bfec5b4cc911352b3e2",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            404,
+            405
+          ],
+          "representative_excerpt": "Today’s copywriter has an incredible opportunity to push brand narrative to interactive, dynamic places. Social media allows for a two-way conversation, meaning that you can actually converse instead of pitch or “copywrite.” Nicke Bergstrom, Co-founder and Creative Director of Farfar, compares it to going on a date: “If all you were doing was talking and not"
+        },
+        {
+          "chunk_id": "9a9e15791814b2e6e4109475975a09cbdf0102d01d76d65fec888df967255243",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            464,
+            465
+          ],
+          "representative_excerpt": "Facebook While the debate over how to track sales from any social “like,” comment, view, or share continues, for this platform, let’s focus on those ideas or campaigns that simply helped a brand become more likable. Whether it’s a paid-for ad on Facebook or a brand’s own Facebook post, an overwhelming positive response does count for something—even if it’s j"
+        }
+      ],
+      "methodological_depth": "MEDIUM",
+      "actionability_for_creative_director": "MEDIUM",
+      "source_diversity": 4,
+      "coverage_class": "MODERATE",
+      "confidence": 0.87,
+      "limitations": [
+        "Social principles and one Meta source are useful, but craft/currentness/testing depth is limited.",
+        "Evidence is concentrated in one advertising book.",
+        "Current platform/form-factor behavior is incomplete or absent."
+      ]
+    },
+    {
+      "domain_id": "25",
+      "domain_name": "mobile-first creative",
+      "queries": [
+        "mobile-first ad creative",
+        "mobile advertising design"
+      ],
+      "retrieved_chunk_ids": [
+        "1287665fb8ae8e53322bacab28c457e907d8815668a120d92b1ebdb74fa2fe21",
+        "0ef4693fb7a5c257b5961a97e0df5d2dfba326dab150c45cafb549a235322bb6",
+        "5b7fbfe4d24f2043b9a045ac11c2f3badddb8d24563b16cee5d412d17b7a1db0",
+        "ee5e7918f8e33fab8535cc4382f14b2224de14838a5116b71e1f960711546f3f",
+        "15dd3b9d24ee9c440cee4425e79d9327a067cac504b6ed65ace2b8020b55929e",
+        "570e1b0a4d7c888638641ec117724eec4a1eeb44cb3a514573bea6d0160a5ff1",
+        "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+        "f49b7aa4141cf4026c31dcdc9f9d788837f513147c6a15a74611018e3a675dda",
+        "88cce7939b9fa31cb847dc72964dd70a68f92351f662c6b22b756459b91a6165",
+        "113386d1b5b56e12753af9b45d7d23f00f2a49e40370f6bba8e66a716546900d"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 0,
+      "representative_evidence": [],
+      "methodological_depth": "NONE",
+      "actionability_for_creative_director": "NONE",
+      "source_diversity": 1,
+      "coverage_class": "NONE",
+      "confidence": 0.96,
+      "limitations": [
+        "Mobile is mentioned as a medium; no mobile-first creative methodology retrieved.",
+        "Evidence is concentrated in one advertising book.",
+        "Current platform/form-factor behavior is incomplete or absent."
+      ]
+    },
+    {
+      "domain_id": "26",
+      "domain_name": "scroll-stopping principles",
+      "queries": [
+        "scroll stopping creative",
+        "attention grabbing social advertising"
+      ],
+      "retrieved_chunk_ids": [
+        "d7a14d2c000f97c3d28ce8fa9aff93c7e5c8fae0f44abef86f06228889968039",
+        "c85020a6b6780fb2f0e8cb2eefc8770daadb212aa4682c570c915a44dd054bc3",
+        "478ec416ee9cf52ed4a80627fc1436331614dfd352aed49a3144ad8ef81c25bf",
+        "981302b0127fa698d62edc8ce37b2a6c7f67b7973b90888f71ca0129857ca401",
+        "46be371d7d229e09611ab4f43b028903edd91ba95b576c8c3b8d88ba42313ddd",
+        "bc17ed37be5790a16134dce91df8f0edd4ea7a69d98bb736089136b2ef89b229",
+        "ef77a7c5568683bf5cdb9825882b0a7d9a03d7d86a179cf2904fa0637f278722",
+        "e36687a57dd74d8d99aebb5258d3a67e94c5119dbd92b00f10931726160d8b34",
+        "b9fcb2ea16891bbaad36929005cea9963598e963d2c791bf2d301f5d491bc8a2",
+        "42e6d123680b754930957d78aa2f0b139096c8178b57d4f3c67901a4ad32577e"
+      ],
+      "source_ids": [
+        "SRC_PRO_CRO",
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "Protégé — CRO Máxima [transcript bundle]",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 0,
+      "representative_evidence": [],
+      "methodological_depth": "NONE",
+      "actionability_for_creative_director": "NONE",
+      "source_diversity": 2,
+      "coverage_class": "NONE",
+      "confidence": 0.96,
+      "limitations": [
+        "Scroll/attention term matches concern analytics or unrelated wording, not scroll-stopping craft.",
+        "Evidence is concentrated in one advertising book.",
+        "Current platform/form-factor behavior is incomplete or absent."
+      ]
+    },
+    {
+      "domain_id": "27",
+      "domain_name": "CTA visual hierarchy",
+      "queries": [
+        "call to action visual hierarchy",
+        "CTA placement contrast advertising"
+      ],
+      "retrieved_chunk_ids": [
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+        "602bb9e430a911a756424d9f756a395ebb428540627e9e5ca8504c672470e5e6",
+        "b7bc0f7453ac4f92041cb038211b4efee23ce3554c98d250be755344d6db6082",
+        "32a13e2ea2958a85df2d7726e8e00c0b7f5d436393dc54d2e84b4848c9dfd27c",
+        "24757494a69170c1cf6c644f9274c00502d2e931fb121860097c2975296d0f90",
+        "dbaa6e39561bc780d00a3d2e815d9cc10c6e44dcf09d0f6091b4e58765d06f10",
+        "336bc6373d6d415dd4be499de6379c41b32c388370bb7401576fd4c4dd3f9a4e",
+        "62c98e5b2e0bb73a95be6360e43d9c00961d2a49290437bcd4945a6f4274469b",
+        "67ca03cf0a07bed32130c9725679b91b20a2ce2796a2866528b49084a8ffa86a",
+        "811668f9b0c7888c155597d3e2a0a864f2e596bc571834ff46569c325fb21c09"
+      ],
+      "source_ids": [
+        "SRC_VEL_FUNNELS",
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 4,
+      "representative_evidence": [
+        {
+          "chunk_id": "32a13e2ea2958a85df2d7726e8e00c0b7f5d436393dc54d2e84b4848c9dfd27c",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            418,
+            419
+          ],
+          "representative_excerpt": "• The “sweet spot” area above the fold (the area visible without scrolling; usually 420 pixels deep) should contain concise copy (headline, subhead) and a primary call-to-action (CTA) button or link. • Below the fold contains secondary information (more copy, etc.) and a repeated CTA. • The email subject line should be 50 characters or fewer in length. Embra"
+        },
+        {
+          "chunk_id": "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            154,
+            155
+          ],
+          "representative_excerpt": "The main reason for hierarchy is so that each element is not competing or fighting with one another for attention. By art directing the layout, you’re basically directing the consumer around the ad. Don’t forget, advertising is all about efficient communication. Some basic layout variations of hierarchy are illustrated on page 78. These thumbnails show diffe"
+        },
+        {
+          "chunk_id": "602bb9e430a911a756424d9f756a395ebb428540627e9e5ca8504c672470e5e6",
+          "source_id": "SRC_VEL_FUNNELS",
+          "source_title": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "representative_excerpt": "Incluye un título impactante que resuma el valor de tu oferta. Puedes utilizar un subtítulo para proporcionar detalles adicionales. Dos, imagen o vídeo llamativo. Una imagen o vídeo relacionado con tu oferta o producto puede ser efectivo para transmitir el mensaje de manera visual y atractiva. A menudo, esta es la parte superior de la landing page. Tres, tex"
+        }
+      ],
+      "methodological_depth": "MEDIUM",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 2,
+      "coverage_class": "MODERATE",
+      "confidence": 0.88,
+      "limitations": [
+        "Direct CTA placement and hierarchy plus a second funnel source; limited ad-format breadth.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "28",
+      "domain_name": "information density",
+      "queries": [
+        "information density graphic design",
+        "reduce clutter advertising layout"
+      ],
+      "retrieved_chunk_ids": [
+        "b3425e71b3cc82a4955361c7ca36e19fa5fbfb3849ed6fb09211a468d0901dfe",
+        "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+        "c6a4e8dd5f030466dc1188ffcf1856e36092878e866451915b7012312bc13882",
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "7d08fea01699f86bd238ffd2b53be119b9f2a46ff3e79b97df9ece783b6a990f",
+        "52f3d1f825e81e53630b33882602e5095b3d70e145b77df562bf54cebbaf6637",
+        "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+        "8af84d90bd99bb640b1696ff368638c961c5d4c41dd86f030cc62c8d586d093a",
+        "00910d06e6e7370b5fff159f67fded7fe0b3025c556456cb6104a0167575f9f2"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 4,
+      "representative_evidence": [
+        {
+          "chunk_id": "b3425e71b3cc82a4955361c7ca36e19fa5fbfb3849ed6fb09211a468d0901dfe",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            178,
+            179
+          ],
+          "representative_excerpt": "A primary objective of the graphic designer is to organize and present information in a compelling way that will be most easily understood by the viewer/user. To achieve this, a graphic designer is trained to spend much of his or her time figuring out how to: build hierarchy of the information being delivered, establish a visual vocabulary that is most inter"
+        },
+        {
+          "chunk_id": "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            569,
+            570
+          ],
+          "representative_excerpt": "• Less elements = more freedom (need for grid is reduced) • More elements = less freedom (need for grid is increased) In other words, a clean and simple layout usually has fewer elements, whereas a complex composition or layered layout has a greater number (see “Look,” page 290). Information presented with clear, logically positioned typography, illustration"
+        },
+        {
+          "chunk_id": "c36b3a4c5a80c45251ced20b8364b0963ea6bbad86ab31f5b5fdff64f8cf25c0",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            154,
+            155
+          ],
+          "representative_excerpt": "The main reason for hierarchy is so that each element is not competing or fighting with one another for attention. By art directing the layout, you’re basically directing the consumer around the ad. Don’t forget, advertising is all about efficient communication. Some basic layout variations of hierarchy are illustrated on page 78. These thumbnails show diffe"
+        }
+      ],
+      "methodological_depth": "MEDIUM",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "MODERATE",
+      "confidence": 0.87,
+      "limitations": [
+        "Actionable element-count, organization, hierarchy, and clarity principles.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "29",
+      "domain_name": "readability / legibility",
+      "queries": [
+        "readability legibility graphic design",
+        "legible type advertising"
+      ],
+      "retrieved_chunk_ids": [
+        "d17a8e4d6d9c9f63f9e9b231fb7f125af7ecc4c08a372dddc37119fbf756bde4",
+        "fb487158ca5c64758366ba0aa72fc5ebc274c19df0c1d916d4cbf9d9ab850c9e",
+        "55c59a77d2d03f01f62c3f5ea6c2a75f81a5689777d26a188999ba3c8a4f1f1d",
+        "c6a4e8dd5f030466dc1188ffcf1856e36092878e866451915b7012312bc13882",
+        "6eff2196fcc2dc19f1d6e02b99d0fd201d57eb83977b4662a98f6617bc68b728",
+        "8778176a63a9f28f4b2b903069f944f6e0484043494c1f563b2945919706536d",
+        "2bd0a139cc4524493d67f9423290b2a9c4f4646d7c2d2a9ff35205e3081fd2ee",
+        "5c5e7fc0a102dd5b5d9237204fd02bf237169b0565906c869f6f91c4cc015258",
+        "b4d6fa875a8b42b8766e485525bea2cdbdd4c57d8ca5cbfe7100a3c5f9ecb25a"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 4,
+      "representative_evidence": [
+        {
+          "chunk_id": "b4d6fa875a8b42b8766e485525bea2cdbdd4c57d8ca5cbfe7100a3c5f9ecb25a",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            573,
+            574
+          ],
+          "representative_excerpt": "Note: one of the most common mistakes a student makes when choosing color for a final layout is poor contrast of tone. As a general rule, when you use two colors together (i.e., foreground against background), and particularly when using type/text, be sure that there is enough contrast between the two. Otherwise the ad will be difficult to read, especially w"
+        },
+        {
+          "chunk_id": "5c5e7fc0a102dd5b5d9237204fd02bf237169b0565906c869f6f91c4cc015258",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            555,
+            556
+          ],
+          "representative_excerpt": "The standard typewriter is a one-unit system, meaning that each character and mark occupies the same amount of space. Typesetting effectively “pre-kerns” the characters to occupy varying amounts of space, although further kerning may be required. • Letterspacing: the spacing between the (typically capital) letters of a word, sometimes varied to improve legib"
+        },
+        {
+          "chunk_id": "d17a8e4d6d9c9f63f9e9b231fb7f125af7ecc4c08a372dddc37119fbf756bde4",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            551,
+            552
+          ],
+          "representative_excerpt": "In terms of color, keep your options open. A simple, well-designed logo should work in either all-white, all-black, or its original color(s). This gives you the flexibility to use it in a black-and-white ad, or when your choice of color palette clashes with the all-color logo (in which case, to maximize contrast and legibility, you would use the white logo w"
+        }
+      ],
+      "methodological_depth": "MEDIUM",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "MODERATE",
+      "confidence": 0.88,
+      "limitations": [
+        "Useful tonal contrast, type spacing, and contextual type choices; not a full accessibility method.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    },
+    {
+      "domain_id": "30",
+      "domain_name": "creative evaluation / critique",
+      "queries": [
+        "evaluate advertising creative",
+        "creative critique criteria"
+      ],
+      "retrieved_chunk_ids": [
+        "4bf3382b1939604260ce556753381ee2f025472aeb1a8c4da50c351a8f38ad55",
+        "99add5411acf729346b41eadf03a2ccddd48b18c0d6b91c25d2e6a3a382915b1",
+        "6983565580fbe7a454a9ae781702b3765dbd6be7d4055774526f289816fd54fa",
+        "656200b8eea81712a0bad47678a681965118bc9f59cabd37b21624a7f20ca58f",
+        "a60f1f8384d41f75df8403af824d20d8a0ed56f3dd3f26e0a42c338c58a9ba13",
+        "deb072ce44b9de6c00fd397520f059c67a45c092cd5940fd50aa8ac2e1672923",
+        "d7a14d2c000f97c3d28ce8fa9aff93c7e5c8fae0f44abef86f06228889968039",
+        "985d986e99326457968aa1e9e7c3bfb1ed7434c6f0fbf91fb58231cedfb8a6a8",
+        "bd3ca1a166e1ecb2f74c89ef6693ee85f04c7416ab1e5e8adc96544424794e9f"
+      ],
+      "source_ids": [
+        "acb-7efda14cb56f"
+      ],
+      "source_titles": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "direct_evidence_count": 4,
+      "representative_evidence": [
+        {
+          "chunk_id": "4bf3382b1939604260ce556753381ee2f025472aeb1a8c4da50c351a8f38ad55",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            46,
+            47
+          ],
+          "representative_excerpt": "(In)effective Creative Advertising: What was the Product? Many ads are so unoriginal and uncreative, making them instantly forgettable and totally fruitless. These ads have no impact or resonance, invisible in every sense. Neither the ad, the message, nor the product is retained by consumers. There are also many ads that are memorable as an ad (concept recal"
+        },
+        {
+          "chunk_id": "99add5411acf729346b41eadf03a2ccddd48b18c0d6b91c25d2e6a3a382915b1",
+          "source_id": "acb-7efda14cb56f",
+          "source_title": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            42,
+            43
+          ],
+          "representative_excerpt": "• Smile disarms you • Laugh really disarms you • Informs tells you something you didn’t know • Provokes there’s a reaction, an emotional response • Involves there’s a connection, an interaction • (makes you) Think America is a capitalist country God© Bless™ America® Two ways of saying the same thing. The first is slow and literal, the second is fast and late"
+        }
+      ],
+      "methodological_depth": "HIGH",
+      "actionability_for_creative_director": "HIGH",
+      "source_diversity": 1,
+      "coverage_class": "STRONG",
+      "confidence": 0.9,
+      "limitations": [
+        "Explicit effectiveness failure modes and response criteria support bounded critique.",
+        "Evidence is concentrated in one advertising book."
+      ]
+    }
+  ]
+}

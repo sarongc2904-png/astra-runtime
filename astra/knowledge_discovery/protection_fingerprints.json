@@ -1,0 +1,62 @@
+{
+  "before_reconstructed_at_resume": {
+    "protected_files": {
+      "knowledge.js": {
+        "sha256": "0596f096fe8c628e2e69142e558ffbc69fd4b607967eb7099d86f01627a62c3d",
+        "bytes": 32016
+      },
+      "classifier_decision_cache.js": {
+        "sha256": "273b40eefac54b17d33357460ff459f96ec5cb896c1517c9ddbf720b3370fbfa",
+        "bytes": 6130
+      },
+      "retrieval_strategy_f.py": {
+        "sha256": "cdbbc9b2b779b751bbd9c8031f7057c12f29fe2702bbe5f0d4b0b3a42012e1de",
+        "bytes": 6107
+      },
+      "rag_answer_policy_runtime.js": {
+        "sha256": "f76d620795170b61af202907eba70c9f7d470b795467db985682359e9aeb8aab",
+        "bytes": 3347
+      },
+      "end_to_end_agent_qa_final_retry/end_to_end_agent_qa_cases.json": {
+        "sha256": "ddb566fd3ea1e9f172cc05001bf65e5cbe895a3f0c809858fa990eb25862ad80",
+        "bytes": 199596
+      },
+      "e2e_benchmark_evidence_rebuild/rebuilt_evidence.json": {
+        "sha256": "02cbd455470b2ea83cc705468fd6c65ac7352e568fce255e39e57e66c2599c3e",
+        "bytes": 417253
+      }
+    },
+    "classifier_cache_records": 20
+  },
+  "after_astra03_build": {
+    "protected_files": {
+      "knowledge.js": {
+        "sha256": "0596f096fe8c628e2e69142e558ffbc69fd4b607967eb7099d86f01627a62c3d",
+        "bytes": 32016
+      },
+      "classifier_decision_cache.js": {
+        "sha256": "273b40eefac54b17d33357460ff459f96ec5cb896c1517c9ddbf720b3370fbfa",
+        "bytes": 6130
+      },
+      "retrieval_strategy_f.py": {
+        "sha256": "cdbbc9b2b779b751bbd9c8031f7057c12f29fe2702bbe5f0d4b0b3a42012e1de",
+        "bytes": 6107
+      },
+      "rag_answer_policy_runtime.js": {
+        "sha256": "f76d620795170b61af202907eba70c9f7d470b795467db985682359e9aeb8aab",
+        "bytes": 3347
+      },
+      "end_to_end_agent_qa_final_retry/end_to_end_agent_qa_cases.json": {
+        "sha256": "ddb566fd3ea1e9f172cc05001bf65e5cbe895a3f0c809858fa990eb25862ad80",
+        "bytes": 199596
+      },
+      "e2e_benchmark_evidence_rebuild/rebuilt_evidence.json": {
+        "sha256": "02cbd455470b2ea83cc705468fd6c65ac7352e568fce255e39e57e66c2599c3e",
+        "bytes": 417253
+      }
+    },
+    "classifier_cache_records": 20
+  },
+  "unchanged": true,
+  "agent_v1_protected": true
+}

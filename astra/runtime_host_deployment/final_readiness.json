@@ -1,0 +1,13 @@
+{
+  "gate": "ASTRA_10R_RUNTIME_HOST_DEPLOYMENT",
+  "decision": "BLOCKED",
+  "ready_for_chatgpt_use": false,
+  "offline_runtime_complete": true,
+  "render_deployed": false,
+  "durable_https_verified": false,
+  "supabase_runtime_wired": false,
+  "previous_503_resolved": false,
+  "gpt_action_manual_configuration_required": true,
+  "exactly_one_next_manual_action": "Connect and authorize a Render account in this environment with a Git repository containing this checkout.",
+  "stop_after_gate": true
+}

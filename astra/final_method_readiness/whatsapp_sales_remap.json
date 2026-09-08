@@ -1,0 +1,102 @@
+{
+  "method_id": "METHOD_WHATSAPP_SALES",
+  "method_name": "WhatsApp Conversational Sales",
+  "canonical_name": "whatsapp sales",
+  "aliases": [
+    "chat sales",
+    "conversational selling"
+  ],
+  "primary_source": "SRC_WA_SALES_OS_LEGACY_CURATED",
+  "supporting_sources": [
+    "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT"
+  ],
+  "domain": "SALES",
+  "subdomain": "conversational sales / appointment conversion",
+  "primary_jobs": [
+    "run first response and lead qualification",
+    "discovery/diagnosis",
+    "appointment setting",
+    "objection handling",
+    "closing/next step",
+    "follow-up and lead recovery",
+    "nurture/automation and CRM/pipeline tracking"
+  ],
+  "business_stage": [],
+  "funnel_stage": [
+    "conversion",
+    "retention"
+  ],
+  "best_for": [
+    "converting inbound leads to appointments/sales via WhatsApp conversation"
+  ],
+  "not_recommended_for": [
+    "provider-independent WhatsApp API operations and current policy",
+    "deep multi-channel CRM integration",
+    "regulated-industry qualification",
+    "long-cycle nurture beyond the compact base workflow"
+  ],
+  "required_inputs": [
+    "inbound lead",
+    "offer",
+    "qualification criteria"
+  ],
+  "expected_outputs": [
+    "conversation flow: qualify→diagnose→appointment→close→follow-up"
+  ],
+  "strengths": [],
+  "limitations": [
+    "MODERATE coverage; curated + workshop sources; authority/currentness/ASR limitations; not STRONG until a fully-attributed current provider-independent source exists"
+  ],
+  "dependencies": [],
+  "compatible_methods": [],
+  "conflicting_methods": [],
+  "evidence_refs": [
+    {
+      "chunk_id": "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "discovery_query": "cómo calificar leads que llegan por WhatsApp sin hacer un interrogatorio"
+    },
+    {
+      "chunk_id": "3452ef206f89c3091ce18b1bc1689136217d9f3638ba15e24b513eb1b1a87fd2",
+      "source_id": "SRC_WA_SALES_OS_LEGACY_CURATED",
+      "discovery_query": "cómo calificar leads que llegan por WhatsApp sin hacer un interrogatorio"
+    },
+    {
+      "chunk_id": "236417a9db826a55d1313e67d2238c028740c410e511b17553f79572cb9049b9",
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "discovery_query": "cómo calificar leads que llegan por WhatsApp sin hacer un interrogatorio"
+    },
+    {
+      "chunk_id": "432560738516315a9e75f7706fdb920910892b44d6d79b0b8a217f322519a98b",
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "discovery_query": "cómo calificar leads que llegan por WhatsApp sin hacer un interrogatorio"
+    },
+    {
+      "chunk_id": "3661633c67890fa6e5ec8246d8bf0ef5310e649e4c67b75b45f6d28a1fb379d8",
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "discovery_query": "cómo calificar leads que llegan por WhatsApp sin hacer un interrogatorio"
+    },
+    {
+      "chunk_id": "ad1c90774931288a3d4c4bacf899ddaa3600fe2f8831f9e608c7a0bf2dcc1dfd",
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "discovery_query": "preguntas de descubrimiento y diagnóstico en una conversación de ventas por What"
+    },
+    {
+      "chunk_id": "3aa3fb3727d42e1ac2dba98f3a5cdf65d6e79173d62633f31e2e6e6b48dfe22b",
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "discovery_query": "preguntas de descubrimiento y diagnóstico en una conversación de ventas por What"
+    },
+    {
+      "chunk_id": "5279a36b551429c33e07b9727384b532e4de76a17e64fc1a701c44397bf744f7",
+      "source_id": "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+      "discovery_query": "cómo agendar una cita por WhatsApp y prevenir que no se presente"
+    }
+  ],
+  "confidence": 0.5,
+  "mapping_status": "PARTIALLY_MAPPED",
+  "coverage": "MODERATE",
+  "coverage_basis": {
+    "dedicated_hits": 40,
+    "queries": 10
+  }
+}

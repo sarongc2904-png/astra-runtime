@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-09-07T01:30:56.573182+00:00",
+  "METHOD_ADJUDICATOR_METADATA_READY": true,
+  "READY_FOR_ASTRA_04_VERTICAL_SLICE_360": true,
+  "criteria": {
+    "all_mandatory_nodes_supported_or_acceptably_partial": true,
+    "no_mandatory_node_unsupported": true,
+    "meta_ads_evidence_backed": true,
+    "whatsapp_sales_evidence_backed": true,
+    "no_blocking_scorer_defect": true,
+    "no_blocking_registry_gap": true,
+    "agent_v1_protected": true,
+    "provenance_intact": true,
+    "no_fabricated_expertise_required": true
+  },
+  "blocking_domains": 0,
+  "non_blocking_uncovered": [
+    "course_creation (NONE, not a mandatory 360 node)",
+    "pricing (WEAK, not mandatory)",
+    "positioning (MODERATE, not mandatory)"
+  ],
+  "velocity_status": "DISCOVERED (brand/umbrella; no single canonical doctrine; not forced)",
+  "course_design_status": "DISCOVERED (no evidence; not a mandatory 360 node -> non-blocking)",
+  "required_astra04_behavior": "node router MUST bind ads->METHOD_META_ADS and whatsapp_conversion->METHOD_WHATSAPP_SALES (coarse scorer would otherwise pick the generic same-domain method); both are evidence-backed and available."
+}

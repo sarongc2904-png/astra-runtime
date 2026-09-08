@@ -1,0 +1,256 @@
+{
+  "ingestion_batch_id": "ASTRA03B-INGEST-20260906-01",
+  "total_chunks": 617,
+  "batch_size": 20,
+  "batches": [
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-001",
+      "row_start": 0,
+      "row_end_exclusive": 20,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-002",
+      "row_start": 20,
+      "row_end_exclusive": 40,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-003",
+      "row_start": 40,
+      "row_end_exclusive": 60,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-004",
+      "row_start": 60,
+      "row_end_exclusive": 80,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-005",
+      "row_start": 80,
+      "row_end_exclusive": 100,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-006",
+      "row_start": 100,
+      "row_end_exclusive": 120,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-007",
+      "row_start": 120,
+      "row_end_exclusive": 140,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-008",
+      "row_start": 140,
+      "row_end_exclusive": 160,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-009",
+      "row_start": 160,
+      "row_end_exclusive": 180,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-010",
+      "row_start": 180,
+      "row_end_exclusive": 200,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-011",
+      "row_start": 200,
+      "row_end_exclusive": 220,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-012",
+      "row_start": 220,
+      "row_end_exclusive": 240,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-013",
+      "row_start": 240,
+      "row_end_exclusive": 260,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-014",
+      "row_start": 260,
+      "row_end_exclusive": 280,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-015",
+      "row_start": 280,
+      "row_end_exclusive": 300,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-016",
+      "row_start": 300,
+      "row_end_exclusive": 320,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-017",
+      "row_start": 320,
+      "row_end_exclusive": 340,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-018",
+      "row_start": 340,
+      "row_end_exclusive": 360,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-019",
+      "row_start": 360,
+      "row_end_exclusive": 380,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-020",
+      "row_start": 380,
+      "row_end_exclusive": 400,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-021",
+      "row_start": 400,
+      "row_end_exclusive": 420,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-022",
+      "row_start": 420,
+      "row_end_exclusive": 440,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-023",
+      "row_start": 440,
+      "row_end_exclusive": 460,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-024",
+      "row_start": 460,
+      "row_end_exclusive": 480,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-025",
+      "row_start": 480,
+      "row_end_exclusive": 500,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-026",
+      "row_start": 500,
+      "row_end_exclusive": 520,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-027",
+      "row_start": 520,
+      "row_end_exclusive": 540,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-028",
+      "row_start": 540,
+      "row_end_exclusive": 560,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-029",
+      "row_start": 560,
+      "row_end_exclusive": 580,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-030",
+      "row_start": 580,
+      "row_end_exclusive": 600,
+      "chunk_count": 20,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    },
+    {
+      "batch_id": "ASTRA03B-INGEST-20260906-01-031",
+      "row_start": 600,
+      "row_end_exclusive": 617,
+      "chunk_count": 17,
+      "transaction_scope": "one atomic PostgREST INSERT request",
+      "conflict_policy": "ignore-duplicates by primary key; never merge/overwrite"
+    }
+  ],
+  "rollback_fail_closed": "Preflight rejects any unexpected ID/hash collision. Each batch is atomic; on failure stop. Successful prior batches are traceable and a resume uses ignore-duplicates without overwrites."
+}

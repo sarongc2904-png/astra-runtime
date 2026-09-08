@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-09-07T03:36:48.0444339Z",
+  "test_suite": "astra/tests/astra07.test.js",
+  "provider_enum": true,
+  "openrouter_key_required": true,
+  "model_required": true,
+  "http_base_url_validated": true,
+  "timeout_integer_positive": true,
+  "retry_budget_integer_nonnegative": true,
+  "output_token_budget_integer_positive": true,
+  "project_config_secret_fallback": false,
+  "sanitized_diagnostics": true,
+  "fail_closed_cases": [
+    "invalid provider",
+    "invalid base URL",
+    "missing OpenRouter key",
+    "missing model",
+    "invalid numeric bounds"
+  ]
+}

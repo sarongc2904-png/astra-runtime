@@ -1,0 +1,16 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "BLOCKED",
+  "offline_astra09_states": "PASS",
+  "deployed_states_verified": [
+    "ENVIRONMENT_NOT_AVAILABLE"
+  ],
+  "deployed_states_pending": [
+    "COMPLETE",
+    "WAITING_FOR_INPUT",
+    "BLOCKED",
+    "FAILED",
+    "CURRENT_RESEARCH_REQUIRED"
+  ]
+}

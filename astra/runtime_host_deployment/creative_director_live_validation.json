@@ -1,0 +1,8 @@
+{
+  "status": "BLOCKED",
+  "local_http_route_valid": true,
+  "local_http_status": 200,
+  "local_astra_status": "COMPLETE",
+  "render_execution_attempted": false,
+  "supabase_to_render_execution_valid": false
+}

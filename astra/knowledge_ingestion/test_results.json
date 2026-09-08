@@ -1,0 +1,134 @@
+{
+  "suite": "ASTRA_03B",
+  "tests": [
+    {
+      "test": "candidate_source_schema",
+      "status": "PASS",
+      "evidence": "12/12 records contain every mandatory field"
+    },
+    {
+      "test": "source_admission_decisions",
+      "status": "PASS",
+      "evidence": {
+        "ADMIT": 7,
+        "DEFER": 4,
+        "REJECT": 1
+      }
+    },
+    {
+      "test": "duplicate_source_handling",
+      "status": "PASS",
+      "evidence": "All HIGH-redundancy candidates deferred or rejected"
+    },
+    {
+      "test": "extraction_qa",
+      "status": "PASS",
+      "evidence": "64/64 units; ASR/no-page warnings retained"
+    },
+    {
+      "test": "chunk_count",
+      "status": "PASS",
+      "evidence": "617"
+    },
+    {
+      "test": "chunk_uniqueness",
+      "status": "PASS",
+      "evidence": "0 duplicate ids/content"
+    },
+    {
+      "test": "chunk_content_hashes",
+      "status": "PASS",
+      "evidence": "617/617"
+    },
+    {
+      "test": "chunk_size_and_blank_rules",
+      "status": "PASS",
+      "evidence": "0 blank/under/oversize"
+    },
+    {
+      "test": "provenance_completeness",
+      "status": "PASS",
+      "evidence": "617/617"
+    },
+    {
+      "test": "embedding_model_dimension",
+      "status": "PASS",
+      "evidence": "(617, 1536)"
+    },
+    {
+      "test": "embedding_numeric_validity",
+      "status": "PASS",
+      "evidence": "617 finite non-zero vectors"
+    },
+    {
+      "test": "additive_counts",
+      "status": "PASS",
+      "evidence": "763 + 617 = 1380"
+    },
+    {
+      "test": "remote_embedding_visibility",
+      "status": "PASS",
+      "evidence": "1380/1380"
+    },
+    {
+      "test": "new_batch_traceability",
+      "status": "PASS",
+      "evidence": "617/617"
+    },
+    {
+      "test": "retrieval_runtime_contract",
+      "status": "PASS",
+      "evidence": "10/10 unchanged Strategy-F"
+    },
+    {
+      "test": "retrieval_visibility",
+      "status": "PASS",
+      "evidence": "7/7 targeted supported domains strong in representative top-5"
+    },
+    {
+      "test": "unresolved_gaps_not_overstated",
+      "status": "PASS",
+      "evidence": [
+        "Meta Ads",
+        "WhatsApp sales",
+        "course creation"
+      ]
+    },
+    {
+      "test": "domain_coverage_improved",
+      "status": "PASS",
+      "evidence": "TRUE"
+    },
+    {
+      "test": "protected_runtime_files",
+      "status": "PASS",
+      "evidence": "11 protected files byte-identical"
+    },
+    {
+      "test": "classifier_cache_preserved",
+      "status": "PASS",
+      "evidence": [
+        20,
+        20
+      ]
+    },
+    {
+      "test": "existing_corpus_and_embeddings_preserved",
+      "status": "PASS",
+      "evidence": "763/763 identity/content/vector preserved"
+    },
+    {
+      "test": "legacy_and_ann_preserved",
+      "status": "PASS",
+      "evidence": "legacy 7584; ANN 0"
+    },
+    {
+      "test": "no_specialist_execution",
+      "status": "PASS",
+      "evidence": "No specialist entrypoint invoked"
+    }
+  ],
+  "passed": 23,
+  "failed": 0,
+  "status": "PASS"
+}

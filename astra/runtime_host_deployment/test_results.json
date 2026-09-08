@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-09-08T02:46:44Z",
+  "decision": "BLOCKED",
+  "checks": {
+    "canonical_pre_resolver": "RUN",
+    "local_http_health": "PASS",
+    "local_runtime_auth": "PASS",
+    "local_campaign_state_fixture": "PASS",
+    "local_creative_director": "PASS",
+    "local_creative_generation_honesty": "PASS",
+    "strategy_f_frozen_vector": "PASS",
+    "dependency_lock_validation": "PASS",
+    "docker_static_contract": "PASS",
+    "docker_image_build": "NOT_RUN_ENVIRONMENT_UNAVAILABLE",
+    "render_deployment": "NOT_RUN_AUTH_UNAVAILABLE",
+    "supabase_runtime_wiring": "NOT_RUN_NO_RUNTIME_URL",
+    "regressions": "PASS",
+    "protection": "PASS"
+  }
+}

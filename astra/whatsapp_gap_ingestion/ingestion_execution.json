@@ -1,0 +1,30 @@
+{
+  "executed_at": "2026-09-07T01:00:11.560577+00:00",
+  "chunks_before": 1415,
+  "attempted_new_chunks": 39,
+  "chunks_inserted": 39,
+  "duplicates_skipped": 0,
+  "insert_failures": [],
+  "chunks_after_expected": 1454,
+  "embeddings_before": 1415,
+  "embeddings_inserted": 39,
+  "embeddings_after_expected": 1454,
+  "completed_batches": [
+    {
+      "batch": 1,
+      "attempted": 20,
+      "inserted": 20,
+      "skipped_existing": 0,
+      "status": "PASS"
+    },
+    {
+      "batch": 2,
+      "attempted": 19,
+      "inserted": 19,
+      "skipped_existing": 0,
+      "status": "PASS"
+    }
+  ],
+  "conflict_policy": "ignore-duplicates; no update, merge or overwrite",
+  "status": "PASS"
+}

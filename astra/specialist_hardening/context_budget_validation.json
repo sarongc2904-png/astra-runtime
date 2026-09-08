@@ -1,0 +1,18 @@
+{
+  "captured_at": "2026-09-07T02:39:08.897020+00:00",
+  "policy": "READ_MINIMUM_NECESSARY_CONTEXT",
+  "max_evidence_per_step_chars": 8000,
+  "per_node_evidence_count_laser": {
+    "market_context": 5,
+    "icp": 5,
+    "offer": 5,
+    "funnel": 5,
+    "creative_strategy": 5,
+    "ads": 5,
+    "whatsapp_conversion": 5,
+    "measurement": 5
+  },
+  "all_nodes_bounded_top5": true,
+  "evidence_chars_total_laser": 55054,
+  "no_full_kb_leakage": true
+}

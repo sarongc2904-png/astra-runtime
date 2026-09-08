@@ -1,0 +1,242 @@
+{
+  "generated_at": "2026-09-07T00:40:30.215389+00:00",
+  "strategy": "Strategy-F unchanged",
+  "queries": [
+    {
+      "query": "estrategia de campañas Meta Ads objetivos y economía de adquisición",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_VEL_FUNNELS",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_VEL_MIDAS",
+        "SRC_VEL_INFO_AZ"
+      ],
+      "returned_chunk_ids": [
+        "9a8c2ea98387788349d14e4b5b300def0b67d2b5002e7e91347cc4e579ca8aad",
+        "46a23102662fe41898efe23cc45926a63b64736114ffd0c2a63e1abd0ad80b22",
+        "09ac04c5370d16507f7d8b3d0ea6a198cc512ab73cca05bf888e1452d24ed954",
+        "1d783c566f8c11831f3ed449ff29602adffe33ce8301b9335a46e1dddbec2380",
+        "52f52e83e7a7b28a938724854407ac50421b3a8631c42c306db14ea3e3f9c169"
+      ],
+      "subject_hits": 2,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "estructura de campaña conjunto de anuncios ABO CBO",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE"
+      ],
+      "returned_chunk_ids": [
+        "586eaa1f65b3d150b9be8b3e2066a39e7dd9f72d10fa29b7eb48a9ebc4b1819e",
+        "1ced200e68b79b8c621b82948a3f11f1b6a4db9766c0d70874ea1a1d0032ff9d",
+        "199e329deb4041c1fbc3d306d6a52fad745633d902649b8dd88cd9cc221ac570",
+        "9a8c2ea98387788349d14e4b5b300def0b67d2b5002e7e91347cc4e579ca8aad",
+        "67764b7d4f02fde057335a3bd8e29f1ad5d68d38cdbcf4c0d2e8d76bd14e86f7"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "estrategia de audiencias Facebook Ads públicos similares lookalike",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE"
+      ],
+      "returned_chunk_ids": [
+        "1ced200e68b79b8c621b82948a3f11f1b6a4db9766c0d70874ea1a1d0032ff9d",
+        "8e5af3fd51526d63d6c53d3f338eebb74205357514c1287ceaf35ae07fcb5cba",
+        "b856c60855661527159ae349024775bae36f03311ae1efee12e5b5539cc5b80c",
+        "c1cf79bd927896c9096faf43b97286f1c9f83842b367dc9c64b7dddc27e315f9",
+        "986cc731a30f95d556120355d2287bb5aeb18979f3496bd6fdecd4b562e59dc4"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "prospección de audiencias frías en Facebook Ads",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE"
+      ],
+      "returned_chunk_ids": [
+        "8e5af3fd51526d63d6c53d3f338eebb74205357514c1287ceaf35ae07fcb5cba",
+        "c1cf79bd927896c9096faf43b97286f1c9f83842b367dc9c64b7dddc27e315f9",
+        "986cc731a30f95d556120355d2287bb5aeb18979f3496bd6fdecd4b562e59dc4",
+        "92c796c3447301cbf0f9d06c8f30363df6aaf22b4970c04b73f758a332a8ad28",
+        "09ac04c5370d16507f7d8b3d0ea6a198cc512ab73cca05bf888e1452d24ed954"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "retargeting de visitantes y personas que vieron anuncios",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE"
+      ],
+      "returned_chunk_ids": [
+        "67764b7d4f02fde057335a3bd8e29f1ad5d68d38cdbcf4c0d2e8d76bd14e86f7",
+        "8e5af3fd51526d63d6c53d3f338eebb74205357514c1287ceaf35ae07fcb5cba",
+        "b5ecc59172a6faeec97d0465776c8f068bdc39c23ed2914ffe737a289d43b8e0",
+        "3a44f0861d631d0ac8a02c97dcb164a3a7c69ea1c7b9841dd38c3bf1fa007072",
+        "2356ee22f9196135b7382ece873b6deb3b70e7a1d9d6268619887a309ad9d3f3"
+      ],
+      "subject_hits": 3,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "testing de creatividades anuncios ganadores Facebook",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE"
+      ],
+      "returned_chunk_ids": [
+        "b8cd41d61b7217f4d0f5f98dbb35a2b1cf9cc3b0f10ca24644483e376fa0e31a",
+        "6c260e0ef44b66c749b650802d4b795e404a7f32e78f90afa0a66ddf53ed01bc",
+        "9899c0da71c0cd2a18d31a674aa3d4f871f5e524752b469269e3fcddcde0067d",
+        "986cc731a30f95d556120355d2287bb5aeb18979f3496bd6fdecd4b562e59dc4",
+        "92c796c3447301cbf0f9d06c8f30363df6aaf22b4970c04b73f758a332a8ad28"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "optimización y escalado vertical horizontal campañas",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_VEL_FUNNELS",
+        null
+      ],
+      "returned_chunk_ids": [
+        "cb15910566e4d86c5762106dc8c38940c99d9853275f29dbde7f5aa0e0d11180",
+        "609a556e534746adc9b369f071abc9658e469f5a6bb4b70fda85f5db3ecb4a69",
+        "586eaa1f65b3d150b9be8b3e2066a39e7dd9f72d10fa29b7eb48a9ebc4b1819e",
+        "46a23102662fe41898efe23cc45926a63b64736114ffd0c2a63e1abd0ad80b22",
+        "315b8fd8371eb5e3d8714d3d5a377fa6e346f543e10a3a7115f9b1ed11899e49"
+      ],
+      "subject_hits": 3,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "generación de leads con campañas de Facebook",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE"
+      ],
+      "returned_chunk_ids": [
+        "e2f7f0bd6d6a3a3110050e68a6b40b44bf14e73bf9259ad55e9ed14415d46129",
+        "09ac04c5370d16507f7d8b3d0ea6a198cc512ab73cca05bf888e1452d24ed954",
+        "cb15910566e4d86c5762106dc8c38940c99d9853275f29dbde7f5aa0e0d11180",
+        "da91e7cb780f905290fd35c56f0f8500a13ca943a6af088366e8eabc452bc7e6",
+        "4d74305a5ecc9ae9ad3056d24743b2c48f26a86409520855f5aa7301ea8dc08b"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "calificación de leads provenientes de Meta Ads",
+      "returned_source_ids": [
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_FUNNELS",
+        "SRC_VEL_OFFER",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_VEL_FUNNELS"
+      ],
+      "returned_chunk_ids": [
+        "d39775cbd58c0919147080bdffa987e900d2e9ef8d89a154e5c0db57df10f73b",
+        "1e08c38ea2a0278f10ad86bca321c899122385968ee7b0e920fa0c4a3e181fb2",
+        "0b0a0cc296887fe7c1d0354353efba59c33a4c3a22bd074bc8e8f4529588bc41",
+        "09ac04c5370d16507f7d8b3d0ea6a198cc512ab73cca05bf888e1452d24ed954",
+        "965abd113c2a0b5ea6a707b22be28f10062b1307ac0a79e7979074d41b673fed"
+      ],
+      "subject_hits": 1,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "medición CPA CPL CTR frecuencia ROAS campañas",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_PRO_GROWTH",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE"
+      ],
+      "returned_chunk_ids": [
+        "bc05e5996ccc8391b50efc77c01fef13013887d0c6c56927d58a40ddae80241a",
+        "a41205c07d6820e1da67093514bc851ea810bc775621b8e495ed7185ff69ea6a",
+        "92c796c3447301cbf0f9d06c8f30363df6aaf22b4970c04b73f758a332a8ad28",
+        "ec2b404f2f5890372a514c52cf445e40f4028698c1b22752006e3e94c07d69c6",
+        "a9c2fc46389b498b5a48d9469a4f111891c343825289eb70703c934a23440f85"
+      ],
+      "subject_hits": 4,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Subject hit requires a dedicated admitted source; incidental mentions from general sources are excluded."
+    },
+    {
+      "query": "Pixel y Conversions API CAPI Meta Ads Advantage Plus",
+      "returned_source_ids": [
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_META_VELOCITY_FACEBOOK_COURSE",
+        "SRC_VEL_OFFER"
+      ],
+      "returned_chunk_ids": [
+        "4d74305a5ecc9ae9ad3056d24743b2c48f26a86409520855f5aa7301ea8dc08b",
+        "c1cf79bd927896c9096faf43b97286f1c9f83842b367dc9c64b7dddc27e315f9",
+        "8e5af3fd51526d63d6c53d3f338eebb74205357514c1287ceaf35ae07fcb5cba",
+        "b7456f6e5d0508312729af329577bad9080e1b8ab17f69582302619f56113c23",
+        "0b0a0cc296887fe7c1d0354353efba59c33a4c3a22bd074bc8e8f4529588bc41"
+      ],
+      "subject_hits": 4,
+      "provenance_ok": true,
+      "coverage_assessment": "PARTIAL_PIXEL_ONLY",
+      "notes": "The retrieved course supports Pixel-level concepts but does not substantively cover CAPI or Advantage+; those terms remain a gap."
+    }
+  ],
+  "queries_with_dedicated_subject_hit": 11,
+  "total_dedicated_subject_hits": 42,
+  "coverage": "MODERATE",
+  "rationale": "The dedicated course is broadly visible for strategy, audiences, creative, structure, retargeting, optimization and metrics, but is strategic/ASR-derived and lacks current CAPI and Advantage+ doctrine; STRONG would overstate the evidence.",
+  "status": "PASS"
+}

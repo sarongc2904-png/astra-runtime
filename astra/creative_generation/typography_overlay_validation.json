@@ -1,0 +1,34 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "typography overlay (separate from AI text)",
+  "date": "2026-09-07",
+  "results": {
+    "overlay_spec_build": {
+      "status": "PASS",
+      "test": "typography_overlay_spec build",
+      "assertion": "o.headline && o.headline.text === expected"
+    },
+    "overlay_validation": {
+      "status": "PASS",
+      "test": "typography_overlay_spec validate",
+      "assertion": "v.valid after validation"
+    },
+    "separation": {
+      "status": "PASS",
+      "rule": "AI-rendered text is NOT automatically final typography",
+      "implementation": "TYPOGRAPHY_OVERLAY_SPEC built separately from VISUAL_GENERATION_PROMPT"
+    },
+    "copy_source": {
+      "status": "PASS",
+      "values": [
+        "USER_PROVIDED_FACTS (if user supplied headline/copy)",
+        "CREATIVE_DIRECTOR_DECISION (default)"
+      ]
+    },
+    "garbled_text_handling": {
+      "status": "PASS",
+      "rule": "Broken AI-rendered text never approved as final typography",
+      "qa_criterion": "generated_text_integrity FAIL on garbled=true"
+    }
+  }
+}

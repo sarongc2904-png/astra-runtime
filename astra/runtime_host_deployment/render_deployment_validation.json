@@ -1,0 +1,13 @@
+{
+  "status": "BLOCKED",
+  "render_deployment_valid": false,
+  "render_cli_available": false,
+  "render_api_credential_available": false,
+  "render_connector_available": false,
+  "git_repository": false,
+  "public_https_url": null,
+  "service_id": null,
+  "deploy_id": null,
+  "manual_action": "Connect and authorize a Render account in this environment with a Git repository containing this checkout.",
+  "alternatives_attempted": []
+}

@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-09-07T00:37:52.907229+00:00",
+  "chunk_count": 35,
+  "blank_chunks": 0,
+  "duplicate_chunk_ids": 0,
+  "exact_content_duplicates_skipped": 0,
+  "near_duplicate_diagnostics": "Exact normalized content SHA-256 enforced. No cross-source fuzzy deletion was performed.",
+  "oversize_chunks": 0,
+  "undersize_chunks": 0,
+  "provenance_incomplete": 0,
+  "provenance_completeness": 1.0,
+  "domain_distribution": {
+    "Meta Ads": 35
+  },
+  "source_distribution": {
+    "SRC_META_VELOCITY_FACEBOOK_COURSE": 35
+  },
+  "status": "PASS"
+}

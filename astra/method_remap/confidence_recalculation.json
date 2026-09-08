@@ -1,0 +1,111 @@
+{
+  "formula": "0.20 source_quality + 0.20 evidence_count(cap 6) + 0.20 specificity + 0.15 agreement + 0.15 field_coverage(cap 10) + 0.05 alias_certainty + 0.05 source_diversity(cap 2); ASR source_quality=0.75; cap=0.86",
+  "retrieval_score_not_confidence": true,
+  "methods": [
+    {
+      "method_id": "METHOD_VELOCITY",
+      "confidence": 0,
+      "evidence_count": 0
+    },
+    {
+      "method_id": "METHOD_SALES_ACCELERATION",
+      "confidence": 0.82,
+      "evidence_count": 6
+    },
+    {
+      "method_id": "METHOD_DIGITAL_MARKETING",
+      "confidence": 0.82,
+      "evidence_count": 6
+    },
+    {
+      "method_id": "METHOD_OFFER_DESIGN",
+      "confidence": 0.78,
+      "evidence_count": 4
+    },
+    {
+      "method_id": "METHOD_CRO",
+      "confidence": 0.82,
+      "evidence_count": 6
+    },
+    {
+      "method_id": "METHOD_META_ADS",
+      "confidence": 0,
+      "evidence_count": 0
+    },
+    {
+      "method_id": "METHOD_WHATSAPP_SALES",
+      "confidence": 0,
+      "evidence_count": 0
+    },
+    {
+      "method_id": "METHOD_ICP",
+      "confidence": 0.85,
+      "evidence_count": 6
+    },
+    {
+      "method_id": "METHOD_FUNNEL",
+      "confidence": 0.82,
+      "evidence_count": 6
+    },
+    {
+      "method_id": "METHOD_CREATIVE_STRATEGY",
+      "confidence": 0.88,
+      "evidence_count": 3
+    },
+    {
+      "method_id": "METHOD_SINGLE_MINDED_PROPOSITION",
+      "confidence": 0.88,
+      "evidence_count": 3
+    },
+    {
+      "method_id": "METHOD_TAGLINE_CRAFT",
+      "confidence": 0.88,
+      "evidence_count": 3
+    },
+    {
+      "method_id": "METHOD_COPYWRITING_TONE",
+      "confidence": 0.88,
+      "evidence_count": 4
+    },
+    {
+      "method_id": "METHOD_VISUAL_IDEAS",
+      "confidence": 0.84,
+      "evidence_count": 2
+    },
+    {
+      "method_id": "METHOD_AMBIENT_ADVERTISING",
+      "confidence": 0.88,
+      "evidence_count": 4
+    },
+    {
+      "method_id": "METHOD_AD_EXECUTION_CRAFT",
+      "confidence": 0.88,
+      "evidence_count": 3
+    },
+    {
+      "method_id": "METHOD_TARGET_AUDIENCE_DEFINITION",
+      "confidence": 0.88,
+      "evidence_count": 3
+    },
+    {
+      "method_id": "METHOD_MIDAS",
+      "confidence": 0.82,
+      "evidence_count": 6
+    },
+    {
+      "method_id": "METHOD_INFOPRODUCT",
+      "confidence": 0.82,
+      "evidence_count": 6
+    },
+    {
+      "method_id": "METHOD_GROWTH_MARKETING",
+      "confidence": 0.82,
+      "evidence_count": 6
+    },
+    {
+      "method_id": "METHOD_COURSE_DESIGN",
+      "confidence": 0,
+      "evidence_count": 0
+    }
+  ]
+}

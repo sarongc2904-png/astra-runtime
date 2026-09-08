@@ -1,0 +1,91 @@
+{
+  "gate": "ASTRA_03E_FINAL_REMAP_AND_READINESS",
+  "generated_at": "2026-09-07T01:32:54.676070+00:00",
+  "artifact_count": 14,
+  "artifacts": [
+    {
+      "path": "astra/final_method_readiness/adjudicator_final_cases.json",
+      "hash": "8c3af655f270a6aa",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/adjudicator_final_results.json",
+      "hash": "41e35509282b3a1a",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/adjudicator_final_run.js",
+      "hash": "94d1e8018b167aad",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/astra04_node_readiness.json",
+      "hash": "78add7982d5e57e4",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/final_method_coverage.json",
+      "hash": "b10ddb085be5ff70",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/final_readiness_decision.json",
+      "hash": "65f4fa4eaf2e29da",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/final_registry_validation.json",
+      "hash": "32fb8794940fa3ec",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/meta_ads_remap.json",
+      "hash": "a9c8eadf13c51b5d",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/registry_before.json",
+      "hash": "cf9ed4ffc72274e1",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/scorer_limitation_adjudication.json",
+      "hash": "1f445a38d1f4cfb7",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/final_method_readiness/whatsapp_sales_remap.json",
+      "hash": "95bf9d919652456b",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/methods/registry.json",
+      "hash": "75321b07831d9a28",
+      "created_or_modified": "modified"
+    },
+    {
+      "path": "astra/ASTRA_03E_TEST_RESULTS.md",
+      "hash": "9df899e21c46d240",
+      "created_or_modified": "created"
+    },
+    {
+      "path": "astra/tests/astra03e.test.js",
+      "hash": "50744801669c21bb",
+      "created_or_modified": "created"
+    }
+  ],
+  "purposes": {
+    "registry_before.json": "pre-gate registry snapshot",
+    "meta_ads_remap.json": "Meta Ads evidence-backed remap",
+    "whatsapp_sales_remap.json": "WhatsApp Sales evidence-backed remap",
+    "final_registry_validation.json": "schema/evidence/status validation",
+    "final_method_coverage.json": "14-domain coverage",
+    "adjudicator_final_cases.json": "14 adjudicator cases",
+    "adjudicator_final_results.json": "adjudicator run + analysis",
+    "adjudicator_final_run.js": "offline adjudicator driver",
+    "scorer_limitation_adjudication.json": "scorer limitation classification",
+    "astra04_node_readiness.json": "8 mandatory node readiness",
+    "final_readiness_decision.json": "final ASTRA-04 readiness decision",
+    "artifact_manifest.json": "this manifest"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-09-07T03:19:18.011Z",
+  "gate": "ASTRA_06_ORCHESTRATOR_E2E_QA",
+  "workflow": "MARKETING_CAMPAIGN_360",
+  "node_order": [
+    "market_context",
+    "icp",
+    "offer",
+    "funnel",
+    "creative_strategy",
+    "ads",
+    "whatsapp_conversion",
+    "measurement",
+    "final_synthesis"
+  ],
+  "forced_bindings": {
+    "ads": "METHOD_META_ADS",
+    "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+  },
+  "validation_only": true
+}

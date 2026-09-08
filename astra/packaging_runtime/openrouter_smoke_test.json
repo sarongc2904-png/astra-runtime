@@ -1,0 +1,31 @@
+{
+  "provider": "openrouter",
+  "generated_at": "2026-09-07T03:40:39.939Z",
+  "diagnostics": {
+    "provider": "openrouter",
+    "model": "openai/gpt-5-mini",
+    "timeout_ms": 120000,
+    "retry_budget": 1,
+    "output_token_budget": 16000,
+    "openrouter": {
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "api_key_present": true
+    },
+    "lmstudio": {
+      "baseUrl": "http://127.0.0.1:1234/v1",
+      "model": "",
+      "api_key_present": true
+    }
+  },
+  "model": "openai/gpt-5-mini",
+  "health": {
+    "ok": true,
+    "status": "READY",
+    "provider": "openrouter",
+    "reachable": true,
+    "model": "openai/gpt-5-mini",
+    "model_available": true
+  },
+  "status": "READY",
+  "product_defect": false
+}

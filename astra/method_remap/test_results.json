@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "passed": 16,
+  "failed": 0,
+  "tests": [
+    {
+      "test": "registry_before",
+      "status": "PASS",
+      "evidence": "17: 8 partial / 9 discovered"
+    },
+    {
+      "test": "registry_after",
+      "status": "PASS",
+      "evidence": "21: 17 partial / 4 discovered"
+    },
+    {
+      "test": "registry_schema",
+      "status": "PASS",
+      "evidence": "all required fields present"
+    },
+    {
+      "test": "evidence_refs",
+      "status": "PASS",
+      "evidence": "17/17"
+    },
+    {
+      "test": "promotion_rule",
+      "status": "PASS",
+      "evidence": "no unsupported promotion"
+    },
+    {
+      "test": "unsupported_methods",
+      "status": "PASS",
+      "evidence": [
+        "METHOD_COURSE_DESIGN",
+        "METHOD_META_ADS",
+        "METHOD_VELOCITY",
+        "METHOD_WHATSAPP_SALES"
+      ]
+    },
+    {
+      "test": "alias_resolution",
+      "status": "PASS",
+      "evidence": "3 evidence-backed decisions"
+    },
+    {
+      "test": "confidence_formula",
+      "status": "PASS",
+      "evidence": "deterministic multi-factor formula"
+    },
+    {
+      "test": "relationships_evidence_gate",
+      "status": "PASS",
+      "evidence": "no inferred relationships"
+    },
+    {
+      "test": "adjudicator_cases",
+      "status": "PASS",
+      "evidence": "13/13"
+    },
+    {
+      "test": "adjudicator_different_winners",
+      "status": "PASS",
+      "evidence": "task-relative winners"
+    },
+    {
+      "test": "unsupported_insufficient",
+      "status": "PASS",
+      "evidence": "Meta/WhatsApp/Course"
+    },
+    {
+      "test": "no_universal_winner",
+      "status": "PASS",
+      "evidence": "no method dominates all supported tasks"
+    },
+    {
+      "test": "cross_method_discrimination",
+      "status": "PASS",
+      "evidence": "7 explicit distinctions"
+    },
+    {
+      "test": "agent_v1_read_only",
+      "status": "PASS",
+      "evidence": "protected and zero writes"
+    },
+    {
+      "test": "no_specialists",
+      "status": "PASS",
+      "evidence": "false"
+    }
+  ],
+  "historical_astra02_note": "The all-DISCOVERED seed assertion is obsolete after authorized ASTRA-03/03C registry population; valid registry data was not reverted."
+}

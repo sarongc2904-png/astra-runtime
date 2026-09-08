@@ -1,0 +1,88 @@
+{
+  "generated_at": "2026-09-07T00:37:52.900224+00:00",
+  "sources": [
+    {
+      "source_id": "SRC_META_VELOCITY_FACEBOOK_COURSE",
+      "units_total": 6,
+      "units_extracted": 6,
+      "blank_units": 0,
+      "garbled_units": 0,
+      "warnings": [
+        "AUTOMATIC_SPEECH_RECOGNITION",
+        "Lexical ASR errors may remain",
+        "PLATFORM_UI_MAY_BE_STALE",
+        "NO_CAPI_OR_ADVANTAGE_PLUS"
+      ],
+      "unit_details": [
+        {
+          "unit": "01_Clase de introducción.txt",
+          "source_video": "velocity_media/cursos/75_facebook/01_Clase de introducción.mp4",
+          "transcript": "astra/knowledge_gap_ingestion/meta_course_transcripts/01_Clase de introducción.txt",
+          "video_sha256": "0bc89d7cbc258ee5047befd337f07d314376f2cce303311c25676c91f580d08e",
+          "transcript_sha256": "ce5c54ec0955bd59d92d100530e892c5522a1bcd0776a123fcc05c902c2e0873",
+          "characters": 2061,
+          "blank": false,
+          "garbled_markers": 0,
+          "status": "PASS_WITH_WARNING"
+        },
+        {
+          "unit": "02_Clase 1 - Visión estratégica y Mentalidad.txt",
+          "source_video": "velocity_media/cursos/75_facebook/02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+          "transcript": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+          "video_sha256": "9ac2e101b3663b263636879bcd39e8d962f607c67ca2edf5dd9be29320a68bc4",
+          "transcript_sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+          "characters": 12904,
+          "blank": false,
+          "garbled_markers": 0,
+          "status": "PASS_WITH_WARNING"
+        },
+        {
+          "unit": "03_Clase 2 - Segmentación y selección de audiencia.txt",
+          "source_video": "velocity_media/cursos/75_facebook/03_Clase 2 - Segmentación y selección de audiencia.mp4",
+          "transcript": "astra/knowledge_gap_ingestion/meta_course_transcripts/03_Clase 2 - Segmentación y selección de audiencia.txt",
+          "video_sha256": "d435489d65679e545f18840bd9cab6baf885e222da814becff4dfd4620764b62",
+          "transcript_sha256": "1ebd6db679962a5e64afc3f824c261d73d051feff16c9e404c2e121d0f3aec9e",
+          "characters": 6167,
+          "blank": false,
+          "garbled_markers": 0,
+          "status": "PASS_WITH_WARNING"
+        },
+        {
+          "unit": "04_Clase 3 - Creación de anuncios ganadores.txt",
+          "source_video": "velocity_media/cursos/75_facebook/04_Clase 3 - Creación de anuncios ganadores.mp4",
+          "transcript": "astra/knowledge_gap_ingestion/meta_course_transcripts/04_Clase 3 - Creación de anuncios ganadores.txt",
+          "video_sha256": "6c7ce1dbe1583522693cc13e16256b14bab43277058b634d06d00ae354c49e52",
+          "transcript_sha256": "ad1c25c526ddf71b40681a9b1f3acabdb6b9d9d36ba297aaca15b3186a6ec3a7",
+          "characters": 5857,
+          "blank": false,
+          "garbled_markers": 0,
+          "status": "PASS_WITH_WARNING"
+        },
+        {
+          "unit": "05_Clase 4 - Tipos de campañas y estructura.txt",
+          "source_video": "velocity_media/cursos/75_facebook/05_Clase 4 - Tipos de campañas y estructura.mp4",
+          "transcript": "astra/knowledge_gap_ingestion/meta_course_transcripts/05_Clase 4 - Tipos de campañas y estructura.txt",
+          "video_sha256": "a6663e8d23eadc6f4e2b7e506d72f41576ab949753eae580a7bb78474b73b533",
+          "transcript_sha256": "7cbb83a7b3cb46eea6d1a1700b2f84d1153f1218d0aa17e9edd7f58b1f6aeb07",
+          "characters": 5349,
+          "blank": false,
+          "garbled_markers": 0,
+          "status": "PASS_WITH_WARNING"
+        },
+        {
+          "unit": "06_Clase 5 - Escala de anuncios y optimización.txt",
+          "source_video": "velocity_media/cursos/75_facebook/06_Clase 5 - Escala de anuncios y optimización.mp4",
+          "transcript": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+          "video_sha256": "e6eca1b18e09e7f6e5a9eec03aa4bfb017729acc0b5ea6a41a8f5f180aac88e6",
+          "transcript_sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+          "characters": 12150,
+          "blank": false,
+          "garbled_markers": 0,
+          "status": "PASS_WITH_WARNING"
+        }
+      ],
+      "status": "PASS_WITH_WARNING"
+    }
+  ],
+  "all_sources_pass_or_pass_with_warning": true
+}

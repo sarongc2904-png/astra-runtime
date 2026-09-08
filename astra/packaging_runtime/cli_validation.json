@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-09-07T03:36:48.0444339Z",
+  "entrypoint": "astra/run_campaign_360.js",
+  "config_loading": true,
+  "provider_validation": true,
+  "text_input": "PASS",
+  "file_input": "PASS",
+  "json_output": "PASS",
+  "health_mode": "PASS",
+  "waiting_for_input_propagation": "PASS",
+  "blocked_failed_exit_behavior": "PASS",
+  "secret_not_printed": "PASS",
+  "machine_readable_fields": [
+    "workflow_id",
+    "status",
+    "completed_nodes",
+    "selected_methods",
+    "provider",
+    "model",
+    "final_synthesis",
+    "current_research_required",
+    "limitations",
+    "usage"
+  ]
+}

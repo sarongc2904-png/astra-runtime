@@ -1,0 +1,23 @@
+{
+  "status": "FINAL",
+  "captured_at": "2026-09-07T02:59:55.894984+00:00",
+  "agent_v1_protected": true,
+  "knowledge_js_sha256": "0596f096fe8c628e2e69142e558ffbc69fd4b607967eb7099d86f01627a62c3d",
+  "classifier_decision_cache_sha256": "273b40eefac54b17d33357460ff459f96ec5cb896c1517c9ddbf720b3370fbfa",
+  "retrieval_strategy_f_py_sha256": "cdbbc9b2b779b751bbd9c8031f7057c12f29fe2702bbe5f0d4b0b3a42012e1de",
+  "answer_policy_sha256": "f76d620795170b61af202907eba70c9f7d470b795467db985682359e9aeb8aab",
+  "canonical_chunks": 1454,
+  "canonical_embeddings": 1454,
+  "sources": 11,
+  "legacy_kb_chunks": 7584,
+  "ann": 0,
+  "classifier_cache_records": 20,
+  "astra06_changes": [
+    "astra/src/workflows/marketing_campaign_360_hardened.js (2 safety guards)",
+    "astra/src/state/workflow_state.js (PLANNED->WAITING_FOR_INPUT/BLOCKED transitions)",
+    "astra/orchestrator_e2e_qa/*",
+    "astra/tests/astra05.test.js (test input fix)",
+    "docs/handoffs"
+  ],
+  "agent_v1_files_modified": 0
+}

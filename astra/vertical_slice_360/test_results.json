@@ -1,0 +1,26 @@
+{
+  "captured_at": "2026-09-07T02:04:57.135161+00:00",
+  "astra04_offline_suite": {
+    "pass": 20,
+    "fail": 0
+  },
+  "acceptance": {
+    "status": "COMPLETE",
+    "mandatory_nodes_executed": 9,
+    "mandatory_node_count": 9,
+    "ads_binding": "METHOD_META_ADS",
+    "whatsapp_binding": "METHOD_WHATSAPP_SALES",
+    "synthesis_sections": 18,
+    "llm_calls": 0,
+    "live_strategy_f": true
+  },
+  "router_core_suite": {
+    "pass": 38,
+    "fail": 1,
+    "note": "1 obsolete registry-all-DISCOVERED test"
+  },
+  "astra03e_suite": {
+    "pass": 23,
+    "fail": 0
+  }
+}

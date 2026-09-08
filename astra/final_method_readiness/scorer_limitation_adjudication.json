@@ -1,0 +1,13 @@
+{
+  "captured_at": "2026-09-07T01:30:56.573182+00:00",
+  "classification": "NON_BLOCKING_KNOWN_LIMITATION",
+  "observed": "ASTRA-02 scorer uses coarse same-domain signals; within a domain it does not exploit primary_jobs/best_for/subdomain for sub-intent. Final run: T08 ads primary=METHOD_DIGITAL_MARKETING (not META_ADS); T09 whatsapp primary=METHOD_SALES_ACCELERATION (not WHATSAPP_SALES); T06 creative primary=METHOD_AD_EXECUTION_CRAFT (not CREATIVE_STRATEGY). In every case the intended method is an evidence-backed candidate in the pool.",
+  "why_non_blocking": [
+    "Evidence-gating prevents zero-evidence DISCOVERED methods (Velocity, Course Design) from ever being primary (verified velocity_ever_primary=false, course_ever_primary=false).",
+    "For every mandatory ASTRA-04 node the intended evidence-backed method is available in the candidate pool.",
+    "ASTRA-04 node routing binds each node to its method (ads->META_ADS, whatsapp_conversion->WHATSAPP_SALES); adjudicator supplies + evidence-confirms candidates, so nodes execute on real evidence without fabrication.",
+    "9 distinct primaries across 14 tasks -> tasks differentiate."
+  ],
+  "post_astra04_improvement": "Enrich scorer to use primary_jobs/best_for/subdomain for within-domain sub-intent (Meta vs generic ads; WhatsApp vs generic sales; strategy vs execution).",
+  "scorer_semantics_changed": false
+}

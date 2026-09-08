@@ -1,0 +1,11 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "PASS",
+  "no_auth": 401,
+  "malformed_auth": 401,
+  "valid_gpt_secret_search": 200,
+  "valid_gpt_secret_gateway": 503,
+  "interpretation": "503 proves custom auth passed and handler reached runtime configuration guard",
+  "unrelated_project_existence_leak": false
+}

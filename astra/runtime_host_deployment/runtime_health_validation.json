@@ -1,0 +1,10 @@
+{
+  "status": "PASS_LOCAL",
+  "method": "GET",
+  "path": "/health",
+  "http_status": 200,
+  "body": {"status": "ok", "service": "astra-runtime"},
+  "authentication_required": false,
+  "sensitive_data_exposed": false,
+  "render_https_verified": false
+}

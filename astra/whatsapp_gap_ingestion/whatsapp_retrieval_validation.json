@@ -1,0 +1,221 @@
+{
+  "generated_at": "2026-09-07T01:00:32.390966+00:00",
+  "strategy": "Strategy-F unchanged",
+  "queries": [
+    {
+      "query": "cómo calificar leads que llegan por WhatsApp sin hacer un interrogatorio",
+      "returned_source_ids": [
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT"
+      ],
+      "returned_chunk_ids": [
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+        "3452ef206f89c3091ce18b1bc1689136217d9f3638ba15e24b513eb1b1a87fd2",
+        "236417a9db826a55d1313e67d2238c028740c410e511b17553f79572cb9049b9",
+        "432560738516315a9e75f7706fdb920910892b44d6d79b0b8a217f322519a98b",
+        "3661633c67890fa6e5ec8246d8bf0ef5310e649e4c67b75b45f6d28a1fb379d8"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    },
+    {
+      "query": "preguntas de descubrimiento y diagnóstico en una conversación de ventas por WhatsApp",
+      "returned_source_ids": [
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_VEL_INFO_AZ",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT"
+      ],
+      "returned_chunk_ids": [
+        "ad1c90774931288a3d4c4bacf899ddaa3600fe2f8831f9e608c7a0bf2dcc1dfd",
+        "3452ef206f89c3091ce18b1bc1689136217d9f3638ba15e24b513eb1b1a87fd2",
+        "8c7e68e717508fc951f94feb64c85c6d41956f4a4ebee1eed9feae62fbc80b9c",
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+        "3aa3fb3727d42e1ac2dba98f3a5cdf65d6e79173d62633f31e2e6e6b48dfe22b"
+      ],
+      "subject_hits": 4,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    },
+    {
+      "query": "cómo agendar una cita por WhatsApp y prevenir que no se presente",
+      "returned_source_ids": [
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_VEL_FUNNELS",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT"
+      ],
+      "returned_chunk_ids": [
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+        "21063f7b2d72d3e6a834eb4256e1b1d6cc2213e125caf2af5423b0c5a304c3a1",
+        "5279a36b551429c33e07b9727384b532e4de76a17e64fc1a701c44397bf744f7",
+        "e6e4f56f1bcf7503db77113da8a8a9a1874cca68c2fd0158ad6e53de38ede753",
+        "3661633c67890fa6e5ec8246d8bf0ef5310e649e4c67b75b45f6d28a1fb379d8"
+      ],
+      "subject_hits": 4,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    },
+    {
+      "query": "manejo de objeciones de precio tiempo y riesgo por WhatsApp",
+      "returned_source_ids": [
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_VEL_SALES",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_VEL_SALES",
+        "SRC_VEL_FUNNELS"
+      ],
+      "returned_chunk_ids": [
+        "d32778bb6f4b2a133033585632e63207f609a4d93b2902fa7c9cefd3a4f47a19",
+        "ab35420097db12b20ed13b4ca5e96216a89c318f69c55a711ccebb8eaf219c18",
+        "486f6c7a66c2ca692523e2c93161464affb2661bbe48f4425098f05a735cd7ca",
+        "1c269c9f78f6355030cca016dd77370fed5c95906ba6e4e39a902e880af35566",
+        "ce394d0d229a2d6b8e7e7542e0d6d5d2705f1bc9deb239adabf39a4cc8cfb4f4"
+      ],
+      "subject_hits": 2,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    },
+    {
+      "query": "cómo cerrar una venta por WhatsApp con siguiente paso y enlace de pago",
+      "returned_source_ids": [
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_VEL_SALES",
+        "SRC_VEL_FUNNELS",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_VEL_INFO_AZ"
+      ],
+      "returned_chunk_ids": [
+        "486f6c7a66c2ca692523e2c93161464affb2661bbe48f4425098f05a735cd7ca",
+        "ab2890de2438416f71a22b90aebf95dd10a13a1b6fe40a9ada21ba82d4dc5486",
+        "e0fecdd6a6c6160538ef0e42d13ee584a97fa6729a3b1a6603f8edf8ac35ad2b",
+        "816b768add3649257c6d628a33ee36793b139f74c49bd76e333580c84506f29f",
+        "7e37c46931dcbecae9c28b18e955a271db00b72e6785ca6f0e67e0777a1927ec"
+      ],
+      "subject_hits": 2,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    },
+    {
+      "query": "secuencia de seguimiento por WhatsApp que aporte contexto",
+      "returned_source_ids": [
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT"
+      ],
+      "returned_chunk_ids": [
+        "432560738516315a9e75f7706fdb920910892b44d6d79b0b8a217f322519a98b",
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+        "3452ef206f89c3091ce18b1bc1689136217d9f3638ba15e24b513eb1b1a87fd2",
+        "5279a36b551429c33e07b9727384b532e4de76a17e64fc1a701c44397bf744f7",
+        "3661633c67890fa6e5ec8246d8bf0ef5310e649e4c67b75b45f6d28a1fb379d8"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    },
+    {
+      "query": "recuperar un lead que dejó de responder en WhatsApp",
+      "returned_source_ids": [
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT"
+      ],
+      "returned_chunk_ids": [
+        "e6e4f56f1bcf7503db77113da8a8a9a1874cca68c2fd0158ad6e53de38ede753",
+        "3661633c67890fa6e5ec8246d8bf0ef5310e649e4c67b75b45f6d28a1fb379d8",
+        "3452ef206f89c3091ce18b1bc1689136217d9f3638ba15e24b513eb1b1a87fd2",
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+        "0e2f4372855a7bc1d6dd89ebb1d6b76cb65684024065aa58308a3a77aeb7ac16"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    },
+    {
+      "query": "nutrir prospectos y enviar recordatorios automáticos por WhatsApp",
+      "returned_source_ids": [
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_VEL_FUNNELS"
+      ],
+      "returned_chunk_ids": [
+        "486f6c7a66c2ca692523e2c93161464affb2661bbe48f4425098f05a735cd7ca",
+        "b15b0b6994f5d3dfa0049568b6cf6f730751213836c6f585f4c0a1ed7a876acf",
+        "0e2f4372855a7bc1d6dd89ebb1d6b76cb65684024065aa58308a3a77aeb7ac16",
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+        "5be1576fb5fe9a02659ce8c59a9e1603efcda99df152eb9e6b894cab9bafa1f2"
+      ],
+      "subject_hits": 4,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    },
+    {
+      "query": "convertir conversaciones de WhatsApp en leads calificados citas y ventas",
+      "returned_source_ids": [
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_VEL_FUNNELS",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT"
+      ],
+      "returned_chunk_ids": [
+        "3452ef206f89c3091ce18b1bc1689136217d9f3638ba15e24b513eb1b1a87fd2",
+        "0e2f4372855a7bc1d6dd89ebb1d6b76cb65684024065aa58308a3a77aeb7ac16",
+        "3aa3fb3727d42e1ac2dba98f3a5cdf65d6e79173d62633f31e2e6e6b48dfe22b",
+        "1e08c38ea2a0278f10ad86bca321c899122385968ee7b0e920fa0c4a3e181fb2",
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1"
+      ],
+      "subject_hits": 4,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    },
+    {
+      "query": "estados etiquetas métricas CRM y pipeline de ventas por WhatsApp",
+      "returned_source_ids": [
+        "SRC_WA_SALES_OS_LEGACY_CURATED",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT",
+        "SRC_WA_FUNNELCHAT_WORKSHOP_TRANSCRIPT"
+      ],
+      "returned_chunk_ids": [
+        "3452ef206f89c3091ce18b1bc1689136217d9f3638ba15e24b513eb1b1a87fd2",
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+        "b15b0b6994f5d3dfa0049568b6cf6f730751213836c6f585f4c0a1ed7a876acf",
+        "432560738516315a9e75f7706fdb920910892b44d6d79b0b8a217f322519a98b",
+        "8d0cbc373d8b75123e5323086829c00343f3e9dadcd6dfba095c02ceae8cb8a1"
+      ],
+      "subject_hits": 5,
+      "provenance_ok": true,
+      "coverage_assessment": "SUPPORTED",
+      "notes": "Only the two admitted dedicated WhatsApp sources count as subject hits; generic-sales/incidental mentions are excluded."
+    }
+  ],
+  "queries_with_dedicated_subject_hit": 10,
+  "total_dedicated_subject_hits": 40,
+  "coverage": "MODERATE",
+  "rationale": "Two complementary dedicated sources cover the full representative workflow and are retrievable, but STRONG would overstate authority/currentness because one source is compact project-curated material without its original local Markdown and the workshop is ASR/product-specific with incomplete provider attribution.",
+  "status": "PASS"
+}

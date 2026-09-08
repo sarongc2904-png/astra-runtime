@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-09-07T03:19:18.009Z",
+  "consistent": true,
+  "invariant": {
+    "methods": {
+      "market_context": "METHOD_GROWTH_MARKETING",
+      "icp": "METHOD_ICP",
+      "offer": "METHOD_OFFER_DESIGN",
+      "funnel": "METHOD_FUNNEL",
+      "creative_strategy": "METHOD_CREATIVE_STRATEGY",
+      "ads": "METHOD_META_ADS",
+      "whatsapp_conversion": "METHOD_WHATSAPP_SALES",
+      "measurement": "METHOD_CRO"
+    },
+    "bindings": {
+      "ads": "METHOD_META_ADS",
+      "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+    },
+    "status": "COMPLETE",
+    "sections": 18
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "scenario": "dental clinic, $500 daily, WhatsApp appointments",
+  "result": "COMPLETE",
+  "contract_fields_present": [
+    "status",
+    "workflow_id",
+    "completed_nodes",
+    "selected_methods",
+    "final_synthesis",
+    "current_research_required",
+    "limitations",
+    "usage"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "date": "2026-09-07",
+  "manifest": {
+    "artifacts": [
+      {
+        "name": "generation_contract.json",
+        "purpose": "Define ASTRA-08C input/output contract and pipeline",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "provider_validation.json",
+        "purpose": "Validate provider abstraction (mock/live)",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "generation_mode_validation.json",
+        "purpose": "Validate SINGLE/VARIANT/REVISION generation modes",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "visual_qa_validation.json",
+        "purpose": "Validate 20-criterion QA evaluation",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "revision_loop_validation.json",
+        "purpose": "Validate bounded revision (max 2) + remediation playbook",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "prompt_fidelity_validation.json",
+        "purpose": "Validate prompt preserves CD constraints",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "typography_overlay_validation.json",
+        "purpose": "Validate typography separation from AI text",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "scenario_results.json",
+        "purpose": "End-to-end scenario validation (7 scenarios)",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "reference_asset_validation.json",
+        "purpose": "Validate reference asset safety + fail-closed",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "limitations_validation.json",
+        "purpose": "Validate design limitations preserved",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "security_validation.json",
+        "purpose": "Validate claim blocking (8 categories)",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "protection_validation.json",
+        "purpose": "Validate frozen knowledge protection",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "test_results.json",
+        "purpose": "Test summary (23 ASTRA-08C + regressions)",
+        "status": "COMPLETE"
+      },
+      {
+        "name": "artifact_manifest.json",
+        "purpose": "This manifest",
+        "status": "COMPLETE"
+      }
+    ],
+    "directory": "astra/creative_generation/",
+    "reports": [
+      "astra/ASTRA_08C_CREATIVE_GENERATION_AND_QA_REPORT.md",
+      "astra/ASTRA_08C_TEST_RESULTS.md"
+    ],
+    "handoff": [
+      "astra/CURRENT_TASK.md",
+      "astra/HANDOFF_LATEST.md",
+      "agent_loop/HANDOFF_ASTRA_08C_CREATIVE_GENERATION_AND_QA.md",
+      "agent_loop/AGENT_STATE.md (append CIERRE block)"
+    ]
+  }
+}

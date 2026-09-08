@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-09-07T03:59:18.479709+00:00",
+  "recommendation_only": true,
+  "executed": false,
+  "priorities": [
+    {
+      "missing_domain": "mobile-first creative and scroll-stopping craft",
+      "why_it_matters": "Core social/performance execution must work in small-screen feeds and earn attention quickly.",
+      "future_specialist_affected": [
+        "CREATIVE_DIRECTOR",
+        "AD_CREATIVE_SPECIALIST",
+        "CREATIVE_CRITIC_QA"
+      ],
+      "priority": "P0",
+      "recommended_source_type_book_category": "Current, method-focused mobile/social advertising creative craft and platform-format guidance",
+      "current_kb_partially_compensates": false
+    },
+    {
+      "missing_domain": "performance creative testing and iteration",
+      "why_it_matters": "Creative decisions need hypothesis, variation, measurement, diagnosis, and iteration—not only concept quality.",
+      "future_specialist_affected": [
+        "AD_CREATIVE_SPECIALIST",
+        "CREATIVE_CRITIC_QA"
+      ],
+      "priority": "P0",
+      "recommended_source_type_book_category": "Current performance-creative experimentation and creative analytics methodology",
+      "current_kb_partially_compensates": true
+    },
+    {
+      "missing_domain": "grid systems, visual balance, and rhythm",
+      "why_it_matters": "These are foundational composition controls for reliable art direction and graphic design.",
+      "future_specialist_affected": [
+        "ART_DIRECTOR",
+        "GRAPHIC_DESIGN_SPECIALIST"
+      ],
+      "priority": "P1",
+      "recommended_source_type_book_category": "Authoritative graphic-design foundations covering grids, composition, balance, rhythm, and spacing",
+      "current_kb_partially_compensates": true
+    },
+    {
+      "missing_domain": "typography and legibility depth",
+      "why_it_matters": "Reliable type systems require hierarchy, scale, spacing, pairing, readability, and accessibility beyond isolated advice.",
+      "future_specialist_affected": [
+        "ART_DIRECTOR",
+        "GRAPHIC_DESIGN_SPECIALIST",
+        "CREATIVE_CRITIC_QA"
+      ],
+      "priority": "P1",
+      "recommended_source_type_book_category": "Typography systems and screen/print legibility reference",
+      "current_kb_partially_compensates": true
+    },
+    {
+      "missing_domain": "visual identity systems",
+      "why_it_matters": "Brand consistency advice does not replace identity architecture, systems, governance, and applications.",
+      "future_specialist_affected": [
+        "CREATIVE_DIRECTOR",
+        "ART_DIRECTOR",
+        "GRAPHIC_DESIGN_SPECIALIST"
+      ],
+      "priority": "P2",
+      "recommended_source_type_book_category": "Brand identity systems and visual-identity design methodology",
+      "current_kb_partially_compensates": true
+    },
+    {
+      "missing_domain": "editorial design",
+      "why_it_matters": "Long-form and multi-page communication needs editorial hierarchy, pacing, navigation, and grid application.",
+      "future_specialist_affected": [
+        "GRAPHIC_DESIGN_SPECIALIST"
+      ],
+      "priority": "P2",
+      "recommended_source_type_book_category": "Editorial design and publication systems",
+      "current_kb_partially_compensates": true
+    },
+    {
+      "missing_domain": "cross-source creative critique",
+      "why_it_matters": "One-source criteria increase doctrinal concentration and blind spots.",
+      "future_specialist_affected": [
+        "CREATIVE_DIRECTOR",
+        "CREATIVE_CRITIC_QA"
+      ],
+      "priority": "P2",
+      "recommended_source_type_book_category": "Independent advertising creative review/critique frameworks with worked cases",
+      "current_kb_partially_compensates": true
+    }
+  ]
+}

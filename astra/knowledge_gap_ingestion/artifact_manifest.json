@@ -1,0 +1,194 @@
+{
+  "gate": "ASTRA_03D_TARGETED_GAP_INGESTION_META_ADS_WHATSAPP",
+  "generated_at": "2026-09-07T00:43:28.531812+00:00",
+  "entry_count": 31,
+  "artifacts": [
+    {
+      "path": "astra/knowledge_gap_ingestion/../../agent_loop/HANDOFF_ASTRA_03D_TARGETED_GAP_INGESTION_META_ADS_WHATSAPP.md",
+      "purpose": "Operational closeout handoff",
+      "sha256": "b735572397c1178000c78f164be66ae7a35816f388078a943a4d5804f1b969e8",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/../ASTRA_03D_TARGETED_GAP_INGESTION_META_ADS_WHATSAPP_REPORT.md",
+      "purpose": "Human-readable gate report",
+      "sha256": "a70762ae493380cd0c0403551cf25b936c0e6e9338566f7344e111d1bfbe607a",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/../ASTRA_03D_TEST_RESULTS.md",
+      "purpose": "Human-readable test report",
+      "sha256": "3f8f1e49fd2386b1380dc288d11d37d3ab77aa18ff1981c65d5db994d978c90c",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/build_artifact_manifest.py",
+      "purpose": "Deterministic artifact inventory and hash generator",
+      "sha256": "4a13f8f58222fded51e72ae5a5f7a0d16f317169ecce70644a2172e6aa3a7d5e",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/candidate_sources.json",
+      "purpose": "Targeted local/project candidate inventory",
+      "sha256": "c7990796f1c9f9198014240e993c7319775919e8b1f1e8366a7ee743c67745cb",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/chunk_qa.json",
+      "purpose": "Chunk integrity, size, duplicate and provenance QA",
+      "sha256": "49b49c64f6b86fb8159f614540ee72c5905b18a8a8c002d3442bc99da7348274",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/corpus_snapshot.before.json",
+      "purpose": "Rollback/read-only comparison copy of the prior canonical snapshot",
+      "sha256": "58ff5ac2dd47da6af5317f7930ac1ff7b3ab142be1a35f9fb9ff6a7e0e9eb60c",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/embedding_validation.json",
+      "purpose": "New-only embedding model/dimension validation",
+      "sha256": "4142c0036c230a6f58ab417c174f0a100cfd30ed16c0b68e3a17826cea8954fa",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/extraction_qa.json",
+      "purpose": "Per-source and per-unit extraction validation",
+      "sha256": "88baaa047c3f731e84d2fafed30010a46d9b5aa5065af847e055365f21f25255",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/ingestion_batches.json",
+      "purpose": "Traceable additive batch plan",
+      "sha256": "61ad9782de98f4038c4b81b0cb4aba6cbd7564f4474402137330187212717a56",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/ingestion_execution.json",
+      "purpose": "Additive PostgREST insertion ledger",
+      "sha256": "a5faddae1a87534e4616a074d1776aa5918a83f527f52a2066102b77aadff7c8",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/meta_ads_retrieval_validation.json",
+      "purpose": "Unchanged Strategy-F Meta Ads retrieval evidence",
+      "sha256": "406a7a87af2d80740b16853159e12ca740acaffdc7c018c6c6d9ded507fcc257",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/meta_course_transcripts/01_Clase de introducción.txt",
+      "purpose": "Local ASR transcript unit for the admitted Meta Ads course",
+      "sha256": "ce5c54ec0955bd59d92d100530e892c5522a1bcd0776a123fcc05c902c2e0873",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/meta_course_transcripts/02_Clase 1 - Visión estratégica y Mentalidad.txt",
+      "purpose": "Local ASR transcript unit for the admitted Meta Ads course",
+      "sha256": "59edd891e073c6ffea0b320f95a1ff042a33a62872c3d6b3ea247c47605920ec",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/meta_course_transcripts/03_Clase 2 - Segmentación y selección de audiencia.txt",
+      "purpose": "Local ASR transcript unit for the admitted Meta Ads course",
+      "sha256": "1ebd6db679962a5e64afc3f824c261d73d051feff16c9e404c2e121d0f3aec9e",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/meta_course_transcripts/04_Clase 3 - Creación de anuncios ganadores.txt",
+      "purpose": "Local ASR transcript unit for the admitted Meta Ads course",
+      "sha256": "ad1c25c526ddf71b40681a9b1f3acabdb6b9d9d36ba297aaca15b3186a6ec3a7",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/meta_course_transcripts/05_Clase 4 - Tipos de campañas y estructura.txt",
+      "purpose": "Local ASR transcript unit for the admitted Meta Ads course",
+      "sha256": "7cbb83a7b3cb46eea6d1a1700b2f84d1153f1218d0aa17e9edd7f58b1f6aeb07",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/meta_course_transcripts/06_Clase 5 - Escala de anuncios y optimización.txt",
+      "purpose": "Local ASR transcript unit for the admitted Meta Ads course",
+      "sha256": "4e15769a1c4fdd1583192e3788844aff9a19a61c320dd84e32e9a4b7ef62f583",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/meta_course_transcripts/transcription_manifest.json",
+      "purpose": "Local transcription execution evidence",
+      "sha256": "fbe3ba6cae43f8d5cc4b2dc59cab0585203c8246e91fcd1ff72c2fc00ce31bfe",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/new_chunks.json",
+      "purpose": "Validated traceable new chunk payloads",
+      "sha256": "e07cace7796683ac51fdb06abaa2e169066d07c881226e474ffe0cd62567a2ec",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/new_embeddings.npy",
+      "purpose": "Validated new-only embedding vectors",
+      "sha256": "ffc6bea8c4d31ee84bddf8b826d750020c1ef36e6848078f852fe3b3f4d83300",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/post_ingestion_gap_coverage.json",
+      "purpose": "Honest before/after domain coverage",
+      "sha256": "69f538a683e54474943ea482948914f86ac33f3adcfca2be64efe780320dbe1b",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/protection_snapshot_before.json",
+      "purpose": "Before-state hashes, counts and prior-vector fingerprint",
+      "sha256": "e8551ddea712ec14c7f5ebac4374d79113d02ead9a0a0fe0ccb2ff1fe8b3e678",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/protection_validation.json",
+      "purpose": "After-state preservation evidence",
+      "sha256": "ae609f36dd6a47a4cd5bcddd359713edef073f1a90865a1b31845f375fc0a9f6",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/remap_readiness.json",
+      "purpose": "Later method-remap and downstream readiness decision",
+      "sha256": "fbbda0bb6a1a1f80eccc3930418ad1002bd0d4031f48f53d01566f1d284cf34f",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/run_astra03d.py",
+      "purpose": "Resumable gate-specific prepare/embed/ingest/refresh/validate runner",
+      "sha256": "09c37f8dbb1109e39606b13f4bf23914f766d419793d6a847e690292764d194f",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/source_admission.json",
+      "purpose": "Evidence-based ADMIT/DEFER/REJECT decisions",
+      "sha256": "161c2567a2ca5c49dc7cf15a291df92db5910d47c0aa6f067762e1c8ab096786",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/test_astra03d.py",
+      "purpose": "Deterministic gate artifact tests",
+      "sha256": "d3e536e45d9f86090b04bfc65a99404136357b32115f96da1bed2758555a65d8",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/transcribe_meta_course.py",
+      "purpose": "Gate-local offline video transcription runner",
+      "sha256": "388f220925ecd5ccb4bbfc7345181b27e465281a6fb30407e86b4c4d17a012dc",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/whatsapp_sales_retrieval_validation.json",
+      "purpose": "Unchanged Strategy-F WhatsApp gap evidence",
+      "sha256": "6a435474259a86bc7ac606a69940ede3ec52674a4bbc7eed3f6ce8b19c33e686",
+      "created_or_modified": "CREATED"
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/artifact_manifest.json",
+      "purpose": "Inventory and hashes for ASTRA-03D artifacts",
+      "sha256": null,
+      "created_or_modified": "CREATED",
+      "hash_note": "Self-hash omitted because embedding it would change the file"
+    }
+  ]
+}

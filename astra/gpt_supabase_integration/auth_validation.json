@@ -1,0 +1,13 @@
+{
+  "gate": "ASTRA_09_GPT_SUPABASE_INTEGRATION",
+  "generated_at": "2026-09-08T01:57:39.473Z",
+  "status": "PASS",
+  "bearer_api_key_reused": "KB_API_KEY at Supabase edge; ASTRA_RUNTIME_API_KEY between gateway and Node runtime",
+  "constant_time_node_key_comparison": true,
+  "project_authorization": "injected ownership authorizer or explicit server-side allowlist",
+  "fail_closed": [
+    "UNAUTHORIZED",
+    "FORBIDDEN",
+    "INVALID_INPUT"
+  ]
+}

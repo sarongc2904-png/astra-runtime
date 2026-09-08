@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "suites": {
+    "astra10r": {"passed": 14, "failed": 0},
+    "astra10": {"passed": 10, "failed": 0},
+    "astra09": {"passed": 25, "failed": 0},
+    "astra08c": {"passed": 23, "failed": 0},
+    "astra08b": {"passed": 36, "failed": 0},
+    "astra07": {"passed": 23, "failed": 0}
+  },
+  "total_passed": 131,
+  "total_failed": 0,
+  "new_regressions": 0
+}

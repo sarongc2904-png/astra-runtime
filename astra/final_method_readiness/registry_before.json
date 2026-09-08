@@ -1,0 +1,217 @@
+{
+  "captured_at": "2026-09-07T01:25:18.424434+00:00",
+  "version": "mr-0.3-astra03c",
+  "method_count": 21,
+  "methods": [
+    {
+      "method_id": "METHOD_VELOCITY",
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0,
+      "domain": "FUNNEL",
+      "subdomain": null,
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_SALES_ACCELERATION",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.82,
+      "evidence_refs_count": 6,
+      "domain": "SALES",
+      "subdomain": "sales conversation and conversion",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_DIGITAL_MARKETING",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.82,
+      "evidence_refs_count": 6,
+      "domain": "ADS",
+      "subdomain": "growth strategy excluding platform-specific ads operations",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_OFFER_DESIGN",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.78,
+      "evidence_refs_count": 4,
+      "domain": "OFFER",
+      "subdomain": "value proposition and funnel-stage offer",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_CRO",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.82,
+      "evidence_refs_count": 6,
+      "domain": "CRO",
+      "subdomain": "conversion research and experimentation",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_META_ADS",
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0,
+      "domain": "ADS",
+      "subdomain": null,
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_WHATSAPP_SALES",
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0,
+      "domain": "SALES",
+      "subdomain": null,
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_ICP",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.85,
+      "evidence_refs_count": 6,
+      "domain": "ICP",
+      "subdomain": "audience, avatar and market customer",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_FUNNEL",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.82,
+      "evidence_refs_count": 6,
+      "domain": "FUNNEL",
+      "subdomain": "funnel strategy, economics and implementation",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_CREATIVE_STRATEGY",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.88,
+      "evidence_refs_count": 3,
+      "domain": "CREATIVE",
+      "subdomain": "advertising campaign development",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_SINGLE_MINDED_PROPOSITION",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.88,
+      "evidence_refs_count": 3,
+      "domain": "COPY",
+      "subdomain": "advertising proposition",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_TAGLINE_CRAFT",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.88,
+      "evidence_refs_count": 3,
+      "domain": "COPY",
+      "subdomain": "campaign tagline",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_COPYWRITING_TONE",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.88,
+      "evidence_refs_count": 4,
+      "domain": "COPY",
+      "subdomain": "advertising copy and tone",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_VISUAL_IDEAS",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.84,
+      "evidence_refs_count": 2,
+      "domain": "CREATIVE",
+      "subdomain": "visual advertising",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_AMBIENT_ADVERTISING",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.88,
+      "evidence_refs_count": 4,
+      "domain": "CREATIVE",
+      "subdomain": "ambient and non-traditional media",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_AD_EXECUTION_CRAFT",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.88,
+      "evidence_refs_count": 3,
+      "domain": "CREATIVE",
+      "subdomain": "art direction and production",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_TARGET_AUDIENCE_DEFINITION",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.88,
+      "evidence_refs_count": 3,
+      "domain": "ICP",
+      "subdomain": "advertising audience definition",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_MIDAS",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.82,
+      "evidence_refs_count": 6,
+      "domain": "RESEARCH",
+      "subdomain": "demand, pricing, business model/LTV and intangible assets",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_INFOPRODUCT",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.82,
+      "evidence_refs_count": 6,
+      "domain": "INFOPRODUCT",
+      "subdomain": "audience, proposition, launch and growth",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_GROWTH_MARKETING",
+      "mapping_status": "PARTIALLY_MAPPED",
+      "confidence": 0.82,
+      "evidence_refs_count": 6,
+      "domain": "RESEARCH",
+      "subdomain": "market, growth loops, positioning and prioritization",
+      "primary_source": null,
+      "supporting_sources": []
+    },
+    {
+      "method_id": "METHOD_COURSE_DESIGN",
+      "mapping_status": "DISCOVERED",
+      "confidence": 0,
+      "evidence_refs_count": 0,
+      "domain": "COURSE",
+      "subdomain": null,
+      "primary_source": null,
+      "supporting_sources": []
+    }
+  ]
+}

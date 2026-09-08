@@ -1,0 +1,37 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "generation modes",
+  "date": "2026-09-07",
+  "modes": {
+    "SINGLE_GENERATION": {
+      "status": "PASS",
+      "description": "One pass + optional revisions",
+      "test": "orchestrator SINGLE_GENERATION completes",
+      "assertions": [
+        "status = COMPLETE",
+        "final_approved_asset is set",
+        "generation_attempts >= 1"
+      ]
+    },
+    "VARIANT_GENERATION": {
+      "status": "PASS",
+      "description": "Multiple independent generations for comparison",
+      "test": "orchestrator VARIANT_GENERATION produces variants",
+      "assertions": [
+        "status = COMPLETE",
+        "generated_assets.length >= 2 (default 3 variants)",
+        "each asset independently evaluated"
+      ]
+    },
+    "REVISION_GENERATION": {
+      "status": "PASS",
+      "description": "Force at least one revision pass regardless of first-pass QA",
+      "test": "orchestrator REVISION_GENERATION forces at least one revision",
+      "assertions": [
+        "revision_history.length >= 1",
+        "forced_remediation_targets applied",
+        "revision_defect_profile respected"
+      ]
+    }
+  }
+}

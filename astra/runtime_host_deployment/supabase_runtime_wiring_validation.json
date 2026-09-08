@@ -1,0 +1,10 @@
+{
+  "status": "BLOCKED",
+  "project_ref": "ftoxermwkfebmnrudiuu",
+  "astra_tools_status": "ACTIVE",
+  "astra_tools_version_observed": 2,
+  "gateway_runtime_url_configured": false,
+  "gateway_runtime_key_configured": false,
+  "secrets_modified": false,
+  "reason": "No Render HTTPS runtime exists, so safe end-to-end matching values cannot be set."
+}

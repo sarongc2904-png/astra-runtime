@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "targeted_retrieval": true,
+  "bounded": true,
+  "whole_kb_passed": false,
+  "target_domains": [
+    {
+      "domain": "advertising concept",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Deep concept/idea development sequence with numerous advertising examples."
+    },
+    {
+      "domain": "single-minded proposition / smp",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Explicit definition, aliases, one-message discipline, and exceptions."
+    },
+    {
+      "domain": "visual metaphor",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Direct visual-metaphor and analogy examples with communication rationale."
+    },
+    {
+      "domain": "art direction",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Direct art-direction decisions, visual references, hierarchy, and execution craft."
+    },
+    {
+      "domain": "copywriting for visual ads",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Direct headline/visual interplay, headline forms, and body-copy flow."
+    },
+    {
+      "domain": "headline-image relationship",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Dedicated visual-verbal relationship guidance and failure modes."
+    },
+    {
+      "domain": "color",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Direct palette selection, tonal contrast, brand fit, and production guidance."
+    },
+    {
+      "domain": "contrast",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Direct tonal contrast and emphasis/readability consequences."
+    },
+    {
+      "domain": "visual hierarchy",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Direct hierarchy purpose, element sizing, reading order, and layout examples."
+    },
+    {
+      "domain": "negative space",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Direct good/bad white-space guidance and layout implications."
+    },
+    {
+      "domain": "photography / image direction",
+      "coverage_class": "STRONG",
+      "evidence_tag_ceiling": "DIRECTLY_SUPPORTED",
+      "reason": "Direct photography-versus-illustration and tonal/execution decisions."
+    },
+    {
+      "domain": "social / meta ad creative",
+      "coverage_class": "MODERATE",
+      "evidence_tag_ceiling": "INFERENCE",
+      "reason": "Social principles and one Meta source are useful, but craft/currentness/testing depth is limited."
+    },
+    {
+      "domain": "cta visual hierarchy",
+      "coverage_class": "MODERATE",
+      "evidence_tag_ceiling": "INFERENCE",
+      "reason": "Direct CTA placement and hierarchy plus a second funnel source; limited ad-format breadth."
+    }
+  ],
+  "provenance_preserved": true,
+  "evidence_used_count": 16,
+  "all_evidence_from_audited_chunks": true,
+  "evidence_classes": [
+    "USER_PROVIDED_FACTS",
+    "INTERNAL_KNOWLEDGE",
+    "EXTERNAL_RESEARCH",
+    "INFERENCE"
+  ],
+  "evidence_discipline_tags": [
+    "DIRECTLY_SUPPORTED",
+    "INFERENCE",
+    "ASSUMPTION",
+    "CURRENT_RESEARCH_REQUIRED"
+  ]
+}

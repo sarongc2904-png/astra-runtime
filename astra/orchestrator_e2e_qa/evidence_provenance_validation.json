@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-09-07T03:19:18.005Z",
+  "normal_provenance_present": false,
+  "read_minimum_necessary_context": true,
+  "source_classes": [
+    "USER_PROVIDED_FACTS",
+    "INTERNAL_KNOWLEDGE",
+    "EXTERNAL_RESEARCH",
+    "INFERENCE"
+  ],
+  "current_research_survives_synthesis": true
+}

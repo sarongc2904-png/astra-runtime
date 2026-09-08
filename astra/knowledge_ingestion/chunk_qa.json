@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-09-06T23:13:18.367993+00:00",
+  "chunk_count": 617,
+  "duplicate_chunk_ids": 0,
+  "exact_content_duplicates_skipped": 0,
+  "blank_chunks": 0,
+  "oversize_chunks": 0,
+  "undersize_chunks": 0,
+  "provenance_incomplete": 0,
+  "source_distribution": {
+    "SRC_PRO_CRO": 86,
+    "SRC_PRO_GROWTH": 132,
+    "SRC_VEL_FUNNELS": 186,
+    "SRC_VEL_INFO_AZ": 62,
+    "SRC_VEL_MIDAS": 79,
+    "SRC_VEL_OFFER": 21,
+    "SRC_VEL_SALES": 51
+  },
+  "near_duplicate_diagnostic": "Exact normalized content SHA-256 enforced; high-redundancy packages were deferred before chunking.",
+  "status": "PASS"
+}

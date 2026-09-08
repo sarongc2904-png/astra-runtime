@@ -1,0 +1,22 @@
+{
+  "pass_all": true,
+  "live": false,
+  "per_scenario": {
+    "01_NORMAL_LASER_CLINIC": true,
+    "02_NORMAL_DENTAL": true,
+    "03_NORMAL_LOCAL_RESTAURANT": true,
+    "04_NORMAL_INFOPRODUCT": true,
+    "05_NORMAL_B2B_SERVICE": true,
+    "06_WEAK_INCOMPLETE_BRIEF": true,
+    "07_MISSING_REQUIRED_EVIDENCE": true,
+    "08_CONFLICTING_METHOD_SIGNALS": true,
+    "09_CURRENT_PLATFORM_DEPENDENT": true,
+    "10_MODEL_API_FAILURE": true,
+    "11_MALFORMED_LLM_OUTPUT": true,
+    "12_CONTEXT_BUDGET_EXCEEDED": true,
+    "13_MISSING_UPSTREAM_DEPENDENCY": true,
+    "14_UNSUPPORTED_METHOD_ATTEMPT": true,
+    "15_REPEAT_CONSISTENCY": true,
+    "LIVE_LASER_LLM": true
+  }
+}

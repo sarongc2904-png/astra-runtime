@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-09-07T03:36:48.0444339Z",
+  "suites": {
+    "ASTRA_06": { "command": "node astra/orchestrator_e2e_qa/run_qa.js", "result": "PASS", "scenarios": "15/15", "live": false },
+    "ASTRA_05": { "command": "node astra/tests/astra05.test.js", "result": "PASS", "tests": "24/24" },
+    "ASTRA_04": { "command": "node astra/tests/astra04.test.js", "result": "PASS", "tests": "20/20" },
+    "ASTRA_03E": { "command": "node astra/tests/astra03e.test.js", "result": "PASS", "tests": "23/23" },
+    "router_core": {
+      "command": "node astra/tests/run_all.test.js",
+      "result": "PASS_WITH_KNOWN_OBSOLETE_ASSERTION",
+      "tests": "38/39",
+      "known_obsolete_assertion": "registry loads seed (all DISCOVERED)",
+      "reason": "Authorized ASTRA-03E method promotions make the old all-DISCOVERED premise false."
+    }
+  },
+  "new_regressions": 0
+}

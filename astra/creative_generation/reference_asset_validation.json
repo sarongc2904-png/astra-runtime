@@ -1,0 +1,23 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "reference asset safety",
+  "date": "2026-09-07",
+  "results": {
+    "critical_identity_check": {
+      "status": "PASS",
+      "test": "orchestrator WAITING_FOR_INPUT on missing reference",
+      "rule": "Required reference assets must be supplied or pipeline fails closed",
+      "assertion": "status = WAITING_FOR_INPUT when logo not supplied"
+    },
+    "propagation": {
+      "status": "PASS",
+      "rule": "Reference assets propagated through generation request to provider",
+      "implementation": "checkReferenceAssets() validates; passed to buildRequest()"
+    },
+    "no_fabrication": {
+      "status": "PASS",
+      "rule": "Never fabricate missing reference identity",
+      "behavior": "WAITING_FOR_INPUT state prevents downstream generation"
+    }
+  }
+}

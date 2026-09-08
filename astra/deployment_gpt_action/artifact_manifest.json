@@ -1,0 +1,78 @@
+{
+  "gate": "ASTRA_10_DEPLOYMENT_AND_GPT_ACTION_CONFIGURATION",
+  "generated_at": "2026-09-08T02:20:22.631Z",
+  "status": "PASS",
+  "entries": [
+    {
+      "name": "auth_validation.json",
+      "bytes": 389,
+      "sha256": "74841d67e9053f2048710df717c9900e130d7039c54ea54dd71dd456f54e3889"
+    },
+    {
+      "name": "deployment_contract.json",
+      "bytes": 392,
+      "sha256": "34b9b388af9589f03607fdbc65877ea7af63d8fce3c0d4e671c2e87f35bf70c4"
+    },
+    {
+      "name": "environment_validation.json",
+      "bytes": 611,
+      "sha256": "8168d49e1de28f7cbf991abb377f26ab2013cfaf55883c99bb1968f87546c2a8"
+    },
+    {
+      "name": "final_readiness.json",
+      "bytes": 821,
+      "sha256": "d8b6dd0d4212804a79dc54188356fe1ebf1897bb5331c31771d0f68c7a252858"
+    },
+    {
+      "name": "gpt_action_validation.json",
+      "bytes": 491,
+      "sha256": "53a268cbbd0c7778415d56c9dc6fc1d93f9cbad8a9f32fe4e7eaa2932ff77b8c"
+    },
+    {
+      "name": "live_tool_validation.json",
+      "bytes": 707,
+      "sha256": "c3d3e2976bf58675006e5c8be1eab4d07d6f841fcc94cd972cb743f328aeda77"
+    },
+    {
+      "name": "openapi_schema_final.json",
+      "bytes": 16190,
+      "sha256": "eab4fa678d8cb311c49c9d7fbb4e37abc53327dbdd618c4c5f4bd604dc4097ad"
+    },
+    {
+      "name": "protection_validation.json",
+      "bytes": 1199,
+      "sha256": "963ee2311f4a4df3308d217aa206da5a1cac7c0309879ecb75196204f2d0e638"
+    },
+    {
+      "name": "public_endpoint_validation.json",
+      "bytes": 437,
+      "sha256": "9e658525b7c47d88f10c30f5fd2343cc428837497bd32c43f8bc319da849e6dc"
+    },
+    {
+      "name": "regression_results.json",
+      "bytes": 373,
+      "sha256": "52e2b6802b23c64e26f70190bbd7ef1bcaa5796b5e1d381585a8a0986f4508b3"
+    },
+    {
+      "name": "security_validation.json",
+      "bytes": 351,
+      "sha256": "c90221b2b12a840673ead4fc5514b5ad54fb0b122887d8016bb9f8f419642f32"
+    },
+    {
+      "name": "state_propagation_validation.json",
+      "bytes": 377,
+      "sha256": "39f501105af13d4cd53cf4c317089c68c1692037614b0f0299fcbd0fc3b831f3"
+    },
+    {
+      "name": "supabase_deployment_validation.json",
+      "bytes": 468,
+      "sha256": "1dfa38a37e113738c3ed45118e8b15f989a0ca3f2bea36d1db8a3271f544601c"
+    },
+    {
+      "name": "test_results.json",
+      "bytes": 440,
+      "sha256": "09188ce6ae01bb5502fcede1d53d185921aeaf8f51e11fe3c3f8efd3a052bd59"
+    }
+  ],
+  "missing_required": []
+}

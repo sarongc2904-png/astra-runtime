@@ -1,0 +1,28 @@
+{
+  "gate": "ASTRA_08A_DESIGN_KNOWLEDGE_COVERAGE_AUDIT",
+  "generated_at": "2026-09-07T04:03:40.2510483Z",
+  "hash_algorithm": "sha256",
+  "artifact_count": 20,
+  "artifacts": [
+    { "path": "astra/design_knowledge_audit/source_inventory.json", "sha256": "9dfa132fb3acbba4676fc1f2b6a49b66e247d7b182948da93fbf84071bac4402", "bytes": 7864 },
+    { "path": "astra/design_knowledge_audit/design_domain_query_plan.json", "sha256": "48ecc8e036e99d87bb769f5e468e8759abb9809f0a166d523160954a73a36635", "bytes": 6744 },
+    { "path": "astra/design_knowledge_audit/design_domain_coverage.json", "sha256": "6a45abdd1835187a656908aa8bea44b016ceb1d998e7fcd91900da8e84b76860", "bytes": 103290 },
+    { "path": "astra/design_knowledge_audit/design_evidence_map.json", "sha256": "4e499354e498a47ea4713d66e4332e057f3f0a1de5c0c43210d712a3ab4bae28", "bytes": 339511 },
+    { "path": "astra/design_knowledge_audit/design_method_inventory.json", "sha256": "cc98a4cdb38b58ec1d661b0ec303cbee68653037a6388d53f09a92976349bfee", "bytes": 16139 },
+    { "path": "astra/design_knowledge_audit/source_domain_matrix.json", "sha256": "8bb3f9a6a1b07205cdc3c4669bef0adf062af184172b6a3ae00babdf9115803d", "bytes": 48173 },
+    { "path": "astra/design_knowledge_audit/gap_analysis.json", "sha256": "eb4e40bd042cdf87b2e4d7b3d7e388aae2d600dd2e71f031406139953cfe7173", "bytes": 8856 },
+    { "path": "astra/design_knowledge_audit/creative_director_readiness.json", "sha256": "81e0238b43c429d86d4981ba2484bdcf08c76e12e46efed9887eb72b779fd7eb", "bytes": 1170 },
+    { "path": "astra/design_knowledge_audit/recommended_ingestion_priorities.json", "sha256": "9f9484a7234f56d6531676cf4b78f8e9100b6e493c96c7c8f14327fd95a30955", "bytes": 3799 },
+    { "path": "astra/design_knowledge_audit/protection_validation.json", "sha256": "d154e516e1a16bd2973852dbefa03a331354f92ba236feaef4e6c6bae28a56b9", "bytes": 3155 },
+    { "path": "astra/design_knowledge_audit/test_results.json", "sha256": "ced095398660a01dedf2b937c98ee30fa300d790d90ce3fddc1484baa7f7100f", "bytes": 3255 },
+    { "path": "astra/design_knowledge_audit/protection_baseline.json", "sha256": "28fb3cb4ffff8e8f92616ed1ed3e82981d41dac63729e5721e0503b0e0bc513d", "bytes": 1476 },
+    { "path": "astra/design_knowledge_audit/run_audit.py", "sha256": "87a64c4ff462151605554c4139a73bd0e571ee78f2cdc1179d7d039b41e40448", "bytes": 13531 },
+    { "path": "astra/design_knowledge_audit/build_analysis.py", "sha256": "7843c7f6f9ea9e7f017b934b6bc365d14ad8bf41642b40e2e3aa6e314e005ac7", "bytes": 21012 },
+    { "path": "astra/design_knowledge_audit/validate_audit.py", "sha256": "a4acd27a428540dd18a31439258c136a6352970475063aa7687ce013c4efa7b5", "bytes": 7022 },
+    { "path": "astra/ASTRA_08A_DESIGN_KNOWLEDGE_COVERAGE_AUDIT_REPORT.md", "sha256": "37dfe581379e2bd1c1d77f20d269f9e11c354fb84392a543b2325dcc2429d047", "bytes": 5737 },
+    { "path": "astra/ASTRA_08A_TEST_RESULTS.md", "sha256": "8a7744ffd41e03f8e1a0b34c0b85b3f7ddbe3e2f8c61a5e5ad6132b216d2c2dd", "bytes": 1640 },
+    { "path": "astra/CURRENT_TASK.md", "sha256": "ba201abc6d45d23add1cfd3c9b843d992bf7537d20f8709668b1bca2a0973636", "bytes": 1725 },
+    { "path": "astra/HANDOFF_LATEST.md", "sha256": "929e277f93fd431c2773f0a509f45ce0d36c2897bf445803bd5e41f0d016c1f5", "bytes": 13817 },
+    { "path": "agent_loop/HANDOFF_ASTRA_08A_DESIGN_KNOWLEDGE_COVERAGE_AUDIT.md", "sha256": "088473d8eb4553afac70642dc074dc1b4648c8326b35b1ae7077fe82d930dfe6", "bytes": 2311 }
+  ]
+}

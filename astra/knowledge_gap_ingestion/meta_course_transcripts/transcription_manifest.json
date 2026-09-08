@@ -1,0 +1,48 @@
+{
+  "model": "faster-whisper-small",
+  "language": "es",
+  "files": [
+    {
+      "file": "01_Clase de introducción.mp4",
+      "status": "TRANSCRIBED",
+      "chars": 2061,
+      "duration_seconds": 135.3386875,
+      "seconds": 62.4
+    },
+    {
+      "file": "02_Clase 1 - Visión estratégica y Mentalidad.mp4",
+      "status": "TRANSCRIBED",
+      "chars": 12904,
+      "duration_seconds": 766.208,
+      "seconds": 313.2
+    },
+    {
+      "file": "03_Clase 2 - Segmentación y selección de audiencia.mp4",
+      "status": "TRANSCRIBED",
+      "chars": 6167,
+      "duration_seconds": 365.9306875,
+      "seconds": 97.5
+    },
+    {
+      "file": "04_Clase 3 - Creación de anuncios ganadores.mp4",
+      "status": "TRANSCRIBED",
+      "chars": 5857,
+      "duration_seconds": 359.4026875,
+      "seconds": 102.8
+    },
+    {
+      "file": "05_Clase 4 - Tipos de campañas y estructura.mp4",
+      "status": "TRANSCRIBED",
+      "chars": 5349,
+      "duration_seconds": 332.608,
+      "seconds": 150.1
+    },
+    {
+      "file": "06_Clase 5 - Escala de anuncios y optimización.mp4",
+      "status": "TRANSCRIBED",
+      "chars": 12150,
+      "duration_seconds": 704.6186875,
+      "seconds": 273.4
+    }
+  ]
+}

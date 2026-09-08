@@ -1,0 +1,41 @@
+{
+  "registry_version": "mr-0.2-astra03",
+  "registry_total_methods": 17,
+  "methods_discovered_from_current_corpus": 8,
+  "methods_normalized": 8,
+  "methods_partially_mapped": 8,
+  "methods_left_discovered": 9,
+  "supported_method_ids": [
+    "METHOD_CREATIVE_STRATEGY",
+    "METHOD_SINGLE_MINDED_PROPOSITION",
+    "METHOD_TAGLINE_CRAFT",
+    "METHOD_COPYWRITING_TONE",
+    "METHOD_VISUAL_IDEAS",
+    "METHOD_AMBIENT_ADVERTISING",
+    "METHOD_AD_EXECUTION_CRAFT",
+    "METHOD_TARGET_AUDIENCE_DEFINITION"
+  ],
+  "unsupported_placeholder_ids": [
+    "METHOD_VELOCITY",
+    "METHOD_SALES_ACCELERATION",
+    "METHOD_DIGITAL_MARKETING",
+    "METHOD_OFFER_DESIGN",
+    "METHOD_CRO",
+    "METHOD_META_ADS",
+    "METHOD_WHATSAPP_SALES",
+    "METHOD_ICP",
+    "METHOD_FUNNEL"
+  ],
+  "domain_coverage": {
+    "CREATIVE": "STRONG_WITHIN_ADVERTISING",
+    "COPY": "STRONG_WITHIN_ADVERTISING",
+    "ICP": "PARTIAL_ADVERTISING_AUDIENCE_ONLY",
+    "OFFER": "INSUFFICIENT_METADATA",
+    "FUNNEL": "INSUFFICIENT_METADATA",
+    "SALES": "INSUFFICIENT_METADATA",
+    "ADS_PLATFORM_META": "INSUFFICIENT_METADATA",
+    "WHATSAPP": "INSUFFICIENT_METADATA",
+    "INFOPRODUCT_COURSE": "INSUFFICIENT_METADATA",
+    "CRO": "INSUFFICIENT_METADATA"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "prompt fidelity (constraints preserved)",
+  "date": "2026-09-07",
+  "results": {
+    "fidelity_check": {
+      "status": "PASS",
+      "test": "prompt_fidelity validate preserves constraints",
+      "elements_checked": [
+        "core_proposition",
+        "creative_concept",
+        "visual_mechanism",
+        "composition_intent",
+        "focal_hierarchy",
+        "copy_zones",
+        "brand_constraints",
+        "aspect_ratio",
+        "safe_zones",
+        "prohibited_elements"
+      ]
+    },
+    "constraint_preservation": {
+      "status": "PASS",
+      "rule": "Difficult constraints never silently dropped to improve aesthetics",
+      "score_threshold": ">=0.6 required for valid direction"
+    },
+    "validation_flow": {
+      "status": "PASS",
+      "location": "orchestrator line 91",
+      "timing": "Pre-generation check before dispatching to provider",
+      "fail_closed": "Returns BLOCKED status if fidelity invalid"
+    }
+  }
+}

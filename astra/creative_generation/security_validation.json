@@ -1,0 +1,41 @@
+{
+  "gate": "ASTRA_08C_CREATIVE_GENERATION_AND_QA",
+  "validation": "claim blocking (unsupported types)",
+  "date": "2026-09-07",
+  "results": {
+    "claim_guard_integration": {
+      "status": "PASS",
+      "tests": [
+        "claim_guard scan detects medical claim",
+        "claim_guard scan passes approved claims",
+        "claim_guard guard detects fabricated testimonials",
+        "visual_qa detects unsupported claims via claim_guard"
+      ]
+    },
+    "blocked_claim_categories": {
+      "status": "PASS",
+      "categories": [
+        "medical (cure, clinically proven, etc.)",
+        "guarantee (guarantee, 100%, etc.)",
+        "certification (certified, award-winning, etc.)",
+        "testimonial (review, testimonial, etc.)",
+        "numeric_performance (performance claims with numbers)",
+        "price_promo (price, discount, percentage off, etc.)",
+        "legal (legal statements, compliance claims)",
+        "logo (fabricated logos)"
+      ]
+    },
+    "approved_claims": {
+      "status": "PASS",
+      "rule": "Only user_facts.approved_claims may override blocking",
+      "implementation": "claim_guard.scan() checks approved_claims list"
+    },
+    "enforcement_layers": {
+      "status": "PASS",
+      "layers": [
+        "Pre-generation: claimGuard.guard() on prompt + overlay → BLOCKED if violations",
+        "Post-generation: visualQA.evaluate() checks generated_text → QA FAIL if violations"
+      ]
+    }
+  }
+}

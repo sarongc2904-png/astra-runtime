@@ -1,0 +1,124 @@
+{
+  "generated_at": "2026-09-07T01:28:44.721Z",
+  "cases": [
+    {
+      "task_id": "T01",
+      "description": "client acquisition",
+      "domain": "FUNNEL",
+      "expected_any": [
+        "METHOD_FUNNEL",
+        "METHOD_VELOCITY"
+      ]
+    },
+    {
+      "task_id": "T02",
+      "description": "ICP definition",
+      "domain": "ICP",
+      "expected_any": [
+        "METHOD_ICP",
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ]
+    },
+    {
+      "task_id": "T03",
+      "description": "offer design",
+      "domain": "OFFER",
+      "expected_any": [
+        "METHOD_OFFER_DESIGN"
+      ]
+    },
+    {
+      "task_id": "T04",
+      "description": "funnel design",
+      "domain": "FUNNEL",
+      "expected_any": [
+        "METHOD_FUNNEL"
+      ]
+    },
+    {
+      "task_id": "T05",
+      "description": "sales conversion",
+      "domain": "SALES",
+      "expected_any": [
+        "METHOD_SALES_ACCELERATION",
+        "METHOD_WHATSAPP_SALES"
+      ]
+    },
+    {
+      "task_id": "T06",
+      "description": "creative strategy",
+      "domain": "CREATIVE",
+      "expected_any": [
+        "METHOD_CREATIVE_STRATEGY"
+      ]
+    },
+    {
+      "task_id": "T07",
+      "description": "copy / proposition",
+      "domain": "COPY",
+      "expected_any": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_COPYWRITING_TONE",
+        "METHOD_TAGLINE_CRAFT"
+      ]
+    },
+    {
+      "task_id": "T08",
+      "description": "Meta Ads",
+      "domain": "ADS",
+      "expected_any": [
+        "METHOD_META_ADS",
+        "METHOD_DIGITAL_MARKETING"
+      ]
+    },
+    {
+      "task_id": "T09",
+      "description": "WhatsApp conversion",
+      "domain": "SALES",
+      "expected_any": [
+        "METHOD_WHATSAPP_SALES"
+      ]
+    },
+    {
+      "task_id": "T10",
+      "description": "measurement / CRO",
+      "domain": "CRO",
+      "expected_any": [
+        "METHOD_CRO"
+      ]
+    },
+    {
+      "task_id": "T11",
+      "description": "positioning",
+      "domain": "COPY",
+      "expected_any": [
+        "METHOD_SINGLE_MINDED_PROPOSITION"
+      ],
+      "note": "no dedicated METHOD_POSITIONING; SMP is nearest evidence-backed"
+    },
+    {
+      "task_id": "T12",
+      "description": "pricing",
+      "domain": "OFFER",
+      "expected_any": [
+        "METHOD_OFFER_DESIGN"
+      ],
+      "note": "no dedicated METHOD_PRICING; offer design nearest"
+    },
+    {
+      "task_id": "T13",
+      "description": "infoproduct creation",
+      "domain": "INFOPRODUCT",
+      "expected_any": [
+        "METHOD_INFOPRODUCT"
+      ]
+    },
+    {
+      "task_id": "T14",
+      "description": "generic multi-step marketing",
+      "domain": "MULTI",
+      "expected_any": [],
+      "note": "composes per-node adjudications"
+    }
+  ]
+}

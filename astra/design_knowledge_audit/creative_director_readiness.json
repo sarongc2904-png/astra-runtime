@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-09-07T03:59:18.478706+00:00",
+  "question": "Can ASTRA-08B Creative Director be built now using only the current corpus?",
+  "decision": "READY_WITH_LIMITATIONS",
+  "limitations": [
+    "368/375 retrieval slots and every evidence-backed named creative method are concentrated in one advertising book.",
+    "Visual rhythm, mobile-first creative, and scroll-stopping craft have no meaningful current evidence.",
+    "Grids, visual balance, editorial design, and performance creative are weak.",
+    "Typography, visual identity, digital/social creative, CTA hierarchy, density, and legibility are useful but incomplete.",
+    "Meta/social evidence does not provide a deep, current performance-creative testing system.",
+    "A Creative Director can be bounded to advertising concept and art direction, but cannot be presented as a complete graphic-design or current performance-creative authority."
+  ],
+  "ready_for_astra_08b_creative_director": true,
+  "required_scope_guard": "Build only a bounded advertising Creative Director that exposes these limitations; do not claim full graphic-design or current-platform authority."
+}

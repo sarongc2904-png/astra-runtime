@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-09-07T03:36:48.0444339Z",
+  "required_files": 5,
+  "files_present": 5,
+  "total_bytes": 5569,
+  "minimal_package": true,
+  "full_corpus_included": false,
+  "internal_handoff_dump_included": false,
+  "agent_v1_identified_as_real_knowledge_engine": true,
+  "local_runtime_access_claimed_without_action": false,
+  "public_api_or_action_claimed": false,
+  "files": [
+    "ASTRA_GPT_SYSTEM_PROMPT.md",
+    "ASTRA_GPT_ARCHITECTURE_SUMMARY.md",
+    "ASTRA_GPT_METHOD_ROUTING_SUMMARY.md",
+    "ASTRA_GPT_LIMITATIONS.md",
+    "ASTRA_GPT_RUNTIME_USAGE.md"
+  ]
+}

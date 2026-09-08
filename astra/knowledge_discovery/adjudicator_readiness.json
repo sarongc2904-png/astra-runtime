@@ -1,0 +1,106 @@
+{
+  "method_adjudicator_metadata_ready": false,
+  "ready_for_astra_04_vertical_slice_360": false,
+  "reason": "Metadata is usable for creative/copy adjudication only; ASTRA's intended multi-domain 360 flow lacks offer, funnel, sales, Meta, WhatsApp, and course methods.",
+  "tasks": [
+    {
+      "task": "client acquisition",
+      "candidate_methods": [],
+      "primary_candidate_if_any": null,
+      "secondary_candidates": [],
+      "insufficient_metadata": "INSUFFICIENT_METADATA",
+      "confidence": 0.0,
+      "explanation": "No acquisition-system method is evidenced in the current corpus."
+    },
+    {
+      "task": "offer design",
+      "candidate_methods": [],
+      "primary_candidate_if_any": null,
+      "secondary_candidates": [],
+      "insufficient_metadata": "INSUFFICIENT_METADATA",
+      "confidence": 0.0,
+      "explanation": "Advertising proposition evidence is not evidence for commercial offer architecture."
+    },
+    {
+      "task": "funnel design",
+      "candidate_methods": [],
+      "primary_candidate_if_any": null,
+      "secondary_candidates": [],
+      "insufficient_metadata": "INSUFFICIENT_METADATA",
+      "confidence": 0.0,
+      "explanation": "No funnel method is evidenced."
+    },
+    {
+      "task": "sales conversion",
+      "candidate_methods": [],
+      "primary_candidate_if_any": null,
+      "secondary_candidates": [],
+      "insufficient_metadata": "INSUFFICIENT_METADATA",
+      "confidence": 0.0,
+      "explanation": "No sales-conversion method is evidenced."
+    },
+    {
+      "task": "Meta Ads",
+      "candidate_methods": [],
+      "primary_candidate_if_any": null,
+      "secondary_candidates": [],
+      "insufficient_metadata": "INSUFFICIENT_METADATA",
+      "confidence": 0.0,
+      "explanation": "Creative advertising knowledge does not establish Meta Ads platform methodology."
+    },
+    {
+      "task": "WhatsApp conversion",
+      "candidate_methods": [],
+      "primary_candidate_if_any": null,
+      "secondary_candidates": [],
+      "insufficient_metadata": "INSUFFICIENT_METADATA",
+      "confidence": 0.0,
+      "explanation": "No WhatsApp sales method is evidenced."
+    },
+    {
+      "task": "infoproduct/course creation",
+      "candidate_methods": [],
+      "primary_candidate_if_any": null,
+      "secondary_candidates": [],
+      "insufficient_metadata": "INSUFFICIENT_METADATA",
+      "confidence": 0.0,
+      "explanation": "No infoproduct or course-building method is evidenced."
+    },
+    {
+      "task": "creative advertising/campaign development",
+      "candidate_methods": [
+        "METHOD_CREATIVE_STRATEGY",
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_AD_EXECUTION_CRAFT",
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ],
+      "primary_candidate_if_any": "METHOD_CREATIVE_STRATEGY",
+      "secondary_candidates": [
+        "METHOD_VISUAL_IDEAS",
+        "METHOD_AMBIENT_ADVERTISING",
+        "METHOD_AD_EXECUTION_CRAFT",
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ],
+      "insufficient_metadata": [],
+      "confidence": 0.84,
+      "explanation": "Primary covers the full evidenced sequence; secondaries cover task-specific visual, ambient, execution, and audience work."
+    },
+    {
+      "task": "copywriting / proposition development",
+      "candidate_methods": [
+        "METHOD_COPYWRITING_TONE",
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT"
+      ],
+      "primary_candidate_if_any": "METHOD_COPYWRITING_TONE",
+      "secondary_candidates": [
+        "METHOD_SINGLE_MINDED_PROPOSITION",
+        "METHOD_TAGLINE_CRAFT"
+      ],
+      "insufficient_metadata": [],
+      "confidence": 0.84,
+      "explanation": "Primary covers copy and tone; proposition and tagline are distinct evidence-backed secondary jobs."
+    }
+  ]
+}

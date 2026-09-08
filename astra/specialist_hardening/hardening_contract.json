@@ -1,0 +1,28 @@
+{
+  "captured_at": "2026-09-07T02:39:08.897020+00:00",
+  "objective": "Move ASTRA-04 thin deterministic specialists to controlled LLM-backed drafting, evidence-bounded.",
+  "llm_generation_must_remain_evidence_bounded": true,
+  "support_classes": [
+    "DIRECTLY_SUPPORTED",
+    "INFERENCE",
+    "ASSUMPTION",
+    "CURRENT_RESEARCH_REQUIRED"
+  ],
+  "evidence_classes": [
+    "USER_PROVIDED_FACTS",
+    "INTERNAL_KNOWLEDGE",
+    "EXTERNAL_RESEARCH",
+    "INFERENCE"
+  ],
+  "llm_layer": "astra/src/llm/llm_executor.js (strict schema validation, bounded retry budget=1, fail-closed, usage tracking)",
+  "specialists": "astra/src/specialists/llm_specialists.js (8 authorized nodes)",
+  "modes": [
+    "llm",
+    "deterministic(baseline)"
+  ],
+  "forced_bindings": {
+    "ads": "METHOD_META_ADS",
+    "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+  },
+  "architecture_redesign": false
+}

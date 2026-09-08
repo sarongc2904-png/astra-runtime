@@ -1,0 +1,301 @@
+{
+  "1_business_objective": "CLIENT_ACQUISITION",
+  "2_target_audience_icp": {
+    "pains": "Frequent shaving, ingrown hairs, time wasted",
+    "desired_outcomes": "Long-lasting smooth skin, fewer appointments, convenience",
+    "objections": "Price concerns, safety fears, time commitment",
+    "buying_triggers": "Free consult, first-session discount, visible results promise",
+    "qualification_signals": "Local adult, disposable income, time-constrained",
+    "non_fit_signals": "Underage, medical contraindications, prefers temporary removal"
+  },
+  "3_core_problem_opportunity": "Acquire new local clients for laser hair removal clinic.",
+  "4_primary_selected_methods": {
+    "market_context": {
+      "primary_method": "METHOD_GROWTH_MARKETING",
+      "forced": false,
+      "secondary": [
+        "METHOD_MIDAS"
+      ],
+      "scorer": "v2"
+    },
+    "icp": {
+      "primary_method": "METHOD_ICP",
+      "forced": false,
+      "secondary": [
+        "METHOD_TARGET_AUDIENCE_DEFINITION"
+      ],
+      "scorer": "v2"
+    },
+    "offer": {
+      "primary_method": "METHOD_OFFER_DESIGN",
+      "forced": false,
+      "secondary": [],
+      "scorer": "v2"
+    },
+    "funnel": {
+      "primary_method": "METHOD_FUNNEL",
+      "forced": false,
+      "secondary": [],
+      "scorer": "v2"
+    },
+    "creative_strategy": {
+      "primary_method": "METHOD_CREATIVE_STRATEGY",
+      "forced": false,
+      "secondary": [
+        "METHOD_AD_EXECUTION_CRAFT",
+        "METHOD_AMBIENT_ADVERTISING"
+      ],
+      "scorer": "v2"
+    },
+    "ads": {
+      "primary_method": "METHOD_META_ADS",
+      "forced": true,
+      "secondary": [],
+      "scorer": "FORCED"
+    },
+    "whatsapp_conversion": {
+      "primary_method": "METHOD_WHATSAPP_SALES",
+      "forced": true,
+      "secondary": [],
+      "scorer": "FORCED"
+    },
+    "measurement": {
+      "primary_method": "METHOD_CRO",
+      "forced": false,
+      "secondary": [],
+      "scorer": "v2"
+    }
+  },
+  "5_offer": {
+    "value_proposition": "Long-lasting smooth skin; fewer ingrown hairs; save daily shaving time",
+    "offer_structure": "Free consult; discounted first session; optional package upsell",
+    "mechanism": "Laser treatments administered by certified clinicians across sessions",
+    "risk_reduction": "Safety credentials, before-after photos, transparent pricing, flexible payments",
+    "value_stack": "Convenience, lasting results, reduced irritation, time savings, professional care",
+    "constraints": "Confirm certifications, capacity, local compliance, pricing strategy"
+  },
+  "6_funnel": {
+    "stages": [
+      "Landing page visit",
+      "Lead magnet opt-in",
+      "Free consult booking",
+      "First discounted session",
+      "Package upsell"
+    ],
+    "transitions": [
+      "Opt-in -> email/SMS nurture",
+      "Nurture -> booking confirmation and prep",
+      "Booking -> reminder sequence",
+      "Consult -> first-session purchase upsell"
+    ],
+    "conversion_intent": "Book free consult or purchase first session",
+    "qualification_points": [
+      "Age over 18",
+      "Local postcode match",
+      "No contraindications",
+      "Disposable income signal",
+      "Time availability"
+    ],
+    "drop_off_risks": [
+      "Form abandonment",
+      "Safety objections",
+      "Price objections",
+      "Scheduling conflicts",
+      "No-show for consult"
+    ],
+    "dependencies": [
+      "Landing page builder",
+      "Booking system integration",
+      "Email/SMS tool",
+      "Clinician capacity data",
+      "Compliance approvals"
+    ]
+  },
+  "7_creative_strategy": {
+    "core_idea": "Save daily shaving time with long-lasting smooth skin.",
+    "single_minded_proposition": "Save daily shaving time.",
+    "angles": "Time freedom; Smooth confidence; Professional care",
+    "creative_territories": "Everyday time unlocked; Post-shave relief; Expert-led care",
+    "hooks": "Free consult; Discounted first session; Before-after visuals",
+    "proof": "Certified clinicians; Before-and-after photos; Transparent pricing",
+    "objection_coverage": "Price: discounts and payment plans; Safety: certifications; Time: few-session promise"
+  },
+  "8_ad_strategy": {
+    "campaign_objective": "Acquire consult bookings",
+    "audience_approach": "Local prospecting and retargeting cohorts",
+    "structure": "One campaign; prospecting and retargeting ad sets",
+    "creative_testing": "Test 3 executions: Time, Confidence, Professional",
+    "qualification": "Age18+, local postcode, no contraindications",
+    "measurement": "Leads, booking conversions, CPL, conversion rate",
+    "limitations": "No platform-specific instructions provided"
+  },
+  "9_ad_angles": "Time freedom; Smooth confidence; Professional care",
+  "10_sample_copy_directions": "Free consult; Discounted first session; Before-after visuals",
+  "11_whatsapp_qualification_flow": {
+    "qualification": "Ask age, postcode, contraindications, budget signal, schedule availability",
+    "discovery": "Ask treatment history, skin type, previous procedures, target area, expectations"
+  },
+  "12_whatsapp_followup_closing": {
+    "closing": "Offer free consult booking or paid first session with confirmation link",
+    "objections": "Scripts for price, safety, schedule, and clinic credibility reassurances",
+    "follow_up": "Reminder 72h, 24h, 3h before appointment; prep instructions",
+    "recovery": "No-show sequence: check wellbeing, offer reschedule discount, limited slots urgency"
+  },
+  "13_measurement_kpis": {
+    "primary_outcome": "Increase consult bookings",
+    "leading_indicators": "WhatsApp qualified leads; ad CTR; opt-in rate",
+    "funnel_metrics": "Visits, opt-ins, bookings, purchases",
+    "conversion_metrics": "Booking rate, CPL, revenue-per-visitor, upsell rate",
+    "diagnostic_metrics": "Form abandonment rate; qualification fail reasons; no-show rate",
+    "optimization_triggers": "Booking rate decline; rising CPL; increased no-shows; low qualification pass",
+    "measurement_cadence": "Weekly KPIs; daily WhatsApp flow monitoring"
+  },
+  "14_assumptions": [
+    "Clinic location and local demographics unknown.",
+    "Current pricing, capacity, conversion metrics unknown.",
+    "Regulatory and medical compliance details unknown.",
+    "Existing brand identity and assets unknown.",
+    "Clinic serves adults seeking long-lasting convenience",
+    "Clinic can accept new clients promptly",
+    "No channel budget specified yet",
+    "No current customer segmentation provided",
+    "Compliance constraints unknown",
+    "Clinic can legally run discounts and promotions",
+    "Clinic has verifiable credentials and qualified staff",
+    "Clinic has appointment capacity for new clients",
+    "Clinic capacity per week unknown",
+    "Discount amount to offer unknown",
+    "Eligible postcodes need definition",
+    "Exact certifications to display not provided",
+    "Booking hours and clinician availability unknown",
+    "Clinic certifications and credentials are verifiable by client.",
+    "Clinic has capacity for discounted first-session offers.",
+    "Transparent pricing and payment options are available to display.",
+    "Local regulatory compliance permits advertised claims.",
+    "Client can supply before-and-after photos and testimonials.",
+    "Budget available for paid social",
+    "Client confirms certifications and pricing",
+    "Booking system integrates with ad leads",
+    "Clinician capacity fits bookings",
+    "Local compliance approvals obtained",
+    "Clinic hours and available appointment slots known",
+    "Booking system supports external appointment creation",
+    "Current pricing and discounts provided",
+    "Clinician capacity per day available",
+    "Any local medical messaging compliance constraints",
+    "Clinic daily clinician capacity available for new bookings",
+    "Booking system supports deep links from WhatsApp",
+    "Current consult booking rate unknown",
+    "Average first-session price not provided",
+    "Compliance approvals in place for messages"
+  ],
+  "15_evidence_provenance": {
+    "total_evidence_chunks": 36,
+    "by_node": {
+      "market_context": [
+        "a2f93596a26d034778b77998b5ee60e9ea480468d8efdeaa81948d886f0859ba",
+        "b0e67ad35bc44dbf58653404ce143fd894aa44d42236cac2190f4f3b054b7ca3",
+        "7b9b55581511947337540d581921335ffc8970ea7a30643ac7ec7c5a64a22fa9",
+        "ac6cd8a9001c2ca64185be3c4924b37483339e6743d2548b523f1c8e1714611a",
+        "13e234cbeccdb2536a7d8be5b91e8b45ec16c6cef413cd3d5d8e0a0d35145703"
+      ],
+      "icp": [
+        "4f0c67316607eb556dd0caab883364119eb57bc089090af8d96343c0e93877e4",
+        "5104ecffaf7bdfe4aa918a27fc33580e411ad1fa7ed8e32ac2d973d3047109e2",
+        "ac6cd8a9001c2ca64185be3c4924b37483339e6743d2548b523f1c8e1714611a",
+        "4042f1d10e35da9afa23b6ee284d51324a8bd986089377e7d686f4fc64a22e54",
+        "33b0b0fa50151a357ff42b413307dd0e3597f64f90117f2b9ffad2a92c1a8727"
+      ],
+      "offer": [
+        "e28d8781ad99307855f88973602cbe38dde324b531dcbac0b40094c40d4a920c",
+        "ac6cd8a9001c2ca64185be3c4924b37483339e6743d2548b523f1c8e1714611a",
+        "6b37e6e74c3a341f2b279384ad50f9986a7a1a02476f342253b2c3dd53fb11d2",
+        "d105e4804493d1f61fbad7d3b2439118a42ff9f06a0999cfdb459cbfdc902719",
+        "3c56b9dc80925d6353971ea4bbea9dbe61d370fc78ad2306bf99fcdc2b74d0b2"
+      ],
+      "funnel": [
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "b93e18150c96bafe96ba2a22edc29983b483abfdacdd1591d9f25c69fc400073",
+        "7d9a46c19a01c6babd26e133ba9464c987f6bb1290006613693555d6d42dbeed",
+        "62be9c1f5b1cf569b3193c2b4eb34a41f499af20169037eb966b886810d1cb03",
+        "85ffcd9c7d1979685425565ef619db25d1a9a5262e24b9f1cddcae6d9f9f01d7"
+      ],
+      "creative_strategy": [
+        "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+        "abf648127f82ce1985c4e55556ea88bbc70e44d9fc97750bc48dc24b4869f6dc",
+        "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28",
+        "8a5a79dc4ce91952a9106e2324c65bd6de9140defddb62f0f1f2110a71bd7397",
+        "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e"
+      ],
+      "ads": [
+        "81b7f132d9a3986afb3f405630dec05c224e1a630fe549483959a8bab22bb190",
+        "b87aedbd10f957a8a25821d16fa3d2377d243112451b9ffd0ea5e807ed714a43",
+        "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+        "69feb1a04fdb11e9de406bd5d4dd7a71d0ed53e662ff8582fff51a6fc3be2b83",
+        "3d80eea11f82066c2d58530a9ab0155c879cf8328b95a1bf6febd222fa185508"
+      ],
+      "whatsapp_conversion": [
+        "3452ef206f89c3091ce18b1bc1689136217d9f3638ba15e24b513eb1b1a87fd2",
+        "7d0a9693d82172e3d66b842f27976edb7c5115816154db35d0a58dceb1cbdec1",
+        "3aa3fb3727d42e1ac2dba98f3a5cdf65d6e79173d62633f31e2e6e6b48dfe22b",
+        "0e2f4372855a7bc1d6dd89ebb1d6b76cb65684024065aa58308a3a77aeb7ac16",
+        "deb0eb2c1d3d9588bb6858503e176d8553d3520eec311d19b89fb824d264134c"
+      ],
+      "measurement": [
+        "f7be06a2fe0e658bc38a33c75833ced0e2471ab50ac9ca372a4c8a60ca1b9413",
+        "555d8e1b0e736b01eb913771ffbe3bd84a44bfe6b48157b7ce8813b25ace809f",
+        "ac6cd8a9001c2ca64185be3c4924b37483339e6743d2548b523f1c8e1714611a",
+        "6c13102b88f2dfb99028a6d5abe6229abd37e9235ca20ec7f65dae0b0f35ee22",
+        "f1ea8036c06e740c0b1c624e0b1c085a8b6905789ea0159f894576e5d04dcefc"
+      ]
+    },
+    "source_classes": [
+      "INTERNAL_KNOWLEDGE",
+      "INFERENCE"
+    ]
+  },
+  "16_known_limitations": [
+    "No platform-specific instructions provided",
+    "Requires booking integration, up to date WhatsApp rules, clinic capacity data"
+  ],
+  "17_current_research_required": [
+    "Local competitor positioning and pricing.",
+    "Search demand and channel cost benchmarks.",
+    "Legal and medical regulatory requirements for laser clinics.",
+    "Target demographic size and preferences.",
+    "Local demand by segment",
+    "Competitor services and pricing",
+    "Best local acquisition channels",
+    "Advertising regulatory restrictions",
+    "Clinic capacity and pricing tiers",
+    "Local competitor offers and pricing",
+    "Regulatory rules for medical advertising and promotions",
+    "Local acceptable first-session discount benchmarks",
+    "Local pricing benchmarks for discounts",
+    "Regulatory rules for clinic advertising",
+    "Best booking widget integrations",
+    "Deadline-timer provider costs",
+    "Local competitor messaging and pricing",
+    "Regulatory constraints for clinical claims locally",
+    "Clinic certification and clinician credentials documentation",
+    "Capacity limits for promotional sessions",
+    "Best performing local ad channels and CPMs",
+    "Meta conversion API and CAPI setup details",
+    "Advantage+ auto-optimization behaviors and constraints",
+    "Local ad policy for laser hair removal",
+    "Audience size and reach estimates for clinic area",
+    "WhatsApp API template and message limits for business",
+    "Provider multiagent features and session billing",
+    "Local regulations for medical messaging and promotions",
+    "WhatsApp Business automation rate limits",
+    "Latest platform opt in rules and consent requirements",
+    "Booking platform API capabilities and cost",
+    "WhatsApp Business policy updates and limits",
+    "Local postcode market size and competitor pricing",
+    "Current CPL benchmarks for laser hair services"
+  ],
+  "18_recommended_next_actions": [
+    "Provide USER_PROVIDED_FACTS (price/margin, capacity, geography, promos)",
+    "Resolve CURRENT_RESEARCH_REQUIRED items before platform setup"
+  ]
+}

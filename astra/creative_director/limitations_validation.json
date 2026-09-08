@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-09-08T00:47:55.248Z",
+  "readiness_decision": "READY_WITH_LIMITATIONS",
+  "required_scope_guard": "Build only a bounded advertising Creative Director that exposes these limitations; do not claim full graphic-design or current-platform authority.",
+  "weak_domains": [
+    "grids",
+    "balance",
+    "editorial design",
+    "performance creative"
+  ],
+  "none_domains": [
+    "rhythm",
+    "mobile-first creative",
+    "scroll-stopping principles"
+  ],
+  "weak_none_surfaced_in_output": [
+    {
+      "domain": "mobile-first creative",
+      "coverage_class": "NONE"
+    },
+    {
+      "domain": "editorial design",
+      "coverage_class": "WEAK"
+    },
+    {
+      "domain": "mobile-first creative",
+      "coverage_class": "NONE"
+    },
+    {
+      "domain": "editorial design",
+      "coverage_class": "WEAK"
+    }
+  ],
+  "current_research_required_emitted": [
+    "mobile-first creative",
+    "current Meta platform mechanics (UI, Advantage+, CAPI, attribution defaults)"
+  ],
+  "single_source_concentration_flagged": true,
+  "audit_limitations": [
+    "368/375 retrieval slots and every evidence-backed named creative method are concentrated in one advertising book.",
+    "Visual rhythm, mobile-first creative, and scroll-stopping craft have no meaningful current evidence.",
+    "Grids, visual balance, editorial design, and performance creative are weak.",
+    "Typography, visual identity, digital/social creative, CTA hierarchy, density, and legibility are useful but incomplete.",
+    "Meta/social evidence does not provide a deep, current performance-creative testing system.",
+    "A Creative Director can be bounded to advertising concept and art direction, but cannot be presented as a complete graphic-design or current performance-creative authority."
+  ]
+}

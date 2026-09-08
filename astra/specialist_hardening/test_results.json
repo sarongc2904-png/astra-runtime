@@ -1,0 +1,67 @@
+{
+  "captured_at": "2026-09-07T02:39:08.897020+00:00",
+  "astra05_offline": {
+    "pass": 24,
+    "fail": 0
+  },
+  "astra04_regression": {
+    "pass": 20,
+    "fail": 0
+  },
+  "astra03e_regression": {
+    "pass": 23,
+    "fail": 0
+  },
+  "router_core_regression": {
+    "pass": 38,
+    "fail": 1,
+    "note": "1 obsolete registry-all-DISCOVERED"
+  },
+  "live_scenarios": {
+    "laser": {
+      "status": "COMPLETE",
+      "mode": "llm",
+      "bindings": {
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+      }
+    },
+    "infoproduct": {
+      "status": "COMPLETE",
+      "mode": "llm",
+      "bindings": {
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+      }
+    },
+    "dental": {
+      "status": "COMPLETE",
+      "mode": "deterministic",
+      "bindings": {
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+      }
+    },
+    "restaurant": {
+      "status": "COMPLETE",
+      "mode": "deterministic",
+      "bindings": {
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+      }
+    },
+    "b2b": {
+      "status": "COMPLETE",
+      "mode": "deterministic",
+      "bindings": {
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+      }
+    }
+  },
+  "llm_e2e": [
+    "laser",
+    "infoproduct"
+  ],
+  "llm_materially_improved": true
+}

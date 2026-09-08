@@ -1,0 +1,207 @@
+{
+  "generated_at": "2026-09-07T03:19:18.000Z",
+  "live": false,
+  "results": {
+    "01_NORMAL_LASER_CLINIC": {
+      "summary": {
+        "status": "COMPLETE",
+        "nodes": 9,
+        "ads": "METHOD_META_ADS",
+        "wa": "METHOD_WHATSAPP_SALES",
+        "sections": 18,
+        "coherent": true
+      },
+      "selected_methods": {
+        "market_context": "METHOD_GROWTH_MARKETING",
+        "icp": "METHOD_ICP",
+        "offer": "METHOD_OFFER_DESIGN",
+        "funnel": "METHOD_FUNNEL",
+        "creative_strategy": "METHOD_CREATIVE_STRATEGY",
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES",
+        "measurement": "METHOD_CRO"
+      },
+      "provenance_present": false,
+      "pass": true
+    },
+    "02_NORMAL_DENTAL": {
+      "summary": {
+        "status": "COMPLETE",
+        "nodes": 9,
+        "ads": "METHOD_META_ADS",
+        "wa": "METHOD_WHATSAPP_SALES",
+        "sections": 18,
+        "coherent": true
+      },
+      "selected_methods": {
+        "market_context": "METHOD_GROWTH_MARKETING",
+        "icp": "METHOD_ICP",
+        "offer": "METHOD_OFFER_DESIGN",
+        "funnel": "METHOD_FUNNEL",
+        "creative_strategy": "METHOD_CREATIVE_STRATEGY",
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES",
+        "measurement": "METHOD_CRO"
+      },
+      "provenance_present": false,
+      "pass": true
+    },
+    "03_NORMAL_LOCAL_RESTAURANT": {
+      "summary": {
+        "status": "COMPLETE",
+        "nodes": 9,
+        "ads": "METHOD_META_ADS",
+        "wa": "METHOD_WHATSAPP_SALES",
+        "sections": 18,
+        "coherent": true
+      },
+      "selected_methods": {
+        "market_context": "METHOD_GROWTH_MARKETING",
+        "icp": "METHOD_ICP",
+        "offer": "METHOD_OFFER_DESIGN",
+        "funnel": "METHOD_FUNNEL",
+        "creative_strategy": "METHOD_CREATIVE_STRATEGY",
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES",
+        "measurement": "METHOD_CRO"
+      },
+      "provenance_present": false,
+      "pass": true
+    },
+    "04_NORMAL_INFOPRODUCT": {
+      "summary": {
+        "status": "COMPLETE",
+        "nodes": 9,
+        "ads": "METHOD_META_ADS",
+        "wa": "METHOD_WHATSAPP_SALES",
+        "sections": 18,
+        "coherent": true
+      },
+      "selected_methods": {
+        "market_context": "METHOD_GROWTH_MARKETING",
+        "icp": "METHOD_ICP",
+        "offer": "METHOD_OFFER_DESIGN",
+        "funnel": "METHOD_FUNNEL",
+        "creative_strategy": "METHOD_CREATIVE_STRATEGY",
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES",
+        "measurement": "METHOD_CRO"
+      },
+      "provenance_present": false,
+      "pass": true
+    },
+    "05_NORMAL_B2B_SERVICE": {
+      "summary": {
+        "status": "COMPLETE",
+        "nodes": 9,
+        "ads": "METHOD_META_ADS",
+        "wa": "METHOD_WHATSAPP_SALES",
+        "sections": 18,
+        "coherent": true
+      },
+      "selected_methods": {
+        "market_context": "METHOD_GROWTH_MARKETING",
+        "icp": "METHOD_ICP",
+        "offer": "METHOD_OFFER_DESIGN",
+        "funnel": "METHOD_FUNNEL",
+        "creative_strategy": "METHOD_CREATIVE_STRATEGY",
+        "ads": "METHOD_META_ADS",
+        "whatsapp_conversion": "METHOD_WHATSAPP_SALES",
+        "measurement": "METHOD_CRO"
+      },
+      "provenance_present": false,
+      "pass": true
+    },
+    "06_WEAK_INCOMPLETE_BRIEF": {
+      "summary": {
+        "status": "WAITING_FOR_INPUT",
+        "reason": "incomplete_business_information"
+      },
+      "pass": true
+    },
+    "07_MISSING_REQUIRED_EVIDENCE": {
+      "summary": {
+        "failed_closed": true,
+        "error": "missing required evidence for node market_context"
+      },
+      "pass": true
+    },
+    "08_CONFLICTING_METHOD_SIGNALS": {
+      "summary": {
+        "primary": "M_SPEC",
+        "margin": 0.236
+      },
+      "pass": true
+    },
+    "09_CURRENT_PLATFORM_DEPENDENT": {
+      "summary": {
+        "current_research_count": 4
+      },
+      "pass": true
+    },
+    "10_MODEL_API_FAILURE": {
+      "summary": {
+        "failed_closed": true,
+        "error": "LLM specialist fail-closed at market_context: provider 503"
+      },
+      "pass": true
+    },
+    "11_MALFORMED_LLM_OUTPUT": {
+      "summary": {
+        "failed_closed": true,
+        "error": "LLM specialist fail-closed at market_context: json_parse:Unexpected token 'u', ."
+      },
+      "pass": true
+    },
+    "12_CONTEXT_BUDGET_EXCEEDED": {
+      "summary": {
+        "completed": true,
+        "per_node_bounded": true,
+        "budget": 8000
+      },
+      "pass": true
+    },
+    "13_MISSING_UPSTREAM_DEPENDENCY": {
+      "summary": {
+        "failed_closed": true,
+        "error": "missing required evidence for node offer"
+      },
+      "pass": true
+    },
+    "14_UNSUPPORTED_METHOD_ATTEMPT": {
+      "summary": {
+        "rejected": true,
+        "error": "forced binding unavailable/evidence-poor: METHOD_VELOCITY"
+      },
+      "pass": true
+    },
+    "15_REPEAT_CONSISTENCY": {
+      "summary": {
+        "consistent": true,
+        "runs": 3
+      },
+      "invariant": {
+        "methods": {
+          "market_context": "METHOD_GROWTH_MARKETING",
+          "icp": "METHOD_ICP",
+          "offer": "METHOD_OFFER_DESIGN",
+          "funnel": "METHOD_FUNNEL",
+          "creative_strategy": "METHOD_CREATIVE_STRATEGY",
+          "ads": "METHOD_META_ADS",
+          "whatsapp_conversion": "METHOD_WHATSAPP_SALES",
+          "measurement": "METHOD_CRO"
+        },
+        "bindings": {
+          "ads": "METHOD_META_ADS",
+          "whatsapp_conversion": "METHOD_WHATSAPP_SALES"
+        },
+        "status": "COMPLETE",
+        "sections": 18
+      },
+      "pass": true
+    },
+    "LIVE_LASER_LLM": {
+      "skipped": true
+    }
+  }
+}

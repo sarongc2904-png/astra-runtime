@@ -1,0 +1,166 @@
+{
+  "generated_at": "2026-09-06T23:13:17.392538+00:00",
+  "counts": {
+    "ADMIT": 7,
+    "DEFER": 4,
+    "REJECT": 1
+  },
+  "decisions": [
+    {
+      "SOURCE_ID": "SRC_VEL_FUNNELS",
+      "DECISION": "ADMIT",
+      "RATIONALE": "Structured funnel curriculum with strategy, economics, audience, offers, ads, landing pages and sales assets.",
+      "CRITERIA": {
+        "relevance": "HIGH",
+        "expected_value": "HIGH",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "LOW",
+        "integrity_risk": "LOW"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_VEL_SALES",
+      "DECISION": "ADMIT",
+      "RATIONALE": "Dedicated sales process, context, strategy, tactics and sales-script material.",
+      "CRITERIA": {
+        "relevance": "HIGH",
+        "expected_value": "HIGH",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "LOW",
+        "integrity_risk": "LOW"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_VEL_MIDAS",
+      "DECISION": "ADMIT",
+      "RATIONALE": "Dedicated demand creation, pricing, business-model/LTV and intangible-asset curriculum.",
+      "CRITERIA": {
+        "relevance": "HIGH",
+        "expected_value": "HIGH",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "LOW",
+        "integrity_risk": "LOW"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_VEL_INFO_AZ",
+      "DECISION": "ADMIT",
+      "RATIONALE": "Coherent end-to-end infoproduct business curriculum covering audience, proposition, launch and growth.",
+      "CRITERIA": {
+        "relevance": "HIGH",
+        "expected_value": "HIGH",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "MODERATE",
+        "integrity_risk": "LOW"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_VEL_OFFER",
+      "DECISION": "ADMIT",
+      "RATIONALE": "Focused workshop gives deeper offer and value-proposition treatment than the broad courses.",
+      "CRITERIA": {
+        "relevance": "HIGH",
+        "expected_value": "HIGH",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "MODERATE",
+        "integrity_risk": "LOW"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_PRO_CRO",
+      "DECISION": "ADMIT",
+      "RATIONALE": "Dedicated CRO research, experimentation, testing, prioritization and consumer-psychology curriculum; ASR warnings retained.",
+      "CRITERIA": {
+        "relevance": "HIGH",
+        "expected_value": "HIGH",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "LOW",
+        "integrity_risk": "MODERATE"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_PRO_GROWTH",
+      "DECISION": "ADMIT",
+      "RATIONALE": "Adds growth loops, market selection, positioning, economics, prioritization and measurement.",
+      "CRITERIA": {
+        "relevance": "HIGH",
+        "expected_value": "HIGH",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "MODERATE",
+        "integrity_risk": "MODERATE"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_VEL_INFO_ABC",
+      "DECISION": "DEFER",
+      "RATIONALE": "Substantially overlaps the admitted A-to-Z infoproduct course; defer until marginal retrieval value is measured.",
+      "CRITERIA": {
+        "relevance": "HIGH",
+        "expected_value": "MODERATE",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "integrity_risk": "LOW"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_PRO_BLOCKBUSTER",
+      "DECISION": "DEFER",
+      "RATIONALE": "Broad and partly overlapping package; needs finer module-level admission before ingestion.",
+      "CRITERIA": {
+        "relevance": "MODERATE",
+        "expected_value": "MODERATE",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "integrity_risk": "MODERATE"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_PRO_FUNNEL_QA",
+      "DECISION": "DEFER",
+      "RATIONALE": "Live Q&A is less systematic and more ASR-noisy than the admitted structured funnel curriculum.",
+      "CRITERIA": {
+        "relevance": "MODERATE",
+        "expected_value": "MODERATE",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "integrity_risk": "MODERATE"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_BIBLIA_VENDEDOR",
+      "DECISION": "DEFER",
+      "RATIONALE": "Useful sales material but redundant with raw course transcripts and its derivation/provenance needs adjudication.",
+      "CRITERIA": {
+        "relevance": "HIGH",
+        "expected_value": "MODERATE",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "HIGH",
+        "integrity_risk": "MODERATE"
+      }
+    },
+    {
+      "SOURCE_ID": "SRC_COPY_FB_PROMPT",
+      "DECISION": "REJECT",
+      "RATIONALE": "A derivative prompt is not sufficient authority for Meta Ads methodology and would overstate platform coverage.",
+      "CRITERIA": {
+        "relevance": "LOW",
+        "expected_value": "LOW",
+        "provenance_identifiable": true,
+        "parseability": "HIGH",
+        "redundancy": "MODERATE",
+        "integrity_risk": "HIGH"
+      }
+    }
+  ]
+}

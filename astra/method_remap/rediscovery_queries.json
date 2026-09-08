@@ -1,0 +1,2712 @@
+{
+  "authorization_id": "HUMAN_AUTHORIZATION_ASTRA_03C_METHOD_REMAP_AND_METADATA_ADJUDICATION_2026-09-06",
+  "query_count": 25,
+  "queries": [
+    {
+      "query_id": "Q01",
+      "query": "Velocity Funnels: pilares, etapas y selección del funnel",
+      "purpose": "Velocity Funnels",
+      "expected_source_id": "SRC_VEL_FUNNELS",
+      "returned_chunk_ids": [
+        "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+        "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "85ffcd9c7d1979685425565ef619db25d1a9a5262e24b9f1cddcae6d9f9f01d7"
+      ],
+      "source_names": [
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q01",
+          "evidence_id": "E1",
+          "chunk_id": "81721eea73d04628c702600433534c5fbe680c6c2d208adf027c8a5346a1d4af",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6115571315455892,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q01",
+          "evidence_id": "E2",
+          "chunk_id": "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5635554543221566,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q01",
+          "evidence_id": "E3",
+          "chunk_id": "de3c3cc36dbd6051f23105668e822cd78e194014050959c0a1e422ae31a43f54",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5712105821057297,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q01",
+          "evidence_id": "E4",
+          "chunk_id": "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6895649213076688,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q01",
+          "evidence_id": "E5",
+          "chunk_id": "85ffcd9c7d1979685425565ef619db25d1a9a5262e24b9f1cddcae6d9f9f01d7",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6039740344715543,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6115571315455892,
+        0.5635554543221566,
+        0.5712105821057297,
+        0.6895649213076688,
+        0.6039740344715543
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q02",
+      "query": "proceso multietapa y modelo económico de un funnel de ventas",
+      "purpose": "Funnel framework",
+      "expected_source_id": "SRC_VEL_FUNNELS",
+      "returned_chunk_ids": [
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+        "121d9778d844c81d30aefaee895c4e7cb7e5e94c65a4aac28fc136a038ced4dd",
+        "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+        "8a0d5e4abbf836861eefa34fc77ceabc82ab4c4be2c3c0a86ddfc02059e326c7"
+      ],
+      "source_names": [
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q02",
+          "evidence_id": "E1",
+          "chunk_id": "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.639444189108815,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E2",
+          "chunk_id": "997b73a0976628562f0101de6b3d681b1e181bf747a09f2dc3803eab139afbc3",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5876658789017009,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E3",
+          "chunk_id": "121d9778d844c81d30aefaee895c4e7cb7e5e94c65a4aac28fc136a038ced4dd",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6020746873550813,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E4",
+          "chunk_id": "6b3aad11414b48a0ba7d6d074958817d6ad41255796adbdc1c8b62119116eef8",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.616548208339074,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q02",
+          "evidence_id": "E5",
+          "chunk_id": "8a0d5e4abbf836861eefa34fc77ceabc82ab4c4be2c3c0a86ddfc02059e326c7",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6003160200311722,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 4,
+      "retrieval_score_diagnostics": [
+        0.639444189108815,
+        0.5876658789017009,
+        0.6020746873550813,
+        0.616548208339074,
+        0.6003160200311722
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q03",
+      "query": "Venta Elegante: estrategia, táctica y guion de conversación de ventas",
+      "purpose": "Sales conversion",
+      "expected_source_id": "SRC_VEL_SALES",
+      "returned_chunk_ids": [
+        "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+        "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+        "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963",
+        "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+        "21b150d1ec4c3d2ec8a8a1f7d6c1fa7b35a2bc009cbb4f95d724d2f8844c4cc0"
+      ],
+      "source_names": [
+        "Velocity — La Venta Elegante [transcript bundle]",
+        "Velocity — La Venta Elegante [transcript bundle]",
+        "Velocity — La Venta Elegante [transcript bundle]",
+        "Velocity — La Venta Elegante [transcript bundle]",
+        "Velocity — La Venta Elegante [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q03",
+          "evidence_id": "E1",
+          "chunk_id": "5e56a61fb790301a99b92387aba613be23ec01f7b4b5a2f2f1d1caf3a54391d0",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6126067243058606,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q03",
+          "evidence_id": "E2",
+          "chunk_id": "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6190822316027752,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q03",
+          "evidence_id": "E3",
+          "chunk_id": "e9751010f527b1feaee5e757b6c474ab0b2a5efd12a89f5d2aa517fca593c963",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5948725300782236,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q03",
+          "evidence_id": "E4",
+          "chunk_id": "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5435265677443862,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q03",
+          "evidence_id": "E5",
+          "chunk_id": "21b150d1ec4c3d2ec8a8a1f7d6c1fa7b35a2bc009cbb4f95d724d2f8844c4cc0",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5631184050804091,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6126067243058606,
+        0.6190822316027752,
+        0.5948725300782236,
+        0.5435265677443862,
+        0.5631184050804091
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q04",
+      "query": "manejo de contexto y estructura de un guion de ventas",
+      "purpose": "Sales conversion",
+      "expected_source_id": "SRC_VEL_SALES",
+      "returned_chunk_ids": [
+        "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+        "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+        "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+        "10e661a79511d82c084e82949fb4115bf8d6eeb469ce8965243ab2f6174c9224",
+        "fa8f6278a819d63c86b259f1ecf619d5a4ec7d1f0ae9ed65830d369028aa00fd"
+      ],
+      "source_names": [
+        "Velocity — La Venta Elegante [transcript bundle]",
+        "Velocity — La Venta Elegante [transcript bundle]",
+        "Velocity — La Venta Elegante [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — La Venta Elegante [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q04",
+          "evidence_id": "E1",
+          "chunk_id": "01a66fbfe571407d15e481289a22cc0ec37cb14a046eefee2285553e2ddccc3e",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.7721302122307648,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "evidence_id": "E2",
+          "chunk_id": "3f89d106a31c9def71fb0f603b7e4dc3e60bc8441ba1e806ec7a43593e13d665",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5845415476452347,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "evidence_id": "E3",
+          "chunk_id": "2d458572ee6e728bd37bba36852f9be7ec8decbc55edb45ee2f9902af76c4e97",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6089897583904528,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "evidence_id": "E4",
+          "chunk_id": "10e661a79511d82c084e82949fb4115bf8d6eeb469ce8965243ab2f6174c9224",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.586885127350415,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q04",
+          "evidence_id": "E5",
+          "chunk_id": "fa8f6278a819d63c86b259f1ecf619d5a4ec7d1f0ae9ed65830d369028aa00fd",
+          "source_pdf_name": "Velocity — La Venta Elegante [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5790744118336957,
+          "source_id": "SRC_VEL_SALES",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 4,
+      "retrieval_score_diagnostics": [
+        0.7721302122307648,
+        0.5845415476452347,
+        0.6089897583904528,
+        0.586885127350415,
+        0.5790744118336957
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q05",
+      "query": "MIDAS: creación de demanda, estrategia de precios, modelo de negocio y LTV",
+      "purpose": "MIDAS framework",
+      "expected_source_id": "SRC_VEL_MIDAS",
+      "returned_chunk_ids": [
+        "58bad94434984c2b61caab1bc6e1f142a88de665a61f93e23396da22bca630bf",
+        "7b0d0bd2813591242ac3daf53dd35cac7955f21c37154b416f75023eef733f52",
+        "f52740637426debb618a0a92e4ee464d3a7efe2e9ba0b9a9c7210a5821c252fb",
+        "b42abee2b48969cca81d3bc1436e988348c9d2298eedd8783fc9cf9945edad0c",
+        "912efd0f2688c6f2a09247daaa259aabddda619593c6c25976acf56af9462d2c"
+      ],
+      "source_names": [
+        "Velocity — Curso MIDAS [transcript bundle]",
+        "Velocity — Curso MIDAS [transcript bundle]",
+        "Velocity — Curso MIDAS [transcript bundle]",
+        "Velocity — Curso MIDAS [transcript bundle]",
+        "Velocity — Curso MIDAS [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q05",
+          "evidence_id": "E1",
+          "chunk_id": "58bad94434984c2b61caab1bc6e1f142a88de665a61f93e23396da22bca630bf",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5463498740820546,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E2",
+          "chunk_id": "7b0d0bd2813591242ac3daf53dd35cac7955f21c37154b416f75023eef733f52",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5381162056312305,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E3",
+          "chunk_id": "f52740637426debb618a0a92e4ee464d3a7efe2e9ba0b9a9c7210a5821c252fb",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5722168995776011,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E4",
+          "chunk_id": "b42abee2b48969cca81d3bc1436e988348c9d2298eedd8783fc9cf9945edad0c",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5782486324725156,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q05",
+          "evidence_id": "E5",
+          "chunk_id": "912efd0f2688c6f2a09247daaa259aabddda619593c6c25976acf56af9462d2c",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5581230903262844,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.5463498740820546,
+        0.5381162056312305,
+        0.5722168995776011,
+        0.5782486324725156,
+        0.5581230903262844
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q06",
+      "query": "estrategia de precios y activos intangibles en MIDAS",
+      "purpose": "MIDAS framework",
+      "expected_source_id": "SRC_VEL_MIDAS",
+      "returned_chunk_ids": [
+        "2969124a61a2a00161920f8c1cd5842ceb07d35613731355f2014312e9dd8b7b",
+        "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+        "bfe47635e7291c9f64afbdb6a562fff9acede2a18380f96d78286200712637f2",
+        "c7bbae8a646a72013561fff03aebc8470c9cee89e622efc061c09910e0e6f1e1",
+        "7c3c03cfccb124a5afb71d8ac0d204add00374961713afd946008f8573999f72"
+      ],
+      "source_names": [
+        "Velocity — Curso MIDAS [transcript bundle]",
+        "Velocity — Curso MIDAS [transcript bundle]",
+        "Velocity — Curso MIDAS [transcript bundle]",
+        "Velocity — Curso MIDAS [transcript bundle]",
+        "Velocity — Curso MIDAS [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q06",
+          "evidence_id": "E1",
+          "chunk_id": "2969124a61a2a00161920f8c1cd5842ceb07d35613731355f2014312e9dd8b7b",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5422450674220916,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E2",
+          "chunk_id": "c132e25ba0513ddd8cae42a66b67b537834422a1c7279f13e073679f881ee4e1",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5391945949726953,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E3",
+          "chunk_id": "bfe47635e7291c9f64afbdb6a562fff9acede2a18380f96d78286200712637f2",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5814643883071317,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E4",
+          "chunk_id": "c7bbae8a646a72013561fff03aebc8470c9cee89e622efc061c09910e0e6f1e1",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5236453801091066,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q06",
+          "evidence_id": "E5",
+          "chunk_id": "7c3c03cfccb124a5afb71d8ac0d204add00374961713afd946008f8573999f72",
+          "source_pdf_name": "Velocity — Curso MIDAS [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.46033483608014863,
+          "source_id": "SRC_VEL_MIDAS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.5422450674220916,
+        0.5391945949726953,
+        0.5814643883071317,
+        0.5236453801091066,
+        0.46033483608014863
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q07",
+      "query": "negocio de infoproductos de la A a la Z: audiencia propuesta lanzamiento crecimiento",
+      "purpose": "Infoproduct framework",
+      "expected_source_id": "SRC_VEL_INFO_AZ",
+      "returned_chunk_ids": [
+        "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+        "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+        "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+        "8b84e5fd888715eff741dad755ef46c2dd01a0d4d64146d2b4a028a81cd074e1",
+        "52f52e83e7a7b28a938724854407ac50421b3a8631c42c306db14ea3e3f9c169"
+      ],
+      "source_names": [
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q07",
+          "evidence_id": "E1",
+          "chunk_id": "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6235598156483552,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q07",
+          "evidence_id": "E2",
+          "chunk_id": "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6072185352562766,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q07",
+          "evidence_id": "E3",
+          "chunk_id": "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.601673298285325,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q07",
+          "evidence_id": "E4",
+          "chunk_id": "8b84e5fd888715eff741dad755ef46c2dd01a0d4d64146d2b4a028a81cd074e1",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6011702293183174,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q07",
+          "evidence_id": "E5",
+          "chunk_id": "52f52e83e7a7b28a938724854407ac50421b3a8631c42c306db14ea3e3f9c169",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5640931298177414,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6235598156483552,
+        0.6072185352562766,
+        0.601673298285325,
+        0.6011702293183174,
+        0.5640931298177414
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q08",
+      "query": "cómo lanzar y hacer crecer un negocio de infoproductos",
+      "purpose": "Infoproduct framework",
+      "expected_source_id": "SRC_VEL_INFO_AZ",
+      "returned_chunk_ids": [
+        "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+        "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+        "34421dcc63514aacb41e5ca4bd17aed9893467722d9c4b66d63685128a645784",
+        "8b84e5fd888715eff741dad755ef46c2dd01a0d4d64146d2b4a028a81cd074e1",
+        "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7"
+      ],
+      "source_names": [
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q08",
+          "evidence_id": "E1",
+          "chunk_id": "2561be3186929065220455f3ed7c2cd8b938192acdf30e1f84a498f1f97a57ec",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6775084170867239,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E2",
+          "chunk_id": "a4f046f3de417060b777e490e7a3d5512333620ad66fdd05766b62d9b7df51ac",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6266039110607184,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E3",
+          "chunk_id": "34421dcc63514aacb41e5ca4bd17aed9893467722d9c4b66d63685128a645784",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.7130843062220689,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E4",
+          "chunk_id": "8b84e5fd888715eff741dad755ef46c2dd01a0d4d64146d2b4a028a81cd074e1",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5781720907426252,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q08",
+          "evidence_id": "E5",
+          "chunk_id": "4227ea68b9e7dc3719c55079d9ee8be6e84abfec74f25b548d64485b4bacc3e7",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.7225373917921258,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6775084170867239,
+        0.6266039110607184,
+        0.7130843062220689,
+        0.5781720907426252,
+        0.7225373917921258
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q09",
+      "query": "propuesta irresistible: elementos, valor, conversión y oferta",
+      "purpose": "Offer design",
+      "expected_source_id": "SRC_VEL_OFFER",
+      "returned_chunk_ids": [
+        "14345c3da7368282fb898dddcc9797621b4c1f08a171749d8d057a08011e2df3",
+        "7cafa65c2e337551eeff5643cdc05a42fcff2f22b77830e85741a207fbea47b6",
+        "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+        "5f15986a875b8c433ec07d81d3cf4927590fafa7d90297b8c34966fe06420f5d",
+        "8fc5f39635cf981c7e89f0042ab811a8248d01bcbf777aa228f1b017d53ee274"
+      ],
+      "source_names": [
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Taller de Propuesta Irresistible [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q09",
+          "evidence_id": "E1",
+          "chunk_id": "14345c3da7368282fb898dddcc9797621b4c1f08a171749d8d057a08011e2df3",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6148823345430477,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E2",
+          "chunk_id": "7cafa65c2e337551eeff5643cdc05a42fcff2f22b77830e85741a207fbea47b6",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6005042408348855,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E3",
+          "chunk_id": "0444956bada2675929cece582f739aaa6e4d7d03c726a14c73fbf3b21bebf8c0",
+          "source_pdf_name": "Velocity — Taller de Propuesta Irresistible [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6901023453449773,
+          "source_id": "SRC_VEL_OFFER",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E4",
+          "chunk_id": "5f15986a875b8c433ec07d81d3cf4927590fafa7d90297b8c34966fe06420f5d",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6663829747692704,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q09",
+          "evidence_id": "E5",
+          "chunk_id": "8fc5f39635cf981c7e89f0042ab811a8248d01bcbf777aa228f1b017d53ee274",
+          "source_pdf_name": "Velocity — Negocio de infoproductos de la A a la Z [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5883424616787905,
+          "source_id": "SRC_VEL_INFO_AZ",
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 1,
+      "retrieval_score_diagnostics": [
+        0.6148823345430477,
+        0.6005042408348855,
+        0.6901023453449773,
+        0.6663829747692704,
+        0.5883424616787905
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q10",
+      "query": "propuesta en fase imán y fase de venta de un funnel",
+      "purpose": "Offer design",
+      "expected_source_id": "SRC_VEL_FUNNELS",
+      "returned_chunk_ids": [
+        "b696eb7e844f49dacd9fd752acfee63c44e99646d8623eb66a07f154e9fe96c2",
+        "470102b912bf5286fb76a9e9a305e9456f2c24587ccd9140bdf7198daff06f19",
+        "d53c564c7b32600ca577ed3ffcc74f89877dcd9ee9349d2c2ec42ab2bca54de5",
+        "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+        "85ffcd9c7d1979685425565ef619db25d1a9a5262e24b9f1cddcae6d9f9f01d7"
+      ],
+      "source_names": [
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q10",
+          "evidence_id": "E1",
+          "chunk_id": "b696eb7e844f49dacd9fd752acfee63c44e99646d8623eb66a07f154e9fe96c2",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.7123536640710004,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "evidence_id": "E2",
+          "chunk_id": "470102b912bf5286fb76a9e9a305e9456f2c24587ccd9140bdf7198daff06f19",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6350629679247313,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "evidence_id": "E3",
+          "chunk_id": "d53c564c7b32600ca577ed3ffcc74f89877dcd9ee9349d2c2ec42ab2bca54de5",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.7015004737633606,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "evidence_id": "E4",
+          "chunk_id": "994ffe14c8ad70eb0e1d506723aa97b39844c10062b84a16d17b4c7d9f5fed92",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6305771440909249,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q10",
+          "evidence_id": "E5",
+          "chunk_id": "85ffcd9c7d1979685425565ef619db25d1a9a5262e24b9f1cddcae6d9f9f01d7",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6434995718174975,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.7123536640710004,
+        0.6350629679247313,
+        0.7015004737633606,
+        0.6305771440909249,
+        0.6434995718174975
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q11",
+      "query": "CRO: investigación experimentación test ejecución y priorización",
+      "purpose": "CRO framework",
+      "expected_source_id": "SRC_PRO_CRO",
+      "returned_chunk_ids": [
+        "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+        "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+        "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1",
+        "324d7b279dcdea1aac631bf051a72c61bf7d2f4fa2d173c349ef4c0d35644c33",
+        "9ee7f02c5acbcc63350eac9929bf5bfed477416fd3371a72f2b4ef30181dca0f"
+      ],
+      "source_names": [
+        "Protégé — CRO Máxima [transcript bundle]",
+        "Protégé — CRO Máxima [transcript bundle]",
+        "Protégé — CRO Máxima [transcript bundle]",
+        "Protégé — CRO Máxima [transcript bundle]",
+        "Protégé — CRO Máxima [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q11",
+          "evidence_id": "E1",
+          "chunk_id": "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6766883824352607,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E2",
+          "chunk_id": "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6388788819884266,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E3",
+          "chunk_id": "c5e4f7729ff749a7282c54b94983c9da876b10b6c80ed3e1a942136e71465bd1",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.635542765479661,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E4",
+          "chunk_id": "324d7b279dcdea1aac631bf051a72c61bf7d2f4fa2d173c349ef4c0d35644c33",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6815121042201531,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q11",
+          "evidence_id": "E5",
+          "chunk_id": "9ee7f02c5acbcc63350eac9929bf5bfed477416fd3371a72f2b4ef30181dca0f",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6653456754023148,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6766883824352607,
+        0.6388788819884266,
+        0.635542765479661,
+        0.6815121042201531,
+        0.6653456754023148
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q12",
+      "query": "psicología del consumidor y oportunidades de optimización CRO",
+      "purpose": "CRO framework",
+      "expected_source_id": "SRC_PRO_CRO",
+      "returned_chunk_ids": [
+        "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+        "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+        "da231f65b0cabbcf73b00cdf747f3d81e123399ae05559c24f02659cffec6e93",
+        "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+        "ac21c1be91d99939b9313c37264759fe386117680495af1ff2b4cfd68878b98c"
+      ],
+      "source_names": [
+        "Protégé — CRO Máxima [transcript bundle]",
+        "Protégé — CRO Máxima [transcript bundle]",
+        "Protégé — CRO Máxima [transcript bundle]",
+        "Protégé — CRO Máxima [transcript bundle]",
+        "Protégé — CRO Máxima [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q12",
+          "evidence_id": "E1",
+          "chunk_id": "e90e5d5012f128b18d02e78ac074676258a03dfcee2e8192b092d7552cad9620",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.636918667484424,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "evidence_id": "E2",
+          "chunk_id": "eab2e090b069f849dbaa3c586c5e2e7a83c7f89aa4887983ba065f5ffbc9a9bc",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6284588419335153,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "evidence_id": "E3",
+          "chunk_id": "da231f65b0cabbcf73b00cdf747f3d81e123399ae05559c24f02659cffec6e93",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5956595402476095,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "evidence_id": "E4",
+          "chunk_id": "d1c3aa76618f1126345b28587be4cf83f005d87b1ef17e81de30f34a0573e8fc",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6281664027888068,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q12",
+          "evidence_id": "E5",
+          "chunk_id": "ac21c1be91d99939b9313c37264759fe386117680495af1ff2b4cfd68878b98c",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6328459756667066,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.636918667484424,
+        0.6284588419335153,
+        0.5956595402476095,
+        0.6281664027888068,
+        0.6328459756667066
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q13",
+      "query": "Growth Marketing: mercado posicionamiento loops crecimiento ICE score",
+      "purpose": "Growth marketing",
+      "expected_source_id": "SRC_PRO_GROWTH",
+      "returned_chunk_ids": [
+        "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+        "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+        "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+        "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+        "256427e1f27ded5cd6d36ffb6b2666bd69f59fc699a96232a9893955db1e55f9"
+      ],
+      "source_names": [
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q13",
+          "evidence_id": "E1",
+          "chunk_id": "8dcfa0786b35eeaf0cd4708e733f21aa61d76974be7995bc4faab67fccfa028a",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.6562685147826564,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E2",
+          "chunk_id": "5a44fcb56d276928064c5ca78fac760f3a65e732ed0482f74c73f9c32e5dd25e",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.538696823667013,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E3",
+          "chunk_id": "4e8c92f9f31bab0236115f4cf4a2da85593c61e51429f5044d0699b5df509642",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5143752814184723,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E4",
+          "chunk_id": "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.530446784386704,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q13",
+          "evidence_id": "E5",
+          "chunk_id": "256427e1f27ded5cd6d36ffb6b2666bd69f59fc699a96232a9893955db1e55f9",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5195187895946285,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6562685147826564,
+        0.538696823667013,
+        0.5143752814184723,
+        0.530446784386704,
+        0.5195187895946285
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q14",
+      "query": "cliente en el mercado métrica principal y oportunidades de crecimiento",
+      "purpose": "Growth/ICP",
+      "expected_source_id": "SRC_PRO_GROWTH",
+      "returned_chunk_ids": [
+        "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+        "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+        "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+        "6c050ef4644b10b278849957fb0f335d82fb12b01c21ae13e47fceb7c7b499b6",
+        "af308a74f4fd87874b2cf35f3051b2536a405ed8f8172d9ca9bc4e46e0e19bba"
+      ],
+      "source_names": [
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]",
+        "Protégé — Growth Marketing [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q14",
+          "evidence_id": "E1",
+          "chunk_id": "bc77baf346bdecea4b72d2ae784f22a302f798abf2009083845325142e0ae434",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5533427191796035,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E2",
+          "chunk_id": "90eb63545812e3ad1a658faef8b82c619f8a505019a5238792727d712d56662e",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5647821411413874,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E3",
+          "chunk_id": "e4b19cf2a7e716178be107041269f30783c583bb8a08276abb8dccb7a9153e32",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5198808309070964,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E4",
+          "chunk_id": "6c050ef4644b10b278849957fb0f335d82fb12b01c21ae13e47fceb7c7b499b6",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5015251269723058,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q14",
+          "evidence_id": "E5",
+          "chunk_id": "af308a74f4fd87874b2cf35f3051b2536a405ed8f8172d9ca9bc4e46e0e19bba",
+          "source_pdf_name": "Protégé — Growth Marketing [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5365662654797511,
+          "source_id": "SRC_PRO_GROWTH",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.5533427191796035,
+        0.5647821411413874,
+        0.5198808309070964,
+        0.5015251269723058,
+        0.5365662654797511
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q15",
+      "query": "creative strategy concept idea campaign execution advertising",
+      "purpose": "Creative Strategy",
+      "expected_source_id": "LEGACY",
+      "returned_chunk_ids": [
+        "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+        "77df5102bd9f4e0d40e8b413105dec32c8a3b475dd3407d83969a1e0e18c0008",
+        "81b7f132d9a3986afb3f405630dec05c224e1a630fe549483959a8bab22bb190",
+        "bb83873561faa0a4d5168dabf43d42756e38c7a14b3b7325b8435469b92a08d5",
+        "30be757507f5710925c180172696cb8260921c7f9c58bfc926c66ee87528c7c1"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q15",
+          "evidence_id": "E1",
+          "chunk_id": "e3f65065c1019c9a975da3f20e9b89371492f7f750925aa8650ee0ecc283953e",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            86,
+            87
+          ],
+          "retrieval_cosine_diagnostic": 0.6053633059243171,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q15",
+          "evidence_id": "E2",
+          "chunk_id": "77df5102bd9f4e0d40e8b413105dec32c8a3b475dd3407d83969a1e0e18c0008",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            216,
+            217
+          ],
+          "retrieval_cosine_diagnostic": 0.5942414695993474,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "excessive_repetition"
+          ]
+        },
+        {
+          "query_id": "Q15",
+          "evidence_id": "E3",
+          "chunk_id": "81b7f132d9a3986afb3f405630dec05c224e1a630fe549483959a8bab22bb190",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            184,
+            185
+          ],
+          "retrieval_cosine_diagnostic": 0.6559488682216578,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q15",
+          "evidence_id": "E4",
+          "chunk_id": "bb83873561faa0a4d5168dabf43d42756e38c7a14b3b7325b8435469b92a08d5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            16,
+            17
+          ],
+          "retrieval_cosine_diagnostic": 0.5795392883201935,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q15",
+          "evidence_id": "E5",
+          "chunk_id": "30be757507f5710925c180172696cb8260921c7f9c58bfc926c66ee87528c7c1",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            86,
+            87
+          ],
+          "retrieval_cosine_diagnostic": 0.5782109276208629,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6053633059243171,
+        0.5942414695993474,
+        0.6559488682216578,
+        0.5795392883201935,
+        0.5782109276208629
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q16",
+      "query": "single-minded proposition one clear benefit advertising",
+      "purpose": "SMP",
+      "expected_source_id": "LEGACY",
+      "returned_chunk_ids": [
+        "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+        "d46b573614997268f220f774e44faa68023506d178077bb42545f486300068de",
+        "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28",
+        "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+        "3b1aa6bbd4504c075278184e807170090b6454d141bf18e9d1545a5fc68ff513"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q16",
+          "evidence_id": "E1",
+          "chunk_id": "49c9cf2173ca1c75094508df6ea6a3c68f9fa479f3a26196e8421a02f730080b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            38,
+            39
+          ],
+          "retrieval_cosine_diagnostic": 0.6954268648736872,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q16",
+          "evidence_id": "E2",
+          "chunk_id": "d46b573614997268f220f774e44faa68023506d178077bb42545f486300068de",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            282,
+            283
+          ],
+          "retrieval_cosine_diagnostic": 0.5542755258786974,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q16",
+          "evidence_id": "E3",
+          "chunk_id": "f6bfdc9bfc920b98f8d6ac4e3f89a45025e0d0e694e0b9f87b1ded8ffeaf3a28",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "retrieval_cosine_diagnostic": 0.7271485023923944,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q16",
+          "evidence_id": "E4",
+          "chunk_id": "a0b35c68c569a9501a9ece7fc9e4149b09e1f5183773ffc627db95312b30452a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            100,
+            101
+          ],
+          "retrieval_cosine_diagnostic": 0.554271047205851,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q16",
+          "evidence_id": "E5",
+          "chunk_id": "3b1aa6bbd4504c075278184e807170090b6454d141bf18e9d1545a5fc68ff513",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            102,
+            103
+          ],
+          "retrieval_cosine_diagnostic": 0.5332321076827371,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6954268648736872,
+        0.5542755258786974,
+        0.7271485023923944,
+        0.554271047205851,
+        0.5332321076827371
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q17",
+      "query": "tagline craft functions development advertising",
+      "purpose": "Tagline Craft",
+      "expected_source_id": "LEGACY",
+      "returned_chunk_ids": [
+        "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+        "64d4537ef55ccd2a5353481881178ed04ceaf3b9ca5f0027c0ce32dea44467ee",
+        "a23a465c8455a5077fb04d56964243ac7c8cdc7a7d8881c9781f30f702c70a3f",
+        "dbaa6e39561bc780d00a3d2e815d9cc10c6e44dcf09d0f6091b4e58765d06f10",
+        "ed30b33c465f0943f045739cfe6e370c34d17d939649a216d0391461f99806cd"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q17",
+          "evidence_id": "E1",
+          "chunk_id": "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "retrieval_cosine_diagnostic": 0.5122719279059755,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q17",
+          "evidence_id": "E2",
+          "chunk_id": "64d4537ef55ccd2a5353481881178ed04ceaf3b9ca5f0027c0ce32dea44467ee",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            198,
+            199
+          ],
+          "retrieval_cosine_diagnostic": 0.5187551475461039,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q17",
+          "evidence_id": "E3",
+          "chunk_id": "a23a465c8455a5077fb04d56964243ac7c8cdc7a7d8881c9781f30f702c70a3f",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            212,
+            213
+          ],
+          "retrieval_cosine_diagnostic": 0.48447425469970495,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q17",
+          "evidence_id": "E4",
+          "chunk_id": "dbaa6e39561bc780d00a3d2e815d9cc10c6e44dcf09d0f6091b4e58765d06f10",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            631
+          ],
+          "retrieval_cosine_diagnostic": 0.5033863112439967,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "broken_fragment_start"
+          ]
+        },
+        {
+          "query_id": "Q17",
+          "evidence_id": "E5",
+          "chunk_id": "ed30b33c465f0943f045739cfe6e370c34d17d939649a216d0391461f99806cd",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            204,
+            205
+          ],
+          "retrieval_cosine_diagnostic": 0.49393697688015714,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.5122719279059755,
+        0.5187551475461039,
+        0.48447425469970495,
+        0.5033863112439967,
+        0.49393697688015714
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q18",
+      "query": "copywriting tone of voice headlines body copy advertising",
+      "purpose": "Copywriting/Tone",
+      "expected_source_id": "LEGACY",
+      "returned_chunk_ids": [
+        "42ce11d8ddc15f4628f51e7fe3ba5847e2926e0522b2da89a20b9ba57ce69bfc",
+        "b13b2a512c9512cc5d04f589515efacea968f638aeee895a6d45f7bdb6a1ce61",
+        "86b865c6a26afab409c84fae5a2bdc7f7b17ce1d451dfe2fa23ed618180654df",
+        "cc9848040c2c4c56778a6b4db1d38c943a0cdffb79b7479a56976c9bb3a57366",
+        "44a3a07fbcafdec4992a3215a6b52d567a250a0fb640d234bbd02b04158a7d66"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q18",
+          "evidence_id": "E1",
+          "chunk_id": "42ce11d8ddc15f4628f51e7fe3ba5847e2926e0522b2da89a20b9ba57ce69bfc",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            486,
+            487
+          ],
+          "retrieval_cosine_diagnostic": 0.5672146762811303,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q18",
+          "evidence_id": "E2",
+          "chunk_id": "b13b2a512c9512cc5d04f589515efacea968f638aeee895a6d45f7bdb6a1ce61",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            480,
+            481
+          ],
+          "retrieval_cosine_diagnostic": 0.5268395460041033,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q18",
+          "evidence_id": "E3",
+          "chunk_id": "86b865c6a26afab409c84fae5a2bdc7f7b17ce1d451dfe2fa23ed618180654df",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            474,
+            475
+          ],
+          "retrieval_cosine_diagnostic": 0.4991000280275182,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q18",
+          "evidence_id": "E4",
+          "chunk_id": "cc9848040c2c4c56778a6b4db1d38c943a0cdffb79b7479a56976c9bb3a57366",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            486,
+            487
+          ],
+          "retrieval_cosine_diagnostic": 0.6563606618167654,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q18",
+          "evidence_id": "E5",
+          "chunk_id": "44a3a07fbcafdec4992a3215a6b52d567a250a0fb640d234bbd02b04158a7d66",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            488,
+            489
+          ],
+          "retrieval_cosine_diagnostic": 0.5183867495514688,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.5672146762811303,
+        0.5268395460041033,
+        0.4991000280275182,
+        0.6563606618167654,
+        0.5183867495514688
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q19",
+      "query": "visual ideas visual metaphor visual pun advertising",
+      "purpose": "Visual Ideas",
+      "expected_source_id": "LEGACY",
+      "returned_chunk_ids": [
+        "e6a28d288025962b1bf62184c0f1e212f4bdec721d0da20276647292ef298843",
+        "f38a7a16f74f8f7cd60a5544ad2c6ec7a7502a7b82655d6a4f75da6db02216df",
+        "df864d4a1485a60c44a4513db6804bef71a2b7c7e96a066c4a37f4a11cf8ea32",
+        "91d3f6d145b506431c92d8d0dd7d43f699cb26fc780210b7184fac6a33b6c09a",
+        "f09537463e8e442a98d626a2d4a347a74958b723c015936817bacf148c9b1e58"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q19",
+          "evidence_id": "E1",
+          "chunk_id": "e6a28d288025962b1bf62184c0f1e212f4bdec721d0da20276647292ef298843",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            138,
+            139
+          ],
+          "retrieval_cosine_diagnostic": 0.6503015580180382,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q19",
+          "evidence_id": "E2",
+          "chunk_id": "f38a7a16f74f8f7cd60a5544ad2c6ec7a7502a7b82655d6a4f75da6db02216df",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            242,
+            243
+          ],
+          "retrieval_cosine_diagnostic": 0.5635038013798599,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q19",
+          "evidence_id": "E3",
+          "chunk_id": "df864d4a1485a60c44a4513db6804bef71a2b7c7e96a066c4a37f4a11cf8ea32",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            170,
+            171
+          ],
+          "retrieval_cosine_diagnostic": 0.584865147887911,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q19",
+          "evidence_id": "E4",
+          "chunk_id": "91d3f6d145b506431c92d8d0dd7d43f699cb26fc780210b7184fac6a33b6c09a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            136,
+            137
+          ],
+          "retrieval_cosine_diagnostic": 0.5349051905526339,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q19",
+          "evidence_id": "E5",
+          "chunk_id": "f09537463e8e442a98d626a2d4a347a74958b723c015936817bacf148c9b1e58",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            242,
+            243
+          ],
+          "retrieval_cosine_diagnostic": 0.5342089357649613,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6503015580180382,
+        0.5635038013798599,
+        0.584865147887911,
+        0.5349051905526339,
+        0.5342089357649613
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q20",
+      "query": "ambient advertising forms site-specific media guerrilla distinction",
+      "purpose": "Ambient Advertising",
+      "expected_source_id": "LEGACY",
+      "returned_chunk_ids": [
+        "5fdc9a8f246fbb185cdda22f057c2120fbe6e229c08124b18f1c8971ee358158",
+        "64ca12dd1fd5e7af702788ecacb50500771284c05741f94a18c92e73deba546c",
+        "151336cbb836226218a5bac22de997d8c4d262c046b487f8e495b82bc570a712",
+        "570e1b0a4d7c888638641ec117724eec4a1eeb44cb3a514573bea6d0160a5ff1",
+        "8449fcc32eabb843b079633f6950997cfdf074ba2bf82d6a2fe61fddd80bab64"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q20",
+          "evidence_id": "E1",
+          "chunk_id": "5fdc9a8f246fbb185cdda22f057c2120fbe6e229c08124b18f1c8971ee358158",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            362,
+            363
+          ],
+          "retrieval_cosine_diagnostic": 0.6222936896520497,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q20",
+          "evidence_id": "E2",
+          "chunk_id": "64ca12dd1fd5e7af702788ecacb50500771284c05741f94a18c92e73deba546c",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            82,
+            83
+          ],
+          "retrieval_cosine_diagnostic": 0.48633935442000253,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "broken_fragment_start"
+          ]
+        },
+        {
+          "query_id": "Q20",
+          "evidence_id": "E3",
+          "chunk_id": "151336cbb836226218a5bac22de997d8c4d262c046b487f8e495b82bc570a712",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            362,
+            363
+          ],
+          "retrieval_cosine_diagnostic": 0.6227155710654795,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q20",
+          "evidence_id": "E4",
+          "chunk_id": "570e1b0a4d7c888638641ec117724eec4a1eeb44cb3a514573bea6d0160a5ff1",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            524
+          ],
+          "retrieval_cosine_diagnostic": 0.5579940751488238,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q20",
+          "evidence_id": "E5",
+          "chunk_id": "8449fcc32eabb843b079633f6950997cfdf074ba2bf82d6a2fe61fddd80bab64",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            621,
+            622
+          ],
+          "retrieval_cosine_diagnostic": 0.5262753286727254,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.6222936896520497,
+        0.48633935442000253,
+        0.6227155710654795,
+        0.5579940751488238,
+        0.5262753286727254
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q21",
+      "query": "advertising execution craft turn concept into campaign executions",
+      "purpose": "Execution Craft",
+      "expected_source_id": "LEGACY",
+      "returned_chunk_ids": [
+        "81b7f132d9a3986afb3f405630dec05c224e1a630fe549483959a8bab22bb190",
+        "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+        "e2e9ade3298c12e8b8a7459e45effb9a8c67373183f0a78b311cc700b05d2bc6",
+        "a7a7f3aeeae187fbf12152a7edfda1cf6cfa8751d7f216a4e2e0b19b85c9667a",
+        "d1f7b40dd03f395edf26a9ac674ec546827d2f4a13eeac35251c964ba8c6603b"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q21",
+          "evidence_id": "E1",
+          "chunk_id": "81b7f132d9a3986afb3f405630dec05c224e1a630fe549483959a8bab22bb190",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            184,
+            185
+          ],
+          "retrieval_cosine_diagnostic": 0.676708773113404,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q21",
+          "evidence_id": "E2",
+          "chunk_id": "94b3cd78eed496e6fa1eeca33e31d8b6a0534a222900163753ed48209cced6d5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "retrieval_cosine_diagnostic": 0.6363520880512938,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q21",
+          "evidence_id": "E3",
+          "chunk_id": "e2e9ade3298c12e8b8a7459e45effb9a8c67373183f0a78b311cc700b05d2bc6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            186,
+            187
+          ],
+          "retrieval_cosine_diagnostic": 0.6272149225209913,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q21",
+          "evidence_id": "E4",
+          "chunk_id": "a7a7f3aeeae187fbf12152a7edfda1cf6cfa8751d7f216a4e2e0b19b85c9667a",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            547,
+            548
+          ],
+          "retrieval_cosine_diagnostic": 0.655679993272885,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q21",
+          "evidence_id": "E5",
+          "chunk_id": "d1f7b40dd03f395edf26a9ac674ec546827d2f4a13eeac35251c964ba8c6603b",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            188,
+            189
+          ],
+          "retrieval_cosine_diagnostic": 0.621146418021514,
+          "source_id": null,
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 5,
+      "retrieval_score_diagnostics": [
+        0.676708773113404,
+        0.6363520880512938,
+        0.6272149225209913,
+        0.655679993272885,
+        0.621146418021514
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q22",
+      "query": "target audience definition buyer pains avatar selection",
+      "purpose": "Target Audience / ICP",
+      "expected_source_id": "SRC_VEL_FUNNELS",
+      "returned_chunk_ids": [
+        "3c0bd5599fba42c65e9afc90b3b2cc3379d51ee8e6b50a6f60a532cb244ae114",
+        "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+        "4042f1d10e35da9afa23b6ee284d51324a8bd986089377e7d686f4fc64a22e54",
+        "fb354abc51f8a9ae921e96bfd8914356e699c77317593d0614ddff5a5ad60a71",
+        "4f0c67316607eb556dd0caab883364119eb57bc089090af8d96343c0e93877e4"
+      ],
+      "source_names": [
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q22",
+          "evidence_id": "E1",
+          "chunk_id": "3c0bd5599fba42c65e9afc90b3b2cc3379d51ee8e6b50a6f60a532cb244ae114",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.5506599359935916,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q22",
+          "evidence_id": "E2",
+          "chunk_id": "956d58e7e1006ff28dc10b834edef009b58da8304b6302c964219fba25d49970",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.4501721424688939,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q22",
+          "evidence_id": "E3",
+          "chunk_id": "4042f1d10e35da9afa23b6ee284d51324a8bd986089377e7d686f4fc64a22e54",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            40,
+            41
+          ],
+          "retrieval_cosine_diagnostic": 0.4347532230823802,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q22",
+          "evidence_id": "E4",
+          "chunk_id": "fb354abc51f8a9ae921e96bfd8914356e699c77317593d0614ddff5a5ad60a71",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.42949480386888395,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": true,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q22",
+          "evidence_id": "E5",
+          "chunk_id": "4f0c67316607eb556dd0caab883364119eb57bc089090af8d96343c0e93877e4",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "retrieval_cosine_diagnostic": 0.467139850416114,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 3,
+      "retrieval_score_diagnostics": [
+        0.5506599359935916,
+        0.4501721424688939,
+        0.4347532230823802,
+        0.42949480386888395,
+        0.467139850416114
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q23",
+      "query": "Meta Ads Ads Manager campaign configuration targeting optimization",
+      "purpose": "Unsupported Meta Ads",
+      "expected_source_id": null,
+      "returned_chunk_ids": [
+        "b87aedbd10f957a8a25821d16fa3d2377d243112451b9ffd0ea5e807ed714a43",
+        "81b7f132d9a3986afb3f405630dec05c224e1a630fe549483959a8bab22bb190",
+        "6c13102b88f2dfb99028a6d5abe6229abd37e9235ca20ec7f65dae0b0f35ee22",
+        "9a9e15791814b2e6e4109475975a09cbdf0102d01d76d65fec888df967255243",
+        "c34b1e031513aaae3c5acede60e5ae978bd344b8a08e0d3c73cb3477f4f9e6da"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "Protégé — CRO Máxima [transcript bundle]",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q23",
+          "evidence_id": "E1",
+          "chunk_id": "b87aedbd10f957a8a25821d16fa3d2377d243112451b9ffd0ea5e807ed714a43",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            184,
+            185
+          ],
+          "retrieval_cosine_diagnostic": 0.43608265169447724,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q23",
+          "evidence_id": "E2",
+          "chunk_id": "81b7f132d9a3986afb3f405630dec05c224e1a630fe549483959a8bab22bb190",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            184,
+            185
+          ],
+          "retrieval_cosine_diagnostic": 0.4608738337235765,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q23",
+          "evidence_id": "E3",
+          "chunk_id": "6c13102b88f2dfb99028a6d5abe6229abd37e9235ca20ec7f65dae0b0f35ee22",
+          "source_pdf_name": "Protégé — CRO Máxima [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.42740469891161026,
+          "source_id": "SRC_PRO_CRO",
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        },
+        {
+          "query_id": "Q23",
+          "evidence_id": "E4",
+          "chunk_id": "9a9e15791814b2e6e4109475975a09cbdf0102d01d76d65fec888df967255243",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            464,
+            465
+          ],
+          "retrieval_cosine_diagnostic": 0.39802284188612824,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "excessive_repetition"
+          ]
+        },
+        {
+          "query_id": "Q23",
+          "evidence_id": "E5",
+          "chunk_id": "c34b1e031513aaae3c5acede60e5ae978bd344b8a08e0d3c73cb3477f4f9e6da",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            258,
+            259
+          ],
+          "retrieval_cosine_diagnostic": 0.2921006450975321,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 0,
+      "retrieval_score_diagnostics": [
+        0.43608265169447724,
+        0.4608738337235765,
+        0.42740469891161026,
+        0.39802284188612824,
+        0.2921006450975321
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q24",
+      "query": "WhatsApp sales follow-up objection handling closing process",
+      "purpose": "Unsupported WhatsApp",
+      "expected_source_id": null,
+      "returned_chunk_ids": [
+        "9ead050ec713575c800e68a28e70bf21286bfd3d2b0c1890817318393b8c7772",
+        "1e2899c5709dc627bd5e711274342b35066d9b19770a18b580a10f04414229b6",
+        "e0a47f239ede07650e0583aca7ba39667e96bc31e91adc7b16b274866683d380",
+        "416a68bccc8e176499c4d1e7e6b21d93a9547b04518d43d64d6e68db6a1d0e90",
+        "11bdae59df8d753227557529a09af319d2e37b7c8cb8543bd1401215bde96566"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q24",
+          "evidence_id": "E1",
+          "chunk_id": "9ead050ec713575c800e68a28e70bf21286bfd3d2b0c1890817318393b8c7772",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            240,
+            241
+          ],
+          "retrieval_cosine_diagnostic": 0.13262985554182286,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q24",
+          "evidence_id": "E2",
+          "chunk_id": "1e2899c5709dc627bd5e711274342b35066d9b19770a18b580a10f04414229b6",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            531,
+            532
+          ],
+          "retrieval_cosine_diagnostic": 0.14977431909547329,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q24",
+          "evidence_id": "E3",
+          "chunk_id": "e0a47f239ede07650e0583aca7ba39667e96bc31e91adc7b16b274866683d380",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            234,
+            235
+          ],
+          "retrieval_cosine_diagnostic": 0.20060599199973494,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q24",
+          "evidence_id": "E4",
+          "chunk_id": "416a68bccc8e176499c4d1e7e6b21d93a9547b04518d43d64d6e68db6a1d0e90",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            74,
+            75
+          ],
+          "retrieval_cosine_diagnostic": 0.21522603000207913,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q24",
+          "evidence_id": "E5",
+          "chunk_id": "11bdae59df8d753227557529a09af319d2e37b7c8cb8543bd1401215bde96566",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            98,
+            99
+          ],
+          "retrieval_cosine_diagnostic": 0.15876434286944308,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        }
+      ],
+      "subject_hits": 0,
+      "retrieval_score_diagnostics": [
+        0.13262985554182286,
+        0.14977431909547329,
+        0.20060599199973494,
+        0.21522603000207913,
+        0.15876434286944308
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    },
+    {
+      "query_id": "Q25",
+      "query": "course curriculum learning objectives lesson sequence pedagogy",
+      "purpose": "Unsupported Course Creation",
+      "expected_source_id": null,
+      "returned_chunk_ids": [
+        "2a286a806ce475bd00c2330f6bcd09a8a9735ad7b3f9144462c9d6a69104cc17",
+        "99add5411acf729346b41eadf03a2ccddd48b18c0d6b91c25d2e6a3a382915b1",
+        "2cd8ca33b4d571edc2bb49d7c0dfe590d5a5cd128e3776868a877f4623196c0c",
+        "84b120a5daf15efaa1a27f86970b98c8776ed2ca7252b58b0ab40c8aaef86fd5",
+        "3b0d97758310b63385958f62ff89ae3a0cc2363fe000346f2c8369e68c3ba0ef"
+      ],
+      "source_names": [
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+        "Velocity — Cursos Amplify: Funnels [transcript bundle]"
+      ],
+      "provenance": [
+        {
+          "query_id": "Q25",
+          "evidence_id": "E1",
+          "chunk_id": "2a286a806ce475bd00c2330f6bcd09a8a9735ad7b3f9144462c9d6a69104cc17",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            96,
+            97
+          ],
+          "retrieval_cosine_diagnostic": 0.1541569703014659,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q25",
+          "evidence_id": "E2",
+          "chunk_id": "99add5411acf729346b41eadf03a2ccddd48b18c0d6b91c25d2e6a3a382915b1",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            42,
+            43
+          ],
+          "retrieval_cosine_diagnostic": 0.16962108377135593,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q25",
+          "evidence_id": "E3",
+          "chunk_id": "2cd8ca33b4d571edc2bb49d7c0dfe590d5a5cd128e3776868a877f4623196c0c",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            557,
+            558
+          ],
+          "retrieval_cosine_diagnostic": 0.16146884266792727,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q25",
+          "evidence_id": "E4",
+          "chunk_id": "84b120a5daf15efaa1a27f86970b98c8776ed2ca7252b58b0ab40c8aaef86fd5",
+          "source_pdf_name": "584080812-The-Advertising-Concept-Book-Think-Now-Design-Later.pdf",
+          "pdf_page_refs": [
+            110,
+            111
+          ],
+          "retrieval_cosine_diagnostic": 0.17797622027615922,
+          "source_id": null,
+          "subject_hit": false,
+          "quality_status": "INCLUDE",
+          "warning_flags": []
+        },
+        {
+          "query_id": "Q25",
+          "evidence_id": "E5",
+          "chunk_id": "3b0d97758310b63385958f62ff89ae3a0cc2363fe000346f2c8369e68c3ba0ef",
+          "source_pdf_name": "Velocity — Cursos Amplify: Funnels [transcript bundle]",
+          "pdf_page_refs": [],
+          "retrieval_cosine_diagnostic": 0.315556758075593,
+          "source_id": "SRC_VEL_FUNNELS",
+          "subject_hit": false,
+          "quality_status": "INCLUDE_WITH_WARNING",
+          "warning_flags": [
+            "AUTOMATIC_SPEECH_RECOGNITION",
+            "NO_PAGE_NUMBERS"
+          ]
+        }
+      ],
+      "subject_hits": 0,
+      "retrieval_score_diagnostics": [
+        0.1541569703014659,
+        0.16962108377135593,
+        0.16146884266792727,
+        0.17797622027615922,
+        0.315556758075593
+      ],
+      "notes": "Scores diagnostic only; subject/source evidence controls remap.",
+      "pipeline": "Strategy-F",
+      "corpus_rows": 1380
+    }
+  ]
+}
