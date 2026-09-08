@@ -3,6 +3,8 @@
 !astra/run_gpt_api.js
 !astra/src/
 !astra/src/**
+!astra/config/
+!astra/config/**
 !astra/methods/
 !astra/methods/registry.json
 !astra/design_knowledge_audit/
@@ -24,3 +26,4 @@
 **/.env.*
 config.json
 **/config.json
+

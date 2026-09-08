@@ -16,6 +16,7 @@ RUN npm ci --omit=dev --ignore-scripts \
     && python3 -m pip install --no-cache-dir -r /tmp/requirements-runtime.txt
 COPY astra/run_gpt_api.js ./astra/run_gpt_api.js
 COPY astra/src ./astra/src
+COPY astra/config ./astra/config
 COPY astra/methods/registry.json ./astra/methods/registry.json
 COPY astra/design_knowledge_audit/gap_analysis.json ./astra/design_knowledge_audit/gap_analysis.json
 COPY astra/design_knowledge_audit/design_method_inventory.json ./astra/design_knowledge_audit/design_method_inventory.json
@@ -32,3 +33,4 @@ USER astra:astra
 EXPOSE 10000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 CMD node -e "fetch('http://127.0.0.1:'+process.env.PORT+'/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
 CMD ["npm", "start"]
+
