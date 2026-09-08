@@ -52,7 +52,7 @@ async function callOnce(cfg, system, user, opts) {
 // Execute an LLM specialist call. opts: { schema, model, max_tokens, llm (injectable for tests) }.
 // Returns { ok, value, attempts, retries, usage, error }. Fail-closed after retry budget.
 async function execute({ system, user, schema, model, max_tokens, llm }) {
-  const cfg = loadCfg();
+  const cfg = llm ? null : loadCfg();
   const runner = llm || ((s, u, o) => callOnce(cfg, s, u, o));
   let attempts = 0, lastErr = null, totalUsage = { prompt: 0, completion: 0 };
   while (attempts <= RETRY_BUDGET) {
