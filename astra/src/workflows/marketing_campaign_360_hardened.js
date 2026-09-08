@@ -17,6 +17,7 @@ const baseSpec = require('../specialists/base_specialist');
 const synthV1 = require('../synthesis/synthesis_engine');
 const synthV2 = require('../synthesis/synthesis_engine_v2');
 const { MAX_EVIDENCE_PER_STEP } = require('../../config/context_budgets');
+const diag = require('../integration/diag'); // [ASTRA-DIAG] temporary instrumentation (ASTRA-10S)
 
 const SPEC_TYPE = { market_context: 'MARKET_CONTEXT_SPECIALIST', icp: 'ICP_SPECIALIST', offer: 'OFFER_SPECIALIST',
   funnel: 'FUNNEL_SPECIALIST', creative_strategy: 'CREATIVE_STRATEGY_SPECIALIST', ads: 'META_ADS_SPECIALIST',
@@ -30,6 +31,7 @@ const NODE_TIER = { market_context: 'SPECIALIST_EXECUTION', icp: 'SPECIALIST_EXE
 function gate(cands) { return cands.filter(m => Array.isArray(m.evidence_refs) && m.evidence_refs.length > 0); }
 
 async function run(rawRequest, options = {}) {
+  const diagId = diag.newId(); // [ASTRA-DIAG] local to this run(); correlate via adjacent timestamps
   const mode = options.mode || 'llm';
   const adapter = options.adapter || new AgentV1Adapter(options.adapterOpts || {});
   const registry = registryLoader.load(options.registryPath);
@@ -65,7 +67,9 @@ async function run(rawRequest, options = {}) {
     const q = n.query.replace('{biz}', biz);
     let evidence = [];
     if (doRetrieve) {
+      diag.mark(diagId, 'BEFORE_RETRIEVAL', { node: n.id });
       const r = adapter.retrieve(q, { top_k: 5 });
+      diag.mark(diagId, 'AFTER_RETRIEVAL', { node: n.id, hits: (r.hits || []).length });
       evidence = r.hits.map(h => ({ chunk_id: h.chunk_id, source_id: h.source_id, source_pdf_name: h.source_pdf_name, text: h.text, cosine: h.cosine, source_class: 'INTERNAL_KNOWLEDGE' }));
       cost.evidence_chars_total += (r.evidenceText || '').length;
       // Guard (ASTRA-06): evidence-required node with ZERO retrieved evidence -> fail closed (no fake recommendation).
@@ -104,7 +108,9 @@ async function run(rawRequest, options = {}) {
 
     let output;
     if (mode === 'llm') {
+      diag.mark(diagId, 'BEFORE_LLM', { node: n.id });
       const res = await LLM.runLLMSpecialist(input, { llm: injectedLLM, max_tokens: 16000 });
+      diag.mark(diagId, 'AFTER_LLM', { node: n.id, ok: !!res.ok });
       if (!res.ok) { wfState.transition(state, 'FAILED'); throw new Error('LLM specialist fail-closed at ' + n.id + ': ' + res.error); }
       output = res.output; cost.model_calls += 1; cost.retries += (output.retries || 0);
       if (output.usage) { cost.tokens.prompt += output.usage.prompt || 0; cost.tokens.completion += output.usage.completion || 0; }
