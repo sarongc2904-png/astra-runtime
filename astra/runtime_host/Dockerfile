@@ -24,6 +24,8 @@ COPY astra/design_knowledge_audit/creative_director_readiness.json ./astra/desig
 COPY knowledge.js c3.js marketing_os.js rag_answer_policy_runtime.js classifier_decision_cache.js retrieval_strategy_f.py ./
 COPY rag_retrieval_refinement/corpus_snapshot.json ./rag_retrieval_refinement/corpus_snapshot.json
 
+RUN mkdir -p "/app/D:\josed\Descargas\DEEPSEEK HARNESS" && ln -s /app "/app/D:\josed\Descargas\DEEPSEEK HARNESS/agente_ia"
+
 RUN groupadd --gid 1000 astra \
     && useradd --uid 1000 --gid 1000 --create-home --shell /usr/sbin/nologin astra \
     && mkdir -p /app/astra/.runtime_state \
