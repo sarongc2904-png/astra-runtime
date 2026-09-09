@@ -106,7 +106,24 @@ async function processNode(n, ctx) {
   if (mode === 'llm') {
     diag.mark(diagId, 'BEFORE_LLM', { node: n.id });
     const res = await LLM.runLLMSpecialist(input, { llm: injectedLLM, max_tokens: 16000 });
-    diag.mark(diagId, 'AFTER_LLM', { node: n.id, ok: !!res.ok });
+    // [ASTRA-10AB] Extended AFTER_LLM: per-node telemetry only (tokens/finish_reason/attempts/
+    // retries/timing). Never includes prompts, responses, RAG evidence, business data, headers,
+    // or secrets — tel.* fields are null when the provider does not expose them (never invented).
+    // runLLMSpecialist() nests these under `.output` on success but at the top level on failure —
+    // normalize the read location here rather than changing either branch's existing shape.
+    const tel = res.ok ? (res.output || {}) : res;
+    const ud = tel.usage_detail || {};
+    diag.mark(diagId, 'AFTER_LLM', {
+      node: n.id, ok: !!res.ok, llm_elapsed_ms: tel.llm_elapsed_ms != null ? Math.round(tel.llm_elapsed_ms) : null,
+      prompt_tokens: ud.prompt_tokens != null ? ud.prompt_tokens : null,
+      completion_tokens: ud.completion_tokens != null ? ud.completion_tokens : null,
+      total_tokens: ud.total_tokens != null ? ud.total_tokens : null,
+      reasoning_tokens: ud.reasoning_tokens != null ? ud.reasoning_tokens : null,
+      cached_tokens: ud.cached_tokens != null ? ud.cached_tokens : null,
+      finish_reason: tel.finish_reason != null ? tel.finish_reason : null,
+      attempts: tel.attempts != null ? tel.attempts : null,
+      retries: tel.retries != null ? tel.retries : null,
+    });
     if (!res.ok) { const e = new Error('LLM specialist fail-closed at ' + n.id + ': ' + res.error); e.wfTransition = 'FAILED'; throw e; }
     output = res.output;
     llmUsage = { retries: output.retries || 0, prompt: (output.usage && output.usage.prompt) || 0, completion: (output.usage && output.usage.completion) || 0 };

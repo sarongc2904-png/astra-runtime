@@ -2,6 +2,7 @@
 // OpenRouter provider (OpenAI-compatible). Reasoning-disabled + 400 fallback (gpt-5-mini mandatory reasoning).
 // Returns a runner (system,user,opts)=>{raw,usage} + healthCheck(). Never logs/returns secrets.
 const { redact } = require('./runtime_config');
+const { normalizeUsage, extractFinishReason } = require('../llm/usage_normalizer'); // [ASTRA-10AB]
 
 function makeProvider(cfg) {
   const or = cfg.openrouter;
@@ -26,8 +27,13 @@ function makeProvider(cfg) {
     const p = await resp.json();
     const content = p.choices && p.choices[0] && p.choices[0].message && p.choices[0].message.content;
     if (!content) throw new Error('OpenRouter: empty content');
+    // Legacy shape, UNCHANGED — existing cost-accounting in marketing_campaign_360_hardened.js
+    // reads usage.prompt/usage.completion and must keep working byte-identically.
     const usage = p.usage ? { prompt: p.usage.prompt_tokens || 0, completion: p.usage.completion_tokens || 0 } : null;
-    return { raw: content, usage };
+    // [ASTRA-10AB] Additive telemetry — new fields only, never replacing `usage` above.
+    const usage_detail = normalizeUsage(p.usage);
+    const finish_reason = extractFinishReason(p);
+    return { raw: content, usage, usage_detail, finish_reason };
   }
   async function healthCheck() {
     if (!or.apiKey) return { ok: false, status: 'CREDENTIALS_UNAVAILABLE', provider: 'openrouter', reachable: null };

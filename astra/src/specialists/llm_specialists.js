@@ -59,7 +59,9 @@ const OUT_SCHEMA = { required: ['findings', 'recommendations', 'decisions', 'ass
 async function runLLMSpecialist(input, opts = {}) {
   const { system, user } = buildPrompt(input);
   const res = await llm.execute({ system, user, schema: OUT_SCHEMA, model: opts.model, max_tokens: opts.max_tokens, llm: opts.llm });
-  if (!res.ok) return { ok: false, fail_closed: true, error: res.error, attempts: res.attempts, retries: res.retries, usage: res.usage };
+  // [ASTRA-10AB] usage_detail/finish_reason/llm_elapsed_ms are additive telemetry; carried through
+  // unchanged on both branches so ASTRA-DIAG can report them even on terminal fail-closed failure.
+  if (!res.ok) return { ok: false, fail_closed: true, error: res.error, attempts: res.attempts, retries: res.retries, usage: res.usage, usage_detail: res.usage_detail, finish_reason: res.finish_reason, llm_elapsed_ms: res.llm_elapsed_ms };
   const v = res.value;
   // enforce support_class validity + provenance (DIRECTLY_SUPPORTED must cite evidence)
   const evIds = new Set((input.knowledge_evidence || []).map(e => e.chunk_id));
@@ -74,6 +76,9 @@ async function runLLMSpecialist(input, opts = {}) {
     current_research_required: (v.current_research_required || []).map(x => (typeof x === 'string' ? { item: x, flag: 'CURRENT_RESEARCH_REQUIRED' } : x)),
     downstream_payload: v.downstream_payload || {},
     generation: 'LLM', usage: res.usage, retries: res.retries,
+    // [ASTRA-10AB] Additive telemetry — new keys only; existing consumers reading only the
+    // fields above (in particular usage.prompt/usage.completion for cost accounting) are unaffected.
+    attempts: res.attempts, usage_detail: res.usage_detail, finish_reason: res.finish_reason, llm_elapsed_ms: res.llm_elapsed_ms,
   };
   for (const k of OUTPUT_KEYS) if (!(k in output)) output[k] = null;
   return { ok: true, output };

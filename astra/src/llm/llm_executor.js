@@ -4,6 +4,8 @@
 // Reasoning-disabled with 400 fallback (gpt-5-mini mandatory reasoning). Config-driven model id.
 const fs = require('fs');
 const path = require('path');
+const { performance } = require('perf_hooks');
+const { normalizeUsage, extractFinishReason } = require('./usage_normalizer'); // [ASTRA-10AB]
 
 const RETRY_BUDGET = 1; // bounded retry on schema failure (total attempts = 1 + RETRY_BUDGET)
 
@@ -45,29 +47,43 @@ async function callOnce(cfg, system, user, opts) {
   const payload = await resp.json();
   const content = payload.choices && payload.choices[0] && payload.choices[0].message && payload.choices[0].message.content;
   if (!content) throw new Error('empty LLM content');
+  // Legacy shape, UNCHANGED — downstream cost-accounting reads usage.prompt/usage.completion.
   const usage = payload.usage ? { prompt: payload.usage.prompt_tokens || 0, completion: payload.usage.completion_tokens || 0 } : null;
-  return { raw: content, usage };
+  // [ASTRA-10AB] Additive telemetry only.
+  const usage_detail = normalizeUsage(payload.usage);
+  const finish_reason = extractFinishReason(payload);
+  return { raw: content, usage, usage_detail, finish_reason };
 }
 
 // Execute an LLM specialist call. opts: { schema, model, max_tokens, llm (injectable for tests) }.
 // Returns { ok, value, attempts, retries, usage, error }. Fail-closed after retry budget.
+// [ASTRA-10AB] Additionally returns usage_detail, finish_reason, llm_elapsed_ms — purely additive
+// telemetry; `usage`/`attempts`/`retries` keep their exact pre-existing shape and semantics
+// (usage.prompt/usage.completion summed across attempts, unchanged) so existing cost-accounting
+// consumers (marketing_campaign_360_hardened.js) are unaffected.
 async function execute({ system, user, schema, model, max_tokens, llm }) {
   const cfg = llm ? null : loadCfg();
   const runner = llm || ((s, u, o) => callOnce(cfg, s, u, o));
   let attempts = 0, lastErr = null, totalUsage = { prompt: 0, completion: 0 };
+  let lastUsageDetail = null, lastFinishReason = null;
+  const t0 = performance.now();
   while (attempts <= RETRY_BUDGET) {
     attempts++;
     try {
-      const { raw, usage } = await runner(system, user, { model, max_tokens });
+      const { raw, usage, usage_detail, finish_reason } = await runner(system, user, { model, max_tokens });
       if (usage) { totalUsage.prompt += usage.prompt || 0; totalUsage.completion += usage.completion || 0; }
+      if (usage_detail !== undefined) lastUsageDetail = usage_detail;
+      if (finish_reason !== undefined) lastFinishReason = finish_reason;
       let value;
       try { value = JSON.parse(stripJson(raw)); } catch (e) { lastErr = 'json_parse:' + e.message; continue; }
       const v = validateSchema(value, schema);
       if (!v.valid) { lastErr = 'schema:' + v.errors.join(','); continue; }
-      return { ok: true, value, attempts, retries: attempts - 1, usage: totalUsage, error: null };
+      const llm_elapsed_ms = performance.now() - t0;
+      return { ok: true, value, attempts, retries: attempts - 1, usage: totalUsage, usage_detail: lastUsageDetail, finish_reason: lastFinishReason, llm_elapsed_ms, error: null };
     } catch (e) { lastErr = e.message; }
   }
-  return { ok: false, value: null, attempts, retries: attempts - 1, usage: totalUsage, error: lastErr || 'unknown', fail_closed: true };
+  const llm_elapsed_ms = performance.now() - t0;
+  return { ok: false, value: null, attempts, retries: attempts - 1, usage: totalUsage, usage_detail: lastUsageDetail, finish_reason: lastFinishReason, llm_elapsed_ms, error: lastErr || 'unknown', fail_closed: true };
 }
 
 module.exports = { execute, validateSchema, stripJson, loadCfg, RETRY_BUDGET };
