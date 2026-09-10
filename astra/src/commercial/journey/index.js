@@ -1,0 +1,38 @@
+'use strict';
+// [ASTRA-11H] Customer Journey + Jobs To Be Done Engine — public surface.
+// DESIGN + DETERMINISTIC IMPLEMENTATION + ISOLATED OFFLINE BENCHMARKING. No LLM.
+// No ASTRA-11H output may feed production routing or autonomous action.
+module.exports = {
+  stageTaxonomy: require('./stage_taxonomy'),
+  temporal: require('./temporal'),
+  journeyObservation: require('./journey_observation'),
+  journeyEvent: require('./journey_event'),
+  transition: require('./transition'),
+  trigger: require('./trigger'),
+  friction: require('./friction'),
+  question: require('./question'),
+  proofRequirement: require('./proof_requirement'),
+  alternative: require('./alternative'),
+  touchpoint: require('./touchpoint'),
+  journeyMetrics: require('./journey_metrics'),
+  bottleneck: require('./bottleneck'),
+  jtbd: require('./jtbd'),
+  jobStatement: require('./job_statement'),
+  forces: require('./forces'),
+  jobOutcome: require('./job_outcome'),
+  buyingCommitteeJourney: require('./buying_committee_journey'),
+  segmentJourney: require('./segment_journey'),
+  postPurchase: require('./post_purchase'),
+  retentionChurn: require('./retention_churn'),
+  conflicts: require('./conflicts'),
+  coverage: require('./coverage'),
+  completion: require('./completion'),
+  report: require('./report'),
+  engine: require('./engine'),
+  JOURNEY_SCHEMA_VERSION: require('./journey_observation').JOURNEY_SCHEMA_VERSION,
+  STAGE_TAXONOMY_VERSION: require('./stage_taxonomy').STAGE_TAXONOMY_VERSION,
+  UCDM_SCHEMA_VERSION: require('../schema/entities').SCHEMA_VERSION,
+  VOC_SCHEMA_VERSION: require('../voc/utterance').VOC_SCHEMA_VERSION,
+  CUSTOMER_MODEL_SCHEMA_VERSION: require('../customer_model/attribute_evidence').CUSTOMER_MODEL_SCHEMA_VERSION,
+  COMPETITOR_SCHEMA_VERSION: require('../competitor/competitor_profile').COMPETITOR_SCHEMA_VERSION,
+};
