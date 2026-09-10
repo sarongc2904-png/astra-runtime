@@ -8,6 +8,11 @@ const ROUTES: Record<string, string> = {
   'campaign-360': '/astra/campaign-360',
   'creative-director': '/astra/creative-director',
   'creative-generation': '/astra/creative-generation',
+  // [ASTRA-11] deterministic commercial engines — forward-only, no side effects.
+  'commercial-funnel-revenue': '/astra/commercial/funnel-revenue',
+  'commercial-experiment-intelligence': '/astra/commercial/experiment-intelligence',
+  'commercial-business-memory': '/astra/commercial/business-memory',
+  'commercial-decision-orchestrator': '/astra/commercial/decision-orchestrator',
 };
 const CORS = { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'authorization, content-type', 'access-control-allow-methods': 'POST, OPTIONS' };
 function json(status: number, body: unknown) { return new Response(JSON.stringify(body), { status, headers: { ...CORS, 'content-type': 'application/json', 'cache-control': 'no-store' } }); }

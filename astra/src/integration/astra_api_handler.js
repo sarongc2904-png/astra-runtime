@@ -2,6 +2,7 @@
 const router = require('./astra_tool_router');
 const runtimeAuth = require('./runtime_auth');
 const diag = require('./diag'); // [ASTRA-DIAG] temporary instrumentation (ASTRA-10S)
+const commercialBridge = require('./commercial_bridge'); // [ASTRA-11] commercial GPT bridge
 
 const PATH_TO_TOOL = {
   '/astra/campaign-360': 'runAstraCampaign360',
@@ -30,6 +31,22 @@ function createHandler(options = {}, env = process.env) {
     }
     const diagId = diag.newId(); // [ASTRA-DIAG]
     diag.mark(diagId, 'REQUEST_RECEIVED', { path, method: req.method });
+
+    // [ASTRA-11] commercial GPT bridge — deterministic engine delegation, no side effects.
+    if (commercialBridge.PATH_TO_OPERATION[path]) {
+      if (req.method !== 'POST') return send(res, { statusCode: 404, body: { status: 'FAILED', error: { code: 'NOT_FOUND', message: 'Route not found' } } }, diagId);
+      const commercialEnv = Object.assign({}, env, { KB_API_KEY: '' });
+      try {
+        const body = await readJson(req);
+        diag.mark(diagId, 'BEFORE_COMMERCIAL_BRIDGE', { operation: commercialBridge.PATH_TO_OPERATION[path] });
+        const result = await commercialBridge.dispatch({ operation: commercialBridge.PATH_TO_OPERATION[path], body, headers: req.headers }, options, commercialEnv);
+        diag.mark(diagId, 'AFTER_COMMERCIAL_BRIDGE');
+        return send(res, result, diagId);
+      } catch (err) {
+        return send(res, { statusCode: err.statusCode || 400, body: { status: 'FAILED', error: { code: 'INVALID_INPUT', message: err.statusCode === 422 ? 'Request too large' : 'Invalid JSON' } } }, diagId);
+      }
+    }
+
     if (req.method !== 'POST' || !PATH_TO_TOOL[path]) return send(res, { statusCode: 404, body: { status: 'FAILED', error: { code: 'NOT_FOUND', message: 'Route not found' } } }, diagId);
     if (!runtimeAuth.authenticate(req.headers, env)) return send(res, { statusCode: 401, body: { status: 'FAILED', error: { code: 'UNAUTHORIZED', message: 'Authentication required' } } }, diagId);
     const internalEnv = Object.assign({}, env, { ASTRA_GPT_API_KEYS: env.ASTRA_RUNTIME_API_KEY, KB_API_KEY: '' });
@@ -43,4 +60,4 @@ function createHandler(options = {}, env = process.env) {
     catch (err) { send(res, { statusCode: err.statusCode || 400, body: { status: 'FAILED', error: { code: 'INVALID_INPUT', message: err.statusCode === 422 ? 'Request too large' : 'Invalid JSON' } } }, diagId); }
   };
 }
-module.exports = { createHandler, readJson, PATH_TO_TOOL };
+module.exports = { createHandler, readJson, PATH_TO_TOOL, COMMERCIAL_PATH_TO_OPERATION: commercialBridge.PATH_TO_OPERATION };
