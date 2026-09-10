@@ -15,7 +15,7 @@ const LOWER_IS_WORSE = /(margin|contribution|retention|show_rate|activation|ltv|
 // evaluateGuardrails({ guardrailMetrics[], primaryImproved, outcomes: { <metric>: { before, after } }, threshold })
 function evaluateGuardrails({ guardrailMetrics = [], primaryImproved = null, outcomes = {}, relative_threshold = 0.02 }) {
   if (guardrailMetrics.length === 0) {
-    return freeze({ status: 'NO_GUARDRAILS_DEFINED', breaches: [], checked: [], note: 'no guardrail metrics were defined for this experiment' });
+    return freeze({ status: 'NO_GUARDRAILS_DEFINED', breaches: [], checked: [], automatic_winner_declared: false, note: 'no guardrail metrics were defined for this experiment' });
   }
   const breaches = []; const checked = []; const missing = [];
   for (const g of guardrailMetrics) {
