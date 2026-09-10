@@ -3,6 +3,7 @@ const router = require('./astra_tool_router');
 const runtimeAuth = require('./runtime_auth');
 const diag = require('./diag'); // [ASTRA-DIAG] temporary instrumentation (ASTRA-10S)
 const commercialBridge = require('./commercial_bridge'); // [ASTRA-11] commercial GPT bridge
+const campaignAsync = require('./campaign_async');
 
 const PATH_TO_TOOL = {
   '/astra/campaign-360': 'runAstraCampaign360',
@@ -31,6 +32,32 @@ function createHandler(options = {}, env = process.env) {
     }
     const diagId = diag.newId(); // [ASTRA-DIAG]
     diag.mark(diagId, 'REQUEST_RECEIVED', { path, method: req.method });
+
+    const ASYNC_CAMPAIGN_PATHS = {
+      '/astra/campaign-360/async/start': 'start',
+      '/astra/campaign-360/async/status': 'status',
+      '/astra/campaign-360/async/result': 'result',
+    };
+    if (ASYNC_CAMPAIGN_PATHS[path]) {
+      if (req.method !== 'POST') return send(res, { statusCode: 404, body: { status: 'FAILED', error: { code: 'NOT_FOUND', message: 'Route not found' } } }, diagId);
+      if (!runtimeAuth.authenticate(req.headers, env)) return send(res, { statusCode: 401, body: { status: 'FAILED', error: { code: 'UNAUTHORIZED', message: 'Authentication required' } } }, diagId);
+      const internalEnv = Object.assign({}, env, { ASTRA_GPT_API_KEYS: env.ASTRA_RUNTIME_API_KEY, KB_API_KEY: '' });
+      try {
+        const body = await readJson(req);
+        let result;
+        if (ASYNC_CAMPAIGN_PATHS[path] === 'start') {
+          diag.mark(diagId, 'BEFORE_CAMPAIGN_ASYNC_START');
+          result = campaignAsync.start(body, options, internalEnv, req.headers);
+        } else if (ASYNC_CAMPAIGN_PATHS[path] === 'status') {
+          result = campaignAsync.status(body.job_id, options);
+        } else {
+          result = campaignAsync.result(body.job_id, options);
+        }
+        return send(res, result, diagId);
+      } catch (err) {
+        return send(res, { statusCode: err.statusCode || 400, body: { status: 'FAILED', error: { code: 'INVALID_INPUT', message: err.statusCode === 422 ? 'Request too large' : 'Invalid JSON' } } }, diagId);
+      }
+    }
 
     // [ASTRA-11] commercial GPT bridge — deterministic engine delegation, no side effects.
     if (commercialBridge.PATH_TO_OPERATION[path]) {

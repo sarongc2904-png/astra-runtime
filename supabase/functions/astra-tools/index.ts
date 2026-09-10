@@ -6,6 +6,9 @@ const ASTRA_RUNTIME_API_KEY = Deno.env.get('ASTRA_RUNTIME_API_KEY') || '';
 const MAX_BODY_BYTES = 256000;
 const ROUTES: Record<string, string> = {
   'campaign-360': '/astra/campaign-360',
+  'campaign-360-async-start': '/astra/campaign-360/async/start',
+  'campaign-360-async-status': '/astra/campaign-360/async/status',
+  'campaign-360-async-result': '/astra/campaign-360/async/result',
   'creative-director': '/astra/creative-director',
   'creative-generation': '/astra/creative-generation',
   // [ASTRA-11] deterministic commercial engines — forward-only, no side effects.
