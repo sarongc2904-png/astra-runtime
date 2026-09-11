@@ -22,11 +22,46 @@ function commercialSchemas() {
   };
 }
 
+// [ASTRA Campaign360 async] GPT-facing async bridge — opt-in via { asyncCampaign: true }.
+// Lets a GPT Action start Campaign 360 and poll, so it never hits the 150s GPT IDLE_TIMEOUT.
+// The runtime + Supabase gateway routes already exist; this only surfaces them in the schema.
+function asyncCampaignPaths(asyncPost) {
+  return {
+    '/functions/v1/astra-tools/campaign-360-async-start': { post: asyncPost('startAstraCampaign360', 'Start the ASTRA 360 campaign workflow asynchronously and return a job_id immediately. Does NOT wait for completion.', { $ref: '#/components/schemas/Campaign360AsyncStartRequest' }, { $ref: '#/components/schemas/Campaign360AsyncJob' }, { 202: true }) },
+    '/functions/v1/astra-tools/campaign-360-async-status': { post: asyncPost('getAstraCampaign360Status', 'Check the status of an async ASTRA 360 campaign job by job_id. Poll this until status is COMPLETE or FAILED.', { $ref: '#/components/schemas/Campaign360AsyncJobRequest' }, { $ref: '#/components/schemas/Campaign360AsyncJob' }, { 404: true }) },
+    '/functions/v1/astra-tools/campaign-360-async-result': { post: asyncPost('getAstraCampaign360Result', 'Retrieve the completed result of an async ASTRA 360 campaign job by job_id. Returns 202 while the job is still QUEUED or RUNNING; 200 with the result once COMPLETE.', { $ref: '#/components/schemas/Campaign360AsyncJobRequest' }, { $ref: '#/components/schemas/Campaign360AsyncResult' }, { 202: true, 404: true }) },
+  };
+}
+function asyncCampaignSchemas() {
+  const jobFields = {
+    job_id: { type: 'string', minLength: 1, maxLength: 200 },
+    status: { type: 'string', enum: ['QUEUED', 'RUNNING', 'COMPLETE', 'FAILED'] },
+    created_at: { type: 'string' },
+    started_at: { type: ['string', 'null'] },
+    completed_at: { type: ['string', 'null'] },
+    updated_at: { type: 'string' },
+    triggers_action: { type: 'boolean' },
+    error: { type: ['object', 'null'], properties: { code: { type: 'string' }, message: { type: 'string' } }, additionalProperties: true },
+  };
+  return {
+    Campaign360AsyncStartRequest: { type: 'object', required: ['input'], additionalProperties: false, properties: { input: { type: 'string', minLength: 1, maxLength: 12000 }, user_context: { type: 'object', properties: {}, additionalProperties: true } } },
+    Campaign360AsyncJobRequest: { type: 'object', required: ['job_id'], additionalProperties: false, properties: { job_id: { type: 'string', minLength: 1, maxLength: 200 } } },
+    Campaign360AsyncJob: { type: 'object', required: ['job_id', 'status', 'created_at', 'updated_at'], additionalProperties: true, properties: { ...jobFields } },
+    Campaign360AsyncResult: { type: 'object', required: ['job_id', 'status', 'created_at', 'updated_at'], additionalProperties: true, properties: { ...jobFields, result: { type: ['object', 'null'], properties: {}, additionalProperties: true } } },
+  };
+}
+
 function build(serverUrl = 'https://PROJECT_REF.supabase.co', opts = {}) {
   const ref = { Error: { type: 'object', required: ['status', 'error'], properties: { status: { type: 'string', enum: ['FAILED'] }, error: { type: 'object', required: ['code', 'message'], properties: { code: { type: 'string' }, message: { type: 'string' }, details: {} } } } } };
   const errors = {};
   for (const code of [400, 401, 403, 422, 500, 503]) errors[code] = { description: ({ 400: 'Invalid input', 401: 'Unauthorized', 403: 'Forbidden', 422: 'Oversized or semantically invalid input', 500: 'Runtime failure', 503: 'Runtime unavailable' })[code], content: { 'application/json': { schema: { $ref: '#/components/schemas/Error' } } } };
   const post = (operationId, summary, schema, successSchema) => ({ operationId, summary, security: [{ bearerAuth: [] }], requestBody: { required: true, content: { 'application/json': { schema } } }, responses: Object.assign({ 200: { description: 'Tool result with ASTRA status preserved', content: { 'application/json': { schema: successSchema || { type: 'object', additionalProperties: true } } } } }, errors) });
+  const asyncPost = (operationId, summary, schema, successSchema, extra = {}) => {
+    const op = post(operationId, summary, schema, successSchema);
+    if (extra[202]) op.responses[202] = { description: 'Accepted — job started or still running; poll status/result by job_id', content: { 'application/json': { schema: successSchema } } };
+    if (extra[404]) op.responses[404] = { description: 'Job not found or expired', content: { 'application/json': { schema: { $ref: '#/components/schemas/Error' } } } };
+    return op;
+  };
   const paths = {
     '/functions/v1/search-kb': { post: post('searchKnowledgeBase', 'Search the existing knowledge base for a narrow factual lookup.', { type: 'object', required: ['query'], additionalProperties: false, properties: { query: { type: 'string', minLength: 1, maxLength: 12000 }, top_k: { type: 'integer', minimum: 1, maximum: 10, default: 5 }, filter_domain: { type: 'string', maxLength: 128 } } }) },
     '/functions/v1/astra-tools/campaign-360': { post: post('runAstraCampaign360', 'Run the complete ASTRA 360 campaign workflow.', { $ref: '#/components/schemas/CampaignRequest' }, { $ref: '#/components/schemas/CampaignResponse' }) },
@@ -34,7 +69,8 @@ function build(serverUrl = 'https://PROJECT_REF.supabase.co', opts = {}) {
     '/functions/v1/astra-tools/creative-generation': { post: post('runAstraCreativeGeneration', 'Generate or revise an approved creative direction with visual QA.', { $ref: '#/components/schemas/CreativeGenerationRequest' }) },
   };
   if (opts.commercial) Object.assign(paths, commercialPaths(post));
-  const schemaExtra = Object.assign({}, opts.commercial ? commercialSchemas() : {});
+  if (opts.asyncCampaign) Object.assign(paths, asyncCampaignPaths(asyncPost));
+  const schemaExtra = Object.assign({}, opts.commercial ? commercialSchemas() : {}, opts.asyncCampaign ? asyncCampaignSchemas() : {});
   return {
     openapi: '3.1.0', info: { title: 'ASTRA GPT Tools', version: '1.0.0', description: 'GPT interface for narrow KB lookup and authoritative ASTRA workflows.' }, servers: [{ url: serverUrl }],
     paths,
