@@ -449,17 +449,24 @@ t('W2 canonical_brief_facts is returned unchanged (same reference-equal frozen o
   assert(Object.isFrozen(r.canonical_brief_facts));
   assert.equal(r.canonical_brief_facts.buyer.value, 'dueñas de estéticas');
 });
-t('W3 a node-level violation fails closed (throws BRIEF_FIDELITY_VIOLATION, never continues silently)', async () => {
-  await assert.rejects(
-    () => runWith(METHOD360_BRIEF, { ICP_SPECIALIST: { pains: 'nuestro ICP son consumidoras de servicios estéticos' } }),
-    err => { assert.equal(err.code, 'BRIEF_FIDELITY_VIOLATION'); assert(err.briefFidelityViolations.some(v => v.fact_field === 'buyer')); return true; }
-  );
+// [ASTRA_CAMPAIGN360_NODE_FIDELITY_DIAGNOSTIC_PROPAGATION] a node-level BRIEF_FIDELITY_VIOLATION no
+// longer escapes H.run() as a thrown exception — that was the confirmed live defect: the generic
+// router catch downstream degraded a real domain failure into an opaque RUNTIME_FAILED, discarding
+// canonical_brief_facts and the exact violation paths. It now resolves with the same structured
+// FAILED shape the final-synthesis fidelity gate already produced. See
+// astra_campaign360_node_fidelity_diagnostic_propagation.test.js for the dedicated contract tests
+// (not-throw, exact violations preserved, partial node_outputs, GPT/async passthrough, and that a
+// genuine technical error still throws unchanged).
+t('W3 a node-level violation fails closed (resolves FAILED/BRIEF_FIDELITY_VIOLATION, never continues silently)', async () => {
+  const r = await runWith(METHOD360_BRIEF, { ICP_SPECIALIST: { pains: 'nuestro ICP son consumidoras de servicios estéticos' } });
+  assert.equal(r.workflow_state_status, 'FAILED');
+  assert.equal(r.reason, 'BRIEF_FIDELITY_VIOLATION');
+  assert(r.brief_fidelity_violations.some(v => v.fact_field === 'buyer'));
 });
 t('W4 a violated run never reaches COMPLETE', async () => {
-  let threw = false;
-  try { await runWith(METHOD360_BRIEF, { OFFER_SPECIALIST: { offer_structure: 'vendemos un paquete introductorio: cita exprés' } }); }
-  catch (e) { threw = true; assert.notEqual(e.wfTransition, undefined); assert.equal(e.wfTransition, 'FAILED'); }
-  assert(threw);
+  const r = await runWith(METHOD360_BRIEF, { OFFER_SPECIALIST: { offer_structure: 'vendemos un paquete introductorio: cita exprés' } });
+  assert.notEqual(r.workflow_state_status, 'COMPLETE');
+  assert.equal(r.workflow_state_status, 'FAILED');
 });
 
 // ========== 8. MÉTODO 360 deterministic fixture — clean run must preserve every fact ==========
@@ -516,31 +523,32 @@ t('M6 MIXED_SINGLE_LINE_BRIEF also COMPLETEs end-to-end with every fact intact',
 });
 
 // ========== 9. ADVERSARIAL — every substitution the authorization names, fail-closed ==========
+async function assertFailsClosed(brief, overrides) {
+  const r = await runWith(brief, overrides);
+  assert.equal(r.workflow_state_status, 'FAILED');
+  assert.equal(r.reason, 'BRIEF_FIDELITY_VIOLATION');
+  assert(r.brief_fidelity_violations.length > 0);
+}
 t('A1 adversarial: buyer <-> buyer-of-the-buyer swap fails closed', async () => {
-  await assert.rejects(() => runWith(METHOD360_BRIEF, { ICP_SPECIALIST: { pains: 'el ICP real son las consumidoras de servicios estéticos, no las dueñas' } }),
-    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+  await assertFailsClosed(METHOD360_BRIEF, { ICP_SPECIALIST: { pains: 'el ICP real son las consumidoras de servicios estéticos, no las dueñas' } });
 });
 t('A2 adversarial: product substituted for a niche service fails closed', async () => {
-  await assert.rejects(() => runWith(METHOD360_BRIEF, { OFFER_SPECIALIST: { value_proposition: 'el producto principal es un servicio estético de sesión de belleza' } }),
-    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+  await assertFailsClosed(METHOD360_BRIEF, { OFFER_SPECIALIST: { value_proposition: 'el producto principal es un servicio estético de sesión de belleza' } });
 });
 t('A3 adversarial: taught mechanism converted into the sold service fails closed', async () => {
-  await assert.rejects(() => runWith(METHOD360_BRIEF, { META_ADS_SPECIALIST: { campaign_objective: 'vamos a vender citas expres pagadas como el producto final' } }),
-    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+  await assertFailsClosed(METHOD360_BRIEF, { META_ADS_SPECIALIST: { campaign_objective: 'vamos a vender citas expres pagadas como el producto final' } });
 });
 t('A4 adversarial: inferred different price fails closed', async () => {
-  await assert.rejects(() => runWith(METHOD360_BRIEF, { OFFER_SPECIALIST: { offer_structure: 'recomendamos vender el minicurso Método 360 a $999 MXN en vez del precio original' } }),
-    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+  await assertFailsClosed(METHOD360_BRIEF, { OFFER_SPECIALIST: { offer_structure: 'recomendamos vender el minicurso Método 360 a $999 MXN en vez del precio original' } });
 });
 t('A5 adversarial: sale objective converted into lead generation fails closed', async () => {
-  await assert.rejects(() => runWith(METHOD360_BRIEF, { META_ADS_SPECIALIST: { campaign_objective: 'el objetivo de la campaña es generar leads para la cita, lead generation' } }),
-    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+  await assertFailsClosed(METHOD360_BRIEF, { META_ADS_SPECIALIST: { campaign_objective: 'el objetivo de la campaña es generar leads para la cita, lead generation' } });
 });
 t('A6 adversarial: exact confirmed-defect phrasing (all at once) fails closed on the first offending node', async () => {
-  await assert.rejects(() => runWith(METHOD360_BRIEF, {
+  await assertFailsClosed(METHOD360_BRIEF, {
     ICP_SPECIALIST: { pains: 'ICP = consumidoras de servicios estéticos' },
     OFFER_SPECIALIST: { offer_structure: 'offer = paquete introductorio / cita exprés' },
-  }), err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+  });
 });
 
 // ========== 10. REGRESSION — must not break sibling systems ==========

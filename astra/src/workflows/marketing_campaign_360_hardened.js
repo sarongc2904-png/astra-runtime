@@ -220,6 +220,26 @@ async function run(rawRequest, options = {}) {
       settled = await Promise.all(wave.map(n => processNode(n, nodeCtx)));
     } catch (err) {
       wfState.transition(state, err.wfTransition || 'FAILED');
+      // [Node Fidelity — Diagnostic Propagation] A node-level BRIEF_FIDELITY_VIOLATION is a
+      // domain outcome, not a runtime crash — rethrowing it let astra_tool_router.js's generic
+      // catch degrade it to opaque RUNTIME_FAILED, discarding canonical_brief_facts and the exact
+      // violation paths processNode() already attached. Return the same structured FAILED shape
+      // the final-synthesis fidelity gate below already produces, instead of throwing. node_outputs
+      // / selected_methods_by_node here still hold only whatever prior waves fully aggregated
+      // (the current wave's own aggregation loop hasn't run yet) — the violating node, and any
+      // sibling in the same wave whose promise happened to resolve concurrently (e.g.
+      // creative_strategy racing funnel), are correctly never added as COMPLETE.
+      if (err.code === 'BRIEF_FIDELITY_VIOLATION') {
+        return {
+          mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id,
+          node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
+          workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
+          brief_fidelity_violations: err.briefFidelityViolations || [],
+          node_outputs, selected_methods_by_node, synthesis: null, cost, _state: state,
+        };
+      }
+      // Any other error (technical/provider/infra failure) keeps the exact prior behavior —
+      // never silently reclassified as a domain failure.
       throw err;
     }
     const byId = new Map(settled.map(r => [r.node.id, r]));

@@ -61,14 +61,13 @@ t('A3 an end-to-end mock-LLM run that actually violates fidelity surfaces the sa
     const obj = { findings: [], recommendations: [], decisions: [], assumptions: [], conflicts: [], confidence: 0.5, current_research_required: [], downstream_payload: payload };
     return { raw: JSON.stringify(obj), usage: { prompt: 1, completion: 1 } };
   };
-  let thrown;
-  try {
-    await H.run('Producto: Método 360\nComprador: dueñas de estéticas\nObjetivo: vender el minicurso', { mode: 'llm', adapter: new AgentV1Adapter({ kb: mockKb() }), llm, retrieve: true, salt: 'diag-passthrough' });
-  } catch (e) { thrown = e; }
-  assert(thrown, 'expected the node-level violation to throw');
-  assert.equal(thrown.code, 'BRIEF_FIDELITY_VIOLATION');
-  // simulate what campaign_async.js does with a thrown error: build a FAILED result carrying it
-  const result = { workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION', brief_fidelity_violations: thrown.briefFidelityViolations, canonical_brief_facts: null };
+  // [ASTRA_CAMPAIGN360_NODE_FIDELITY_DIAGNOSTIC_PROPAGATION] a node-level BRIEF_FIDELITY_VIOLATION
+  // no longer escapes H.run() as a thrown exception (that was exactly the confirmed defect: the
+  // generic router catch degraded it to opaque RUNTIME_FAILED) — it now resolves as the same
+  // structured FAILED shape the final-synthesis fidelity gate already produced.
+  const result = await H.run('Producto: Método 360\nComprador: dueñas de estéticas\nObjetivo: vender el minicurso', { mode: 'llm', adapter: new AgentV1Adapter({ kb: mockKb() }), llm, retrieve: true, salt: 'diag-passthrough' });
+  assert.equal(result.workflow_state_status, 'FAILED');
+  assert.equal(result.reason, 'BRIEF_FIDELITY_VIOLATION');
   const payload = campaignPayload(result);
   assert(payload.brief_fidelity_violations.length > 0);
   assert.equal(payload.brief_fidelity_violations[0].fact_field, 'buyer');

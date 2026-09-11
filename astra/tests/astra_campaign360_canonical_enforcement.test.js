@@ -242,20 +242,21 @@ t('I. legacy call (no canonicalBriefFacts) keeps the generic fallback line for b
 
 // ========== J. FULL_METHOD360_ADVERSARIAL — full pipeline sim of the confirmed E2E failure ==========
 t('J. full adversarial Método 360 run does NOT reach COMPLETE and fails closed with BRIEF_FIDELITY_VIOLATION', async () => {
-  await assert.rejects(
-    () => runWith(STRUCTURED_METHOD360_BRIEF, {
-      ICP_SPECIALIST: { pains: 'ICP: profesionales adultos con poco tiempo, ocupados' },
-      OFFER_SPECIALIST: { offer_structure: 'incluimos webinar demo, 3 plantillas descargables y muestra gratis; usamos testimonios de clientes; oferta limitada con deadline' },
-      FUNNEL_SPECIALIST: { stages: 'curso de 90 minutos, funnel webinar -> checkout directo' },
-      MARKET_CONTEXT_SPECIALIST: { problem_context: 'precio por confirmar, sin precio definido aún' },
-    }),
-    err => {
-      assert.equal(err.code, 'BRIEF_FIDELITY_VIOLATION');
-      assert(Array.isArray(err.briefFidelityViolations) && err.briefFidelityViolations.length > 0);
-      for (const v of err.briefFidelityViolations) assert(typeof v.type === 'string' && v.node);
-      return true;
-    }
-  );
+  // [ASTRA_CAMPAIGN360_NODE_FIDELITY_DIAGNOSTIC_PROPAGATION] a node-level BRIEF_FIDELITY_VIOLATION
+  // now resolves H.run() with a structured FAILED result (never a thrown exception, and never
+  // COMPLETE) — see astra_campaign360_node_fidelity_diagnostic_propagation.test.js for the
+  // dedicated coverage of that contract change itself.
+  const r = await runWith(STRUCTURED_METHOD360_BRIEF, {
+    ICP_SPECIALIST: { pains: 'ICP: profesionales adultos con poco tiempo, ocupados' },
+    OFFER_SPECIALIST: { offer_structure: 'incluimos webinar demo, 3 plantillas descargables y muestra gratis; usamos testimonios de clientes; oferta limitada con deadline' },
+    FUNNEL_SPECIALIST: { stages: 'curso de 90 minutos, funnel webinar -> checkout directo' },
+    MARKET_CONTEXT_SPECIALIST: { problem_context: 'precio por confirmar, sin precio definido aún' },
+  });
+  assert.notEqual(r.workflow_state_status, 'COMPLETE');
+  assert.equal(r.workflow_state_status, 'FAILED');
+  assert.equal(r.reason, 'BRIEF_FIDELITY_VIOLATION');
+  assert(Array.isArray(r.brief_fidelity_violations) && r.brief_fidelity_violations.length > 0);
+  for (const v of r.brief_fidelity_violations) assert(typeof v.type === 'string' && v.node);
 });
 
 // ========== K. CLEAN_METHOD360 — faithful output must COMPLETE ==========
