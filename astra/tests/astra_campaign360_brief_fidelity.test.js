@@ -305,6 +305,60 @@ t('a marker appended AFTER an already-made unmarked contradiction escapes nothin
   assert(violations.some(v => v.fact_field === 'product_name' || v.fact_field === 'product_type'), JSON.stringify(violations));
 });
 
+// ========== 2d. PROPOSAL NON-REPLACEMENT — a marker before the contradiction is necessary but
+// not sufficient: the alternative must ALSO be worded as a non-replacing secondary exploration,
+// AND the canonical fact must still be stated as principal (in-field or in a sibling field). A
+// marker in front of a flat "X será el nuevo principal" statement does not launder it. ==========
+t('PROPOSAL_REPLACES_PRODUCT: "PROPUESTA/HIPÓTESIS: la oferta principal será una cita exprés." => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'PROPUESTA/HIPÓTESIS: la oferta principal será una cita exprés.',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.fact_field === 'product_name' || v.fact_field === 'product_type'), JSON.stringify(violations));
+});
+t('PROPOSAL_REPLACES_OBJECTIVE: "PROPUESTA: objective=CLIENT_ACQUISITION." => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    campaign_objective: 'PROPUESTA: objective=CLIENT_ACQUISITION.',
+  } }, { nodeId: 'ads' });
+  assert(violations.some(v => v.fact_field === 'business_objective'), JSON.stringify(violations));
+});
+t('PROPOSAL_REPLACES_PRICE: "PROPUESTA: el precio principal será $900 MXN." => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'PROPUESTA: el precio principal será $900 MXN.',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.type === 'PRICE_SUBSTITUTION'), JSON.stringify(violations));
+});
+t('PROPOSAL_REPLACES_GEOGRAPHY: "PROPUESTA: campaña principal dirigida a Colombia." => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    problem_context: 'PROPUESTA: campaña principal dirigida a Colombia.',
+  } }, { nodeId: 'market_context' });
+  assert(violations.some(v => v.type === 'GEOGRAPHY_SUBSTITUTION'), JSON.stringify(violations));
+});
+t('PROPOSAL_REPLACES_BUYER: "PROPUESTA: comprador objetivo = consumidoras finales." => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    pains: 'PROPUESTA: comprador objetivo = consumidoras finales.',
+  } }, { nodeId: 'icp' });
+  assert(violations.some(v => v.fact_field === 'buyer'), JSON.stringify(violations));
+});
+t('PROPOSAL_SECONDARY_NON_REPLACING: "Oferta principal: Método 360. PROPUESTA/HIPÓTESIS a validar: usar una cita exprés como lead magnet, sin sustituir el producto principal." => PASS', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'Oferta principal: Método 360. PROPUESTA/HIPÓTESIS a validar: usar una cita exprés como lead magnet, sin sustituir el producto principal.',
+  } }, { nodeId: 'offer' });
+  assert.deepStrictEqual(violations, []);
+});
+t('a marker with a non-replacing cue but WITHOUT the canonical fact stated anywhere still fails (cue alone is not enough — criterion A is also required)', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'PROPUESTA a validar: usar una cita exprés como lead magnet, sin sustituir el producto principal.',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.fact_field === 'product_name' || v.fact_field === 'product_type'), JSON.stringify(violations));
+});
+
 // ========== 3/4/5/6/7. full-pipeline wiring: Node Input Contract + validators inside run() ==========
 t('W1 every node input carries canonical_brief_facts (Node Input Contract)', async () => {
   const captured = [];

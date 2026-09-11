@@ -44,6 +44,12 @@ function containsFact(haystack, factValue) {
 }
 
 const PROPOSAL_MARKER = /propuesta|hip[oó]tesis|proposal|hypothesis|a validar|por validar|sujeto a (validaci[oó]n|datos)/;
+// [NON-REPLACEMENT] A marker alone never proves the alternative isn't replacing the fact — the
+// wording must clearly delimit it as a secondary exploration/test/lead-magnet/variant that does
+// NOT stand in for the principal value. "a validar" alone (already part of PROPOSAL_MARKER) does
+// not count on its own — it is exactly the kind of bare marker the confirmed defect used to
+// wrongly excuse a flat replacement ("PROPUESTA: el precio principal será $900 MXN a validar.").
+const NON_REPLACING_CUE = /sin sustituir|sin reemplazar|sin cambiar (el|la) (producto|precio|objetivo|p[uú]blico|mercado|comprador|geograf[ií]a) principal|como lead magnet|a modo de (prueba|test)|a testear|secundari[oa]|variante a (probar|testear)|no reemplaza|no sustituye|complementari[oa]/;
 
 // Known substitution phrases per field — patterns that indicate the fact was swapped for a
 // different one, drawn from the confirmed defect class (entity-role inversion, product/
@@ -81,26 +87,53 @@ function earliestMatchIndex(val, patterns) {
   }
   return best;
 }
-// A match at `idx` is escaped only when a proposal marker exists at or before it.
-function isEscapedByPosition(idx, markerIndex) { return markerIndex !== -1 && idx >= markerIndex; }
+// [NON-REPLACEMENT RULE] A marked contradiction escapes ONLY when BOTH hold:
+//   A) the canonical fact is explicitly preserved as the field's principal value — either right
+//      there before the marker in this same field's text, or plainly stated in a sibling field of
+//      the same output (e.g. offer_structure states the product while a separate exploratory_idea
+//      field proposes an alternative) — never merely inferred from the marker's presence; and
+//   B) the marked span itself is worded as a non-replacing exploration (a NON_REPLACING_CUE) —
+//      "PROPUESTA: la oferta principal será X" fails B even though it has a marker, because the
+//      wording itself claims to BE the new principal, not a secondary idea alongside it.
+// Position alone (match at/after the marker) is necessary but no longer sufficient.
+function factPreservedAsPrincipal(val, markerIndex, factValue, siblingTexts) {
+  const primary = markerIndex === -1 ? val : val.slice(0, markerIndex);
+  if (containsFact(primary, factValue)) return true;
+  return siblingTexts.some(t => containsFact(t, factValue));
+}
+function isNonReplacingProposal(val, idx, markerIndex, factValues, siblingTexts) {
+  if (markerIndex === -1 || idx < markerIndex) return false; // position gate (unchanged prerequisite)
+  if (!NON_REPLACING_CUE.test(val.slice(markerIndex))) return false; // B: must read as secondary/non-replacing
+  const values = Array.isArray(factValues) ? factValues : [factValues];
+  if (!values.some(v => factPreservedAsPrincipal(val, markerIndex, v, siblingTexts))) return false; // A: fact still principal
+  return true;
+}
+// product_name and product_type are one product-identity concept for criterion A: stating "Método
+// 360" as principal is understood to name the product itself, type included — a field is not
+// required to separately restate the type in the same breath for the identity to read as intact.
+function productIdentityValues(facts) {
+  return [facts.product_name, facts.product_type].filter(f => f && f.status === 'USER_PROVIDED_FACT' && f.value).map(f => f.value);
+}
 
-function checkFieldSubstitutions(facts, key, rawVal) {
+function checkFieldSubstitutions(facts, key, rawVal, siblingTexts) {
   const val = norm(stringify(rawVal));
   const markerIndex = firstMarkerIndex(val);
   const violations = [];
+  const productValues = productIdentityValues(facts);
   for (const field of CHECKED_FIELDS) {
     const f = facts[field];
     if (!f || f.status !== 'USER_PROVIDED_FACT' || !f.value) continue;
     const idx = earliestMatchIndex(val, SUBSTITUTION_PATTERNS[field] || []);
     if (idx === -1) continue;
-    if (isEscapedByPosition(idx, markerIndex)) continue;
+    const escapeValues = (field === 'product_name' || field === 'product_type') ? productValues : f.value;
+    if (isNonReplacingProposal(val, idx, markerIndex, escapeValues, siblingTexts)) continue;
     violations.push({ type: field.toUpperCase() + '_SUBSTITUTION', fact_field: field, canonical_value: f.value, field_key: key });
   }
   // buyer role inversion — explicit wrong-party phrasing
   const bf = facts.buyer;
   if (bf && bf.status === 'USER_PROVIDED_FACT' && bf.value) {
     const idx = earliestMatchIndex(val, BUYER_ROLE_INVERSION_PHRASES);
-    if (idx !== -1 && !isEscapedByPosition(idx, markerIndex)) {
+    if (idx !== -1 && !isNonReplacingProposal(val, idx, markerIndex, bf.value, siblingTexts)) {
       violations.push({ type: 'BUYER_ROLE_INVERSION', fact_field: 'buyer', canonical_value: bf.value, field_key: key, detail: 'field frames the end consumer as the buyer role' });
     }
   }
@@ -112,7 +145,7 @@ function checkFieldSubstitutions(facts, key, rawVal) {
     while ((m = re.exec(val))) {
       const amt = m[1].replace(/,/g, '');
       if (amt === String(pf.value)) continue;
-      if (isEscapedByPosition(m.index, markerIndex)) continue;
+      if (isNonReplacingProposal(val, m.index, markerIndex, pf.value, siblingTexts)) continue;
       violations.push({ type: 'PRICE_SUBSTITUTION', fact_field: 'price', canonical_value: pf.value, found_value: amt, field_key: key });
       break;
     }
@@ -127,7 +160,7 @@ function checkFieldSubstitutions(facts, key, rawVal) {
       const idx = val.search(new RegExp('\\b' + c.replace(/ /g, '\\s+') + '\\b'));
       if (idx !== -1 && (bestIdx === -1 || idx < bestIdx)) { bestIdx = idx; bestHit = c; }
     }
-    if (bestIdx !== -1 && !isEscapedByPosition(bestIdx, markerIndex)) {
+    if (bestIdx !== -1 && !isNonReplacingProposal(val, bestIdx, markerIndex, gf.value, siblingTexts)) {
       violations.push({ type: 'GEOGRAPHY_SUBSTITUTION', fact_field: 'geography', canonical_value: gf.value, found_value: bestHit, field_key: key });
     }
   }
@@ -138,17 +171,21 @@ function checkFieldSubstitutions(facts, key, rawVal) {
 const OTHER_COUNTRIES = ['espana', 'colombia', 'argentina', 'chile', 'peru', 'estados unidos', 'united states', 'usa'];
 
 function validateOutputAgainstFacts(facts, output, { nodeId } = {}) {
+  const entries = relevantFields(output);
   const violations = [];
-  for (const [key, rawVal] of relevantFields(output)) {
-    for (const v of checkFieldSubstitutions(facts, key, rawVal)) violations.push(v);
+  for (const [key, rawVal] of entries) {
+    const siblingTexts = entries.filter(([k]) => k !== key).map(([, v]) => norm(stringify(v)));
+    for (const v of checkFieldSubstitutions(facts, key, rawVal, siblingTexts)) violations.push(v);
   }
   return { violations: violations.map(v => ({ ...v, node: nodeId || null, path: nodeId ? `node_outputs.${nodeId}.downstream_payload.${v.field_key}` : `field.${v.field_key}` })) };
 }
 
 function validateFinalSynthesis(facts, synthesis) {
+  const entries = relevantFields(synthesis);
   const violations = [];
-  for (const [key, rawVal] of relevantFields(synthesis)) {
-    for (const v of checkFieldSubstitutions(facts, key, rawVal)) violations.push(v);
+  for (const [key, rawVal] of entries) {
+    const siblingTexts = entries.filter(([k]) => k !== key).map(([, v]) => norm(stringify(v)));
+    for (const v of checkFieldSubstitutions(facts, key, rawVal, siblingTexts)) violations.push(v);
   }
   return { violations: violations.map(v => ({ ...v, node: null, path: `synthesis.deliverable.${v.field_key}` })) };
 }
