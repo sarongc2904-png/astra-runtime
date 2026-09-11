@@ -367,6 +367,12 @@ function activeExplicitProhibitionCategories(constraintValue) {
   return active;
 }
 const NEGATION_CUE = /\bno\s+(usar|incluir|utilizar|mencionar|presentar|afirmar)\b|=\s*unknown\b|\bsin\b[^.\n]{0,25}\bdisponible\b|\bno\s+hay\b/i;
+// [OCCURRENCE DIAGNOSTICS] valRawSentences is the field's own real text (case/accents intact,
+// via textOnly() \u2014 never norm()'d). All matching below already relies on case-insensitive ('i')
+// regexes, and every pattern that needs an accented variant already spells it out (e.g.
+// garant[i\u00ed]a) \u2014 so running the exact same matching against real text instead of the
+// lowercased/accent-stripped form changes no PASS/FAIL decision. It only lets each violation
+// carry the literal matched substring and its literal containing clause, instead of nothing.
 function checkExplicitProhibition(facts, key, valRawSentences) {
   const cf = facts.constraints;
   if (!cf || cf.status !== 'USER_PROVIDED_FACT') return [];
@@ -379,6 +385,7 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
   const clauses = valRawSentences.split(/[.!?;\n]|\b(?:pero|sin embargo|aunque)\b|[,\u2014]|\b(?:y|e)\s+(?=(?:usa\w*|inclu\w*|utiliza\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*)\b)/i);
   let negativeList = false;
   let offset = 0;
+  let clauseIndex = 0;
   for (const s of clauses) {
     const start = valRawSentences.indexOf(s, offset);
     const separator = valRawSentences.slice(offset, start);
@@ -397,12 +404,17 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
       if (!activeCategories.has(p.type)) continue;
       for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
         if (!isNegated(match.index, match.index + match[0].length)) {
-          violations.push({ type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key });
+          violations.push({
+            type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key,
+            matched_text: match[0], matched_pattern: p.re.source,
+            local_clause: s.trim(), clause_index: clauseIndex, occurrence_start: start + match.index,
+          });
         }
       }
     }
     negativeList = isNegated(s.length, s.length);
     offset = start + s.length;
+    clauseIndex += 1;
   }
   return violations;
 }
@@ -600,12 +612,13 @@ function validateOutputAgainstFacts(facts, output, { nodeId, upstream_outputs = 
   const proposalAnchors = upstreamProposalAnchors(facts, upstream_outputs);
   for (const [key, rawVal] of entries) {
     const textVal = norm(textOnly(rawVal));
+    const rawTextVal = textOnly(rawVal);
     const markerIndex = firstMarkerIndex(textVal);
     const siblingEntries = normEntries.filter(([k]) => k !== key);
     for (const v of checkFieldSubstitutions(facts, key, rawVal, siblingEntries)) violations.push(v);
     for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
-    for (const v of checkExplicitProhibition(facts, key, textVal)) violations.push(v);
+    for (const v of checkExplicitProhibition(facts, key, rawTextVal)) violations.push(v);
     for (const v of checkUpstreamProposalPropagation(key, rawVal, proposalAnchors)) violations.push(v);
   }
   const combinedText = textEntries.map(([, v]) => v).join(' \n ');
@@ -621,12 +634,13 @@ function validateFinalSynthesis(facts, synthesis) {
   const violations = [];
   for (const [key, rawVal] of entries) {
     const textVal = norm(textOnly(rawVal));
+    const rawTextVal = textOnly(rawVal);
     const markerIndex = firstMarkerIndex(textVal);
     const siblingEntries = normEntries.filter(([k]) => k !== key);
     for (const v of checkFieldSubstitutions(facts, key, rawVal, siblingEntries)) violations.push(v);
     for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
-    for (const v of checkExplicitProhibition(facts, key, textVal)) violations.push(v);
+    for (const v of checkExplicitProhibition(facts, key, rawTextVal)) violations.push(v);
   }
   const combinedText = textEntries.map(([, v]) => v).join(' \n ');
   for (const v of checkBuyerPositivePreservation(facts, null, combinedText)) violations.push(v);
