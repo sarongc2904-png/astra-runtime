@@ -273,6 +273,79 @@ t('O14 Supabase gateway forwards the three async slugs to the runtime async path
   assert(src.includes("'campaign-360': '/astra/campaign-360'"), 'sync forward lost');
 });
 
+// ---------- recursive structural audit: every "object" node must declare properties ----------
+// GPT Builder rejects a schema node typed "object" (or a type array containing "object") that
+// has no "properties" key — even nested, even inside array items, even a deliberately free-form
+// object (which must spell that out as `properties: {}` alongside `additionalProperties: true`).
+function isObjectType(t) { return t === 'object' || (Array.isArray(t) && t.includes('object')); }
+function walkSchema(node, nodePath, defects, seen) {
+  if (node == null || typeof node !== 'object') return;
+  if (seen.has(node)) return; // guards against any accidental reference cycle
+  seen.add(node);
+  if (Array.isArray(node)) { node.forEach((v, i) => walkSchema(v, `${nodePath}[${i}]`, defects, seen)); return; }
+  if ('$ref' in node) return; // resolved via components.schemas itself, walked separately
+  if (isObjectType(node.type) && !('properties' in node)) defects.push(nodePath);
+  for (const combinator of ['oneOf', 'anyOf', 'allOf']) {
+    if (Array.isArray(node[combinator])) node[combinator].forEach((sub, i) => walkSchema(sub, `${nodePath}.${combinator}[${i}]`, defects, seen));
+  }
+  for (const [k, v] of Object.entries(node)) {
+    if (k === 'type' || ['oneOf', 'anyOf', 'allOf'].includes(k)) continue;
+    walkSchema(v, `${nodePath}.${k}`, defects, seen);
+  }
+}
+function auditRecursiveObjectSchemas(spec) {
+  const defects = []; const seen = new WeakSet();
+  walkSchema(spec.components && spec.components.schemas, 'components.schemas', defects, seen);
+  let checked = 0;
+  for (const [p, item] of Object.entries(spec.paths)) {
+    checked += 1;
+    walkSchema(item.post.requestBody, `paths['${p}'].post.requestBody`, defects, seen);
+    walkSchema(item.post.responses, `paths['${p}'].post.responses`, defects, seen);
+  }
+  return { defects, pathsChecked: checked };
+}
+
+t('R1 recursive audit: zero object schema nodes missing properties (RECURSIVE_OBJECT_SCHEMA_MISSING_PROPERTIES = 0)', () => {
+  const { defects } = auditRecursiveObjectSchemas(full);
+  assert.deepStrictEqual(defects, [], `object schema(s) missing properties at:\n  ${defects.join('\n  ')}`);
+});
+t('R2 recursive audit covers components.schemas, every requestBody and every responses block', () => {
+  const { pathsChecked } = auditRecursiveObjectSchemas(full);
+  assert.equal(pathsChecked, Object.keys(full.paths).length);
+  assert.equal(pathsChecked, 10);
+});
+t('R3 recursive audit reports an exact defect path when one is deliberately introduced', () => {
+  const broken = JSON.parse(JSON.stringify(full));
+  broken.components.schemas.CommercialResponse.properties.result = { type: 'object', additionalProperties: true };
+  const { defects } = auditRecursiveObjectSchemas(broken);
+  assert.deepStrictEqual(defects, ['components.schemas.CommercialResponse.properties.result']);
+});
+t('R4 base build() and commercial-only build() also pass the recursive audit', () => {
+  assert.deepStrictEqual(auditRecursiveObjectSchemas(openapi.build()).defects, []);
+  assert.deepStrictEqual(auditRecursiveObjectSchemas(openapi.build(GW, { commercial: true })).defects, []);
+});
+t('R5 free-form objects are explicit — properties:{} plus additionalProperties:true, never bare "object"', () => {
+  const freeForm = [
+    full.components.schemas.CommercialResponse.properties.report,
+    full.components.schemas.CommercialResponse.properties.result,
+    full.components.schemas.CampaignResponse.properties.final_synthesis,
+    full.components.schemas.CampaignResponse.properties.usage,
+    full.components.schemas.CreativeDirectorResponse.properties.creative_director_output,
+    full.components.schemas.CreativeGenerationResponse.properties.final_approved_asset,
+  ];
+  for (const s of freeForm) { assert.deepStrictEqual(s.properties, {}); assert.equal(s.additionalProperties, true); }
+});
+t('R6 CreativeDirector/CreativeGeneration success responses are real, named schemas — not the generic object fallback', () => {
+  const cd = full.paths['/functions/v1/astra-tools/creative-director'].post.responses[200].content['application/json'].schema;
+  const cg = full.paths['/functions/v1/astra-tools/creative-generation'].post.responses[200].content['application/json'].schema;
+  assert.equal(cd.$ref, '#/components/schemas/CreativeDirectorResponse');
+  assert.equal(cg.$ref, '#/components/schemas/CreativeGenerationResponse');
+  for (const name of ['CreativeDirectorResponse', 'CreativeGenerationResponse']) {
+    const s = full.components.schemas[name];
+    assert.equal(s.type, 'object'); assert('properties' in s); assert(s.required.includes('status'));
+  }
+});
+
 (async () => {
   for (const x of tests) { try { await x.fn(); pass += 1; console.log('PASS', x.name); } catch (e) { fail += 1; console.log('FAIL', x.name, '::', e && e.message); } }
   console.log(`\nASTRA_CAMPAIGN360_GPT_ASYNC_BRIDGE_TEST_RESULT pass=${pass} fail=${fail}`);
