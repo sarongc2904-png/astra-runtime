@@ -74,7 +74,7 @@ function runWith(brief, overrides = {}) {
   return H.run(brief, { mode: 'llm', adapter: mockAdapter(), llm: buildMockLLM(overrides), retrieve: true, salt: 'brief-fidelity' });
 }
 
-// ---------- exact Método 360 fixture (labeled fields, per authorization §8) ----------
+// ---------- LABELED_METHOD360_BRIEF — the original labeled fixture (kept exactly, regression) ----------
 const METHOD360_BRIEF = [
   'Producto: Método 360',
   'Tipo: minicurso grabado',
@@ -84,6 +84,20 @@ const METHOD360_BRIEF = [
   'Objetivo: vender el minicurso',
   'Mecanismo: Meta Ads para generar consultas, seguido de WhatsApp consulta -> conversación -> cita',
 ].join('\n');
+
+// ---------- LIVE_METHOD360_BRIEF_EXACT — the literal natural-language text from the real E2E
+// run, byte-for-byte, unreformatted (no labels at all except "Objetivo:"). ----------
+const LIVE_METHOD360_BRIEF_EXACT = [
+  'Crea una campaña 360 para Método 360.',
+  'Es un minicurso grabado de $400 MXN dirigido a dueñas de estéticas en México.',
+  'Objetivo: vender el minicurso.',
+  'Enseña Meta Ads para generar consultas y WhatsApp para convertir',
+  'consulta → conversación → cita.',
+].join('\n');
+
+// ---------- MIXED_SINGLE_LINE_BRIEF — every fact packed into one sentence, no line breaks, no
+// labels at all. ----------
+const MIXED_SINGLE_LINE_BRIEF = 'Crea Método 360, minicurso de $400 MXN para dueñas de estéticas en México. Objetivo: vender el minicurso. Enseña Meta Ads y WhatsApp para pasar de consulta a cita.';
 
 // ========== 1. CANONICAL_BRIEF_FACTS extraction ==========
 t('F1 extracts every labeled field as USER_PROVIDED_FACT', () => {
@@ -109,6 +123,44 @@ t('F4 CanonicalBriefFacts is frozen (immutable at the source)', () => {
   const f = briefFacts.extract(METHOD360_BRIEF);
   assert(Object.isFrozen(f));
   assert.throws(() => { f.buyer = { value: 'x', status: 'USER_PROVIDED_FACT' }; }, TypeError);
+});
+
+function assertMethod360Facts(f) {
+  assert.equal(f.product_name.value, 'Método 360'); assert.equal(f.product_name.status, 'USER_PROVIDED_FACT');
+  assert.equal(f.product_type.value, 'minicurso grabado', f.product_type.value);
+  assert.equal(f.price.value, '400'); assert.equal(f.currency.value, 'MXN');
+  assert.equal(f.buyer.value, 'dueñas de estéticas');
+  assert.equal(f.geography.value, 'México');
+  assert.equal(f.business_objective.value, 'vender el minicurso');
+  assert(/Meta Ads/.test(f.mechanism.value) && /WhatsApp/.test(f.mechanism.value), f.mechanism.value);
+}
+
+// ========== 1b. LIVE_METHOD360_BRIEF_EXACT — the literal natural-language E2E text, unreformatted ==========
+t('N1 LIVE_METHOD360_BRIEF_EXACT: natural-language text (no labels except Objetivo) yields every fact as USER_PROVIDED_FACT', () => {
+  assertMethod360Facts(briefFacts.extract(LIVE_METHOD360_BRIEF_EXACT));
+});
+t('N2 LIVE_METHOD360_BRIEF_EXACT: mechanism captures the full taught funnel including the arrow chain', () => {
+  const f = briefFacts.extract(LIVE_METHOD360_BRIEF_EXACT);
+  assert(/consulta/i.test(f.mechanism.value) && /conversaci[oó]n/i.test(f.mechanism.value) && /cita/i.test(f.mechanism.value) && f.mechanism.value.includes('→'));
+});
+t('N3 LABELED_METHOD360_BRIEF (unchanged fixture) still extracts identically — regression', () => {
+  assertMethod360Facts(briefFacts.extract(METHOD360_BRIEF));
+});
+t('N4 MIXED_SINGLE_LINE_BRIEF: every fact packed into one sentence with no labels still extracts', () => {
+  const f = briefFacts.extract(MIXED_SINGLE_LINE_BRIEF);
+  assert.equal(f.product_name.value, 'Método 360');
+  assert.equal(f.product_type.value, 'minicurso');
+  assert.equal(f.price.value, '400'); assert.equal(f.currency.value, 'MXN');
+  assert.equal(f.buyer.value, 'dueñas de estéticas');
+  assert.equal(f.geography.value, 'México');
+  assert.equal(f.business_objective.value, 'vender el minicurso');
+  assert(/Meta Ads/.test(f.mechanism.value) && /WhatsApp/.test(f.mechanism.value));
+});
+t('N5 the three brief forms (labeled / natural / mixed) all state the same underlying facts', () => {
+  const a = briefFacts.extract(METHOD360_BRIEF), b = briefFacts.extract(LIVE_METHOD360_BRIEF_EXACT), c = briefFacts.extract(MIXED_SINGLE_LINE_BRIEF);
+  for (const field of ['product_name', 'price', 'currency', 'buyer', 'geography', 'business_objective']) {
+    assert.equal(a[field].value, b[field].value, field); assert.equal(b[field].value, c[field].value, field);
+  }
 });
 
 // ========== 2. IMMUTABLE FACT LOCK — node-level validator unit tests ==========
@@ -153,6 +205,50 @@ t('L8 UNKNOWN facts never trigger a violation (nothing to contradict)', () => {
   const f = briefFacts.extract('Producto: X'); // buyer/objective/etc all UNKNOWN
   const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: { pains: 'consumidoras de servicios estéticos, CLIENT_ACQUISITION, cita exprés' } }, { nodeId: 'icp' });
   assert.deepStrictEqual(violations, []);
+});
+
+// ========== 2b. FIELD-LEVEL VALIDATION — a mention in a DIFFERENT field never excuses a
+// substitution in the field that actually asserts it (closes the global-mention bypass). ==========
+t('FL4 FIELD_LEVEL_ADVERSARIAL: canonical fact correctly stated in "notes", but the primary field is substituted -> FAILS', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'cita exprés',                                   // the field that actually asserts the offer
+    notes: 'Referencia: Método 360, minicurso grabado, 400 MXN.',      // correct mention elsewhere - must NOT excuse it
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.fact_field === 'product_name' || v.fact_field === 'product_type'), JSON.stringify(violations));
+  assert(violations.every(v => v.field_key === 'offer_structure'), 'violation must be attributed to the substituted field, not "notes"');
+});
+t('FL5 FIELD_LEVEL_ADVERSARIAL: buyer correctly mentioned laterally, but the ICP field itself says consumidoras -> FAILS', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    pains: 'nuestro ICP principal son consumidoras finales que buscan verse bien',
+    side_note: 'dueñas de estéticas siguen siendo el negocio contratante',
+  } }, { nodeId: 'icp' });
+  assert(violations.some(v => v.fact_field === 'buyer' && v.field_key === 'pains'), JSON.stringify(violations));
+});
+t('FL6 FIELD_LEVEL_ADVERSARIAL: objective correctly mentioned laterally, but campaign_objective = CLIENT_ACQUISITION -> FAILS', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    campaign_objective: 'CLIENT_ACQUISITION',
+    context: 'recordatorio: el objetivo declarado por el cliente es vender el minicurso',
+  } }, { nodeId: 'ads' });
+  assert(violations.some(v => v.fact_field === 'business_objective' && v.field_key === 'campaign_objective'), JSON.stringify(violations));
+});
+t('FL7 an explicit PROPOSAL in a side field, with the primary field untouched, PASSES', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'Oferta principal: acceso al minicurso Método 360 a 400 MXN, sin cambios.',
+    exploratory_idea: 'PROPUESTA a validar más adelante: ofrecer una cita exprés como lead magnet gratuito.',
+  } }, { nodeId: 'offer' });
+  assert.deepStrictEqual(violations, []);
+});
+t('FL8 the same two phrases WITHOUT a proposal marker in a side field still fail (marker, not mere separateness, is what escapes it)', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'Oferta principal: acceso al minicurso Método 360 a 400 MXN, sin cambios.',
+    exploratory_idea: 'Alternativa: ofrecer directamente una cita exprés como lead magnet.',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.field_key === 'exploratory_idea'), JSON.stringify(violations));
 });
 
 // ========== 3/4/5/6/7. full-pipeline wiring: Node Input Contract + validators inside run() ==========
@@ -221,6 +317,24 @@ t('M4 only the field the fixture never specified (constraints) is UNKNOWN — no
   for (const field of ['product_name', 'product_type', 'price', 'currency', 'buyer', 'geography', 'business_objective', 'mechanism']) {
     assert.equal(f[field].status, 'USER_PROVIDED_FACT', `${field} unexpectedly UNKNOWN`);
   }
+});
+t('M5 the literal natural-language LIVE_METHOD360_BRIEF_EXACT COMPLETEs end-to-end with every fact intact', async () => {
+  const r = await runWith(LIVE_METHOD360_BRIEF_EXACT);
+  assert.equal(r.workflow_state_status, 'COMPLETE');
+  assertMethod360Facts(r.canonical_brief_facts);
+  assert.equal(r.brief.objective, 'vender el minicurso');
+  assert.notEqual(r.brief.objective, 'CLIENT_ACQUISITION');
+  for (const no of r.node_outputs) {
+    const { violations } = fidelity.validateOutputAgainstFacts(r.canonical_brief_facts, no.output, { nodeId: no.work_unit_id });
+    assert.deepStrictEqual(violations, [], `${no.work_unit_id}: ${JSON.stringify(violations)}`);
+  }
+});
+t('M6 MIXED_SINGLE_LINE_BRIEF also COMPLETEs end-to-end with every fact intact', async () => {
+  const r = await runWith(MIXED_SINGLE_LINE_BRIEF);
+  assert.equal(r.workflow_state_status, 'COMPLETE');
+  assert.equal(r.canonical_brief_facts.product_name.value, 'Método 360');
+  assert.equal(r.canonical_brief_facts.buyer.value, 'dueñas de estéticas');
+  assert.equal(r.canonical_brief_facts.business_objective.value, 'vender el minicurso');
 });
 
 // ========== 9. ADVERSARIAL — every substitution the authorization names, fail-closed ==========
