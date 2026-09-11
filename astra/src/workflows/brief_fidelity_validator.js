@@ -308,7 +308,7 @@ function checkUnlabeledProposal(facts, key, val, markerIndex) {
 
 // ---------- [EXPLICIT PROHIBITION GATE] activated when the brief's constraints explicitly ban
 // invented metrics/results/testimonials/proof/urgency/scarcity/evidence. These categories may
-// never appear — not even marked PROPUESTA — unless the SAME sentence clearly negates them
+// never appear — not even marked PROPUESTA — unless that occurrence is explicitly negated
 // ("no usar testimonios", "testimonios = UNKNOWN", "sin proof disponible"). ----------
 // \w* covers every conjugation this gate's natural-constraint extraction can hand it verbatim
 // ("no inventes", "no inventar", "no inventen", ...) without hardcoding each form separately.
@@ -328,12 +328,35 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
   const cf = facts.constraints;
   if (!cf || cf.status !== 'USER_PROVIDED_FACT' || !PROHIBITION_RULE.test(norm(cf.value))) return [];
   const violations = [];
-  const sentences = valRawSentences.split(/(?<=[.!?\n])/);
-  for (const s of sentences) {
-    if (NEGATION_CUE.test(s)) continue;
+  // Commas in a negative enumeration preserve scope (CAC, ROAS, LTV, testimonios).
+  // Adversatives, sentence boundaries and a new affirmative action end it. UNKNOWN
+  // belongs only to its immediately preceding occurrence, never the whole clause.
+  const clauses = valRawSentences.split(/[.!?;\n]|\b(?:pero|sin embargo|aunque)\b|[,\u2014]|\b(?:y|e)\s+(?=(?:usa\w*|inclu\w*|utiliza\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*)\b)/i);
+  let negativeList = false;
+  let offset = 0;
+  for (const s of clauses) {
+    const start = valRawSentences.indexOf(s, offset);
+    const separator = valRawSentences.slice(offset, start);
+    if (!/^\s*,\s*$/.test(separator)) negativeList = false;
+    const negative = /\bno\s+(?:inventes|inventar|inventen|usar|incluir|utilizar|mencionar|presentar|afirmar)\b|\bno\s+hay\b/gi;
+    const actions = /\b(?:usa\w*|inclu\w*|utiliza\w*|menciona\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*)\b/i;
+    const isNegated = (idx, end) => {
+      const before = s.slice(0, idx);
+      let cueEnd = negativeList ? 0 : -1;
+      for (const cue of before.matchAll(negative)) cueEnd = cue.index + cue[0].length;
+      if (cueEnd >= 0 && !actions.test(before.slice(cueEnd))) return true;
+      return /^\s*=\s*unknown\b/i.test(s.slice(end)) ||
+        (/\bsin\s+$/i.test(before) && /^\s+disponible\b/i.test(s.slice(end)));
+    };
     for (const p of PROHIBITED_CONTENT_PATTERNS) {
-      if (p.re.test(s)) violations.push({ type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key });
+      for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
+        if (!isNegated(match.index, match.index + match[0].length)) {
+          violations.push({ type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key });
+        }
+      }
     }
+    negativeList = isNegated(s.length, s.length);
+    offset = start + s.length;
   }
   return violations;
 }
