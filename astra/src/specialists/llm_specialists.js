@@ -31,10 +31,21 @@ function buildPrompt(input) {
     method_id: method.method_id, primary_jobs: method.primary_jobs, best_for: method.best_for,
     not_recommended_for: method.not_recommended_for, limitations: method.limitations, coverage: method.coverage,
   } : { method_id: input.selected_methods && input.selected_methods.primary_method };
+  // [Brief Fidelity] canonical_brief_facts is the immutable fact-fidelity ground truth computed
+  // once upstream (campaign_brief_facts.js) and passed unchanged into every node — see it here so
+  // the model can honor it, not just so a downstream validator can catch it after the fact.
+  const canonicalFacts = input.canonical_brief_facts || {};
+  const canonicalConstraints = canonicalFacts.constraints || null;
   const system = [
     `You are ASTRA's ${input.specialist_type}, a marketing specialist that drafts a concrete, business-specific plan for ONE node of a campaign.`,
+    `CANONICAL_BRIEF_FACTS (immutable ground truth for this business — see rules below): ${JSON.stringify(canonicalFacts)}`,
+    `CANONICAL FACT RULES (mandatory, override anything else in this prompt if they conflict):`,
+    `- Every field above with status USER_PROVIDED_FACT is immutable: never substitute, deny, degrade to UNKNOWN, or reinterpret it.`,
+    `- A field with status UNKNOWN must remain UNKNOWN unless the supplied evidence authorizes a clearly labeled INFERENCE.`,
+    `- Any new idea not contained in the facts or evidence above MUST begin explicitly with "PROPUESTA:". Never present a PROPUESTA as a fact.`,
+    `- The canonical constraints below are mandatory and binding; they are not suggestions.`,
     `HARD RULES (evidence-bounded):`,
-    `- Use ONLY the supplied evidence, method metadata, task brief, and upstream outputs. Do NOT use outside knowledge.`,
+    `- Use ONLY the supplied evidence, method metadata, task brief, canonical facts, and upstream outputs. Do NOT use outside knowledge.`,
     `- Tag every recommendation with support_class one of: ${SUPPORT_CLASSES.join(', ')}.`,
     `- DIRECTLY_SUPPORTED requires an evidence reference (cite E# / chunk). INFERENCE = reasoned from method/brief. ASSUMPTION = a stated gap needing USER_PROVIDED_FACTS.`,
     `- For anything requiring CURRENT platform/provider/market facts you do not have (e.g. ${(spec.current || []).join(', ') || 'current market/pricing/competitor data'}), do NOT invent it: put it in current_research_required and mark CURRENT_RESEARCH_REQUIRED.`,
@@ -48,6 +59,10 @@ function buildPrompt(input) {
     `SELECTED_METHOD: ${JSON.stringify(methodInfo)}`,
     `UPSTREAM_OUTPUTS (payloads): ${JSON.stringify((input.upstream_outputs || []).map(u => ({ node: u.work_unit_id, payload: u.downstream_payload })))}`.slice(0, 3000),
     `CONSTRAINTS: ${JSON.stringify(input.constraints || {})}`,
+    // Additive — does not replace CONSTRAINTS above. The structured brief's own binding
+    // restrictions ("Restricciones obligatorias:") live in canonical_brief_facts.constraints,
+    // not in the generic task-level constraints object.
+    `CANONICAL_CONSTRAINTS (from the user's brief — binding): ${JSON.stringify(canonicalConstraints)}`,
     `EVIDENCE (targeted, top5):\n${evidenceBlock(input.knowledge_evidence)}`,
   ].join('\n\n');
   return { system, user };

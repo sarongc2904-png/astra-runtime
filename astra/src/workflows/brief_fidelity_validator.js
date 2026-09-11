@@ -15,6 +15,20 @@
 function stripAccents(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, ''); }
 function norm(s) { return stripAccents(String(s || '')).toLowerCase(); }
 function stringify(v) { try { return typeof v === 'string' ? v : JSON.stringify(v); } catch { return String(v); } }
+// Prose-only extraction: unlike stringify() (which JSON.stringifies whole objects, mixing key
+// names into the searchable text), this walks only VALUES, never keys. Needed for the denial/
+// unlabeled-proposal/prohibition/positive-preservation checks below, which match on bare words
+// like "proof" or "icp" that are also legitimate downstream_payload field NAMES (e.g.
+// CREATIVE_STRATEGY_SPECIALIST's own "proof" field) — matching stringify()'s JSON keys would
+// false-positive on the schema itself, not on anything a specialist actually wrote.
+function textOnly(v) {
+  if (v == null) return '';
+  if (typeof v === 'string') return v;
+  if (typeof v === 'number' || typeof v === 'boolean') return String(v);
+  if (Array.isArray(v)) return v.map(textOnly).join(' ');
+  if (typeof v === 'object') return Object.values(v).map(textOnly).join(' ');
+  return String(v);
+}
 
 // The fields a node/synthesis output is actually judged on. Never the whole serialized object —
 // that is exactly the global-mention bypass this module closes.
@@ -198,26 +212,174 @@ function checkFieldSubstitutions(facts, key, rawVal, siblingEntries) {
 // inside unrelated JSON/text like "usage" or "causa".
 const OTHER_COUNTRIES = ['espana', 'colombia', 'argentina', 'chile', 'peru', 'estados unidos', 'united states', 'usa'];
 
+// ---------- [KNOWN FACT DENIAL] a field may never deny/blank-out a fact it already knows,
+// regardless of position or marker — "aunque no aparezca otro valor". Denying a known fact is
+// never a legitimate PROPOSAL, so there is no escape here. ----------
+const DENIAL_PATTERNS = {
+  price: [/precio\s+desconocid/, /precio\s+no\s+definid/, /precio\s+por\s+confirmar/, /precio\s+a\s+confirmar/, /sin\s+precio/, /precio\s+final\s+pendiente/, /precio\s+pendiente/, /confirmar\s+precio/],
+  buyer: [/audiencia\s+desconocid/, /audiencia\s+por\s+definir/, /icp\s+por\s+definir/, /comprador\s+desconocid/, /buyer\s+por\s+definir/],
+  geography: [/geograf[ií]a\s+por\s+definir/, /geograf[ií]a\s+desconocid/, /mercado\s+por\s+confirmar/, /pa[ií]s\s+por\s+definir/],
+  product_name: [/producto\s+por\s+definir/, /producto\s+desconocid/],
+  product_type: [/producto\s+por\s+definir/, /tipo\s+de\s+producto\s+por\s+definir/],
+  mechanism: [/mecanismo\s+por\s+definir/, /mecanismo\s+desconocid/],
+};
+function checkKnownFactDenial(facts, key, val) {
+  const violations = [];
+  for (const field of Object.keys(DENIAL_PATTERNS)) {
+    const f = facts[field];
+    if (!f || f.status !== 'USER_PROVIDED_FACT' || !f.value) continue;
+    if (DENIAL_PATTERNS[field].some(re => re.test(val))) {
+      violations.push({ type: 'KNOWN_FACT_DENIAL', fact_field: field, canonical_value: f.value, field_key: key });
+    }
+  }
+  return violations;
+}
+
+// ---------- [UNLABELED PROPOSAL GATE] activated only when the brief's own canonical constraints
+// state the "new ideas must be marked PROPUESTA" rule (deterministic string check on
+// facts.constraints — never a global marketing blocklist). Fires on the confirmed E2E adversarial
+// additions, unless they appear at/after an explicit PROPOSAL/HIPÓTESIS marker in the same field. ----------
+const IDEA_MARKING_RULE = /idea\s+nueva[\s\S]{0,40}marcarse[\s\S]{0,30}propuesta|marcarse\s+expl[ií]citamente\s+como\s+propuesta/i;
+const CONFIRMED_UNSUPPORTED_ADDITIONS = [
+  /webinar\s*demo/i, /\b3\s*plantillas?\s*descargables?/i, /curso\s+de\s+90\s*min/i, /muestra\s+gratis/i,
+  /testimonios?/i, /oferta\s+limitada/i, /\bdeadline\b/i, /nurture\s+por\s+email/i, /\bcalendly\b/i,
+  /\bwebinar\b/i,
+];
+// A negated mention ("no usar testimonios", "testimonios = UNKNOWN") is the opposite of an
+// unlabeled addition — it is explicitly declining or nulling the idea, exactly as the brief's own
+// "missing data stays UNKNOWN" rule requires. Scoped to the sentence containing the match so a
+// negation elsewhere in a long field does not blanket-excuse an unrelated addition.
+function sentenceAround(val, idx) {
+  const start = val.lastIndexOf('.', idx) + 1;
+  const endDot = val.indexOf('.', idx); const endNl = val.indexOf('\n', idx);
+  const end = endDot === -1 ? (endNl === -1 ? val.length : endNl) : (endNl === -1 ? endDot : Math.min(endDot, endNl));
+  return val.slice(start, end === -1 ? val.length : end);
+}
+function checkUnlabeledProposal(facts, key, val, markerIndex) {
+  const cf = facts.constraints;
+  if (!cf || cf.status !== 'USER_PROVIDED_FACT' || !IDEA_MARKING_RULE.test(norm(cf.value))) return [];
+  const violations = [];
+  const seen = new Set();
+  for (const re of CONFIRMED_UNSUPPORTED_ADDITIONS) {
+    const idx = val.search(re);
+    if (idx === -1) continue;
+    if (markerIndex !== -1 && idx >= markerIndex) continue; // escaped: appears inside the PROPUESTA span
+    if (NEGATION_CUE.test(sentenceAround(val, idx))) continue; // negated/nulled, not an addition
+    const label = 'UNLABELED_PROPOSAL:' + re.source;
+    if (seen.has(label)) continue; seen.add(label);
+    violations.push({ type: 'UNLABELED_PROPOSAL', fact_field: null, matched: re.source, field_key: key });
+  }
+  return violations;
+}
+
+// ---------- [EXPLICIT PROHIBITION GATE] activated when the brief's constraints explicitly ban
+// invented metrics/results/testimonials/proof/urgency/scarcity/evidence. These categories may
+// never appear — not even marked PROPUESTA — unless the SAME sentence clearly negates them
+// ("no usar testimonios", "testimonios = UNKNOWN", "sin proof disponible"). ----------
+const PROHIBITION_RULE = /no\s+inventar[\s\S]{0,200}(m[ée]tricas|testimonios|proof|evidencia)/i;
+const PROHIBITED_CONTENT_PATTERNS = [
+  { type: 'testimonials', re: /testimonios?/i },
+  { type: 'proof', re: /\bproof\b/i },
+  { type: 'social_proof', re: /prueba\s+social|caso\s+de\s+estudio/i },
+  { type: 'urgency', re: /urgencia/i },
+  { type: 'scarcity', re: /escasez|oferta\s+limitada/i },
+  { type: 'deadline', re: /\bdeadline\b/i },
+  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado/i },
+  { type: 'invented_metric', re: /\b(cac|cpa|cpl|roas|mer|ltv)\b[\s\S]{0,20}(esperado|proyectado|estimado|objetivo|meta)/i },
+];
+const NEGATION_CUE = /\bno\s+(usar|incluir|utilizar|mencionar|presentar|afirmar)\b|=\s*unknown\b|\bsin\b[^.\n]{0,25}\bdisponible\b|\bno\s+hay\b/i;
+function checkExplicitProhibition(facts, key, valRawSentences) {
+  const cf = facts.constraints;
+  if (!cf || cf.status !== 'USER_PROVIDED_FACT' || !PROHIBITION_RULE.test(norm(cf.value))) return [];
+  const violations = [];
+  const sentences = valRawSentences.split(/(?<=[.!?\n])/);
+  for (const s of sentences) {
+    if (NEGATION_CUE.test(s)) continue;
+    for (const p of PROHIBITED_CONTENT_PATTERNS) {
+      if (p.re.test(s)) violations.push({ type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key });
+    }
+  }
+  return violations;
+}
+
+// ---------- [POSITIVE PRESERVATION] "not contradicting" is not enough for the section that is
+// explicitly responsible for a fact: it must actually restate it (or an unambiguous equivalent).
+// Field-aware by node — most nodes never need to mention buyer/mechanism at all, so this only
+// fires when the node's own text shows it DID address the topic (audience / funnel) yet dropped
+// the canonical value. `null` nodeId (the final synthesis) is included in both sets since its
+// deliverable legitimately restates ICP + funnel under their own sections. ----------
+// Deliberately excludes a bare "icp" token: at the final-synthesis level the serialized
+// deliverable includes JSON structural keys (e.g. selected_methods_by_node.icp) that would
+// otherwise false-positive this cue on every run. The replacement-signal phrases below are what
+// actually detects a substituted audience; this cue only recognizes prose that genuinely
+// discusses the audience topic.
+const AUDIENCE_TOPIC_CUES = /audiencia|target\s*audience|p[uú]blico\s+objetivo|cliente\s+objetivo|segmento\s+objetivo/i;
+const BUYER_REPLACEMENT_SIGNALS = [/profesionales?\s+(con\s+poco\s+tiempo|ocupad[oa]s?)/i, /consumidoras?\s+finales?/i, /mujeres?\s+en\s+general/i, /adultos?\s+profesionales?/i];
+const BUYER_PRESERVATION_NODES = new Set(['icp', 'ads', null]);
+function checkBuyerPositivePreservation(facts, nodeId, combinedText) {
+  const bf = facts.buyer;
+  if (!bf || bf.status !== 'USER_PROVIDED_FACT' || !bf.value) return [];
+  if (!BUYER_PRESERVATION_NODES.has(nodeId)) return [];
+  const addressesAudience = AUDIENCE_TOPIC_CUES.test(combinedText) || BUYER_REPLACEMENT_SIGNALS.some(re => re.test(combinedText));
+  if (!addressesAudience) return [];
+  if (containsFact(combinedText, bf.value)) return [];
+  return [{ type: 'POSITIVE_PRESERVATION_MISSING', fact_field: 'buyer', canonical_value: bf.value, field_key: '*' }];
+}
+const MECHANISM_REPLACEMENT_SIGNALS = [/webinar[\s\S]{0,30}(->|→)[\s\S]{0,30}checkout/i, /\bwebinar\b[\s\S]{0,80}\bcheckout\b/i, /lead\s*magnet[\s\S]{0,80}email/i, /email\s+funnel/i, /\bq\s*(&|y)\s*a\b/i];
+const MECHANISM_PRESERVATION_NODES = new Set(['funnel', 'ads', 'whatsapp_conversion', null]);
+function checkMechanismPositivePreservation(facts, nodeId, combinedText) {
+  const mf = facts.mechanism;
+  if (!mf || mf.status !== 'USER_PROVIDED_FACT' || !mf.value) return [];
+  if (!MECHANISM_PRESERVATION_NODES.has(nodeId)) return [];
+  const replaced = MECHANISM_REPLACEMENT_SIGNALS.some(re => re.test(combinedText));
+  if (!replaced) return [];
+  if (containsFact(combinedText, 'consulta') && containsFact(combinedText, 'cita')) return [];
+  return [{ type: 'MECHANISM_SUBSTITUTION', fact_field: 'mechanism', canonical_value: mf.value, field_key: '*' }];
+}
+
+function pathFor(nodeId, fieldKey) {
+  if (nodeId) return `node_outputs.${nodeId}.downstream_payload.${fieldKey}`;
+  return `synthesis.deliverable.${fieldKey}`;
+}
+
 function validateOutputAgainstFacts(facts, output, { nodeId } = {}) {
   const entries = relevantFields(output);
   const normEntries = entries.map(([k, v]) => [k, norm(stringify(v))]);
+  const textEntries = entries.map(([k, v]) => [k, norm(textOnly(v))]);
   const violations = [];
   for (const [key, rawVal] of entries) {
+    const textVal = norm(textOnly(rawVal));
+    const markerIndex = firstMarkerIndex(textVal);
     const siblingEntries = normEntries.filter(([k]) => k !== key);
     for (const v of checkFieldSubstitutions(facts, key, rawVal, siblingEntries)) violations.push(v);
+    for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
+    for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
+    for (const v of checkExplicitProhibition(facts, key, textVal)) violations.push(v);
   }
-  return { violations: violations.map(v => ({ ...v, node: nodeId || null, path: nodeId ? `node_outputs.${nodeId}.downstream_payload.${v.field_key}` : `field.${v.field_key}` })) };
+  const combinedText = textEntries.map(([, v]) => v).join(' \n ');
+  for (const v of checkBuyerPositivePreservation(facts, nodeId || null, combinedText)) violations.push(v);
+  for (const v of checkMechanismPositivePreservation(facts, nodeId || null, combinedText)) violations.push(v);
+  return { violations: violations.map(v => ({ ...v, node: nodeId || null, path: pathFor(nodeId, v.field_key) })) };
 }
 
 function validateFinalSynthesis(facts, synthesis) {
   const entries = relevantFields(synthesis);
   const normEntries = entries.map(([k, v]) => [k, norm(stringify(v))]);
+  const textEntries = entries.map(([k, v]) => [k, norm(textOnly(v))]);
   const violations = [];
   for (const [key, rawVal] of entries) {
+    const textVal = norm(textOnly(rawVal));
+    const markerIndex = firstMarkerIndex(textVal);
     const siblingEntries = normEntries.filter(([k]) => k !== key);
     for (const v of checkFieldSubstitutions(facts, key, rawVal, siblingEntries)) violations.push(v);
+    for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
+    for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
+    for (const v of checkExplicitProhibition(facts, key, textVal)) violations.push(v);
   }
-  return { violations: violations.map(v => ({ ...v, node: null, path: `synthesis.deliverable.${v.field_key}` })) };
+  const combinedText = textEntries.map(([, v]) => v).join(' \n ');
+  for (const v of checkBuyerPositivePreservation(facts, null, combinedText)) violations.push(v);
+  for (const v of checkMechanismPositivePreservation(facts, null, combinedText)) violations.push(v);
+  return { violations: violations.map(v => ({ ...v, node: null, path: pathFor(null, v.field_key) })) };
 }
 
 module.exports = { validateOutputAgainstFacts, validateFinalSynthesis, containsFact, relevantFields, CHECKED_FIELDS };

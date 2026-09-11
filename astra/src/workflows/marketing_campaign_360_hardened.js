@@ -242,7 +242,10 @@ async function run(rawRequest, options = {}) {
 
   // synthesis (HIGH_REASONING tier recorded; deterministic reconciliation engine, no extra LLM call in slice)
   const synthTier = modelRouter.route('STRATEGIC_SYNTHESIS'); cost.by_tier[synthTier.task_class] = (cost.by_tier[synthTier.task_class] || 0) + 1;
-  const synthesis = (mode === 'llm' ? synthV2 : synthV1).synthesize({ brief, node_outputs, selected_methods_by_node });
+  // [Brief Fidelity] canonicalBriefFacts is already computed above — transported here so
+  // synthesis_engine_v2 never asks for a USER_PROVIDED_FACT that's already known (synthV1, the
+  // deterministic baseline, is untouched and does not take this parameter).
+  const synthesis = (mode === 'llm' ? synthV2 : synthV1).synthesize({ brief, node_outputs, selected_methods_by_node, canonicalBriefFacts });
   if (!synthesis.coherent) { wfState.transition(state, 'BLOCKED'); throw new Error('synthesis incomplete: missing ' + synthesis.missing_sections.join(',')); }
 
   // [Final Synthesis Validator — Brief Fidelity] COMPLETE is prohibited if the reconciled output

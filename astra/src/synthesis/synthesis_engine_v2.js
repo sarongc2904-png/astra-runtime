@@ -7,7 +7,11 @@
 function payload(o, key) { return (o && o.downstream_payload && o.downstream_payload[key]) || null; }
 function dedupeStrings(arr) { return [...new Set((arr || []).filter(Boolean).map(x => (typeof x === 'string' ? x : JSON.stringify(x))))]; }
 
-function synthesize({ brief, node_outputs, selected_methods_by_node }) {
+// [Brief Fidelity] Which canonical_brief_facts keys are meaningful "USER_PROVIDED_FACTS" for the
+// purposes of a generic "please provide X" recommendation.
+const CANONICAL_FACT_KEYS = ['product_name', 'product_type', 'price', 'currency', 'buyer', 'geography', 'business_objective', 'mechanism', 'constraints'];
+
+function synthesize({ brief, node_outputs, selected_methods_by_node, canonicalBriefFacts }) {
   const o = {}; for (const n of node_outputs) o[n.work_unit_id] = n.output;
   const outs = node_outputs.map(n => n.output);
 
@@ -50,10 +54,21 @@ function synthesize({ brief, node_outputs, selected_methods_by_node }) {
     '15_evidence_provenance': { total_evidence_chunks: allChunks.length, by_node: evidence_by_node, source_classes: ['INTERNAL_KNOWLEDGE', 'INFERENCE'] },
     '16_known_limitations': limitations,
     '17_current_research_required': currentResearch,
-    '18_recommended_next_actions': (recsBySupport['ASSUMPTION'] || []).map(r => 'Resolve: ' + r.recommendation).slice(0, 6).concat([
-      'Provide USER_PROVIDED_FACTS (price/margin, capacity, geography, promos)',
-      'Resolve CURRENT_RESEARCH_REQUIRED items before platform setup',
-    ]),
+    // [Brief Fidelity — fact-aware] Never ask for a USER_PROVIDED_FACT that canonicalBriefFacts
+    // already has. Only fields genuinely UNKNOWN there are requested; when everything is known
+    // (or canonicalBriefFacts wasn't supplied by an older caller) the legacy generic line is used
+    // as a safe fallback so this never silently produces an empty/missing recommendation set.
+    '18_recommended_next_actions': (() => {
+      const actions = (recsBySupport['ASSUMPTION'] || []).map(r => 'Resolve: ' + r.recommendation).slice(0, 6);
+      if (canonicalBriefFacts) {
+        const stillUnknown = CANONICAL_FACT_KEYS.filter(k => canonicalBriefFacts[k] && canonicalBriefFacts[k].status === 'UNKNOWN');
+        if (stillUnknown.length) actions.push('Provide USER_PROVIDED_FACTS still UNKNOWN: ' + stillUnknown.join(', '));
+      } else {
+        actions.push('Provide USER_PROVIDED_FACTS (price/margin, capacity, geography, promos)');
+      }
+      actions.push('Resolve CURRENT_RESEARCH_REQUIRED items before platform setup');
+      return actions;
+    })(),
   };
 
   const sections = Object.keys(deliverable);
