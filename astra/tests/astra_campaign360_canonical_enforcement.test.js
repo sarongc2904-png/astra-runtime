@@ -198,11 +198,17 @@ t('G. the same ideas, correctly marked PROPUESTA and non-replacing, pass', () =>
 });
 
 // ========== H. EXPLICIT_PROHIBITION ==========
-const PROHIBITED_UNLABELED = ['usar testimonios de clientes', 'caso de estudio real', 'oferta limitada por tiempo', 'deadline de inscripción', 'ROAS objetivo de 3x', 'garantizamos resultados'];
+const PROHIBITED_UNLABELED = ['usar testimonios de clientes', 'oferta limitada por tiempo', 'ROAS objetivo de 3x'];
 for (const phrase of PROHIBITED_UNLABELED) {
   t(`H. "${phrase}" fails EXPLICIT_PROHIBITION even when constraints prohibit it`, () => {
     const { violations } = fidelity.validateOutputAgainstFacts(FACTS, { downstream_payload: { creative_testing: phrase } }, { nodeId: 'ads' });
     assert(violations.some(v => v.type === 'EXPLICIT_PROHIBITION'), `${phrase} -> ${JSON.stringify(violations)}`);
+  });
+}
+for (const phrase of ['caso de estudio real', 'deadline de inscripción', 'garantizamos resultados']) {
+  t(`H. "${phrase}" is not an EXPLICIT_PROHIBITION when its own category is absent from constraints`, () => {
+    const { violations } = fidelity.validateOutputAgainstFacts(FACTS, { downstream_payload: { creative_testing: phrase } }, { nodeId: 'ads' });
+    assert.deepStrictEqual(violations.filter(v => v.type === 'EXPLICIT_PROHIBITION'), [], JSON.stringify(violations));
   });
 }
 t('H. a PROPUESTA-marked prohibited category still fails (no marker escape for explicit prohibitions)', () => {

@@ -326,15 +326,13 @@ function checkUnlabeledProposal(facts, key, val, markerIndex) {
   return violations;
 }
 
-// ---------- [EXPLICIT PROHIBITION GATE] activated when the brief's constraints explicitly ban
-// invented metrics/results/testimonials/proof/urgency/scarcity/evidence. These categories may
-// never appear — not even marked PROPUESTA — unless that occurrence is explicitly negated
+// ---------- [EXPLICIT PROHIBITION GATE] category-scoped to what the brief's own constraints
+// explicitly prohibit. A ban on metrics/testimonials never activates scarcity, urgency or any
+// other sibling category by association. An active category may never appear — not even marked
+// PROPUESTA — unless that occurrence is explicitly negated
 // ("no usar testimonios", "testimonios = UNKNOWN", "sin proof disponible"). ----------
-// \w* covers every conjugation this gate's natural-constraint extraction can hand it verbatim
-// ("no inventes", "no inventar", "no inventen", ...) without hardcoding each form separately.
-const PROHIBITION_RULE = /no\s+invent\w*[\s\S]{0,200}(m[ée]tricas|testimonios|proof|evidencia)/i;
 const PROHIBITED_CONTENT_PATTERNS = [
-  { type: 'testimonials', re: /testimonios?/i },
+  { type: 'testimonials', re: /testimonios?|\btestimonials?\b/i },
   { type: 'proof', re: /\bproof\b/i },
   { type: 'social_proof', re: /prueba\s+social|caso\s+de\s+estudio/i },
   { type: 'urgency', re: /urgencia/i },
@@ -343,10 +341,37 @@ const PROHIBITED_CONTENT_PATTERNS = [
   { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado/i },
   { type: 'invented_metric', re: /\b(cac|cpa|cpl|roas|mer|ltv)\b[\s\S]{0,20}(esperado|proyectado|estimado|objetivo|meta)/i },
 ];
+const PROHIBITION_CATEGORY_TERMS = [
+  { type: 'testimonials', re: /testimonios?|\btestimonials?\b/i },
+  { type: 'proof', re: /\bproof\b/i },
+  { type: 'social_proof', re: /prueba\s+social|caso\s+de\s+estudio/i },
+  { type: 'urgency', re: /urgencia/i },
+  { type: 'scarcity', re: /escasez|oferta\s+limitada/i },
+  { type: 'deadline', re: /\bdeadline\b/i },
+  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado/i },
+  { type: 'invented_metric', re: /m[ée]tricas?|\b(cac|cpa|cpl|roas|mer|ltv)\b/i },
+];
+const EXPLICIT_PROHIBITION_DIRECTIVE = /\bno\s+(?:invent\w*|usar|incluir|utilizar|mencionar|presentar|afirmar|agregar|incorporar|garantiza\w*)\b/i;
+function activeExplicitProhibitionCategories(constraintValue) {
+  const active = new Set();
+  for (const clause of norm(textOnly(constraintValue)).split(/[.!?;\n]/)) {
+    const directive = EXPLICIT_PROHIBITION_DIRECTIVE.exec(clause);
+    if (!directive) continue;
+    // An adversative starts a new assertion and cannot extend the preceding prohibition.
+    const prohibitedSpan = clause.slice(directive.index + directive[0].length).split(/\b(?:pero|sin embargo|aunque)\b/i)[0];
+    const prohibitedText = directive[0] + ' ' + prohibitedSpan;
+    for (const category of PROHIBITION_CATEGORY_TERMS) {
+      if (category.re.test(prohibitedText)) active.add(category.type);
+    }
+  }
+  return active;
+}
 const NEGATION_CUE = /\bno\s+(usar|incluir|utilizar|mencionar|presentar|afirmar)\b|=\s*unknown\b|\bsin\b[^.\n]{0,25}\bdisponible\b|\bno\s+hay\b/i;
 function checkExplicitProhibition(facts, key, valRawSentences) {
   const cf = facts.constraints;
-  if (!cf || cf.status !== 'USER_PROVIDED_FACT' || !PROHIBITION_RULE.test(norm(cf.value))) return [];
+  if (!cf || cf.status !== 'USER_PROVIDED_FACT') return [];
+  const activeCategories = activeExplicitProhibitionCategories(cf.value);
+  if (!activeCategories.size) return [];
   const violations = [];
   // Commas in a negative enumeration preserve scope (CAC, ROAS, LTV, testimonios).
   // Adversatives, sentence boundaries and a new affirmative action end it. UNKNOWN
@@ -369,6 +394,7 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
         (/\bsin\s+$/i.test(before) && /^\s+disponible\b/i.test(s.slice(end)));
     };
     for (const p of PROHIBITED_CONTENT_PATTERNS) {
+      if (!activeCategories.has(p.type)) continue;
       for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
         if (!isNegated(match.index, match.index + match[0].length)) {
           violations.push({ type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key });

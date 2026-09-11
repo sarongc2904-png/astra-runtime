@@ -36,7 +36,15 @@ for (const conjunction of ['pero', 'sin embargo', 'aunque']) {
   });
 }
 t('F MULTI_SENTENCE_FAILS', () => blocked('No inventes testimonios. Usa testimonios de clientes.'));
-t('G AFFIRMATIVE_PROOF_FAILS', () => blocked('Agregar proof social.', 'proof'));
+t('G AFFIRMATIVE_PROOF_FAILS only when proof is explicitly prohibited', () => {
+  const proofFacts = { ...facts, constraints: { status: 'USER_PROVIDED_FACT', value: 'No inventes proof.' } };
+  const affirmative = fidelity.validateOutputAgainstFacts(proofFacts, { downstream_payload: { proof: 'Agregar proof social.' } }, { nodeId: 'creative_strategy' }).violations;
+  assert(affirmative.some(v => v.type === 'EXPLICIT_PROHIBITION' && v.category === 'proof'), JSON.stringify(affirmative));
+  for (const negated of ['No usar proof.', 'proof = UNKNOWN.', 'sin proof disponible.', 'no hay proof.']) {
+    const violations = fidelity.validateOutputAgainstFacts(proofFacts, { downstream_payload: { proof: negated } }, { nodeId: 'creative_strategy' }).violations;
+    assert.deepStrictEqual(violations, [], `${negated} -> ${JSON.stringify(violations)}`);
+  }
+});
 for (const text of ['ROAS objetivo 4x.', 'CAC esperado de $100.']) t('H METRIC_INVENTION_STILL_FAILS ' + text, () => blocked(text, 'invented_metric'));
 t('I MARKET_CONTEXT_LIVE_FIXTURE', () => {
   assert.deepStrictEqual(validate(CANONICAL, 'market_context'), []);
