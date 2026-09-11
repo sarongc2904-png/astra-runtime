@@ -141,7 +141,7 @@ async function processNode(n, ctx) {
   // continues silently — fail-closed. Deterministic-only regeneration is not an authorized
   // mechanism yet, so any violation here is a hard FAILED with the violating field(s) attached.
   if (canonicalBriefFacts) {
-    const { violations } = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, output, { nodeId: n.id });
+    const { violations } = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, output, { nodeId: n.id, upstream_outputs: input.upstream_outputs });
     if (violations.length) {
       const e = new Error('BRIEF_FIDELITY_VIOLATION at node ' + n.id + ': ' + violations.map(v => v.type).join(', '));
       e.wfTransition = 'FAILED'; e.code = 'BRIEF_FIDELITY_VIOLATION'; e.briefFidelityViolations = violations;

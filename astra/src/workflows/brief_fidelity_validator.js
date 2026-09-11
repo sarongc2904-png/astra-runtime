@@ -401,11 +401,73 @@ function pathFor(nodeId, fieldKey) {
   return `synthesis.deliverable.${fieldKey}`;
 }
 
-function validateOutputAgainstFacts(facts, output, { nodeId } = {}) {
+// Runtime proposal provenance, independent of the user's constraints. Anchors come ONLY
+// from explicitly marked upstream prose, never a global list of prohibited ideas. Remove
+// canonical vocabulary and grammatical/action words: in "upsell consultoria cita", cita is
+// canonical but consultoria is novel, including when reused as "agendar consultoria".
+// This is lexical derivation detection, not a claim of general semantic paraphrase detection.
+const PROPOSAL_GLUE = new Set(('para como desde hasta sobre entre cuando donde porque tambien cualquier cada nuevo nueva nuevos nuevas propuesta unknown current_research_required incluir usar utilizar presentar ofrecer agregar incorporar confirmar enviar agendar realizar crear generar hacer tener puede pueden debe deben sera ser estar esta este estos estas una unas unos del las los con por que sin mas').split(' '));
+function proposalWords(text) { return norm(text).match(/[a-z_]{4,}/g) || []; }
+function proposalLeaves(value) {
+  if (typeof value === 'string') return [norm(value)];
+  if (Array.isArray(value)) return value.flatMap(proposalLeaves);
+  if (value && typeof value === 'object') {
+    if (['UNKNOWN', 'CURRENT_RESEARCH_REQUIRED'].includes(value.status) ||
+        value.support_class === 'CURRENT_RESEARCH_REQUIRED') return [];
+    return Object.values(value).flatMap(proposalLeaves);
+  }
+  return [];
+}
+function upstreamProposalAnchors(facts, upstreamOutputs) {
+  const canonical = new Set(Object.values(facts || {})
+    .filter(f => f && f.status === 'USER_PROVIDED_FACT').flatMap(f => proposalWords(textOnly(f.value))));
+  const anchors = new Set();
+  for (const upstream of upstreamOutputs || []) {
+    const payload = upstream.downstream_payload || (upstream.output && upstream.output.downstream_payload);
+    for (const text of proposalLeaves(payload)) {
+      // A marker covers its sentence, including a semicolon continuation in the live offer.
+      for (const sentence of text.split(/[.!?\n]/)) {
+        const marker = /\bpropuesta\s*:/i.exec(sentence);
+        if (!marker) continue;
+        for (const word of proposalWords(sentence.slice(marker.index + marker[0].length))) {
+          if (!canonical.has(word) && !PROPOSAL_GLUE.has(word)) anchors.add(word);
+        }
+      }
+    }
+  }
+  return anchors;
+}
+function checkUpstreamProposalPropagation(key, rawValue, anchors) {
+  if (!anchors.size) return [];
+  for (const text of proposalLeaves(rawValue)) {
+    // Markers/rejections belong to the local clause and only to occurrences AFTER them.
+    // Neither a sibling field nor a marker appended later can launder an assertion.
+    for (const clause of text.split(/[.!?\n]|\b(?:pero|sin embargo|aunque)\b/)) {
+      for (const match of clause.matchAll(/[a-z_]{4,}/g)) {
+        if (!anchors.has(match[0])) continue;
+        const before = clause.slice(0, match.index);
+        const after = clause.slice(match.index + match[0].length);
+        if (/\bpropuesta\s*:/.test(before)) continue;
+        if (/^\s*(?:=|:)\s*(?:unknown|current_research_required)\b/.test(after) ||
+            /^\s*(?:unknown|current_research_required)\s*[:=]/.test(before)) continue;
+        const localBefore = before.slice(before.lastIndexOf(';') + 1);
+        const rejection = /\b(?:no\s+(?:incluir|usar|utilizar|ofrecer|agendar|implementar|adoptar)|rechazar|rechazamos|descartar|descartamos)\b/g;
+        let rejectedAt = -1;
+        for (const r of localBefore.matchAll(rejection)) rejectedAt = r.index + r[0].length;
+        if (rejectedAt >= 0 && !/\b(?:inclu\w*|us[ae]\w*|utiliz\w*|ofrec\w*|agend\w*|implement\w*|adopt\w*)\b/.test(localBefore.slice(rejectedAt))) continue;
+        return [{ type: 'UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION', fact_field: null, field_key: key }];
+      }
+    }
+  }
+  return [];
+}
+
+function validateOutputAgainstFacts(facts, output, { nodeId, upstream_outputs = [] } = {}) {
   const entries = relevantFields(output);
   const normEntries = entries.map(([k, v]) => [k, norm(stringify(v))]);
   const textEntries = entries.map(([k, v]) => [k, norm(textOnly(v))]);
   const violations = [];
+  const proposalAnchors = upstreamProposalAnchors(facts, upstream_outputs);
   for (const [key, rawVal] of entries) {
     const textVal = norm(textOnly(rawVal));
     const markerIndex = firstMarkerIndex(textVal);
@@ -414,6 +476,7 @@ function validateOutputAgainstFacts(facts, output, { nodeId } = {}) {
     for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkExplicitProhibition(facts, key, textVal)) violations.push(v);
+    for (const v of checkUpstreamProposalPropagation(key, rawVal, proposalAnchors)) violations.push(v);
   }
   const combinedText = textEntries.map(([, v]) => v).join(' \n ');
   for (const v of checkBuyerPositivePreservation(facts, nodeId || null, combinedText)) violations.push(v);

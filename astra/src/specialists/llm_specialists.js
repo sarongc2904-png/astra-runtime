@@ -43,6 +43,7 @@ function buildPrompt(input) {
     `- Every field above with status USER_PROVIDED_FACT is immutable: never substitute, deny, degrade to UNKNOWN, or reinterpret it.`,
     `- A field with status UNKNOWN must remain UNKNOWN unless the supplied evidence authorizes a clearly labeled INFERENCE.`,
     `- Any new idea not contained in the facts or evidence above MUST begin explicitly with "PROPUESTA:". Never present a PROPUESTA as a fact.`,
+    `- Any upstream content already labeled PROPUESTA is tainted as proposal. Any reuse, paraphrase, derivative, operationalization or downstream dependency of that idea MUST retain explicit PROPUESTA status. Never convert upstream PROPUESTA into an unmarked fact/decision.`,
     `- The canonical constraints below are mandatory and binding; they are not suggestions.`,
     `HARD RULES (evidence-bounded):`,
     `- Use ONLY the supplied evidence, method metadata, task brief, canonical facts, and upstream outputs. Do NOT use outside knowledge.`,
