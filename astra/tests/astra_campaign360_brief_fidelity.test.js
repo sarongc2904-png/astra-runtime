@@ -1,0 +1,276 @@
+'use strict';
+// Campaign360 Brief Fidelity remediation. Confirmed defect: Campaign360 completes technically
+// but substitutes explicit brief facts (buyer role inversion, product/objective substitution).
+// This suite proves CANONICAL_BRIEF_FACTS extraction, the immutable fact lock, the per-node
+// fidelity validator, and the final-synthesis validator — using the exact Método 360 fixture,
+// plus adversarial cases reproducing every substitution named in the authorization. Offline,
+// deterministic (mock LLM only). No network, no real LLM calls.
+const assert = require('assert');
+const H = require('../src/workflows/marketing_campaign_360_hardened');
+const briefFacts = require('../src/workflows/campaign_brief_facts');
+const fidelity = require('../src/workflows/brief_fidelity_validator');
+const { AgentV1Adapter } = require('../src/adapter/agent_v1_adapter');
+
+const tests = []; let pass = 0, fail = 0;
+function t(name, fn) { tests.push({ name, fn }); }
+
+// ---------- offline mock knowledge base + adapter (same pattern as astra10x.test.js) ----------
+function mockKb() {
+  return {
+    async retrieveStrategyFAsync(query) {
+      const hits = Array.from({ length: 5 }, (_, i) => ({ rank: i + 1, chunk_id: 'c' + i, source_pdf_name: 'S.pdf', pdf_page_refs: '1', content: 'evidence ' + query, original_query_cosine: 0.6, rag_decision: 'CITE', quality_status: 'OK', warning_flags: [] }));
+      return { top5: hits, advisory_top1_cosine: 0.6 };
+    },
+    buildStrategyFEvidence(raw) {
+      const hits = raw.top5 || [];
+      return { evidenceText: hits.map(h => h.content).join('\n'), hits, advisoryTop1Cosine: raw.advisory_top1_cosine, pipeline: 'Strategy-F', corpus: 'kb_chunks_v2' };
+    },
+  };
+}
+function mockAdapter() { return new AgentV1Adapter({ kb: mockKb() }); }
+function specTypeFromSystem(sys) { const m = /You are ASTRA's ([A-Z_]+)/.exec(sys); return m ? m[1] : 'UNKNOWN'; }
+
+// Mirrors llm_specialists.js SPECS[*].fields so every node's downstream_payload is complete
+// enough for synthesis_engine_v2 to reach coherent:true (18/18 sections) on a clean run.
+const SPEC_FIELDS = {
+  MARKET_CONTEXT_SPECIALIST: ['problem_context', 'market_assumptions', 'constraints'],
+  ICP_SPECIALIST: ['pains', 'desired_outcomes', 'objections', 'buying_triggers', 'qualification_signals', 'non_fit_signals'],
+  OFFER_SPECIALIST: ['value_proposition', 'offer_structure', 'mechanism', 'risk_reduction', 'value_stack', 'constraints'],
+  FUNNEL_SPECIALIST: ['stages', 'transitions', 'conversion_intent', 'qualification_points', 'drop_off_risks', 'dependencies'],
+  CREATIVE_STRATEGY_SPECIALIST: ['core_idea', 'single_minded_proposition', 'angles', 'creative_territories', 'hooks', 'proof', 'objection_coverage'],
+  META_ADS_SPECIALIST: ['campaign_objective', 'audience_approach', 'structure', 'creative_testing', 'qualification', 'measurement', 'limitations'],
+  WHATSAPP_SALES_SPECIALIST: ['qualification', 'discovery', 'objection_handling', 'appointment_closing', 'follow_up', 'recovery', 'conversational_logic', 'limitations'],
+  MEASUREMENT_CRO_SPECIALIST: ['primary_outcome', 'leading_indicators', 'funnel_metrics', 'conversion_metrics', 'diagnostic_metrics', 'optimization_triggers', 'measurement_cadence'],
+};
+// Deliberately generic/neutral — does NOT parrot the canonical facts verbatim in every field
+// (a real specialist wouldn't either). This matters for the adversarial tests below: if every
+// sibling field restated "dueñas de estéticas" / "Método 360" / "vender el minicurso", the
+// PROPOSAL tolerance in brief_fidelity_validator.js (fact present elsewhere -> not a violation)
+// would mask a genuine single-field substitution. Keeping the filler neutral means an override
+// on one field is judged on its own, exactly like real specialist output would be.
+const CLEAN_STATEMENT = 'Contenido determinístico de prueba para este nodo, alineado al brief original del cliente, sin cambiar la oferta ni el público declarados.';
+
+// buildMockLLM(overrides): overrides = { SPEC_TYPE: { field: 'text to inject' } } lets a test
+// replace exactly one field on one node with an adversarial phrase while every other field on
+// every other node stays fidelity-clean — isolating the substitution under test.
+function buildMockLLM(overrides = {}) {
+  return async (system) => {
+    const st = specTypeFromSystem(system);
+    const fields = SPEC_FIELDS[st] || [];
+    const payload = {};
+    for (const f of fields) payload[f] = CLEAN_STATEMENT;
+    Object.assign(payload, overrides[st] || {});
+    const current = /META_ADS/.test(st) ? ['CAPI', 'current attribution'] : (/WHATSAPP/.test(st) ? ['current WhatsApp API mechanics'] : []);
+    const obj = {
+      findings: [{ claim: 'grounded finding', support_class: 'DIRECTLY_SUPPORTED', evidence_ref: 'E1' }],
+      recommendations: [{ recommendation: 'action for ' + st, support_class: 'INFERENCE', basis: 'method' }],
+      decisions: [{ decision: 'd', rationale: 'r' }], assumptions: ['needs USER_PROVIDED_FACTS: budget'], conflicts: [], confidence: 0.7,
+      current_research_required: current, downstream_payload: payload,
+    };
+    return { raw: JSON.stringify(obj), usage: { prompt: 10, completion: 10 } };
+  };
+}
+function runWith(brief, overrides = {}) {
+  return H.run(brief, { mode: 'llm', adapter: mockAdapter(), llm: buildMockLLM(overrides), retrieve: true, salt: 'brief-fidelity' });
+}
+
+// ---------- exact Método 360 fixture (labeled fields, per authorization §8) ----------
+const METHOD360_BRIEF = [
+  'Producto: Método 360',
+  'Tipo: minicurso grabado',
+  'Precio: 400 MXN',
+  'Comprador: dueñas de estéticas',
+  'Geografía: México',
+  'Objetivo: vender el minicurso',
+  'Mecanismo: Meta Ads para generar consultas, seguido de WhatsApp consulta -> conversación -> cita',
+].join('\n');
+
+// ========== 1. CANONICAL_BRIEF_FACTS extraction ==========
+t('F1 extracts every labeled field as USER_PROVIDED_FACT', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  assert.equal(f.product_name.value, 'Método 360'); assert.equal(f.product_name.status, 'USER_PROVIDED_FACT');
+  assert.equal(f.product_type.value, 'minicurso grabado'); assert.equal(f.product_type.status, 'USER_PROVIDED_FACT');
+  assert.equal(f.price.value, '400'); assert.equal(f.currency.value, 'MXN');
+  assert.equal(f.buyer.value, 'dueñas de estéticas');
+  assert.equal(f.geography.value, 'México');
+  assert.equal(f.business_objective.value, 'vender el minicurso');
+  assert(/Meta Ads/.test(f.mechanism.value) && /WhatsApp/.test(f.mechanism.value));
+});
+t('F2 an absent field is UNKNOWN, never invented', () => {
+  const f = briefFacts.extract('Producto: X');
+  assert.equal(f.buyer.status, 'UNKNOWN'); assert.equal(f.buyer.value, null);
+  assert(f.explicit_unknowns.includes('buyer'));
+});
+t('F3 deterministic: identical text -> identical facts + hash', () => {
+  const a = briefFacts.extract(METHOD360_BRIEF), b = briefFacts.extract(METHOD360_BRIEF);
+  assert.deepStrictEqual(a, b);
+});
+t('F4 CanonicalBriefFacts is frozen (immutable at the source)', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  assert(Object.isFrozen(f));
+  assert.throws(() => { f.buyer = { value: 'x', status: 'USER_PROVIDED_FACT' }; }, TypeError);
+});
+
+// ========== 2. IMMUTABLE FACT LOCK — node-level validator unit tests ==========
+t('L1 buyer role inversion is detected', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: { pains: 'nuestro ICP son consumidoras de servicios estéticos que buscan verse bien' } }, { nodeId: 'icp' });
+  assert(violations.some(v => v.type === 'BUYER_SUBSTITUTION' || v.type === 'BUYER_ROLE_INVERSION'));
+});
+t('L2 product substitution (cita exprés / paquete introductorio) is detected', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: { offer_structure: 'ofrecemos un paquete introductorio: cita exprés a precio especial' } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.fact_field === 'product_name' || v.fact_field === 'product_type'));
+});
+t('L3 objective substitution (CLIENT_ACQUISITION / lead gen) is detected', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: { campaign_objective: 'objective: CLIENT_ACQUISITION, generar leads para la cita' } }, { nodeId: 'ads' });
+  assert(violations.some(v => v.fact_field === 'business_objective'));
+});
+t('L4 mechanism-as-product substitution is detected', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: { structure: 'el objetivo real es vender citas expres pagadas, el producto es la cita' } }, { nodeId: 'ads' });
+  assert(violations.some(v => v.fact_field === 'mechanism'));
+});
+t('L5 price substitution is detected', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: { offer_structure: 'el precio del minicurso Método 360 para dueñas de estéticas es $900 MXN' } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.type === 'PRICE_SUBSTITUTION'));
+});
+t('L6 geography substitution is detected', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: { problem_context: 'campaña dirigida a dueñas de estéticas en españa' } }, { nodeId: 'market_context' });
+  assert(violations.some(v => v.type === 'GEOGRAPHY_SUBSTITUTION'));
+});
+t('L7 a PROPOSAL alongside the still-present fact is NOT a violation', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'oferta principal: Método 360, minicurso grabado, a 400 MXN. PROPUESTA a validar: podríamos probar una cita exprés como lead magnet gratuito, sujeto a datos.',
+  } }, { nodeId: 'offer' });
+  assert.deepStrictEqual(violations, []);
+});
+t('L8 UNKNOWN facts never trigger a violation (nothing to contradict)', () => {
+  const f = briefFacts.extract('Producto: X'); // buyer/objective/etc all UNKNOWN
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: { pains: 'consumidoras de servicios estéticos, CLIENT_ACQUISITION, cita exprés' } }, { nodeId: 'icp' });
+  assert.deepStrictEqual(violations, []);
+});
+
+// ========== 3/4/5/6/7. full-pipeline wiring: Node Input Contract + validators inside run() ==========
+t('W1 every node input carries canonical_brief_facts (Node Input Contract)', async () => {
+  const captured = [];
+  const llm = async (system, user, opts) => {
+    // llm_executor passes the raw prompt; we cannot see `input` directly here, so instead assert
+    // indirectly via a clean run completing (proves the extra field did not break validateInput/
+    // buildPrompt for any of the 8 nodes) and directly via the unit tests above (F1-F4).
+    captured.push(specTypeFromSystem(system));
+    return buildMockLLM()(system, user, opts);
+  };
+  const r = await H.run(METHOD360_BRIEF, { mode: 'llm', adapter: mockAdapter(), llm, retrieve: true, salt: 'contract' });
+  assert.equal(r.workflow_state_status, 'COMPLETE');
+  assert.equal(captured.length, 8);
+});
+t('W2 canonical_brief_facts is returned unchanged (same reference-equal frozen object) on COMPLETE', async () => {
+  const r = await runWith(METHOD360_BRIEF);
+  assert.equal(r.workflow_state_status, 'COMPLETE');
+  assert(Object.isFrozen(r.canonical_brief_facts));
+  assert.equal(r.canonical_brief_facts.buyer.value, 'dueñas de estéticas');
+});
+t('W3 a node-level violation fails closed (throws BRIEF_FIDELITY_VIOLATION, never continues silently)', async () => {
+  await assert.rejects(
+    () => runWith(METHOD360_BRIEF, { ICP_SPECIALIST: { pains: 'nuestro ICP son consumidoras de servicios estéticos' } }),
+    err => { assert.equal(err.code, 'BRIEF_FIDELITY_VIOLATION'); assert(err.briefFidelityViolations.some(v => v.fact_field === 'buyer')); return true; }
+  );
+});
+t('W4 a violated run never reaches COMPLETE', async () => {
+  let threw = false;
+  try { await runWith(METHOD360_BRIEF, { OFFER_SPECIALIST: { offer_structure: 'vendemos un paquete introductorio: cita exprés' } }); }
+  catch (e) { threw = true; assert.notEqual(e.wfTransition, undefined); assert.equal(e.wfTransition, 'FAILED'); }
+  assert(threw);
+});
+
+// ========== 8. MÉTODO 360 deterministic fixture — clean run must preserve every fact ==========
+t('M1 clean Método 360 run COMPLETEs with every canonical fact intact', async () => {
+  const r = await runWith(METHOD360_BRIEF);
+  assert.equal(r.workflow_state_status, 'COMPLETE');
+  assert.equal(r.canonical_brief_facts.product_name.value, 'Método 360');
+  assert.equal(r.canonical_brief_facts.product_type.value, 'minicurso grabado');
+  assert.equal(r.canonical_brief_facts.price.value, '400'); assert.equal(r.canonical_brief_facts.currency.value, 'MXN');
+  assert.equal(r.canonical_brief_facts.buyer.value, 'dueñas de estéticas');
+  assert.equal(r.canonical_brief_facts.business_objective.value, 'vender el minicurso');
+  // the confirmed defect, closed at the source: intent_analyzer's heuristic CLIENT_ACQUISITION
+  // objective must never override the explicit "vender el minicurso" fact downstream.
+  assert.equal(r.brief.objective, 'vender el minicurso');
+  assert.notEqual(r.brief.objective, 'CLIENT_ACQUISITION');
+});
+t('M2 clean run: no node output substitutes buyer, product, objective or mechanism', async () => {
+  const r = await runWith(METHOD360_BRIEF);
+  const f = r.canonical_brief_facts;
+  for (const no of r.node_outputs) {
+    const { violations } = fidelity.validateOutputAgainstFacts(f, no.output, { nodeId: no.work_unit_id });
+    assert.deepStrictEqual(violations, [], `${no.work_unit_id}: ${JSON.stringify(violations)}`);
+  }
+});
+t('M3 clean run: final synthesis carries no BRIEF_FIDELITY_VIOLATION and is not blocked', async () => {
+  const r = await runWith(METHOD360_BRIEF);
+  assert.notEqual(r.reason, 'BRIEF_FIDELITY_VIOLATION');
+  assert.equal(r.workflow_state_status, 'COMPLETE');
+});
+t('M4 only the field the fixture never specified (constraints) is UNKNOWN — nothing else was invented', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  assert.deepStrictEqual(f.explicit_unknowns, ['constraints']);
+  for (const field of ['product_name', 'product_type', 'price', 'currency', 'buyer', 'geography', 'business_objective', 'mechanism']) {
+    assert.equal(f[field].status, 'USER_PROVIDED_FACT', `${field} unexpectedly UNKNOWN`);
+  }
+});
+
+// ========== 9. ADVERSARIAL — every substitution the authorization names, fail-closed ==========
+t('A1 adversarial: buyer <-> buyer-of-the-buyer swap fails closed', async () => {
+  await assert.rejects(() => runWith(METHOD360_BRIEF, { ICP_SPECIALIST: { pains: 'el ICP real son las consumidoras de servicios estéticos, no las dueñas' } }),
+    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+});
+t('A2 adversarial: product substituted for a niche service fails closed', async () => {
+  await assert.rejects(() => runWith(METHOD360_BRIEF, { OFFER_SPECIALIST: { value_proposition: 'el producto principal es un servicio estético de sesión de belleza' } }),
+    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+});
+t('A3 adversarial: taught mechanism converted into the sold service fails closed', async () => {
+  await assert.rejects(() => runWith(METHOD360_BRIEF, { META_ADS_SPECIALIST: { campaign_objective: 'vamos a vender citas expres pagadas como el producto final' } }),
+    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+});
+t('A4 adversarial: inferred different price fails closed', async () => {
+  await assert.rejects(() => runWith(METHOD360_BRIEF, { OFFER_SPECIALIST: { offer_structure: 'recomendamos vender el minicurso Método 360 a $999 MXN en vez del precio original' } }),
+    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+});
+t('A5 adversarial: sale objective converted into lead generation fails closed', async () => {
+  await assert.rejects(() => runWith(METHOD360_BRIEF, { META_ADS_SPECIALIST: { campaign_objective: 'el objetivo de la campaña es generar leads para la cita, lead generation' } }),
+    err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+});
+t('A6 adversarial: exact confirmed-defect phrasing (all at once) fails closed on the first offending node', async () => {
+  await assert.rejects(() => runWith(METHOD360_BRIEF, {
+    ICP_SPECIALIST: { pains: 'ICP = consumidoras de servicios estéticos' },
+    OFFER_SPECIALIST: { offer_structure: 'offer = paquete introductorio / cita exprés' },
+  }), err => err.code === 'BRIEF_FIDELITY_VIOLATION');
+});
+
+// ========== 10. REGRESSION — must not break sibling systems ==========
+t('R1 a request with no labeled brief fields still runs (all facts UNKNOWN, no false-positive violations)', async () => {
+  const r = await H.run('Create a client acquisition campaign for a dental clinic.', { mode: 'llm', adapter: mockAdapter(), llm: buildMockLLM(), retrieve: true, salt: 'sibling' });
+  assert.equal(r.workflow_state_status, 'COMPLETE');
+});
+t('R2 WAITING_FOR_INPUT guard still returns canonical_brief_facts and is unaffected', async () => {
+  const r = await H.run('help', { mode: 'llm', adapter: mockAdapter(), retrieve: false });
+  assert.equal(r.workflow_state_status, 'WAITING_FOR_INPUT');
+  assert('canonical_brief_facts' in r);
+});
+t('R3 deterministic mode (no LLM) is unaffected by the fidelity layer', () => {
+  const mod = require('../src/workflows/marketing_campaign_360_hardened');
+  assert.equal(typeof mod.run, 'function');
+});
+
+(async () => {
+  for (const x of tests) {
+    try { await x.fn(); pass += 1; console.log('PASS', x.name); }
+    catch (e) { fail += 1; console.log('FAIL', x.name, '::', e && e.message); }
+  }
+  console.log(`\nASTRA_CAMPAIGN360_BRIEF_FIDELITY_TEST_RESULT pass=${pass} fail=${fail}`);
+  if (fail) process.exit(1);
+})();

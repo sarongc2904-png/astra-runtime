@@ -18,6 +18,8 @@ const synthV1 = require('../synthesis/synthesis_engine');
 const synthV2 = require('../synthesis/synthesis_engine_v2');
 const { MAX_EVIDENCE_PER_STEP } = require('../../config/context_budgets');
 const diag = require('../integration/diag'); // [ASTRA-DIAG] temporary instrumentation (ASTRA-10S)
+const briefFacts = require('./campaign_brief_facts'); // [Brief Fidelity] CANONICAL_BRIEF_FACTS
+const fidelity = require('./brief_fidelity_validator'); // [Brief Fidelity] node + final validators
 
 const SPEC_TYPE = { market_context: 'MARKET_CONTEXT_SPECIALIST', icp: 'ICP_SPECIALIST', offer: 'OFFER_SPECIALIST',
   funnel: 'FUNNEL_SPECIALIST', creative_strategy: 'CREATIVE_STRATEGY_SPECIALIST', ads: 'META_ADS_SPECIALIST',
@@ -60,7 +62,7 @@ const WAVES = computeWaves(base.NODES, base.DEPS);
 // the correct, single transition — this is what prevents two concurrent failures in the same wave
 // from both calling wfState.transition and hitting workflow_state.js's terminal-state guard.
 async function processNode(n, ctx) {
-  const { done, adapter, doRetrieve, registry, brief, biz, mode, injectedLLM, diagId } = ctx;
+  const { done, adapter, doRetrieve, registry, brief, biz, mode, injectedLLM, diagId, canonicalBriefFacts } = ctx;
   for (const d of base.DEPS[n.id]) {
     if (!done[d]) { const e = new Error('dependency not satisfied: ' + n.id + ' <- ' + d); e.wfTransition = 'BLOCKED'; throw e; }
   }
@@ -90,9 +92,13 @@ async function processNode(n, ctx) {
   }
 
   let acc = 0; const bundle = evidence.filter(e => { acc += (e.text || '').length; return acc <= MAX_EVIDENCE_PER_STEP; });
+  // [Brief Fidelity — Node Input Contract] every node receives canonical_brief_facts alongside
+  // upstream outputs + evidence. canonicalBriefFacts is frozen and never derived from a node's
+  // own (or a prior node's) output — upstream_outputs never outranks a USER_PROVIDED_FACT.
   const input = {
     task_id: brief.task_id, work_unit_id: n.id, specialist_type: SPEC_TYPE[n.id],
     task_brief: { objective: brief.objective, business_type: biz, language: brief.language, constraints: brief.constraints },
+    canonical_brief_facts: canonicalBriefFacts,
     upstream_outputs: base.DEPS[n.id].map(d => ({ work_unit_id: d, downstream_payload: done[d].downstream_payload })),
     selected_methods: { primary_method: primary, primary_method_object: primaryObj, secondary_methods: selInfo.secondary || [] },
     knowledge_evidence: bundle, constraints: brief.constraints || {}, output_requirements: { must_cite: true, max_output_chars: MAX_EVIDENCE_PER_STEP },
@@ -131,6 +137,18 @@ async function processNode(n, ctx) {
     output = DET_FN[n.id](input);
   }
 
+  // [Node Fidelity Validator] a node output that contradicts a USER_PROVIDED_FACT never
+  // continues silently — fail-closed. Deterministic-only regeneration is not an authorized
+  // mechanism yet, so any violation here is a hard FAILED with the violating field(s) attached.
+  if (canonicalBriefFacts) {
+    const { violations } = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, output, { nodeId: n.id });
+    if (violations.length) {
+      const e = new Error('BRIEF_FIDELITY_VIOLATION at node ' + n.id + ': ' + violations.map(v => v.type).join(', '));
+      e.wfTransition = 'FAILED'; e.code = 'BRIEF_FIDELITY_VIOLATION'; e.briefFidelityViolations = violations;
+      throw e;
+    }
+  }
+
   return {
     node: n, output, primary, forced: !!n.forced, selInfo, bundle, tier, evidenceChars, llmUsage,
     selectedMethod: { primary_method: primary, forced: !!n.forced, secondary: selInfo.secondary || [], scorer: n.forced ? 'FORCED' : 'v2' },
@@ -146,7 +164,24 @@ async function run(rawRequest, options = {}) {
   const injectedLLM = options.llm; // for tests (mock)
 
   const ia = intentAnalyzer.analyze(rawRequest, { salt: options.salt });
-  const { intent, brief } = ia;
+  const { intent } = ia;
+
+  // [Brief Fidelity] CANONICAL_BRIEF_FACTS — extracted directly from rawRequest, independent of
+  // intent_analyzer's heuristic business_type/objective classification. Frozen once, never
+  // mutated, never re-derived from a node's output. This is the ground truth every node output
+  // and the final synthesis are validated against.
+  const canonicalBriefFacts = briefFacts.extract(rawRequest);
+
+  // [Immutable Fact Lock] intent_analyzer's `objective` is a keyword-matched ROUTING signal
+  // (e.g. it collapses to CLIENT_ACQUISITION whenever several intents match at once) — it is not
+  // itself a business fact. A USER_PROVIDED_FACT business_objective always overrides it for
+  // everything downstream (task_brief on every node, and the final synthesis): the confirmed
+  // defect was exactly this heuristic objective silently replacing an explicit "vender el
+  // minicurso" with CLIENT_ACQUISITION. intent_analyzer.js itself is untouched — this only
+  // decides which value the rest of the pipeline is allowed to see.
+  const brief = canonicalBriefFacts.business_objective.status === 'USER_PROVIDED_FACT'
+    ? Object.freeze({ ...ia.brief, objective: canonicalBriefFacts.business_objective.value })
+    : ia.brief;
   const biz = brief.business_type || 'the business';
 
   const steps = base.NODES.map((n, i) => ({ step_id: n.id, name: n.id, specialist_type: SPEC_TYPE[n.id], dependencies: base.DEPS[n.id], status: 'PLANNED', order_index: i }));
@@ -158,7 +193,7 @@ async function run(rawRequest, options = {}) {
   // (a clear deliverable like "digital infoproduct" proceeds even if the business noun is implicit).
   if ((!biz || biz === 'UNSPECIFIED_BUSINESS') && (!ia.matched_intents || ia.matched_intents.length === 0)) {
     wfState.transition(state, 'WAITING_FOR_INPUT');
-    return { mode, intent, brief, workflow_id: workflow.workflow_id, workflow_state_status: 'WAITING_FOR_INPUT',
+    return { mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id, workflow_state_status: 'WAITING_FOR_INPUT',
       required_inputs: ['business_type / description', 'objective', 'target customer', 'constraints (budget/geo)'],
       reason: 'incomplete_business_information', node_outputs: [], selected_methods_by_node: {}, synthesis: null,
       cost: { mode, model_calls: 0 }, _state: state };
@@ -168,7 +203,7 @@ async function run(rawRequest, options = {}) {
 
   const cost = { mode, model_calls: 0, retries: 0, by_tier: {}, tokens: { prompt: 0, completion: 0 }, evidence_chars_total: 0, per_node: {} };
   const node_outputs = []; const selected_methods_by_node = {}; const done = {};
-  const nodeCtx = { done, adapter, doRetrieve, registry, brief, biz, mode, injectedLLM, diagId };
+  const nodeCtx = { done, adapter, doRetrieve, registry, brief, biz, mode, injectedLLM, diagId, canonicalBriefFacts };
 
   // [ASTRA-10X] Execute by topological wave: nodes within a wave run concurrently (Promise.all);
   // a wave only starts once every prior wave fully completed, so DEPS are always satisfied.
@@ -210,9 +245,25 @@ async function run(rawRequest, options = {}) {
   const synthesis = (mode === 'llm' ? synthV2 : synthV1).synthesize({ brief, node_outputs, selected_methods_by_node });
   if (!synthesis.coherent) { wfState.transition(state, 'BLOCKED'); throw new Error('synthesis incomplete: missing ' + synthesis.missing_sections.join(',')); }
 
+  // [Final Synthesis Validator — Brief Fidelity] COMPLETE is prohibited if the reconciled output
+  // substitutes any USER_PROVIDED_FACT. Per-node checks already ran (§ Node Fidelity Validator);
+  // this is the last gate before the workflow declares victory. On violation: FAILED, with the
+  // exact violation paths — never a silent COMPLETE, and never swallowed into a generic error.
+  const finalCheck = fidelity.validateFinalSynthesis(canonicalBriefFacts, synthesis);
+  if (finalCheck.violations.length) {
+    wfState.transition(state, 'FAILED');
+    return {
+      mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id,
+      node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
+      workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
+      brief_fidelity_violations: finalCheck.violations,
+      node_outputs, selected_methods_by_node, synthesis, cost, _state: state,
+    };
+  }
+
   wfState.transition(state, 'COMPLETE');
   return {
-    mode, intent, brief, workflow_id: workflow.workflow_id, node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
+    mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id, node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
     mandatory_nodes_executed: node_outputs.length + 1, mandatory_node_count: 9,
     bindings: { ads: selected_methods_by_node.ads.primary_method, whatsapp_conversion: selected_methods_by_node.whatsapp_conversion.primary_method },
     node_outputs, selected_methods_by_node, synthesis, cost, workflow_state_status: state.status, _state: state,
