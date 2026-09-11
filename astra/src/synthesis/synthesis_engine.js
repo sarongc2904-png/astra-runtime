@@ -10,7 +10,7 @@ function collect(outputs, key) {
 }
 function byType(outputs, t) { return outputs.find(o => o.specialist_type === t) || null; }
 
-function synthesize({ brief, node_outputs, selected_methods_by_node }) {
+function synthesize({ brief, node_outputs, selected_methods_by_node, canonicalBriefFacts }) {
   const o = {};
   for (const n of node_outputs) o[n.work_unit_id] = n.output;
   const outs = node_outputs.map(n => n.output);
@@ -33,8 +33,16 @@ function synthesize({ brief, node_outputs, selected_methods_by_node }) {
   const ads = (o['ads'] && o['ads'].downstream_payload.ads_plan) || null;
   const wa = (o['whatsapp_conversion'] && o['whatsapp_conversion'].downstream_payload.whatsapp_flow) || null;
 
+  // [Brief Fidelity — UNKNOWN Preservation] same fix as synthesis_engine_v2.js: brief.objective
+  // falls back to intent_analyzer's heuristic ROUTING classification (which can collapse to
+  // "CLIENT_ACQUISITION") whenever canonicalBriefFacts.business_objective is not a
+  // USER_PROVIDED_FACT — that heuristic must never be presented as an affirmed business fact.
+  // Legacy callers with no canonicalBriefFacts keep the untouched fallback.
+  const businessObjectiveSection = canonicalBriefFacts
+    ? (canonicalBriefFacts.business_objective.status === 'USER_PROVIDED_FACT' ? canonicalBriefFacts.business_objective.value : 'UNKNOWN')
+    : (brief.objective || 'CLIENT_ACQUISITION');
   const deliverable = {
-    '1_business_objective': brief.objective || 'CLIENT_ACQUISITION',
+    '1_business_objective': businessObjectiveSection,
     '2_target_audience_icp': (o['icp'] && o['icp'].downstream_payload.icp) || null,
     '3_core_problem_opportunity': 'Acquire qualified local clients efficiently and convert them via a WhatsApp-led sales conversation.',
     '4_primary_selected_methods': selected_methods_by_node,

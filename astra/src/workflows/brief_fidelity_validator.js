@@ -289,6 +289,53 @@ function checkKnownFactDenial(facts, key, val) {
   return violations;
 }
 
+// ---------- [UNKNOWN FACT FABRICATION] confirmed live defect: canonicalBriefFacts marked
+// business_objective UNKNOWN (the raw brief never stated one) yet the final synthesis's
+// dedicated "1_business_objective" section asserted a concrete value anyway — sourced from
+// intent_analyzer's heuristic ROUTING classification (which can collapse to "CLIENT_ACQUISITION"
+// whenever several intents match), never itself a business fact — with brief_fidelity_violations
+// staying empty. The mirror image of KNOWN_FACT_DENIAL above: there, a KNOWN fact must not be
+// denied; here, an UNKNOWN fact must not be silently promoted to an affirmed one.
+//
+// Scoped ONLY to the small set of field keys whose entire schema purpose IS to state that exact
+// fact (mirrors OBJECTIVE_BEARING_FIELD_KEYS and PRINCIPAL_FIELD_KEYS' "always" sets) — never a
+// blanket "any concrete text in any field is fabrication" rule. A specialist node routinely
+// writes ordinary tactical/exploratory prose into fields like campaign_objective or mechanism
+// while the corresponding canonical fact is legitimately UNKNOWN (the brief just never specified
+// one) — that is normal node elaboration, not fabrication, and flagging it would false-positive
+// on confirmed-passing behavior (astra_campaign360_brief_fidelity.test.js R1). For that reason
+// this check runs ONLY at the final-synthesis gate (validateFinalSynthesis), never per-node
+// (validateOutputAgainstFacts) — the confirmed defect is a property of the single authoritative
+// deliverable section, not of a specialist's in-progress tactical field.
+const UNKNOWN_ASSERTION_FIELD_KEYS = {
+  business_objective: OBJECTIVE_BEARING_FIELD_KEYS,
+  product_name: new Set(['product_name', 'product']),
+  price: new Set(['price']),
+  buyer: new Set(['buyer']),
+  geography: new Set(['geography']),
+  mechanism: new Set(['mechanism']),
+};
+// Empty, whitespace/punctuation-only, or literally UNKNOWN/CURRENT_RESEARCH_REQUIRED: the fact is
+// honestly left unresolved rather than silently asserted.
+const UNKNOWN_PRESERVED_ONLY = /^[\s.,;:\-]*(unknown|current_research_required)?[\s.,;:\-]*$/;
+function bareFieldKey(key) { return norm(key).replace(/^\d+_/, ''); }
+function checkUnknownFactFabrication(facts, key, val, markerIndex) {
+  const bareKey = bareFieldKey(key);
+  const violations = [];
+  for (const [category, fieldKeys] of Object.entries(UNKNOWN_ASSERTION_FIELD_KEYS)) {
+    if (!fieldKeys.has(bareKey)) continue;
+    const f = facts[category];
+    if (!f || f.status !== 'UNKNOWN') continue;
+    // Same position gate as every other proposal-escape in this file: only the text BEFORE a
+    // PROPUESTA/HIPÓTESIS marker is judged as an assertion — a marked span is a labeled proposal,
+    // not a silent replacement of the still-UNKNOWN canonical fact.
+    const primary = markerIndex === -1 ? val : val.slice(0, markerIndex);
+    if (UNKNOWN_PRESERVED_ONLY.test(primary)) continue;
+    violations.push({ type: 'UNKNOWN_FACT_FABRICATION', fact_field: category, field_key: key });
+  }
+  return violations;
+}
+
 // ---------- [UNLABELED PROPOSAL GATE] activated only when the brief's own canonical constraints
 // state the "new ideas must be marked PROPUESTA" rule (deterministic string check on
 // facts.constraints — never a global marketing blocklist). Fires on the confirmed E2E adversarial
@@ -639,6 +686,7 @@ function validateFinalSynthesis(facts, synthesis) {
     const siblingEntries = normEntries.filter(([k]) => k !== key);
     for (const v of checkFieldSubstitutions(facts, key, rawVal, siblingEntries)) violations.push(v);
     for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
+    for (const v of checkUnknownFactFabrication(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkExplicitProhibition(facts, key, rawTextVal)) violations.push(v);
   }

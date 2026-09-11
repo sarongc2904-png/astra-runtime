@@ -36,8 +36,21 @@ function synthesize({ brief, node_outputs, selected_methods_by_node, canonicalBr
   const ads = payload(o['ads'], 'campaign_objective') != null ? o['ads'].downstream_payload : (o['ads'] && o['ads'].downstream_payload.ads_plan) || null;
   const wa = o['whatsapp_conversion'] && o['whatsapp_conversion'].downstream_payload;
 
+  // [Brief Fidelity — UNKNOWN Preservation] confirmed live defect: canonicalBriefFacts.
+  // business_objective.status === 'UNKNOWN' (the brief never stated one) still reached this
+  // section as a concrete asserted fact, because brief.objective falls back to
+  // intent_analyzer's heuristic ROUTING classification when no USER_PROVIDED_FACT objective
+  // exists (see marketing_campaign_360_hardened.js's [Immutable Fact Lock]) — a routing signal
+  // ("collapses to CLIENT_ACQUISITION whenever several intents match at once"), not itself a
+  // business fact. brief.objective is only ever trustworthy here when canonicalBriefFacts
+  // confirms it is a USER_PROVIDED_FACT; otherwise the deliverable must honestly say UNKNOWN
+  // rather than fabricate. Legacy callers with no canonicalBriefFacts keep the untouched
+  // fallback for backward compatibility.
+  const businessObjectiveSection = canonicalBriefFacts
+    ? (canonicalBriefFacts.business_objective.status === 'USER_PROVIDED_FACT' ? canonicalBriefFacts.business_objective.value : 'UNKNOWN')
+    : (brief.objective || 'CLIENT_ACQUISITION');
   const deliverable = {
-    '1_business_objective': brief.objective || 'CLIENT_ACQUISITION',
+    '1_business_objective': businessObjectiveSection,
     '2_target_audience_icp': o['icp'] ? o['icp'].downstream_payload : null,
     '3_core_problem_opportunity': (o['market_context'] && (o['market_context'].downstream_payload.problem_context)) || 'Acquire qualified local clients efficiently and convert via a WhatsApp-led sales conversation.',
     '4_primary_selected_methods': selected_methods_by_node,
