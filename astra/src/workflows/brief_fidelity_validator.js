@@ -64,49 +64,72 @@ const BUYER_ROLE_INVERSION_PHRASES = [
 ];
 const CHECKED_FIELDS = ['buyer', 'product_name', 'product_type', 'business_objective', 'mechanism'];
 
-// One field's own text is escaped from a substitution finding only when:
-//  (a) it explicitly marks the contradictory content as a PROPOSAL/HYPOTHESIS (never a fact), or
-//  (b) it also states the canonical fact itself, right there in the same field (a caveat next to
-//      the correct answer, not a replacement of it).
-// A mention in a *different* field never escapes anything — that is defect §2, closed here.
-function isEscapedInField(fieldText, factValue) {
-  return PROPOSAL_MARKER.test(fieldText) || containsFact(fieldText, factValue);
+// [STRICT SAME-FIELD FIDELITY] The mere presence of the canonical fact elsewhere in a field's
+// OWN text never neutralizes a substitution pattern anymore — that was the confirmed bypass
+// ("$400 MXN, pero el precio será $900 MXN" used to pass because "400" was also present). The
+// ONLY escape is an explicit PROPOSAL/HIPÓTESIS marker, and only for a substitution phrase that
+// occurs AT OR AFTER that marker's position in the text — i.e. the contradictory alternative must
+// itself be inside the proposal-marked span, not stated as a flat, unmarked assertion earlier in
+// the same field. A marker appended after an already-made unmarked contradiction escapes nothing.
+function firstMarkerIndex(val) { return val.search(PROPOSAL_MARKER); }
+// Index of the earliest match among a set of patterns, or -1 if none match.
+function earliestMatchIndex(val, patterns) {
+  let best = -1;
+  for (const re of patterns) {
+    const idx = val.search(re);
+    if (idx !== -1 && (best === -1 || idx < best)) best = idx;
+  }
+  return best;
 }
+// A match at `idx` is escaped only when a proposal marker exists at or before it.
+function isEscapedByPosition(idx, markerIndex) { return markerIndex !== -1 && idx >= markerIndex; }
 
 function checkFieldSubstitutions(facts, key, rawVal) {
   const val = norm(stringify(rawVal));
+  const markerIndex = firstMarkerIndex(val);
   const violations = [];
   for (const field of CHECKED_FIELDS) {
     const f = facts[field];
     if (!f || f.status !== 'USER_PROVIDED_FACT' || !f.value) continue;
-    const patterns = SUBSTITUTION_PATTERNS[field] || [];
-    if (!patterns.some(re => re.test(val))) continue;
-    if (isEscapedInField(val, f.value)) continue;
+    const idx = earliestMatchIndex(val, SUBSTITUTION_PATTERNS[field] || []);
+    if (idx === -1) continue;
+    if (isEscapedByPosition(idx, markerIndex)) continue;
     violations.push({ type: field.toUpperCase() + '_SUBSTITUTION', fact_field: field, canonical_value: f.value, field_key: key });
   }
-  // buyer role inversion — explicit wrong-party phrasing, still escapable by a same-field proposal marker
+  // buyer role inversion — explicit wrong-party phrasing
   const bf = facts.buyer;
-  if (bf && bf.status === 'USER_PROVIDED_FACT' && bf.value && BUYER_ROLE_INVERSION_PHRASES.some(re => re.test(val)) && !PROPOSAL_MARKER.test(val)) {
-    violations.push({ type: 'BUYER_ROLE_INVERSION', fact_field: 'buyer', canonical_value: bf.value, field_key: key, detail: 'field frames the end consumer as the buyer role' });
+  if (bf && bf.status === 'USER_PROVIDED_FACT' && bf.value) {
+    const idx = earliestMatchIndex(val, BUYER_ROLE_INVERSION_PHRASES);
+    if (idx !== -1 && !isEscapedByPosition(idx, markerIndex)) {
+      violations.push({ type: 'BUYER_ROLE_INVERSION', fact_field: 'buyer', canonical_value: bf.value, field_key: key, detail: 'field frames the end consumer as the buyer role' });
+    }
   }
-  // price substitution: a different price asserted in this field, with the canonical price absent
-  // from this same field and no proposal marker escaping it.
+  // price substitution: a different price asserted in this field.
   const pf = facts.price;
-  if (pf && pf.status === 'USER_PROVIDED_FACT' && pf.value && !val.includes(String(pf.value)) && !PROPOSAL_MARKER.test(val)) {
+  if (pf && pf.status === 'USER_PROVIDED_FACT' && pf.value) {
     const re = /\$?\s*([\d][\d,.]*)\s*(mxn|usd|pesos?|d[oó]lares?)/gi;
     let m;
     while ((m = re.exec(val))) {
       const amt = m[1].replace(/,/g, '');
-      if (amt !== String(pf.value)) { violations.push({ type: 'PRICE_SUBSTITUTION', fact_field: 'price', canonical_value: pf.value, found_value: amt, field_key: key }); break; }
+      if (amt === String(pf.value)) continue;
+      if (isEscapedByPosition(m.index, markerIndex)) continue;
+      violations.push({ type: 'PRICE_SUBSTITUTION', fact_field: 'price', canonical_value: pf.value, found_value: amt, field_key: key });
+      break;
     }
   }
-  // geography substitution: a different, word-boundary-matched country named in this field, with
-  // the canonical geography absent from this same field.
+  // geography substitution: a different, word-boundary-matched country named in this field.
   const gf = facts.geography;
-  if (gf && gf.status === 'USER_PROVIDED_FACT' && gf.value && !containsFact(val, gf.value) && !PROPOSAL_MARKER.test(val)) {
+  if (gf && gf.status === 'USER_PROVIDED_FACT' && gf.value) {
     const canon = norm(gf.value);
-    const hit = OTHER_COUNTRIES.find(c => c !== canon && !canon.includes(c) && new RegExp('\\b' + c.replace(/ /g, '\\s+') + '\\b').test(val));
-    if (hit) violations.push({ type: 'GEOGRAPHY_SUBSTITUTION', fact_field: 'geography', canonical_value: gf.value, found_value: hit, field_key: key });
+    let bestIdx = -1, bestHit = null;
+    for (const c of OTHER_COUNTRIES) {
+      if (c === canon || canon.includes(c)) continue;
+      const idx = val.search(new RegExp('\\b' + c.replace(/ /g, '\\s+') + '\\b'));
+      if (idx !== -1 && (bestIdx === -1 || idx < bestIdx)) { bestIdx = idx; bestHit = c; }
+    }
+    if (bestIdx !== -1 && !isEscapedByPosition(bestIdx, markerIndex)) {
+      violations.push({ type: 'GEOGRAPHY_SUBSTITUTION', fact_field: 'geography', canonical_value: gf.value, found_value: bestHit, field_key: key });
+    }
   }
   return violations;
 }

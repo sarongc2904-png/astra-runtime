@@ -202,7 +202,8 @@ t('L7 a PROPOSAL alongside the still-present fact is NOT a violation', () => {
   assert.deepStrictEqual(violations, []);
 });
 t('L8 UNKNOWN facts never trigger a violation (nothing to contradict)', () => {
-  const f = briefFacts.extract('Producto: X'); // buyer/objective/etc all UNKNOWN
+  const f = briefFacts.extract(''); // every field UNKNOWN — nothing was ever provided
+  assert.equal(f.product_name.status, 'UNKNOWN'); // sanity: this fixture really has no facts to contradict
   const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: { pains: 'consumidoras de servicios estéticos, CLIENT_ACQUISITION, cita exprés' } }, { nodeId: 'icp' });
   assert.deepStrictEqual(violations, []);
 });
@@ -249,6 +250,59 @@ t('FL8 the same two phrases WITHOUT a proposal marker in a side field still fail
     exploratory_idea: 'Alternativa: ofrecer directamente una cita exprés como lead magnet.',
   } }, { nodeId: 'offer' });
   assert(violations.some(v => v.field_key === 'exploratory_idea'), JSON.stringify(violations));
+});
+
+// ========== 2c. STRICT SAME-FIELD FIDELITY — the mere co-presence of the canonical fact in the
+// SAME field no longer neutralizes a substitution; only an explicit, non-replacing
+// PROPOSAL/HIPÓTESIS (contradiction strictly at/after the marker) escapes it. ==========
+t('SAME_FIELD_PRODUCT_CONTRADICTION: "Método 360, pero la oferta principal será cita exprés" => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'Método 360, pero la oferta principal será cita exprés.',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.fact_field === 'product_name' || v.fact_field === 'product_type'), JSON.stringify(violations));
+});
+t('SAME_FIELD_OBJECTIVE_CONTRADICTION: "Vender el minicurso, pero objective=CLIENT_ACQUISITION" => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    campaign_objective: 'Vender el minicurso, pero objective=CLIENT_ACQUISITION.',
+  } }, { nodeId: 'ads' });
+  assert(violations.some(v => v.fact_field === 'business_objective'), JSON.stringify(violations));
+});
+t('SAME_FIELD_PRICE_CONTRADICTION: "$400 MXN, pero el precio será $900 MXN" => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: '$400 MXN, pero el precio será $900 MXN.',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.type === 'PRICE_SUBSTITUTION'), JSON.stringify(violations));
+});
+t('SAME_FIELD_GEOGRAPHY_CONTRADICTION: "México, pero campaña dirigida a Colombia" => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    problem_context: 'México, pero campaña dirigida a Colombia.',
+  } }, { nodeId: 'market_context' });
+  assert(violations.some(v => v.type === 'GEOGRAPHY_SUBSTITUTION'), JSON.stringify(violations));
+});
+t('SAME_FIELD_BUYER_CONTRADICTION: "Dueñas de estéticas, pero comprador objetivo = consumidoras finales" => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    pains: 'Dueñas de estéticas, pero comprador objetivo = consumidoras finales.',
+  } }, { nodeId: 'icp' });
+  assert(violations.some(v => v.fact_field === 'buyer'), JSON.stringify(violations));
+});
+t('EXPLICIT_NON_REPLACING_PROPOSAL: "Oferta principal: Método 360. PROPUESTA/HIPÓTESIS a validar: usar cita exprés como lead magnet, sin sustituir el producto." => PASS', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'Oferta principal: Método 360. PROPUESTA/HIPÓTESIS a validar: usar una cita exprés como lead magnet, sin sustituir el producto.',
+  } }, { nodeId: 'offer' });
+  assert.deepStrictEqual(violations, []);
+});
+t('a marker appended AFTER an already-made unmarked contradiction escapes nothing (position matters, not mere presence of the word)', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'Vamos a vender una cita exprés como producto principal. PROPUESTA a validar más adelante.',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.fact_field === 'product_name' || v.fact_field === 'product_type'), JSON.stringify(violations));
 });
 
 // ========== 3/4/5/6/7. full-pipeline wiring: Node Input Contract + validators inside run() ==========
