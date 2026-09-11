@@ -438,6 +438,16 @@ function proposalLeaves(value) {
   }
   return [];
 }
+function proposalLeafEntries(value, path = []) {
+  if (typeof value === 'string') return [{ value, path }];
+  if (Array.isArray(value)) return value.flatMap((item, index) => proposalLeafEntries(item, path.concat(index)));
+  if (value && typeof value === 'object') {
+    if (['UNKNOWN', 'CURRENT_RESEARCH_REQUIRED'].includes(value.status) ||
+        value.support_class === 'CURRENT_RESEARCH_REQUIRED') return [];
+    return Object.entries(value).flatMap(([key, item]) => proposalLeafEntries(item, path.concat(key)));
+  }
+  return [];
+}
 function upstreamProposalAnchors(facts, upstreamOutputs) {
   const canonical = new Set(Object.values(facts || {})
     .filter(f => f && f.status === 'USER_PROVIDED_FACT').flatMap(f => proposalWords(textOnly(f.value))));
@@ -457,12 +467,28 @@ function upstreamProposalAnchors(facts, upstreamOutputs) {
   }
   return anchors;
 }
-function checkUpstreamProposalPropagation(key, rawValue, anchors) {
+function proposalClauseSpans(text) {
+  const spans = []; let start = 0; let clauseIndex = 0;
+  const separators = /[.!?\n]|\b(?:pero|sin embargo|aunque)\b/gi;
+  for (const separator of text.matchAll(separators)) {
+    spans.push({ start, end: separator.index, clauseIndex: clauseIndex++ });
+    start = separator.index + separator[0].length;
+  }
+  spans.push({ start, end: text.length, clauseIndex });
+  return spans;
+}
+function formatLeafPath(path) {
+  return path.reduce((out, part) => out + (typeof part === 'number' ? `[${part}]` : `.${part}`), '$');
+}
+function proposalPropagationHits(rawValue, anchors) {
   if (!anchors.size) return [];
-  for (const text of proposalLeaves(rawValue)) {
+  const hits = []; const seen = new Set();
+  for (const leaf of proposalLeafEntries(rawValue)) {
+    const text = norm(leaf.value);
     // Markers/rejections belong to the local clause and only to occurrences AFTER them.
     // Neither a sibling field nor a marker appended later can launder an assertion.
-    for (const clause of text.split(/[.!?\n]|\b(?:pero|sin embargo|aunque)\b/)) {
+    for (const span of proposalClauseSpans(text)) {
+      const clause = text.slice(span.start, span.end);
       for (const match of clause.matchAll(/[a-z_]{4,}/g)) {
         if (!anchors.has(match[0])) continue;
         const before = clause.slice(0, match.index);
@@ -475,11 +501,69 @@ function checkUpstreamProposalPropagation(key, rawValue, anchors) {
         let rejectedAt = -1;
         for (const r of localBefore.matchAll(rejection)) rejectedAt = r.index + r[0].length;
         if (rejectedAt >= 0 && !/\b(?:inclu\w*|us[ae]\w*|utiliz\w*|ofrec\w*|agend\w*|implement\w*|adopt\w*)\b/.test(localBefore.slice(rejectedAt))) continue;
-        return [{ type: 'UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION', fact_field: null, field_key: key }];
+        const localStart = clause.lastIndexOf(';', match.index) + 1;
+        const repairOffset = span.start + localStart;
+        const identity = JSON.stringify(leaf.path) + ':' + repairOffset;
+        if (seen.has(identity)) continue;
+        seen.add(identity);
+        hits.push({ matched_anchor: match[0], leaf_path: formatLeafPath(leaf.path), leaf_path_parts: leaf.path, clause_index: span.clauseIndex, repair_offset: repairOffset });
       }
     }
   }
-  return [];
+  return hits;
+}
+function checkUpstreamProposalPropagation(key, rawValue, anchors) {
+  return proposalPropagationHits(rawValue, anchors).map(hit => ({
+    type: 'UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION', fact_field: null, field_key: key,
+    matched_anchor: hit.matched_anchor, leaf_path: hit.leaf_path, clause_index: hit.clause_index,
+  }));
+}
+function cloneJsonValue(value) {
+  return value == null ? value : JSON.parse(JSON.stringify(value));
+}
+function getAtPath(value, path) {
+  return path.reduce((current, part) => current[part], value);
+}
+function setAtPath(value, path, replacement) {
+  if (!path.length) return replacement;
+  const parent = getAtPath(value, path.slice(0, -1));
+  parent[path[path.length - 1]] = replacement;
+  return value;
+}
+function prefixProposalClauses(text, offsets) {
+  let repaired = text;
+  for (const offset of [...offsets].sort((a, b) => b - a)) {
+    const whitespace = (repaired.slice(offset).match(/^\s*/) || [''])[0].length;
+    const insertion = offset + whitespace;
+    repaired = repaired.slice(0, insertion) + 'PROPUESTA: ' + repaired.slice(insertion);
+  }
+  return repaired;
+}
+function repairUpstreamProposalStatus(facts, output, upstreamOutputs = []) {
+  let repairedOutput = cloneJsonValue(output);
+  const anchors = upstreamProposalAnchors(facts, upstreamOutputs);
+  const repairs = [];
+  const container = repairedOutput && repairedOutput.downstream_payload && typeof repairedOutput.downstream_payload === 'object'
+    ? repairedOutput.downstream_payload : repairedOutput;
+  if (!container || typeof container !== 'object' || Array.isArray(container)) return { output: repairedOutput, repairs };
+  for (const [fieldKey, rawValue] of Object.entries(container)) {
+    const hits = proposalPropagationHits(rawValue, anchors);
+    const byLeaf = new Map();
+    for (const hit of hits) {
+      const identity = JSON.stringify(hit.leaf_path_parts);
+      if (!byLeaf.has(identity)) byLeaf.set(identity, { path: hit.leaf_path_parts, hits: [] });
+      byLeaf.get(identity).hits.push(hit);
+      repairs.push({ field_key: fieldKey, matched_anchor: hit.matched_anchor, leaf_path: hit.leaf_path,
+        clause_index: hit.clause_index, repair_type: 'PREFIX_PROPUESTA', deterministic: true });
+    }
+    let repairedValue = rawValue;
+    for (const { path, hits: leafHits } of byLeaf.values()) {
+      const originalLeaf = getAtPath(repairedValue, path);
+      repairedValue = setAtPath(repairedValue, path, prefixProposalClauses(originalLeaf, leafHits.map(hit => hit.repair_offset)));
+    }
+    container[fieldKey] = repairedValue;
+  }
+  return { output: repairedOutput, repairs };
 }
 
 function validateOutputAgainstFacts(facts, output, { nodeId, upstream_outputs = [] } = {}) {
@@ -524,4 +608,4 @@ function validateFinalSynthesis(facts, synthesis) {
   return { violations: violations.map(v => ({ ...v, node: null, path: pathFor(null, v.field_key) })) };
 }
 
-module.exports = { validateOutputAgainstFacts, validateFinalSynthesis, containsFact, relevantFields, CHECKED_FIELDS };
+module.exports = { validateOutputAgainstFacts, validateFinalSynthesis, repairUpstreamProposalStatus, containsFact, relevantFields, CHECKED_FIELDS };

@@ -137,20 +137,29 @@ async function processNode(n, ctx) {
     output = DET_FN[n.id](input);
   }
 
+  let proposalStatusRepairs = [];
   // [Node Fidelity Validator] a node output that contradicts a USER_PROVIDED_FACT never
-  // continues silently — fail-closed. Deterministic-only regeneration is not an authorized
-  // mechanism yet, so any violation here is a hard FAILED with the violating field(s) attached.
+  // continues silently — fail-closed. The only repair allowed here preserves proposal status by
+  // adding a marker to the exact clauses found by the same deterministic provenance detector.
   if (canonicalBriefFacts) {
-    const { violations } = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, output, { nodeId: n.id, upstream_outputs: input.upstream_outputs });
+    let { violations } = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, output, { nodeId: n.id, upstream_outputs: input.upstream_outputs });
+    if (violations.length && violations.every(v => v.type === 'UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION')) {
+      const repaired = fidelity.repairUpstreamProposalStatus(canonicalBriefFacts, output, input.upstream_outputs);
+      proposalStatusRepairs = repaired.repairs.map(repair => ({ node: n.id, ...repair }));
+      const secondValidation = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, repaired.output, { nodeId: n.id, upstream_outputs: input.upstream_outputs });
+      output = repaired.output;
+      violations = secondValidation.violations;
+    }
     if (violations.length) {
       const e = new Error('BRIEF_FIDELITY_VIOLATION at node ' + n.id + ': ' + violations.map(v => v.type).join(', '));
       e.wfTransition = 'FAILED'; e.code = 'BRIEF_FIDELITY_VIOLATION'; e.briefFidelityViolations = violations;
+      e.proposalStatusRepairs = proposalStatusRepairs;
       throw e;
     }
   }
 
   return {
-    node: n, output, primary, forced: !!n.forced, selInfo, bundle, tier, evidenceChars, llmUsage,
+    node: n, output, primary, forced: !!n.forced, selInfo, bundle, tier, evidenceChars, llmUsage, proposalStatusRepairs,
     selectedMethod: { primary_method: primary, forced: !!n.forced, secondary: selInfo.secondary || [], scorer: n.forced ? 'FORCED' : 'v2' },
   };
 }
@@ -202,7 +211,7 @@ async function run(rawRequest, options = {}) {
   wfState.transition(state, 'RUNNING');
 
   const cost = { mode, model_calls: 0, retries: 0, by_tier: {}, tokens: { prompt: 0, completion: 0 }, evidence_chars_total: 0, per_node: {} };
-  const node_outputs = []; const selected_methods_by_node = {}; const done = {};
+  const node_outputs = []; const selected_methods_by_node = {}; const done = {}; const proposal_status_repairs = [];
   const nodeCtx = { done, adapter, doRetrieve, registry, brief, biz, mode, injectedLLM, diagId, canonicalBriefFacts };
 
   // [ASTRA-10X] Execute by topological wave: nodes within a wave run concurrently (Promise.all);
@@ -235,7 +244,7 @@ async function run(rawRequest, options = {}) {
           node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
           workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
           brief_fidelity_violations: err.briefFidelityViolations || [],
-          node_outputs, selected_methods_by_node, synthesis: null, cost, _state: state,
+          node_outputs, selected_methods_by_node, proposal_status_repairs: proposal_status_repairs.concat(err.proposalStatusRepairs || []), synthesis: null, cost, _state: state,
         };
       }
       // Any other error (technical/provider/infra failure) keeps the exact prior behavior —
@@ -246,6 +255,7 @@ async function run(rawRequest, options = {}) {
     for (const n of base.NODES) {
       if (!waveIds.has(n.id)) continue;
       const r = byId.get(n.id);
+      proposal_status_repairs.push(...r.proposalStatusRepairs);
       selected_methods_by_node[n.id] = r.selectedMethod;
       cost.evidence_chars_total += r.evidenceChars;
       cost.by_tier[r.tier.task_class] = (cost.by_tier[r.tier.task_class] || 0) + 1;
@@ -280,7 +290,7 @@ async function run(rawRequest, options = {}) {
       node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
       workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
       brief_fidelity_violations: finalCheck.violations,
-      node_outputs, selected_methods_by_node, synthesis, cost, _state: state,
+      node_outputs, selected_methods_by_node, proposal_status_repairs, synthesis, cost, _state: state,
     };
   }
 
@@ -289,7 +299,7 @@ async function run(rawRequest, options = {}) {
     mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id, node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
     mandatory_nodes_executed: node_outputs.length + 1, mandatory_node_count: 9,
     bindings: { ads: selected_methods_by_node.ads.primary_method, whatsapp_conversion: selected_methods_by_node.whatsapp_conversion.primary_method },
-    node_outputs, selected_methods_by_node, synthesis, cost, workflow_state_status: state.status, _state: state,
+    node_outputs, selected_methods_by_node, proposal_status_repairs, synthesis, cost, workflow_state_status: state.status, _state: state,
   };
 }
 

@@ -132,25 +132,68 @@ t('I/J complete natural mock pipeline preserves proposals at synthesis input and
     assert.equal(r.synthesis.deliverable['12_whatsapp_followup_closing'].closing, 'PROPUESTA: ' + WA);
   } finally { synth.synthesize = original; }
 });
-for (const target of ['funnel', 'whatsapp_conversion']) {
-  t('I/J lost status at ' + target + ' fails closed before synthesis', async () => {
-    const original = synth.synthesize; let called = false;
-    synth.synthesize = () => { called = true; throw new Error('invalid input reached synthesis'); };
-    try {
-      const r = await runWith(BRIEF, {
-        OFFER_SPECIALIST: { offer_structure: OFFER },
-        FUNNEL_SPECIALIST: { stages: target === 'funnel' ? FUNNEL : 'PROPUESTA: ' + FUNNEL },
-        WHATSAPP_SALES_SPECIALIST: { appointment_closing: WA },
-      });
-      assert.equal(called, false);
-      assert.equal(r.workflow_state_status, 'FAILED');
-      assert.equal(r.reason, 'BRIEF_FIDELITY_VIOLATION');
-      assert(r.brief_fidelity_violations.some(v => v.type === TYPE && v.node === target));
-      assert.equal(r.synthesis, null);
-      assert(!r.node_outputs.some(n => n.work_unit_id === target));
-    } finally { synth.synthesize = original; }
+t('L exact V6 funnel paths receive one deterministic repair each', async () => {
+  const originalRepair = fidelity.repairUpstreamProposalStatus; let repairCalls = 0; let r;
+  fidelity.repairUpstreamProposalStatus = (...args) => { repairCalls += 1; return originalRepair(...args); };
+  try {
+    r = await runWith(BRIEF, {
+      OFFER_SPECIALIST: { offer_structure: OFFER },
+      FUNNEL_SPECIALIST: {
+        stages: FUNNEL,
+        qualification_points: 'Calificar interés en consultoría',
+        dependencies: 'Disponibilidad de consultoría',
+      },
+    });
+  } finally { fidelity.repairUpstreamProposalStatus = originalRepair; }
+  assert.equal(r.workflow_state_status, 'COMPLETE', JSON.stringify(r.brief_fidelity_violations));
+  assert.equal(repairCalls, 1, 'processNode must execute exactly one deterministic repair');
+  assert.equal(r.cost.model_calls, 8); assert.equal(r.cost.retries, 0);
+  const funnel = r.node_outputs.find(n => n.work_unit_id === 'funnel').output.downstream_payload;
+  assert.equal(funnel.stages, 'PROPUESTA: ' + FUNNEL);
+  assert.equal(funnel.qualification_points, 'PROPUESTA: Calificar interés en consultoría');
+  assert.equal(funnel.dependencies, 'PROPUESTA: Disponibilidad de consultoría');
+  assert.deepStrictEqual(r.proposal_status_repairs.filter(x => x.node === 'funnel').map(x => x.field_key).sort(), ['dependencies', 'qualification_points', 'stages']);
+});
+t('M exact V4 offer to funnel to WhatsApp propagation is repaired end-to-end', async () => {
+  const r = await runWith(BRIEF, {
+    OFFER_SPECIALIST: { offer_structure: OFFER },
+    FUNNEL_SPECIALIST: { stages: FUNNEL },
+    WHATSAPP_SALES_SPECIALIST: { appointment_closing: WA },
+  });
+  assert.equal(r.workflow_state_status, 'COMPLETE', JSON.stringify(r.brief_fidelity_violations));
+  assert.equal(r.node_outputs.find(n => n.work_unit_id === 'funnel').output.downstream_payload.stages, 'PROPUESTA: ' + FUNNEL);
+  assert.equal(r.node_outputs.find(n => n.work_unit_id === 'whatsapp_conversion').output.downstream_payload.appointment_closing, 'PROPUESTA: ' + WA);
+  assert(r.proposal_status_repairs.some(x => x.node === 'funnel' && x.matched_anchor === 'upsell'));
+  assert(r.proposal_status_repairs.some(x => x.node === 'whatsapp_conversion' && x.matched_anchor === 'consultoria'));
+});
+for (const [label, field, value, expectedType] of [
+  ['I price substitution', 'conversion_intent', 'El precio principal será $900 MXN', 'PRICE_SUBSTITUTION'],
+  ['J geography substitution', 'dependencies', 'La campaña operará en España', 'GEOGRAPHY_SUBSTITUTION'],
+  ['K explicit prohibition', 'qualification_points', 'Usar testimonios de clientes', 'EXPLICIT_PROHIBITION'],
+]) {
+  t(label + ' alongside proposal propagation gets no repair and fails closed', async () => {
+    const r = await runWith(BRIEF, { OFFER_SPECIALIST: { offer_structure: OFFER }, FUNNEL_SPECIALIST: { stages: FUNNEL, [field]: value } });
+    assert.equal(r.workflow_state_status, 'FAILED');
+    assert(r.brief_fidelity_violations.some(v => v.type === TYPE));
+    assert(r.brief_fidelity_violations.some(v => v.type === expectedType));
+    assert.deepStrictEqual(r.proposal_status_repairs, []);
+    assert(!r.node_outputs.some(n => n.work_unit_id === 'funnel'));
   });
 }
+t('a non-clearing second validation remains hard FAILED', async () => {
+  const originalRepair = fidelity.repairUpstreamProposalStatus; let r;
+  fidelity.repairUpstreamProposalStatus = (factsArg, output) => ({
+    output: JSON.parse(JSON.stringify(output)),
+    repairs: [{ field_key: 'stages', matched_anchor: 'upsell', repair_type: 'PREFIX_PROPUESTA', deterministic: true }],
+  });
+  try {
+    r = await runWith(BRIEF, { OFFER_SPECIALIST: { offer_structure: OFFER }, FUNNEL_SPECIALIST: { stages: FUNNEL } });
+  } finally { fidelity.repairUpstreamProposalStatus = originalRepair; }
+  assert.equal(r.workflow_state_status, 'FAILED');
+  assert(r.brief_fidelity_violations.some(v => v.type === TYPE));
+  assert.equal(r.proposal_status_repairs.length, 1);
+  assert(!r.node_outputs.some(n => n.work_unit_id === 'funnel'));
+});
 (async () => {
   let pass = 0, fail = 0;
   for (const { name, fn } of tests) {
