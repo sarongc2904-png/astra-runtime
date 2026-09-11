@@ -10,7 +10,9 @@ const { createHandler, PATH_TO_TOOL } = require('../src/integration/astra_api_ha
 const asyncJobs = require('../src/integration/campaign_async');
 const openapi = require('../src/integration/openapi_builder');
 
-const GW = 'https://ftoxermwkfebmnrudiuu.supabase.co/functions/v1/astra-tools';
+// Paths already carry '/functions/v1/...' — the server must be the bare project origin, NOT
+// '.../functions/v1/astra-tools' (that would double the prefix when a client resolves server+path).
+const GW = 'https://ftoxermwkfebmnrudiuu.supabase.co';
 const KEY = 'runtime-test-key-with-adequate-entropy';
 const ENV = { ASTRA_RUNTIME_API_KEY: KEY, ASTRA_ALLOWED_PROJECT_IDS: 'owned' };
 const tests = []; let pass = 0, fail = 0;
@@ -176,31 +178,90 @@ t('O9 async start declares 202; result declares 202 + 404; status declares 404',
   assert(full.paths['/functions/v1/astra-tools/campaign-360-async-result'].post.responses[404]);
   assert(full.paths['/functions/v1/astra-tools/campaign-360-async-status'].post.responses[404]);
 });
-t('O10 existing actions preserved in the full schema (legacy + commercial)', () => {
+t('O10 existing actions preserved in the full schema (legacy non-blocking + commercial) — sync campaign excluded', () => {
   const ids = Object.values(full.paths).map(p => p.post.operationId);
-  for (const id of ['searchKnowledgeBase', 'runAstraCampaign360', 'runAstraCreativeDirector', 'runAstraCreativeGeneration', 'commercialBusinessMemory', 'commercialDecisionOrchestrator', 'commercialFunnelRevenue', 'commercialExperimentIntelligence']) assert(ids.includes(id), `lost ${id}`);
+  for (const id of ['searchKnowledgeBase', 'runAstraCreativeDirector', 'runAstraCreativeGeneration', 'commercialBusinessMemory', 'commercialDecisionOrchestrator', 'commercialFunnelRevenue', 'commercialExperimentIntelligence']) assert(ids.includes(id), `lost ${id}`);
+  assert(!ids.includes('runAstraCampaign360'), 'sync campaign must not be a GPT footgun once async exists');
 });
-t('O11 no project_id anywhere in the async GPT surface', () => {
+t('O10b full GPT schema is exactly the ten authorized operations, no more no less', () => {
+  const ids = Object.values(full.paths).map(p => p.post.operationId).sort();
+  assert.deepStrictEqual(ids, [
+    'commercialBusinessMemory', 'commercialDecisionOrchestrator', 'commercialExperimentIntelligence', 'commercialFunnelRevenue',
+    'getAstraCampaign360Result', 'getAstraCampaign360Status', 'runAstraCreativeDirector', 'runAstraCreativeGeneration',
+    'searchKnowledgeBase', 'startAstraCampaign360',
+  ].sort());
+});
+t('O10c sync campaign stays fully intact in build() base, and in a commercial-only schema without asyncCampaign', () => {
+  assert(Object.values(openapi.build().paths).map(p => p.post.operationId).includes('runAstraCampaign360'));
+  const commercialOnly = openapi.build(GW, { commercial: true });
+  assert(Object.values(commercialOnly.paths).map(p => p.post.operationId).includes('runAstraCampaign360'));
+  assert.equal(Object.keys(commercialOnly.paths).length, 8);
+});
+t('O10d runtime PATH_TO_TOOL still routes the sync campaign path (direct API / runtime unaffected)', () => {
+  const { PATH_TO_TOOL } = require('../src/integration/astra_api_handler');
+  assert.equal(PATH_TO_TOOL['/astra/campaign-360'], 'runAstraCampaign360');
+});
+t('O11 no project_id anywhere in the async GPT surface, or in the legacy GPT-facing request schemas', () => {
   const blob = JSON.stringify([
     full.components.schemas.Campaign360AsyncStartRequest,
     full.components.schemas.Campaign360AsyncJobRequest,
     full.components.schemas.Campaign360AsyncJob,
     full.components.schemas.Campaign360AsyncResult,
+    full.components.schemas.CampaignRequest,
+    full.components.schemas.CreativeDirectorRequest,
+    full.components.schemas.CreativeGenerationRequest,
     full.paths['/functions/v1/astra-tools/campaign-360-async-start'],
     full.paths['/functions/v1/astra-tools/campaign-360-async-status'],
     full.paths['/functions/v1/astra-tools/campaign-360-async-result'],
   ]);
   assert(!/project_id/.test(blob));
 });
+t('O11b project_id explicitly absent from each of the five named schemas', () => {
+  for (const name of ['CampaignRequest', 'CreativeDirectorRequest', 'CreativeGenerationRequest', 'Campaign360AsyncStartRequest', 'Campaign360AsyncJobRequest']) {
+    const s = full.components.schemas[name];
+    assert(s, `${name} missing`);
+    assert(!('project_id' in s.properties), `${name} still exposes project_id`);
+  }
+});
+t('O11c project_id remains on the commercial request schemas (unaffected by this remediation)', () => {
+  for (const name of ['CommercialFunnelRevenueRequest', 'CommercialExperimentIntelligenceRequest', 'CommercialBusinessMemoryRequest', 'CommercialDecisionOrchestratorRequest']) {
+    assert('project_id' in full.components.schemas[name].properties, `${name} lost project_id`);
+  }
+});
 t('O12 every component object schema declares properties (GPT Builder compat)', () => {
   for (const [n, s] of Object.entries(full.components.schemas)) {
     if (s.type === 'object') assert('properties' in s, `${n} object schema has no properties`);
   }
 });
-t('O13 server URL points at the Supabase gateway over HTTPS, never Render directly', () => {
+t('O13 server URL is exactly the bare Supabase project origin over HTTPS, never Render, never suffixed', () => {
   assert.equal(full.servers[0].url, GW);
+  assert.equal(full.servers[0].url, 'https://ftoxermwkfebmnrudiuu.supabase.co');
   assert(full.servers[0].url.startsWith('https://'));
+  assert(!/\/functions\/v1/.test(full.servers[0].url), 'server must not carry the functions path — paths already do');
   assert(!JSON.stringify(full).includes('onrender.com'));
+});
+t('O13b every resolved endpoint (server + path) is well-formed with no doubled /functions/v1/', () => {
+  for (const p of Object.keys(full.paths)) {
+    const resolved = full.servers[0].url + p;
+    const u = new URL(resolved); // throws if malformed
+    assert.equal(u.protocol, 'https:');
+    assert(!/\/functions\/v1\/astra-tools\/functions\/v1\//.test(resolved), `doubled prefix: ${resolved}`);
+    assert.equal((resolved.match(/\/functions\/v1\//g) || []).length, 1, `expected exactly one /functions/v1/ segment: ${resolved}`);
+  }
+});
+t('O13c the resolved async-start endpoint is the correct single Supabase URL', () => {
+  const resolved = full.servers[0].url + '/functions/v1/astra-tools/campaign-360-async-start';
+  assert.equal(resolved, 'https://ftoxermwkfebmnrudiuu.supabase.co/functions/v1/astra-tools/campaign-360-async-start');
+});
+t('O13d builder normalizes a caller mistake (serverUrl already including the functions/astra-tools suffix)', () => {
+  for (const bad of [
+    'https://ftoxermwkfebmnrudiuu.supabase.co/functions/v1/astra-tools',
+    'https://ftoxermwkfebmnrudiuu.supabase.co/functions/v1/astra-tools/',
+    'https://ftoxermwkfebmnrudiuu.supabase.co/functions/v1',
+  ]) {
+    const s = openapi.build(bad, { commercial: true, asyncCampaign: true });
+    assert.equal(s.servers[0].url, 'https://ftoxermwkfebmnrudiuu.supabase.co', `did not normalize ${bad}`);
+  }
 });
 t('O14 Supabase gateway forwards the three async slugs to the runtime async paths', () => {
   const src = fs.readFileSync(path.join(__dirname, '../../supabase/functions/astra-tools/index.ts'), 'utf8');

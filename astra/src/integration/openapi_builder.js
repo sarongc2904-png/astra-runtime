@@ -51,6 +51,15 @@ function asyncCampaignSchemas() {
   };
 }
 
+// Every path below already carries the full '/functions/v1/...' prefix, so `servers[0].url`
+// must be the bare project origin. Defensive normalization: if a caller passes the origin with
+// an accidental '/functions/v1' (and/or '/astra-tools') suffix already attached, strip it here
+// so the resolved endpoint (server + path) is never doubled, e.g.
+// '.../astra-tools/functions/v1/astra-tools/campaign-360'.
+function normalizeServerUrl(serverUrl) {
+  return String(serverUrl).replace(/\/+$/, '').replace(/\/functions\/v1(?:\/astra-tools)?$/i, '');
+}
+
 function build(serverUrl = 'https://PROJECT_REF.supabase.co', opts = {}) {
   const ref = { Error: { type: 'object', required: ['status', 'error'], properties: { status: { type: 'string', enum: ['FAILED'] }, error: { type: 'object', required: ['code', 'message'], properties: { code: { type: 'string' }, message: { type: 'string' }, details: {} } } } } };
   const errors = {};
@@ -69,16 +78,22 @@ function build(serverUrl = 'https://PROJECT_REF.supabase.co', opts = {}) {
     '/functions/v1/astra-tools/creative-generation': { post: post('runAstraCreativeGeneration', 'Generate or revise an approved creative direction with visual QA.', { $ref: '#/components/schemas/CreativeGenerationRequest' }) },
   };
   if (opts.commercial) Object.assign(paths, commercialPaths(post));
-  if (opts.asyncCampaign) Object.assign(paths, asyncCampaignPaths(asyncPost));
+  if (opts.asyncCampaign) {
+    // Sync Campaign 360 is a GPT footgun once the async path exists: a GPT that could still
+    // call it synchronously would just re-hit the 150s IDLE_TIMEOUT. It stays fully intact in
+    // build() (no opts), the runtime, and direct API access — only removed from this GPT schema.
+    delete paths['/functions/v1/astra-tools/campaign-360'];
+    Object.assign(paths, asyncCampaignPaths(asyncPost));
+  }
   const schemaExtra = Object.assign({}, opts.commercial ? commercialSchemas() : {}, opts.asyncCampaign ? asyncCampaignSchemas() : {});
   return {
-    openapi: '3.1.0', info: { title: 'ASTRA GPT Tools', version: '1.0.0', description: 'GPT interface for narrow KB lookup and authoritative ASTRA workflows.' }, servers: [{ url: serverUrl }],
+    openapi: '3.1.0', info: { title: 'ASTRA GPT Tools', version: '1.0.0', description: 'GPT interface for narrow KB lookup and authoritative ASTRA workflows.' }, servers: [{ url: normalizeServerUrl(serverUrl) }],
     paths,
     components: { securitySchemes: { bearerAuth: { type: 'http', scheme: 'bearer' } }, schemas: Object.assign(ref, schemaExtra, {
-      CampaignRequest: { type: 'object', required: ['input'], additionalProperties: false, properties: { input: { type: 'string', minLength: 1, maxLength: 12000 }, project_id: { type: 'string', maxLength: 128 }, user_context: { type: 'object', additionalProperties: true } } },
+      CampaignRequest: { type: 'object', required: ['input'], additionalProperties: false, properties: { input: { type: 'string', minLength: 1, maxLength: 12000 }, user_context: { type: 'object', properties: {}, additionalProperties: true } } },
       CampaignResponse: { type: 'object', required: ['status', 'workflow_id', 'completed_nodes', 'selected_methods', 'final_synthesis', 'current_research_required', 'limitations', 'usage'], properties: { request_id: { type: 'string' }, status: { type: 'string', enum: ['COMPLETE', 'WAITING_FOR_INPUT', 'BLOCKED', 'FAILED'] }, workflow_id: { type: ['string', 'null'] }, completed_nodes: { type: 'array', items: { type: 'string' } }, selected_methods: { type: 'object', additionalProperties: { type: 'string' } }, final_synthesis: { type: ['object', 'null'], additionalProperties: true }, current_research_required: { type: 'array', items: {} }, limitations: { type: 'array', items: {} }, usage: { type: 'object', additionalProperties: true }, reason: { type: ['string', 'null'] }, required_inputs: { type: 'array', items: { type: 'string' } } } },
-      CreativeDirectorRequest: { type: 'object', required: ['input', 'mode'], additionalProperties: false, properties: { input: { type: 'string', minLength: 1, maxLength: 12000 }, mode: { type: 'string', enum: ['SINGLE_CREATIVE', 'CREATIVE_VARIANTS', 'CREATIVE_SYSTEM'] }, brand_constraints: { type: 'object', additionalProperties: true }, reference_assets: { type: 'array', items: { type: 'object', additionalProperties: true }, maxItems: 20 }, commands: { type: 'array', items: { type: 'string' }, maxItems: 20 }, project_id: { type: 'string', maxLength: 128 } } },
-      CreativeGenerationRequest: { type: 'object', required: ['creative_director_output', 'generation_mode'], additionalProperties: false, properties: { creative_director_output: { type: 'object', additionalProperties: true }, generation_mode: { type: 'string', enum: ['SINGLE_GENERATION', 'VARIANT_GENERATION', 'REVISION_GENERATION'] }, reference_assets: { type: 'array', items: { type: 'object', additionalProperties: true }, maxItems: 20 }, project_id: { type: 'string', maxLength: 128 } } },
+      CreativeDirectorRequest: { type: 'object', required: ['input', 'mode'], additionalProperties: false, properties: { input: { type: 'string', minLength: 1, maxLength: 12000 }, mode: { type: 'string', enum: ['SINGLE_CREATIVE', 'CREATIVE_VARIANTS', 'CREATIVE_SYSTEM'] }, brand_constraints: { type: 'object', properties: {}, additionalProperties: true }, reference_assets: { type: 'array', items: { type: 'object', properties: {}, additionalProperties: true }, maxItems: 20 }, commands: { type: 'array', items: { type: 'string' }, maxItems: 20 } } },
+      CreativeGenerationRequest: { type: 'object', required: ['creative_director_output', 'generation_mode'], additionalProperties: false, properties: { creative_director_output: { type: 'object', properties: {}, additionalProperties: true }, generation_mode: { type: 'string', enum: ['SINGLE_GENERATION', 'VARIANT_GENERATION', 'REVISION_GENERATION'] }, reference_assets: { type: 'array', items: { type: 'object', properties: {}, additionalProperties: true }, maxItems: 20 } } },
     }) },
   };
 }
