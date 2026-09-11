@@ -181,6 +181,7 @@ function productIdentityValues(facts) {
 const FACT_CATEGORY = { product_name: 'product', product_type: 'product', business_objective: 'business_objective', mechanism: 'mechanism' };
 
 function checkFieldSubstitutions(facts, key, rawVal, siblingEntries) {
+  const rawText = stringify(rawVal);
   const val = norm(stringify(rawVal));
   const markerIndex = firstMarkerIndex(val);
   const violations = [];
@@ -231,10 +232,14 @@ function checkFieldSubstitutions(facts, key, rawVal, siblingEntries) {
   if (gf && gf.status === 'USER_PROVIDED_FACT' && gf.value) {
     const canon = norm(gf.value);
     let bestIdx = -1, bestHit = null;
-    for (const c of OTHER_COUNTRIES) {
+    for (const c of UNAMBIGUOUS_OTHER_COUNTRIES) {
       if (c === canon || canon.includes(c)) continue;
       const idx = val.search(new RegExp('\\b' + c.replace(/ /g, '\\s+') + '\\b'));
       if (idx !== -1 && (bestIdx === -1 || idx < bestIdx)) { bestIdx = idx; bestHit = c; }
+    }
+    const ambiguousIdx = ambiguousGeographyAliasIndex(rawText, val, key);
+    if (ambiguousIdx !== -1 && !canon.includes('usa') && (bestIdx === -1 || ambiguousIdx < bestIdx)) {
+      bestIdx = ambiguousIdx; bestHit = AMBIGUOUS_GEOGRAPHY_ALIASES[0];
     }
     if (bestIdx !== -1 && !isNonReplacingProposal(val, bestIdx, markerIndex, gf.value, 'geography', siblingEntries)) {
       violations.push({ type: 'GEOGRAPHY_SUBSTITUTION', fact_field: 'geography', canonical_value: gf.value, found_value: bestHit, field_key: key });
@@ -244,7 +249,22 @@ function checkFieldSubstitutions(facts, key, rawVal, siblingEntries) {
 }
 // Word-boundary matched (never a bare substring test): "usa" as a country code must not match
 // inside unrelated JSON/text like "usage" or "causa".
-const OTHER_COUNTRIES = ['espana', 'colombia', 'argentina', 'chile', 'peru', 'estados unidos', 'united states', 'usa'];
+const UNAMBIGUOUS_OTHER_COUNTRIES = ['espana', 'colombia', 'argentina', 'chile', 'peru', 'estados unidos', 'united states'];
+const AMBIGUOUS_GEOGRAPHY_ALIASES = ['usa'];
+const GEOGRAPHY_VALUE_FIELDS = new Set(['geography', 'target_geo', 'country', 'target_country']);
+const USA_GEOGRAPHY_CONTEXT = /\b(?:mercado(?:\s+objetivo)?|target\s+market|geograf[ií]a|pa[ií]s)\s*(?::|=)?\s*usa\b|\bmercado\s+objetivo\b[^.!?\n]{0,30}\b(?:es|sera)\s+usa\b|\b(?:audiencia|clientes?\s+objetivo|p[uú]blico\s+objetivo)\b[^.!?\n]{0,25}\ben\s+usa\b|\b(?:operar\w*|dirigid[oa]s?|orientad[oa]s?|segmentad[oa]s?)\b[^.!?\n]{0,35}\b(?:en|a)\s+usa\b|\ben\s+usa\b/i;
+function ambiguousGeographyAliasIndex(rawText, normalizedText, fieldKey) {
+  // All-caps USA is an explicit country spelling. Sentence-case "Usa WhatsApp" is not.
+  const uppercase = rawText.search(/\bUSA\b/);
+  if (uppercase !== -1) return norm(rawText.slice(0, uppercase)).length;
+  const contextual = normalizedText.search(USA_GEOGRAPHY_CONTEXT);
+  if (contextual !== -1) {
+    const local = normalizedText.slice(contextual).search(/\busa\b/);
+    return contextual + local;
+  }
+  if (GEOGRAPHY_VALUE_FIELDS.has(norm(fieldKey)) && /^\s*usa\s*$/.test(normalizedText)) return normalizedText.search(/\busa\b/);
+  return -1;
+}
 
 // ---------- [KNOWN FACT DENIAL] a field may never deny/blank-out a fact it already knows,
 // regardless of position or marker — "aunque no aparezca otro valor". Denying a known fact is
