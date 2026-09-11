@@ -111,6 +111,26 @@ function captureConstraintsBlock(text) {
   return collected.length ? collected.join('\n') : null;
 }
 
+// [Natural Constraint Extraction] A brief with no "Restricciones:"/"Restricciones obligatorias:"
+// heading can still state a binding restriction as a plain prose sentence — e.g. "No inventes
+// métricas, resultados, CAC, ROAS, LTV, testimonios ni evidencia." Captured verbatim, sentence by
+// sentence, whenever a sentence begins with one of a fixed set of prohibition/immutability verbs
+// ("No inventes/inventar/cambies/cambiar"). Nothing is reinterpreted, summarized, or expanded — the
+// captured value is the sentence(s) exactly as written, and only sentences that actually start this
+// way are captured (no keyword scanning that could invent a prohibition the user never wrote). This
+// is a fallback only: the structured "Restricciones obligatorias:" block always takes precedence
+// when present (see extract() below).
+const NATURAL_CONSTRAINT_SENTENCE = /^\s*no\s+(inventes|inventar|cambies|cambiar)\b/i;
+function captureNaturalConstraintSentences(text) {
+  const sentences = text.match(/[^.\n]+[.\n]?/g) || [];
+  const matches = [];
+  for (const raw of sentences) {
+    const s = raw.trim();
+    if (NATURAL_CONSTRAINT_SENTENCE.test(s)) matches.push(s.replace(/\s+/g, ' ').trim());
+  }
+  return matches.length ? matches.join('\n') : null;
+}
+
 function firstNaturalMatch(naturalText, patterns) {
   for (const re of patterns || []) {
     const m = naturalText.match(re);
@@ -198,7 +218,7 @@ function extract(rawRequest) {
   // constraints: a same-line value ("Restricciones: presupuesto limitado") wins first (legacy,
   // unchanged); otherwise capture the full "Restricciones obligatorias:" block verbatim, line by
   // line, up to the next structural heading — nothing summarized, nothing invented.
-  const constraintsRaw = firstLabeledMatch(text, FIELD_LABELS.constraints) || captureConstraintsBlock(text);
+  const constraintsRaw = firstLabeledMatch(text, FIELD_LABELS.constraints) || captureConstraintsBlock(text) || captureNaturalConstraintSentences(text);
 
   const facts = {
     product_name: fact(product_name),

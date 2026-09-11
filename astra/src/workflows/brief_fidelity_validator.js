@@ -84,6 +84,32 @@ const BUYER_ROLE_INVERSION_PHRASES = [
 ];
 const CHECKED_FIELDS = ['buyer', 'product_name', 'product_type', 'business_objective', 'mechanism'];
 
+// [BUSINESS OBJECTIVE FIELD AWARENESS] Confirmed live false positive: "agendar una cita" in
+// whatsapp_conversion.appointment_closing tripped BUSINESS_OBJECTIVE_SUBSTITUTION even though the
+// canonical mechanism itself is "consulta → conversación → cita" — an operational field
+// describing HOW the mechanism's own final step is executed is not asserting a different business
+// objective. Unlike buyer/product/price/geography/mechanism (whose substitution phrases are
+// inherently objective-neutral vocabulary), several business_objective substitution patterns
+// (notably "agendar (una) cita") legitimately overlap with the words a mechanism-following
+// operational field would use. So this ONE fact category additionally requires objective-bearing
+// context — either the field itself is meant to hold an objective, or its own text explicitly
+// asserts one — before the substitution patterns below are even evaluated. PRODUCT/BUYER/PRICE/
+// GEOGRAPHY/MECHANISM checks are untouched by this gate.
+const OBJECTIVE_BEARING_FIELD_KEYS = new Set(['business_objective', 'campaign_objective', 'objective', 'primary_objective', 'goal', 'primary_goal']);
+const EXPLICIT_OBJECTIVE_ASSERTION = /\bel objetivo(\s+principal)?(\s+de la campana)?\s+es\b|\bobjetivo principal\b|\bcampaign objective\b|\bgoal is\b/;
+// A field that explicitly asserts an objective ("el objetivo ... es X") but merely quotes the
+// canonical value under an immediately preceding negation ("..., no vender el minicurso") is still
+// a drift — the canonical objective is textually present yet explicitly disclaimed, which
+// containsFact() alone cannot tell apart from a genuine restatement.
+function objectiveExplicitlyNegated(val, canonicalValue) {
+  const canon = norm(canonicalValue);
+  if (!canon) return false;
+  const idx = val.indexOf(canon);
+  if (idx === -1) return false;
+  const before = val.slice(Math.max(0, idx - 20), idx);
+  return /\bno\b[\s,]*$/.test(before);
+}
+
 // [STRICT SAME-FIELD FIDELITY] The mere presence of the canonical fact elsewhere in a field's
 // OWN text never neutralizes a substitution pattern anymore — that was the confirmed bypass
 // ("$400 MXN, pero el precio será $900 MXN" used to pass because "400" was also present). The
@@ -162,7 +188,15 @@ function checkFieldSubstitutions(facts, key, rawVal, siblingEntries) {
   for (const field of CHECKED_FIELDS) {
     const f = facts[field];
     if (!f || f.status !== 'USER_PROVIDED_FACT' || !f.value) continue;
-    const idx = earliestMatchIndex(val, SUBSTITUTION_PATTERNS[field] || []);
+    let idx = earliestMatchIndex(val, SUBSTITUTION_PATTERNS[field] || []);
+    if (field === 'business_objective') {
+      const isObjectiveBearingField = OBJECTIVE_BEARING_FIELD_KEYS.has(norm(key));
+      const hasExplicitAssertion = EXPLICIT_OBJECTIVE_ASSERTION.test(val);
+      if (!isObjectiveBearingField && !hasExplicitAssertion) continue; // not objective-bearing context — skip entirely
+      if (idx === -1 && hasExplicitAssertion && objectiveExplicitlyNegated(val, f.value)) {
+        idx = val.indexOf(norm(f.value)); // true drift: canonical objective present only as a disclaimed mention
+      }
+    }
     if (idx === -1) continue;
     const category = FACT_CATEGORY[field] || field;
     const escapeValues = category === 'product' ? productValues : f.value;
@@ -276,7 +310,9 @@ function checkUnlabeledProposal(facts, key, val, markerIndex) {
 // invented metrics/results/testimonials/proof/urgency/scarcity/evidence. These categories may
 // never appear — not even marked PROPUESTA — unless the SAME sentence clearly negates them
 // ("no usar testimonios", "testimonios = UNKNOWN", "sin proof disponible"). ----------
-const PROHIBITION_RULE = /no\s+inventar[\s\S]{0,200}(m[ée]tricas|testimonios|proof|evidencia)/i;
+// \w* covers every conjugation this gate's natural-constraint extraction can hand it verbatim
+// ("no inventes", "no inventar", "no inventen", ...) without hardcoding each form separately.
+const PROHIBITION_RULE = /no\s+invent\w*[\s\S]{0,200}(m[ée]tricas|testimonios|proof|evidencia)/i;
 const PROHIBITED_CONTENT_PATTERNS = [
   { type: 'testimonials', re: /testimonios?/i },
   { type: 'proof', re: /\bproof\b/i },
