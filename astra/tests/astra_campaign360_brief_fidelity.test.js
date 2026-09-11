@@ -359,6 +359,76 @@ t('a marker with a non-replacing cue but WITHOUT the canonical fact stated anywh
   assert(violations.some(v => v.fact_field === 'product_name' || v.fact_field === 'product_type'), JSON.stringify(violations));
 });
 
+// ========== 2e. FIELD-AWARE PRIMARY ASSERTION — a sibling only corroborates criterion A when it
+// is a semantically authorized field for that fact (product_name/product/offer_structure[+principal
+// wording] for product; business_objective/campaign_objective[+conserves it] for objective; price/
+// offer_price/pricing for price; buyer/target_audience/icp for buyer; geography/market/target_geo
+// for geography). notes/assumptions/limitations/rationale/evidence/exploratory_idea/secondary_idea/
+// comments are NEVER authorized, no matter what they contain. ==========
+t('CROSS_FIELD_PRODUCT_LATERAL_MENTION: offer_structure substitutes the product, "notes" mentions it laterally => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'PROPUESTA: cita exprés como lead magnet, sin sustituir producto.',
+    notes: 'Método 360',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => (v.fact_field === 'product_name' || v.fact_field === 'product_type') && v.field_key === 'offer_structure'), JSON.stringify(violations));
+});
+t('CROSS_FIELD_PRICE_NUMERIC_COLLISION: offer_structure substitutes the price, "notes" happens to contain the digits => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'PROPUESTA: $900 MXN como variante secundaria.',
+    notes: '400 minutos de contenido',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.type === 'PRICE_SUBSTITUTION' && v.field_key === 'offer_structure'), JSON.stringify(violations));
+});
+t('CROSS_FIELD_OBJECTIVE_LATERAL: campaign_objective substitutes the objective, "notes" mentions it laterally => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    campaign_objective: 'PROPUESTA: CLIENT_ACQUISITION como test secundario.',
+    notes: 'vender el minicurso',
+  } }, { nodeId: 'ads' });
+  assert(violations.some(v => v.fact_field === 'business_objective' && v.field_key === 'campaign_objective'), JSON.stringify(violations));
+});
+t('CROSS_FIELD_BUYER_LATERAL: icp substitutes the buyer, "notes" mentions it laterally => FAIL CLOSED', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    icp: 'PROPUESTA: consumidoras finales como segmento secundario.',
+    notes: 'dueñas de estéticas',
+  } }, { nodeId: 'icp' });
+  assert(violations.some(v => v.fact_field === 'buyer' && v.field_key === 'icp'), JSON.stringify(violations));
+});
+t('VALID_SIBLING_PRIMARY: product_name field states the product; a separate exploratory_idea proposes an alternative => PASS', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    product_name: 'Método 360',
+    exploratory_idea: 'PROPUESTA: cita exprés como lead magnet, sin sustituir producto.',
+  } }, { nodeId: 'offer' });
+  assert.deepStrictEqual(violations, []);
+});
+t('VALID_SAME_FIELD_PRIMARY: the field itself states the product before proposing an alternative => PASS', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'Oferta principal: Método 360. PROPUESTA: usar cita exprés como lead magnet, sin sustituir el producto.',
+  } }, { nodeId: 'offer' });
+  assert.deepStrictEqual(violations, []);
+});
+t('a disallowed key never corroborates even with a "principal" designator word (allow-list is exhaustive, not keyword-triggered)', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    offer_structure: 'PROPUESTA: cita exprés como lead magnet, sin sustituir producto.',
+    rationale: 'El producto principal sigue siendo Método 360.',
+  } }, { nodeId: 'offer' });
+  assert(violations.some(v => v.field_key === 'offer_structure'), JSON.stringify(violations));
+});
+t('a conditional sibling key (campaign_objective) DOES corroborate when it explicitly conserves the canonical objective', () => {
+  const f = briefFacts.extract(METHOD360_BRIEF);
+  const { violations } = fidelity.validateOutputAgainstFacts(f, { downstream_payload: {
+    campaign_objective: 'Objetivo principal vigente: vender el minicurso.',
+    exploratory_idea: 'PROPUESTA: objective=CLIENT_ACQUISITION como test secundario.',
+  } }, { nodeId: 'ads' });
+  assert.deepStrictEqual(violations, []);
+});
+
 // ========== 3/4/5/6/7. full-pipeline wiring: Node Input Contract + validators inside run() ==========
 t('W1 every node input carries canonical_brief_facts (Node Input Contract)', async () => {
   const captured = [];
