@@ -376,6 +376,9 @@ const TACTICAL_DETAIL_PATTERNS = [
   /\bcampa[ñn]a\s+umbrella\b/i,
   /\bsegmentar\b[\s\S]{0,30}\b(?:fr[ií][oa]s?|c[aá]lid[oa]s?|similares?|lookalike)\b/i,
   /\breportes?\s+diarios?\b/i,
+  /\blead\s*magnet\b/i,
+  /\bcontenido\s+(?:breve\s+)?de\s+valor\b/i,
+  /\bopci[oó]n\s+(?:de\s+)?agendar\b/i,
 ];
 function unlabeledProposalGateActive(cf) {
   if (!cf || cf.status !== 'USER_PROVIDED_FACT') return false;
@@ -753,6 +756,52 @@ function prefixProposalClauses(text, offsets) {
   }
   return repaired;
 }
+// [NEW TACTICAL ADDITION REPAIR — confirmed live defect, job 8a8644f2-7e6e-47ae-bc04-
+// a27562eb9d9e] repairUpstreamProposalStatus only ever repaired anchors that originated
+// UPSTREAM (marked PROPUESTA there, then reused unmarked downstream). A brand-new tactical
+// detail invented ENTIRELY within THIS node — no upstream anchor exists for it at all, e.g.
+// "recordatorio 24h" dreamed up by WHATSAPP_SALES_SPECIALIST itself — had no repair path:
+// UNLABELED_PROPOSAL just failed closed with zero attempt to fix it. This walks the SAME
+// TACTICAL_DETAIL_PATTERNS source checkUnlabeledProposal already validates against — leaf-aware
+// (arrays/nested objects), same negation/marker escapes — and prefixes PROPUESTA: at the start of
+// the containing clause: the identical deterministic PREFIX_PROPUESTA repair already used for
+// upstream propagation, just sourced locally instead of from an upstream anchor.
+//
+// Deliberately excludes CONFIRMED_UNSUPPORTED_ADDITIONS: those are the confirmed E2E adversarial
+// additions from an EARLIER, separate defect (testimonials, deadline, oferta limitada, webinar
+// demo, ...) — content serious enough that it must keep failing closed for a human/LLM to
+// address, never silently auto-labeled PROPUESTA by this mechanical repair. Auto-repairing them
+// was a confirmed regression here: astra_campaign360_node_fidelity_diagnostic_propagation.test.js
+// specifically exercises "webinar demo sin marcar como propuesta" staying a hard FAILED. Gated
+// exactly like checkUnlabeledProposal's tactical branch (facts.constraints must be a
+// USER_PROVIDED_FACT and the broader unlabeledProposalGateActive check), so it is a no-op
+// wherever that check itself would never have fired.
+function localUnlabeledProposalHits(facts, rawValue) {
+  const cf = facts.constraints;
+  if (!cf || cf.status !== 'USER_PROVIDED_FACT' || !unlabeledProposalGateActive(cf)) return [];
+  const patterns = TACTICAL_DETAIL_PATTERNS;
+  if (!patterns.length) return [];
+  const hits = []; const seen = new Set();
+  for (const leaf of proposalLeafEntries(rawValue)) {
+    const text = norm(leaf.value);
+    const markerIndex = firstMarkerIndex(text);
+    for (const span of proposalClauseSpans(text)) {
+      const clause = text.slice(span.start, span.end);
+      if (NEGATION_CUE.test(clause)) continue; // negated/nulled, not an addition
+      for (const re of patterns) {
+        const match = re.exec(clause);
+        if (!match) continue;
+        const idx = span.start + match.index;
+        if (markerIndex !== -1 && idx >= markerIndex) continue; // already labeled
+        const identity = JSON.stringify(leaf.path) + ':' + span.start + ':' + re.source;
+        if (seen.has(identity)) continue;
+        seen.add(identity);
+        hits.push({ matched_anchor: match[0], leaf_path: formatLeafPath(leaf.path), leaf_path_parts: leaf.path, clause_index: span.clauseIndex, repair_offset: span.start });
+      }
+    }
+  }
+  return hits;
+}
 function repairUpstreamProposalStatus(facts, output, upstreamOutputs = []) {
   let repairedOutput = cloneJsonValue(output);
   const anchors = upstreamProposalAnchors(facts, upstreamOutputs);
@@ -761,7 +810,7 @@ function repairUpstreamProposalStatus(facts, output, upstreamOutputs = []) {
     ? repairedOutput.downstream_payload : repairedOutput;
   if (!container || typeof container !== 'object' || Array.isArray(container)) return { output: repairedOutput, repairs };
   for (const [fieldKey, rawValue] of Object.entries(container)) {
-    const hits = proposalPropagationHits(rawValue, anchors);
+    const hits = proposalPropagationHits(rawValue, anchors).concat(localUnlabeledProposalHits(facts, rawValue));
     const byLeaf = new Map();
     for (const hit of hits) {
       const identity = JSON.stringify(hit.leaf_path_parts);
@@ -773,7 +822,11 @@ function repairUpstreamProposalStatus(facts, output, upstreamOutputs = []) {
     let repairedValue = rawValue;
     for (const { path, hits: leafHits } of byLeaf.values()) {
       const originalLeaf = getAtPath(repairedValue, path);
-      repairedValue = setAtPath(repairedValue, path, prefixProposalClauses(originalLeaf, leafHits.map(hit => hit.repair_offset)));
+      // Two hits at the same clause (e.g. an upstream-propagated anchor and a brand-new
+      // tactical addition both inside "si no responde 48h: ... oferta limitada ...") must only
+      // insert one PROPUESTA: prefix, not one per hit — dedupe by repair_offset.
+      const offsets = [...new Set(leafHits.map(hit => hit.repair_offset))];
+      repairedValue = setAtPath(repairedValue, path, prefixProposalClauses(originalLeaf, offsets));
     }
     container[fieldKey] = repairedValue;
   }

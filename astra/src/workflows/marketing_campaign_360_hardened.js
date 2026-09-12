@@ -141,9 +141,22 @@ async function processNode(n, ctx) {
   // [Node Fidelity Validator] a node output that contradicts a USER_PROVIDED_FACT never
   // continues silently — fail-closed. The only repair allowed here preserves proposal status by
   // adding a marker to the exact clauses found by the same deterministic provenance detector.
+  //
+  // [Repair-gate fix — confirmed live defect, job 8a8644f2-7e6e-47ae-bc04-a27562eb9d9e] this used
+  // to require EVERY violation on the node to be UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION before
+  // even ATTEMPTING repair — so a node whose violations were a genuine MIX of that type plus a
+  // plain UNLABELED_PROPOSAL (a brand-new tactical detail invented in this node, not propagated
+  // from anywhere upstream) skipped repair entirely and failed closed with the raw, unrepaired
+  // violation list — even for the propagation violations that repairUpstreamProposalStatus could
+  // already fix cleanly on their own. repairUpstreamProposalStatus now also repairs plain
+  // UNLABELED_PROPOSAL (new tactical additions with no upstream anchor at all — see its own
+  // [NEW TACTICAL ADDITION REPAIR] comment), so both repairable types gate attempt-to-repair
+  // together; any OTHER violation type (EXPLICIT_PROHIBITION, *_SUBSTITUTION, KNOWN_FACT_DENIAL,
+  // UNKNOWN_FACT_FABRICATION, ...) still skips repair and fails closed immediately, unchanged.
+  const REPAIRABLE_VIOLATION_TYPES = new Set(['UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION', 'UNLABELED_PROPOSAL']);
   if (canonicalBriefFacts) {
     let { violations } = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, output, { nodeId: n.id, upstream_outputs: input.upstream_outputs });
-    if (violations.length && violations.every(v => v.type === 'UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION')) {
+    if (violations.length && violations.every(v => REPAIRABLE_VIOLATION_TYPES.has(v.type))) {
       const repaired = fidelity.repairUpstreamProposalStatus(canonicalBriefFacts, output, input.upstream_outputs);
       proposalStatusRepairs = repaired.repairs.map(repair => ({ node: n.id, ...repair }));
       const secondValidation = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, repaired.output, { nodeId: n.id, upstream_outputs: input.upstream_outputs });
