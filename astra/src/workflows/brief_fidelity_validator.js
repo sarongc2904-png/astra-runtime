@@ -734,6 +734,11 @@ const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[
 // meta; a bare acronym next to a stated CURRENCY VALUE ("CAC is $20", "LTV $500") is itself an
 // observed/claimed value, not just a %/x multiplier — RESULT_CURRENCY_VALUE (language-neutral,
 // digits-based) closes that gap generically rather than special-casing dollar signs here.
+// A %/x multiplier may carry a decimal component ("3.5x ROAS", "4.5% CTR") — shared between the
+// ordinary clause-based metric matcher and the compact-punctuation matcher below so both recognize
+// the same value shapes consistently. The trailing \b is only on the "x" alternative (never after
+// a literal "%", which can never satisfy \b — see the PRE-EXISTING BUG FIX note below).
+const METRIC_PCT_X_VALUE = '\\d+(?:\\.\\d+)?\\s*(?:%|x\\b)';
 const INVENTED_METRIC_CLAIM = new RegExp(
   '\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b[\\s\\S]{0,20}\\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta|expected|projected|estimated|target|goal)\\b' +
   '|\\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta|expected|projected|estimated|target|goal)\\b[\\s\\S]{0,20}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b' +
@@ -743,12 +748,55 @@ const INVENTED_METRIC_CLAIM = new RegExp(
   // a word character. Splitting the \b onto only the "x" alternative (mirroring how RESULT_MAGNITUDE
   // already does it correctly) fixes this for every acronym, not just the ones this gate happens to
   // test.
-  '|\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b[\\s\\S]{0,10}(?:\\d+\\s*(?:%|x\\b)|' + RESULT_CURRENCY_VALUE + ')' +
+  '|\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b[\\s\\S]{0,10}(?:' + METRIC_PCT_X_VALUE + '|' + RESULT_CURRENCY_VALUE + ')' +
   // The %/x magnitude can precede the acronym too ("3x ROAS", "4% CTR"), not just follow it —
   // mirrors the currency-value reverse branch immediately below.
-  '|(?:\\d+\\s*(?:%|x\\b))[\\s\\S]{0,10}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b' +
+  '|(?:' + METRIC_PCT_X_VALUE + ')[\\s\\S]{0,10}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b' +
   '|(?:' + RESULT_CURRENCY_VALUE + ')[\\s\\S]{0,10}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b',
   'i');
+// [COMPACT METRIC PUNCTUATION HARDENING] confirmed live-red-team gap: "ROAS?4x" produced ZERO
+// violations. Root cause is NOT the metric matcher itself (INVENTED_METRIC_CLAIM correctly pairs
+// an acronym with an adjacent magnitude) — it is that checkExplicitProhibitionOnLeaf's generic
+// clause splitter treats "?" (like "." and "!") as a hard clause boundary for EVERY category, so
+// "ROAS?4x" is split into two separate clauses ("ROAS" and "4x") before any category-specific
+// regex ever runs, and the acronym and its magnitude are never evaluated together. The prohibition
+// explicitly rules out weakening the general clause splitter (it protects every other category's
+// negation/enumeration semantics) — so this is a NARROW, SEPARATE matcher: it runs on each leaf's
+// RAW, un-split text, looks only for a protected metric acronym directly adjacent to a concrete
+// magnitude/value with nothing but compact punctuation between them (never a full word, so it can
+// never accidentally span two genuinely unrelated clauses — "ROAS is unavailable, use 4x zoom" has
+// a whole clause of separating words and does not match), and contributes ADDITIONAL invented_metric
+// violations alongside — never in place of — the existing clause-based check.
+const COMPACT_METRIC_ACRONYMS = 'cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm';
+// Requires at least one actual punctuation mark (not pure whitespace) — "ROAS 4x" (space only) is
+// already handled by the ordinary clause-based INVENTED_METRIC_CLAIM path and must never be
+// double-matched here.
+const COMPACT_PUNCTUATION_SEPARATOR = '\\s*[?:=/\\-—()]+\\s*';
+const COMPACT_METRIC_VALUE = `${METRIC_PCT_X_VALUE}|${RESULT_CURRENCY_VALUE}`;
+const COMPACT_METRIC_VALUE_CLAIM = new RegExp(
+  `\\b(?:${COMPACT_METRIC_ACRONYMS})\\b${COMPACT_PUNCTUATION_SEPARATOR}(?:${COMPACT_METRIC_VALUE})` +
+  `|(?:${COMPACT_METRIC_VALUE})${COMPACT_PUNCTUATION_SEPARATOR}\\b(?:${COMPACT_METRIC_ACRONYMS})\\b`,
+  'gi');
+// A lone "ROAS?" (no value token immediately following) never matches COMPACT_METRIC_VALUE_CLAIM
+// at all — the value is a required part of the pattern, not optional — so a bare question/reference
+// is safe by construction, with no separate escape needed.
+// Deliberately conservative, narrow negation guard scoped to this matcher only: mirrors the same
+// closed bilingual negation vocabulary already used elsewhere in this file (no/nunca/sin/evitar,
+// without/never/avoid/do not/don't), checked only in the text immediately preceding the match.
+const COMPACT_METRIC_NEGATION_BEFORE = /\b(?:no|nunca|sin|evitar|without|never|avoid|do\s+not|don['’]t)\b[^.!?;\n]{0,20}$/i;
+function checkCompactMetricPunctuationClaims(fieldKey, leafText, leafPath) {
+  const violations = [];
+  for (const match of leafText.matchAll(COMPACT_METRIC_VALUE_CLAIM)) {
+    const before = leafText.slice(0, match.index);
+    if (COMPACT_METRIC_NEGATION_BEFORE.test(before)) continue;
+    violations.push({
+      type: 'EXPLICIT_PROHIBITION', fact_field: null, category: 'invented_metric', field_key: fieldKey,
+      matched_text: match[0], matched_pattern: COMPACT_METRIC_VALUE_CLAIM.source,
+      local_clause: match[0], clause_index: null, occurrence_start: match.index, leaf_path: leafPath,
+    });
+  }
+  return violations;
+}
 const PROHIBITED_CONTENT_PATTERNS = [
   { type: 'testimonials', re: /testimonios?|\btestimonials?\b/i },
   { type: 'proof', re: /\bproof\b/i },
@@ -835,7 +883,30 @@ function checkExplicitProhibition(facts, key, rawVal) {
   if (!activeCategories.size) return [];
   const violations = [];
   for (const leaf of collectTextLeaves(rawVal, key)) {
-    violations.push(...checkExplicitProhibitionOnLeaf(key, leaf.text, leaf.leafPath, activeCategories));
+    // Clause-based check runs FIRST: when both paths legitimately fire for the same physical
+    // occurrence (a separator like ":"/"="/"/" that was never a clause boundary to begin with), the
+    // clause-based violation carries the fuller, more informative diagnostic (local_clause = the
+    // whole surrounding clause, e.g. "Proposed ROAS: 4x") — the compact matcher's own local_clause
+    // is only the bare matched span. Dedup below keeps whichever was inserted first.
+    const leafViolations = [];
+    leafViolations.push(...checkExplicitProhibitionOnLeaf(key, leaf.text, leaf.leafPath, activeCategories));
+    if (activeCategories.has('invented_metric')) {
+      leafViolations.push(...checkCompactMetricPunctuationClaims(key, leaf.text, leaf.leafPath));
+    }
+    // [DEDUP] the compact-punctuation matcher intentionally overlaps the ordinary clause-based
+    // matcher for separators that are NOT hard clause boundaries (":", "=", "/", "-", "(", ")") —
+    // those were already reachable through the clause matcher's own [\s\S]{0,10} gap tolerance, so
+    // the same physical occurrence (identical category + start offset within this leaf) can surface
+    // from both paths. Collapse to one violation per genuinely distinct occurrence; never removes a
+    // violation that is unique to the compact path (e.g. "ROAS?4x", where "?" IS a clause boundary
+    // and only the compact matcher ever sees the pairing at all).
+    const seen = new Set();
+    for (const v of leafViolations) {
+      const dedupeKey = `${v.category}|${v.occurrence_start}`;
+      if (seen.has(dedupeKey)) continue;
+      seen.add(dedupeKey);
+      violations.push(v);
+    }
   }
   return violations;
 }
@@ -892,7 +963,9 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
     // all (checked via isNegated(s.length, s.length) for the enumeration-continuation/negativeList
     // carry-over below — e.g. "No CAC" as a whole clause, immediately followed by ", ROAS or
     // testimonials" as a sibling clause in the same negated list).
-    const ENGLISH_BARE_NEGATION_BEFORE_NOUN = /\b(?:no|without)\b(?:\s+\w+)?\s*$/i;
+    // "nunca" (Spanish "never") bare-negates a following noun/acronym the same way "no"/"without"
+    // do ("Nunca ROAS:4x") — the direct Spanish mirror of this English-specific bare-noun shape.
+    const ENGLISH_BARE_NEGATION_BEFORE_NOUN = /\b(?:no|without|nunca)\b(?:\s+\w+)?\s*$/i;
     const isNegated = (idx, end) => {
       const before = s.slice(0, idx);
       let cueEnd = negativeList ? 0 : -1;
