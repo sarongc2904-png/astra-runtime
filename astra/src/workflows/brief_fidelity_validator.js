@@ -356,19 +356,64 @@ function sentenceAround(val, idx) {
   const end = endDot === -1 ? (endNl === -1 ? val.length : endNl) : (endNl === -1 ? endDot : Math.min(endDot, endNl));
   return val.slice(start, end === -1 ? val.length : end);
 }
+// [PROPOSAL STATUS LOSS FIX] confirmed live defect: brand-new tactical specifics — "Test 3 hooks
+// y 2 creativos por hook", "Recordatorio 48h y 24h", "Campaña umbrella con 3 ejecuciones" —
+// reached final_synthesis as flat, unmarked assertions with zero violations, because
+// CONFIRMED_UNSUPPORTED_ADDITIONS is a closed list of specific known-bad phrases (built for a
+// different, earlier confirmed defect) that was never meant to catch open-ended new tactics. Per
+// REGLA 4, ANY new count/cadence/structural detail not itself a canonical fact must be PROPUESTA-
+// labeled — semantic-category detection (a number bound to a tactical unit or a recognized
+// campaign-structure term), not a hardcoded phrase list. Gated more broadly than
+// CONFIRMED_UNSUPPORTED_ADDITIONS: a brief need not spell out the exact "mark ideas as PROPUESTA"
+// sentence for this to apply — any brief that already prohibits inventing content (the same
+// EXPLICIT_PROHIBITION_DIRECTIVE gate used for negative-constraint categories) implies new
+// tactical specifics must not be silently asserted either. Still requires facts.constraints to be
+// a USER_PROVIDED_FACT, so a brief with no constraints at all (e.g. the R1 regression fixture)
+// stays completely unaffected — no new false positives on ordinary node prose.
+const TACTICAL_DETAIL_PATTERNS = [
+  /\b\d+\s*(?:h|hrs?|horas?)\b/i,
+  /\b\d+\s+(?:ejecuciones?|hooks?|creativos?|preguntas?|mensajes?|recordatorios?|reportes?|anuncios?|variantes?|versiones?)\b/i,
+  /\bcampa[ñn]a\s+umbrella\b/i,
+  /\bsegmentar\b[\s\S]{0,30}\b(?:fr[ií][oa]s?|c[aá]lid[oa]s?|similares?|lookalike)\b/i,
+  /\breportes?\s+diarios?\b/i,
+];
+function unlabeledProposalGateActive(cf) {
+  if (!cf || cf.status !== 'USER_PROVIDED_FACT') return false;
+  const val = norm(cf.value);
+  return IDEA_MARKING_RULE.test(val) || EXPLICIT_PROHIBITION_DIRECTIVE.test(val);
+}
+function clauseIndexAt(val, idx) { return val.slice(0, idx).split(/[.!?;\n]/).length - 1; }
 function checkUnlabeledProposal(facts, key, val, markerIndex) {
   const cf = facts.constraints;
-  if (!cf || cf.status !== 'USER_PROVIDED_FACT' || !IDEA_MARKING_RULE.test(norm(cf.value))) return [];
+  if (!cf || cf.status !== 'USER_PROVIDED_FACT') return [];
   const violations = [];
   const seen = new Set();
-  for (const re of CONFIRMED_UNSUPPORTED_ADDITIONS) {
-    const idx = val.search(re);
-    if (idx === -1) continue;
-    if (markerIndex !== -1 && idx >= markerIndex) continue; // escaped: appears inside the PROPUESTA span
-    if (NEGATION_CUE.test(sentenceAround(val, idx))) continue; // negated/nulled, not an addition
-    const label = 'UNLABELED_PROPOSAL:' + re.source;
-    if (seen.has(label)) continue; seen.add(label);
-    violations.push({ type: 'UNLABELED_PROPOSAL', fact_field: null, matched: re.source, field_key: key });
+  if (IDEA_MARKING_RULE.test(norm(cf.value))) {
+    for (const re of CONFIRMED_UNSUPPORTED_ADDITIONS) {
+      const idx = val.search(re);
+      if (idx === -1) continue;
+      if (markerIndex !== -1 && idx >= markerIndex) continue; // escaped: appears inside the PROPUESTA span
+      if (NEGATION_CUE.test(sentenceAround(val, idx))) continue; // negated/nulled, not an addition
+      const label = 'UNLABELED_PROPOSAL:' + re.source;
+      if (seen.has(label)) continue; seen.add(label);
+      violations.push({ type: 'UNLABELED_PROPOSAL', fact_field: null, matched: re.source, field_key: key });
+    }
+  }
+  if (unlabeledProposalGateActive(cf)) {
+    for (const re of TACTICAL_DETAIL_PATTERNS) {
+      const match = re.exec(val);
+      if (!match) continue;
+      const idx = match.index;
+      if (markerIndex !== -1 && idx >= markerIndex) continue; // escaped: appears inside the PROPUESTA span
+      if (NEGATION_CUE.test(sentenceAround(val, idx))) continue;
+      const label = 'UNLABELED_PROPOSAL:' + re.source;
+      if (seen.has(label)) continue; seen.add(label);
+      violations.push({
+        type: 'UNLABELED_PROPOSAL', fact_field: null, matched: re.source, field_key: key,
+        matched_text: match[0], matched_pattern: re.source,
+        local_clause: sentenceAround(val, idx).trim(), clause_index: clauseIndexAt(val, idx), occurrence_start: idx,
+      });
+    }
   }
   return violations;
 }
@@ -378,6 +423,33 @@ function checkUnlabeledProposal(facts, key, val, markerIndex) {
 // other sibling category by association. An active category may never appear — not even marked
 // PROPUESTA — unless that occurrence is explicitly negated
 // ("no usar testimonios", "testimonios = UNKNOWN", "sin proof disponible"). ----------
+// [NEGATIVE CONSTRAINT BYPASS FIX] confirmed live defect: a brief prohibiting "resultados" or
+// "evidencia" had NO corresponding category here at all — "resultados"/"evidencia" never matched
+// any PROHIBITION_CATEGORY_TERMS entry, so activeExplicitProhibitionCategories() never activated
+// for them, and EXPLICIT_PROHIBITION never even attempted to scan for phrases like "Citas que
+// pagan más en 30 días" (an invented result) or "Scripts... probados" (invented evidence) — with
+// or without a PROPUESTA marker (this file's EXPLICIT_PROHIBITION check has never honored the
+// marker as an escape for any category; the gap was upstream, in category coverage, not in
+// marker handling). invented_result/invented_evidence close that gap the same way every other
+// category here works: semantic term/pattern matching, never a hardcoded exact phrase.
+// A "result claim" always requires an explicit numeric/temporal magnitude (%, Nx, "en N días",
+// or a bare count directly against an outcome noun like "50 ventas") — never a bare verb+noun
+// pairing alone. That single invariant is what keeps this from false-positiving on ordinary,
+// REQUIRED mechanism-preservation prose ("generar consultas ... convertir consulta → cita" has
+// no digit anywhere, so it never matches, no matter how close "generar" sits to "citas").
+const RESULT_OUTCOME_TERMS = 'ventas?|ingres\\w*|leads?|citas?|clientes?|conversi[oó]n(?:es)?|ticket';
+const RESULT_SELF_SUFFICIENT_VERBS = 'duplicar|triplicar'; // inherently claim a magnitude (x2/x3) on their own
+const RESULT_QUALIFIED_VERBS = 'aumentar|incrementar|subir|bajar|reducir|mejorar|lograr|conseguir|obtener|generar|pagan';
+const RESULT_MAGNITUDE = `\\d+\\s*%|\\d+\\s*x\\b|en\\s+\\d+\\s*(?:d[ií]as?|semanas?|meses?)|\\d+\\s+(?:${RESULT_OUTCOME_TERMS})`;
+const INVENTED_RESULT_CLAIM = new RegExp(
+  `\\b(?:${RESULT_SELF_SUFFICIENT_VERBS})\\b` +
+  `|\\b(?:${RESULT_QUALIFIED_VERBS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))` +
+  `|\\b(?:${RESULT_OUTCOME_TERMS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))`, 'i');
+const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bantes\s*\/\s*despu[ée]s\b|\bresultados?\s+document\w+\b/i;
+// [INVENTED METRIC ORDER FIX] confirmed live miss: "Objetivo ROAS 4x" (qualifier BEFORE the
+// acronym) never matched the old acronym-then-qualifier-only pattern. Now bidirectional, plus a
+// bare acronym+magnitude form ("ROAS 4x") that needs no qualifier word at all.
+const INVENTED_METRIC_CLAIM = /\b(?:cac|cpa|cpl|roas|mer|ltv)\b[\s\S]{0,20}\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta)\b|\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta)\b[\s\S]{0,20}\b(?:cac|cpa|cpl|roas|mer|ltv)\b|\b(?:cac|cpa|cpl|roas|mer|ltv)\b[\s\S]{0,10}\d+\s*(?:%|x)\b/i;
 const PROHIBITED_CONTENT_PATTERNS = [
   { type: 'testimonials', re: /testimonios?|\btestimonials?\b/i },
   { type: 'proof', re: /\bproof\b/i },
@@ -386,7 +458,9 @@ const PROHIBITED_CONTENT_PATTERNS = [
   { type: 'scarcity', re: /escasez|oferta\s+limitada/i },
   { type: 'deadline', re: /\bdeadline\b/i },
   { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado/i },
-  { type: 'invented_metric', re: /\b(cac|cpa|cpl|roas|mer|ltv)\b[\s\S]{0,20}(esperado|proyectado|estimado|objetivo|meta)/i },
+  { type: 'invented_metric', re: INVENTED_METRIC_CLAIM },
+  { type: 'invented_result', re: INVENTED_RESULT_CLAIM },
+  { type: 'invented_evidence', re: INVENTED_EVIDENCE_CLAIM },
 ];
 const PROHIBITION_CATEGORY_TERMS = [
   { type: 'testimonials', re: /testimonios?|\btestimonials?\b/i },
@@ -397,6 +471,8 @@ const PROHIBITION_CATEGORY_TERMS = [
   { type: 'deadline', re: /\bdeadline\b/i },
   { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado/i },
   { type: 'invented_metric', re: /m[ée]tricas?|\b(cac|cpa|cpl|roas|mer|ltv)\b/i },
+  { type: 'invented_result', re: /\bresultados?\b|\bresults?\b/i },
+  { type: 'invented_evidence', re: /\bevidencia\b|\bevidence\b/i },
 ];
 const EXPLICIT_PROHIBITION_DIRECTIVE = /\bno\s+(?:invent\w*|usar|incluir|utilizar|mencionar|presentar|afirmar|agregar|incorporar|garantiza\w*)\b/i;
 function activeExplicitProhibitionCategories(constraintValue) {
@@ -414,6 +490,12 @@ function activeExplicitProhibitionCategories(constraintValue) {
   return active;
 }
 const NEGATION_CUE = /\bno\s+(usar|incluir|utilizar|mencionar|presentar|afirmar)\b|=\s*unknown\b|\bsin\b[^.\n]{0,25}\bdisponible\b|\bno\s+hay\b/i;
+// A genuinely FUTURE/conditional framing ("testimonios futuros si existen", "recopilar casos de
+// éxito a futuro") is not a claim that the prohibited content exists now — it is the same kind of
+// honest non-assertion NEGATION_CUE already recognizes, just phrased as a forward-looking
+// contingency instead of an outright negation. Scoped to the same clause as the match, exactly
+// like every other escape in this function.
+const FUTURE_HEDGE_CUE = /\bfuturo?s?\b|\ba\s+futuro\b|\bsi\s+(?:existen?|hubiera|los\s+hay)\b|\beventualmente\b|\bcuando\s+(?:existan?|haya|los\s+haya)\b/i;
 // [OCCURRENCE DIAGNOSTICS] valRawSentences is the field's own real text (case/accents intact,
 // via textOnly() \u2014 never norm()'d). All matching below already relies on case-insensitive ('i')
 // regexes, and every pattern that needs an accented variant already spells it out (e.g.
@@ -450,7 +532,7 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
     for (const p of PROHIBITED_CONTENT_PATTERNS) {
       if (!activeCategories.has(p.type)) continue;
       for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
-        if (!isNegated(match.index, match.index + match[0].length)) {
+        if (!isNegated(match.index, match.index + match[0].length) && !FUTURE_HEDGE_CUE.test(s)) {
           violations.push({
             type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key,
             matched_text: match[0], matched_pattern: p.re.source,
