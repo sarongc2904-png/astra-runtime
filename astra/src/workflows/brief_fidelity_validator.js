@@ -995,43 +995,123 @@ function extractMechanismStageTerms(mechanismValue) {
   return [...terms];
 }
 const PURCHASE_GROUNDING_VOCAB = ['compra', 'compras', 'comprar', 'pago', 'pagar', 'pagos', 'venta', 'ventas', 'vender', 'purchase', 'buy', 'pay', 'sale', 'sales', 'checkout', 'pedido', 'orden'];
-const CAMPAIGN_CONVERSION_FIELD_PATHS = [['6_funnel', 'conversion_intent'], ['12_whatsapp_followup_closing', 'closing'], ['13_measurement_kpis', 'conversion_metrics']];
-// Deliberately narrow: only "o"/"or" (disjunction) and ";" (an enumerated metrics list, as in the
-// live measurement.conversion_metrics defect) count as separating ALTERNATIVE conversions. Neither
-// "y"/"and" (joins parts of one flow, not alternatives) nor a bare comma (ordinary prose is full of
-// commas with no enumeration-of-alternatives meaning at all) are treated as option boundaries —
-// using either produced false positives on perfectly ordinary sentences that merely mention the
-// mechanism in passing.
-const OPTION_SPLIT = /\s+o\s+|\s+or\s+|;/i;
-function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
-  const entry = CAMPAIGN_CONVERSION_FIELD_PATHS.find(([sectionKey]) => sectionKey === key);
-  if (!entry) return [];
-  const [sectionKey, subKey] = entry;
+
+// [ROLE-COHERENCE COVERAGE] Explicit semantic-role table by leaf/path, instead of a growing pile
+// of isolated field-specific regex hacks — every field this system inspects is registered ONCE,
+// with the classification that determines HOW STRICTLY it is checked. This is the single place a
+// new field is added when coverage needs to grow; no per-field logic ever lives outside this
+// table plus the shared extraction/grounding helpers below.
+//   - STRICT: the field's ENTIRE value (whole text, even with no enumeration at all) IS this
+//     campaign's own claimed conversion/endpoint — funnel.conversion_intent, whatsapp closing,
+//     whatsapp recovery (a recovery message's own proposed closing action), measurement.primary_outcome.
+//   - SEQUENCE: the field describes an ordered PROCESS (funnel.stages/transitions,
+//     measurement.funnel_metrics) — intermediate steps are always legitimate process description,
+//     never candidates in their own right; only an item that is ITSELF an arrow chain contributes
+//     its TERMINAL segment as a candidate (an item with no arrow at all is pure description and is
+//     never inspected). This is what lets "Meta Ads genera consultas; WhatsApp gestiona la
+//     conversación; compra del minicurso" pass while "Meta Ads → Landing → WhatsApp → Cita" still
+//     flags its own terminal.
+//   - ENUMERATION: the field lists several independently-named metrics/items (ad_strategy.measurement,
+//     measurement.conversion_metrics) — split on ";" AND "," (each item genuinely claims to BE a
+//     named endpoint/metric on its own, unlike a SEQUENCE's intermediate steps), and each item's
+//     own arrow-terminal (if it has one) or whole text (if it doesn't) is a candidate.
+//   - SAFE: legitimate to mention the mechanism/intermediate steps without being treated as this
+//     campaign's own conversion at all — whatsapp.follow_up, measurement.leading_indicators,
+//     ad_strategy.campaign_objective (a MEDIA/PLATFORM objective like "Mensajes" is never the
+//     same thing as the campaign's commercial objective and must never be role-confused with it).
+//   Any field/section not listed here is not inspected by this check at all — mechanism/offer/
+//   educational-content/ICP fields are never touched, by omission, not by a special-case escape.
+const FINAL_SYNTHESIS_FIELD_ROLES = {
+  '6_funnel': {
+    stages: 'SEQUENCE', transitions: 'SEQUENCE', conversion_intent: 'STRICT',
+  },
+  '8_ad_strategy': {
+    measurement: 'ENUMERATION', campaign_objective: 'SAFE',
+  },
+  '12_whatsapp_followup_closing': {
+    closing: 'STRICT', recovery: 'STRICT', follow_up: 'SAFE', objections: 'SAFE',
+  },
+  '13_measurement_kpis': {
+    primary_outcome: 'STRICT', funnel_metrics: 'SEQUENCE', conversion_metrics: 'ENUMERATION',
+    leading_indicators: 'SAFE', diagnostic_metrics: 'SAFE', optimization_triggers: 'SAFE', measurement_cadence: 'SAFE',
+  },
+};
+function mechanismTermsForFacts(facts) {
   const mf = facts.mechanism;
   if (!mf || mf.status !== 'USER_PROVIDED_FACT' || !mf.value) return [];
-  const raw = rawVal && typeof rawVal === 'object' ? rawVal[subKey] : null;
-  if (!raw || typeof raw !== 'string') return [];
   const objectiveWords = new Set(norm((facts.business_objective && facts.business_objective.value) || '').split(/[^a-z0-9]+/).filter(w => w.length >= 3));
   // Stem-aware, not exact-match: "citas" (objective) must exclude the mechanism term "cita" —
   // singular/plural and light conjugation differences are common between a brief's own wording
   // of its objective and the mechanism's stage-chain token for the same concept.
   const objectiveGrounds = term => [...objectiveWords].some(w => w.startsWith(term) || term.startsWith(w));
-  const mechanismTerms = extractMechanismStageTerms(mf.value).filter(term => !objectiveGrounds(term));
+  return extractMechanismStageTerms(mf.value).filter(term => !objectiveGrounds(term));
+}
+// Reduces one segment to its candidate phrase: if it's itself an arrow chain, only the TERMINAL
+// (the part after the last arrow, up to the next punctuation) is a candidate — everything before
+// the last arrow is process description, never a claimed endpoint on its own. Returns null for an
+// arrow-free segment when the caller doesn't want whole-segment fallback (SEQUENCE shape).
+function arrowTerminalOrNull(seg) {
+  const arrowParts = seg.split(/→|-->|->/);
+  if (arrowParts.length < 2) return null;
+  return arrowParts[arrowParts.length - 1].split(/[.,;:\n]/)[0].trim() || null;
+}
+function extractStrictCandidates(text) {
+  const candidates = [];
+  for (const item of text.split(/;/).map(s => s.trim()).filter(Boolean)) {
+    for (const seg of item.split(/\s+o\s+|\s+or\s+/i).map(s => s.trim()).filter(Boolean)) {
+      candidates.push(arrowTerminalOrNull(seg) || seg);
+    }
+  }
+  return candidates;
+}
+function extractSequenceCandidates(text) {
+  const candidates = [];
+  for (const item of text.split(/;/).map(s => s.trim()).filter(Boolean)) {
+    const terminal = arrowTerminalOrNull(item);
+    if (terminal) candidates.push(terminal); // an item with no arrow is pure process description — never a candidate
+  }
+  return candidates;
+}
+function extractEnumerationCandidates(text) {
+  const candidates = [];
+  for (const item of text.split(/[;,]/).map(s => s.trim()).filter(Boolean)) {
+    candidates.push(arrowTerminalOrNull(item) || item); // each item independently claims to BE a named endpoint/metric
+  }
+  return candidates;
+}
+function extractConversionCandidates(text, role) {
+  if (role === 'STRICT') return extractStrictCandidates(text);
+  if (role === 'SEQUENCE') return extractSequenceCandidates(text);
+  if (role === 'ENUMERATION') return extractEnumerationCandidates(text);
+  return [];
+}
+function isConversionCandidateGrounded(normCandidate, objectiveWords) {
+  const groundedByPurchase = PURCHASE_GROUNDING_VOCAB.some(w => new RegExp('\\b' + w + '\\b').test(normCandidate));
+  const groundedByObjective = [...objectiveWords].some(w => normCandidate.includes(w));
+  return groundedByPurchase || groundedByObjective;
+}
+function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
+  const sectionRoles = FINAL_SYNTHESIS_FIELD_ROLES[key];
+  if (!sectionRoles || !rawVal || typeof rawVal !== 'object') return [];
+  const mechanismTerms = mechanismTermsForFacts(facts);
   if (!mechanismTerms.length) return [];
-  const options = raw.split(OPTION_SPLIT).map(s => s.trim()).filter(Boolean);
-  if (options.length < 2) return []; // no enumeration/disjunction at all — nothing to have promoted a term into
+  const objectiveWords = new Set(norm((facts.business_objective && facts.business_objective.value) || '').split(/[^a-z0-9]+/).filter(w => w.length >= 3));
   const violations = [];
-  for (const option of options) {
-    const normOption = norm(option);
-    const matchedTerm = mechanismTerms.find(term => new RegExp('\\b' + escapeRegExpLiteral(term) + '\\w*\\b').test(normOption));
-    if (!matchedTerm) continue;
-    const groundedByPurchase = PURCHASE_GROUNDING_VOCAB.some(w => new RegExp('\\b' + w + '\\b').test(normOption));
-    const groundedByObjective = [...objectiveWords].some(w => normOption.includes(w));
-    if (groundedByPurchase || groundedByObjective) continue;
-    violations.push({
-      type: 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION', fact_field: 'mechanism', field_key: subKey,
-      matched_text: option, matched_anchor: matchedTerm, section: sectionKey,
-    });
+  for (const [subKey, role] of Object.entries(sectionRoles)) {
+    if (role === 'SAFE') continue;
+    const raw = rawVal[subKey];
+    if (!raw || typeof raw !== 'string') continue;
+    const candidates = extractConversionCandidates(raw, role);
+    for (const candidate of candidates) {
+      const normCandidate = norm(candidate);
+      const matchedTerm = mechanismTerms.find(term => new RegExp('\\b' + escapeRegExpLiteral(term) + '\\w*\\b').test(normCandidate));
+      if (!matchedTerm) continue;
+      if (isConversionCandidateGrounded(normCandidate, objectiveWords)) continue;
+      violations.push({
+        type: 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION', fact_field: 'mechanism', field_key: subKey,
+        matched_text: candidate, matched_anchor: matchedTerm, section: key,
+      });
+    }
   }
   return violations;
 }
@@ -1104,6 +1184,183 @@ function checkAssumptionEpistemicConsistency(key, rawVal, rawRequest) {
   return violations;
 }
 
+// ---------- [FINAL SYNTHESIS REPAIR — bounded, deterministic-first] Per the authorized sequence:
+// node outputs -> synthesize() -> validateFinalSynthesis() -> repair ONLY if every violation
+// present is an explicitly authorized repairable class -> revalidate -> COMPLETE only if clean,
+// else fail closed. EXPLICIT_PROHIBITION, invented metrics/evidence/guarantees/testimonials,
+// *_SUBSTITUTION, UNLABELED_PROPOSAL, and the FACT-based KNOWN_FACT_DENIAL (price/buyer/geography/
+// product/mechanism — field_key != '14_assumptions') are never in this set; any one of them present
+// anywhere makes the whole violation list ineligible for repair, unchanged from before this gate.
+const REPAIRABLE_FINAL_SYNTHESIS_TYPES = new Set(['MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION', 'UNSUPPORTED_USER_ATTRIBUTION', 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS']);
+function isRepairableFinalSynthesisViolation(v) {
+  if (REPAIRABLE_FINAL_SYNTHESIS_TYPES.has(v.type)) return true;
+  // KNOWN_FACT_DENIAL is emitted by TWO different systems: the strict canonical-fact denial check
+  // (fact_field = price/buyer/geography/product_name/product_type/mechanism — never repairable,
+  // denying a core canonical fact is serious) and this gate's own assumption-epistemic-consistency
+  // check (field_key === '14_assumptions', fact_field null) — only the latter is authorized here.
+  if (v.type === 'KNOWN_FACT_DENIAL' && v.field_key === '14_assumptions') return true;
+  return false;
+}
+function canonicalConversionPhrase(facts) {
+  const name = (facts.product_type && facts.product_type.value) || (facts.product_name && facts.product_name.value) || 'la oferta';
+  return `Compra/pago de ${name}`;
+}
+function isCandidateFlaggedForRepair(candidate, mechanismTerms, objectiveWords) {
+  const normCandidate = norm(candidate);
+  const matchedTerm = mechanismTerms.find(term => new RegExp('\\b' + escapeRegExpLiteral(term) + '\\w*\\b').test(normCandidate));
+  if (!matchedTerm) return false;
+  return !isConversionCandidateGrounded(normCandidate, objectiveWords);
+}
+// Replaces ONLY the terminal segment of an arrow chain with the canonical conversion phrase,
+// preserving every earlier stage verbatim — "los pasos intermediarios pueden conservarse, pero el
+// endpoint debe estar alineado con la campaña."
+function repairArrowTerminal(seg, facts) {
+  const arrowParts = seg.split(/(→|-->|->)/);
+  if (arrowParts.length < 2) return seg;
+  const lastIdx = arrowParts.length - 1;
+  const trailingPunct = (arrowParts[lastIdx].match(/[.,;:\n]*$/) || [''])[0];
+  arrowParts[lastIdx] = ' ' + canonicalConversionPhrase(facts) + trailingPunct;
+  return arrowParts.join('');
+}
+// Repairs one field's text according to its role. Never invents content beyond canonical facts:
+// a wholly-flagged non-chain segment/item is DROPPED (an alternative among several — dropping it
+// leaves the others standing); a flagged ARROW-CHAIN terminal is REPLACED in place (the chain's
+// earlier, legitimate steps survive untouched); if every candidate in a STRICT/ENUMERATION field
+// is flagged and none survive, the field falls back to the canonical conversion phrase alone.
+function repairConversionFieldText(text, role, facts, mechanismTerms, objectiveWords) {
+  let changed = false;
+  const flagged = c => isCandidateFlaggedForRepair(c, mechanismTerms, objectiveWords);
+  if (role === 'STRICT') {
+    const items = text.split(/;/);
+    const repairedItems = items.map(item => {
+      const segParts = item.split(/(\s+o\s+|\s+or\s+)/i);
+      const kept = [];
+      for (let i = 0; i < segParts.length; i += 2) {
+        const seg = segParts[i];
+        const delim = i > 0 ? segParts[i - 1] : '';
+        const terminal = arrowTerminalOrNull(seg);
+        if (terminal) {
+          if (flagged(terminal)) { changed = true; kept.push({ delim, text: repairArrowTerminal(seg, facts) }); }
+          else kept.push({ delim, text: seg });
+        } else if (flagged(seg.trim())) { changed = true; }
+        else kept.push({ delim, text: seg });
+      }
+      return kept.length ? kept.map((p, i2) => (i2 === 0 ? p.text : p.delim + p.text)).join('').trim() : null;
+    }).filter(x => x !== null);
+    if (!repairedItems.length) { changed = true; return { text: canonicalConversionPhrase(facts) + '.', changed }; }
+    return { text: repairedItems.join('; '), changed };
+  }
+  if (role === 'SEQUENCE') {
+    const items = text.split(/;/);
+    const repairedItems = items.map(item => {
+      const terminal = arrowTerminalOrNull(item);
+      if (terminal && flagged(terminal)) { changed = true; return repairArrowTerminal(item, facts); }
+      return item; // no arrow, or arrow terminal not flagged -> untouched (pure process description)
+    });
+    return { text: repairedItems.join(';'), changed };
+  }
+  if (role === 'ENUMERATION') {
+    const items = text.split(/([;,])/);
+    const kept = [];
+    for (let i = 0; i < items.length; i += 2) {
+      const item = items[i]; if (!item || !item.trim()) continue;
+      const delim = i > 0 ? items[i - 1] : '';
+      const terminal = arrowTerminalOrNull(item);
+      const candidate = terminal || item.trim();
+      if (flagged(candidate)) {
+        changed = true;
+        if (terminal) kept.push({ delim, text: repairArrowTerminal(item, facts) }); // drop non-chain item; replace chain terminal
+      } else kept.push({ delim, text: item });
+    }
+    if (!kept.length) { changed = true; return { text: canonicalConversionPhrase(facts) + '.', changed }; }
+    return { text: kept.map((p, i2) => (i2 === 0 ? p.text : p.delim + p.text)).join('').trim(), changed };
+  }
+  return { text, changed: false };
+}
+// Removes (never rewrites into a new positive claim) assumption strings that are either an
+// isolated fabricated user-attribution, an isolated false denial of a raw-brief-confirmed topic,
+// or one side of a same-list contradiction — preferring the UNKNOWN/uncertain side when neither
+// side is grounded by the raw brief, and the raw-brief-grounded side when one is.
+function repairAssumptions(items, rawRequest) {
+  const normRequest = rawRequest ? norm(String(rawRequest)) : null;
+  let result = items.filter(x => typeof x === 'string');
+  const repairs = [];
+  const topicOf = (text, cue) => assumptionTopicWords(text, cue).sort((a, b) => b.length - a.length)[0];
+  const knownInRaw = topic => topic != null && normRequest != null && new RegExp('\\b' + escapeRegExpLiteral(topic) + '\\w*\\b').test(normRequest);
+  if (normRequest != null) {
+    result = result.filter(text => {
+      if (ASSUMPTION_USER_ATTRIBUTION_CUE.test(text)) {
+        const topic = topicOf(text, ASSUMPTION_USER_ATTRIBUTION_CUE);
+        if (topic && !knownInRaw(topic)) { repairs.push({ removed: text, reason: 'UNSUPPORTED_USER_ATTRIBUTION' }); return false; }
+      } else if (ASSUMPTION_UNKNOWN_CUE.test(text)) {
+        const topic = topicOf(text, ASSUMPTION_UNKNOWN_CUE);
+        if (topic && knownInRaw(topic)) { repairs.push({ removed: text, reason: 'KNOWN_FACT_DENIAL' }); return false; }
+      }
+      return true;
+    });
+  }
+  let again = true;
+  while (again) {
+    again = false;
+    const parsed = result.map(text => ({
+      text, attributed: ASSUMPTION_USER_ATTRIBUTION_CUE.test(text), unknown: ASSUMPTION_UNKNOWN_CUE.test(text),
+      certain: ASSUMPTION_CERTAINTY_CUE.test(text) || ASSUMPTION_USER_ATTRIBUTION_CUE.test(text),
+    }));
+    outer: for (let i = 0; i < parsed.length; i++) {
+      if (!parsed[i].certain) continue;
+      const certainTopics = new Set(assumptionTopicWords(parsed[i].text, parsed[i].attributed ? ASSUMPTION_USER_ATTRIBUTION_CUE : ASSUMPTION_CERTAINTY_CUE));
+      if (!certainTopics.size) continue;
+      for (let j = 0; j < parsed.length; j++) {
+        if (i === j || !parsed[j].unknown) continue;
+        const sharedTopic = assumptionTopicWords(parsed[j].text, ASSUMPTION_UNKNOWN_CUE).find(w => certainTopics.has(w));
+        if (!sharedTopic) continue;
+        if (knownInRaw(sharedTopic)) {
+          repairs.push({ removed: parsed[j].text, kept: parsed[i].text, reason: 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS' });
+          result = result.filter(t => t !== parsed[j].text);
+        } else {
+          repairs.push({ removed: parsed[i].text, kept: parsed[j].text, reason: 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS' });
+          result = result.filter(t => t !== parsed[i].text);
+        }
+        again = true;
+        break outer;
+      }
+    }
+  }
+  return { items: result, repairs };
+}
+// Attempts a deterministic repair of `synthesis` for the given (already-computed) `violations`.
+// Returns null when NOT eligible (any violation outside REPAIRABLE_FINAL_SYNTHESIS_TYPES) — the
+// caller must fail closed on the ORIGINAL violations in that case, never attempt a partial repair.
+function repairFinalSynthesis(facts, synthesis, violations, { rawRequest } = {}) {
+  if (!violations.length || !violations.every(isRepairableFinalSynthesisViolation)) return null;
+  const repaired = cloneJsonValue(synthesis);
+  const repairs = [];
+  const mechanismTerms = mechanismTermsForFacts(facts);
+  const objectiveWords = new Set(norm((facts.business_objective && facts.business_objective.value) || '').split(/[^a-z0-9]+/).filter(w => w.length >= 3));
+  if (mechanismTerms.length) {
+    for (const [sectionKey, subKeyRoles] of Object.entries(FINAL_SYNTHESIS_FIELD_ROLES)) {
+      const section = repaired.deliverable && repaired.deliverable[sectionKey];
+      if (!section || typeof section !== 'object') continue;
+      for (const [subKey, role] of Object.entries(subKeyRoles)) {
+        if (role === 'SAFE') continue;
+        const raw = section[subKey];
+        if (!raw || typeof raw !== 'string') continue;
+        const { text, changed } = repairConversionFieldText(raw, role, facts, mechanismTerms, objectiveWords);
+        if (changed) { section[subKey] = text; repairs.push({ type: 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION', field_key: subKey, section: sectionKey, repair_type: 'DETERMINISTIC' }); }
+      }
+    }
+  }
+  const assumptions = repaired.deliverable && repaired.deliverable['14_assumptions'];
+  if (Array.isArray(assumptions)) {
+    const { items, repairs: aRepairs } = repairAssumptions(assumptions, rawRequest);
+    if (aRepairs.length) {
+      repaired.deliverable['14_assumptions'] = items;
+      for (const r of aRepairs) repairs.push({ ...r, field_key: '14_assumptions', repair_type: 'DETERMINISTIC' });
+    }
+  }
+  return { synthesis: repaired, repairs };
+}
+
 function validateFinalSynthesis(facts, synthesis, { rawRequest } = {}) {
   const entries = relevantFields(synthesis);
   const normEntries = entries.map(([k, v]) => [k, norm(stringify(v))]);
@@ -1128,4 +1385,7 @@ function validateFinalSynthesis(facts, synthesis, { rawRequest } = {}) {
   return { violations: violations.map(v => ({ ...v, node: null, path: pathFor(null, v.field_key) })) };
 }
 
-module.exports = { validateOutputAgainstFacts, validateFinalSynthesis, repairUpstreamProposalStatus, containsFact, relevantFields, CHECKED_FIELDS, activeExplicitProhibitionCategories };
+module.exports = {
+  validateOutputAgainstFacts, validateFinalSynthesis, repairUpstreamProposalStatus, containsFact, relevantFields, CHECKED_FIELDS, activeExplicitProhibitionCategories,
+  repairFinalSynthesis, isRepairableFinalSynthesisViolation,
+};

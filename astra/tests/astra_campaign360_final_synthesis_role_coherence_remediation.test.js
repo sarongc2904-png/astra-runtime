@@ -225,12 +225,35 @@ const SPEC_FIELDS = {
   MEASUREMENT_CRO_SPECIALIST: ['primary_outcome', 'leading_indicators', 'funnel_metrics', 'conversion_metrics', 'diagnostic_metrics', 'optimization_triggers', 'measurement_cadence'],
 };
 const CLEAN_STATEMENT = 'Contenido determinístico de prueba para este nodo, alineado al brief original del cliente Método 360, sin cambiar la oferta ni el público declarados. Flujo: consulta → conversación → cita.';
+// Conversion-bearing fields need role-correct clean content, not the generic CLEAN_STATEMENT —
+// a real specialist would never phrase its OWN campaign-conversion field as "...Flujo: consulta →
+// conversación → cita." (that boilerplate is fine for offer/ICP/creative fields, which legitimately
+// reference the mechanism, but the funnel/whatsapp/measurement CONVERSION_STRICT/CONVERSION_LIST
+// fields are specifically the ones this gate's coverage now inspects, and must end at the actual
+// campaign conversion — the minicourse purchase — like a correctly-behaving specialist would).
+const CLEAN_CONVERSION_DEFAULTS = {
+  FUNNEL_SPECIALIST: {
+    // No arrows here: SEQUENCE fields only inspect an item that is ITSELF an arrow chain, so plain
+    // step-by-step prose (however it mentions the mechanism) never becomes a candidate at all.
+    stages: 'Meta Ads genera consultas y WhatsApp gestiona la conversación, el mecanismo del minicurso; paso final de esta campaña: compra del minicurso.',
+    transitions: 'De consulta a conversación por WhatsApp; cierre con compra del minicurso.',
+    conversion_intent: 'Compra del minicurso Método 360.',
+  },
+  META_ADS_SPECIALIST: { measurement: 'Compras del minicurso registradas; costo por compra.' },
+  WHATSAPP_SALES_SPECIALIST: { appointment_closing: 'Enviar link de pago del minicurso.', recovery: 'Reenviar link de pago del minicurso a leads inactivos.' },
+  MEASUREMENT_CRO_SPECIALIST: {
+    primary_outcome: 'Compras del minicurso Método 360.',
+    funnel_metrics: 'Clics en anuncio y mensajes de WhatsApp que terminan en compras del minicurso.',
+    conversion_metrics: 'Tasa de compra del minicurso.',
+  },
+};
 function buildMockLLM(payloadOverrides = {}, assumptionOverrides = {}) {
   return async (system) => {
     const st = specTypeFromSystem(system);
     const fields = SPEC_FIELDS[st] || [];
     const payload = {};
     for (const f of fields) payload[f] = CLEAN_STATEMENT;
+    Object.assign(payload, CLEAN_CONVERSION_DEFAULTS[st] || {});
     Object.assign(payload, payloadOverrides[st] || {});
     const current = /META_ADS/.test(st) ? ['CAPI', 'current attribution'] : (/WHATSAPP/.test(st) ? ['current WhatsApp API mechanics'] : []);
     const obj = {
@@ -247,7 +270,14 @@ function runWith(payloadOverrides, assumptionOverrides) {
   return H.run(RAW_M360_NO_BUDGET, { mode: 'llm', adapter: mockAdapter(), llm: buildMockLLM(payloadOverrides, assumptionOverrides), retrieve: true, salt: 'final-synthesis-role-coherence' });
 }
 
-t('LIVE REGRESSION FIXTURE (full pipeline): the exact live bad outputs, reproduced through mock node generation, fail closed at final synthesis', async () => {
+// [ASTRA_CAMPAIGN360_SYNTHESIS_REPAIR_AND_ROLE_COHERENCE_COVERAGE] this exact live bad-output
+// combination is now entirely composed of REPAIRABLE violation classes — deterministic repair
+// resolves it and the run reaches COMPLETE with a corrected final_synthesis, instead of failing
+// closed. The underlying protection is unchanged and re-verified directly (offline) elsewhere in
+// this file (see the LIVE FIXTURE test above, and the R1-R15 repair matrix) — dedicated coverage
+// for "an unauthorized violation type still fails closed even when mixed with repairable ones"
+// lives in R10.
+t('LIVE REGRESSION FIXTURE (full pipeline): the exact live bad outputs are deterministically repaired and the run reaches COMPLETE', async () => {
   const r = await runWith(
     {
       FUNNEL_SPECIALIST: { conversion_intent: 'Comprar minicurso 400 MXN o agendar cita' },
@@ -256,11 +286,14 @@ t('LIVE REGRESSION FIXTURE (full pipeline): the exact live bad outputs, reproduc
     },
     { MARKET_CONTEXT_SPECIALIST: ['Presupuesto de anuncios disponible y definido por usuario.'], ICP_SPECIALIST: ['Presupuesto de ads desconocido.'] }
   );
-  assert.equal(r.workflow_state_status, 'FAILED');
-  assert.equal(r.reason, 'BRIEF_FIDELITY_VIOLATION');
-  const types = r.brief_fidelity_violations.map(v => v.type);
-  assert(types.includes('MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION'), JSON.stringify(r.brief_fidelity_violations));
-  assert(types.includes('UNSUPPORTED_USER_ATTRIBUTION') || types.includes('CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS'), JSON.stringify(r.brief_fidelity_violations));
+  assert.equal(r.workflow_state_status, 'COMPLETE', JSON.stringify(r.brief_fidelity_violations));
+  assert.notEqual(r.reason, 'BRIEF_FIDELITY_VIOLATION');
+  assert(r.final_synthesis_repairs.length > 0);
+  assert(r.final_synthesis_repairs.some(x => x.type === 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION'));
+  assert(r.final_synthesis_repairs.some(x => x.reason === 'UNSUPPORTED_USER_ATTRIBUTION' || x.reason === 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS'));
+  // revalidating the repaired synthesis directly proves the fix, not just the pipeline's own say-so
+  const { violations } = fidelity.validateFinalSynthesis(r.canonical_brief_facts, r.synthesis, {});
+  assert.deepStrictEqual(violations, []);
 });
 
 t('LIVE REGRESSION FIXTURE (full pipeline): the clean/faithful Método 360 run still reaches COMPLETE', async () => {

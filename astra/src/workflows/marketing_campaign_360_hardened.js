@@ -20,6 +20,49 @@ const { MAX_EVIDENCE_PER_STEP } = require('../../config/context_budgets');
 const diag = require('../integration/diag'); // [ASTRA-DIAG] temporary instrumentation (ASTRA-10S)
 const briefFacts = require('./campaign_brief_facts'); // [Brief Fidelity] CANONICAL_BRIEF_FACTS
 const fidelity = require('./brief_fidelity_validator'); // [Brief Fidelity] node + final validators
+const llmExec = require('../llm/llm_executor'); // [Final Synthesis Repair] bounded regeneration only
+
+// [Final Synthesis Repair — bounded regeneration] Deterministic repair (fidelity.repairFinalSynthesis)
+// is always tried FIRST and resolves every currently-known repairable case on its own (its
+// replacement text is grounded-by-construction, so it can never re-trigger the same check) — this
+// LLM fallback exists only for a repairable-class violation deterministic repair cannot safely
+// resolve, per the authorized architecture: LLM proposes -> deterministic runtime validates/accepts/
+// rejects, never the reverse. Exactly ONE attempt; never reruns specialists/retrieval; produces
+// ONLY a final_synthesis patch (a map of "sectionKey.subKey" -> new text, plus an optional
+// "14_assumptions" replacement array) — deterministic revalidation after it is what actually
+// decides COMPLETE vs FAILED, never the model's own say-so.
+const MAX_FINAL_SYNTHESIS_REGENERATION_ATTEMPTS = 1;
+async function regenerateFinalSynthesis(canonicalBriefFacts, synthesis, violations, opts = {}) {
+  const system = [
+    'You repair ONLY the specific violating fields of an already-generated Campaign360 final synthesis. You do not invent new fields or new facts.',
+    `CANONICAL_BRIEF_FACTS (immutable — never contradict): ${JSON.stringify(canonicalBriefFacts)}`,
+    'SEMANTIC ROLE RULES (mandatory):',
+    '- BUSINESS_OBJECTIVE / CAMPAIGN_CONVERSION fields must reflect what THIS campaign actually sells/converts (per business_objective and any explicit user-provided conversion), never a step of PRODUCT_MECHANISM/MECHANISM_OUTCOME (what the product teaches) unless business_objective itself authorizes it.',
+    '- Preserve legitimate intermediate process steps; only replace the non-conforming ENDPOINT/claim.',
+    '- Never fabricate a fact as USER_PROVIDED — an unsupported attribution must be removed or degraded to UNKNOWN/ASSUMPTION; a false denial of a known fact must not be repeated.',
+    '- PROPUESTA labeling is preserved verbatim where already present; never remove it, never use it to justify a violation.',
+    '- Never introduce testimonials, guarantees, invented metrics, or invented evidence.',
+    'Return STRICT JSON only: { "fixed_fields": { "<sectionKey>.<subKey>": "<new text>", ... }, "assumptions": ["<full replacement 14_assumptions array>"] (omit if unchanged) }. Only include keys for fields that actually needed to change.',
+  ].join('\n');
+  const user = [
+    `CURRENT_FINAL_SYNTHESIS_DELIVERABLE: ${JSON.stringify(synthesis.deliverable)}`,
+    `VIOLATIONS_TO_FIX: ${JSON.stringify(violations)}`,
+  ].join('\n\n');
+  const schema = { required: ['fixed_fields'] };
+  const res = await llmExec.execute({ system, user, schema, model: opts.model, max_tokens: opts.max_tokens || 2000, llm: opts.llm });
+  if (!res.ok) return { ok: false, error: res.error, usage: res.usage };
+  const repaired = JSON.parse(JSON.stringify(synthesis));
+  const fixedFields = (res.value && res.value.fixed_fields) || {};
+  for (const [pathKey, newValue] of Object.entries(fixedFields)) {
+    if (typeof newValue !== 'string') continue;
+    const dot = pathKey.indexOf('.');
+    if (dot === -1) continue;
+    const sectionKey = pathKey.slice(0, dot); const subKey = pathKey.slice(dot + 1);
+    if (repaired.deliverable[sectionKey] && typeof repaired.deliverable[sectionKey] === 'object') repaired.deliverable[sectionKey][subKey] = newValue;
+  }
+  if (Array.isArray(res.value && res.value.assumptions)) repaired.deliverable['14_assumptions'] = res.value.assumptions.filter(x => typeof x === 'string');
+  return { ok: true, synthesis: repaired, usage: res.usage, retries: res.retries };
+}
 
 const SPEC_TYPE = { market_context: 'MARKET_CONTEXT_SPECIALIST', icp: 'ICP_SPECIALIST', offer: 'OFFER_SPECIALIST',
   funnel: 'FUNNEL_SPECIALIST', creative_strategy: 'CREATIVE_STRATEGY_SPECIALIST', ads: 'META_ADS_SPECIALIST',
@@ -293,9 +336,40 @@ async function run(rawRequest, options = {}) {
 
   // [Final Synthesis Validator — Brief Fidelity] COMPLETE is prohibited if the reconciled output
   // substitutes any USER_PROVIDED_FACT. Per-node checks already ran (§ Node Fidelity Validator);
-  // this is the last gate before the workflow declares victory. On violation: FAILED, with the
-  // exact violation paths — never a silent COMPLETE, and never swallowed into a generic error.
-  const finalCheck = fidelity.validateFinalSynthesis(canonicalBriefFacts, synthesis, { rawRequest });
+  // this is the last gate before the workflow declares victory. On violation: attempt deterministic
+  // repair ONLY when every violation present is an explicitly authorized repairable class (never
+  // EXPLICIT_PROHIBITION, invented metrics/evidence/guarantees/testimonials, *_SUBSTITUTION, or the
+  // fact-based KNOWN_FACT_DENIAL — those fail closed immediately, unchanged); revalidate; if a
+  // repairable violation survives deterministic repair, ONE bounded final-synthesis-only
+  // regeneration is attempted (never a specialist rerun, never a new Campaign360); FAILED, with the
+  // exact violation paths, if coherence still cannot be established — never a silent COMPLETE.
+  let finalCheck = fidelity.validateFinalSynthesis(canonicalBriefFacts, synthesis, { rawRequest });
+  let finalSynthesis = synthesis;
+  const finalSynthesisRepairs = [];
+  let finalSynthesisRegenerationAttempts = 0;
+  if (finalCheck.violations.length && finalCheck.violations.every(fidelity.isRepairableFinalSynthesisViolation)) {
+    const repairResult = fidelity.repairFinalSynthesis(canonicalBriefFacts, finalSynthesis, finalCheck.violations, { rawRequest });
+    if (repairResult) {
+      finalSynthesisRepairs.push(...repairResult.repairs);
+      let revalidated = fidelity.validateFinalSynthesis(canonicalBriefFacts, repairResult.synthesis, { rawRequest });
+      finalSynthesis = repairResult.synthesis;
+      finalCheck = revalidated;
+      if (revalidated.violations.length && revalidated.violations.every(fidelity.isRepairableFinalSynthesisViolation)
+        && finalSynthesisRegenerationAttempts < MAX_FINAL_SYNTHESIS_REGENERATION_ATTEMPTS) {
+        finalSynthesisRegenerationAttempts += 1;
+        const regen = await regenerateFinalSynthesis(canonicalBriefFacts, finalSynthesis, revalidated.violations, { llm: injectedLLM });
+        if (regen.ok) {
+          cost.model_calls += 1;
+          cost.tokens.prompt += (regen.usage && regen.usage.prompt) || 0;
+          cost.tokens.completion += (regen.usage && regen.usage.completion) || 0;
+          finalSynthesisRepairs.push({ repair_type: 'BOUNDED_REGENERATION' });
+          finalSynthesis = regen.synthesis;
+          finalCheck = fidelity.validateFinalSynthesis(canonicalBriefFacts, finalSynthesis, { rawRequest });
+        }
+        // regen.ok === false: keep the pre-regeneration finalCheck/finalSynthesis — fails closed below.
+      }
+    }
+  }
   if (finalCheck.violations.length) {
     wfState.transition(state, 'FAILED');
     return {
@@ -303,7 +377,8 @@ async function run(rawRequest, options = {}) {
       node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
       workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
       brief_fidelity_violations: finalCheck.violations,
-      node_outputs, selected_methods_by_node, proposal_status_repairs, synthesis, cost, _state: state,
+      node_outputs, selected_methods_by_node, proposal_status_repairs, final_synthesis_repairs: finalSynthesisRepairs,
+      synthesis: finalSynthesis, cost, _state: state,
     };
   }
 
@@ -312,8 +387,9 @@ async function run(rawRequest, options = {}) {
     mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id, node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
     mandatory_nodes_executed: node_outputs.length + 1, mandatory_node_count: 9,
     bindings: { ads: selected_methods_by_node.ads.primary_method, whatsapp_conversion: selected_methods_by_node.whatsapp_conversion.primary_method },
-    node_outputs, selected_methods_by_node, proposal_status_repairs, synthesis, cost, workflow_state_status: state.status, _state: state,
+    node_outputs, selected_methods_by_node, proposal_status_repairs, final_synthesis_repairs: finalSynthesisRepairs,
+    synthesis: finalSynthesis, cost, workflow_state_status: state.status, _state: state,
   };
 }
 
-module.exports = { run, SPEC_TYPE, DET_FN };
+module.exports = { run, SPEC_TYPE, DET_FN, regenerateFinalSynthesis, MAX_FINAL_SYNTHESIS_REGENERATION_ATTEMPTS };
