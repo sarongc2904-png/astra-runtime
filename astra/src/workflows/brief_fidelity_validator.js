@@ -448,10 +448,16 @@ function checkUnlabeledProposal(facts, key, val, markerIndex) {
 //     with a MEASUREMENT_VERB (medir/analizar/registrar/probar/testear/...) is a description of
 //     an EXPERIMENT'S GOAL, not an assertion that the result was achieved or is expected — e.g.
 //     "probar mensajes para mejorar conversión" — and is explicitly excluded.
+// [CONJUGATED FORM FIX] confirmed live gap: the verb list only matched bare infinitives, missing
+// imperative/conjugated forms like "Consigue más ventas" or "Aumenta tu ticket promedio" — a
+// direct claim is a direct claim regardless of conjugation. Each entry below is a shared stem
+// that covers its regular conjugations (aumenta/aumentar/aumentas/aumentan/aumentando) without
+// resorting to full morphological analysis; the stem-changing irregulars (conseguir → consigue,
+// obtener → obtiene) list their conjugated stem as a second alternative alongside the infinitive.
 const RESULT_OUTCOME_TERMS = 'ventas?|ingres\\w*|leads?|citas?|clientes?|conversi[oó]n(?:es)?|ticket';
-const RESULT_SELF_SUFFICIENT_VERBS = 'duplicar|triplicar';
-const RESULT_CLAIM_VERBS = 'aumentar|incrementar|subir|mejorar|conseguir|lograr|obtener|reducir|bajar|pagan';
-const RESULT_MAGNITUDE_ONLY_VERBS = 'generar';
+const RESULT_SELF_SUFFICIENT_VERBS = 'duplica\\w*|triplica\\w*';
+const RESULT_CLAIM_VERBS = 'aumenta\\w*|increment[ao]\\w*|sub(?:e|es|en|ir|iendo|ido)|mejora\\w*|consig(?:o|ues|ue|uen|uiendo)\\w*|conseguir|logra\\w*|obtien\\w*|obtener|reduc\\w*|baja\\w*|paga\\w*';
+const RESULT_MAGNITUDE_ONLY_VERBS = 'genera\\w*';
 const RESULT_MEASUREMENT_VERBS = 'medir|analizar|registrar|probar|testear|monitorear|evaluar|revisar|comparar|dar\\s+seguimiento';
 const RESULT_MAGNITUDE = `\\d+\\s*%|\\d+\\s*x\\b|en\\s+\\d+\\s*(?:d[ií]as?|semanas?|meses?)|\\d+\\s+(?:${RESULT_OUTCOME_TERMS})`;
 const INVENTED_RESULT_CLAIM = new RegExp(
@@ -471,6 +477,20 @@ function isMeasurementPurposeClause(clauseText, idx) {
   const before = clauseText.slice(0, idx);
   return RESULT_MEASUREMENT_PURPOSE_BEFORE.test(before) && RESULT_MEASUREMENT_VERBS_RE.test(before);
 }
+// [GOAL/INTENT/DESIRE CONTEXT] confirmed live false positive (job ec5fa16f-2cdf-4a9d-9439-
+// 8e6ea7761725): "Compradoras buscan capacitación práctica para aumentar ingresos" is a
+// market_assumptions statement describing the BUYER's own goal/desire — not the system asserting
+// or promising a result. A result claim is a PROMISE THE SYSTEM MAKES; a sentence that frames the
+// same verb as something a third party wants/needs/aims for is a description of intent, not a
+// claim. Grammatical person is the load-bearing signal: third-person forms (buscan/quiere/
+// necesitan/...) describe someone else's goal and escape; first-person-plural forms (buscamos/
+// queremos/necesitamos/...) are the advertiser's OWN voice and must NOT escape — "Queremos
+// aumentar tus ventas" is still every bit a claim. Scoped to the whole clause (like
+// FUTURE_HEDGE_CUE) since the intent cue is rarely adjacent to the claim verb itself
+// ("Compradoras buscan capacitación práctica para aumentar ingresos" — "buscan" and "aumentar"
+// are several words apart).
+const GOAL_INTENT_ESCAPE_CUE = /\bbuscan\b|\bbusca\b|\bquieren\b|\bquiere\b|\bdesean\b|\bdesea\b|\bnecesitan\b|\bnecesita\b|\baspiran\b|\baspira\b|\besperan\b|\bespera\b|\bsu\s+objetivo\s+es\b|\bsu\s+meta\s+es\b|\bobjetivo\s+es\b|\bmeta\s+es\b|\bintenci[oó]n\s+es\b/i;
+function hasGoalIntentContext(clauseText) { return GOAL_INTENT_ESCAPE_CUE.test(clauseText); }
 const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bantes\s*\/\s*despu[ée]s\b|\bresultados?\s+document\w+\b/i;
 // [INVENTED METRIC ORDER FIX] confirmed live miss: "Objetivo ROAS 4x" (qualifier BEFORE the
 // acronym) never matched the old acronym-then-qualifier-only pattern. Now bidirectional, plus a
@@ -558,7 +578,7 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
     for (const p of PROHIBITED_CONTENT_PATTERNS) {
       if (!activeCategories.has(p.type)) continue;
       for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
-        if (p.type === 'invented_result' && isMeasurementPurposeClause(s, match.index)) continue;
+        if (p.type === 'invented_result' && (isMeasurementPurposeClause(s, match.index) || hasGoalIntentContext(s))) continue;
         if (!isNegated(match.index, match.index + match[0].length) && !FUTURE_HEDGE_CUE.test(s)) {
           violations.push({
             type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key,
