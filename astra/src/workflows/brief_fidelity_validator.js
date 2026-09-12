@@ -947,7 +947,164 @@ function validateOutputAgainstFacts(facts, output, { nodeId, upstream_outputs = 
   return { violations: violations.map(v => ({ ...v, node: nodeId || null, path: pathFor(nodeId, v.field_key) })) };
 }
 
-function validateFinalSynthesis(facts, synthesis) {
+// ---------- [FINAL SYNTHESIS ROLE COHERENCE] confirmed live defect (job
+// bf7fca56-0575-45d4-8bc1-f8791ed1abf7): the first live run to complete all 8 nodes revealed that
+// a MECHANISM_OUTCOME (a stage the product TEACHES — "consulta → conversación → cita") can be
+// silently promoted into a CAMPAIGN_CONVERSION (what this specific campaign's ad spend is actually
+// selling) purely because it shares commercial vocabulary. Neither the per-node validator (each
+// node individually is fine — "cita" is legitimate mechanism prose) nor synthesize() (a pure
+// pass-through/aggregator of each node's own downstream_payload — it invents nothing itself) is
+// the place this belongs; it is a genuinely CROSS-NODE, FINAL-SYNTHESIS-ONLY coherence problem:
+// funnel/whatsapp_conversion/measurement each independently and validly describe "the mechanism
+// ends at X", and only when their outputs sit together in the deliverable does "campaign conversion
+// = purchase, OR X" become visible as a role conflict. Deliberately NOT a hardcoded "cita" ban:
+// the mechanism's own arrow-chain endpoint(s) are extracted generically (works identically for
+// "anuncio → reserva → visita" or a bare "conseguir clientes"), and a term is flagged only when it
+// appears as an ENUMERATED ALTERNATIVE in one of the three fields that literally ARE this
+// campaign's conversion definition — never inside mechanism/offer/educational-content prose,
+// which is untouched. A term already present in business_objective is never a mechanism-only term
+// (CASE A8/A9: an explicitly requested appointment/lead objective stays fully valid).
+const MECHANISM_TERM_STOPWORDS = new Set(('para con del las los una uno unos unas por que como este esta estos estas cada todo toda todos todas para sera seran hacia sobre entre desde hasta '
+  + 'meta ads facebook instagram google tiktok whatsapp '
+  + 'genera generar generando convierte convertir convirtiendo gestiona gestionar gestionando ensena ensenar enseñar enseña aplica aplicar aprende aprender usa usar utiliza utilizar teach teaches teaching '
+  + 'using use uses convert converts converting manage manages managing generate generates generating learn learns learning').split(/\s+/));
+function escapeRegExpLiteral(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function extractMechanismStageTerms(mechanismValue) {
+  const text = String(mechanismValue || '');
+  const parts = text.split(/→|-->|->/);
+  const terms = new Set();
+  if (parts.length > 1) {
+    // Arrow chain present: take ONLY the stage token immediately touching each arrow (never the
+    // descriptive lead-up prose, which is where tool/channel names like "Meta Ads"/"WhatsApp" live).
+    parts.forEach((seg, i) => {
+      if (i === 0) {
+        const words = norm(seg).split(/[^a-z0-9]+/).filter(Boolean);
+        if (words.length) terms.add(words[words.length - 1]);
+      } else if (i === parts.length - 1) {
+        const trailing = seg.split(/[.,;:\n]/)[0];
+        for (const w of norm(trailing).split(/[^a-z0-9]+/)) if (w.length >= 3 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(w);
+      } else {
+        for (const w of norm(seg).split(/[^a-z0-9]+/)) if (w.length >= 3 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(w);
+      }
+    });
+  } else {
+    // No explicit stage chain — fall back to filtered whole-text keywords (e.g. "conseguir
+    // clientes"): still excludes tool/channel names and generic teaching/using verbs.
+    for (const w of norm(text).split(/[^a-z0-9]+/)) if (w.length >= 4 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(w);
+  }
+  return [...terms];
+}
+const PURCHASE_GROUNDING_VOCAB = ['compra', 'compras', 'comprar', 'pago', 'pagar', 'pagos', 'venta', 'ventas', 'vender', 'purchase', 'buy', 'pay', 'sale', 'sales', 'checkout', 'pedido', 'orden'];
+const CAMPAIGN_CONVERSION_FIELD_PATHS = [['6_funnel', 'conversion_intent'], ['12_whatsapp_followup_closing', 'closing'], ['13_measurement_kpis', 'conversion_metrics']];
+// Deliberately narrow: only "o"/"or" (disjunction) and ";" (an enumerated metrics list, as in the
+// live measurement.conversion_metrics defect) count as separating ALTERNATIVE conversions. Neither
+// "y"/"and" (joins parts of one flow, not alternatives) nor a bare comma (ordinary prose is full of
+// commas with no enumeration-of-alternatives meaning at all) are treated as option boundaries —
+// using either produced false positives on perfectly ordinary sentences that merely mention the
+// mechanism in passing.
+const OPTION_SPLIT = /\s+o\s+|\s+or\s+|;/i;
+function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
+  const entry = CAMPAIGN_CONVERSION_FIELD_PATHS.find(([sectionKey]) => sectionKey === key);
+  if (!entry) return [];
+  const [sectionKey, subKey] = entry;
+  const mf = facts.mechanism;
+  if (!mf || mf.status !== 'USER_PROVIDED_FACT' || !mf.value) return [];
+  const raw = rawVal && typeof rawVal === 'object' ? rawVal[subKey] : null;
+  if (!raw || typeof raw !== 'string') return [];
+  const objectiveWords = new Set(norm((facts.business_objective && facts.business_objective.value) || '').split(/[^a-z0-9]+/).filter(w => w.length >= 3));
+  // Stem-aware, not exact-match: "citas" (objective) must exclude the mechanism term "cita" —
+  // singular/plural and light conjugation differences are common between a brief's own wording
+  // of its objective and the mechanism's stage-chain token for the same concept.
+  const objectiveGrounds = term => [...objectiveWords].some(w => w.startsWith(term) || term.startsWith(w));
+  const mechanismTerms = extractMechanismStageTerms(mf.value).filter(term => !objectiveGrounds(term));
+  if (!mechanismTerms.length) return [];
+  const options = raw.split(OPTION_SPLIT).map(s => s.trim()).filter(Boolean);
+  if (options.length < 2) return []; // no enumeration/disjunction at all — nothing to have promoted a term into
+  const violations = [];
+  for (const option of options) {
+    const normOption = norm(option);
+    const matchedTerm = mechanismTerms.find(term => new RegExp('\\b' + escapeRegExpLiteral(term) + '\\w*\\b').test(normOption));
+    if (!matchedTerm) continue;
+    const groundedByPurchase = PURCHASE_GROUNDING_VOCAB.some(w => new RegExp('\\b' + w + '\\b').test(normOption));
+    const groundedByObjective = [...objectiveWords].some(w => normOption.includes(w));
+    if (groundedByPurchase || groundedByObjective) continue;
+    violations.push({
+      type: 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION', fact_field: 'mechanism', field_key: subKey,
+      matched_text: option, matched_anchor: matchedTerm, section: sectionKey,
+    });
+  }
+  return violations;
+}
+
+// ---------- [FINAL SYNTHESIS EPISTEMIC CONSISTENCY] confirmed live defect: the SAME
+// final_synthesis.14_assumptions array contained "Presupuesto de anuncios disponible y definido
+// por usuario." alongside "Presupuesto de ads desconocido." — dedupeStrings() in synthesize()
+// only removes byte-identical duplicates; two node outputs asserting OPPOSITE epistemic status
+// about the same topic both survive verbatim. Two independent, symmetric checks, neither of which
+// requires a new canonical-fact field (this stays scoped to the synthesized assumptions list, not
+// a rewrite of campaign_brief_facts.js's schema):
+//   1. an assumption attributing a fact to the USER ("definido/indicado/... por el usuario",
+//      "disponible y definido") for a topic whose own significant keyword is absent from the raw
+//      brief text is a fabricated attribution — the user never said it;
+//   2. symmetrically, an assumption denying knowledge ("desconocido", "por confirmar/definir") of
+//      a topic whose keyword IS present in the raw brief is a false denial of a known fact;
+//   3. independent of rawRequest: two assumptions in the SAME list asserting opposite epistemic
+//      status (one confident/attributed, one pending/unknown) about a shared significant keyword
+//      contradict each other outright.
+const ASSUMPTION_USER_ATTRIBUTION_CUE = /\b(definid[oa]|indicad[oa]|proporcionad[oa]|confirmad[oa]|especificad[oa])\s+por\s+(el\s+)?usuario\b|\busuario\s+(indic[oó]|proporcion[oó]|confirm[oó]|especific[oó])\b|\bdisponible\s+y\s+definid[oa]\b/i;
+const ASSUMPTION_CERTAINTY_CUE = /\b(operativ[oa]|list[oa]|confirmad[oa]|definid[oa]|disponible)\b/i;
+const ASSUMPTION_UNKNOWN_CUE = /\bdesconocid[oa]\b|\bpor\s+(confirmar|definir)\b|\bpendiente\b|\bno\s+(disponible|definid[oa]|especificad[oa])\b/i;
+const ASSUMPTION_TOPIC_STOPWORDS = new Set('para con del las los una uno unos unas este esta estos estas cada todo toda propuesta assumption asumo existe existira habra sera seran monto valor'.split(' '));
+function assumptionTopicWords(text, cueRegex) {
+  const stripped = String(text || '').replace(new RegExp(cueRegex.source, cueRegex.flags.replace('g', '') + 'g'), ' ');
+  return norm(stripped).split(/[^a-z0-9]+/).filter(w => w.length >= 4 && !ASSUMPTION_TOPIC_STOPWORDS.has(w));
+}
+function checkAssumptionEpistemicConsistency(key, rawVal, rawRequest) {
+  if (key !== '14_assumptions' || !Array.isArray(rawVal)) return [];
+  const items = rawVal.filter(x => typeof x === 'string');
+  const violations = [];
+  const normRequest = rawRequest ? norm(String(rawRequest)) : null;
+  const parsed = items.map(text => ({
+    text,
+    attributed: ASSUMPTION_USER_ATTRIBUTION_CUE.test(text),
+    unknown: ASSUMPTION_UNKNOWN_CUE.test(text),
+    certain: ASSUMPTION_CERTAINTY_CUE.test(text) || ASSUMPTION_USER_ATTRIBUTION_CUE.test(text),
+  }));
+  // Rule 1 — isolated unsupported attribution / false known-fact denial (needs rawRequest).
+  if (normRequest != null) {
+    for (const p of parsed) {
+      if (p.attributed) {
+        const words = assumptionTopicWords(p.text, ASSUMPTION_USER_ATTRIBUTION_CUE);
+        const topic = words.sort((a, b) => b.length - a.length)[0];
+        if (topic && !new RegExp('\\b' + escapeRegExpLiteral(topic) + '\\w*\\b').test(normRequest)) {
+          violations.push({ type: 'UNSUPPORTED_USER_ATTRIBUTION', fact_field: null, field_key: key, matched_text: p.text, matched_anchor: topic });
+        }
+      } else if (p.unknown) {
+        const words = assumptionTopicWords(p.text, ASSUMPTION_UNKNOWN_CUE);
+        const topic = words.sort((a, b) => b.length - a.length)[0];
+        if (topic && new RegExp('\\b' + escapeRegExpLiteral(topic) + '\\w*\\b').test(normRequest)) {
+          violations.push({ type: 'KNOWN_FACT_DENIAL', fact_field: null, field_key: key, matched_text: p.text, matched_anchor: topic });
+        }
+      }
+    }
+  }
+  // Rule 2 — cross-item contradiction within the same list (no rawRequest needed).
+  for (let i = 0; i < parsed.length; i++) {
+    if (!parsed[i].certain) continue;
+    const certainTopics = new Set(assumptionTopicWords(parsed[i].text, parsed[i].attributed ? ASSUMPTION_USER_ATTRIBUTION_CUE : ASSUMPTION_CERTAINTY_CUE));
+    if (!certainTopics.size) continue;
+    for (let j = 0; j < parsed.length; j++) {
+      if (i === j || !parsed[j].unknown) continue;
+      const unknownTopics = assumptionTopicWords(parsed[j].text, ASSUMPTION_UNKNOWN_CUE);
+      if (unknownTopics.some(w => certainTopics.has(w))) {
+        violations.push({ type: 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS', fact_field: null, field_key: key, matched_text: parsed[i].text, conflicting_text: parsed[j].text });
+      }
+    }
+  }
+  return violations;
+}
+
+function validateFinalSynthesis(facts, synthesis, { rawRequest } = {}) {
   const entries = relevantFields(synthesis);
   const normEntries = entries.map(([k, v]) => [k, norm(stringify(v))]);
   const textEntries = entries.map(([k, v]) => [k, norm(textOnly(v))]);
@@ -962,6 +1119,8 @@ function validateFinalSynthesis(facts, synthesis) {
     for (const v of checkUnknownFactFabrication(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkExplicitProhibition(facts, key, rawTextVal)) violations.push(v);
+    for (const v of checkMechanismToCampaignConversionPromotion(facts, key, rawVal)) violations.push(v);
+    for (const v of checkAssumptionEpistemicConsistency(key, rawVal, rawRequest)) violations.push(v);
   }
   const combinedText = textEntries.map(([, v]) => v).join(' \n ');
   for (const v of checkBuyerPositivePreservation(facts, null, combinedText)) violations.push(v);

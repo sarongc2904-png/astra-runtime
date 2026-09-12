@@ -295,7 +295,7 @@ async function run(rawRequest, options = {}) {
   // substitutes any USER_PROVIDED_FACT. Per-node checks already ran (§ Node Fidelity Validator);
   // this is the last gate before the workflow declares victory. On violation: FAILED, with the
   // exact violation paths — never a silent COMPLETE, and never swallowed into a generic error.
-  const finalCheck = fidelity.validateFinalSynthesis(canonicalBriefFacts, synthesis);
+  const finalCheck = fidelity.validateFinalSynthesis(canonicalBriefFacts, synthesis, { rawRequest });
   if (finalCheck.violations.length) {
     wfState.transition(state, 'FAILED');
     return {
