@@ -463,12 +463,29 @@ const RESULT_CLAIM_VERBS = 'aumenta\\w*|increment[ao]\\w*|sub(?:e|es|en|ir|iendo
 const RESULT_MAGNITUDE_ONLY_VERBS = 'genera\\w*';
 const RESULT_MEASUREMENT_VERBS = 'medir|analizar|registrar|probar|testear|monitorear|evaluar|revisar|comparar|dar\\s+seguimiento';
 const RESULT_MAGNITUDE = `\\d+\\s*%|\\d+\\s*x\\b|en\\s+\\d+\\s*(?:d[ií]as?|semanas?|meses?)|\\d+\\s+(?:${RESULT_OUTCOME_TERMS})`;
+// [GUARANTEED RESULT CLAIM] confirmed preexisting gap: "Resultados garantizados" (and
+// "garantizamos X"/"X garantizado(s)") never matched INVENTED_RESULT_CLAIM at all — RESULT_CLAIM_VERBS
+// has no guarantee verb, and RESULT_OUTCOME_TERMS never listed the bare word "resultado(s)" itself
+// (only concrete channels like ventas/leads/citas/clientes). A guarantee is a STRONGER assertion
+// than any of the comparative claim verbs above — certainty of an outcome, not just a claimed
+// change — so it gets its own verb family (garantiz\w* — covers garantizar/garantizo/garantizamos/
+// garantizado/garantizada/garantizando, every conjugation via one shared stem) paired with either
+// a concrete RESULT_OUTCOME_TERM or the generic word "resultado(s)" itself (kept OUT of the base
+// RESULT_OUTCOME_TERMS so this addition never changes what the CLAIM_VERB branches above already
+// match). Deliberately verb-STEM based, never matching the unrelated noun "garantía" (no
+// "garantiz" substring in it) — see isGuaranteedResultMatch()/GUARANTEE_ADVISORY_CUE below for why
+// "garantía de reembolso/producto/satisfacción" and "evitar prometer resultados garantizados" stay
+// clear of this category.
+const GUARANTEE_VERBS = 'garantiz\\w*';
+const RESULT_OUTCOME_TERMS_OR_BARE_RESULT = `${RESULT_OUTCOME_TERMS}|resultados?`;
 const INVENTED_RESULT_CLAIM = new RegExp(
   `\\b(?:${RESULT_SELF_SUFFICIENT_VERBS})\\b` +
   `|\\b(?:${RESULT_CLAIM_VERBS})\\b(?=[\\s\\S]{0,40}\\b(?:${RESULT_OUTCOME_TERMS})\\b)` +
   `|\\b(?:${RESULT_OUTCOME_TERMS})\\b(?=[\\s\\S]{0,40}\\b(?:${RESULT_CLAIM_VERBS})\\b)` +
   `|\\b(?:${RESULT_CLAIM_VERBS}|${RESULT_MAGNITUDE_ONLY_VERBS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))` +
-  `|\\b(?:${RESULT_OUTCOME_TERMS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))`, 'i');
+  `|\\b(?:${RESULT_OUTCOME_TERMS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))` +
+  `|\\b(?:${GUARANTEE_VERBS})\\b(?=[\\s\\S]{0,40}\\b(?:${RESULT_OUTCOME_TERMS_OR_BARE_RESULT})\\b)` +
+  `|\\b(?:${RESULT_OUTCOME_TERMS_OR_BARE_RESULT})\\b(?=[\\s\\S]{0,40}\\b(?:${GUARANTEE_VERBS})\\b)`, 'i');
 // [[REQUIRED mechanism-preservation prose]] "generar consultas y WhatsApp para convertir consulta
 // → conversación → cita" is the canonical, EXPECTED mechanism restatement used throughout this
 // pipeline's node/synthesis fixtures — "generar" here is magnitude-gated (no digit present, so it
@@ -513,6 +530,39 @@ const GOAL_INTENT_FIELD_KEYS = new Set(['desired_outcomes']);
 const RESULT_MAGNITUDE_RE = new RegExp(RESULT_MAGNITUDE, 'i');
 function isDesiredOutcomeQualitativeGoal(fieldKey, clauseText) {
   return GOAL_INTENT_FIELD_KEYS.has(norm(fieldKey)) && !RESULT_MAGNITUDE_RE.test(clauseText);
+}
+// [GUARANTEED RESULT CLAIM — precedence over desired_outcomes semantics] A guarantee is strictly
+// stronger than a qualitative wish: "Resultados garantizados"/"Ventas garantizadas" must still be
+// caught inside desired_outcomes even with zero magnitude present — isDesiredOutcomeQualitativeGoal
+// above must never swallow a guarantee-verb match. A matched occurrence can only be this category
+// if its own text is a guarantiz\w* form OR the bare word "resultado(s)" — neither can arise from
+// any OTHER branch of INVENTED_RESULT_CLAIM (RESULT_CLAIM_VERBS has no guarantee verb, and
+// "resultado(s)" was deliberately kept out of RESULT_OUTCOME_TERMS), so this test is exact, not a
+// heuristic guess at which branch fired.
+function isGuaranteedResultMatch(matchedText) {
+  return /^garantiz/i.test(matchedText) || /^resultados?$/i.test(matchedText);
+}
+// [GUARANTEE NEGATION / ADVISORY ESCAPE] "No garantizamos resultados" and "Sin garantía de
+// resultados" must not fail — but the generic negation cue list (isNegated() inside
+// checkExplicitProhibition, below) is built around "no <ACTION> <OBJECT>" phrasing where the
+// matched OBJECT follows the negated verb ("no usar testimonios"). A guarantee match is often the
+// VERB itself ("no garantizamos" — the match IS "garantizamos", immediately after "no", with
+// nothing else in between for the generic cue to anchor on), so it needs its own direct check: is
+// the match text a garantiz\w* form immediately preceded by "no " (optionally with a clitic
+// pronoun — "no te/les/nos garantizamos")? "Sin garantía de resultados" needs no special handling
+// at all: "garantía" (the noun) never contains the "garantiz" verb stem, so it never matches this
+// category's patterns in the first place — see isGuaranteedResultMatch() above.
+// A second, distinct escape: advisory/avoidance framing ("Evitar prometer resultados
+// garantizados", "no debemos prometer resultados garantizados") describes NOT making the claim,
+// not making it — scoped to the same clause, before the match, and only for a guarantee-category
+// match (never widened to any other invented_result phrasing).
+const GUARANTEE_SELF_NEGATION_CUE = /\bno\s+(?:te\s+|les?\s+|nos\s+)?$/i;
+const GUARANTEE_ADVISORY_CUE = /\bevitar\b|\bevita\b|\bevitando\b|\bno\s+(?:debe(?:s|mos|n)?\s+)?prometer\b/i;
+function isGuaranteeNegationOrAdvisoryEscape(s, match) {
+  if (!isGuaranteedResultMatch(match[0])) return false;
+  const before = s.slice(0, match.index);
+  if (/^garantiz/i.test(match[0]) && GUARANTEE_SELF_NEGATION_CUE.test(before)) return true;
+  return GUARANTEE_ADVISORY_CUE.test(before);
 }
 const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bantes\s*\/\s*despu[ée]s\b|\bresultados?\s+document\w+\b/i;
 // [INVENTED METRIC ORDER FIX] confirmed live miss: "Objetivo ROAS 4x" (qualifier BEFORE the
@@ -601,7 +651,11 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
     for (const p of PROHIBITED_CONTENT_PATTERNS) {
       if (!activeCategories.has(p.type)) continue;
       for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
-        if (p.type === 'invented_result' && (isMeasurementPurposeClause(s, match.index) || hasGoalIntentContext(s) || isDesiredOutcomeQualitativeGoal(key, s))) continue;
+        if (p.type === 'invented_result' && (
+          isMeasurementPurposeClause(s, match.index) || hasGoalIntentContext(s) ||
+          (isDesiredOutcomeQualitativeGoal(key, s) && !isGuaranteedResultMatch(match[0])) ||
+          isGuaranteeNegationOrAdvisoryEscape(s, match)
+        )) continue;
         if (!isNegated(match.index, match.index + match[0].length) && !FUTURE_HEDGE_CUE.test(s)) {
           violations.push({
             type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key,

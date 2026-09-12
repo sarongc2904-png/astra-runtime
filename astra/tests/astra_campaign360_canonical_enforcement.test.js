@@ -205,12 +205,21 @@ for (const phrase of PROHIBITED_UNLABELED) {
     assert(violations.some(v => v.type === 'EXPLICIT_PROHIBITION'), `${phrase} -> ${JSON.stringify(violations)}`);
   });
 }
-for (const phrase of ['caso de estudio real', 'deadline de inscripción', 'garantizamos resultados']) {
+for (const phrase of ['caso de estudio real', 'deadline de inscripción']) {
   t(`H. "${phrase}" is not an EXPLICIT_PROHIBITION when its own category is absent from constraints`, () => {
     const { violations } = fidelity.validateOutputAgainstFacts(FACTS, { downstream_payload: { creative_testing: phrase } }, { nodeId: 'ads' });
     assert.deepStrictEqual(violations.filter(v => v.type === 'EXPLICIT_PROHIBITION'), [], JSON.stringify(violations));
   });
 }
+// [ASTRA_CAMPAIGN360_GUARANTEED_RESULT_CLAIM_REMEDIATION] confirmed preexisting gap: "garantizamos
+// resultados" used to silently pass here even though FACTS.constraints prohibits "resultados" —
+// a guarantee-of-a-result claim is categorically a result claim and is now caught under
+// invented_result whenever that category is active, without needing the separate 'guarantee'
+// category's own activating term ("garantía"/"garantizamos") in the constraint itself.
+t('H. "garantizamos resultados" DOES fail EXPLICIT_PROHIBITION/invented_result — a guarantee is a stronger result claim, not a separate unactivated category', () => {
+  const { violations } = fidelity.validateOutputAgainstFacts(FACTS, { downstream_payload: { creative_testing: 'garantizamos resultados' } }, { nodeId: 'ads' });
+  assert(violations.some(v => v.type === 'EXPLICIT_PROHIBITION' && v.category === 'invented_result'), JSON.stringify(violations));
+});
 t('H. a PROPUESTA-marked prohibited category still fails (no marker escape for explicit prohibitions)', () => {
   const { violations } = fidelity.validateOutputAgainstFacts(FACTS, { downstream_payload: { creative_testing: 'PROPUESTA: usar testimonios de clientes satisfechos' } }, { nodeId: 'ads' });
   assert(violations.some(v => v.type === 'EXPLICIT_PROHIBITION'), JSON.stringify(violations));

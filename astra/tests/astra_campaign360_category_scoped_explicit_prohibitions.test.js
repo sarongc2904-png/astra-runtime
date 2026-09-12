@@ -56,7 +56,14 @@ t('deadline and guarantee activate only from their own terms', () => {
   fails('No inventes deadline.', 'deadline de inscripción', 'deadline');
   fails('No inventes garantía de resultado.', 'garantizamos resultados', 'guarantee');
   fails('No garantizamos resultados.', 'garantizamos resultados', 'guarantee');
-  passes('No inventes resultados.', 'garantizamos resultados');
+  // [ASTRA_CAMPAIGN360_GUARANTEED_RESULT_CLAIM_REMEDIATION] confirmed preexisting gap: a
+  // guarantee-of-a-RESULT claim ("garantizamos resultados") is categorically a result claim —
+  // stronger than any comparative one — so it is caught under 'invented_result' whenever that
+  // category is already active (constraint prohibits "resultados"), even without the separate
+  // 'guarantee' category's own activating term ("garantía"/"garantizamos" in the constraint
+  // itself). This was a silent pass-through before that fix; the 'guarantee' category itself
+  // (asserted above) still activates only from its own terms, unchanged.
+  fails('No inventes resultados.', 'garantizamos resultados', 'invented_result');
 });
 t('evidence and resultados alone create no unrelated category', () => {
   for (const constraint of ['No inventes evidencia.', 'No inventes resultados.']) {
