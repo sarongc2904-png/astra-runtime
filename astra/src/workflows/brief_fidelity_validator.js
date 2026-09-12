@@ -1014,6 +1014,45 @@ function extractMechanismStageTerms(mechanismValue) {
 }
 const PURCHASE_GROUNDING_VOCAB = ['compra', 'compras', 'comprar', 'pago', 'pagar', 'pagos', 'venta', 'ventas', 'vender', 'purchase', 'buy', 'pay', 'sale', 'sales', 'checkout', 'pedido', 'orden'];
 
+// [BOUNDED CROSS-LANGUAGE ENDPOINT EQUIVALENCE] confirmed gap: structure-first arrow-position
+// extraction never does a vocabulary lookup, so it already treats "ad -> WhatsApp -> appointment"
+// and "anuncio -> WhatsApp -> cita" identically WHEN both sides of a comparison use the same
+// language — but a mechanism naming its endpoint in one language and a synthesis field naming the
+// SAME concept in the other has zero string overlap ("cita" vs "appointment" share no characters)
+// and was silently invisible to both detection and grounding. This is a small, explicit, SYMMETRIC
+// table over generic commercial CONVERSION-ENDPOINT NOUNS ONLY — the exact closed set already
+// named by this system's own language-invariance property (never a Método 360 phrase, never an
+// industry-specific term, never general prose translation, which stays forbidden). A cognate pair
+// that already shares a lexical root ("consulta"/"consultation", "demo"/"demostración") needs no
+// table entry at all — TERM_MATCHES_CANDIDATE_WORD below already recognizes those bidirectionally.
+const ENDPOINT_SYNONYM_PAIRS = [
+  ['cita', 'appointment'], ['reserva', 'reservation'], ['visita', 'visit'],
+  ['llamada', 'call'], ['consulta', 'consultation'], ['conversacion', 'conversation'],
+];
+// Returns [term, ...its bounded synonym(s)] — always includes term itself. A mechanism term and
+// its cross-language counterpart must be treated as ONE unit for objective-grounding purposes (see
+// mechanismTermsForFacts): an objective stated in either language must exempt BOTH forms, or a
+// synthesis simply restating the mechanism's own endpoint in the objective's language would still
+// be flagged.
+function endpointSynonymCluster(term) {
+  const cluster = new Set([term]);
+  for (const [es, en] of ENDPOINT_SYNONYM_PAIRS) {
+    if (term === es || es.startsWith(term) || term.startsWith(es)) cluster.add(en);
+    if (term === en || en.startsWith(term) || term.startsWith(en)) cluster.add(es);
+  }
+  return [...cluster];
+}
+// Generalizes the forward-only "\bterm\w*\b" stem match to also catch the REVERSE cognate
+// direction — a mechanism term that is the LONGER form of a shared root ("consultation") while the
+// candidate uses the shorter cognate ("consulta"), or vice versa ("demostración" mechanism term vs
+// "demo" candidate). Gated to words of length >= 4 on both sides so a short incidental substring
+// ("co" inside "compra") can never count as a spurious prefix match.
+function termMatchesCandidateWord(term, normCandidate) {
+  if (new RegExp('\\b' + escapeRegExpLiteral(term) + '\\w*\\b').test(normCandidate)) return true;
+  if (term.length < 4) return false;
+  return normCandidate.split(/[^a-z0-9]+/).some(w => w.length >= 4 && term.startsWith(w));
+}
+
 // [ROLE-COHERENCE COVERAGE] Explicit semantic-role table by leaf/path, instead of a growing pile
 // of isolated field-specific regex hacks — every field this system inspects is registered ONCE,
 // with the classification that determines HOW STRICTLY it is checked. This is the single place a
@@ -1062,7 +1101,18 @@ function mechanismTermsForFacts(facts) {
   // singular/plural and light conjugation differences are common between a brief's own wording
   // of its objective and the mechanism's stage-chain token for the same concept.
   const objectiveGrounds = term => [...objectiveWords].some(w => w.startsWith(term) || term.startsWith(w));
-  return extractMechanismStageTerms(mf.value).filter(term => !objectiveGrounds(term));
+  // Expand each extracted term with its bounded cross-language synonym cluster BEFORE testing
+  // objective-grounding, and exclude/keep the WHOLE cluster together — an objective stated in
+  // either language ("generar citas" / "book appointments") must exempt both the Spanish and the
+  // English form of the same endpoint concept, never just whichever form happens to share the
+  // objective's language.
+  const result = [];
+  for (const term of extractMechanismStageTerms(mf.value)) {
+    const cluster = endpointSynonymCluster(term);
+    if (cluster.some(objectiveGrounds)) continue;
+    for (const c of cluster) result.push(c);
+  }
+  return [...new Set(result)];
 }
 // Reduces one segment to its candidate phrase: if it's itself an arrow chain, only the TERMINAL
 // (the part after the last arrow, up to the next punctuation) is a candidate — everything before
@@ -1136,7 +1186,7 @@ function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
     const candidates = extractConversionCandidates(raw, role);
     for (const candidate of candidates) {
       const normCandidate = norm(candidate);
-      const matchedTerm = mechanismTerms.find(term => new RegExp('\\b' + escapeRegExpLiteral(term) + '\\w*\\b').test(normCandidate));
+      const matchedTerm = mechanismTerms.find(term => termMatchesCandidateWord(term, normCandidate));
       if (!matchedTerm) continue;
       if (isConversionCandidateGrounded(normCandidate, objectiveWords, mechanismTerms)) continue;
       violations.push({
@@ -1185,6 +1235,16 @@ const ASSUMPTION_TOPIC_STOPWORDS = new Set('para con del las los una uno unos un
 // optional trailing lowercase "s" (plural — "KPIs") is captured and stripped so "KPI" and "KPIs"
 // resolve to the same topic.
 const ACRONYM_TOPIC_RE = /\b([A-Z]{2,5})s?\b/g;
+// [ACRONYM FALSE-POSITIVE CONTROL] confirmed gap: a sentence typed or pasted in ALL CAPS (or one
+// that simply capitalizes an ordinary short function word) makes that word indistinguishable from
+// a real acronym by case alone — "EL CAC DEL MES ESTA DEFINIDO..." matches "EL", "DEL" and "ESTA"
+// under ACRONYM_TOPIC_RE exactly as readily as it matches "CAC". This is the SAME short-function-
+// word category (articles/prepositions/copulas/conjunctions in both languages) the >=4-char normal-
+// word floor already excluded by length alone — extending it to acronym-length tokens too is reusing
+// the existing filter, not inventing a new one, and it stays purely grammatical/closed-class (never
+// a business or industry term), so a genuine short acronym is never at risk of exclusion.
+const ACRONYM_TOPIC_STOPWORDS = new Set(('el la lo le se su mi tu un al es de en no si ya y o u ni tan mas '
+  + 'is at on of an to in be do so up as it if or my we he by go no us the and are was').split(' '));
 // Returns candidate topic words for a cue sentence, ACRONYMS FIRST (longest-first within each
 // group). An acronym is a deliberately-extracted, high-signal business term (CAC, KPI...); an
 // incidental long word elsewhere in the same sentence ("reunión", "mensualidad") is noise by
@@ -1195,7 +1255,9 @@ const ACRONYM_TOPIC_RE = /\b([A-Z]{2,5})s?\b/g;
 // the acronym's, even though the acronym is the actual subject of the assumption.
 function assumptionTopicWords(text, cueRegex) {
   const stripped = String(text || '').replace(new RegExp(cueRegex.source, cueRegex.flags.replace('g', '') + 'g'), ' ');
-  const acronyms = [...stripped.matchAll(ACRONYM_TOPIC_RE)].map(m => m[1].toLowerCase());
+  const acronyms = [...stripped.matchAll(ACRONYM_TOPIC_RE)]
+    .map(m => m[1].toLowerCase())
+    .filter(w => !ACRONYM_TOPIC_STOPWORDS.has(w) && !ASSUMPTION_TOPIC_STOPWORDS.has(w));
   const acronymSet = new Set(acronyms);
   const normalWords = norm(stripped).split(/[^a-z0-9]+/).filter(w => {
     if (w.length < 4 || ASSUMPTION_TOPIC_STOPWORDS.has(w)) return false;
@@ -1276,7 +1338,7 @@ function canonicalConversionPhrase(facts) {
 }
 function isCandidateFlaggedForRepair(candidate, mechanismTerms, objectiveWords) {
   const normCandidate = norm(candidate);
-  const matchedTerm = mechanismTerms.find(term => new RegExp('\\b' + escapeRegExpLiteral(term) + '\\w*\\b').test(normCandidate));
+  const matchedTerm = mechanismTerms.find(term => termMatchesCandidateWord(term, normCandidate));
   if (!matchedTerm) return false;
   return !isConversionCandidateGrounded(normCandidate, objectiveWords, mechanismTerms);
 }

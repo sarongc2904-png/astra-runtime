@@ -104,11 +104,28 @@ tRole('F3-J same mixed-language mechanism under an explicit appointment objectiv
 // not a memorized answer key.
 function normWord(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
 const PURCHASE_WORDS = new Set(['compra', 'venta', 'pago', 'purchase', 'sale', 'pay']);
+// Mirrors production's bounded, symmetric ENDPOINT_SYNONYM_PAIRS (brief_fidelity_validator.js) so
+// this test file's own generated-matrix oracle stays consistent with the cross-language endpoint
+// equivalence the hardening intentionally adds — an objective stated in either language must exempt
+// both language forms of the same conversion-endpoint concept, verified independently via the
+// hand-authored X1-X8 cross-language cases below.
+const TEST_ENDPOINT_SYNONYM_PAIRS = [
+  ['cita', 'appointment'], ['reserva', 'reservation'], ['visita', 'visit'],
+  ['llamada', 'call'], ['consulta', 'consultation'], ['conversacion', 'conversation'],
+];
+function endpointSynonymEquivalents(term) {
+  const nt = normWord(term);
+  const set = new Set([nt]);
+  for (const [es, en] of TEST_ENDPOINT_SYNONYM_PAIRS) {
+    if (nt === es || es.startsWith(nt) || nt.startsWith(es)) set.add(en);
+    if (nt === en || en.startsWith(nt) || nt.startsWith(en)) set.add(es);
+  }
+  return [...set];
+}
 function objectiveGroundsWord(objective, term) {
   if (!objective) return false;
   const words = normWord(objective).split(/[^a-z0-9]+/);
-  const nt = normWord(term);
-  return words.some(w => w.length >= 3 && (w.startsWith(nt) || nt.startsWith(w)));
+  return endpointSynonymEquivalents(term).some(nt => words.some(w => w.length >= 3 && (w.startsWith(nt) || nt.startsWith(w))));
 }
 const OBJECTIVES = {
   sale_es: 'vender el producto', sale_en: 'sell the product',
@@ -418,6 +435,86 @@ tRole('FRESH-20 repair of a compound-noun-collision candidate preserves the surv
   const second = fidelity.validateFinalSynthesis(fa, repaired.synthesis, {});
   assert.deepStrictEqual(second.violations, []);
   assert(/comprar software/i.test(repaired.synthesis.deliverable['6_funnel'].conversion_intent));
+});
+
+// ============================================================
+// VERIFICATION-GATE CASES (X1-X8, E1-E8) — added by the follow-up final-verification authorization
+// that caught two real family-level gaps this file's first pass missed: (1) TRUE cross-language
+// endpoint SYNONYMS (no lexical overlap at all, e.g. "cita"/"appointment") were invisible in either
+// direction, and a cognate pair ("consultation"/"consulta", "demostración"/"demo") only matched in
+// whichever direction happened to have the longer word on the mechanism side; (2) the acronym rule
+// treated ANY all-caps 2-5 letter token as a candidate topic, so an incidentally-capitalized common
+// word ("ESTA", "EL", "DEL") could outrank a real acronym ("CAC") by tie-break length. Both are
+// fixed generically in brief_fidelity_validator.js (ENDPOINT_SYNONYM_PAIRS + endpointSynonymCluster
+// + termMatchesCandidateWord's bidirectional-prefix cognate check; ACRONYM_TOPIC_STOPWORDS reusing
+// the same short-function-word exclusion already applied to normal-word topics) — never a
+// Método-360-specific patch.
+t('X1 sell-course objective (ES) + EN mechanism endpoint "appointment" + ES candidate "cita" -> DETECT', () => {
+  const fa = facts('vender curso', 'ad -> WhatsApp -> appointment');
+  assert(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar cita' } }).length > 0);
+});
+t('X2 sell-course objective (EN) + ES mechanism endpoint "cita" + EN candidate "appointment" -> DETECT', () => {
+  const fa = facts('sell course', 'anuncio -> WhatsApp -> cita');
+  assert(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar appointment' } }).length > 0);
+});
+t('X3 sell-software objective (ES) + EN mechanism endpoint "demo" + ES candidate "demostración" -> DETECT', () => {
+  const fa = facts('vender software', 'content -> form -> demo');
+  assert(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar demostración' } }).length > 0);
+});
+t('X4 sell-software objective (EN) + ES mechanism endpoint "demostración" + EN candidate "demo" -> DETECT', () => {
+  const fa = facts('sell software', 'contenido -> formulario -> demostración');
+  assert(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar demo' } }).length > 0);
+});
+t('X5 sell-product objective (ES) + EN mechanism endpoint "consultation" + ES candidate "consulta" -> DETECT', () => {
+  const fa = facts('vender producto', 'ad -> chat -> consultation');
+  assert(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar consulta' } }).length > 0);
+});
+t('X6 sell-product objective (EN) + ES mechanism endpoint "consulta" + EN candidate "consultation" -> DETECT', () => {
+  const fa = facts('sell product', 'anuncio -> chat -> consulta');
+  assert(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar consultation' } }).length > 0);
+});
+t('X7 explicit appointment objective (ES) + EN mechanism endpoint + ES candidate -> PASS (grounded via synonym cluster, not omission)', () => {
+  const fa = facts('generar citas', 'ad -> WhatsApp -> appointment');
+  assert.deepStrictEqual(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar cita' } }), []);
+  // The RIGHT reason, not a blind spot: the English form must ALSO be exempt, not just the Spanish
+  // one, proving the whole synonym cluster was excluded together rather than one form by accident.
+  assert.deepStrictEqual(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar appointment' } }), []);
+});
+t('X8 explicit appointment objective (EN) + ES mechanism endpoint + EN candidate -> PASS (grounded via synonym cluster, not omission)', () => {
+  const fa = facts('book appointments', 'anuncio -> WhatsApp -> cita');
+  assert.deepStrictEqual(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar appointment' } }), []);
+  assert.deepStrictEqual(mechViol(fa, { '6_funnel': { conversion_intent: 'Confirmar cita' } }), []);
+});
+t('E1 "NO HAY DATOS" with an empty raw brief creates no accidental HAY/DATOS topic or false attribution', () => {
+  assert.deepStrictEqual(epiViol(['NO HAY DATOS.'], ''), []);
+});
+t('E2 "EL CRM ESTA DISPONIBLE definido por el usuario" anchors on CRM, not the incidentally-capitalized ESTA/EL', () => {
+  const v = epiViol(['EL CRM ESTA DISPONIBLE definido por el usuario.'], 'Vende tu curso.');
+  assert(v.some(x => x.type === 'UNSUPPORTED_USER_ATTRIBUTION' && x.matched_anchor === 'crm'));
+});
+t('E3 documented contract: "AI" is a genuine 2-letter acronym and is correctly extracted as the topic', () => {
+  const v = epiViol(['AI disponible definido por el usuario.'], 'Vende tu curso.');
+  assert(v.some(x => x.type === 'UNSUPPORTED_USER_ATTRIBUTION' && x.matched_anchor === 'ai'));
+});
+t('E4 documented contract: "IA" (Spanish acronym) is likewise correctly extracted as the topic', () => {
+  const v = epiViol(['IA disponible definido por el usuario.'], 'Vende tu curso.');
+  assert(v.some(x => x.type === 'UNSUPPORTED_USER_ATTRIBUTION' && x.matched_anchor === 'ia'));
+});
+t('E5 "KPI desconocido" with a brief-grounded KPI value -> KNOWN_FACT_DENIAL', () => {
+  const v = epiViol(['KPI desconocido.'], 'Vende tu curso. KPI objetivo definido.');
+  assert(v.some(x => x.type === 'KNOWN_FACT_DENIAL' && x.matched_anchor === 'kpi'));
+});
+t('E6 "EL CAC DEL MES ESTA DEFINIDO POR EL USUARIO" (fully shouted) still anchors on CAC, not MES/EL/DEL/ESTA', () => {
+  const v = epiViol(['EL CAC DEL MES ESTA DEFINIDO POR EL USUARIO.'], 'Vende tu curso.');
+  assert(v.some(x => x.type === 'UNSUPPORTED_USER_ATTRIBUTION' && x.matched_anchor === 'cac'));
+});
+t('E7 documented contract: "USA" as a geography/acronym still correctly flags a GENUINE cross-item contradiction (not spurious)', () => {
+  const v = epiViol(['USA mercado desconocido.', 'USA mercado disponible.'], 'Vende tu curso en USA.');
+  assert(v.some(x => x.type === 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS'));
+  assert(v.some(x => x.type === 'KNOWN_FACT_DENIAL' && x.matched_anchor === 'usa'));
+});
+t('E8 documented contract: a lone negated-certainty sentence ("NO API DISPONIBLE") triggers no violation standalone (Rule 2 needs a contradicting partner; negation is not itself a false certainty match)', () => {
+  assert.deepStrictEqual(epiViol(['NO API DISPONIBLE.'], 'Vende tu curso.'), []);
 });
 
 (async () => {
