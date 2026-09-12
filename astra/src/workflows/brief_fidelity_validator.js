@@ -457,16 +457,34 @@ function checkUnlabeledProposal(facts, key, val, markerIndex) {
 // that covers its regular conjugations (aumenta/aumentar/aumentas/aumentan/aumentando) without
 // resorting to full morphological analysis; the stem-changing irregulars (conseguir → consigue,
 // obtener → obtiene) list their conjugated stem as a second alternative alongside the infinitive.
-const RESULT_OUTCOME_TERMS = 'ventas?|ingres\\w*|leads?|citas?|clientes?|conversi[oó]n(?:es)?|ticket';
-const RESULT_SELF_SUFFICIENT_VERBS = 'duplica\\w*|triplica\\w*';
+// [BILINGUAL POSITIVE PROHIBITION SEMANTICS] confirmed pre-existing gap (surfaced by red-teaming
+// the prior negation gate): the specialists genuinely emit English text even under a Spanish
+// brief (the same job that produced "no testimonials" also demonstrates this), so every list below
+// gets its direct English equivalent — never a giant keyword blacklist, just the same closed,
+// bounded verb/noun families already used for Spanish, extended in kind. Every consumer of these
+// constants (INVENTED_RESULT_CLAIM, the buyer-context claim-role model, the measurement-purpose
+// escape, magnitude detection) inherits bilingual behavior automatically, with no structural change
+// anywhere else — a claim is a claim regardless of which language it's typed in.
+const RESULT_OUTCOME_TERMS = 'ventas?|ingres\\w*|leads?|citas?|clientes?|conversi[oó]n(?:es)?|ticket|sales?|revenue|appointments?|clients?|conversions?|customers?';
+const RESULT_SELF_SUFFICIENT_VERBS = 'duplica\\w*|triplica\\w*|double[sd]?|doubling|triple[sd]?|tripling';
 // [OFFER CONSTRAINT ADHERENCE — confirmed live gap] "Llena citas" ("fills your appointment
 // calendar") asserts a result exactly like "aumenta ventas" does, but "llena\w*"/"llenar" was
 // missing from this list entirely — paired with an OUTCOME_TERM already in RESULT_OUTCOME_TERMS
 // ("citas"), it is a claim verb like any other here, not a new category.
-const RESULT_CLAIM_VERBS = 'aumenta\\w*|increment[ao]\\w*|sub(?:e|es|en|ir|iendo|ido)|mejora\\w*|consig(?:o|ues|ue|uen|uiendo)\\w*|conseguir|logra\\w*|obtien\\w*|obtener|reduc\\w*|baja\\w*|paga\\w*|llena\\w*|llenar';
-const RESULT_MAGNITUDE_ONLY_VERBS = 'genera\\w*';
-const RESULT_MEASUREMENT_VERBS = 'medir|analizar|registrar|probar|testear|monitorear|evaluar|revisar|comparar|dar\\s+seguimiento';
-const RESULT_MAGNITUDE = `\\d+\\s*%|\\d+\\s*x\\b|en\\s+\\d+\\s*(?:d[ií]as?|semanas?|meses?)|\\d+\\s+(?:${RESULT_OUTCOME_TERMS})`;
+const RESULT_CLAIM_VERBS = 'aumenta\\w*|increment[ao]\\w*|sub(?:e|es|en|ir|iendo|ido)|mejora\\w*|consig(?:o|ues|ue|uen|uiendo)\\w*|conseguir|logra\\w*|obtien\\w*|obtener|reduc\\w*|baja\\w*|paga\\w*|llena\\w*|llenar|increase[sd]?|increasing|boost[sd]?|boosting|improve[sd]?|improving|lower[sd]?|lowering|fill[sd]?|filling|get[s]?|getting';
+const RESULT_MAGNITUDE_ONLY_VERBS = 'genera\\w*|generate[sd]?|generating';
+const RESULT_MEASUREMENT_VERBS = 'medir|analizar|registrar|probar|testear|monitorear|evaluar|revisar|comparar|dar\\s+seguimiento|track\\w*|measur\\w*|monitor\\w*|defin\\w*|evaluat\\w*|review\\w*|compar\\w*';
+// A stated currency amount ("$20", "20 dollars", "500 MXN") is itself a concrete claimed value,
+// language-neutral by construction (digits are digits) except for the unit word itself.
+// [SCOPED, NOT SHARED] a stated currency amount is a concrete claimed VALUE only in the narrow
+// context of a metric-acronym assertion (CAC/ROAS/LTV/...) — see INVENTED_METRIC_CLAIM, which
+// references this directly. It is deliberately NOT folded into RESULT_MAGNITUDE below: the
+// canonical brief's own PRICE is a normal, protected fact ("$400 MXN") that legitimately sits near
+// ordinary outcome-term words in offer/funnel prose ("Minicurso 400 MXN venta directa") — treating
+// any nearby currency mention as a "result magnitude" would flag the product's own price as an
+// invented result, which is not what any category here is meant to catch.
+const RESULT_CURRENCY_VALUE = '\\$\\s*\\d+(?:[.,]\\d+)?|\\d+(?:[.,]\\d+)?\\s*(?:usd|mxn|dollars?|pesos?)';
+const RESULT_MAGNITUDE = `\\d+\\s*%|\\d+\\s*x\\b|en\\s+\\d+\\s*(?:d[ií]as?|semanas?|meses?)|in\\s+\\d+\\s*(?:days?|weeks?|months?)|\\d+\\s+(?:${RESULT_OUTCOME_TERMS})`;
 // [GUARANTEED RESULT CLAIM] confirmed preexisting gap: "Resultados garantizados" (and
 // "garantizamos X"/"X garantizado(s)") never matched INVENTED_RESULT_CLAIM at all — RESULT_CLAIM_VERBS
 // has no guarantee verb, and RESULT_OUTCOME_TERMS never listed the bare word "resultado(s)" itself
@@ -480,22 +498,30 @@ const RESULT_MAGNITUDE = `\\d+\\s*%|\\d+\\s*x\\b|en\\s+\\d+\\s*(?:d[ií]as?|sema
 // "garantiz" substring in it) — see isGuaranteedResultMatch()/GUARANTEE_ADVISORY_CUE below for why
 // "garantía de reembolso/producto/satisfacción" and "evitar prometer resultados garantizados" stay
 // clear of this category.
-const GUARANTEE_VERBS = 'garantiz\\w*';
-const RESULT_OUTCOME_TERMS_OR_BARE_RESULT = `${RESULT_OUTCOME_TERMS}|resultados?`;
+const GUARANTEE_VERBS = 'garantiz\\w*|guarantee[sd]?|guaranteeing';
+const RESULT_OUTCOME_TERMS_OR_BARE_RESULT = `${RESULT_OUTCOME_TERMS}|resultados?|results?`;
 const INVENTED_RESULT_CLAIM = new RegExp(
   `\\b(?:${RESULT_SELF_SUFFICIENT_VERBS})\\b` +
   `|\\b(?:${RESULT_CLAIM_VERBS})\\b(?=[\\s\\S]{0,40}\\b(?:${RESULT_OUTCOME_TERMS})\\b)` +
   `|\\b(?:${RESULT_OUTCOME_TERMS})\\b(?=[\\s\\S]{0,40}\\b(?:${RESULT_CLAIM_VERBS})\\b)` +
   `|\\b(?:${RESULT_CLAIM_VERBS}|${RESULT_MAGNITUDE_ONLY_VERBS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))` +
-  `|\\b(?:${RESULT_OUTCOME_TERMS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))` +
+  // Bare "resultado(s)/results" (not just the concrete outcome channels) also counts when paired
+  // with a magnitude — "Resultados en 30 días"/"Results in 30 days" — and the magnitude can
+  // precede the outcome word too ("20% more appointments"), not just follow it.
+  `|\\b(?:${RESULT_OUTCOME_TERMS_OR_BARE_RESULT})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))` +
+  `|(?:${RESULT_MAGNITUDE})(?=[\\s\\S]{0,40}\\b(?:${RESULT_OUTCOME_TERMS_OR_BARE_RESULT})\\b)` +
   `|\\b(?:${GUARANTEE_VERBS})\\b(?=[\\s\\S]{0,40}\\b(?:${RESULT_OUTCOME_TERMS_OR_BARE_RESULT})\\b)` +
-  `|\\b(?:${RESULT_OUTCOME_TERMS_OR_BARE_RESULT})\\b(?=[\\s\\S]{0,40}\\b(?:${GUARANTEE_VERBS})\\b)`, 'i');
+  `|\\b(?:${RESULT_OUTCOME_TERMS_OR_BARE_RESULT})\\b(?=[\\s\\S]{0,40}\\b(?:${GUARANTEE_VERBS})\\b)` +
+  // A bare "100% guaranteed"/"100% garantizado" — no explicit outcome noun at all — is still a
+  // guarantee claim; pairs GUARANTEE_VERBS with a magnitude the same way CLAIM_VERBS already are.
+  `|\\b(?:${GUARANTEE_VERBS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))` +
+  `|(?:${RESULT_MAGNITUDE})(?=[\\s\\S]{0,40}\\b(?:${GUARANTEE_VERBS})\\b)`, 'i');
 // [[REQUIRED mechanism-preservation prose]] "generar consultas y WhatsApp para convertir consulta
 // → conversación → cita" is the canonical, EXPECTED mechanism restatement used throughout this
 // pipeline's node/synthesis fixtures — "generar" here is magnitude-gated (no digit present, so it
 // never matches) and "citas"/"conversión" here never sit within 40 chars of a CLAIM_VERB in that
 // sentence, so this stays safe without any phrase-specific exception.
-const RESULT_MEASUREMENT_PURPOSE_BEFORE = /\bpara\s+$/i;
+const RESULT_MEASUREMENT_PURPOSE_BEFORE = /\bpara\s+$|\bto\s+$/i;
 const RESULT_MEASUREMENT_VERBS_RE = new RegExp(`\\b(?:${RESULT_MEASUREMENT_VERBS})\\b`, 'i');
 function isMeasurementPurposeClause(clauseText, idx) {
   const before = clauseText.slice(0, idx);
@@ -595,7 +621,11 @@ function claimContextRoleForField(fieldKey) { return CLAIM_CONTEXT_FIELD_ROLES[n
 // as escaping, and by the same logic "buscamos/queremos/necesitamos/..." (OUR OWN goal, stated to
 // the buyer) must never escape. Any of these presentin the clause means the match is NOT
 // descriptive buyer language, regardless of role.
-const ADVERTISER_CLAIM_VOICE_CUE = /\btu\b|\btus\b|\bte\b|\bti\b|\bustedes?\b|\bcontigo\b|\bvas\b|\bvamos\s+a\b|\b\w+(?:ar[aá]s|er[aá]s|ir[aá]s|dr[aá]s)\b|\bqueremos\b|\bbuscamos\b|\bnecesitamos\b|\bdeseamos\b|\baspiramos\b|\besperamos\b|\bofrecemos\b|\bayudamos\b|\bconseguimos\b|\blogramos\b|\bentregamos\b|\bbrindamos\b/i;
+// English 2nd-person address (you/your/yourself) and 1st-person-plural future promise ("we will",
+// "we're going to") are the direct English mirror of the Spanish cues above — "We will increase
+// YOUR revenue" / "YOU will get more clients" are exactly as much an advertiser promise as
+// "Aumenta TUS ventas" is.
+const ADVERTISER_CLAIM_VOICE_CUE = /\btu\b|\btus\b|\bte\b|\bti\b|\bustedes?\b|\bcontigo\b|\bvas\b|\bvamos\s+a\b|\b\w+(?:ar[aá]s|er[aá]s|ir[aá]s|dr[aá]s)\b|\bqueremos\b|\bbuscamos\b|\bnecesitamos\b|\bdeseamos\b|\baspiramos\b|\besperamos\b|\bofrecemos\b|\bayudamos\b|\bconseguimos\b|\blogramos\b|\bentregamos\b|\bbrindamos\b|\byou\b|\byour\b|\byourself\b|\bwe['’]ll\b|\bwe\s+will\b|\bwe['’]re\s+going\s+to\b|\bwe\s+are\s+going\s+to\b|\bwe\s+help\b|\bwe\s+offer\b|\bwe\s+deliver\b|\bwe\s+provide\b/i;
 // [NOMINALIZED INFINITIVE / PURPOSE-NEED CLAUSE] "Dificultad PARA subir ticket", "Necesidad DE
 // conseguir más clientes" — a bare infinitive immediately governed by "de"/"para" is a Spanish
 // noun-complement construction describing a NEED/DIFFICULTY/GOAL, grammatically incapable of being
@@ -613,7 +643,11 @@ const BARE_INFINITIVE_RE = /^[a-záéíóúñ]+(?:ar|er|ir)$/i;
 // governs the outcome noun directly" from "an unrelated noun sits between them."
 const CLAIM_VERB_RE_BARE = new RegExp(`\\b(?:${RESULT_CLAIM_VERBS})\\b`, 'i');
 const OUTCOME_TERM_RE_BARE = new RegExp(`\\b(?:${RESULT_OUTCOME_TERMS})\\b`, 'i');
-const SMALL_QUANTIFIER_GAP_RE = /^\s*(?:m[aá]s|tan|tant[oa]s?|muy)?\s*$/i;
+// "more" is the direct English equivalent of "más" ("Get MORE appointments" / "Consigue MÁS
+// citas" are the identical imperative shape); a bare comma between the verb and its outcome term
+// ("Appointments, get more") is ordinary punctuation, not an intervening noun, so it is tolerated
+// on either side of the quantifier the same way whitespace already is.
+const SMALL_QUANTIFIER_GAP_RE = /^[\s,]*(?:m[aá]s|tan|tant[oa]s?|muy|more)?[\s,]*$/i;
 // Returns { gapText, verbText } for the NEAREST occurrence of the "other" term paired with match —
 // verbText is whichever of the two (match itself, or the paired occurrence) is the CLAIM_VERB side,
 // regardless of which one triggered this particular match. This matters because INVENTED_RESULT_CLAIM
@@ -665,7 +699,7 @@ function isBuyerContextDescriptiveMatch(fieldKey, clauseText, match) {
 // "resultado(s)" was deliberately kept out of RESULT_OUTCOME_TERMS), so this test is exact, not a
 // heuristic guess at which branch fired.
 function isGuaranteedResultMatch(matchedText) {
-  return /^garantiz/i.test(matchedText) || /^resultados?$/i.test(matchedText);
+  return /^(?:garantiz|guarantee)/i.test(matchedText) || /^resultados?$/i.test(matchedText) || /^results?$/i.test(matchedText);
 }
 // [GUARANTEE NEGATION / ADVISORY ESCAPE] "No garantizamos resultados" and "Sin garantía de
 // resultados" must not fail — but the generic negation cue list (isNegated() inside
@@ -681,19 +715,40 @@ function isGuaranteedResultMatch(matchedText) {
 // garantizados", "no debemos prometer resultados garantizados") describes NOT making the claim,
 // not making it — scoped to the same clause, before the match, and only for a guarantee-category
 // match (never widened to any other invented_result phrasing).
-const GUARANTEE_SELF_NEGATION_CUE = /\bno\s+(?:te\s+|les?\s+|nos\s+)?$/i;
-const GUARANTEE_ADVISORY_CUE = /\bevitar\b|\bevita\b|\bevitando\b|\bno\s+(?:debe(?:s|mos|n)?\s+)?prometer\b/i;
+const GUARANTEE_SELF_NEGATION_CUE = /\bno\s+(?:te\s+|les?\s+|nos\s+)?$|\b(?:do\s+not|don['’]t|never)\s+$/i;
+const GUARANTEE_ADVISORY_CUE = /\bevitar\b|\bevita\b|\bevitando\b|\bno\s+(?:debe(?:s|mos|n)?\s+)?prometer\b|\bavoid\b|\bavoiding\b|\bexclude\b|\bexcluding\b|\bdo\s+not\s+promise\b|\bdon['’]t\s+promise\b|\bnever\s+promise\b/i;
 function isGuaranteeNegationOrAdvisoryEscape(s, match) {
   if (!isGuaranteedResultMatch(match[0])) return false;
   const before = s.slice(0, match.index);
-  if (/^garantiz/i.test(match[0]) && GUARANTEE_SELF_NEGATION_CUE.test(before)) return true;
+  if (/^(?:garantiz|guarantee)/i.test(match[0]) && GUARANTEE_SELF_NEGATION_CUE.test(before)) return true;
   return GUARANTEE_ADVISORY_CUE.test(before);
 }
-const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bantes\s*\/\s*despu[ée]s\b|\bresultados?\s+document\w+\b/i;
+// English proof/evidence-assertion verbs (proven/proves/shown/shows/demonstrated/verified/
+// validated) mirror the existing Spanish assertion-verb family — "case study"/"before/after" were
+// already language-neutral tokens (no translation needed).
+const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bantes\s*\/\s*despu[ée]s\b|\bresultados?\s+document\w+\b|\bproven\b|\bproves?\b|\bproving\b|\bshown\b|\bshows\b|\bshowing\b|\bdemonstrat\w+\b|\bverified\b|\bvalidated\b|\bprior\s+results?\b|\bclients?\s+achiev\w+\b|\breal\s+evidence\b|\bdocumented\s+results?\b/i;
 // [INVENTED METRIC ORDER FIX] confirmed live miss: "Objetivo ROAS 4x" (qualifier BEFORE the
 // acronym) never matched the old acronym-then-qualifier-only pattern. Now bidirectional, plus a
-// bare acronym+magnitude form ("ROAS 4x") that needs no qualifier word at all.
-const INVENTED_METRIC_CLAIM = /\b(?:cac|cpa|cpl|roas|mer|ltv)\b[\s\S]{0,20}\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta)\b|\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta)\b[\s\S]{0,20}\b(?:cac|cpa|cpl|roas|mer|ltv)\b|\b(?:cac|cpa|cpl|roas|mer|ltv)\b[\s\S]{0,10}\d+\s*(?:%|x)\b/i;
+// bare acronym+magnitude form ("ROAS 4x") that needs no qualifier word at all. English qualifiers
+// (expected/projected/estimated/target/goal/actual) mirror esperado/proyectado/estimado/objetivo/
+// meta; a bare acronym next to a stated CURRENCY VALUE ("CAC is $20", "LTV $500") is itself an
+// observed/claimed value, not just a %/x multiplier — RESULT_CURRENCY_VALUE (language-neutral,
+// digits-based) closes that gap generically rather than special-casing dollar signs here.
+const INVENTED_METRIC_CLAIM = new RegExp(
+  '\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b[\\s\\S]{0,20}\\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta|expected|projected|estimated|target|goal)\\b' +
+  '|\\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta|expected|projected|estimated|target|goal)\\b[\\s\\S]{0,20}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b' +
+  // [PRE-EXISTING BUG FIX] a trailing \b right after a literal "%" can never match (neither side of
+  // that position is a \w character), so "\d+\s*(?:%|x)\b" silently never matched a bare "X%"
+  // magnitude for any acronym ("ROAS 4%") — only "Xx" ("ROAS 4x") ever worked, since "x" itself is
+  // a word character. Splitting the \b onto only the "x" alternative (mirroring how RESULT_MAGNITUDE
+  // already does it correctly) fixes this for every acronym, not just the ones this gate happens to
+  // test.
+  '|\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b[\\s\\S]{0,10}(?:\\d+\\s*(?:%|x\\b)|' + RESULT_CURRENCY_VALUE + ')' +
+  // The %/x magnitude can precede the acronym too ("3x ROAS", "4% CTR"), not just follow it —
+  // mirrors the currency-value reverse branch immediately below.
+  '|(?:\\d+\\s*(?:%|x\\b))[\\s\\S]{0,10}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b' +
+  '|(?:' + RESULT_CURRENCY_VALUE + ')[\\s\\S]{0,10}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b',
+  'i');
 const PROHIBITED_CONTENT_PATTERNS = [
   { type: 'testimonials', re: /testimonios?|\btestimonials?\b/i },
   { type: 'proof', re: /\bproof\b/i },
@@ -701,7 +756,7 @@ const PROHIBITED_CONTENT_PATTERNS = [
   { type: 'urgency', re: /urgencia/i },
   { type: 'scarcity', re: /escasez|oferta\s+limitada/i },
   { type: 'deadline', re: /\bdeadline\b/i },
-  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado/i },
+  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado|guarantee[sd]?|guaranteed\s+results?/i },
   { type: 'invented_metric', re: INVENTED_METRIC_CLAIM },
   { type: 'invented_result', re: INVENTED_RESULT_CLAIM },
   { type: 'invented_evidence', re: INVENTED_EVIDENCE_CLAIM },
@@ -713,7 +768,7 @@ const PROHIBITION_CATEGORY_TERMS = [
   { type: 'urgency', re: /urgencia/i },
   { type: 'scarcity', re: /escasez|oferta\s+limitada/i },
   { type: 'deadline', re: /\bdeadline\b/i },
-  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado/i },
+  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado|guarantee[sd]?|guaranteed\s+results?/i },
   { type: 'invented_metric', re: /m[ée]tricas?|\b(cac|cpa|cpl|roas|mer|ltv)\b/i },
   { type: 'invented_result', re: /\bresultados?\b|\bresults?\b/i },
   { type: 'invented_evidence', re: /\bevidencia\b|\bevidence\b/i },
@@ -823,7 +878,10 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
     // mixed-language clause ("Nunca uses testimonials") pairs a Spanish negator with an English
     // verb, which neither the pure-Spanish `negative` cue (requires a Spanish verb) nor an
     // English-only "never" cue would catch on its own.
-    const ENGLISH_NEGATIVE_VERB_DIRECTIVE = /\b(?:do\s+not|don['’]t|never|nunca)\s+(?:use[sd]?|using|includes?|including|mentions?|mentioning|presents?|presenting|states?|stating|adds?|adding|declares?|declaring)\b/gi;
+    // The verb after the negator may itself be Spanish ("Do not usar testimonios" — an English
+    // negator with a Spanish verb, explicitly required by the bilingual mandate) — so the verb
+    // alternation includes both languages' negatable-verb sets, not just the English ones.
+    const ENGLISH_NEGATIVE_VERB_DIRECTIVE = /\b(?:do\s+not|don['’]t|never|nunca)\s+(?:use[sd]?|using|includes?|including|mentions?|mentioning|presents?|presenting|states?|stating|adds?|adding|declares?|declaring|usar|incluir|utilizar|mencionar|presentar|afirmar|declarar|declares?|inventar)\b/gi;
     const actions = /\b(?:usa\w*|inclu\w*|utiliza\w*|menciona\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*|declara\w*|use[sd]?|using|includes?|including|mentions?|mentioning|presents?|presenting|states?|stating|adds?|adding|declares?|declaring)\b/i;
     const ADVISORY_NEGATION_CUE = /\bevitar\b|\bevita\b|\bevitando\b|\bavoid\b|\bavoiding\b|\bexclude\b|\bexcluding\b/i;
     // Capped at ONE intervening word ("no fake testimonials") rather than two: a wider cap starts

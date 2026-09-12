@@ -269,7 +269,7 @@ tFresh('nested object with array leaf mixing PASS and DETECT isolates precisely'
 tFresh('"Without testimonials or guarantees" negates both nouns via one bare "without"', () => {
   assert.deepStrictEqual(violationsFor('limitations', 'Without testimonials or guarantees'), []);
 });
-tFresh('genuine guarantee-category detection is unaffected: "We guarantee results" still DETECTs (Spanish-vocabulary guarantee pattern, documents existing scope)', () => expectPass('limitations', 'We guarantee results'));
+tFresh('English guarantee assertion "We guarantee results" now DETECTs (English guarantee coverage added by ASTRA_CAMPAIGN360_BILINGUAL_POSITIVE_PROHIBITION_HARDENING; was a documented Spanish-only scope limitation at the time this test was first written)', () => expectDetect('limitations', 'We guarantee results'));
 
 // ============================================================
 // PART F — USAGE LIVE REGRESSION (ads fails, whatsapp_conversion fulfills, same wave)

@@ -219,7 +219,7 @@ tFresh('descriptive "Agenda con pocas citas" PASSes (no claim verb, no pronoun)'
 tFresh('third-person "El cliente busca subir su ticket" PASSes (goal-intent escape, unrelated to field role)', () => expectPass('pains', 'El cliente busca subir su ticket'));
 tFresh('first-person-plural "Buscamos subir tu ticket" DETECTs (advertiser voice "buscamos"+"tu")', () => expectDetect('pains', 'Buscamos subir tu ticket'));
 tFresh('mixed ES/EN "Baja occupancy of citas" — Spanish claim-verb "Baja" still evaluated under the same rule, PASSes (descriptive, no pronoun, non-adjacent to a recognized outcome term)', () => expectPass('pains', 'Baja occupancy of citas'));
-tFresh('mixed ES/EN "Increase tus ventas now" PASSes (the claim-verb vocabulary is Spanish-only — "Increase" never matches at all, same documented scope as FRESH-12)', () => expectPass('pains', 'Increase tus ventas now'));
+tFresh('mixed ES/EN "Increase tus ventas now" now DETECTs (English claim-verb coverage added by ASTRA_CAMPAIGN360_BILINGUAL_POSITIVE_PROHIBITION_HARDENING; was a documented Spanish-only scope limitation at the time this test was first written)', () => expectDetect('pains', 'Increase tus ventas now'));
 tFresh('PROPUESTA marker never bypasses a magnitude claim in buying_triggers', () => expectDetect('buying_triggers', 'PROPUESTA: Aumentar ventas 25% en 30 días'));
 tFresh('PROPUESTA marker never bypasses a guarantee in qualification_signals', () => expectDetect('qualification_signals', 'PROPUESTA: Garantizamos resultados'));
 tFresh('the advisory-negation escape (evitar/no debemos prometer) is scoped ONLY to guarantee-category matches, by existing design — an ordinary claim-verb match inside the same advisory sentence still DETECTs, since the sentence still literally states the promissory phrase', () => expectDetect('objections', 'No debemos prometer aumentar tus ventas'));
@@ -246,7 +246,7 @@ tFresh('nested object field (nested under a nested key) still isolates leaves co
   assert.equal(v[0].leaf_path, 'pains.secondary');
 });
 tFresh('English-only descriptive "Low appointment occupancy" PASSes (no Spanish claim-verb vocabulary matched at all)', () => expectPass('pains', 'Low appointment occupancy'));
-tFresh('English-only imperative "Get more clients now" does not match Spanish claim-verb vocabulary either (documents current scope: detection is Spanish-lexicon-based)', () => expectPass('pains', 'Get more clients now'));
+tFresh('English-only imperative "Get more clients now" now DETECTs (English claim-verb coverage added by ASTRA_CAMPAIGN360_BILINGUAL_POSITIVE_PROHIBITION_HARDENING; was a documented Spanish-only scope limitation at the time this test was first written)', () => expectDetect('pains', 'Get more clients now'));
 tFresh('capitalized shouted imperative "AUMENTA TUS VENTAS" still DETECTs (case-insensitive matching)', () => expectDetect('pains', 'AUMENTA TUS VENTAS'));
 tFresh('capitalized shouted descriptive "BAJA OCUPACIÓN DE CITAS" still PASSes (case-insensitive, same structural rule)', () => expectPass('pains', 'BAJA OCUPACIÓN DE CITAS'));
 tFresh('punctuation-heavy descriptive "¿Baja ocupación? Sí, de citas." still PASSes', () => expectPass('pains', '¿Baja ocupación? Sí, de citas.'));
