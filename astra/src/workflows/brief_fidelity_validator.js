@@ -964,14 +964,32 @@ function validateOutputAgainstFacts(facts, output, { nodeId, upstream_outputs = 
 // campaign's conversion definition — never inside mechanism/offer/educational-content prose,
 // which is untouched. A term already present in business_objective is never a mechanism-only term
 // (CASE A8/A9: an explicitly requested appointment/lead objective stays fully valid).
+// Bilingual, bounded (connectors + generic teaching/using/converting verbs only — never endpoint
+// NOUNS like "appointment"/"demo"/"call", which must stay extractable regardless of language).
 const MECHANISM_TERM_STOPWORDS = new Set(('para con del las los una uno unos unas por que como este esta estos estas cada todo toda todos todas para sera seran hacia sobre entre desde hasta '
   + 'meta ads facebook instagram google tiktok whatsapp '
   + 'genera generar generando convierte convertir convirtiendo gestiona gestionar gestionando ensena ensenar enseñar enseña aplica aplicar aprende aprender usa usar utiliza utilizar teach teaches teaching '
-  + 'using use uses convert converts converting manage manages managing generate generates generating learn learns learning').split(/\s+/));
+  + 'using use uses convert converts converting manage manages managing generate generates generating learn learns learning '
+  + 'for and the to with via through on at of a an is are book books booking schedule schedules scheduling request requests requesting register registers registering '
+  + 'get gets getting obtain obtains obtaining contact contacts contacting click clicks clicking').split(/\s+/));
 function escapeRegExpLiteral(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+// [LANGUAGE-ROBUST STRUCTURE-FIRST EXTRACTION] a mechanism's stage chain is recognized by its
+// ARROW STRUCTURE, never by which language names the stages — "ad -> WhatsApp -> appointment" and
+// "anuncio -> WhatsApp -> cita" extract their terminal candidate the exact same way, by POSITION,
+// with no vocabulary lookup at all. This is the single shared arrow-token pattern for every split
+// in this file (→/⇒/➜/-->/->/> — longest tokens first so "-->" isn't half-consumed as "->").
+// Deliberately no 'g' flag: reused via .split() (which doesn't need it) and this exact instance
+// is never reused with .test()/.exec() elsewhere, so there is no shared-lastIndex statefulness risk.
+const ARROW_RE = /→|⇒|➜|-->|->|>/;
+// Naive de-pluralization (English/Spanish "-s" only, never applied to words <=4 chars to avoid
+// mangling short real words) so a plural mechanism-chain word ("appointments") and its singular
+// use elsewhere ("Book appointment") resolve to the SAME stem — the stem-match regex built from a
+// term only ever extends forward (`\bterm\w*\b`), so storing the shorter/singular form is what
+// lets it match both directions.
+function stemMechanismTerm(w) { return w.length > 4 && w.endsWith('s') ? w.slice(0, -1) : w; }
 function extractMechanismStageTerms(mechanismValue) {
   const text = String(mechanismValue || '');
-  const parts = text.split(/→|-->|->/);
+  const parts = text.split(ARROW_RE);
   const terms = new Set();
   if (parts.length > 1) {
     // Arrow chain present: take ONLY the stage token immediately touching each arrow (never the
@@ -979,18 +997,18 @@ function extractMechanismStageTerms(mechanismValue) {
     parts.forEach((seg, i) => {
       if (i === 0) {
         const words = norm(seg).split(/[^a-z0-9]+/).filter(Boolean);
-        if (words.length) terms.add(words[words.length - 1]);
+        if (words.length) terms.add(stemMechanismTerm(words[words.length - 1]));
       } else if (i === parts.length - 1) {
         const trailing = seg.split(/[.,;:\n]/)[0];
-        for (const w of norm(trailing).split(/[^a-z0-9]+/)) if (w.length >= 3 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(w);
+        for (const w of norm(trailing).split(/[^a-z0-9]+/)) if (w.length >= 3 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(stemMechanismTerm(w));
       } else {
-        for (const w of norm(seg).split(/[^a-z0-9]+/)) if (w.length >= 3 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(w);
+        for (const w of norm(seg).split(/[^a-z0-9]+/)) if (w.length >= 3 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(stemMechanismTerm(w));
       }
     });
   } else {
     // No explicit stage chain — fall back to filtered whole-text keywords (e.g. "conseguir
     // clientes"): still excludes tool/channel names and generic teaching/using verbs.
-    for (const w of norm(text).split(/[^a-z0-9]+/)) if (w.length >= 4 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(w);
+    for (const w of norm(text).split(/[^a-z0-9]+/)) if (w.length >= 4 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(stemMechanismTerm(w));
   }
   return [...terms];
 }
@@ -1051,7 +1069,7 @@ function mechanismTermsForFacts(facts) {
 // the last arrow is process description, never a claimed endpoint on its own. Returns null for an
 // arrow-free segment when the caller doesn't want whole-segment fallback (SEQUENCE shape).
 function arrowTerminalOrNull(seg) {
-  const arrowParts = seg.split(/→|-->|->/);
+  const arrowParts = seg.split(ARROW_RE);
   if (arrowParts.length < 2) return null;
   return arrowParts[arrowParts.length - 1].split(/[.,;:\n]/)[0].trim() || null;
 }
@@ -1085,10 +1103,24 @@ function extractConversionCandidates(text, role) {
   if (role === 'ENUMERATION') return extractEnumerationCandidates(text);
   return [];
 }
-function isConversionCandidateGrounded(normCandidate, objectiveWords) {
-  const groundedByPurchase = PURCHASE_GROUNDING_VOCAB.some(w => new RegExp('\\b' + w + '\\b').test(normCandidate));
+// [COMPOUND-NOUN COLLISION FIX] confirmed gap: "sales" (PURCHASE_GROUNDING_VOCAB) can occur purely
+// as a MODIFIER of the mechanism's own endpoint noun — "sales call" is a KIND OF CALL (the
+// mechanism's own term), not an assertion that a sale happened. A purchase-vocab match immediately
+// adjacent to one of this mechanism's own extracted terms is that compound, not grounding — so it
+// is excluded; any OTHER, non-adjacent purchase-vocab match (the normal case: "Comprar minicurso",
+// "Ofrecer link pago") still grounds normally.
+function isConversionCandidateGrounded(normCandidate, objectiveWords, mechanismTerms) {
   const groundedByObjective = [...objectiveWords].some(w => normCandidate.includes(w));
-  return groundedByPurchase || groundedByObjective;
+  if (groundedByObjective) return true;
+  for (const w of PURCHASE_GROUNDING_VOCAB) {
+    const m = new RegExp('\\b' + w + '\\w*\\b').exec(normCandidate);
+    if (!m) continue;
+    const before = normCandidate.slice(0, m.index).trim().split(/\s+/).pop() || '';
+    const after = normCandidate.slice(m.index + m[0].length).trim().split(/\s+/)[0] || '';
+    const isCompoundWithMechanismTerm = (mechanismTerms || []).some(t => before === t || after === t || before.startsWith(t) || after.startsWith(t));
+    if (!isCompoundWithMechanismTerm) return true;
+  }
+  return false;
 }
 function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
   const sectionRoles = FINAL_SYNTHESIS_FIELD_ROLES[key];
@@ -1106,7 +1138,7 @@ function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
       const normCandidate = norm(candidate);
       const matchedTerm = mechanismTerms.find(term => new RegExp('\\b' + escapeRegExpLiteral(term) + '\\w*\\b').test(normCandidate));
       if (!matchedTerm) continue;
-      if (isConversionCandidateGrounded(normCandidate, objectiveWords)) continue;
+      if (isConversionCandidateGrounded(normCandidate, objectiveWords, mechanismTerms)) continue;
       violations.push({
         type: 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION', fact_field: 'mechanism', field_key: subKey,
         matched_text: candidate, matched_anchor: matchedTerm, section: key,
@@ -1131,13 +1163,50 @@ function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
 //   3. independent of rawRequest: two assumptions in the SAME list asserting opposite epistemic
 //      status (one confident/attributed, one pending/unknown) about a shared significant keyword
 //      contradict each other outright.
-const ASSUMPTION_USER_ATTRIBUTION_CUE = /\b(definid[oa]|indicad[oa]|proporcionad[oa]|confirmad[oa]|especificad[oa])\s+por\s+(el\s+)?usuario\b|\busuario\s+(indic[oó]|proporcion[oó]|confirm[oó]|especific[oó])\b|\bdisponible\s+y\s+definid[oa]\b/i;
-const ASSUMPTION_CERTAINTY_CUE = /\b(operativ[oa]|list[oa]|confirmad[oa]|definid[oa]|disponible)\b/i;
-const ASSUMPTION_UNKNOWN_CUE = /\bdesconocid[oa]\b|\bpor\s+(confirmar|definir)\b|\bpendiente\b|\bno\s+(disponible|definid[oa]|especificad[oa])\b/i;
+// `s?` after each adjective ending tolerates plural agreement ("KPI definidos", "requisitos
+// confirmados") — a purely grammatical robustness fix, not a new semantic category.
+// [PRE-EXISTING BUG FIX, surfaced by B1] the trailing \b after an accented verb ending
+// ("confirm[oó]") never matches: JS regex \b is defined over the ASCII \w class, so "ó" itself
+// never counts as a word character — the position right after it sits between two NON-word
+// characters ("ó" and, say, a following space), which is never a boundary, so \b silently fails
+// every time this branch's verb form ends in an accented vowel ("indicó"/"confirmó"/
+// "proporcionó"/"especificó"). Replaced with a lookahead that only rejects a CONTINUING letter
+// (never breaks on the accented vowel itself), which is what the trailing \b was actually meant to
+// guard against.
+const ASSUMPTION_USER_ATTRIBUTION_CUE = /\b(definid[oa]s?|indicad[oa]s?|proporcionad[oa]s?|confirmad[oa]s?|especificad[oa]s?)\s+por\s+(el\s+)?usuario\b|\busuario\s+(indic[oó]|proporcion[oó]|confirm[oó]|especific[oó])(?![a-záéíóúñA-ZÁÉÍÓÚÑ])|\bdisponible\s+y\s+definid[oa]s?\b/i;
+const ASSUMPTION_CERTAINTY_CUE = /\b(operativ[oa]s?|list[oa]s?|confirmad[oa]s?|definid[oa]s?|disponible|inclu[iy]d[oa]s?)\b/i;
+const ASSUMPTION_UNKNOWN_CUE = /\bdesconocid[oa]s?\b|\bpor\s+(confirmar|definir)\b|\bpendiente(s)?\b|\bno\s+(disponible|definid[oa]s?|especificad[oa]s?)\b/i;
 const ASSUMPTION_TOPIC_STOPWORDS = new Set('para con del las los una uno unos unas este esta estos estas cada todo toda propuesta assumption asumo existe existira habra sera seran monto valor'.split(' '));
+// [SHORT-TOPIC EPISTEMIC COVERAGE] confirmed gap: a real topic can be a short business acronym
+// (CAC, KPI, CRM, LTV, API, SEO, IVA, ...) that the >=4-char normal-word floor discards entirely.
+// Generic rule, not a closed whitelist: 2-5 ALL-CAPS ASCII/Latin letters, word-bounded, checked on
+// the ORIGINAL (case-preserved) text — lowercase short tokens ("de", "la", "abc") never qualify
+// this way, so they still can't become an accidental anchor just by coincidence of length. An
+// optional trailing lowercase "s" (plural — "KPIs") is captured and stripped so "KPI" and "KPIs"
+// resolve to the same topic.
+const ACRONYM_TOPIC_RE = /\b([A-Z]{2,5})s?\b/g;
+// Returns candidate topic words for a cue sentence, ACRONYMS FIRST (longest-first within each
+// group). An acronym is a deliberately-extracted, high-signal business term (CAC, KPI...); an
+// incidental long word elsewhere in the same sentence ("reunión", "mensualidad") is noise by
+// comparison. Callers take words[0] as THE topic, so acronym-first ordering — not just acronym
+// inclusion — is required: otherwise a sentence naming both a real acronym and an unrelated long
+// word (e.g. "El CAC del mes fue definido por el usuario en la reunión de ayer") would anchor on
+// the long word and could false-flag (or fail to flag) based on that word's grounding instead of
+// the acronym's, even though the acronym is the actual subject of the assumption.
 function assumptionTopicWords(text, cueRegex) {
   const stripped = String(text || '').replace(new RegExp(cueRegex.source, cueRegex.flags.replace('g', '') + 'g'), ' ');
-  return norm(stripped).split(/[^a-z0-9]+/).filter(w => w.length >= 4 && !ASSUMPTION_TOPIC_STOPWORDS.has(w));
+  const acronyms = [...stripped.matchAll(ACRONYM_TOPIC_RE)].map(m => m[1].toLowerCase());
+  const acronymSet = new Set(acronyms);
+  const normalWords = norm(stripped).split(/[^a-z0-9]+/).filter(w => {
+    if (w.length < 4 || ASSUMPTION_TOPIC_STOPWORDS.has(w)) return false;
+    // Skip a plural surface form ("kpis") already covered by its singular acronym ("kpi") — keeping
+    // both would let the longer-wins topic-selection pick a form that never matches the raw brief.
+    if (w.endsWith('s') && acronymSet.has(w.slice(0, -1))) return false;
+    return true;
+  });
+  const uniqueAcronyms = [...new Set(acronyms)].sort((a, b) => b.length - a.length);
+  const uniqueNormalWords = [...new Set(normalWords)].sort((a, b) => b.length - a.length);
+  return [...uniqueAcronyms, ...uniqueNormalWords];
 }
 function checkAssumptionEpistemicConsistency(key, rawVal, rawRequest) {
   if (key !== '14_assumptions' || !Array.isArray(rawVal)) return [];
@@ -1155,13 +1224,13 @@ function checkAssumptionEpistemicConsistency(key, rawVal, rawRequest) {
     for (const p of parsed) {
       if (p.attributed) {
         const words = assumptionTopicWords(p.text, ASSUMPTION_USER_ATTRIBUTION_CUE);
-        const topic = words.sort((a, b) => b.length - a.length)[0];
+        const topic = words[0];
         if (topic && !new RegExp('\\b' + escapeRegExpLiteral(topic) + '\\w*\\b').test(normRequest)) {
           violations.push({ type: 'UNSUPPORTED_USER_ATTRIBUTION', fact_field: null, field_key: key, matched_text: p.text, matched_anchor: topic });
         }
       } else if (p.unknown) {
         const words = assumptionTopicWords(p.text, ASSUMPTION_UNKNOWN_CUE);
-        const topic = words.sort((a, b) => b.length - a.length)[0];
+        const topic = words[0];
         if (topic && new RegExp('\\b' + escapeRegExpLiteral(topic) + '\\w*\\b').test(normRequest)) {
           violations.push({ type: 'KNOWN_FACT_DENIAL', fact_field: null, field_key: key, matched_text: p.text, matched_anchor: topic });
         }
@@ -1209,13 +1278,14 @@ function isCandidateFlaggedForRepair(candidate, mechanismTerms, objectiveWords) 
   const normCandidate = norm(candidate);
   const matchedTerm = mechanismTerms.find(term => new RegExp('\\b' + escapeRegExpLiteral(term) + '\\w*\\b').test(normCandidate));
   if (!matchedTerm) return false;
-  return !isConversionCandidateGrounded(normCandidate, objectiveWords);
+  return !isConversionCandidateGrounded(normCandidate, objectiveWords, mechanismTerms);
 }
 // Replaces ONLY the terminal segment of an arrow chain with the canonical conversion phrase,
 // preserving every earlier stage verbatim — "los pasos intermediarios pueden conservarse, pero el
 // endpoint debe estar alineado con la campaña."
+const ARROW_RE_CAPTURE = /(→|⇒|➜|-->|->|>)/;
 function repairArrowTerminal(seg, facts) {
-  const arrowParts = seg.split(/(→|-->|->)/);
+  const arrowParts = seg.split(ARROW_RE_CAPTURE);
   if (arrowParts.length < 2) return seg;
   const lastIdx = arrowParts.length - 1;
   const trailingPunct = (arrowParts[lastIdx].match(/[.,;:\n]*$/) || [''])[0];
@@ -1285,7 +1355,7 @@ function repairAssumptions(items, rawRequest) {
   const normRequest = rawRequest ? norm(String(rawRequest)) : null;
   let result = items.filter(x => typeof x === 'string');
   const repairs = [];
-  const topicOf = (text, cue) => assumptionTopicWords(text, cue).sort((a, b) => b.length - a.length)[0];
+  const topicOf = (text, cue) => assumptionTopicWords(text, cue)[0];
   const knownInRaw = topic => topic != null && normRequest != null && new RegExp('\\b' + escapeRegExpLiteral(topic) + '\\w*\\b').test(normRequest);
   if (normRequest != null) {
     result = result.filter(text => {
