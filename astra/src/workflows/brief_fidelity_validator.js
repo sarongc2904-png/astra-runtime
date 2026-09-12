@@ -789,7 +789,7 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
   // Commas in a negative enumeration preserve scope (CAC, ROAS, LTV, testimonios).
   // Adversatives, sentence boundaries and a new affirmative action end it. UNKNOWN
   // belongs only to its immediately preceding occurrence, never the whole clause.
-  const clauses = valRawSentences.split(/[.!?;\n]|\b(?:pero|sin embargo|aunque)\b|[,\u2014]|\b(?:y|e)\s+(?=(?:usa\w*|inclu\w*|utiliza\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*)\b)/i);
+  const clauses = valRawSentences.split(/[.!?;\n]|\b(?:pero|sin embargo|aunque|but|however)\b|[,\u2014]|\b(?:y|e|and)\s+(?=(?:usa\w*|inclu\w*|utiliza\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*|use[sd]?|using|includes?|including|mentions?|mentioning|presents?|presenting|states?|stating|adds?|adding)\b)/i);
   let negativeList = false;
   let offset = 0;
   let clauseIndex = 0;
@@ -807,16 +807,43 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
     // had ANY cue at all. Each is scoped per-occurrence via `before` (the text up to the match),
     // exactly like the existing cues — never a blanket field/category escape: "Usar testimonios
     // reales" / "Incluir testimonios" (no negation cue present) still detect.
-    const negative = /\bno\s+(?:inventes|inventar|inventen|usar|incluir|utilizar|mencionar|presentar|afirmar|declarar|declares?)\b|\bno\s+hay\b/gi;
-    const actions = /\b(?:usa\w*|inclu\w*|utiliza\w*|menciona\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*|declara\w*)\b/i;
-    const ADVISORY_NEGATION_CUE = /\bevitar\b|\bevita\b|\bevitando\b/i;
+    // [BILINGUAL NEGATION SEMANTICS] confirmed live false positive: "no testimonials" (English)
+    // was invisible to every existing cue, which is entirely Spanish-vocabulary. Two DIFFERENT
+    // English negation shapes exist, not one: (a) "do not/don't/never USE/INCLUDE/..." mirrors the
+    // Spanish "no + VERB" shape exactly (verb-mediated — ENGLISH_NEGATIVE_VERB_DIRECTIVE, folded
+    // into the same cueEnd/actions-reset mechanism as the Spanish `negative` cue); (b) English "no"
+    // and "without" ALSO negate a bare NOUN directly ("no testimonials" = "there are no
+    // testimonials", not "no <verb>") — Spanish has no equivalent bare-"no"-noun idiom (that role
+    // is "sin X"), so this is a genuinely new shape (ENGLISH_BARE_NEGATION_BEFORE_NOUN), mirroring
+    // the existing bare "sin $" check. "avoid"/"avoiding"/"exclude"/"excluding" mirror "evitar" as
+    // advisory cues. Allows up to 2 intervening words ("no fake testimonials") so a modified noun
+    // phrase is still recognized, without matching arbitrarily far back.
+    const negative = /\b(?:no|nunca)\s+(?:inventes|inventar|inventen|usar|incluir|utilizar|mencionar|presentar|afirmar|declarar|declares?)\b|\bno\s+hay\b/gi;
+    // "nunca" (Spanish "never") is included alongside the English directives themselves — a
+    // mixed-language clause ("Nunca uses testimonials") pairs a Spanish negator with an English
+    // verb, which neither the pure-Spanish `negative` cue (requires a Spanish verb) nor an
+    // English-only "never" cue would catch on its own.
+    const ENGLISH_NEGATIVE_VERB_DIRECTIVE = /\b(?:do\s+not|don['’]t|never|nunca)\s+(?:use[sd]?|using|includes?|including|mentions?|mentioning|presents?|presenting|states?|stating|adds?|adding|declares?|declaring)\b/gi;
+    const actions = /\b(?:usa\w*|inclu\w*|utiliza\w*|menciona\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*|declara\w*|use[sd]?|using|includes?|including|mentions?|mentioning|presents?|presenting|states?|stating|adds?|adding|declares?|declaring)\b/i;
+    const ADVISORY_NEGATION_CUE = /\bevitar\b|\bevita\b|\bevitando\b|\bavoid\b|\bavoiding\b|\bexclude\b|\bexcluding\b/i;
+    // Capped at ONE intervening word ("no fake testimonials") rather than two: a wider cap starts
+    // colliding with unrelated Spanish "no <verb> <verb>" constructions ("No debemos prometer
+    // aumentar...") that must NOT be swallowed by this English-specific bare-noun negation shape.
+    // Trailing `\s*$` (not requiring the optional word itself to be followed by whitespace) is
+    // required so this also matches when `before` is an ENTIRE clause with no trailing space at
+    // all (checked via isNegated(s.length, s.length) for the enumeration-continuation/negativeList
+    // carry-over below — e.g. "No CAC" as a whole clause, immediately followed by ", ROAS or
+    // testimonials" as a sibling clause in the same negated list).
+    const ENGLISH_BARE_NEGATION_BEFORE_NOUN = /\b(?:no|without)\b(?:\s+\w+)?\s*$/i;
     const isNegated = (idx, end) => {
       const before = s.slice(0, idx);
       let cueEnd = negativeList ? 0 : -1;
-      for (const cue of before.matchAll(negative)) cueEnd = cue.index + cue[0].length;
+      for (const cue of before.matchAll(negative)) cueEnd = Math.max(cueEnd, cue.index + cue[0].length);
+      for (const cue of before.matchAll(ENGLISH_NEGATIVE_VERB_DIRECTIVE)) cueEnd = Math.max(cueEnd, cue.index + cue[0].length);
       if (cueEnd >= 0 && !actions.test(before.slice(cueEnd))) return true;
       if (ADVISORY_NEGATION_CUE.test(before)) return true;
       if (/\bsin\s+$/i.test(before)) return true;
+      if (ENGLISH_BARE_NEGATION_BEFORE_NOUN.test(before)) return true;
       return /^\s*=\s*unknown\b/i.test(s.slice(end)) ||
         (/\bsin\s+$/i.test(before) && /^\s+disponible\b/i.test(s.slice(end)));
     };
