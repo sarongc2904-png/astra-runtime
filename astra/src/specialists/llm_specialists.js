@@ -5,6 +5,10 @@
 const llm = require('../llm/llm_executor');
 const { OUTPUT_KEYS } = require('./base_specialist');
 const { MAX_EVIDENCE_PER_STEP } = require('../../config/context_budgets');
+// [Offer Constraint Adherence] reuses the SAME deterministic category-activation detector the
+// fidelity validator uses to decide which EXPLICIT_PROHIBITION categories are active for this
+// brief's canonical constraints — never a second, parallel classification of the constraint text.
+const { activeExplicitProhibitionCategories } = require('../workflows/brief_fidelity_validator');
 
 const SUPPORT_CLASSES = ['DIRECTLY_SUPPORTED', 'INFERENCE', 'ASSUMPTION', 'CURRENT_RESEARCH_REQUIRED'];
 
@@ -22,6 +26,45 @@ const SPECS = {
 
 function evidenceBlock(evidence) {
   return (evidence || []).map((e, i) => `[E${i + 1} chunk:${e.chunk_id} src:${e.source_pdf_name || e.source_id || '?'}]\n${String(e.text || '').replace(/\s+/g, ' ').trim().slice(0, 600)}`).join('\n\n').slice(0, MAX_EVIDENCE_PER_STEP);
+}
+
+// [Offer Constraint Adherence — confirmed live defect, job 58a4113f-9e0a-413f-b84f-094a7132298a]
+// OFFER_SPECIALIST generated "PROPUESTA: Llena citas y aumenta ventas..." under a canonical
+// constraint that explicitly prohibits inventing "resultados" — the validator correctly caught it
+// and failed the node closed (exactly as designed; EXPLICIT_PROHIBITION is deliberately never
+// auto-repaired, see marketing_campaign_360_hardened.js's REPAIRABLE_VIOLATION_TYPES), but the
+// generation itself never had a fair chance: CANONICAL_CONSTRAINTS was passed through only as raw
+// brief text ("No inventes métricas, resultados, ... testimonios ni evidencia."), with no
+// actionable translation of what "resultados" means for THIS specialist's own schema field (a
+// "value_proposition" is, by its very name, naturally result-oriented copy) — a generic "this is
+// binding" instruction never told the model what an invented-result claim actually looks like or
+// what it may say INSTEAD (the mechanism/process/content it teaches). This closes that gap by
+// deriving concrete, per-category directives from the SAME constraint text the validator itself
+// activates categories from — never a duplicate/drifting classification, and never invented ahead
+// of what the brief actually prohibits: a brief with no result-prohibiting constraint gets no
+// extra guidance at all (no new universal restriction is created).
+const PROHIBITION_CATEGORY_GUIDANCE = {
+  invented_result: 'Do not claim, promise, or imply a business RESULT this offer/plan will produce (more sales, more citas/appointments/leads, more clients, higher revenue/conversion/ticket) — describe only what the customer will DO, LEARN, or RECEIVE (the process, mechanism, content, or skill taught), never the outcome they will achieve as a result of it.',
+  guarantee: 'Never guarantee a result or outcome, however phrased ("garantizado", "te garantizamos...").',
+  invented_metric: 'Never invent or project performance metrics (CAC, CPA, CPL, ROAS, MER, LTV) — omit them entirely unless already supplied as a USER_PROVIDED_FACT.',
+  invented_evidence: 'Never claim proven/validated/documented results, case studies, or before/after evidence that was not supplied as evidence.',
+  testimonials: 'Never invent or imply a customer testimonial.',
+  social_proof: 'Never invent social proof or case studies.',
+  proof: 'Never claim "proof" that was not supplied as evidence.',
+  urgency: 'Never invent urgency.',
+  scarcity: 'Never invent scarcity or a limited-time framing.',
+  deadline: 'Never invent a deadline.',
+};
+function constraintDerivedGuidance(canonicalConstraints) {
+  if (!canonicalConstraints || canonicalConstraints.status !== 'USER_PROVIDED_FACT' || !canonicalConstraints.value) return [];
+  const active = activeExplicitProhibitionCategories(canonicalConstraints.value);
+  const lines = [...active].map(c => PROHIBITION_CATEGORY_GUIDANCE[c]).filter(Boolean);
+  if (!lines.length) return [];
+  return [
+    'CONSTRAINT-DERIVED PROHIBITIONS (from the canonical constraints above — mandatory, apply to every field you write):',
+    ...lines.map(l => `- ${l}`),
+    '- You may still describe the mechanism/process/content being taught or delivered — only a claimed RESULT/outcome/guarantee/metric/testimonial/evidence in the categories above is restricted.',
+  ];
 }
 
 function buildPrompt(input) {
@@ -45,6 +88,8 @@ function buildPrompt(input) {
     `- Any new idea not contained in the facts or evidence above MUST begin explicitly with "PROPUESTA:". Never present a PROPUESTA as a fact.`,
     `- Any upstream content already labeled PROPUESTA is tainted as proposal. Any reuse, paraphrase, derivative, operationalization or downstream dependency of that idea MUST retain explicit PROPUESTA status. Never convert upstream PROPUESTA into an unmarked fact/decision.`,
     `- The canonical constraints below are mandatory and binding; they are not suggestions.`,
+    `- "PROPUESTA:" labels an idea as a proposal — it never lifts a prohibition below; a prohibited claim marked PROPUESTA is still prohibited.`,
+    ...constraintDerivedGuidance(canonicalConstraints),
     `HARD RULES (evidence-bounded):`,
     `- Use ONLY the supplied evidence, method metadata, task brief, canonical facts, and upstream outputs. Do NOT use outside knowledge.`,
     `- Tag every recommendation with support_class one of: ${SUPPORT_CLASSES.join(', ')}.`,

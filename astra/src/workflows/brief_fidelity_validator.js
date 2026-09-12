@@ -459,7 +459,11 @@ function checkUnlabeledProposal(facts, key, val, markerIndex) {
 // obtener → obtiene) list their conjugated stem as a second alternative alongside the infinitive.
 const RESULT_OUTCOME_TERMS = 'ventas?|ingres\\w*|leads?|citas?|clientes?|conversi[oó]n(?:es)?|ticket';
 const RESULT_SELF_SUFFICIENT_VERBS = 'duplica\\w*|triplica\\w*';
-const RESULT_CLAIM_VERBS = 'aumenta\\w*|increment[ao]\\w*|sub(?:e|es|en|ir|iendo|ido)|mejora\\w*|consig(?:o|ues|ue|uen|uiendo)\\w*|conseguir|logra\\w*|obtien\\w*|obtener|reduc\\w*|baja\\w*|paga\\w*';
+// [OFFER CONSTRAINT ADHERENCE — confirmed live gap] "Llena citas" ("fills your appointment
+// calendar") asserts a result exactly like "aumenta ventas" does, but "llena\w*"/"llenar" was
+// missing from this list entirely — paired with an OUTCOME_TERM already in RESULT_OUTCOME_TERMS
+// ("citas"), it is a claim verb like any other here, not a new category.
+const RESULT_CLAIM_VERBS = 'aumenta\\w*|increment[ao]\\w*|sub(?:e|es|en|ir|iendo|ido)|mejora\\w*|consig(?:o|ues|ue|uen|uiendo)\\w*|conseguir|logra\\w*|obtien\\w*|obtener|reduc\\w*|baja\\w*|paga\\w*|llena\\w*|llenar';
 const RESULT_MAGNITUDE_ONLY_VERBS = 'genera\\w*';
 const RESULT_MEASUREMENT_VERBS = 'medir|analizar|registrar|probar|testear|monitorear|evaluar|revisar|comparar|dar\\s+seguimiento';
 const RESULT_MAGNITUDE = `\\d+\\s*%|\\d+\\s*x\\b|en\\s+\\d+\\s*(?:d[ií]as?|semanas?|meses?)|\\d+\\s+(?:${RESULT_OUTCOME_TERMS})`;
@@ -638,13 +642,26 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
     const start = valRawSentences.indexOf(s, offset);
     const separator = valRawSentences.slice(offset, start);
     if (!/^\s*,\s*$/.test(separator)) negativeList = false;
-    const negative = /\bno\s+(?:inventes|inventar|inventen|usar|incluir|utilizar|mencionar|presentar|afirmar)\b|\bno\s+hay\b/gi;
-    const actions = /\b(?:usa\w*|inclu\w*|utiliza\w*|menciona\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*)\b/i;
+    // [NEGATIVE CONSTRAINT SEMANTICS] confirmed live false positive: "No declarar métricas ni
+    // testimonios" (a constraints field STATING a prohibition, exactly the same shape as the
+    // canonical brief's own restriction) flagged "testimonios" as an EXPLICIT_PROHIBITION —
+    // mentioning a prohibited category INSIDE a negative instruction is not using/inventing it.
+    // "declarar" was simply missing from the negatable-verb list (usar/incluir/utilizar/mencionar/
+    // presentar/afirmar/inventar were already covered); "evitar X" and bare "sin X" (without
+    // requiring a following "disponible") are additional, independent negation shapes that never
+    // had ANY cue at all. Each is scoped per-occurrence via `before` (the text up to the match),
+    // exactly like the existing cues — never a blanket field/category escape: "Usar testimonios
+    // reales" / "Incluir testimonios" (no negation cue present) still detect.
+    const negative = /\bno\s+(?:inventes|inventar|inventen|usar|incluir|utilizar|mencionar|presentar|afirmar|declarar|declares?)\b|\bno\s+hay\b/gi;
+    const actions = /\b(?:usa\w*|inclu\w*|utiliza\w*|menciona\w*|presenta\w*|afirma\w*|agrega\w*|incorpora\w*|declara\w*)\b/i;
+    const ADVISORY_NEGATION_CUE = /\bevitar\b|\bevita\b|\bevitando\b/i;
     const isNegated = (idx, end) => {
       const before = s.slice(0, idx);
       let cueEnd = negativeList ? 0 : -1;
       for (const cue of before.matchAll(negative)) cueEnd = cue.index + cue[0].length;
       if (cueEnd >= 0 && !actions.test(before.slice(cueEnd))) return true;
+      if (ADVISORY_NEGATION_CUE.test(before)) return true;
+      if (/\bsin\s+$/i.test(before)) return true;
       return /^\s*=\s*unknown\b/i.test(s.slice(end)) ||
         (/\bsin\s+$/i.test(before) && /^\s+disponible\b/i.test(s.slice(end)));
     };
@@ -952,4 +969,4 @@ function validateFinalSynthesis(facts, synthesis) {
   return { violations: violations.map(v => ({ ...v, node: null, path: pathFor(null, v.field_key) })) };
 }
 
-module.exports = { validateOutputAgainstFacts, validateFinalSynthesis, repairUpstreamProposalStatus, containsFact, relevantFields, CHECKED_FIELDS };
+module.exports = { validateOutputAgainstFacts, validateFinalSynthesis, repairUpstreamProposalStatus, containsFact, relevantFields, CHECKED_FIELDS, activeExplicitProhibitionCategories };
