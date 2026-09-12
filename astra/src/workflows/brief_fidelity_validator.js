@@ -432,19 +432,45 @@ function checkUnlabeledProposal(facts, key, val, markerIndex) {
 // marker as an escape for any category; the gap was upstream, in category coverage, not in
 // marker handling). invented_result/invented_evidence close that gap the same way every other
 // category here works: semantic term/pattern matching, never a hardcoded exact phrase.
-// A "result claim" always requires an explicit numeric/temporal magnitude (%, Nx, "en N días",
-// or a bare count directly against an outcome noun like "50 ventas") — never a bare verb+noun
-// pairing alone. That single invariant is what keeps this from false-positiving on ordinary,
-// REQUIRED mechanism-preservation prose ("generar consultas ... convertir consulta → cita" has
-// no digit anywhere, so it never matches, no matter how close "generar" sits to "citas").
+// [QUALITATIVE RESULT CLAIM] a result claim is not always numeric — "conseguir más ventas",
+// "mejorar ingresos", "citas que pagan más" promise an improvement just as much as "aumentar
+// ventas 30%" does, with no digit anywhere. Detection is layered so it never collapses into a
+// blanket "any of these words together" rule:
+//   - CLAIM_VERBS (aumentar/incrementar/.../pagan) paired with an OUTCOME_TERM in either order,
+//     with NO magnitude required — these verbs are comparative/achievement verbs that essentially
+//     never appear in ordinary mechanism/funnel description without asserting a change.
+//   - "generar" is kept in its OWN, magnitude-REQUIRED tier: it is the one verb in this family
+//     that is completely ordinary, expected language for describing what the funnel itself does
+//     ("generar consultas", "generar leads") — see [[REQUIRED mechanism-preservation prose]]
+//     below — so it only counts as a claim when paired with an explicit magnitude.
+//   - duplicar/triplicar inherently claim a magnitude (x2/x3) on their own.
+//   - A CLAIM_VERB immediately preceded by "para " (a purpose/goal clause) whose own clause opens
+//     with a MEASUREMENT_VERB (medir/analizar/registrar/probar/testear/...) is a description of
+//     an EXPERIMENT'S GOAL, not an assertion that the result was achieved or is expected — e.g.
+//     "probar mensajes para mejorar conversión" — and is explicitly excluded.
 const RESULT_OUTCOME_TERMS = 'ventas?|ingres\\w*|leads?|citas?|clientes?|conversi[oó]n(?:es)?|ticket';
-const RESULT_SELF_SUFFICIENT_VERBS = 'duplicar|triplicar'; // inherently claim a magnitude (x2/x3) on their own
-const RESULT_QUALIFIED_VERBS = 'aumentar|incrementar|subir|bajar|reducir|mejorar|lograr|conseguir|obtener|generar|pagan';
+const RESULT_SELF_SUFFICIENT_VERBS = 'duplicar|triplicar';
+const RESULT_CLAIM_VERBS = 'aumentar|incrementar|subir|mejorar|conseguir|lograr|obtener|reducir|bajar|pagan';
+const RESULT_MAGNITUDE_ONLY_VERBS = 'generar';
+const RESULT_MEASUREMENT_VERBS = 'medir|analizar|registrar|probar|testear|monitorear|evaluar|revisar|comparar|dar\\s+seguimiento';
 const RESULT_MAGNITUDE = `\\d+\\s*%|\\d+\\s*x\\b|en\\s+\\d+\\s*(?:d[ií]as?|semanas?|meses?)|\\d+\\s+(?:${RESULT_OUTCOME_TERMS})`;
 const INVENTED_RESULT_CLAIM = new RegExp(
   `\\b(?:${RESULT_SELF_SUFFICIENT_VERBS})\\b` +
-  `|\\b(?:${RESULT_QUALIFIED_VERBS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))` +
+  `|\\b(?:${RESULT_CLAIM_VERBS})\\b(?=[\\s\\S]{0,40}\\b(?:${RESULT_OUTCOME_TERMS})\\b)` +
+  `|\\b(?:${RESULT_OUTCOME_TERMS})\\b(?=[\\s\\S]{0,40}\\b(?:${RESULT_CLAIM_VERBS})\\b)` +
+  `|\\b(?:${RESULT_CLAIM_VERBS}|${RESULT_MAGNITUDE_ONLY_VERBS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))` +
   `|\\b(?:${RESULT_OUTCOME_TERMS})\\b(?=[\\s\\S]{0,40}(?:${RESULT_MAGNITUDE}))`, 'i');
+// [[REQUIRED mechanism-preservation prose]] "generar consultas y WhatsApp para convertir consulta
+// → conversación → cita" is the canonical, EXPECTED mechanism restatement used throughout this
+// pipeline's node/synthesis fixtures — "generar" here is magnitude-gated (no digit present, so it
+// never matches) and "citas"/"conversión" here never sit within 40 chars of a CLAIM_VERB in that
+// sentence, so this stays safe without any phrase-specific exception.
+const RESULT_MEASUREMENT_PURPOSE_BEFORE = /\bpara\s+$/i;
+const RESULT_MEASUREMENT_VERBS_RE = new RegExp(`\\b(?:${RESULT_MEASUREMENT_VERBS})\\b`, 'i');
+function isMeasurementPurposeClause(clauseText, idx) {
+  const before = clauseText.slice(0, idx);
+  return RESULT_MEASUREMENT_PURPOSE_BEFORE.test(before) && RESULT_MEASUREMENT_VERBS_RE.test(before);
+}
 const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bantes\s*\/\s*despu[ée]s\b|\bresultados?\s+document\w+\b/i;
 // [INVENTED METRIC ORDER FIX] confirmed live miss: "Objetivo ROAS 4x" (qualifier BEFORE the
 // acronym) never matched the old acronym-then-qualifier-only pattern. Now bidirectional, plus a
@@ -532,6 +558,7 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
     for (const p of PROHIBITED_CONTENT_PATTERNS) {
       if (!activeCategories.has(p.type)) continue;
       for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
+        if (p.type === 'invented_result' && isMeasurementPurposeClause(s, match.index)) continue;
         if (!isNegated(match.index, match.index + match[0].length) && !FUTURE_HEDGE_CUE.test(s)) {
           violations.push({
             type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key,
