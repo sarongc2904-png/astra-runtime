@@ -494,6 +494,26 @@ function isMeasurementPurposeClause(clauseText, idx) {
 // are several words apart).
 const GOAL_INTENT_ESCAPE_CUE = /\bbuscan\b|\bbusca\b|\bquieren\b|\bquiere\b|\bdesean\b|\bdesea\b|\bnecesitan\b|\bnecesita\b|\baspiran\b|\baspira\b|\besperan\b|\bespera\b|\bsu\s+objetivo\s+es\b|\bsu\s+meta\s+es\b|\bobjetivo\s+es\b|\bmeta\s+es\b|\bintenci[oó]n\s+es\b/i;
 function hasGoalIntentContext(clauseText) { return GOAL_INTENT_ESCAPE_CUE.test(clauseText); }
+// [DESIRED-OUTCOME FIELD SEMANTICS] confirmed live false positive (job
+// 02293f22-6736-4fe3-bf77-a52805e68939): icp.desired_outcomes = "Aumentar citas y clientela
+// Mejorar conversión consulta→cita Aprender pasos prácticos y replicables" flagged "Aumentar",
+// "citas" and "Mejorar" as invented_result — but desired_outcomes is a field the ICP_SPECIALIST
+// schema itself defines to hold the BUYER's own desired outcomes (see SPEC_FIELDS in
+// llm_specialists.js). Its schema purpose already IS the goal/intent framing that
+// GOAL_INTENT_ESCAPE_CUE otherwise requires an explicit textual cue ("quieren"/"buscan"/...) to
+// establish — a bare qualitative wish list here needs no such cue to read as intent rather than a
+// claim the system is making. Deliberately narrow and field-key-scoped (not a text-content
+// exception for "Aumentar citas"/"Mejorar conversión" specifically, and not a blanket disable of
+// invented_result inside this field): a magnitude-bearing claim (a number, %, "Nx", or timeframe
+// anywhere in the same clause — e.g. "Aumentar ventas 30% en 30 días") is a concrete promise even
+// as a stated "desired outcome" and is NOT escaped by this rule. Every other prohibition category
+// (guarantee/evidence/invented_metric/testimonials/...) is untouched — desired_outcomes remains
+// fully subject to them.
+const GOAL_INTENT_FIELD_KEYS = new Set(['desired_outcomes']);
+const RESULT_MAGNITUDE_RE = new RegExp(RESULT_MAGNITUDE, 'i');
+function isDesiredOutcomeQualitativeGoal(fieldKey, clauseText) {
+  return GOAL_INTENT_FIELD_KEYS.has(norm(fieldKey)) && !RESULT_MAGNITUDE_RE.test(clauseText);
+}
 const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bantes\s*\/\s*despu[ée]s\b|\bresultados?\s+document\w+\b/i;
 // [INVENTED METRIC ORDER FIX] confirmed live miss: "Objetivo ROAS 4x" (qualifier BEFORE the
 // acronym) never matched the old acronym-then-qualifier-only pattern. Now bidirectional, plus a
@@ -581,7 +601,7 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
     for (const p of PROHIBITED_CONTENT_PATTERNS) {
       if (!activeCategories.has(p.type)) continue;
       for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
-        if (p.type === 'invented_result' && (isMeasurementPurposeClause(s, match.index) || hasGoalIntentContext(s))) continue;
+        if (p.type === 'invented_result' && (isMeasurementPurposeClause(s, match.index) || hasGoalIntentContext(s) || isDesiredOutcomeQualitativeGoal(key, s))) continue;
         if (!isNegated(match.index, match.index + match[0].length) && !FUTURE_HEDGE_CUE.test(s)) {
           violations.push({
             type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key,
