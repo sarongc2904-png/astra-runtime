@@ -56,11 +56,16 @@ t('E a negated occurrence plus an affirmative one in the same field diagnoses on
 });
 
 // ========== F. nested/array leaf preserves correct diagnostics ==========
-t('F a violation inside a nested object leaf still carries correct matched_text/local_clause', () => {
+// [ARRAY/OBJECT ELEMENT BOUNDARY ISOLATION] each primitive leaf (here: the "es" string leaf,
+// separately from the unrelated "notes" array leaf) is now checked on its OWN text — the
+// violating leaf's local_clause is never polluted by concatenating a sibling leaf's text, and the
+// diagnostic reports exactly which leaf via leaf_path.
+t('F a violation inside a nested object leaf still carries correct matched_text/local_clause, isolated from sibling leaves', () => {
   const found = violations(NO_TESTIMONIALS, { es: 'Usar testimonios de clientes satisfechos', notes: ['UNKNOWN'] });
   assert.equal(found.length, 1, JSON.stringify(found));
   assert.equal(found[0].matched_text, 'testimonios');
-  assert.equal(found[0].local_clause.trim(), 'Usar testimonios de clientes satisfechos UNKNOWN');
+  assert.equal(found[0].local_clause.trim(), 'Usar testimonios de clientes satisfechos');
+  assert.equal(found[0].leaf_path, 'limitations.es');
 });
 
 // ========== occurrence_start points at the real match position ==========

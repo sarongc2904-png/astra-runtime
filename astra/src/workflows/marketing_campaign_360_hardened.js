@@ -210,6 +210,12 @@ async function processNode(n, ctx) {
       const e = new Error('BRIEF_FIDELITY_VIOLATION at node ' + n.id + ': ' + violations.map(v => v.type).join(', '));
       e.wfTransition = 'FAILED'; e.code = 'BRIEF_FIDELITY_VIOLATION'; e.briefFidelityViolations = violations;
       e.proposalStatusRepairs = proposalStatusRepairs;
+      // [FAILED-NODE USAGE ACCOUNTING] the LLM call above already happened and already cost real
+      // provider tokens — a node's OUTPUT failing post-generation fidelity validation must never
+      // make that consumption vanish from cost accounting. Carry it on the error itself (never in
+      // node_outputs/selected_methods_by_node — this node's output still never counts as COMPLETE)
+      // so the wave-level catch in run() can still aggregate it.
+      e.nodeUsage = { tier, evidenceChars, llmUsage, bundle };
       throw e;
     }
   }
@@ -280,33 +286,76 @@ async function run(rawRequest, options = {}) {
   // wave actually finished first.
   for (const wave of WAVES) {
     const waveIds = new Set(wave.map(n => n.id));
-    let settled;
-    try {
-      settled = await Promise.all(wave.map(n => processNode(n, nodeCtx)));
-    } catch (err) {
-      wfState.transition(state, err.wfTransition || 'FAILED');
-      // [Node Fidelity — Diagnostic Propagation] A node-level BRIEF_FIDELITY_VIOLATION is a
-      // domain outcome, not a runtime crash — rethrowing it let astra_tool_router.js's generic
-      // catch degrade it to opaque RUNTIME_FAILED, discarding canonical_brief_facts and the exact
-      // violation paths processNode() already attached. Return the same structured FAILED shape
-      // the final-synthesis fidelity gate below already produces, instead of throwing. node_outputs
-      // / selected_methods_by_node here still hold only whatever prior waves fully aggregated
-      // (the current wave's own aggregation loop hasn't run yet) — the violating node, and any
-      // sibling in the same wave whose promise happened to resolve concurrently (e.g.
-      // creative_strategy racing funnel), are correctly never added as COMPLETE.
-      if (err.code === 'BRIEF_FIDELITY_VIOLATION') {
-        return {
-          mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id,
-          node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
-          workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
-          brief_fidelity_violations: err.briefFidelityViolations || [],
-          node_outputs, selected_methods_by_node, proposal_status_repairs: proposal_status_repairs.concat(err.proposalStatusRepairs || []), synthesis: null, cost, _state: state,
-        };
+    // [FAILED-NODE USAGE ACCOUNTING] Promise.allSettled (not Promise.all) so a node-level
+    // BRIEF_FIDELITY_VIOLATION in this wave never causes a sibling's ALREADY-INCURRED real LLM
+    // call to silently vanish from `cost` — every settled promise (fulfilled or rejected) is
+    // inspected before any pass/fail decision is made. A rejected node's OUTPUT still never
+    // becomes COMPLETE and is still never added to node_outputs/selected_methods_by_node/done
+    // (unchanged from before); only its (already-spent) usage is preserved.
+    const results = await Promise.allSettled(wave.map(n => processNode(n, nodeCtx)));
+    let firstFidelityError = null;
+    let firstOtherError = null;
+    for (let i = 0; i < wave.length; i++) {
+      const res = results[i];
+      if (res.status === 'fulfilled') continue;
+      if (res.reason && res.reason.code === 'BRIEF_FIDELITY_VIOLATION') {
+        if (!firstFidelityError) firstFidelityError = res.reason;
+        const u = res.reason.nodeUsage;
+        if (u) {
+          cost.evidence_chars_total += u.evidenceChars || 0;
+          if (u.tier) cost.by_tier[u.tier.task_class] = (cost.by_tier[u.tier.task_class] || 0) + 1;
+          if (u.llmUsage) {
+            cost.model_calls += 1; cost.retries += u.llmUsage.retries;
+            cost.tokens.prompt += u.llmUsage.prompt; cost.tokens.completion += u.llmUsage.completion;
+          }
+          cost.per_node[wave[i].id] = {
+            tier: u.tier ? u.tier.task_class : undefined,
+            evidence_count: u.bundle ? u.bundle.length : undefined,
+            validation_failed: true,
+          };
+        }
+      } else if (!firstOtherError) {
+        firstOtherError = res.reason;
       }
-      // Any other error (technical/provider/infra failure) keeps the exact prior behavior —
-      // never silently reclassified as a domain failure.
-      throw err;
     }
+    if (firstOtherError) {
+      // Any other error (technical/provider/infra/schema failure) keeps the exact prior
+      // behavior — never silently reclassified as a domain failure, never given the structured
+      // FAILED shape below.
+      wfState.transition(state, firstOtherError.wfTransition || 'FAILED');
+      throw firstOtherError;
+    }
+    if (firstFidelityError) {
+      wfState.transition(state, firstFidelityError.wfTransition || 'FAILED');
+      // A sibling that raced the violating node and FULFILLED still made a real, billable LLM
+      // call this wave — account for it too before returning, exactly like the normal
+      // aggregation loop below would have, even though (per the existing, unchanged design) its
+      // output is correctly never added as COMPLETE once the wave as a whole fails.
+      for (let i = 0; i < wave.length; i++) {
+        if (results[i].status !== 'fulfilled') continue;
+        const r = results[i].value; const n = wave[i];
+        cost.evidence_chars_total += r.evidenceChars;
+        cost.by_tier[r.tier.task_class] = (cost.by_tier[r.tier.task_class] || 0) + 1;
+        if (r.llmUsage) {
+          cost.model_calls += 1; cost.retries += r.llmUsage.retries;
+          cost.tokens.prompt += r.llmUsage.prompt; cost.tokens.completion += r.llmUsage.completion;
+        }
+        cost.per_node[n.id] = { tier: r.tier.task_class, evidence_count: r.bundle.length, generation: r.output.generation || 'DETERMINISTIC' };
+      }
+      // [Node Fidelity — Diagnostic Propagation] A node-level BRIEF_FIDELITY_VIOLATION is a
+      // domain outcome, not a runtime crash — returning the same structured FAILED shape the
+      // final-synthesis fidelity gate below already produces (instead of throwing) is what keeps
+      // astra_tool_router.js's generic catch from degrading it to opaque RUNTIME_FAILED, which
+      // would discard canonical_brief_facts and the exact violation paths processNode() attached.
+      return {
+        mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id,
+        node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
+        workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
+        brief_fidelity_violations: firstFidelityError.briefFidelityViolations || [],
+        node_outputs, selected_methods_by_node, proposal_status_repairs: proposal_status_repairs.concat(firstFidelityError.proposalStatusRepairs || []), synthesis: null, cost, _state: state,
+      };
+    }
+    const settled = results.map(r => r.value);
     const byId = new Map(settled.map(r => [r.node.id, r]));
     for (const n of base.NODES) {
       if (!waveIds.has(n.id)) continue;

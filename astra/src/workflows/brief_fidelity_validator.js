@@ -532,8 +532,129 @@ function hasGoalIntentContext(clauseText) { return GOAL_INTENT_ESCAPE_CUE.test(c
 // fully subject to them.
 const GOAL_INTENT_FIELD_KEYS = new Set(['desired_outcomes']);
 const RESULT_MAGNITUDE_RE = new RegExp(RESULT_MAGNITUDE, 'i');
-function isDesiredOutcomeQualitativeGoal(fieldKey, clauseText) {
-  return GOAL_INTENT_FIELD_KEYS.has(norm(fieldKey)) && !RESULT_MAGNITUDE_RE.test(clauseText);
+function isDesiredOutcomeQualitativeGoal(fieldKey, clauseText, match) {
+  // [FIELD ROLE MUST NOT BE A BYPASS] "Te ayudamos a aumentar ingresos" (advertiser voice) and
+  // "Consigue más citas" (a CONJUGATED imperative, not the field's usual bare-infinitive goal-list
+  // phrasing) must still detect even placed inside desired_outcomes. The field's original,
+  // protected leniency — a BARE INFINITIVE claim-verb ("Aumentar citas", "Mejorar conversión") is
+  // always read as a goal-list label, unconditionally exempt — stays completely unchanged (this is
+  // exactly what keeps the already-protected gate-14 fixture, "Aumentar citas y clientela Mejorar
+  // conversión consulta→cita Aprender pasos...", passing). What's NEW is that a match whose verb is
+  // NOT a bare infinitive (a conjugated/imperative form) no longer gets that same free pass just for
+  // being in this field — it falls through to the same adjacency-based structural check the other
+  // BUYER_* roles use. nearestPairInfo's `verbText` is checked (not raw match[0]) because
+  // INVENTED_RESULT_CLAIM matches the SAME "Aumentar citas" bigram from BOTH sides independently —
+  // once with match[0]="Aumentar", once with match[0]="citas" — and both occurrences of one goal
+  // phrase must resolve to the identical exemption verdict. All the referenced helpers/consts are
+  // defined further down in this file; that is safe since this function is only ever CALLED after
+  // the whole module has finished loading.
+  if (!GOAL_INTENT_FIELD_KEYS.has(norm(fieldKey))) return false;
+  if (isGuaranteedResultMatch(match[0])) return false;
+  if (RESULT_MAGNITUDE_RE.test(clauseText)) return false;
+  if (ADVERTISER_CLAIM_VOICE_CUE.test(clauseText)) return false;
+  if (RESULT_SELF_SUFFICIENT_VERBS_RE.test(match[0])) return false;
+  const pair = nearestPairInfo(clauseText, match);
+  if (pair && BARE_INFINITIVE_RE.test(pair.verbText)) return true;
+  if (BARE_INFINITIVE_RE.test(match[0])) return true; // no locatable pair (e.g. self-contained infinitive mention) — still a goal label
+  return !isDirectlyAdjacentPair(clauseText, match);
+}
+// [CLAIM-CONTEXT ROLE MODEL] confirmed live false positive (job 6682572e-b316-4f2f-9c89-
+// fb7b165bbdac): icp.pains = "Baja ocupación de citas" / "Dificultad para subir ticket medio" and
+// icp.buying_triggers = "Baja ocupación de citas" were flagged as invented_result — but these
+// fields hold the BUYER's own state/objection/trigger/attribute language, not an advertiser
+// promise. The SAME lexical pair (claim-verb-shaped word + outcome noun) has a different meaning
+// depending on CLAIM-CONTEXT ROLE and VOICE — "Baja ocupación" (adjective describing a low current
+// state) vs "Baja tus precios" (imperative command); "Dificultad para subir ticket" (a buyer's
+// difficulty, nominalized infinitive) vs "Sube tu ticket" (a direct second-person command).
+// Generalized, deterministic, field-role-scoped — NEVER a literal exception for "Baja ocupación"
+// or "subir ticket" specifically, and NEVER a blanket exemption for these fields (a genuine
+// advertiser claim maliciously placed inside pains/buying_triggers/objections/qualification/
+// non-fit still detects — see ADVERTISER_CLAIM_VOICE_CUE and the magnitude/guarantee/self-
+// sufficient-verb overrides below, all of which take precedence over the field-role exemption).
+const CLAIM_CONTEXT_FIELD_ROLES = {
+  pains: 'BUYER_STATE',
+  desired_outcomes: 'BUYER_GOAL', // kept in the table for documentation; its own narrower rule (isDesiredOutcomeQualitativeGoal) is unchanged and unaffected by this addition.
+  objections: 'BUYER_OBJECTION',
+  buying_triggers: 'BUYER_TRIGGER',
+  qualification_signals: 'BUYER_ATTRIBUTE',
+  non_fit_signals: 'BUYER_ATTRIBUTE',
+};
+// A descriptive buyer-context role never itself waives detection — only BUYER_STATE/
+// BUYER_OBJECTION/BUYER_TRIGGER/BUYER_ATTRIBUTE get the structural exemption logic below.
+// BUYER_GOAL (desired_outcomes) keeps its pre-existing, narrower, magnitude-gated rule untouched.
+const BUYER_DESCRIPTIVE_CLAIM_ROLES = new Set(['BUYER_STATE', 'BUYER_OBJECTION', 'BUYER_TRIGGER', 'BUYER_ATTRIBUTE']);
+function claimContextRoleForField(fieldKey) { return CLAIM_CONTEXT_FIELD_ROLES[norm(fieldKey)] || 'UNKNOWN'; }
+// [VOICE / CLAIM-BEARING SIGNALS] deterministic, closed, grammatical-category cues — never a
+// specific-phrase list. Second-person address (tú/tus/te/ti/usted/contigo/vas[+a]) and the generic
+// Spanish future-tense 2nd-person-singular verb suffix (-arás/-erás/-irás/-drás, ANY verb stem) are
+// the advertiser speaking directly TO the buyer ("Aumenta TUS ventas", "Duplicarás tus ventas",
+// "Vas a conseguir más clientes"). First-person-plural advertiser verbs (queremos/ofrecemos/
+// ayudamos/conseguimos/logramos/entregamos/brindamos/buscamos/necesitamos/deseamos/aspiramos/
+// esperamos) are the exact grammatical-person mirror of the pre-existing GOAL_INTENT_ESCAPE_CUE's
+// third-person set — that list already treats "buscan/quiere/necesitan/..." (someone else's goal)
+// as escaping, and by the same logic "buscamos/queremos/necesitamos/..." (OUR OWN goal, stated to
+// the buyer) must never escape. Any of these presentin the clause means the match is NOT
+// descriptive buyer language, regardless of role.
+const ADVERTISER_CLAIM_VOICE_CUE = /\btu\b|\btus\b|\bte\b|\bti\b|\bustedes?\b|\bcontigo\b|\bvas\b|\bvamos\s+a\b|\b\w+(?:ar[aá]s|er[aá]s|ir[aá]s|dr[aá]s)\b|\bqueremos\b|\bbuscamos\b|\bnecesitamos\b|\bdeseamos\b|\baspiramos\b|\besperamos\b|\bofrecemos\b|\bayudamos\b|\bconseguimos\b|\blogramos\b|\bentregamos\b|\bbrindamos\b/i;
+// [NOMINALIZED INFINITIVE / PURPOSE-NEED CLAUSE] "Dificultad PARA subir ticket", "Necesidad DE
+// conseguir más clientes" — a bare infinitive immediately governed by "de"/"para" is a Spanish
+// noun-complement construction describing a NEED/DIFFICULTY/GOAL, grammatically incapable of being
+// an imperative (an infinitive is never a command form) — generic by construction (any verb stem
+// ending -ar/-er/-ir), never a lookup of which specific infinitive appears.
+const NOMINALIZING_PREPOSITION_BEFORE_INFINITIVE = /\b(?:de|para)\s+$/i;
+const BARE_INFINITIVE_RE = /^[a-záéíóúñ]+(?:ar|er|ir)$/i;
+// [DIRECT-ADJACENCY TO PAIRED TERM] "Aumenta ventas"/"Consigue más citas" — the claim verb and its
+// outcome noun sit with nothing (or only a small intensifier — más/mas/tan/tanto/tanta/muy) between
+// them: a direct verb+object imperative/assertion shape. "Baja ocupación DE citas" — the outcome
+// noun ("citas") is NOT what the claim-verb-shaped word directly governs; it is attached, via a
+// genitive "de", to a DIFFERENT intervening noun ("ocupación") that the claim-verb-shaped word
+// modifies as an ADJECTIVE instead. Measuring the actual gap between the two paired terms — not
+// just "are both words present somewhere within 40 chars" — is what tells apart "the claim verb
+// governs the outcome noun directly" from "an unrelated noun sits between them."
+const CLAIM_VERB_RE_BARE = new RegExp(`\\b(?:${RESULT_CLAIM_VERBS})\\b`, 'i');
+const OUTCOME_TERM_RE_BARE = new RegExp(`\\b(?:${RESULT_OUTCOME_TERMS})\\b`, 'i');
+const SMALL_QUANTIFIER_GAP_RE = /^\s*(?:m[aá]s|tan|tant[oa]s?|muy)?\s*$/i;
+// Returns { gapText, verbText } for the NEAREST occurrence of the "other" term paired with match —
+// verbText is whichever of the two (match itself, or the paired occurrence) is the CLAIM_VERB side,
+// regardless of which one triggered this particular match. This matters because INVENTED_RESULT_CLAIM
+// matches BOTH directions independently ("Aumentar" via the verb-then-outcome branch, and "citas" via
+// the outcome-then-verb branch, for the exact same "Aumentar citas" bigram) — a caller asking "is the
+// VERB of this pairing a bare infinitive" must get the same answer for either occurrence, not just
+// whichever half happened to be `match[0]` this time.
+function nearestPairInfo(clauseText, match) {
+  const isVerb = CLAIM_VERB_RE_BARE.test(match[0]);
+  const otherRe = new RegExp(isVerb ? `\\b(?:${RESULT_OUTCOME_TERMS})\\b` : `\\b(?:${RESULT_CLAIM_VERBS})\\b`, 'gi');
+  const matchStart = match.index; const matchEnd = match.index + match[0].length;
+  let best = null;
+  for (const m of clauseText.matchAll(otherRe)) {
+    let gapText = null;
+    if (m.index >= matchEnd) gapText = clauseText.slice(matchEnd, m.index);
+    else if (m.index + m[0].length <= matchStart) gapText = clauseText.slice(m.index + m[0].length, matchStart);
+    if (gapText == null) continue; // overlapping occurrence — not a valid pairing
+    if (best == null || gapText.length < best.gapText.length) best = { gapText, otherText: m[0] };
+  }
+  if (!best) return null;
+  return { gapText: best.gapText, verbText: isVerb ? match[0] : best.otherText };
+}
+function isDirectlyAdjacentPair(clauseText, match) {
+  const info = nearestPairInfo(clauseText, match);
+  if (info == null) return true; // no locatable paired term at all — conservatively treat as a claim, never exempt
+  return SMALL_QUANTIFIER_GAP_RE.test(info.gapText);
+}
+const RESULT_SELF_SUFFICIENT_VERBS_RE = new RegExp(`^(?:${RESULT_SELF_SUFFICIENT_VERBS})$`, 'i');
+// The single entry point checkExplicitProhibition calls for every invented_result match: returns
+// true only when the match should be read as descriptive buyer-context language, never a claim.
+function isBuyerContextDescriptiveMatch(fieldKey, clauseText, match) {
+  const role = claimContextRoleForField(fieldKey);
+  if (!BUYER_DESCRIPTIVE_CLAIM_ROLES.has(role)) return false;
+  if (isGuaranteedResultMatch(match[0])) return false; // a guarantee is never descriptive, in any field
+  if (RESULT_MAGNITUDE_RE.test(clauseText)) return false; // a quantified result is never descriptive, in any field
+  if (RESULT_SELF_SUFFICIENT_VERBS_RE.test(match[0])) return false; // duplicar/triplicar always self-sufficiently claim a magnitude
+  if (ADVERTISER_CLAIM_VOICE_CUE.test(clauseText)) return false; // advertiser voice present — field role is not a bypass
+  const before = clauseText.slice(0, match.index);
+  if (BARE_INFINITIVE_RE.test(match[0]) && NOMINALIZING_PREPOSITION_BEFORE_INFINITIVE.test(before)) return true;
+  if (!isDirectlyAdjacentPair(clauseText, match)) return true;
+  return false;
 }
 // [GUARANTEED RESULT CLAIM — precedence over desired_outcomes semantics] A guarantee is strictly
 // stronger than a qualitative wish: "Resultados garantizados"/"Ventas garantizadas" must still be
@@ -625,11 +746,45 @@ const FUTURE_HEDGE_CUE = /\bfuturo?s?\b|\ba\s+futuro\b|\bsi\s+(?:existen?|hubier
 // garant[i\u00ed]a) \u2014 so running the exact same matching against real text instead of the
 // lowercased/accent-stripped form changes no PASS/FAIL decision. It only lets each violation
 // carry the literal matched substring and its literal containing clause, instead of nothing.
-function checkExplicitProhibition(facts, key, valRawSentences) {
+// [ARRAY ELEMENT BOUNDARY ISOLATION] confirmed live defect: textOnly() flattens an array into one
+// space-joined string ("Falta de formación práctica Baja ocupación de citas Dificultad para subir
+// ticket medio Gestión ineficiente de citas"), so checkExplicitProhibition's own clause-splitting
+// (which only breaks on punctuation/adversatives — arrays are joined with a bare space, no
+// punctuation at all) then treated FOUR separate pains array items as ONE clause, letting a
+// CLAIM_VERB in one item pair with an OUTCOME_TERM in a completely different item via ordinary
+// regex proximity. Each primitive leaf of the raw value (a string, or a string inside nested
+// arrays/objects) keeps its OWN leaf_path and is run through the clause-splitting/detection logic
+// SEPARATELY — never concatenated with a sibling array element first. A plain string field (no
+// array) is unaffected: it still gets exactly one leaf, with leaf_path === key, matching prior
+// behavior and output shape for every non-array field already covered by existing tests.
+function collectTextLeaves(value, pathPrefix) {
+  if (value == null) return [];
+  if (typeof value === 'string') return value ? [{ text: value, leafPath: pathPrefix }] : [];
+  if (typeof value === 'number' || typeof value === 'boolean') return [{ text: String(value), leafPath: pathPrefix }];
+  if (Array.isArray(value)) {
+    const out = [];
+    value.forEach((item, i) => out.push(...collectTextLeaves(item, `${pathPrefix}[${i}]`)));
+    return out;
+  }
+  if (typeof value === 'object') {
+    const out = [];
+    for (const [k, v] of Object.entries(value)) out.push(...collectTextLeaves(v, pathPrefix ? `${pathPrefix}.${k}` : k));
+    return out;
+  }
+  return [{ text: String(value), leafPath: pathPrefix }];
+}
+function checkExplicitProhibition(facts, key, rawVal) {
   const cf = facts.constraints;
   if (!cf || cf.status !== 'USER_PROVIDED_FACT') return [];
   const activeCategories = activeExplicitProhibitionCategories(cf.value);
   if (!activeCategories.size) return [];
+  const violations = [];
+  for (const leaf of collectTextLeaves(rawVal, key)) {
+    violations.push(...checkExplicitProhibitionOnLeaf(key, leaf.text, leaf.leafPath, activeCategories));
+  }
+  return violations;
+}
+function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCategories) {
   const violations = [];
   // Commas in a negative enumeration preserve scope (CAC, ROAS, LTV, testimonios).
   // Adversatives, sentence boundaries and a new affirmative action end it. UNKNOWN
@@ -670,14 +825,16 @@ function checkExplicitProhibition(facts, key, valRawSentences) {
       for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
         if (p.type === 'invented_result' && (
           isMeasurementPurposeClause(s, match.index) || hasGoalIntentContext(s) ||
-          (isDesiredOutcomeQualitativeGoal(key, s) && !isGuaranteedResultMatch(match[0])) ||
-          isGuaranteeNegationOrAdvisoryEscape(s, match)
+          isDesiredOutcomeQualitativeGoal(key, s, match) ||
+          isGuaranteeNegationOrAdvisoryEscape(s, match) ||
+          isBuyerContextDescriptiveMatch(key, s, match)
         )) continue;
         if (!isNegated(match.index, match.index + match[0].length) && !FUTURE_HEDGE_CUE.test(s)) {
           violations.push({
             type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key,
             matched_text: match[0], matched_pattern: p.re.source,
             local_clause: s.trim(), clause_index: clauseIndex, occurrence_start: start + match.index,
+            leaf_path: leafPath,
           });
         }
       }
@@ -938,7 +1095,7 @@ function validateOutputAgainstFacts(facts, output, { nodeId, upstream_outputs = 
     for (const v of checkFieldSubstitutions(facts, key, rawVal, siblingEntries)) violations.push(v);
     for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
-    for (const v of checkExplicitProhibition(facts, key, rawTextVal)) violations.push(v);
+    for (const v of checkExplicitProhibition(facts, key, rawVal)) violations.push(v);
     for (const v of checkUpstreamProposalPropagation(key, rawVal, proposalAnchors)) violations.push(v);
   }
   const combinedText = textEntries.map(([, v]) => v).join(' \n ');
@@ -1507,7 +1664,7 @@ function validateFinalSynthesis(facts, synthesis, { rawRequest } = {}) {
     for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
     for (const v of checkUnknownFactFabrication(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
-    for (const v of checkExplicitProhibition(facts, key, rawTextVal)) violations.push(v);
+    for (const v of checkExplicitProhibition(facts, key, rawVal)) violations.push(v);
     for (const v of checkMechanismToCampaignConversionPromotion(facts, key, rawVal)) violations.push(v);
     for (const v of checkAssumptionEpistemicConsistency(key, rawVal, rawRequest)) violations.push(v);
   }
