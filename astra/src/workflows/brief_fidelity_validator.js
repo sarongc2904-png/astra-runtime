@@ -862,6 +862,39 @@ const NEGATION_CUE = /\bno\s+(usar|incluir|utilizar|mencionar|presentar|afirmar)
 // contingency instead of an outright negation. Scoped to the same clause as the match, exactly
 // like every other escape in this function.
 const FUTURE_HEDGE_CUE = /\bfuturo?s?\b|\ba\s+futuro\b|\bsi\s+(?:existen?|hubiera|los\s+hay)\b|\beventualmente\b|\bcuando\s+(?:existan?|haya|los\s+haya)\b/i;
+// [NEED-TO-OBTAIN FRAMING] confirmed live adjudication: "Necesitamos conseguir testimonios
+// reales" states a PLAN to acquire the prohibited content later, not that it currently exists or
+// is being used — the same honest non-assertion FUTURE_HEDGE_CUE already recognizes, just phrased
+// as an expressed need/requirement rather than an explicit future/conditional marker. Both the
+// need-verb and the acquisition-verb are closed, stemmed vocabularies (never one exact phrase), so
+// this generalizes across "necesitamos/necesito/hay que/debemos/se requiere/requerimos +
+// conseguir/obtener/recopilar/reunir/juntar".
+const NEED_TO_OBTAIN_CUE = /\b(?:necesitamos|necesito|hay\s+que|debemos|se\s+requiere[n]?|requerimos)\s+(?:consegu\w*|obten\w*|recopil\w*|reun\w*|junt\w*)\b/i;
+// [RESEARCH/VERIFICATION FRAMING] a request to CONFIRM/VERIFY whether the prohibited content
+// exists or is available is asking for evidence, not asserting it — the same non-assertion
+// FUTURE_HEDGE_CUE's "si existen" branch already recognizes for a bare conditional, generalized to
+// the "disponibilidad de X"/"existencia de X" noun-phrase objects a verification request commonly
+// takes ("Verificar disponibilidad de testimonios con el cliente").
+const RESEARCH_VERIFICATION_CUE = /\b(?:confirmar|verificar|revisar|checar)\s+(?:si\s+(?:existe[n]?|hay)|disponibilidad\s+de|existencia\s+de)\b/i;
+// [HUMAN SOURCE VOCABULARY] closed, auditable, bilingual set of human-role nouns used both by the
+// collection-planning cue below and by the implicit-testimonial-attribution matcher further down.
+// Never expanded ad hoc per-case — any new role belongs in this single list.
+const HUMAN_SOURCE_NOUN = 'client\\w*|customer\\w*|paciente\\w*|patient\\w*|alumn\\w*|student\\w*|usuari\\w*|user\\w*|comprador\\w*|buyer\\w*|persona\\w*|person\\w*';
+// [COLLECTION/VERIFICATION-FROM-SOURCE FRAMING] confirmed adjudicated false positives: "Preguntar
+// a clientas si darían un testimonio", "Recopilar testimonios reales de clientas", "Verificar si
+// alguna clienta ha dado permiso para usar su testimonio", "Ask customers whether they would
+// provide a testimonial", "Collect real testimonials from customers" — all describe a PLAN to ask/
+// gather/verify FROM a human source, never an assertion that the prohibited content exists or is
+// being used. RESEARCH_VERIFICATION_CUE above only covers "confirmar/verificar si existe(n)/
+// disponibilidad de X"; this is the general sibling for the same planning verbs (plus request/
+// interview/invite/collect-family verbs NEED_TO_OBTAIN_CUE doesn't cover) when they co-occur with
+// a HUMAN_SOURCE_NOUN anywhere in the clause, in either order — a bare imperative/infinitive plan
+// verb next to "clientas"/"customers" is never itself a positive claim.
+const COLLECTION_REQUEST_CUE = new RegExp(
+  '\\b(?:preguntar|pregunta|pedir|solicitar|entrevistar|recopilar|reunir|juntar|obtener|conseguir|invitar|verificar|confirmar|revisar|checar|ask|collect|gather|request|interview|invite|verify|confirm|check)\\w*\\b[\\s\\S]{0,60}\\b(?:' + HUMAN_SOURCE_NOUN + ')\\b' +
+  '|\\b(?:' + HUMAN_SOURCE_NOUN + ')\\b[\\s\\S]{0,60}\\b(?:preguntar|pregunta|pedir|solicitar|entrevistar|recopilar|reunir|juntar|obtener|conseguir|invitar|verificar|confirmar|revisar|checar|ask|collect|gather|request|interview|invite|verify|confirm|check)\\w*\\b',
+  'i'
+);
 // [OCCURRENCE DIAGNOSTICS] valRawSentences is the field's own real text (case/accents intact,
 // via textOnly() \u2014 never norm()'d). All matching below already relies on case-insensitive ('i')
 // regexes, and every pattern that needs an accented variant already spells it out (e.g.
@@ -1006,6 +1039,30 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
     // "nunca" (Spanish "never") bare-negates a following noun/acronym the same way "no"/"without"
     // do ("Nunca ROAS:4x") — the direct Spanish mirror of this English-specific bare-noun shape.
     const ENGLISH_BARE_NEGATION_BEFORE_NOUN = /\b(?:no|without|nunca)\b(?:\s+\w+)?\s*$/i;
+    // [ABSENCE / MISSING-PROOF EPISTEMIC CONTEXT] confirmed live false positive: "Desconfianza por
+    // falta de testimonios" (a funnel drop_off_risk describing that customers distrust the offer
+    // BECAUSE testimonials are absent) was flagged identically to an actual invented testimonial
+    // claim. The user's prohibition ("no inventes ... testimonios") forbids FABRICATING the
+    // prohibited content, never describing its ABSENCE — "falta de/ausencia de/carencia de X" and
+    // "no existe(n) X" are the general Spanish noun-phrase idioms for "X does not exist", the exact
+    // semantic mirror of the already-recognized "sin X"/"no hay X" shapes, just phrased as a noun
+    // ("lack of X") or an existence verb ("X does not exist") instead of a bare preposition/"hay".
+    // General across every PROHIBITED_CONTENT_PATTERNS category (proof/guarantee/evidence/...),
+    // never scoped to testimonials or to this field.
+    const EXISTENCE_ABSENCE_CUE = /\b(?:falta|ausencia|carencia)\s+de\s*$|\bno\s+existe[n]?\s*$/i;
+    // [PASSIVE/REFLEXIVE NEGATION] confirmed live false positive: "No se proporcionaron
+    // testimonios" (Spanish reflexive-passive: "testimonials were not provided") is a plain
+    // negative-fact statement, not an assertion that testimonials exist — but the existing
+    // `negative` cue only recognizes an ACTIVE "no + VERB" shape (no usar/incluir/...), never the
+    // "no se + VERB" reflexive-passive construction Spanish uses for describing what was NOT
+    // supplied/included/stated. Stemmed (not one exact conjugation) so it also covers "no se
+    // proporcionó/proporciona", "no se incluyeron/mencionaron/presentaron/afirmaron/declararon/
+    // obtuvieron/consiguieron" — the same verb family the active `negative` cue already covers,
+    // just in its reflexive-passive form.
+    // Optional auxiliary ("han/habían/habrían") between "se" and the verb stem covers compound
+    // tenses ("no se han recopilado testimonios") the same way the bare simple-past form does.
+    // "recopil/reun/junt" added to the stem family to mirror NEED_TO_OBTAIN_CUE's acquisition verbs.
+    const PASSIVE_NEGATION_CUE = /\bno\s+se\s+(?:han?|habr[ií]an?|hab[ií]an?)?\s*(?:proporcion|inclu|mencion|present|afirm|declar|invent|obtuv|consegu|consigu|logr|recopil|reun|junt)\w*\s*$/i;
     const isNegated = (idx, end) => {
       const before = s.slice(0, idx);
       let cueEnd = negativeList ? 0 : -1;
@@ -1015,6 +1072,8 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
       if (ADVISORY_NEGATION_CUE.test(before)) return true;
       if (/\bsin\s+$/i.test(before)) return true;
       if (ENGLISH_BARE_NEGATION_BEFORE_NOUN.test(before)) return true;
+      if (EXISTENCE_ABSENCE_CUE.test(before)) return true;
+      if (PASSIVE_NEGATION_CUE.test(before)) return true;
       return /^\s*=\s*unknown\b/i.test(s.slice(end)) ||
         (/\bsin\s+$/i.test(before) && /^\s+disponible\b/i.test(s.slice(end)));
     };
@@ -1027,7 +1086,16 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
           isGuaranteeNegationOrAdvisoryEscape(s, match) ||
           isBuyerContextDescriptiveMatch(semanticKey, s, match)
         )) continue;
-        if (!isNegated(match.index, match.index + match[0].length) && !FUTURE_HEDGE_CUE.test(s)) {
+        // [CATEGORY-SCOPED COLLECTION CUE] confirmed regression: COLLECTION_REQUEST_CUE's
+        // acquisition-verb vocabulary (conseguir/obtener/...) legitimately overlaps with common
+        // CLIENT-ACQUISITION marketing claims ("Vas a conseguir más clientes") that have nothing to
+        // do with collecting testimonials/evidence FROM a source — "clientes" there is the OBJECT
+        // being acquired, not the SOURCE of a testimonial. Scoped to only the two categories this
+        // cue was ever motivated by (testimonials/invented_evidence) so it can never exempt an
+        // invented_result/guarantee/... claim just because it happens to mention a human-source
+        // noun.
+        const collectionCueApplies = (p.type === 'testimonials' || p.type === 'invented_evidence') && COLLECTION_REQUEST_CUE.test(s);
+        if (!isNegated(match.index, match.index + match[0].length) && !FUTURE_HEDGE_CUE.test(s) && !NEED_TO_OBTAIN_CUE.test(s) && !RESEARCH_VERIFICATION_CUE.test(s) && !collectionCueApplies) {
           violations.push({
             type: 'EXPLICIT_PROHIBITION', fact_field: null, category: p.type, field_key: key,
             matched_text: match[0], matched_pattern: p.re.source,
@@ -1040,6 +1108,84 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
     negativeList = isNegated(s.length, s.length);
     offset = start + s.length;
     clauseIndex += 1;
+  }
+  return violations;
+}
+
+// ---------- [IMPLICIT TESTIMONIAL/EVIDENCE ATTRIBUTION] confirmed adjudicated gap: "Una clienta
+// dice que duplicó sus resultados" / "Clientes satisfechos recomiendan el método" are testimonial-
+// like attributed claims that never contain the literal word "testimonio(s)"/"evidencia" the base
+// PROHIBITED_CONTENT_PATTERNS regex requires — a human SOURCE (client/customer/patient/student/
+// user/buyer/person, HUMAN_SOURCE_NOUN above) combined with an ATTRIBUTION/ENDORSEMENT VERB (dice/
+// afirma/asegura/cuenta/recomienda/reporta/comenta/señala or says/states/claims/reports/
+// recommends/endorses/tells), or the "Según SOURCE, ..."/"According to SOURCE, ..." attribution
+// construction, is the general semantic signature of an invented testimonial regardless of literal
+// vocabulary. A bare mention of the source class alone ("clientas pueden escribir por WhatsApp")
+// or a PLANNING verb next to the source (preguntar/recopilar/entrevistar/verificar — see
+// COLLECTION_REQUEST_CUE above) never matches this: the attribution-verb vocabulary is a
+// completely separate, non-overlapping closed list from the planning-verb vocabulary, so a
+// research/collection instruction can never trigger this matcher. Requires the clause to carry at
+// least one word of payload beyond the source+verb themselves, so a bare "Clienta dice." with
+// nothing asserted is never flagged. Implemented as its own additional matcher feeding the SAME
+// EXPLICIT_PROHIBITION/testimonials category — never a broadening of any other category, and never
+// touching isNegated()/FUTURE_HEDGE_CUE/NEED_TO_OBTAIN_CUE/RESEARCH_VERIFICATION_CUE/
+// COLLECTION_REQUEST_CUE, which remain exactly as iteration 1 left them.
+const IMPLICIT_ATTRIBUTION_VERB = 'dic(?:e|en)|dijo|afirm\\w*|asegura\\w*|cuenta\\w*|recomiend\\w*|report\\w*|coment\\w*|se\\u00f1al\\w*|says?|said|states?|stated|claims?|claimed|recommends?|recommended|endors\\w*|tells?|told';
+const IMPLICIT_SOURCE_VERB_RE = new RegExp(
+  '\\b(?:' + HUMAN_SOURCE_NOUN + ')\\b[\\s\\S]{0,60}\\b(?:' + IMPLICIT_ATTRIBUTION_VERB + ')\\b' +
+  '|\\b(?:' + IMPLICIT_ATTRIBUTION_VERB + ')\\b[\\s\\S]{0,60}\\b(?:' + HUMAN_SOURCE_NOUN + ')\\b',
+  'i'
+);
+const IMPLICIT_SEGUN_CONSTRUCTION_RE = new RegExp(
+  '\\b(?:seg\\u00fan|according\\s+to)\\s+(?:\\w+\\s+){0,2}(?:' + HUMAN_SOURCE_NOUN + ')\\b\\s*,',
+  'i'
+);
+function implicitTestimonialAttributionMatch(clauseText) {
+  const trimmed = clauseText.trim();
+  if (!trimmed) return null;
+  const segunMatch = IMPLICIT_SEGUN_CONSTRUCTION_RE.exec(trimmed);
+  if (segunMatch) {
+    const after = trimmed.slice(segunMatch.index + segunMatch[0].length).trim();
+    if (after.split(/\s+/).filter(Boolean).length >= 2) {
+      return { matched_text: segunMatch[0].replace(/,\s*$/, ''), offset: segunMatch.index };
+    }
+  }
+  const wordCount = trimmed.split(/\s+/).filter(Boolean).length;
+  const sourceVerbMatch = IMPLICIT_SOURCE_VERB_RE.exec(trimmed);
+  if (sourceVerbMatch && wordCount >= 4) return { matched_text: sourceVerbMatch[0], offset: sourceVerbMatch.index };
+  return null;
+}
+function checkImplicitTestimonialAttribution(facts, key, rawVal) {
+  const cf = facts.constraints;
+  if (!cf || cf.status !== 'USER_PROVIDED_FACT') return [];
+  const activeCategories = activeExplicitProhibitionCategories(cf.value);
+  if (!activeCategories.has('testimonials')) return [];
+  const violations = [];
+  for (const leaf of collectTextLeaves(rawVal, key)) {
+    // [FIELD ROLE MUST NOT BE A BLANKET BYPASS] confirmed regression: "El cliente dice que es
+    // caro" inside an 'objections' field describes the BUYER'S OWN anticipated objection as ICP
+    // research voice, not an advertiser-fabricated endorsement — the same descriptive-voice
+    // exemption isBuyerContextDescriptiveMatch already grants invented_result matches in pains/
+    // objections/buying_triggers/qualification_signals/non_fit_signals. Mirrors that exemption's
+    // own guard exactly: it never applies if the payload itself carries a quantified result or
+    // direct advertiser voice, so a fabricated positive claim smuggled into a buyer-context field
+    // still detects.
+    const semanticKey = semanticLeafFieldKey(key, leaf.leafPath);
+    const isBuyerDescriptiveField = BUYER_DESCRIPTIVE_CLAIM_ROLES.has(claimContextRoleForField(semanticKey));
+    let offset = 0;
+    for (const s of leaf.text.split(/[.!?\n]/)) {
+      const start = leaf.text.indexOf(s, offset);
+      const hit = implicitTestimonialAttributionMatch(s);
+      if (hit && !(isBuyerDescriptiveField && !RESULT_MAGNITUDE_RE.test(s) && !ADVERTISER_CLAIM_VOICE_CUE.test(s))) {
+        violations.push({
+          type: 'EXPLICIT_PROHIBITION', fact_field: null, category: 'testimonials', field_key: key,
+          matched_text: hit.matched_text, matched_pattern: 'IMPLICIT_TESTIMONIAL_ATTRIBUTION',
+          local_clause: s.trim(), clause_index: null, occurrence_start: start + hit.offset,
+          leaf_path: leaf.leafPath,
+        });
+      }
+      offset = start + s.length;
+    }
   }
   return violations;
 }
@@ -1294,6 +1440,7 @@ function validateOutputAgainstFacts(facts, output, { nodeId, upstream_outputs = 
     for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkExplicitProhibition(facts, key, rawVal)) violations.push(v);
+    for (const v of checkImplicitTestimonialAttribution(facts, key, rawVal)) violations.push(v);
     for (const v of checkUpstreamProposalPropagation(key, rawVal, proposalAnchors)) violations.push(v);
   }
   const combinedText = textEntries.map(([, v]) => v).join(' \n ');
@@ -1989,6 +2136,7 @@ function validateFinalSynthesis(facts, synthesis, { rawRequest } = {}) {
     for (const v of checkUnknownFactFabrication(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkExplicitProhibition(facts, key, rawVal)) violations.push(v);
+    for (const v of checkImplicitTestimonialAttribution(facts, key, rawVal)) violations.push(v);
     for (const v of checkMechanismToCampaignConversionPromotion(facts, key, rawVal)) violations.push(v);
     for (const v of checkAssumptionEpistemicConsistency(key, rawVal, rawRequest)) violations.push(v);
   }
