@@ -739,9 +739,19 @@ const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[
 // the same value shapes consistently. The trailing \b is only on the "x" alternative (never after
 // a literal "%", which can never satisfy \b — see the PRE-EXISTING BUG FIX note below).
 const METRIC_PCT_X_VALUE = '\\d+(?:\\.\\d+)?\\s*(?:%|x\\b)';
+// [META BRAND / TARGET COLLISION FIX] confirmed live false positive (job 29a3248a-045f-4942-ba15-
+// 59469d1e9369): "Costos y CPC actuales en Meta Ads México" flagged "CPC actuales en Meta" as an
+// invented_metric qualifier match — "meta" is bare Spanish for "target/goal", but here it is the
+// first word of the brand entity "Meta Ads" (also "Meta Business [Suite]", "Meta platform"). A
+// bounded negative lookahead scoped to exactly those brand-continuation words disambiguates the
+// entity usage from the target/goal usage without touching "meta" as a qualifier anywhere else
+// ("Meta objetivo de CAC", "meta de CPC", "CPC meta" all still match — none of them are followed by
+// ads/business/platform). Never a whole-sentence patch, never a blanket "meta" exemption.
+const META_QUALIFIER = 'meta(?!\\s+(?:ads|business(?:\\s+suite)?|platform)\\b)';
+const METRIC_QUALIFIERS = `esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|${META_QUALIFIER}|expected|projected|estimated|target|goal`;
 const INVENTED_METRIC_CLAIM = new RegExp(
-  '\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b[\\s\\S]{0,20}\\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta|expected|projected|estimated|target|goal)\\b' +
-  '|\\b(?:esperad[oa]|proyectad[oa]|estimad[oa]|objetivo|meta|expected|projected|estimated|target|goal)\\b[\\s\\S]{0,20}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b' +
+  '\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b[\\s\\S]{0,20}\\b(?:' + METRIC_QUALIFIERS + ')\\b' +
+  '|\\b(?:' + METRIC_QUALIFIERS + ')\\b[\\s\\S]{0,20}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b' +
   // [PRE-EXISTING BUG FIX] a trailing \b right after a literal "%" can never match (neither side of
   // that position is a \w character), so "\d+\s*(?:%|x)\b" silently never matched a bare "X%"
   // magnitude for any acronym ("ROAS 4%") — only "Xx" ("ROAS 4x") ever worked, since "x" itself is
@@ -752,7 +762,16 @@ const INVENTED_METRIC_CLAIM = new RegExp(
   // The %/x magnitude can precede the acronym too ("3x ROAS", "4% CTR"), not just follow it —
   // mirrors the currency-value reverse branch immediately below.
   '|(?:' + METRIC_PCT_X_VALUE + ')[\\s\\S]{0,10}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b' +
-  '|(?:' + RESULT_CURRENCY_VALUE + ')[\\s\\S]{0,10}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b',
+  '|(?:' + RESULT_CURRENCY_VALUE + ')[\\s\\S]{0,10}\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b' +
+  // [PRECISE CONNECTOR, NOT A WIDER WILDCARD] confirmed live false negative: "CPC actual es $20"
+  // never matched via the {0,10}-gap branch above (the intervening "actual es " is 11 characters).
+  // Blanket-widening that wildcard gap to {0,15} was tried and reverted — it let the greedy [\s\S]
+  // span across an entirely unrelated LATER acronym's own value ("CAC $20 and ROAS 4x" collapsed
+  // into one false match spanning both). Instead, a small, bounded set of connector words
+  // (actual/actuales/real/reales/es/is) may appear between the acronym and its value — never
+  // arbitrary text, never another acronym or a sentence boundary, so it cannot reach past an
+  // unrelated pairing the way a wider generic gap can.
+  '|\\b(?:cac|cpa|cpl|roas|mer|ltv|ctr|cpc|cpm)\\b(?:\\s+(?:actual(?:es)?|real(?:es)?|es|is))+\\s*(?::|=)?\\s*(?:' + METRIC_PCT_X_VALUE + '|' + RESULT_CURRENCY_VALUE + ')',
   'i');
 // [COMPACT METRIC PUNCTUATION HARDENING] confirmed live-red-team gap: "ROAS?4x" produced ZERO
 // violations. Root cause is NOT the metric matcher itself (INVENTED_METRIC_CLAIM correctly pairs
@@ -1383,10 +1402,20 @@ function termMatchesCandidateWord(term, normCandidate) {
 //     never inspected). This is what lets "Meta Ads genera consultas; WhatsApp gestiona la
 //     conversación; compra del minicurso" pass while "Meta Ads → Landing → WhatsApp → Cita" still
 //     flags its own terminal.
-//   - ENUMERATION: the field lists several independently-named metrics/items (ad_strategy.measurement,
-//     measurement.conversion_metrics) — split on ";" AND "," (each item genuinely claims to BE a
-//     named endpoint/metric on its own, unlike a SEQUENCE's intermediate steps), and each item's
-//     own arrow-terminal (if it has one) or whole text (if it doesn't) is a candidate.
+//   - ENUMERATION: the field lists several independently-named metrics/items (measurement.
+//     conversion_metrics) — split on ";" AND "," (each item genuinely claims to BE a named
+//     endpoint/metric on its own, unlike a SEQUENCE's intermediate steps), and each item's own
+//     arrow-terminal (if it has one) or whole text (if it doesn't) is a candidate, matched against
+//     the mechanism's FULL term set (endpoint AND intermediate stages) — this field's whole purpose
+//     is enumerating what COUNTS AS a conversion, so even an intermediate stage substituted here
+//     unaccompanied by the real objective is still a role error.
+//   - LEADING_INDICATOR: same candidate extraction as ENUMERATION, but matched against ONLY the
+//     mechanism's own ENDPOINT term(s) — ad_strategy.measurement is ad-platform TRACKING SETUP
+//     ("what does the ad platform measure"), not a definition of the campaign's conversion, so
+//     mentioning an intermediate acquisition signal (consultas generadas, conversaciones iniciadas,
+//     chats, landing visits) as a tracked leading indicator is legitimate and must never be flagged
+//     — but the mechanism's actual endpoint substituted here as if it were the tracked conversion
+//     ("citas agendadas") is still exactly the role error this whole check exists to catch.
 //   - SAFE: legitimate to mention the mechanism/intermediate steps without being treated as this
 //     campaign's own conversion at all — whatsapp.follow_up, measurement.leading_indicators,
 //     ad_strategy.campaign_objective (a MEDIA/PLATFORM objective like "Mensajes" is never the
@@ -1398,7 +1427,7 @@ const FINAL_SYNTHESIS_FIELD_ROLES = {
     stages: 'SEQUENCE', transitions: 'SEQUENCE', conversion_intent: 'STRICT',
   },
   '8_ad_strategy': {
-    measurement: 'ENUMERATION', campaign_objective: 'SAFE',
+    measurement: 'LEADING_INDICATOR', campaign_objective: 'SAFE',
   },
   '12_whatsapp_followup_closing': {
     closing: 'STRICT', recovery: 'STRICT', follow_up: 'SAFE', objections: 'SAFE',
@@ -1423,6 +1452,47 @@ function mechanismTermsForFacts(facts) {
   // objective's language.
   const result = [];
   for (const term of extractMechanismStageTerms(mf.value)) {
+    const cluster = endpointSynonymCluster(term);
+    if (cluster.some(objectiveGrounds)) continue;
+    for (const c of cluster) result.push(c);
+  }
+  return [...new Set(result)];
+}
+// [SILENT ROLE CONTAMINATION FIX] confirmed live false positive (job 29a3248a-045f-4942-ba15-
+// 59469d1e9369): 8_ad_strategy.measurement = "PROPUESTA: Medir consultas generadas y conversaciones
+// iniciadas (no proyectar resultados)" was flagged via matched_anchor "consulta" — an INTERMEDIATE
+// mechanism stage term (the mechanism is "... generar consultas y WhatsApp para convertir: consulta
+// → conversación → cita"), not the mechanism's actual ENDPOINT ("cita"). Tracking intermediate
+// acquisition signals (consultas generadas, conversaciones iniciadas, chats, landing visits) as
+// LEADING INDICATORS is exactly the legitimate ad-platform measurement use case this field exists
+// for — the role confusion this whole check protects against is specifically the mechanism's own
+// ENDPOINT being promoted to look like the campaign's primary conversion, not any mention of an
+// earlier funnel stage. `extractMechanismEndpointTerms` mirrors extractMechanismStageTerms's own
+// trailing-segment branch exactly (same stemming, same stopword filtering) but returns ONLY the
+// LAST arrow-chain segment's terms, never the first/middle stage tokens.
+function extractMechanismEndpointTerms(mechanismValue) {
+  const text = String(mechanismValue || '');
+  const parts = text.split(ARROW_RE);
+  const terms = new Set();
+  if (parts.length > 1) {
+    const trailing = parts[parts.length - 1].split(/[.,;:\n]/)[0];
+    for (const w of norm(trailing).split(/[^a-z0-9]+/)) if (w.length >= 3 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(stemMechanismTerm(w));
+  } else {
+    // No explicit arrow chain at all — the whole mechanism IS its own "endpoint" description, so
+    // endpoint-only and full-term extraction coincide (mirrors the no-arrow branch above).
+    for (const w of norm(text).split(/[^a-z0-9]+/)) if (w.length >= 4 && !MECHANISM_TERM_STOPWORDS.has(w)) terms.add(stemMechanismTerm(w));
+  }
+  return [...terms];
+}
+// Endpoint-only mirror of mechanismTermsForFacts — same objective-grounding/cross-language-cluster
+// treatment, restricted to the mechanism's actual terminal stage.
+function mechanismEndpointTermsForFacts(facts) {
+  const mf = facts.mechanism;
+  if (!mf || mf.status !== 'USER_PROVIDED_FACT' || !mf.value) return [];
+  const objectiveWords = new Set(norm((facts.business_objective && facts.business_objective.value) || '').split(/[^a-z0-9]+/).filter(w => w.length >= 3));
+  const objectiveGrounds = term => [...objectiveWords].some(w => w.startsWith(term) || term.startsWith(w));
+  const result = [];
+  for (const term of extractMechanismEndpointTerms(mf.value)) {
     const cluster = endpointSynonymCluster(term);
     if (cluster.some(objectiveGrounds)) continue;
     for (const c of cluster) result.push(c);
@@ -1465,7 +1535,7 @@ function extractEnumerationCandidates(text) {
 function extractConversionCandidates(text, role) {
   if (role === 'STRICT') return extractStrictCandidates(text);
   if (role === 'SEQUENCE') return extractSequenceCandidates(text);
-  if (role === 'ENUMERATION') return extractEnumerationCandidates(text);
+  if (role === 'ENUMERATION' || role === 'LEADING_INDICATOR') return extractEnumerationCandidates(text);
   return [];
 }
 // [COMPOUND-NOUN COLLISION FIX] confirmed gap: "sales" (PURCHASE_GROUNDING_VOCAB) can occur purely
@@ -1492,18 +1562,24 @@ function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
   if (!sectionRoles || !rawVal || typeof rawVal !== 'object') return [];
   const mechanismTerms = mechanismTermsForFacts(facts);
   if (!mechanismTerms.length) return [];
+  // LEADING_INDICATOR fields are matched against ONLY the mechanism's endpoint term(s) — see the
+  // FINAL_SYNTHESIS_FIELD_ROLES comment above. Computed lazily/once since most syntheses have no
+  // LEADING_INDICATOR-role field at all.
+  const mechanismEndpointTerms = mechanismEndpointTermsForFacts(facts);
   const objectiveWords = new Set(norm((facts.business_objective && facts.business_objective.value) || '').split(/[^a-z0-9]+/).filter(w => w.length >= 3));
   const violations = [];
   for (const [subKey, role] of Object.entries(sectionRoles)) {
     if (role === 'SAFE') continue;
     const raw = rawVal[subKey];
     if (!raw || typeof raw !== 'string') continue;
+    const termsForRole = role === 'LEADING_INDICATOR' ? mechanismEndpointTerms : mechanismTerms;
+    if (!termsForRole.length) continue;
     const candidates = extractConversionCandidates(raw, role);
     for (const candidate of candidates) {
       const normCandidate = norm(candidate);
-      const matchedTerm = mechanismTerms.find(term => termMatchesCandidateWord(term, normCandidate));
+      const matchedTerm = termsForRole.find(term => termMatchesCandidateWord(term, normCandidate));
       if (!matchedTerm) continue;
-      if (isConversionCandidateGrounded(normCandidate, objectiveWords, mechanismTerms)) continue;
+      if (isConversionCandidateGrounded(normCandidate, objectiveWords, termsForRole)) continue;
       violations.push({
         type: 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION', fact_field: 'mechanism', field_key: subKey,
         matched_text: candidate, matched_anchor: matchedTerm, section: key,
@@ -1539,8 +1615,63 @@ function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
 // (never breaks on the accented vowel itself), which is what the trailing \b was actually meant to
 // guard against.
 const ASSUMPTION_USER_ATTRIBUTION_CUE = /\b(definid[oa]s?|indicad[oa]s?|proporcionad[oa]s?|confirmad[oa]s?|especificad[oa]s?)\s+por\s+(el\s+)?usuario\b|\busuario\s+(indic[oó]|proporcion[oó]|confirm[oó]|especific[oó])(?![a-záéíóúñA-ZÁÉÍÓÚÑ])|\bdisponible\s+y\s+definid[oa]s?\b/i;
-const ASSUMPTION_CERTAINTY_CUE = /\b(operativ[oa]s?|list[oa]s?|confirmad[oa]s?|definid[oa]s?|disponible|inclu[iy]d[oa]s?)\b/i;
-const ASSUMPTION_UNKNOWN_CUE = /\bdesconocid[oa]s?\b|\bpor\s+(confirmar|definir)\b|\bpendiente(s)?\b|\bno\s+(disponible|definid[oa]s?|especificad[oa]s?)\b/i;
+const ASSUMPTION_CERTAINTY_CUE = /\b(operativ[oa]s?|list[oa]s?|confirmad[oa]s?|definid[oa]s?|disponible|inclu[iy]d[oa]s?|activ[oa]s?)\b/i;
+const ASSUMPTION_UNKNOWN_CUE = /\bdesconocid[oa]s?\b|\bpor\s+(confirmar|definir)\b|\bpendiente(s)?\b|\bno\s+(disponible|definid[oa]s?|especificad[oa]s?|proporcionad[oa]s?)\b|\bno\s+se\s+proporcion[oó]\b/i;
+// [ASSUMPTION EPISTEMIC SEMANTICS — CONFIRMED LIVE OVER-DETECTION] job 29a3248a-045f-4942-ba15-
+// 59469d1e9369 reported 7 CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS violations from a 4-item
+// cluster where NONE were genuine contradictions — all four were variants of "budget is
+// unknown/not specified/not defined/needed", which are COMPATIBLE epistemic states, not opposing
+// ones. Two root bugs: (1) ASSUMPTION_CERTAINTY_CUE is negation-blind — "no definidos"/"no
+// confirmado" still match the bare participle "definid[oa]s?"/"confirmad[oa]s?", so a NEGATED
+// sentence was misclassified as asserting certainty; (2) a self-hedged sentence combining a
+// certainty word with an unknown word in the SAME clause ("disponible (desconocido)") was treated
+// as unambiguously certain instead of adjudicated as ambiguous/badly formed, letting it pairwise-
+// contradict every other unknown-family statement in the list. Fixed via a proper epistemic-state
+// classifier (below) instead of the old boolean certain/unknown flags — replaces "same topic +
+// different status keyword = contradiction" with actual state-compatibility.
+const ASSUMPTION_EXISTENCE_NEGATION_CUE = /\bno\s+(?:existe[n]?|hay)\b/i;
+// A REQUIRED/NEEDS-CONFIRMATION framing ("Necesitamos X disponible", "Requerimos confirmar Y") is
+// a REQUEST, not an assertion that X currently IS available — grammatically distinct from the
+// PARTICIPLE forms ASSUMPTION_CERTAINTY_CUE matches (bare infinitives like "definir"/"confirmar"
+// were never matched by it to begin with; this cue additionally neutralizes a participle/adjective
+// that appears alongside an explicit "necesitamos/requerimos" framing in the same sentence).
+const ASSUMPTION_REQUIRED_CUE = /\bnecesita\w*\b|\brequerimos\b|\brequerid[oa]s?\b|\bse\s+requiere\b|\bhace\s+falta\b|\bdebemos\s+(?:definir|confirmar|obtener|especificar)\b/i;
+// Combined epistemic vocabulary, used ONLY to strip cue words before extracting a sentence's actual
+// topic (Rule 2) — never used for state classification itself (classifyAssumptionEpistemicState
+// above already handles that with its own priority order).
+const ASSUMPTION_ANY_EPISTEMIC_CUE = new RegExp([
+  ASSUMPTION_USER_ATTRIBUTION_CUE.source, ASSUMPTION_CERTAINTY_CUE.source, ASSUMPTION_UNKNOWN_CUE.source,
+  ASSUMPTION_EXISTENCE_NEGATION_CUE.source, ASSUMPTION_REQUIRED_CUE.source,
+].join('|'), 'i');
+// Classifies one assumption sentence into a discrete epistemic-role bucket. Priority matters:
+// REQUIRED is checked first (a request framing overrides any participle in the same sentence —
+// "Necesitamos presupuesto disponible" is a NEED, not a claim of current availability), then
+// explicit existence-negation ("no existe"/"no hay"), then genuine (non-negated) certainty vs.
+// unknown-family cues — a sentence matching BOTH is AMBIGUOUS, not confidently certain.
+function classifyAssumptionEpistemicState(text) {
+  if (ASSUMPTION_REQUIRED_CUE.test(text)) return 'REQUIRED';
+  if (ASSUMPTION_EXISTENCE_NEGATION_CUE.test(text)) return 'KNOWN_UNAVAILABLE';
+  const hasUnknown = ASSUMPTION_UNKNOWN_CUE.test(text);
+  let hasGenuineCertainty = false;
+  for (const m of text.matchAll(new RegExp(ASSUMPTION_CERTAINTY_CUE.source, 'gi'))) {
+    const before = text.slice(0, m.index);
+    if (!/\b(?:no|sin)\s+$/i.test(before)) { hasGenuineCertainty = true; break; }
+  }
+  if (hasGenuineCertainty && hasUnknown) return 'AMBIGUOUS'; // "disponible (desconocido)" — badly formed, never anchors a contradiction
+  if (hasUnknown) return 'UNKNOWN_FAMILY';
+  if (hasGenuineCertainty) return 'KNOWN_AVAILABLE';
+  return 'NONE';
+}
+// Only a confident KNOWN_AVAILABLE claim conflicting with either an explicit KNOWN_UNAVAILABLE
+// claim or a plain acknowledgment of uncertainty (UNKNOWN_FAMILY) is a genuine contradiction — the
+// asymmetry is deliberate: a firm "yes" is the surprising side that needs backing, whether directly
+// contradicted by a firm "no" or merely by another part of the same synthesis still calling it
+// unknown. REQUIRED, AMBIGUOUS, NONE, and KNOWN_UNAVAILABLE-vs-UNKNOWN_FAMILY are all compatible —
+// none of them assert a confident, checkable fact that a hedge elsewhere could conflict with.
+function areEpistemicStatesContradictory(a, b) {
+  const states = new Set([a, b]);
+  return states.has('KNOWN_AVAILABLE') && (states.has('KNOWN_UNAVAILABLE') || states.has('UNKNOWN_FAMILY'));
+}
 const ASSUMPTION_TOPIC_STOPWORDS = new Set('para con del las los una uno unos unas este esta estos estas cada todo toda propuesta assumption asumo existe existira habra sera seran monto valor'.split(' '));
 // [SHORT-TOPIC EPISTEMIC COVERAGE] confirmed gap: a real topic can be a short business acronym
 // (CAC, KPI, CRM, LTV, API, SEO, IVA, ...) that the >=4-char normal-word floor discards entirely.
@@ -1614,17 +1745,24 @@ function checkAssumptionEpistemicConsistency(key, rawVal, rawRequest) {
       }
     }
   }
-  // Rule 2 — cross-item contradiction within the same list (no rawRequest needed).
+  // Rule 2 — cross-item contradiction within the same list (no rawRequest needed). Uses proper
+  // epistemic-state compatibility (see classifyAssumptionEpistemicState/areEpistemicStatesContradictory
+  // above), not "same topic + different status keyword". Every pair is checked exactly once
+  // (i < j); topic extraction strips the FULL combined epistemic vocabulary (attribution + certainty
+  // + unknown + existence-negation + required cues) from both sides so the remaining words are
+  // purely the sentence's actual subject, regardless of which state either side landed in.
+  const states = parsed.map(p => classifyAssumptionEpistemicState(p.text));
+  const topicsFor = text => new Set(assumptionTopicWords(text, ASSUMPTION_ANY_EPISTEMIC_CUE));
+  const topicsCache = parsed.map(p => topicsFor(p.text));
   for (let i = 0; i < parsed.length; i++) {
-    if (!parsed[i].certain) continue;
-    const certainTopics = new Set(assumptionTopicWords(parsed[i].text, parsed[i].attributed ? ASSUMPTION_USER_ATTRIBUTION_CUE : ASSUMPTION_CERTAINTY_CUE));
-    if (!certainTopics.size) continue;
-    for (let j = 0; j < parsed.length; j++) {
-      if (i === j || !parsed[j].unknown) continue;
-      const unknownTopics = assumptionTopicWords(parsed[j].text, ASSUMPTION_UNKNOWN_CUE);
-      if (unknownTopics.some(w => certainTopics.has(w))) {
-        violations.push({ type: 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS', fact_field: null, field_key: key, matched_text: parsed[i].text, conflicting_text: parsed[j].text });
-      }
+    if (!topicsCache[i].size) continue;
+    for (let j = i + 1; j < parsed.length; j++) {
+      if (!areEpistemicStatesContradictory(states[i], states[j])) continue;
+      if (![...topicsCache[j]].some(w => topicsCache[i].has(w))) continue;
+      // Report with the confident (KNOWN_AVAILABLE) side first for a consistent, meaningful
+      // diagnostic — whichever original index that happens to be.
+      const [confidentIdx, otherIdx] = states[i] === 'KNOWN_AVAILABLE' ? [i, j] : [j, i];
+      violations.push({ type: 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS', fact_field: null, field_key: key, matched_text: parsed[confidentIdx].text, conflicting_text: parsed[otherIdx].text });
     }
   }
   return violations;
@@ -1706,7 +1844,7 @@ function repairConversionFieldText(text, role, facts, mechanismTerms, objectiveW
     });
     return { text: repairedItems.join(';'), changed };
   }
-  if (role === 'ENUMERATION') {
+  if (role === 'ENUMERATION' || role === 'LEADING_INDICATOR') {
     const items = text.split(/([;,])/);
     const kept = [];
     for (let i = 0; i < items.length; i += 2) {
@@ -1746,27 +1884,37 @@ function repairAssumptions(items, rawRequest) {
       return true;
     });
   }
+  // [CONSISTENCY FIX] this loop must use the EXACT SAME epistemic-state model as
+  // checkAssumptionEpistemicConsistency's Rule 2 (classifyAssumptionEpistemicState /
+  // areEpistemicStatesContradictory) — it previously used the old certain/unknown booleans
+  // directly, so repair could remove an assumption pair that validation itself would no longer
+  // flag as contradictory (a family-level inconsistency confirmed while hardening job
+  // 29a3248a-045f-4942-ba15-59469d1e9369's live 4-item cluster: validation correctly reported zero
+  // contradictions, but this unpatched loop still silently deleted 3 of the 4 legitimate
+  // assumptions on every repair pass).
   let again = true;
   while (again) {
     again = false;
-    const parsed = result.map(text => ({
-      text, attributed: ASSUMPTION_USER_ATTRIBUTION_CUE.test(text), unknown: ASSUMPTION_UNKNOWN_CUE.test(text),
-      certain: ASSUMPTION_CERTAINTY_CUE.test(text) || ASSUMPTION_USER_ATTRIBUTION_CUE.test(text),
-    }));
-    outer: for (let i = 0; i < parsed.length; i++) {
-      if (!parsed[i].certain) continue;
-      const certainTopics = new Set(assumptionTopicWords(parsed[i].text, parsed[i].attributed ? ASSUMPTION_USER_ATTRIBUTION_CUE : ASSUMPTION_CERTAINTY_CUE));
-      if (!certainTopics.size) continue;
-      for (let j = 0; j < parsed.length; j++) {
-        if (i === j || !parsed[j].unknown) continue;
-        const sharedTopic = assumptionTopicWords(parsed[j].text, ASSUMPTION_UNKNOWN_CUE).find(w => certainTopics.has(w));
+    const states = result.map(text => classifyAssumptionEpistemicState(text));
+    const topics = result.map(text => new Set(assumptionTopicWords(text, ASSUMPTION_ANY_EPISTEMIC_CUE)));
+    outer: for (let i = 0; i < result.length; i++) {
+      if (!topics[i].size) continue;
+      for (let j = 0; j < result.length; j++) {
+        if (i === j || !areEpistemicStatesContradictory(states[i], states[j])) continue;
+        const sharedTopic = [...topics[j]].find(w => topics[i].has(w));
         if (!sharedTopic) continue;
+        // Keep whichever side the raw brief actually grounds; drop the other. If neither (or the
+        // raw request is unavailable), prefer keeping the non-KNOWN_AVAILABLE side — an unverified
+        // confident claim is the one that needs to go, never a plain acknowledgment of uncertainty.
+        const iIsConfident = states[i] === 'KNOWN_AVAILABLE';
+        const confidentText = iIsConfident ? result[i] : result[j];
+        const otherText = iIsConfident ? result[j] : result[i];
         if (knownInRaw(sharedTopic)) {
-          repairs.push({ removed: parsed[j].text, kept: parsed[i].text, reason: 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS' });
-          result = result.filter(t => t !== parsed[j].text);
+          repairs.push({ removed: otherText, kept: confidentText, reason: 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS' });
+          result = result.filter(t => t !== otherText);
         } else {
-          repairs.push({ removed: parsed[i].text, kept: parsed[j].text, reason: 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS' });
-          result = result.filter(t => t !== parsed[i].text);
+          repairs.push({ removed: confidentText, kept: otherText, reason: 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS' });
+          result = result.filter(t => t !== confidentText);
         }
         again = true;
         break outer;
@@ -1783,6 +1931,7 @@ function repairFinalSynthesis(facts, synthesis, violations, { rawRequest } = {})
   const repaired = cloneJsonValue(synthesis);
   const repairs = [];
   const mechanismTerms = mechanismTermsForFacts(facts);
+  const mechanismEndpointTerms = mechanismEndpointTermsForFacts(facts);
   const objectiveWords = new Set(norm((facts.business_objective && facts.business_objective.value) || '').split(/[^a-z0-9]+/).filter(w => w.length >= 3));
   if (mechanismTerms.length) {
     for (const [sectionKey, subKeyRoles] of Object.entries(FINAL_SYNTHESIS_FIELD_ROLES)) {
@@ -1792,7 +1941,13 @@ function repairFinalSynthesis(facts, synthesis, violations, { rawRequest } = {})
         if (role === 'SAFE') continue;
         const raw = section[subKey];
         if (!raw || typeof raw !== 'string') continue;
-        const { text, changed } = repairConversionFieldText(raw, role, facts, mechanismTerms, objectiveWords);
+        // LEADING_INDICATOR repair must use the SAME endpoint-only term set validation does — an
+        // intermediate acquisition signal (consultas/conversaciones) must never be stripped out of
+        // an ad-platform measurement field just because repair happened to run for an unrelated
+        // violation elsewhere in the same synthesis.
+        const termsForRole = role === 'LEADING_INDICATOR' ? mechanismEndpointTerms : mechanismTerms;
+        if (!termsForRole.length) continue;
+        const { text, changed } = repairConversionFieldText(raw, role, facts, termsForRole, objectiveWords);
         if (changed) { section[subKey] = text; repairs.push({ type: 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION', field_key: subKey, section: sectionKey, repair_type: 'DETERMINISTIC' }); }
       }
     }
