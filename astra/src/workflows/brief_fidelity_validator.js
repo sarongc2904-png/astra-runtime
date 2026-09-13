@@ -597,6 +597,24 @@ function isDesiredOutcomeQualitativeGoal(fieldKey, clauseText, match) {
 // advertiser claim maliciously placed inside pains/buying_triggers/objections/qualification/
 // non-fit still detects — see ADVERTISER_CLAIM_VOICE_CUE and the magnitude/guarantee/self-
 // sufficient-verb overrides below, all of which take precedence over the field-role exemption).
+// [DIAGNOSTIC_TRIGGER — ASTRA_CAMPAIGN360_MEASUREMENT_DERIVATION_AND_PROPOSAL_PROVENANCE_HARDENING]
+// confirmed live false positive (job b2252275-fbb4-40e5-840e-8c7532f3ac71): measurement.
+// optimization_triggers = "baja calificación leads" was flagged as invented_result — but this
+// field's entire schema purpose (MEASUREMENT_CRO_SPECIALIST.optimization_triggers/
+// diagnostic_metrics, see llm_specialists.js) is to hold DIAGNOSTIC/MONITORING CONDITIONS ("when
+// X is low, trigger an optimization action"), not an advertiser claim. Grammatically this is the
+// EXACT same shape already adjudicated for icp.pains/icp.buying_triggers ("Baja ocupación de
+// citas", job 6682572e-b316-4f2f-9c89-fb7b165bbdac): a claim-verb-shaped adjective ("baja")
+// modifying a state noun ("calificación"/"ocupación"), not governing an outcome noun directly. It
+// is deliberately given its OWN role name — DIAGNOSTIC_TRIGGER, not BUYER_TRIGGER — because this
+// field is not the buyer's own voice; it is the measurement node's condition/monitoring language.
+// Field-key-scoped only to fields whose schema purpose IS a diagnostic/trigger condition
+// (optimization_triggers, diagnostic_metrics — both unique to MEASUREMENT_CRO_SPECIALIST, so no
+// node-level scoping is needed). Never a blanket measurement exemption: this role only ever grants
+// the SAME structural exemption BUYER_* roles already have below (isDescriptiveStateMatch), which
+// still refuses guarantee/magnitude/advertiser-voice/self-sufficient-verb matches regardless of
+// role — a genuine claim smuggled into a trigger field ("Baja tu CAC a $20", "Aumenta tus ventas
+// 30%", "Te garantizamos más clientes", "Duplicar citas en 30 días") still detects.
 const CLAIM_CONTEXT_FIELD_ROLES = {
   pains: 'BUYER_STATE',
   desired_outcomes: 'BUYER_GOAL', // kept in the table for documentation; its own narrower rule (isDesiredOutcomeQualitativeGoal) is unchanged and unaffected by this addition.
@@ -604,11 +622,25 @@ const CLAIM_CONTEXT_FIELD_ROLES = {
   buying_triggers: 'BUYER_TRIGGER',
   qualification_signals: 'BUYER_ATTRIBUTE',
   non_fit_signals: 'BUYER_ATTRIBUTE',
+  optimization_triggers: 'DIAGNOSTIC_TRIGGER',
+  diagnostic_metrics: 'DIAGNOSTIC_TRIGGER',
 };
-// A descriptive buyer-context role never itself waives detection — only BUYER_STATE/
-// BUYER_OBJECTION/BUYER_TRIGGER/BUYER_ATTRIBUTE get the structural exemption logic below.
+// A descriptive-state role never itself waives detection — only BUYER_STATE/BUYER_OBJECTION/
+// BUYER_TRIGGER/BUYER_ATTRIBUTE/DIAGNOSTIC_TRIGGER get the structural exemption logic below.
 // BUYER_GOAL (desired_outcomes) keeps its pre-existing, narrower, magnitude-gated rule untouched.
-const BUYER_DESCRIPTIVE_CLAIM_ROLES = new Set(['BUYER_STATE', 'BUYER_OBJECTION', 'BUYER_TRIGGER', 'BUYER_ATTRIBUTE']);
+// primary_outcome, funnel_metrics, conversion_metrics and measurement_cadence are deliberately
+// ABSENT from CLAIM_CONTEXT_FIELD_ROLES — primary_outcome is this campaign's own claimed business
+// outcome and must stay fully strict; funnel_metrics/conversion_metrics/measurement_cadence are not
+// condition/trigger fields (they name what is tracked and how often, not a diagnostic state), so
+// they get no claim-role exemption here at all — only the separate UPSTREAM_PROPOSAL_PROPAGATION
+// specificity gate (below) addresses their false positives, which is a different failure mode.
+const DESCRIPTIVE_CLAIM_ROLES = new Set(['BUYER_STATE', 'BUYER_OBJECTION', 'BUYER_TRIGGER', 'BUYER_ATTRIBUTE', 'DIAGNOSTIC_TRIGGER']);
+// Narrower subset for the UNRELATED implicit-testimonial-attribution exemption below (checkImplicit
+// TestimonialAttribution) — that check is about human-sourced-endorsement voice specifically
+// ("el cliente dice que..."), not about diagnostic/trigger conditions, so DIAGNOSTIC_TRIGGER is
+// deliberately excluded here: a measurement field is never exempted from testimonial-attribution
+// detection just because it is also a diagnostic-condition field — a different failure mode.
+const BUYER_VOICE_CLAIM_ROLES = new Set(['BUYER_STATE', 'BUYER_OBJECTION', 'BUYER_TRIGGER', 'BUYER_ATTRIBUTE']);
 function claimContextRoleForField(fieldKey) { return CLAIM_CONTEXT_FIELD_ROLES[norm(fieldKey)] || 'UNKNOWN'; }
 // [VOICE / CLAIM-BEARING SIGNALS] deterministic, closed, grammatical-category cues — never a
 // specific-phrase list. Second-person address (tú/tus/te/ti/usted/contigo/vas[+a]) and the generic
@@ -677,10 +709,13 @@ function isDirectlyAdjacentPair(clauseText, match) {
 }
 const RESULT_SELF_SUFFICIENT_VERBS_RE = new RegExp(`^(?:${RESULT_SELF_SUFFICIENT_VERBS})$`, 'i');
 // The single entry point checkExplicitProhibition calls for every invented_result match: returns
-// true only when the match should be read as descriptive buyer-context language, never a claim.
-function isBuyerContextDescriptiveMatch(fieldKey, clauseText, match) {
+// true only when the match should be read as descriptive state/condition language (buyer-context
+// OR diagnostic-trigger-context), never a claim. Renamed from isBuyerContextDescriptiveMatch —
+// DIAGNOSTIC_TRIGGER fields are not buyer voice, so the old name no longer described what this
+// function actually gates; behavior for the existing BUYER_* roles is unchanged.
+function isDescriptiveStateMatch(fieldKey, clauseText, match) {
   const role = claimContextRoleForField(fieldKey);
-  if (!BUYER_DESCRIPTIVE_CLAIM_ROLES.has(role)) return false;
+  if (!DESCRIPTIVE_CLAIM_ROLES.has(role)) return false;
   if (isGuaranteedResultMatch(match[0])) return false; // a guarantee is never descriptive, in any field
   if (RESULT_MAGNITUDE_RE.test(clauseText)) return false; // a quantified result is never descriptive, in any field
   if (RESULT_SELF_SUFFICIENT_VERBS_RE.test(match[0])) return false; // duplicar/triplicar always self-sufficiently claim a magnitude
@@ -1084,7 +1119,7 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
           isMeasurementPurposeClause(s, match.index) || hasGoalIntentContext(s) ||
           isDesiredOutcomeQualitativeGoal(semanticKey, s, match) ||
           isGuaranteeNegationOrAdvisoryEscape(s, match) ||
-          isBuyerContextDescriptiveMatch(semanticKey, s, match)
+          isDescriptiveStateMatch(semanticKey, s, match)
         )) continue;
         // [CATEGORY-SCOPED COLLECTION CUE] confirmed regression: COLLECTION_REQUEST_CUE's
         // acquisition-verb vocabulary (conseguir/obtener/...) legitimately overlaps with common
@@ -1171,7 +1206,7 @@ function checkImplicitTestimonialAttribution(facts, key, rawVal) {
     // direct advertiser voice, so a fabricated positive claim smuggled into a buyer-context field
     // still detects.
     const semanticKey = semanticLeafFieldKey(key, leaf.leafPath);
-    const isBuyerDescriptiveField = BUYER_DESCRIPTIVE_CLAIM_ROLES.has(claimContextRoleForField(semanticKey));
+    const isBuyerDescriptiveField = BUYER_VOICE_CLAIM_ROLES.has(claimContextRoleForField(semanticKey));
     let offset = 0;
     for (const s of leaf.text.split(/[.!?\n]/)) {
       const start = leaf.text.indexOf(s, offset);
@@ -1235,7 +1270,66 @@ function pathFor(nodeId, fieldKey) {
 // canonical vocabulary and grammatical/action words: in "upsell consultoria cita", cita is
 // canonical but consultoria is novel, including when reused as "agendar consultoria".
 // This is lexical derivation detection, not a claim of general semantic paraphrase detection.
-const PROPOSAL_GLUE = new Set(('para como desde hasta sobre entre cuando donde porque tambien cualquier cada nuevo nueva nuevos nuevas propuesta unknown current_research_required incluir usar utilizar presentar ofrecer agregar incorporar confirmar enviar agendar realizar crear generar hacer tener puede pueden debe deben sera ser estar esta este estos estas una unas unos del las los con por que sin mas').split(' '));
+// [BILINGUAL — RT18/RT50, Part J red-team] confirmed gaps: "activar" (Spanish "activate/turn on",
+// the exact same grammatical category as ofrecer/usar/incluir already here) and the English
+// equivalents of this entire glue list (offer/include/use/present/add/incorporate/confirm/send/
+// schedule/create/generate/make/have/this/these/with/without/more/...) were both missing — an
+// English-authored specialist output's generic adoption verb ("offer a special bonus") was
+// wrongly surviving as a novel anchor word itself, purely because this list, unlike every other
+// vocabulary list in this file, had never been given its English mirror.
+const PROPOSAL_GLUE = new Set(('para como desde hasta sobre entre cuando donde porque tambien cualquier cada nuevo nueva nuevos nuevas propuesta unknown current_research_required incluir usar utilizar presentar ofrecer activar agregar incorporar confirmar enviar agendar realizar crear generar hacer tener puede pueden debe deben sera ser estar esta este estos estas una unas unos del las los con por que sin mas ' +
+  'from about between when where because also any each proposal include present offer activate incorporate confirm send schedule implement create generate make have this these with without more').split(' '));
+// [MEASUREMENT/OPERATIONS VOCABULARY — Parts D/E of ASTRA_CAMPAIGN360_MEASUREMENT_DERIVATION_AND_
+// PROPOSAL_PROVENANCE_HARDENING] confirmed live false positive (job b2252275-fbb4-40e5-840e-
+// 8c7532f3ac71): measurement.{funnel_metrics,conversion_metrics,diagnostic_metrics,
+// optimization_triggers,measurement_cadence} were flagged as UNLABELED_UPSTREAM_PROPOSAL_
+// PROPAGATION purely for reusing single ordinary words (link/envio/enlace/inicial/tiempo/post/
+// calificacion) that ALSO happened to appear once, incidentally, in an upstream PROPUESTA-marked
+// sentence. Unlike PROPOSAL_GLUE (closed-class grammatical connectors/generic verbs, useless as
+// evidence of ANY idea, proposed or not), this is a bounded, CATEGORY-grounded set of ordinary
+// marketing-OPERATIONS nouns — timing/cadence, communication-channel/delivery mechanics, and
+// measurement/diagnostic descriptors — that describe standard, ubiquitous funnel MACHINERY
+// regardless of which specific tactic a brief proposes. A measurement node's job is inherently to
+// describe WHEN something is tracked (tiempo/inicial/final/cadencia/frecuencia), THROUGH WHAT
+// channel (enlace/link/envio/recordatorio/mensaje/canal), and WHAT STATE is diagnosed
+// (calificacion/respuesta/seguimiento/diagnostico/medicion) — none of that is evidence a specific
+// upstream PROPOSAL was silently copied, only that ordinary funnel-operations vocabulary recurs
+// across nodes describing the SAME already-established mechanism. Deliberately NOT the literal 7
+// live anchors (this set is built from three linguistic CATEGORIES, each with multiple members
+// beyond what the live job happened to use) and deliberately NOT a field/node-scoped exemption —
+// it changes anchor ELIGIBILITY globally, the same mechanism PROPOSAL_GLUE already uses, so a
+// genuinely DISTINCTIVE, deal-specific noun (consultoria/auditoria/descuento/oferta — an actual
+// offer/tactic name) is completely unaffected and still detects on a single reused occurrence,
+// exactly as the protected regression suite (astra_campaign360_proposal_status_propagation*.test.js)
+// already requires. "recordatorio" is included here (not just the measurement-node's own 5 fields)
+// because the SAME category applies symmetrically downstream of it: "PROPUESTA: enviar recordatorio
+// 24h" followed by an unrelated node's "medir tiempo de respuesta post-recordatorio" must not fail
+// merely because both mention a reminder as a timing reference point, not as a re-proposed tactic.
+// [BILINGUAL] mirrors this file's established pattern (RESULT_CLAIM_VERBS, ADVERTISER_CLAIM_VOICE_
+// CUE, etc.) of pairing every Spanish vocabulary list with its direct English equivalent, rather
+// than leaving English-authored specialist output to a Spanish-only list.
+const MEASUREMENT_OPERATIONS_GLUE = new Set([
+  // temporal / cadence — standard scheduling vocabulary, never proposal-specific on its own
+  'tiempo', 'inicial', 'final', 'previo', 'posterior', 'durante', 'cadencia', 'frecuencia', 'periodo', 'ciclo',
+  'initial', 'previous', 'prior', 'during', 'cadence', 'frequency', 'period', 'cycle', 'timing',
+  // communication channel / delivery mechanics — standard funnel-plumbing vocabulary
+  'enlace', 'link', 'envio', 'mensaje', 'recordatorio', 'canal', 'post',
+  'send', 'sending', 'message', 'reminder', 'channel',
+  // measurement / diagnostic descriptors — standard tracking vocabulary, not an asserted tactic
+  'calificacion', 'respuesta', 'seguimiento', 'diagnostico', 'medicion', 'indicador', 'reporte',
+  'qualification', 'rating', 'response', 'tracking', 'diagnostic', 'measurement', 'measuring', 'indicator', 'report',
+  // [RT23/RT24/RT26/RT27, Part J red-team] measurement-PURPOSE verbs — deliberately the SAME
+  // closed vocabulary RESULT_MEASUREMENT_VERBS already defines above (medir/analizar/registrar/
+  // probar/testear/monitorear/evaluar/revisar/comparar + track/measure/monitor/define/evaluate/
+  // review/compare), reused rather than re-invented: a bare "medir"/"analizar" is the measurement
+  // node doing its own job, not evidence of a copied tactic, exactly like RESULT_MEASUREMENT_VERBS
+  // already treats these same verbs as a non-claim "measurement purpose" signal elsewhere in this
+  // file. "revisar"/"review"/"comparar"/"compare" deliberately excluded here even though they are
+  // in RESULT_MEASUREMENT_VERBS: those are common enough as ordinary tactical verbs (not measurement-
+  // specific) that excluding them from anchor eligibility risked masking genuine propagation.
+  'medir', 'analizar', 'registrar', 'probar', 'testear', 'monitorear', 'evaluar',
+  'measure', 'monitor', 'evaluate',
+]);
 function proposalWords(text) { return norm(text).match(/[a-z_]{4,}/g) || []; }
 function proposalLeaves(value) {
   if (typeof value === 'string') return [norm(value)];
@@ -1257,24 +1351,51 @@ function proposalLeafEntries(value, path = []) {
   }
   return [];
 }
+// [PROVENANCE-PRESERVING ANCHORS — ASTRA_CAMPAIGN360_MEASUREMENT_DERIVATION_AND_PROPOSAL_
+// PROVENANCE_HARDENING] confirmed live diagnostic gap (job b2252275-fbb4-40e5-840e-
+// 8c7532f3ac71): a terminal UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION violation could not be
+// adjudicated after the fact — the saved result exposed only a single matched WORD and a JSON
+// path, never the actual downstream clause or which upstream node/proposal it supposedly came
+// from. anchors is no longer a flat Set<word>; it is a Map<word, sourceClauseRecord[]>, where each
+// record is { source_node, source_path, source_clause, words } — words being the FULL set of novel
+// (non-canonical, non-glue) anchor words that co-occurred in that ONE upstream PROPUESTA-marked
+// clause. Map supports the same .has()/.size surface proposalPropagationHits already used on the
+// old Set, so downstream callers needed no interface change beyond what genuinely required the
+// richer per-word source list. Marker/anchor-word EXTRACTION is functionally identical to before
+// (same PROPUESTA: marker, same proposalWords() 4+-letter tokenizer, same canonical/glue
+// filtering) — only what gets RECORDED alongside each anchor changed. Splitting is now done
+// directly on the upstream leaf's own RAW (un-normalized) text rather than pre-normalized text,
+// so source_clause can be reported with its original casing/accents for human diagnosis;
+// proposalWords() still normalizes internally before tokenizing, so which words qualify as anchors
+// is byte-for-byte unchanged from the previous implementation.
 function upstreamProposalAnchors(facts, upstreamOutputs) {
   const canonical = new Set(Object.values(facts || {})
     .filter(f => f && f.status === 'USER_PROVIDED_FACT').flatMap(f => proposalWords(textOnly(f.value))));
-  const anchors = new Set();
+  const anchorIndex = new Map(); // word -> sourceClauseRecord[]
   for (const upstream of upstreamOutputs || []) {
+    const sourceNode = upstream.work_unit_id || upstream.node_id || upstream.node || null;
     const payload = upstream.downstream_payload || (upstream.output && upstream.output.downstream_payload);
-    for (const text of proposalLeaves(payload)) {
+    for (const entry of proposalLeafEntries(payload)) {
+      const rawText = String(entry.value);
       // A marker covers its sentence, including a semicolon continuation in the live offer.
-      for (const sentence of text.split(/[.!?\n]/)) {
+      for (const sentence of rawText.split(/[.!?\n]/)) {
         const marker = /\bpropuesta\s*:/i.exec(sentence);
         if (!marker) continue;
-        for (const word of proposalWords(sentence.slice(marker.index + marker[0].length))) {
-          if (!canonical.has(word) && !PROPOSAL_GLUE.has(word)) anchors.add(word);
+        const words = proposalWords(sentence.slice(marker.index + marker[0].length))
+          .filter(w => !canonical.has(w) && !PROPOSAL_GLUE.has(w) && !MEASUREMENT_OPERATIONS_GLUE.has(w));
+        if (!words.length) continue;
+        const record = {
+          source_node: sourceNode, source_path: formatLeafPath(entry.path),
+          source_clause: sentence.trim(), words: new Set(words),
+        };
+        for (const word of words) {
+          if (!anchorIndex.has(word)) anchorIndex.set(word, []);
+          anchorIndex.get(word).push(record);
         }
       }
     }
   }
-  return anchors;
+  return anchorIndex;
 }
 function proposalClauseSpans(text) {
   const spans = []; let start = 0; let clauseIndex = 0;
@@ -1306,16 +1427,46 @@ function proposalPropagationHits(rawValue, anchors) {
         if (/^\s*(?:=|:)\s*(?:unknown|current_research_required)\b/.test(after) ||
             /^\s*(?:unknown|current_research_required)\s*[:=]/.test(before)) continue;
         const localBefore = before.slice(before.lastIndexOf(';') + 1);
-        const rejection = /\b(?:no\s+(?:incluir|usar|utilizar|ofrecer|agendar|implementar|adoptar)|rechazar|rechazamos|descartar|descartamos)\b/g;
+        // [BILINGUAL, RT33/RT50] English rejection verbs mirror the pre-existing Spanish set, and
+        // "nunca" (Spanish "never") mirrors "no" as a rejection negator — this file's own
+        // established pattern elsewhere (isNegated's `negative` cue already treats no/nunca as
+        // equivalent); this specific rejection escape had never been given either mirror before.
+        const rejection = /\b(?:(?:no|nunca)\s+(?:incluir|usar|utilizar|ofrecer|agendar|implementar|adoptar)|rechazar|rechazamos|descartar|descartamos|(?:do\s+not|don['’]t|never)\s+(?:include|use|offer|schedule|implement|adopt)|reject(?:s|ed|ing)?|discard(?:s|ed|ing)?)\b/g;
         let rejectedAt = -1;
         for (const r of localBefore.matchAll(rejection)) rejectedAt = r.index + r[0].length;
-        if (rejectedAt >= 0 && !/\b(?:inclu\w*|us[ae]\w*|utiliz\w*|ofrec\w*|agend\w*|implement\w*|adopt\w*)\b/.test(localBefore.slice(rejectedAt))) continue;
+        if (rejectedAt >= 0 && !/\b(?:inclu\w*|us[ae]\w*|utiliz\w*|ofrec\w*|agend\w*|implement\w*|adopt\w*|include[sd]?|including|use[sd]?|using|offer(?:s|ed|ing)?|schedul\w*|adopt(?:s|ed|ing)?)\b/.test(localBefore.slice(rejectedAt))) continue;
+        // [RT34] "sin X disponible" / "no existe X" — the same non-adoption ABSENCE framing
+        // EXISTENCE_ABSENCE_CUE already recognizes elsewhere in this file (checkExplicitProhibition
+        // OnLeaf) — an anchor word appearing only inside a statement that the thing is UNAVAILABLE
+        // is not evidence of adoption either. Scoped to the local clause exactly like every other
+        // escape here.
+        if (/\bsin\s+$/i.test(localBefore) && /^\s+disponible\b/i.test(after)) continue;
+        if (/\bno\s+existe[n]?\s*$/i.test(localBefore)) continue;
+
+        // Specificity is now handled at ANCHOR-ELIGIBILITY time (MEASUREMENT_OPERATIONS_GLUE,
+        // above) rather than here: a word that survived that filter to become an anchor at all is
+        // by construction distinctive enough that a single unmarked reuse is sufficient evidence
+        // — exactly the pre-existing behavior the protected regression suite depends on
+        // (consultoria/auditoria/propietaria/oferta/descuento all still detect on one occurrence).
+        const corroborating = anchors.get(match[0])[0];
+
         const localStart = clause.lastIndexOf(';', match.index) + 1;
         const repairOffset = span.start + localStart;
         const identity = JSON.stringify(leaf.path) + ':' + repairOffset;
         if (seen.has(identity)) continue;
         seen.add(identity);
-        hits.push({ matched_anchor: match[0], leaf_path: formatLeafPath(leaf.path), leaf_path_parts: leaf.path, clause_index: span.clauseIndex, repair_offset: repairOffset });
+        hits.push({
+          matched_anchor: match[0], leaf_path: formatLeafPath(leaf.path), leaf_path_parts: leaf.path,
+          clause_index: span.clauseIndex, repair_offset: repairOffset,
+          // [PART C — diagnostic contract] downstream_clause is reported normalized (lowercase,
+          // accent-stripped) rather than sliced from raw text: proposalClauseSpans() operates on
+          // normalized text, and re-deriving raw-text span offsets would require assuming norm()
+          // is index-length-preserving against arbitrary input, which this file does not otherwise
+          // rely on. Normalized text is still fully human-adjudicable.
+          downstream_clause: clause.trim(),
+          upstream_source_node: corroborating.source_node, upstream_source_path: corroborating.source_path,
+          upstream_source_clause: corroborating.source_clause,
+        });
       }
     }
   }
@@ -1325,6 +1476,8 @@ function checkUpstreamProposalPropagation(key, rawValue, anchors) {
   return proposalPropagationHits(rawValue, anchors).map(hit => ({
     type: 'UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION', fact_field: null, field_key: key,
     matched_anchor: hit.matched_anchor, leaf_path: hit.leaf_path, clause_index: hit.clause_index,
+    downstream_clause: hit.downstream_clause, upstream_source_node: hit.upstream_source_node,
+    upstream_source_path: hit.upstream_source_path, upstream_source_clause: hit.upstream_source_clause,
   }));
 }
 function cloneJsonValue(value) {
