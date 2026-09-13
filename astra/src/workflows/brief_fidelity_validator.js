@@ -929,8 +929,29 @@ function checkExplicitProhibition(facts, key, rawVal) {
   }
   return violations;
 }
+// [ARRAY/NESTED LEAF FIELD-IDENTITY FIX] confirmed regression: a naive "last non-numeric path
+// segment" reading breaks the two call sites that already pass a correct, already-recognized
+// field key. At the node-output call site `key` IS the field itself ('pains') and leafPath is
+// '(pains[0]' or 'pains.primary' — taking the last segment wrongly yields 'pains[0]' (unstripped
+// bracket, no dot to split on) or 'primary' (an incidental nested sub-key), losing the BUYER_STATE
+// role and turning legitimate buyer-pain descriptions into false EXPLICIT_PROHIBITION detects.
+// Only the OTHER call site (validateFinalSynthesis) needs drill-down: there `key` is a whole
+// SECTION container ('2_target_audience_icp') with no claim-context role of its own, and the
+// actually-meaningful field name is nested one level down in leafPath ('...icp.pains'). The fix:
+// never override an already-recognized field key; only search the path for a recognized segment
+// when the passed-in key itself has no known role.
+function semanticLeafFieldKey(fieldKey, leafPath) {
+  if (CLAIM_CONTEXT_FIELD_ROLES[norm(fieldKey)] || GOAL_INTENT_FIELD_KEYS.has(norm(fieldKey))) return fieldKey;
+  const parts = String(leafPath || '').replace(/\[\d+\]/g, '').split('.').filter(Boolean);
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const seg = parts[i];
+    if (CLAIM_CONTEXT_FIELD_ROLES[norm(seg)] || GOAL_INTENT_FIELD_KEYS.has(norm(seg))) return seg;
+  }
+  return fieldKey;
+}
 function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCategories) {
   const violations = [];
+  const semanticKey = semanticLeafFieldKey(key, leafPath);
   // Commas in a negative enumeration preserve scope (CAC, ROAS, LTV, testimonios).
   // Adversatives, sentence boundaries and a new affirmative action end it. UNKNOWN
   // belongs only to its immediately preceding occurrence, never the whole clause.
@@ -1002,9 +1023,9 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
       for (const match of s.matchAll(new RegExp(p.re.source, 'gi'))) {
         if (p.type === 'invented_result' && (
           isMeasurementPurposeClause(s, match.index) || hasGoalIntentContext(s) ||
-          isDesiredOutcomeQualitativeGoal(key, s, match) ||
+          isDesiredOutcomeQualitativeGoal(semanticKey, s, match) ||
           isGuaranteeNegationOrAdvisoryEscape(s, match) ||
-          isBuyerContextDescriptiveMatch(key, s, match)
+          isBuyerContextDescriptiveMatch(semanticKey, s, match)
         )) continue;
         if (!isNegated(match.index, match.index + match[0].length) && !FUTURE_HEDGE_CUE.test(s)) {
           violations.push({
@@ -1392,30 +1413,42 @@ function termMatchesCandidateWord(term, normCandidate) {
 // with the classification that determines HOW STRICTLY it is checked. This is the single place a
 // new field is added when coverage needs to grow; no per-field logic ever lives outside this
 // table plus the shared extraction/grounding helpers below.
-//   - STRICT: the field's ENTIRE value (whole text, even with no enumeration at all) IS this
-//     campaign's own claimed conversion/endpoint — funnel.conversion_intent, whatsapp closing,
-//     whatsapp recovery (a recovery message's own proposed closing action), measurement.primary_outcome.
-//   - SEQUENCE: the field describes an ordered PROCESS (funnel.stages/transitions,
-//     measurement.funnel_metrics) — intermediate steps are always legitimate process description,
-//     never candidates in their own right; only an item that is ITSELF an arrow chain contributes
-//     its TERMINAL segment as a candidate (an item with no arrow at all is pure description and is
-//     never inspected). This is what lets "Meta Ads genera consultas; WhatsApp gestiona la
-//     conversación; compra del minicurso" pass while "Meta Ads → Landing → WhatsApp → Cita" still
-//     flags its own terminal.
-//   - ENUMERATION: the field lists several independently-named metrics/items (measurement.
-//     conversion_metrics) — split on ";" AND "," (each item genuinely claims to BE a named
-//     endpoint/metric on its own, unlike a SEQUENCE's intermediate steps), and each item's own
-//     arrow-terminal (if it has one) or whole text (if it doesn't) is a candidate, matched against
-//     the mechanism's FULL term set (endpoint AND intermediate stages) — this field's whole purpose
-//     is enumerating what COUNTS AS a conversion, so even an intermediate stage substituted here
-//     unaccompanied by the real objective is still a role error.
-//   - LEADING_INDICATOR: same candidate extraction as ENUMERATION, but matched against ONLY the
-//     mechanism's own ENDPOINT term(s) — ad_strategy.measurement is ad-platform TRACKING SETUP
-//     ("what does the ad platform measure"), not a definition of the campaign's conversion, so
-//     mentioning an intermediate acquisition signal (consultas generadas, conversaciones iniciadas,
-//     chats, landing visits) as a tracked leading indicator is legitimate and must never be flagged
-//     — but the mechanism's actual endpoint substituted here as if it were the tracked conversion
-//     ("citas agendadas") is still exactly the role error this whole check exists to catch.
+//
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] adjudicated three confirmed live false
+// positives (funnel.conversion_intent = "Solicitar consulta por WhatsApp"; ad_strategy.measurement
+// = "citas agendadas"; measurement_kpis.conversion_metrics = "tasa cita confirmada") as real: a
+// funnel MICROCONVERSION and two MEASUREMENT/KPI fields were being held to the same bar as an
+// actual BUSINESS_OUTCOME field. Four roles, not a blanket per-field SAFE bypass:
+//   - BUSINESS_OUTCOME (formerly STRICT): the field's ENTIRE value (whole text, even with no
+//     enumeration at all) IS this campaign's own claimed final conversion/endpoint — whatsapp
+//     closing, whatsapp recovery (a recovery message's own proposed closing action),
+//     measurement.primary_outcome. Matched against the mechanism's FULL term set (any mechanism
+//     vocabulary, endpoint or intermediate, substituting for the real purchase objective is a
+//     violation here) — this is the one role that must never be weakened.
+//   - PROCESS_SEQUENCE (formerly SEQUENCE): the field describes an ordered PROCESS (funnel.stages/
+//     transitions, measurement.funnel_metrics) — intermediate steps are always legitimate process
+//     description, never candidates in their own right; only an item that is ITSELF an arrow chain
+//     contributes its TERMINAL segment as a candidate (an item with no arrow at all is pure
+//     description and is never inspected). This is what lets "Meta Ads genera consultas; WhatsApp
+//     gestiona la conversación; compra del minicurso" pass while "Meta Ads → Landing → WhatsApp →
+//     Cita" still flags its own terminal.
+//   - MICROCONVERSION (funnel.conversion_intent): the field names the funnel's own intermediate
+//     conversion action, which is EXPECTED to reference a mechanism stage ("Solicitar consulta por
+//     WhatsApp") — that is what a funnel microconversion IS, not a redefinition of the business
+//     objective. Matched against ONLY the mechanism's own ENDPOINT term(s) (same extraction as
+//     BUSINESS_OUTCOME's whole-field candidate), so an intermediate-stage mention never flags, but
+//     the field still flags when it asserts the mechanism's actual terminal action as the intent
+//     ("Agendar cita") — that IS asserting the final commercial outcome, not a microconversion.
+//   - MEASUREMENT (ad_strategy.measurement, measurement_kpis.conversion_metrics; formerly
+//     ENUMERATION/LEADING_INDICATOR): a measurement/KPI/tracking-setup field is not a definition of
+//     the campaign's business objective at all — it may name any mechanism stage OR the mechanism's
+//     own endpoint as a tracked metric ("citas agendadas", "tasa cita confirmada") without that
+//     being business-objective substitution. Never inspected by this check. This is NOT the same as
+//     SAFE: it is its own named role documenting WHY (measurement/KPI semantics), reserving room
+//     for a future measurement-specific check, and every other validator (EXPLICIT_PROHIBITION,
+//     invented_metric, etc.) still runs on this field exactly as before — only THIS substitution
+//     check is inapplicable to a field whose entire purpose is measuring stages/outcomes, not
+//     declaring the business objective.
 //   - SAFE: legitimate to mention the mechanism/intermediate steps without being treated as this
 //     campaign's own conversion at all — whatsapp.follow_up, measurement.leading_indicators,
 //     ad_strategy.campaign_objective (a MEDIA/PLATFORM objective like "Mensajes" is never the
@@ -1424,16 +1457,16 @@ function termMatchesCandidateWord(term, normCandidate) {
 //   educational-content/ICP fields are never touched, by omission, not by a special-case escape.
 const FINAL_SYNTHESIS_FIELD_ROLES = {
   '6_funnel': {
-    stages: 'SEQUENCE', transitions: 'SEQUENCE', conversion_intent: 'STRICT',
+    stages: 'PROCESS_SEQUENCE', transitions: 'PROCESS_SEQUENCE', conversion_intent: 'MICROCONVERSION',
   },
   '8_ad_strategy': {
-    measurement: 'LEADING_INDICATOR', campaign_objective: 'SAFE',
+    measurement: 'MEASUREMENT', campaign_objective: 'SAFE',
   },
   '12_whatsapp_followup_closing': {
-    closing: 'STRICT', recovery: 'STRICT', follow_up: 'SAFE', objections: 'SAFE',
+    closing: 'BUSINESS_OUTCOME', recovery: 'BUSINESS_OUTCOME', follow_up: 'SAFE', objections: 'SAFE',
   },
   '13_measurement_kpis': {
-    primary_outcome: 'STRICT', funnel_metrics: 'SEQUENCE', conversion_metrics: 'ENUMERATION',
+    primary_outcome: 'BUSINESS_OUTCOME', funnel_metrics: 'PROCESS_SEQUENCE', conversion_metrics: 'MEASUREMENT',
     leading_indicators: 'SAFE', diagnostic_metrics: 'SAFE', optimization_triggers: 'SAFE', measurement_cadence: 'SAFE',
   },
 };
@@ -1525,17 +1558,9 @@ function extractSequenceCandidates(text) {
   }
   return candidates;
 }
-function extractEnumerationCandidates(text) {
-  const candidates = [];
-  for (const item of text.split(/[;,]/).map(s => s.trim()).filter(Boolean)) {
-    candidates.push(arrowTerminalOrNull(item) || item); // each item independently claims to BE a named endpoint/metric
-  }
-  return candidates;
-}
 function extractConversionCandidates(text, role) {
-  if (role === 'STRICT') return extractStrictCandidates(text);
-  if (role === 'SEQUENCE') return extractSequenceCandidates(text);
-  if (role === 'ENUMERATION' || role === 'LEADING_INDICATOR') return extractEnumerationCandidates(text);
+  if (role === 'BUSINESS_OUTCOME' || role === 'MICROCONVERSION') return extractStrictCandidates(text);
+  if (role === 'PROCESS_SEQUENCE') return extractSequenceCandidates(text);
   return [];
 }
 // [COMPOUND-NOUN COLLISION FIX] confirmed gap: "sales" (PURCHASE_GROUNDING_VOCAB) can occur purely
@@ -1569,10 +1594,10 @@ function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
   const objectiveWords = new Set(norm((facts.business_objective && facts.business_objective.value) || '').split(/[^a-z0-9]+/).filter(w => w.length >= 3));
   const violations = [];
   for (const [subKey, role] of Object.entries(sectionRoles)) {
-    if (role === 'SAFE') continue;
+    if (role === 'SAFE' || role === 'MEASUREMENT') continue;
     const raw = rawVal[subKey];
     if (!raw || typeof raw !== 'string') continue;
-    const termsForRole = role === 'LEADING_INDICATOR' ? mechanismEndpointTerms : mechanismTerms;
+    const termsForRole = role === 'MICROCONVERSION' ? mechanismEndpointTerms : mechanismTerms;
     if (!termsForRole.length) continue;
     const candidates = extractConversionCandidates(raw, role);
     for (const candidate of candidates) {
@@ -1672,7 +1697,7 @@ function areEpistemicStatesContradictory(a, b) {
   const states = new Set([a, b]);
   return states.has('KNOWN_AVAILABLE') && (states.has('KNOWN_UNAVAILABLE') || states.has('UNKNOWN_FAMILY'));
 }
-const ASSUMPTION_TOPIC_STOPWORDS = new Set('para con del las los una uno unos unas este esta estos estas cada todo toda propuesta assumption asumo existe existira habra sera seran monto valor'.split(' '));
+const ASSUMPTION_TOPIC_STOPWORDS = new Set('para con del las los una uno unos unas este esta estos estas cada todo toda propuesta assumption asumo existe existira habra sera seran monto valor campana campaign'.split(' '));
 // [SHORT-TOPIC EPISTEMIC COVERAGE] confirmed gap: a real topic can be a short business acronym
 // (CAC, KPI, CRM, LTV, API, SEO, IVA, ...) that the >=4-char normal-word floor discards entirely.
 // Generic rule, not a closed whitelist: 2-5 ALL-CAPS ASCII/Latin letters, word-bounded, checked on
@@ -1810,12 +1835,14 @@ function repairArrowTerminal(seg, facts) {
 // Repairs one field's text according to its role. Never invents content beyond canonical facts:
 // a wholly-flagged non-chain segment/item is DROPPED (an alternative among several — dropping it
 // leaves the others standing); a flagged ARROW-CHAIN terminal is REPLACED in place (the chain's
-// earlier, legitimate steps survive untouched); if every candidate in a STRICT/ENUMERATION field
-// is flagged and none survive, the field falls back to the canonical conversion phrase alone.
+// earlier, legitimate steps survive untouched); if every candidate in a BUSINESS_OUTCOME/
+// MICROCONVERSION field is flagged and none survive, the field falls back to the canonical
+// conversion phrase alone. MEASUREMENT fields never produce violations, so repair never runs on
+// them at all.
 function repairConversionFieldText(text, role, facts, mechanismTerms, objectiveWords) {
   let changed = false;
   const flagged = c => isCandidateFlaggedForRepair(c, mechanismTerms, objectiveWords);
-  if (role === 'STRICT') {
+  if (role === 'BUSINESS_OUTCOME' || role === 'MICROCONVERSION') {
     const items = text.split(/;/);
     const repairedItems = items.map(item => {
       const segParts = item.split(/(\s+o\s+|\s+or\s+)/i);
@@ -1835,7 +1862,7 @@ function repairConversionFieldText(text, role, facts, mechanismTerms, objectiveW
     if (!repairedItems.length) { changed = true; return { text: canonicalConversionPhrase(facts) + '.', changed }; }
     return { text: repairedItems.join('; '), changed };
   }
-  if (role === 'SEQUENCE') {
+  if (role === 'PROCESS_SEQUENCE') {
     const items = text.split(/;/);
     const repairedItems = items.map(item => {
       const terminal = arrowTerminalOrNull(item);
@@ -1843,22 +1870,6 @@ function repairConversionFieldText(text, role, facts, mechanismTerms, objectiveW
       return item; // no arrow, or arrow terminal not flagged -> untouched (pure process description)
     });
     return { text: repairedItems.join(';'), changed };
-  }
-  if (role === 'ENUMERATION' || role === 'LEADING_INDICATOR') {
-    const items = text.split(/([;,])/);
-    const kept = [];
-    for (let i = 0; i < items.length; i += 2) {
-      const item = items[i]; if (!item || !item.trim()) continue;
-      const delim = i > 0 ? items[i - 1] : '';
-      const terminal = arrowTerminalOrNull(item);
-      const candidate = terminal || item.trim();
-      if (flagged(candidate)) {
-        changed = true;
-        if (terminal) kept.push({ delim, text: repairArrowTerminal(item, facts) }); // drop non-chain item; replace chain terminal
-      } else kept.push({ delim, text: item });
-    }
-    if (!kept.length) { changed = true; return { text: canonicalConversionPhrase(facts) + '.', changed }; }
-    return { text: kept.map((p, i2) => (i2 === 0 ? p.text : p.delim + p.text)).join('').trim(), changed };
   }
   return { text, changed: false };
 }
@@ -1938,14 +1949,14 @@ function repairFinalSynthesis(facts, synthesis, violations, { rawRequest } = {})
       const section = repaired.deliverable && repaired.deliverable[sectionKey];
       if (!section || typeof section !== 'object') continue;
       for (const [subKey, role] of Object.entries(subKeyRoles)) {
-        if (role === 'SAFE') continue;
+        if (role === 'SAFE' || role === 'MEASUREMENT') continue;
         const raw = section[subKey];
         if (!raw || typeof raw !== 'string') continue;
-        // LEADING_INDICATOR repair must use the SAME endpoint-only term set validation does — an
-        // intermediate acquisition signal (consultas/conversaciones) must never be stripped out of
-        // an ad-platform measurement field just because repair happened to run for an unrelated
-        // violation elsewhere in the same synthesis.
-        const termsForRole = role === 'LEADING_INDICATOR' ? mechanismEndpointTerms : mechanismTerms;
+        // MICROCONVERSION repair must use the SAME endpoint-only term set validation does — an
+        // intermediate mechanism stage mention (consultas/conversaciones) must never be stripped
+        // out of a funnel microconversion field just because repair happened to run for an
+        // unrelated violation elsewhere in the same synthesis.
+        const termsForRole = role === 'MICROCONVERSION' ? mechanismEndpointTerms : mechanismTerms;
         if (!termsForRole.length) continue;
         const { text, changed } = repairConversionFieldText(raw, role, facts, termsForRole, objectiveWords);
         if (changed) { section[subKey] = text; repairs.push({ type: 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION', field_key: subKey, section: sectionKey, repair_type: 'DETERMINISTIC' }); }

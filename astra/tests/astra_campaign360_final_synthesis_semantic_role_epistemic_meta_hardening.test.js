@@ -70,24 +70,27 @@ function metricViolations(field, text, nodeId = 'ads') {
 tPersist('LIVE FALSE POSITIVE: ad_strategy.measurement listing intermediate stages only -> PASS', () => {
   assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'PROPUESTA: Medir consultas generadas y conversaciones iniciadas (no proyectar resultados)' } } }), []);
 });
-tPersist('PROTECTED: ad_strategy.measurement listing the TRUE endpoint ("citas agendadas") -> DETECT', () => {
-  assert(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Clicks, citas agendadas' } } }).length > 0);
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] ad_strategy.measurement is MEASUREMENT now — a
+// tracking-setup field naming the mechanism endpoint as a tracked item is exactly FP3, adjudicated
+// as a real false positive, not business-objective substitution.
+tPersist('ad_strategy.measurement (MEASUREMENT) listing the endpoint ("citas agendadas") -> PASS (tracking semantics)', () => {
+  assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Clicks, citas agendadas' } } }), []);
 });
-tPersist('PROTECTED: the original "no longer silent" PROPUESTA fixture (endpoint present) -> DETECT', () => {
-  assert(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'PROPUESTA: Medir clicks, formularios completados, chats iniciados, citas agendadas internamente.' } } }).length > 0);
+tPersist('ad_strategy.measurement (MEASUREMENT) the original PROPUESTA fixture (endpoint present) -> PASS', () => {
+  assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'PROPUESTA: Medir clicks, formularios completados, chats iniciados, citas agendadas internamente.' } } }), []);
 });
 tPersist('ad_strategy.measurement tracking chats only (leading indicator) -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Chats de WhatsApp iniciados' } } }), []));
 tPersist('ad_strategy.measurement tracking landing visits only (leading indicator) -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Visitas a landing page' } } }), []));
 tPersist('ad_strategy.measurement tracking checkout starts (purchase-grounded) -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Checkout iniciados del minicurso' } } }), []));
-tPersist('ad_strategy.measurement mixing leading indicator AND endpoint -> DETECT (endpoint still flagged)', () => {
+tPersist('ad_strategy.measurement (MEASUREMENT) mixing leading indicator AND endpoint -> PASS', () => {
   const v = mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Consultas generadas; citas agendadas' } } });
-  assert(v.length > 0);
+  assert.deepStrictEqual(v, []);
 });
-tPersist('13_measurement_kpis.conversion_metrics with ONLY an intermediate stage (no purchase) -> DETECT (this field IS the conversion definition)', () => {
-  assert(mechanismViolations({ deliverable: { '13_measurement_kpis': { conversion_metrics: 'Consultas generadas' } } }).length > 0);
+tPersist('13_measurement_kpis.conversion_metrics (MEASUREMENT) with an intermediate stage -> PASS (KPI/tracking semantics)', () => {
+  assert.deepStrictEqual(mechanismViolations({ deliverable: { '13_measurement_kpis': { conversion_metrics: 'Consultas generadas' } } }), []);
 });
-tPersist('13_measurement_kpis.primary_outcome = mechanism endpoint -> DETECT', () => assert(mechanismViolations({ deliverable: { '13_measurement_kpis': { primary_outcome: 'Generar consultas y gestionar conversiones por WhatsApp' } } }).length > 0));
-tPersist('13_measurement_kpis.conversion_metrics = "citas agendadas" -> DETECT', () => assert(mechanismViolations({ deliverable: { '13_measurement_kpis': { conversion_metrics: 'citas agendadas' } } }).length > 0));
+tPersist('13_measurement_kpis.primary_outcome (BUSINESS_OUTCOME) = mechanism endpoint -> DETECT', () => assert(mechanismViolations({ deliverable: { '13_measurement_kpis': { primary_outcome: 'Generar consultas y gestionar conversiones por WhatsApp' } } }).length > 0));
+tPersist('13_measurement_kpis.conversion_metrics (MEASUREMENT) = "citas agendadas" -> PASS (this is exactly FP4)', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '13_measurement_kpis': { conversion_metrics: 'citas agendadas' } } }), []));
 tPersist('12_whatsapp_followup_closing.closing = "agendar cita" -> DETECT', () => assert(mechanismViolations({ deliverable: { '12_whatsapp_followup_closing': { closing: 'agendar cita' } } }).length > 0));
 tPersist('12_whatsapp_followup_closing.closing grounded in purchase -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '12_whatsapp_followup_closing': { closing: 'Enviar link de pago del minicurso' } } }), []));
 tPersist('6_funnel.conversion_intent grounded in purchase -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '6_funnel': { conversion_intent: 'PROPUESTA: Pago minicurso 400 MXN' } } }), []));
@@ -120,13 +123,24 @@ for (const text of LEADING_INDICATOR_TEXTS_PASS) {
     assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: text } } }), []);
   });
 }
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] both fields are MEASUREMENT now — naming the
+// mechanism endpoint as a tracked item is exactly FP3/FP4, adjudicated as real false positives.
+// Equivalent BUSINESS_OUTCOME true-positive coverage for the same endpoint texts is provided via
+// primary_outcome (a field that genuinely does define the campaign's own outcome) and
+// conversion_intent (MICROCONVERSION, which still flags a bare endpoint assertion).
 const ENDPOINT_TEXTS_DETECT = ['citas agendadas', 'cita confirmada', 'agendar cita', 'cita reservada'];
 for (const text of ENDPOINT_TEXTS_DETECT) {
-  tPersist(`ROLE-MATRIX LEADING_INDICATOR field with endpoint "${text}" -> DETECT`, () => {
-    assert(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: text } } }).length > 0);
+  tPersist(`ROLE-MATRIX ad_strategy.measurement (MEASUREMENT) with endpoint "${text}" -> PASS`, () => {
+    assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: text } } }), []);
   });
-  tPersist(`ROLE-MATRIX ENUMERATION field (conversion_metrics) with endpoint "${text}" -> DETECT`, () => {
-    assert(mechanismViolations({ deliverable: { '13_measurement_kpis': { conversion_metrics: text } } }).length > 0);
+  tPersist(`ROLE-MATRIX conversion_metrics (MEASUREMENT) with endpoint "${text}" -> PASS`, () => {
+    assert.deepStrictEqual(mechanismViolations({ deliverable: { '13_measurement_kpis': { conversion_metrics: text } } }), []);
+  });
+  tPersist(`ROLE-MATRIX primary_outcome (BUSINESS_OUTCOME) with endpoint "${text}" -> DETECT`, () => {
+    assert(mechanismViolations({ deliverable: { '13_measurement_kpis': { primary_outcome: text } } }).length > 0);
+  });
+  tPersist(`ROLE-MATRIX conversion_intent (MICROCONVERSION) with bare endpoint "${text}" -> DETECT`, () => {
+    assert(mechanismViolations({ deliverable: { '6_funnel': { conversion_intent: text } } }).length > 0);
   });
 }
 
@@ -257,20 +271,23 @@ function liveFinalSynthesis() {
     },
   };
 }
-t('LIVE FIXTURE: initial validation reproduces exactly the 4 TRUE role violations, 0 false assumption contradictions, 0 meta-brand false positives', () => {
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] conversion_metrics = "citas agendadas" is
+// exactly FP4 — MEASUREMENT now, correctly PASSes. The live fixture's true role violations drop
+// from 4 to 3: closing, primary_outcome, transitions.
+t('LIVE FIXTURE: initial validation reproduces exactly the 3 TRUE role violations, 0 false assumption contradictions, 0 meta-brand false positives', () => {
   const facts = { ...M360_FACTS, constraints: { value: METRIC_CONSTRAINT, status: 'USER_PROVIDED_FACT' } };
   const result = fidelity.validateFinalSynthesis(facts, liveFinalSynthesis(), {});
   const byType = {};
   for (const v of result.violations) byType[v.type] = (byType[v.type] || 0) + 1;
-  assert.equal(byType.MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION, 4, JSON.stringify(result.violations));
+  assert.equal(byType.MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION, 3, JSON.stringify(result.violations));
   assert(!byType.CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS, JSON.stringify(result.violations));
   assert(!result.violations.some(v => v.category === 'invented_metric'), JSON.stringify(result.violations));
-  // The measurement field (leading indicators only) and stages/campaign_objective must NOT be
-  // among the 4 flagged fields — only closing, primary_outcome, conversion_metrics, and transitions.
+  // The measurement field, conversion_metrics (both MEASUREMENT now) and stages/campaign_objective
+  // must NOT be among the flagged fields — only closing, primary_outcome, and transitions.
   const flaggedFields = result.violations.filter(v => v.type === 'MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION').map(v => v.field_key).sort();
-  assert.deepStrictEqual(flaggedFields, ['closing', 'conversion_metrics', 'primary_outcome', 'transitions']);
+  assert.deepStrictEqual(flaggedFields, ['closing', 'primary_outcome', 'transitions']);
 });
-t('LIVE FIXTURE: deterministic repair resolves the 4 role violations and revalidation is clean', () => {
+t('LIVE FIXTURE: deterministic repair resolves the 3 role violations and revalidation is clean', () => {
   const facts = { ...M360_FACTS, constraints: { value: METRIC_CONSTRAINT, status: 'USER_PROVIDED_FACT' } };
   const synth = liveFinalSynthesis();
   const first = fidelity.validateFinalSynthesis(facts, synth, {});
@@ -402,13 +419,17 @@ function tFresh(name, fn) { freshCaseCount++; t('FRESH-' + freshCaseCount + ' ' 
 // Role ambiguity / leading indicators
 tFresh('ad_strategy.measurement "Impresiones y alcance" (pure media metrics) -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Impresiones y alcance' } } }), []));
 tFresh('ad_strategy.measurement "CTR y CPC del anuncio" -> PASS (media metrics, no mechanism term at all)', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'CTR y CPC del anuncio' } } }), []));
-tFresh('ad_strategy.measurement arrow chain ending in endpoint -> DETECT (SEQUENCE-like arrow terminal via enumeration item)', () => {
+tFresh('ad_strategy.measurement (MEASUREMENT) arrow chain ending in endpoint -> PASS', () => {
   const v = mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Anuncio -> WhatsApp -> Cita' } } });
-  assert(v.length > 0);
+  assert.deepStrictEqual(v, []);
 });
-tFresh('ad_strategy.measurement "Consultas y citas agendadas" (both stages) -> DETECT (endpoint present)', () => assert(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Consultas y citas agendadas' } } }).length > 0));
-tFresh('multiple funnel stages, only later one has endpoint -> DETECT only that item', () => {
+tFresh('ad_strategy.measurement (MEASUREMENT) "Consultas y citas agendadas" -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Consultas y citas agendadas' } } }), []));
+tFresh('conversion_metrics (MEASUREMENT) with multiple stages including endpoint -> PASS', () => {
   const v = mechanismViolations({ deliverable: { '13_measurement_kpis': { conversion_metrics: 'Leads generados; consultas iniciadas; citas agendadas' } } });
+  assert.deepStrictEqual(v, []);
+});
+tFresh('the same multi-stage text in primary_outcome (BUSINESS_OUTCOME) -> DETECT the endpoint item', () => {
+  const v = mechanismViolations({ deliverable: { '13_measurement_kpis': { primary_outcome: 'Leads generados; consultas iniciadas; citas agendadas' } } });
   assert(v.length > 0);
 });
 tFresh('WhatsApp inquiry tracked as leading indicator -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Consultas por WhatsApp recibidas' } } }), []));
@@ -483,12 +504,14 @@ tFresh('field-role: STRICT field with a purely research-style sentence (no mecha
 tFresh('field-role: LEADING_INDICATOR field with grounded purchase term AND leading indicator together -> PASS', () => {
   assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Compras registradas; consultas generadas' } } }), []);
 });
-tFresh('capitalization: "CITAS AGENDADAS" uppercase endpoint in LEADING_INDICATOR field -> DETECT', () => assert(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'CITAS AGENDADAS' } } }).length > 0));
-tFresh('punctuation: "citas-agendadas" hyphenated endpoint still DETECTs via word extraction', () => assert(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'citas-agendadas' } } }).length > 0));
-tFresh('array of ad_strategy-style measurement items isolates the endpoint occurrence', () => {
+tFresh('capitalization: "CITAS AGENDADAS" uppercase endpoint in ad_strategy.measurement (MEASUREMENT) -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'CITAS AGENDADAS' } } }), []));
+tFresh('punctuation: "citas-agendadas" hyphenated endpoint in ad_strategy.measurement (MEASUREMENT) -> PASS', () => assert.deepStrictEqual(mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'citas-agendadas' } } }), []));
+tFresh('array of ad_strategy-style measurement items (MEASUREMENT) -> PASS', () => {
   const v = mechanismViolations({ deliverable: { '8_ad_strategy': { measurement: 'Consultas generadas, citas agendadas' } } });
-  assert(v.length > 0);
+  assert.deepStrictEqual(v, []);
 });
+tFresh('capitalization: "CITAS AGENDADAS" uppercase endpoint in primary_outcome (BUSINESS_OUTCOME) -> DETECT', () => assert(mechanismViolations({ deliverable: { '13_measurement_kpis': { primary_outcome: 'CITAS AGENDADAS' } } }).length > 0));
+tFresh('punctuation: "citas-agendadas" hyphenated endpoint in primary_outcome (BUSINESS_OUTCOME) still DETECTs via word extraction', () => assert(mechanismViolations({ deliverable: { '13_measurement_kpis': { primary_outcome: 'citas-agendadas' } } }).length > 0));
 tFresh('research speech act "obtener datos reales de ROAS" -> PASS', () => assert.deepStrictEqual(metricViolations('current_research_required', 'obtener datos reales de ROAS'), []));
 tFresh('research speech act with value present -> DETECT: "obtener CAC real: $25"', () => assert(metricViolations('current_research_required', 'obtener CAC real: $25').length > 0));
 tFresh('mixed ES/EN research: "research actual CPC" -> PASS (no value)', () => assert.deepStrictEqual(metricViolations('current_research_required', 'research actual CPC'), []));

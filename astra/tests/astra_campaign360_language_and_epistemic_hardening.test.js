@@ -146,12 +146,18 @@ const MECHANISM_FORMS = {
   noarrow_en: { text: 'Ad to generate leads and calls', endpoint: 'calls' },
   enumeration_es: { text: 'anuncio, formulario, demo', endpoint: 'demo' }, // arrow-free enumeration phrase
 };
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] conversion_metrics was reclassified from
+// ENUMERATION (a business-outcome-bearing role) to MEASUREMENT: a KPI/measurement field may name
+// any mechanism stage or endpoint as a tracked metric without that being business-objective
+// substitution — the field is NEVER inspected by this check now. Its generic detect-matrix row is
+// replaced with a matrix asserting the new never-flag behavior explicitly (not silently dropped),
+// while primary_outcome's own row below continues to provide equivalent BUSINESS_OUTCOME
+// substitution-detection coverage across the exact same objective x mechanism grid.
 const FIELD_CASES = [
   ['6_funnel', 'conversion_intent', 'STRICT'],
   ['12_whatsapp_followup_closing', 'closing', 'STRICT'],
   ['13_measurement_kpis', 'primary_outcome', 'STRICT'],
   ['6_funnel', 'stages', 'SEQUENCE'],
-  ['13_measurement_kpis', 'conversion_metrics', 'ENUMERATION'],
 ];
 
 let advId = 0;
@@ -172,6 +178,13 @@ for (const [objKey, objective] of Object.entries(OBJECTIVES)) {
         assert.equal(v.length > 0, expectDetect, JSON.stringify({ objective, mech: mech.text, text, v }));
       });
     }
+    advId++;
+    tRole(`ADV-ROLE#${advId} obj=${objKey} mech=${mechKey} field=conversion_metrics(MEASUREMENT) expect=PASS (measurement/KPI semantics, never business-objective substitution)`, () => {
+      const fa = facts(objective, mech.text);
+      const text = `Registro; confirmar ${mech.endpoint}`;
+      const v = mechViol(fa, { '13_measurement_kpis': { conversion_metrics: text } });
+      assert.deepStrictEqual(v, [], JSON.stringify({ objective, mech: mech.text, text, v }));
+    });
   }
 }
 
@@ -371,10 +384,19 @@ tRole('FRESH-7 parenthetical PROPUESTA around the endpoint does not escape detec
   const fa = facts('vender el curso', 'Anuncio -> WhatsApp -> cita');
   assert(mechViol(fa, { '6_funnel': { conversion_intent: 'Comprar curso o (PROPUESTA) confirmar cita' } }).length > 0);
 });
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] conversion_metrics is MEASUREMENT now (a KPI/
+// tracking field, never inspected by this check) — this per-item enumeration-isolation behavior no
+// longer applies to it. Redirected to primary_outcome (a real BUSINESS_OUTCOME field), which still
+// uses semicolon-separated whole-candidate matching and so preserves the same isolation intent.
 tRole('FRESH-8 repeated endpoint mention across two candidates only flags the ungrounded one once per candidate', () => {
   const fa = facts('vender el curso', 'Anuncio -> WhatsApp -> cita');
-  const v = mechViol(fa, { '13_measurement_kpis': { conversion_metrics: 'citas agendadas; citas confirmadas; compras del curso' } });
+  const v = mechViol(fa, { '13_measurement_kpis': { primary_outcome: 'citas agendadas; citas confirmadas; compras del curso' } });
   assert.equal(v.length, 2);
+});
+tRole('FRESH-8b conversion_metrics (MEASUREMENT) with the same repeated-endpoint text stays PASS', () => {
+  const fa = facts('vender el curso', 'Anuncio -> WhatsApp -> cita');
+  const v = mechViol(fa, { '13_measurement_kpis': { conversion_metrics: 'citas agendadas; citas confirmadas; compras del curso' } });
+  assert.deepStrictEqual(v, []);
 });
 tRole('FRESH-9 safe mechanism-field mention of the English endpoint stays PASS', () => {
   const fa = facts('vender el curso', 'Ad -> WhatsApp -> appointment');
@@ -403,11 +425,14 @@ tEpistemic('FRESH-15 two DIFFERENT acronyms in contradiction-shaped sentences do
   const v = epiViol(['CAC disponible.', 'KPI desconocido.'], RAW_NO_TOPIC);
   assert.deepStrictEqual(v.filter(x => x.type === 'CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS'), []);
 });
-tRole('FRESH-16 mixed ES/EN enumeration field: only the ungrounded English endpoint item flagged', () => {
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] conversion_metrics is MEASUREMENT now — a
+// KPI/tracking field is never inspected by this check regardless of language mix or endpoint
+// mentions (this is precisely what FP4, "tasa cita confirmada", adjudicated as a real false
+// positive under the old ENUMERATION role).
+tRole('FRESH-16 mixed ES/EN conversion_metrics (MEASUREMENT) stays PASS regardless of endpoint mentions', () => {
   const fa = facts('vender el curso', 'Ad -> WhatsApp -> appointment');
   const v = mechViol(fa, { '13_measurement_kpis': { conversion_metrics: 'Compra del curso, book appointment, mensajes recibidos' } });
-  assert.equal(v.length, 1);
-  assert(/appointment/i.test(v[0].matched_text));
+  assert.deepStrictEqual(v, []);
 });
 tRole('FRESH-17 no-arrow English mechanism phrase ("Ad to generate leads") extracts "leads" deterministically, not hardcoded to any industry', () => {
   const fa = facts('sell the course', 'Ad to generate leads');

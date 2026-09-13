@@ -73,22 +73,33 @@ function mechanismViolations(facts, synth) {
 }
 
 // ========== LIVE FIXTURE — reproduce the exact live job's confirmed defects ==========
-t('LIVE FIXTURE: reproduces MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION (conversion_intent, conversion_metrics) and CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS', () => {
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] "Agendar consulta vía WhatsApp." anchors on
+// "consulta" (an intermediate mechanism stage, not the endpoint "cita") — under the new
+// MICROCONVERSION role this is exactly the funnel-microconversion case adjudicated as a real false
+// positive (FP2 in that decision), so conversion_intent now correctly PASSes. Likewise
+// conversion_metrics is MEASUREMENT (KPI/tracking semantics) and never flags. Equivalent
+// BUSINESS_OUTCOME coverage is added via primary_outcome, a field that genuinely does define the
+// campaign's own outcome.
+t('LIVE FIXTURE: reproduces MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION (primary_outcome) and CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS; funnel microconversion + KPI measurement text now correctly PASS', () => {
   const synth = {
     deliverable: {
       '6_funnel': { conversion_intent: 'Agendar consulta vía WhatsApp.' },
-      '13_measurement_kpis': { conversion_metrics: 'Tasa chat→cita' },
+      '13_measurement_kpis': { primary_outcome: 'Tasa chat→cita', conversion_metrics: 'Tasa chat→cita' },
       '14_assumptions': ['Existe clip 60s listo para anuncios.', 'Disponibilidad de creativos y recursos para anuncios desconocida.'],
     },
   };
   const { violations } = fidelity.validateFinalSynthesis(M360_FACTS, synth, {});
   const types = violations.map(v => v.type);
   assert(types.includes('MECHANISM_TO_CAMPAIGN_CONVERSION_PROMOTION'), JSON.stringify(violations));
-  assert(violations.some(v => v.field_key === 'conversion_intent'), JSON.stringify(violations));
-  assert(violations.some(v => v.field_key === 'conversion_metrics'), JSON.stringify(violations));
+  assert(!violations.some(v => v.field_key === 'conversion_intent'), JSON.stringify(violations));
+  assert(violations.some(v => v.field_key === 'primary_outcome'), JSON.stringify(violations));
+  assert(!violations.some(v => v.field_key === 'conversion_metrics'), JSON.stringify(violations));
   assert(types.includes('CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS'), JSON.stringify(violations));
 });
-t('LIVE FIXTURE: the additional incoherent fields the old narrow coverage missed are no longer silent (stages arrow-chain endpoint, ad_strategy comma list, whatsapp recovery)', () => {
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] ad_strategy.measurement is MEASUREMENT now — a
+// tracking-setup field naming the mechanism endpoint as a tracked item is exactly FP3, adjudicated
+// as a real false positive, so it correctly PASSes here too.
+t('LIVE FIXTURE: the additional incoherent fields the old narrow coverage missed are no longer silent (stages arrow-chain endpoint, whatsapp recovery, funnel_metrics); ad_strategy measurement correctly PASSes as KPI/tracking semantics', () => {
   const synth = {
     deliverable: {
       '6_funnel': { stages: 'PROPUESTA: Meta Ads → Landing clip gratis → Lead form → WhatsApp → Cita.' },
@@ -99,7 +110,7 @@ t('LIVE FIXTURE: the additional incoherent fields the old narrow coverage missed
   };
   const v = mechanismViolations(M360_FACTS, synth);
   assert(v.some(x => x.field_key === 'stages'), JSON.stringify(v));
-  assert(v.some(x => x.field_key === 'measurement'), JSON.stringify(v));
+  assert(!v.some(x => x.field_key === 'measurement'), JSON.stringify(v));
   assert(v.some(x => x.field_key === 'recovery'), JSON.stringify(v));
   assert(v.some(x => x.field_key === 'funnel_metrics'), JSON.stringify(v));
 });
@@ -126,11 +137,17 @@ t('A6: measurement primary_outcome = mechanism outcome -> DETECT', () => {
 t('A7: measurement funnel_metrics termina en mechanism outcome -> DETECT', () => {
   assert(mechanismViolations(M360_FACTS, { deliverable: { '13_measurement_kpis': { funnel_metrics: 'Clicks -> WhatsApp -> Cita' } } }).length > 0);
 });
-t('A8: conversion_metrics usa mechanism outcome como final conversion -> DETECT', () => {
-  assert(mechanismViolations(M360_FACTS, { deliverable: { '13_measurement_kpis': { conversion_metrics: 'Registros; citas agendadas' } } }).length > 0);
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] A8/A9 encoded the superseded assumption that
+// merely naming the mechanism endpoint in a measurement/KPI field equals business-objective
+// substitution. conversion_metrics and ad_strategy.measurement are MEASUREMENT now (KPI/tracking
+// semantics) and are never inspected by this check — this is exactly FP3/FP4, adjudicated as real
+// false positives. Equivalent BUSINESS_OUTCOME true-positive protection for this same content
+// already exists via A6 (primary_outcome = 'Citas agendadas' -> DETECT).
+t('A8: conversion_metrics (MEASUREMENT) usa mechanism outcome -> PASS (KPI/tracking semantics, not business-objective substitution)', () => {
+  assert.deepStrictEqual(mechanismViolations(M360_FACTS, { deliverable: { '13_measurement_kpis': { conversion_metrics: 'Registros; citas agendadas' } } }), []);
 });
-t('A9: ad measurement trata mechanism outcome como campaign conversion -> DETECT', () => {
-  assert(mechanismViolations(M360_FACTS, { deliverable: { '8_ad_strategy': { measurement: 'Clicks, citas agendadas' } } }).length > 0);
+t('A9: ad measurement (MEASUREMENT) trata mechanism outcome -> PASS (tracking-setup semantics, not campaign conversion)', () => {
+  assert.deepStrictEqual(mechanismViolations(M360_FACTS, { deliverable: { '8_ad_strategy': { measurement: 'Clicks, citas agendadas' } } }), []);
 });
 t('A10: mechanism field contiene mechanism outcome -> PASS (not campaign-endpoint-bearing)', () => {
   assert.deepStrictEqual(mechanismViolations(M360_FACTS, { deliverable: { '5_offer': { mechanism: 'consulta -> conversación -> cita' } } }), []);

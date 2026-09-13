@@ -63,13 +63,17 @@ function assumptionViolations(assumptions, rawRequest) {
 }
 
 // ========== LIVE FIXTURE — reproduce the exact live defect, offline ==========
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] measurement_kpis.conversion_metrics is
+// MEASUREMENT now (KPI/tracking semantics, never business-objective substitution) — the original
+// fixture's third violation site is replaced with primary_outcome (a real BUSINESS_OUTCOME field)
+// asserting the mechanism endpoint as the campaign's own outcome, preserving equivalent coverage.
 t('LIVE FIXTURE: the exact live final_synthesis reproduces all 5 violations (3 mechanism-promotion + 2 assumption-consistency)', () => {
   const synthesis = {
     deliverable: {
       '1_business_objective': 'vender el minicurso',
       '6_funnel': { conversion_intent: 'Comprar minicurso 400 MXN o agendar cita' },
       '12_whatsapp_followup_closing': { closing: 'PROPUESTA: Ofrecer link pago o agendar cita por calendario según preferencia' },
-      '13_measurement_kpis': { conversion_metrics: 'Registros de compra; tasa respuesta WhatsApp; citas agendadas' },
+      '13_measurement_kpis': { primary_outcome: 'citas agendadas', conversion_metrics: 'Registros de compra; tasa respuesta WhatsApp; citas agendadas' },
       '14_assumptions': ['Presupuesto de anuncios disponible y definido por usuario.', 'Presupuesto de ads desconocido.'],
     },
   };
@@ -79,7 +83,8 @@ t('LIVE FIXTURE: the exact live final_synthesis reproduces all 5 violations (3 m
   assert.equal(mechanismViols.length, 3, JSON.stringify(violations));
   assert(mechanismViols.some(v => v.section === '6_funnel'));
   assert(mechanismViols.some(v => v.section === '12_whatsapp_followup_closing'));
-  assert(mechanismViols.some(v => v.section === '13_measurement_kpis'));
+  assert(mechanismViols.some(v => v.section === '13_measurement_kpis' && v.field_key === 'primary_outcome'));
+  assert(!mechanismViols.some(v => v.field_key === 'conversion_metrics'), JSON.stringify(violations));
   assert(assumptionViols.length >= 2, JSON.stringify(violations));
 });
 
@@ -92,9 +97,18 @@ t('CASE A3: whatsapp closing "Ofrecer link pago o agendar cita" -> FAIL, cita no
   const { facts, synth } = synthWithFunnel('12_whatsapp_followup_closing', 'closing', 'Ofrecer link pago o agendar cita');
   assert(mechanismViolations(facts, synth).length > 0);
 });
-t('CASE A4: measurement "compras completadas; citas agendadas" -> cita NOT left as a conversion KPI', () => {
-  const { facts, synth } = synthWithFunnel('13_measurement_kpis', 'conversion_metrics', 'compras completadas; citas agendadas');
+// [HUMAN_SEMANTIC_DECISION_CAMPAIGN360_2026_09_13] conversion_metrics is MEASUREMENT now — a KPI/
+// tracking field may name the mechanism endpoint as a tracked metric without that being
+// business-objective substitution (this is exactly FP4, "tasa cita confirmada", adjudicated as a
+// real false positive). Redirected to primary_outcome (BUSINESS_OUTCOME) to preserve equivalent
+// true-positive coverage for a field that actually DOES define the campaign's own outcome.
+t('CASE A4: primary_outcome "compras completadas; citas agendadas" -> cita NOT left as the campaign outcome', () => {
+  const { facts, synth } = synthWithFunnel('13_measurement_kpis', 'primary_outcome', 'compras completadas; citas agendadas');
   assert(mechanismViolations(facts, synth).some(v => v.matched_text === 'citas agendadas'));
+});
+t('CASE A4b: conversion_metrics (MEASUREMENT) "compras completadas; citas agendadas" -> PASS (KPI/tracking semantics)', () => {
+  const { facts, synth } = synthWithFunnel('13_measurement_kpis', 'conversion_metrics', 'compras completadas; citas agendadas');
+  assert.deepStrictEqual(mechanismViolations(facts, synth), []);
 });
 t('CASE A5: mechanism field itself describing the taught process -> PASS (not a campaign-conversion field)', () => {
   const synth = { deliverable: { '5_offer': { offer_structure: 'El curso enseña a convertir consulta -> conversación -> cita' } } };
