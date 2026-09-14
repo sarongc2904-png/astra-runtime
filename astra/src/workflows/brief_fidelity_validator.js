@@ -762,6 +762,40 @@ function isGuaranteeNegationOrAdvisoryEscape(s, match) {
 // validated) mirror the existing Spanish assertion-verb family — "case study"/"before/after" were
 // already language-neutral tokens (no translation needed).
 const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bantes\s*\/\s*despu[ée]s\b|\bresultados?\s+document\w+\b|\bproven\b|\bproves?\b|\bproving\b|\bshown\b|\bshows\b|\bshowing\b|\bdemonstrat\w+\b|\bverified\b|\bvalidated\b|\bprior\s+results?\b|\bclients?\s+achiev\w+\b|\breal\s+evidence\b|\bdocumented\s+results?\b/i;
+// [OPERATIONAL ASSET VS EVIDENCE CLAIM — ASTRA_CAMPAIGN360_ASSUMPTION_EPISTEMIC_TARGETED_
+// REMEDIATION] confirmed live false positive (job 7a5fae9c-fac7-456d-a5e6-8562b050d356):
+// "14_assumptions" = "Creativos del anuncio listos y validados." flagged invented_evidence on
+// "validados" — but "validados" here governs "creativos" (an operational/QA asset-readiness
+// noun: the ad creatives went through internal review), not a claim that campaign RESULTS were
+// proven. INVENTED_EVIDENCE_CLAIM's participle family (validad[oa]s?/probad[oa]s?/comprobad[oa]s?/
+// demostrad[oa]s?, and the English verified/validated/proven/shown/demonstrated) is genuinely
+// dual-sense: the same word asserts fabricated proof-of-results when it governs an EVIDENCE noun
+// (resultados/caso/evidencia/métricas/results/case/evidence/performance/proof) but is ordinary
+// asset-status language when it governs an OPERATIONAL noun (creativos/materiales/plantillas/
+// contenido/anuncios/piezas/recursos/assets/materials/creatives/content). Structural nearest-noun
+// disambiguation, mirroring this file's existing isDescriptiveStateMatch/nearestPairInfo idiom
+// (word-sense by grammatical adjacency, never a phrase whitelist): the escape fires only when an
+// operational term is the NEAREST candidate noun to the match and no evidence term appears at all
+// in the clause — if an evidence term is present (even far away) or NEITHER term type is present,
+// this fails closed and detection stays intact, exactly like nearestPairInfo's own "no locatable
+// pair -> never exempt" default. Scoped ONLY to the invented_evidence category — every other
+// prohibition category (invented_result, guarantee, testimonials, ...) is untouched.
+const OPERATIONAL_ASSET_TERMS_RE = /\b(?:creativ[oa]s?|materiales?|plantillas?|contenidos?|anuncios?|piezas?|recursos?|assets?|materials?|creatives?|content)\b/gi;
+const EVIDENCE_RESULT_TERMS_RE = /\b(?:resultados?|casos?|evidencia|m[ée]tricas?|datos|estudios?|testimonios?|results?|cases?|evidence|metrics?|data|studies|study|performance|proof|testimonials?)\b/gi;
+function nearestTermDistance(clauseText, matchIndex, termRe) {
+  let best = null;
+  for (const m of clauseText.matchAll(new RegExp(termRe.source, termRe.flags))) {
+    const dist = Math.abs(m.index - matchIndex);
+    if (best == null || dist < best) best = dist;
+  }
+  return best;
+}
+function isOperationalAssetValidationMatch(clauseText, match) {
+  const evidenceDist = nearestTermDistance(clauseText, match.index, EVIDENCE_RESULT_TERMS_RE);
+  if (evidenceDist != null) return false; // an evidence/result noun anywhere in clause -> never exempt
+  const operationalDist = nearestTermDistance(clauseText, match.index, OPERATIONAL_ASSET_TERMS_RE);
+  return operationalDist != null; // exempt only when an operational asset noun is present (and no evidence noun at all)
+}
 // [INVENTED METRIC ORDER FIX] confirmed live miss: "Objetivo ROAS 4x" (qualifier BEFORE the
 // acronym) never matched the old acronym-then-qualifier-only pattern. Now bidirectional, plus a
 // bare acronym+magnitude form ("ROAS 4x") that needs no qualifier word at all. English qualifiers
@@ -1121,6 +1155,7 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
           isGuaranteeNegationOrAdvisoryEscape(s, match) ||
           isDescriptiveStateMatch(semanticKey, s, match)
         )) continue;
+        if (p.type === 'invented_evidence' && isOperationalAssetValidationMatch(s, match)) continue;
         // [CATEGORY-SCOPED COLLECTION CUE] confirmed regression: COLLECTION_REQUEST_CUE's
         // acquisition-verb vocabulary (conseguir/obtener/...) legitimately overlaps with common
         // CLIENT-ACQUISITION marketing claims ("Vas a conseguir más clientes") that have nothing to
@@ -1941,7 +1976,14 @@ function checkMechanismToCampaignConversionPromotion(facts, key, rawVal) {
 // guard against.
 const ASSUMPTION_USER_ATTRIBUTION_CUE = /\b(definid[oa]s?|indicad[oa]s?|proporcionad[oa]s?|confirmad[oa]s?|especificad[oa]s?)\s+por\s+(el\s+)?usuario\b|\busuario\s+(indic[oó]|proporcion[oó]|confirm[oó]|especific[oó])(?![a-záéíóúñA-ZÁÉÍÓÚÑ])|\bdisponible\s+y\s+definid[oa]s?\b/i;
 const ASSUMPTION_CERTAINTY_CUE = /\b(operativ[oa]s?|list[oa]s?|confirmad[oa]s?|definid[oa]s?|disponible|inclu[iy]d[oa]s?|activ[oa]s?)\b/i;
-const ASSUMPTION_UNKNOWN_CUE = /\bdesconocid[oa]s?\b|\bpor\s+(confirmar|definir)\b|\bpendiente(s)?\b|\bno\s+(disponible|definid[oa]s?|especificad[oa]s?|proporcionad[oa]s?)\b|\bno\s+se\s+proporcion[oó]\b/i;
+// [UNKNOWN-CUE SYNONYM GAP] confirmed live false negative (job 7a5fae9c-fac7-456d-a5e6-
+// 8562b050d356): "Cuenta Meta Ads y WhatsApp Business operativas (no provisto)." self-hedges its
+// own certainty ("operativas") with a parenthetical "(no provisto)" qualifier, but the unknown-cue
+// vocabulary only recognized the synonym "no proporcionado", not "no provisto" — so the sentence
+// was misclassified as confidently KNOWN_AVAILABLE instead of AMBIGUOUS (classifyAssumptionEpistemicState
+// already treats hasGenuineCertainty+hasUnknown together as AMBIGUOUS, and AMBIGUOUS never anchors a
+// contradiction — the gap was purely this missing synonym, not the classifier's own logic).
+const ASSUMPTION_UNKNOWN_CUE = /\bdesconocid[oa]s?\b|\bpor\s+(confirmar|definir)\b|\bpendiente(s)?\b|\bno\s+(disponible|definid[oa]s?|especificad[oa]s?|proporcionad[oa]s?|provist[oa]s?)\b|\bno\s+se\s+proporcion[oó]\b/i;
 // [ASSUMPTION EPISTEMIC SEMANTICS — CONFIRMED LIVE OVER-DETECTION] job 29a3248a-045f-4942-ba15-
 // 59469d1e9369 reported 7 CONTRADICTORY_ASSUMPTION_EPISTEMIC_STATUS violations from a 4-item
 // cluster where NONE were genuine contradictions — all four were variants of "budget is
@@ -1960,13 +2002,26 @@ const ASSUMPTION_EXISTENCE_NEGATION_CUE = /\bno\s+(?:existe[n]?|hay)\b/i;
 // PARTICIPLE forms ASSUMPTION_CERTAINTY_CUE matches (bare infinitives like "definir"/"confirmar"
 // were never matched by it to begin with; this cue additionally neutralizes a participle/adjective
 // that appears alongside an explicit "necesitamos/requerimos" framing in the same sentence).
+// [BARE IMPERATIVE ACTION-ITEM GAP] confirmed live false positive (job 7a5fae9c-fac7-456d-a5e6-
+// 8562b050d356): "Confirmar cuenta WhatsApp Business activa." is a to-do/action-item ("[Team to]
+// confirm the WhatsApp Business account is active") — grammatically a bare, sentence-leading
+// Spanish infinitive-as-imperative, the same verb family "debemos confirmar/definir/obtener/
+// especificar" already covers, just without the "debemos" prefix. It was previously invisible to
+// ASSUMPTION_REQUIRED_CUE (which required the "debemos" framing), so the trailing certainty word
+// "activa" alone won classification and misclassified this as KNOWN_AVAILABLE. Closed grammatical
+// set (confirmar/verificar/validar as bare infinitives), anchored at the start of the sentence or
+// clause (after a period/semicolon/start-of-string, optional leading whitespace) so a MID-clause
+// occurrence of the same infinitive in a different grammatical role ("...para confirmar el envio")
+// is not swept in by this addition — that shape was never in scope and stays governed by the
+// existing certainty/unknown cues exactly as before.
+const ASSUMPTION_BARE_IMPERATIVE_CUE = /(?:^|[.;:]\s*)\s*(?:confirmar|verificar|validar)\b/i;
 const ASSUMPTION_REQUIRED_CUE = /\bnecesita\w*\b|\brequerimos\b|\brequerid[oa]s?\b|\bse\s+requiere\b|\bhace\s+falta\b|\bdebemos\s+(?:definir|confirmar|obtener|especificar)\b/i;
 // Combined epistemic vocabulary, used ONLY to strip cue words before extracting a sentence's actual
 // topic (Rule 2) — never used for state classification itself (classifyAssumptionEpistemicState
 // above already handles that with its own priority order).
 const ASSUMPTION_ANY_EPISTEMIC_CUE = new RegExp([
   ASSUMPTION_USER_ATTRIBUTION_CUE.source, ASSUMPTION_CERTAINTY_CUE.source, ASSUMPTION_UNKNOWN_CUE.source,
-  ASSUMPTION_EXISTENCE_NEGATION_CUE.source, ASSUMPTION_REQUIRED_CUE.source,
+  ASSUMPTION_EXISTENCE_NEGATION_CUE.source, ASSUMPTION_REQUIRED_CUE.source, ASSUMPTION_BARE_IMPERATIVE_CUE.source,
 ].join('|'), 'i');
 // Classifies one assumption sentence into a discrete epistemic-role bucket. Priority matters:
 // REQUIRED is checked first (a request framing overrides any participle in the same sentence —
@@ -1974,7 +2029,7 @@ const ASSUMPTION_ANY_EPISTEMIC_CUE = new RegExp([
 // explicit existence-negation ("no existe"/"no hay"), then genuine (non-negated) certainty vs.
 // unknown-family cues — a sentence matching BOTH is AMBIGUOUS, not confidently certain.
 function classifyAssumptionEpistemicState(text) {
-  if (ASSUMPTION_REQUIRED_CUE.test(text)) return 'REQUIRED';
+  if (ASSUMPTION_REQUIRED_CUE.test(text) || ASSUMPTION_BARE_IMPERATIVE_CUE.test(text)) return 'REQUIRED';
   if (ASSUMPTION_EXISTENCE_NEGATION_CUE.test(text)) return 'KNOWN_UNAVAILABLE';
   const hasUnknown = ASSUMPTION_UNKNOWN_CUE.test(text);
   let hasGenuineCertainty = false;
@@ -2041,6 +2096,38 @@ function assumptionTopicWords(text, cueRegex) {
   const uniqueNormalWords = [...new Set(normalWords)].sort((a, b) => b.length - a.length);
   return [...uniqueAcronyms, ...uniqueNormalWords];
 }
+// [TOPIC-EQUIVALENCE OVER-BROAD SINGLE-WORD MATCH] confirmed live false positives (job
+// 7a5fae9c-fac7-456d-a5e6-8562b050d356): "Capacidad de respuesta humana en WhatsApp disponible."
+// and "Herramienta automatización WhatsApp disponible." each pairwise-"contradicted" an unrelated
+// assumption purely because both happened to mention the single word "whatsapp" — a channel/brand
+// name that recurs in nearly every assumption in a WhatsApp-funnel campaign, not evidence the two
+// sentences are about the same specific fact (human staffing capacity and automation tooling are
+// not the WhatsApp NUMBER's activation status). Separately, "Pasarela de pago en MXN lista para
+// entrega digital." vs "Detalle técnico entrega digital (PDF/Docs) no especificado." shared TWO
+// words ("entrega", "digital") yet still misfired, because that pairing is generic delivery-
+// mechanism boilerplate, not the same specific fact (payment-gateway readiness vs. file-format
+// spec) — so a blanket "require >=2 shared words" rule (explicitly rejected by the authorization,
+// and confirmed by grep of existing tests to break legitimate SINGLE-anchor cases like "Landing
+// disponible."/"No existe landing." and "CAC desconocido."/"CAC definido.") would not have fixed
+// this second case anyway, and was never the right lever.
+// Fix: a small, closed, deterministic set of GENERIC topic terms (channel/platform brand names,
+// plus generic delivery-mechanism vocabulary) that can never ALONE establish "same fact" — at
+// least one of the shared topic words must fall OUTSIDE this set for a contradiction to be
+// reported. This preserves every existing single-anchor case (landing/CAC/CRM/API/herramienta+
+// agenda/duración/presupuesto/... are all specific referents, not in this set) while suppressing
+// the confirmed over-broad matches. "WhatsApp Business"/"WhatsApp API" pairs (job's own protected
+// regression, astra_campaign360_final_synthesis_semantic_role_epistemic_meta_hardening.test.js)
+// still detect because "business"/"api" are themselves non-generic qualifying words alongside the
+// generic "whatsapp" — this never requires two shared words, only that not EVERY shared word is
+// generic. Extensible by principle (recurring channel-brand or generic-process vocabulary that
+// alone never pins down a specific fact), never a whitelist of the live sentences themselves.
+const GENERIC_ASSUMPTION_TOPIC_TERMS = new Set(['whatsapp', 'meta', 'instagram', 'facebook', 'google', 'tiktok', 'entrega', 'digital']);
+function sharedQualifyingTopic(setA, setB) {
+  for (const w of setB) {
+    if (setA.has(w) && !GENERIC_ASSUMPTION_TOPIC_TERMS.has(w)) return w;
+  }
+  return null;
+}
 function checkAssumptionEpistemicConsistency(key, rawVal, rawRequest) {
   if (key !== '14_assumptions' || !Array.isArray(rawVal)) return [];
   const items = rawVal.filter(x => typeof x === 'string');
@@ -2083,7 +2170,7 @@ function checkAssumptionEpistemicConsistency(key, rawVal, rawRequest) {
     if (!topicsCache[i].size) continue;
     for (let j = i + 1; j < parsed.length; j++) {
       if (!areEpistemicStatesContradictory(states[i], states[j])) continue;
-      if (![...topicsCache[j]].some(w => topicsCache[i].has(w))) continue;
+      if (!sharedQualifyingTopic(topicsCache[i], topicsCache[j])) continue;
       // Report with the confident (KNOWN_AVAILABLE) side first for a consistent, meaningful
       // diagnostic — whichever original index that happens to be.
       const [confidentIdx, otherIdx] = states[i] === 'KNOWN_AVAILABLE' ? [i, j] : [j, i];
@@ -2212,7 +2299,7 @@ function repairAssumptions(items, rawRequest) {
       if (!topics[i].size) continue;
       for (let j = 0; j < result.length; j++) {
         if (i === j || !areEpistemicStatesContradictory(states[i], states[j])) continue;
-        const sharedTopic = [...topics[j]].find(w => topics[i].has(w));
+        const sharedTopic = sharedQualifyingTopic(topics[i], topics[j]);
         if (!sharedTopic) continue;
         // Keep whichever side the raw brief actually grounds; drop the other. If neither (or the
         // raw request is unavailable), prefer keeping the non-KNOWN_AVAILABLE side — an unverified
