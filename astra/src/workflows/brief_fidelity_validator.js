@@ -759,9 +759,26 @@ function isGuaranteeNegationOrAdvisoryEscape(s, match) {
   return GUARANTEE_ADVISORY_CUE.test(before);
 }
 // English proof/evidence-assertion verbs (proven/proves/shown/shows/demonstrated/verified/
-// validated) mirror the existing Spanish assertion-verb family — "case study"/"before/after" were
-// already language-neutral tokens (no translation needed).
-const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bantes\s*\/\s*despu[ée]s\b|\bresultados?\s+document\w+\b|\bproven\b|\bproves?\b|\bproving\b|\bshown\b|\bshows\b|\bshowing\b|\bdemonstrat\w+\b|\bverified\b|\bvalidated\b|\bprior\s+results?\b|\bclients?\s+achiev\w+\b|\breal\s+evidence\b|\bdocumented\s+results?\b/i;
+// validated) mirror the existing Spanish assertion-verb family — "case study" was already a
+// language-neutral token (no translation needed).
+// [BEFORE/AFTER STRUCTURAL VS EVIDENTIARY — ASTRA_CAMPAIGN360_BEFORE_AFTER_SEMANTIC_REMEDIATION]
+// confirmed live false positive (job e61b7afb-07da-49a5-89be-bc3cce9ce066): creative_strategy.
+// creative_territories = "PROPUESTA: Antes/después en pasos" flagged invented_evidence purely on
+// the bare token "antes/después" — but a creative TERRITORY proposing a before/after-IN-STEPS
+// visual/narrative FORMAT ("show step 1, step 2... as a before/after progression") is a creative
+// structure choice, not a claim that real customer evidence exists. "antes/después" was previously
+// an ungated bare-token alternative inside this same monolithic regex — the prior "[OPERATIONAL
+// ASSET VS EVIDENCE CLAIM]" fix below solved the identical dual-sense problem for the participle
+// family (validados/probados/...) via nearest-noun disambiguation; before/after needed the SAME
+// treatment but was never covered by that fix's OPERATIONAL_ASSET_TERMS_RE (creative_territories
+// isn't proposing a QA-reviewed asset, it's proposing a visual/narrative FORMAT — a different
+// semantic axis, hence the separate STRUCTURAL_PROCESS_TERMS_RE below rather than reusing
+// operational-asset terms). Removed from the bare-token alternation here; re-added, gated, below.
+// English "before/after" had NO coverage at all (the old comment above incorrectly assumed it was
+// "language-neutral" — it never had an English form in this regex) — added symmetrically below,
+// gated by the identical structural/evidence distinction from day one so it can never recreate the
+// same bug in the other language.
+const INVENTED_EVIDENCE_CLAIM = /\bprobad[oa]s?\b|\bvalidad[oa]s?\b|\bcomprobad[oa]s?\b|\bdemostrad[oa]s?\b|\bcase\s*stud(?:y|ies)\b|\bcasos?\s+de\s+[ée]xito\b|\bresultados?\s+anteriores?\b|\bclientes?\s+logr\w+\b|\bevidencia\s+real\b|\bresultados?\s+document\w+\b|\bproven\b|\bproves?\b|\bproving\b|\bshown\b|\bshows\b|\bshowing\b|\bdemonstrat\w+\b|\bverified\b|\bvalidated\b|\bprior\s+results?\b|\bclients?\s+achiev\w+\b|\breal\s+evidence\b|\bdocumented\s+results?\b|\bantes\s*\/\s*despu[ée]s\b|\bbefore\s*(?:\/|and)\s*after\b/i;
 // [OPERATIONAL ASSET VS EVIDENCE CLAIM — ASTRA_CAMPAIGN360_ASSUMPTION_EPISTEMIC_TARGETED_
 // REMEDIATION] confirmed live false positive (job 7a5fae9c-fac7-456d-a5e6-8562b050d356):
 // "14_assumptions" = "Creativos del anuncio listos y validados." flagged invented_evidence on
@@ -795,6 +812,28 @@ function isOperationalAssetValidationMatch(clauseText, match) {
   if (evidenceDist != null) return false; // an evidence/result noun anywhere in clause -> never exempt
   const operationalDist = nearestTermDistance(clauseText, match.index, OPERATIONAL_ASSET_TERMS_RE);
   return operationalDist != null; // exempt only when an operational asset noun is present (and no evidence noun at all)
+}
+// [STRUCTURAL/PROCESS BEFORE-AFTER ESCAPE] same nearest-term idiom as isOperationalAssetValidationMatch
+// immediately above, applied to the "antes/después"/"before/after" token specifically (bilingual,
+// punctuation-tolerant: "antes/después", "antes / después", "before/after", "before / after",
+// "before and after"). A before/after mention is a creative-format/process device (a before/after
+// PRESENTED IN STEPS, AS A WORKFLOW, AS A LAYOUT...) rather than an evidentiary claim only when a
+// structural/process term is the nearest candidate AND no evidence/result term appears anywhere in
+// the clause. Same fail-closed default as its sibling: an evidence term anywhere -> never exempt; a
+// BARE before/after with NEITHER a structural NOR an evidence term nearby also never exempts (this
+// function returns false when structuralDist is null too) — deliberately conservative, matching
+// this file's whole convention that ABSENCE of a disambiguating signal never grants an exemption on
+// its own, only a specifically-identified non-evidentiary context does. Scoped to before/after
+// matches only (checked via BEFORE_AFTER_TOKEN_RE against match[0]) so it never interacts with the
+// unrelated participle-family matches isOperationalAssetValidationMatch already covers.
+const BEFORE_AFTER_TOKEN_RE = /\bantes\s*\/\s*despu[ée]s\b|\bbefore\s*(?:\/|and)\s*after\b/i;
+const STRUCTURAL_PROCESS_TERMS_RE = /\b(?:pasos?|steps?|procesos?|process(?:es)?|secuencias?|sequences?|etapas?|stages?|flujo|workflow|flow|layouts?|estructuras?|structures?|recorridos?|journeys?)\b/gi;
+function isStructuralProcessBeforeAfterMatch(clauseText, match) {
+  if (!BEFORE_AFTER_TOKEN_RE.test(match[0])) return false;
+  const evidenceDist = nearestTermDistance(clauseText, match.index, EVIDENCE_RESULT_TERMS_RE);
+  if (evidenceDist != null) return false; // an evidence/result noun anywhere in clause -> never exempt
+  const structuralDist = nearestTermDistance(clauseText, match.index, STRUCTURAL_PROCESS_TERMS_RE);
+  return structuralDist != null; // exempt only when a structural/process term is present (and no evidence noun at all)
 }
 // [INVENTED METRIC ORDER FIX] confirmed live miss: "Objetivo ROAS 4x" (qualifier BEFORE the
 // acronym) never matched the old acronym-then-qualifier-only pattern. Now bidirectional, plus a
@@ -1155,7 +1194,7 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
           isGuaranteeNegationOrAdvisoryEscape(s, match) ||
           isDescriptiveStateMatch(semanticKey, s, match)
         )) continue;
-        if (p.type === 'invented_evidence' && isOperationalAssetValidationMatch(s, match)) continue;
+        if (p.type === 'invented_evidence' && (isOperationalAssetValidationMatch(s, match) || isStructuralProcessBeforeAfterMatch(s, match))) continue;
         // [CATEGORY-SCOPED COLLECTION CUE] confirmed regression: COLLECTION_REQUEST_CUE's
         // acquisition-verb vocabulary (conseguir/obtener/...) legitimately overlaps with common
         // CLIENT-ACQUISITION marketing claims ("Vas a conseguir más clientes") that have nothing to
