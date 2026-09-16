@@ -22,7 +22,7 @@ const claimText = (item) => item?.text || item?.claim || item?.assertion || item
 const collectClaims = (obj) => {
   const claims = [];
   for (const [section, value] of Object.entries(obj || {})) {
-    if (!Array.isArray(value)) continue;
+    if (!Array.isArray(value) || section === 'evidence_used') continue;
     for (let i = 0; i < value.length; i++) {
       const item = value[i];
       if (!item || typeof item !== 'object') continue;
@@ -34,12 +34,19 @@ const collectClaims = (obj) => {
         index: i,
         text,
         classification,
-        evidence_ids: Array.isArray(item.evidence_ids) ? item.evidence_ids.filter(Boolean) : [],
+        evidence_ids: Array.isArray(item.evidence_ids) ? item.evidence_ids.filter(Boolean).map(String) : [],
       });
     }
   }
   return claims;
 };
+
+const evidenceUsed = Array.isArray(result.evidence_used) ? result.evidence_used : [];
+const evidenceIds = evidenceUsed
+  .map(item => String(item?.evidence_id || '').trim())
+  .filter(Boolean);
+const evidenceIdSet = new Set(evidenceIds);
+const duplicateEvidenceIds = evidenceIds.filter((id, index) => evidenceIds.indexOf(id) !== index);
 
 const canonicalText = normalize(
   Array.isArray(result.canonical_brief)
@@ -109,6 +116,12 @@ const isCanonicalSupported = (text) => {
   return canonicalSupportPatterns.some(parts => parts.every(p => n.includes(p)));
 };
 
+const evidenceResolution = (ids) => {
+  const resolved = ids.filter(id => evidenceIdSet.has(id));
+  const unresolved = ids.filter(id => !evidenceIdSet.has(id));
+  return { resolved, unresolved, allResolve: ids.length > 0 && unresolved.length === 0 };
+};
+
 const unsupportedClaims = [];
 const groundedClaims = [];
 const qualifiedClaims = [];
@@ -117,22 +130,38 @@ let grounded = 0;
 
 for (const claim of claims) {
   const c = claim.classification;
+  const ev = evidenceResolution(claim.evidence_ids);
   if (c === 'FACT') {
     groundable++;
-    const supported = isCanonicalSupported(claim.text) || claim.evidence_ids.length > 0;
+    const canonical = isCanonicalSupported(claim.text);
+    const supported = canonical || ev.allResolve;
     if (supported) {
       grounded++;
-      groundedClaims.push({ ...claim, support: claim.evidence_ids.length > 0 ? 'evidence_id' : 'canonical_brief' });
+      groundedClaims.push({
+        ...claim,
+        support: canonical ? 'canonical_brief' : 'resolved_evidence_ids',
+        resolved_evidence_ids: ev.resolved,
+      });
     } else {
-      unsupportedClaims.push({ ...claim, reason: 'FACT without canonical-brief match or evidence_ids' });
+      unsupportedClaims.push({
+        ...claim,
+        reason: claim.evidence_ids.length > 0
+          ? `FACT has unresolved evidence_ids: ${ev.unresolved.join(',')}`
+          : 'FACT without canonical-brief match or resolved evidence_ids',
+      });
     }
   } else if (c === 'EVIDENCE') {
     groundable++;
-    if (claim.evidence_ids.length > 0) {
+    if (ev.allResolve) {
       grounded++;
-      groundedClaims.push({ ...claim, support: 'evidence_id' });
+      groundedClaims.push({ ...claim, support: 'resolved_evidence_ids', resolved_evidence_ids: ev.resolved });
     } else {
-      unsupportedClaims.push({ ...claim, reason: 'EVIDENCE without evidence_ids' });
+      unsupportedClaims.push({
+        ...claim,
+        reason: claim.evidence_ids.length === 0
+          ? 'EVIDENCE without evidence_ids'
+          : `EVIDENCE has unresolved evidence_ids: ${ev.unresolved.join(',')}`,
+      });
     }
   } else if (['INFERENCE', 'RECOMMENDATION', 'UNKNOWN'].includes(c)) {
     qualifiedClaims.push(claim);
@@ -156,13 +185,21 @@ for (const rule of contradictoryFactChecks) {
 
 const criticalHallucinations = unsupportedClaims.filter(c => c.classification === 'FACT' || c.classification === 'EVIDENCE').length;
 
+const evidenceRegistryValid = evidenceUsed.length > 0 && duplicateEvidenceIds.length === 0;
+
 const out = {
-  metric_version: 'ASTRA_NEXT_CLAIM_ADJUDICATOR_V1_2',
+  metric_version: 'ASTRA_NEXT_CLAIM_ADJUDICATOR_V1_3',
   brief_fidelity_pct: briefFidelityPct,
   brief_checks: checks,
   critical_hallucinations: criticalHallucinations,
   knowledge_grounding_pct: knowledgeGroundingPct,
   cross_node_contradictions: crossNodeContradictions,
+  evidence_registry: {
+    evidence_used_count: evidenceUsed.length,
+    unique_evidence_ids: evidenceIdSet.size,
+    duplicate_evidence_ids: [...new Set(duplicateEvidenceIds)],
+    valid: evidenceRegistryValid,
+  },
   claim_counts: {
     total_classified_claims: claims.length,
     groundable_fact_or_evidence_claims: groundable,
@@ -176,6 +213,7 @@ const out = {
     hallucination_pass: criticalHallucinations === 0,
     grounding_pass: knowledgeGroundingPct >= 90,
     contradiction_pass: crossNodeContradictions === 0,
+    evidence_registry_pass: evidenceRegistryValid,
   },
 };
 
