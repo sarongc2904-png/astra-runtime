@@ -1,0 +1,42 @@
+{
+  "id": "ASTRA_NEXT_CAMPAIGN360_FLOW_V1",
+  "runtime_target": "AnythingLLM Agent Flow",
+  "input_contract": {
+    "canonical_brief": "astra-next-poc/frozen_brief/metodo360.json",
+    "knowledge_manifest": "ASTRA_NEXT_POC_KB_V1"
+  },
+  "global_rules": [
+    "Canonical brief is immutable",
+    "Never convert UNKNOWN into FACT",
+    "Every material recommendation must be traceable to evidence or explicitly labeled inference",
+    "Each node receives only the canonical brief, relevant retrieved context, and structured prior state",
+    "Do not execute external business actions in POC-1"
+  ],
+  "nodes": [
+    {"id":"normalize_brief","output":["facts","unknowns","constraints"]},
+    {"id":"business_context","output":["facts","evidence","inferences","risks"]},
+    {"id":"market_customer","output":["market_context","customer_jobs","pain_points","unknowns"]},
+    {"id":"icp","output":["primary_icp","qualification_signals","disqualification_signals"]},
+    {"id":"positioning","output":["positioning","category","differentiation","claims"]},
+    {"id":"offer","output":["offer_structure","value_stack","objections","risk_reversal"]},
+    {"id":"funnel","output":["stages","stage_objectives","conversion_events","handoffs"]},
+    {"id":"creative_strategy","parallel_group":"acquisition","output":["angles","hooks","concepts","creative_rules"]},
+    {"id":"paid_media","parallel_group":"acquisition","output":["campaign_structure","audience_logic","budget_logic","testing_plan"]},
+    {"id":"whatsapp_sales","output":["conversation_flow","qualification","follow_up","handoff_rules"]},
+    {"id":"measurement","output":["kpis","instrumentation","diagnostic_rules","decision_rules"]},
+    {"id":"final_synthesis","output":["campaign_plan","assumptions","unknowns","evidence_map","execution_order"]}
+  ],
+  "required_sections": [
+    "business_context",
+    "market_customer",
+    "icp",
+    "positioning",
+    "offer",
+    "funnel",
+    "creative_strategy",
+    "paid_media",
+    "whatsapp_sales",
+    "measurement",
+    "final_synthesis"
+  ]
+}
