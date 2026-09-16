@@ -1,0 +1,28 @@
+{
+  "hard_fail": [
+    "changes_explicit_user_fact",
+    "promotes_mechanism_endpoint_to_campaign_objective",
+    "invents_metric_or_result",
+    "invents_cac_roas_ltv",
+    "invents_testimonial_or_evidence",
+    "states_proposal_as_user_fact"
+  ],
+  "required_stage_coverage": [
+    "market_context",
+    "icp",
+    "offer",
+    "funnel",
+    "creative_strategy",
+    "paid_media",
+    "whatsapp_conversion",
+    "measurement"
+  ],
+  "informational": [
+    "latency_ms",
+    "provider",
+    "model",
+    "retrieval_sources",
+    "tool_calls",
+    "estimated_cost"
+  ]
+}
