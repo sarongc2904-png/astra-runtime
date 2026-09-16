@@ -1,0 +1,40 @@
+{
+  "id": "ASTRA_NEXT_POC_METODO360_V1",
+  "version": 1,
+  "immutable": true,
+  "canonical_brief": {
+    "business": "Infoproduct for beauty and aesthetic businesses",
+    "offer": "Método 360 mini course",
+    "price": {
+      "amount": 400,
+      "currency": "MXN"
+    },
+    "market": "Mexico",
+    "location": "Mexico",
+    "objective": "Sell the mini course",
+    "conversion_channel": "WhatsApp",
+    "budget": null,
+    "promise": "Teach beauty and aesthetic businesses to fill their appointment calendar",
+    "constraints": [
+      "Do not invent missing business metrics",
+      "Do not change canonical brief facts between workflow nodes",
+      "Separate facts from inferences and recommendations"
+    ],
+    "known_facts": [
+      "The product is a mini course called Método 360",
+      "The price is 400 MXN",
+      "The target business category is beauty/aesthetic businesses",
+      "The market is Mexico",
+      "The conversion channel is WhatsApp",
+      "The objective is to sell the mini course"
+    ],
+    "unknown_facts": [
+      "Current conversion rate",
+      "Current CAC",
+      "Current ROAS",
+      "Historical campaign performance",
+      "Audience list size",
+      "Current WhatsApp close rate"
+    ]
+  }
+}
