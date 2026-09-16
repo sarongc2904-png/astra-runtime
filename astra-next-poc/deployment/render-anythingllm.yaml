@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: astra-next-anythingllm-poc
+    runtime: docker
+    dockerfilePath: ./astra-next-poc/deployment/Dockerfile
+    dockerContext: .
+    autoDeploy: false
+    envVars:
+      - key: STORAGE_DIR
+        value: /app/server/storage
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: AUTH_TOKEN
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: SIG_KEY
+        sync: false
+      - key: SIG_SALT
+        sync: false
