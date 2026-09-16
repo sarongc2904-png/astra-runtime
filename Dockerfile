@@ -31,6 +31,7 @@ RUN chmod +x /usr/local/bin/astra-next-bootstrap.sh
 
 RUN mkdir -p /opt/astra-next-kb /opt/astra-next-benchmark
 COPY astra-next-poc/benchmark/adjudicate_campaign360.js /opt/astra-next-benchmark/adjudicate_campaign360.js
+COPY astra-next-poc/benchmark/run_campaign360_sync.js /opt/astra-next-benchmark/run_campaign360_sync.js
 COPY astra/methods/registry.json /opt/astra-next-kb/01-method-registry.json
 COPY astra/ASTRA_03_KNOWLEDGE_METHOD_DISCOVERY_REPORT.md /opt/astra-next-kb/02-knowledge-method-discovery.md
 COPY astra/ASTRA_03B_MULTI_DOMAIN_KNOWLEDGE_SOURCE_INGESTION_REPORT.md /opt/astra-next-kb/03-multi-domain-ingestion-report.md
