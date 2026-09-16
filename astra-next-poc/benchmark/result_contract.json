@@ -1,0 +1,50 @@
+{
+  "id": "ASTRA_NEXT_BENCHMARK_RESULT_V1",
+  "required_metadata": [
+    "run_id",
+    "engine",
+    "model",
+    "brief_id",
+    "knowledge_manifest_id",
+    "knowledge_manifest_version",
+    "started_at",
+    "completed_at"
+  ],
+  "quality_metrics": {
+    "brief_fidelity_pct": "number 0-100",
+    "critical_hallucinations": "integer >= 0",
+    "required_sections_pct": "number 0-100",
+    "workflow_completion_pct": "number 0-100",
+    "knowledge_grounding_pct": "number 0-100",
+    "cross_node_contradictions": "integer >= 0"
+  },
+  "runtime_metrics": {
+    "llm_requests": "integer >= 0",
+    "input_tokens": "integer >= 0",
+    "output_tokens": "integer >= 0",
+    "total_tokens": "integer >= 0",
+    "estimated_cost_usd": "number >= 0",
+    "retries": "integer >= 0",
+    "http_4xx": "integer >= 0",
+    "http_5xx": "integer >= 0",
+    "fatal_errors": "integer >= 0",
+    "duration_ms": "integer >= 0"
+  },
+  "evidence": {
+    "retrieved_sources": [],
+    "unsupported_claims": [],
+    "brief_fidelity_violations": [],
+    "contradictions": [],
+    "errors": [],
+    "final_output": null
+  },
+  "pass_gate": {
+    "brief_fidelity_pct": 100,
+    "critical_hallucinations": 0,
+    "required_sections_pct": 100,
+    "workflow_completion_pct": 100,
+    "fatal_errors": 0,
+    "knowledge_grounding_pct_min": 90,
+    "cost_ratio_vs_legacy_max": 1.25
+  }
+}
