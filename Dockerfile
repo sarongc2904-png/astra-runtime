@@ -5,7 +5,7 @@ USER root
 # POC-only compatibility patch: AnythingLLM's OpenRouter adapter currently omits
 # max_tokens, which makes OpenRouter reserve the model's full output ceiling.
 # Inject a bounded max_tokens value while keeping the same provider/model.
-# Also emit exact OpenRouter stream usage for benchmark telemetry.
+# Also emit exact OpenRouter usage for benchmark telemetry.
 RUN node - <<'NODE'
 const fs = require('fs');
 const p = '/app/server/utils/AiProviders/openRouter/index.js';
@@ -19,9 +19,14 @@ const streamReplacement = 'temperature,\n        max_tokens: Number(process.env.
 if (!s.includes(streamNeedle)) throw new Error('OpenRouter stream patch target not found');
 s = s.replace(streamNeedle, streamReplacement);
 
+const syncMetricsNeedle = `total_tokens: result.output.usage.total_tokens || 0,\n        outputTps:`;
+const syncMetricsReplacement = `total_tokens: result.output.usage.total_tokens || 0,\n        cost: typeof result.output.usage.cost === "number" ? result.output.usage.cost : null,\n        cost_details: result.output.usage.cost_details || null,\n        outputTps:`;
+if (!s.includes(syncMetricsNeedle)) throw new Error('OpenRouter sync usage telemetry patch target not found');
+s = s.replace(syncMetricsNeedle, syncMetricsReplacement);
+
 const usageNeedle = `usage = {\n              prompt_tokens: chunk.usage.prompt_tokens,\n              completion_tokens: chunk.usage.completion_tokens,\n              total_tokens: chunk.usage.total_tokens,\n            };`;
 const usageReplacement = `usage = {\n              prompt_tokens: chunk.usage.prompt_tokens || 0,\n              completion_tokens: chunk.usage.completion_tokens || 0,\n              total_tokens: chunk.usage.total_tokens || 0,\n              cost: typeof chunk.usage.cost === "number" ? chunk.usage.cost : null,\n              cost_details: chunk.usage.cost_details || null,\n            };\n            console.log("[ASTRA_NEXT_OPENROUTER_USAGE] " + JSON.stringify(usage));`;
-if (!s.includes(usageNeedle)) throw new Error('OpenRouter usage telemetry patch target not found');
+if (!s.includes(usageNeedle)) throw new Error('OpenRouter stream usage telemetry patch target not found');
 s = s.replace(usageNeedle, usageReplacement);
 fs.writeFileSync(p, s);
 NODE
