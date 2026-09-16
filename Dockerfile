@@ -1,0 +1,4 @@
+FROM mintplexlabs/anythingllm:latest
+
+ENV STORAGE_DIR=/app/server/storage
+EXPOSE 3001
