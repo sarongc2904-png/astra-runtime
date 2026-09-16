@@ -16,6 +16,8 @@ const normalize = (s) => String(s || '')
   .replace(/\s+/g, ' ')
   .trim();
 
+const claimText = (item) => item?.text || item?.claim || item?.assertion || '';
+
 const collectClaims = (obj) => {
   const claims = [];
   for (const [section, value] of Object.entries(obj || {})) {
@@ -23,7 +25,7 @@ const collectClaims = (obj) => {
     for (let i = 0; i < value.length; i++) {
       const item = value[i];
       if (!item || typeof item !== 'object') continue;
-      const text = item.text || item.claim || '';
+      const text = claimText(item);
       const classification = String(item.classification || item.type || '').toUpperCase();
       if (!text || !classification) continue;
       claims.push({
@@ -40,7 +42,7 @@ const collectClaims = (obj) => {
 
 const canonicalText = normalize(
   Array.isArray(result.canonical_brief)
-    ? result.canonical_brief.map(x => x?.text || '').join(' | ')
+    ? result.canonical_brief.map(x => claimText(x)).join(' | ')
     : JSON.stringify(result.canonical_brief || {})
 );
 
@@ -154,7 +156,7 @@ for (const rule of contradictoryFactChecks) {
 const criticalHallucinations = unsupportedClaims.filter(c => c.classification === 'FACT' || c.classification === 'EVIDENCE').length;
 
 const out = {
-  metric_version: 'ASTRA_NEXT_CLAIM_ADJUDICATOR_V1',
+  metric_version: 'ASTRA_NEXT_CLAIM_ADJUDICATOR_V1_1',
   brief_fidelity_pct: briefFidelityPct,
   brief_checks: checks,
   critical_hallucinations: criticalHallucinations,
