@@ -1,0 +1,82 @@
+{
+  "id": "ASTRA_NEXT_POC_KB_V1",
+  "version": 1,
+  "status": "FROZEN_FOR_POC",
+  "purpose": "Representative knowledge sample for Campaign360 parity testing",
+  "selection_policy": {
+    "minimum_necessary_context": true,
+    "whole_kb_dump": false,
+    "same_sample_for_legacy_and_next": true,
+    "source_repo": "sarongc2904-png/astra-runtime"
+  },
+  "domains": [
+    "business_strategy",
+    "market_research",
+    "icp",
+    "positioning",
+    "offer",
+    "funnel",
+    "creative_strategy",
+    "meta_ads",
+    "whatsapp_conversion",
+    "measurement"
+  ],
+  "selected_sources": [
+    {
+      "path": "astra/methods/registry.json",
+      "role": "method_registry",
+      "required": true
+    },
+    {
+      "path": "astra/ASTRA_03_KNOWLEDGE_METHOD_DISCOVERY_REPORT.md",
+      "role": "knowledge_method_map",
+      "required": true
+    },
+    {
+      "path": "astra/ASTRA_03B_MULTI_DOMAIN_KNOWLEDGE_SOURCE_INGESTION_REPORT.md",
+      "role": "multi_domain_knowledge_evidence",
+      "required": true
+    },
+    {
+      "path": "astra/src/router/knowledge_query_planner.js",
+      "role": "minimum_context_retrieval_policy",
+      "required": true
+    },
+    {
+      "path": "astra/src/creative/creative_knowledge.js",
+      "role": "creative_knowledge_source_of_truth",
+      "required": true
+    },
+    {
+      "path": "astra/ASTRA_08A_DESIGN_KNOWLEDGE_COVERAGE_AUDIT_REPORT.md",
+      "role": "design_knowledge_evidence",
+      "required": true
+    },
+    {
+      "path": "astra/knowledge_gap_ingestion/extraction_qa.json",
+      "role": "meta_ads_gap_ingestion_qa",
+      "required": true
+    }
+  ],
+  "explicitly_excluded_from_knowledge_migration": [
+    "custom provider adapters",
+    "custom retry wrappers",
+    "custom async Campaign360 lifecycle",
+    "custom LLM orchestration",
+    "custom job polling",
+    "deployment-specific runtime glue"
+  ],
+  "grounding_labels": [
+    "FACT",
+    "EVIDENCE",
+    "INFERENCE",
+    "RECOMMENDATION",
+    "UNKNOWN"
+  ],
+  "freeze_rules": [
+    "Do not silently add sources after benchmark execution starts",
+    "Any manifest change increments version",
+    "Every benchmark result records manifest id and version",
+    "Canonical brief facts override inferred business assumptions"
+  ]
+}
