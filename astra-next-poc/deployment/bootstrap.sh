@@ -97,6 +97,7 @@ const normalized=text
   .replace(/\s*```\s*$/,'')
   .trim();
 let parsed=null; try{parsed=JSON.parse(normalized)}catch{}
+if(parsed) fs.writeFileSync('/tmp/campaign360.normalized.json', JSON.stringify(parsed, null, 2));
 const sections=['canonical_brief','business_context','market_customer','icp','positioning','offer','funnel','creative_strategy','paid_media_strategy','whatsapp_sales','measurement','final_synthesis','unknowns','evidence_used'];
 const present=parsed?sections.filter(k=>Object.prototype.hasOwnProperty.call(parsed,k)):[];
 console.log(`[ASTRA_NEXT_CAMPAIGN360] http=${http} duration_ms=${duration} chars=${text.length} normalized_chars=${normalized.length} sources=${uniq.length} json_valid=${!!parsed} sections=${present.length}/${sections.length} errors=${errors.length}`);
@@ -106,6 +107,20 @@ const b64=Buffer.from(normalized,'utf8').toString('base64'); const size=2800; co
 for(let i=0;i<n;i++) console.log(`[ASTRA_NEXT_CAMPAIGN360_RESULT_B64 ${i+1}/${n}] ${b64.slice(i*size,(i+1)*size)}`);
 console.log(`[ASTRA_NEXT_CAMPAIGN360] status=${http==='200'&&normalized.length>0&&!!parsed&&present.length===sections.length?'PASS':'FAIL'}`);
 NODE
+
+  if [ -s /tmp/campaign360.normalized.json ]; then
+    node /opt/astra-next-benchmark/adjudicate_campaign360.js /tmp/campaign360.normalized.json >/tmp/astra_next_adjudication.json
+    node - /tmp/astra_next_adjudication.json <<'NODE'
+const fs=require('fs');
+const j=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+console.log(`[ASTRA_NEXT_ADJUDICATION] status=${j.status} brief_fidelity_pct=${j.brief_fidelity_pct} critical_hallucinations=${j.critical_hallucinations} knowledge_grounding_pct=${j.knowledge_grounding_pct} cross_node_contradictions=${j.cross_node_contradictions} claims=${j.claim_counts.total_classified_claims} groundable=${j.claim_counts.groundable_fact_or_evidence_claims} grounded=${j.claim_counts.grounded_fact_or_evidence_claims} unsupported=${j.claim_counts.unsupported_claims}`);
+const b64=Buffer.from(JSON.stringify(j),'utf8').toString('base64');
+const size=2800, n=Math.max(1,Math.ceil(b64.length/size));
+for(let i=0;i<n;i++) console.log(`[ASTRA_NEXT_ADJUDICATION_B64 ${i+1}/${n}] ${b64.slice(i*size,(i+1)*size)}`);
+NODE
+  else
+    log "ERROR adjudication_skipped normalized_result_missing"
+  fi
 else
   log "campaign360_skipped run=${RUN_CAMPAIGN360_POC:-false} kb_total=${KB_TOTAL} kb_fail=${KB_FAIL}"
 fi
