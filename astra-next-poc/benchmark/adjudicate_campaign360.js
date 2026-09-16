@@ -16,7 +16,8 @@ const normalize = (s) => String(s || '')
   .replace(/\s+/g, ' ')
   .trim();
 
-const claimText = (item) => item?.text || item?.claim || item?.assertion || '';
+// Accept all claim-body aliases observed across real Campaign360 runs.
+const claimText = (item) => item?.text || item?.claim || item?.assertion || item?.statement || '';
 
 const collectClaims = (obj) => {
   const claims = [];
@@ -156,7 +157,7 @@ for (const rule of contradictoryFactChecks) {
 const criticalHallucinations = unsupportedClaims.filter(c => c.classification === 'FACT' || c.classification === 'EVIDENCE').length;
 
 const out = {
-  metric_version: 'ASTRA_NEXT_CLAIM_ADJUDICATOR_V1_1',
+  metric_version: 'ASTRA_NEXT_CLAIM_ADJUDICATOR_V1_2',
   brief_fidelity_pct: briefFidelityPct,
   brief_checks: checks,
   critical_hallucinations: criticalHallucinations,
