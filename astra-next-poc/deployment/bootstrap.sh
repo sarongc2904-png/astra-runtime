@@ -71,6 +71,54 @@ else
   log "ERROR openrouter_key_missing"
 fi
 log "llm_provider=${LLM_PROVIDER:-unset} model=${OPENROUTER_MODEL_PREF:-unset}"
-log "bootstrap_complete"
 
+KB_DIR=/opt/astra-next-kb
+KB_TOTAL=0
+KB_PASS=0
+KB_FAIL=0
+
+if [ -n "${OPENROUTER_API_KEY:-}" ] && [ -d "$KB_DIR" ]; then
+  log "kb_ingestion_start manifest=ASTRA_NEXT_POC_KB_V1 workspace=astra-next"
+  for FILE in "$KB_DIR"/*; do
+    [ -f "$FILE" ] || continue
+    KB_TOTAL=$((KB_TOTAL + 1))
+    BASE=$(basename "$FILE")
+    TMP=$(mktemp)
+    HTTP_CODE=$(curl -sS -o "$TMP" -w '%{http_code}' -X POST \
+      http://127.0.0.1:3001/api/workspace/astra-next/upload-and-embed \
+      -H "$AUTH_HEADER" \
+      -F "file=@${FILE}" || true)
+
+    OK=no
+    if [ "$HTTP_CODE" = "200" ]; then
+      OK=$(node - "$TMP" <<'NODE'
+const fs=require('fs');
+const p=process.argv[2];
+try { const j=JSON.parse(fs.readFileSync(p,'utf8')); process.stdout.write(j.success===true?'yes':'no'); }
+catch { process.stdout.write('no'); }
+NODE
+)
+    fi
+
+    if [ "$OK" = "yes" ]; then
+      KB_PASS=$((KB_PASS + 1))
+      log "kb_ingest_pass file=${BASE}"
+    else
+      KB_FAIL=$((KB_FAIL + 1))
+      BODY=$(tr '\n' ' ' < "$TMP" | head -c 300)
+      log "ERROR kb_ingest_fail file=${BASE} http=${HTTP_CODE} body=${BODY}"
+    fi
+    rm -f "$TMP"
+  done
+
+  if [ "$KB_TOTAL" -eq 7 ] && [ "$KB_FAIL" -eq 0 ]; then
+    log "kb_ingestion_complete status=PASS manifest=ASTRA_NEXT_POC_KB_V1 total=${KB_TOTAL} passed=${KB_PASS} failed=${KB_FAIL}"
+  else
+    log "ERROR kb_ingestion_complete status=FAIL manifest=ASTRA_NEXT_POC_KB_V1 total=${KB_TOTAL} passed=${KB_PASS} failed=${KB_FAIL}"
+  fi
+else
+  log "ERROR kb_ingestion_skipped reason=openrouter_or_kb_dir_missing"
+fi
+
+log "bootstrap_complete"
 wait "$APP_PID"
