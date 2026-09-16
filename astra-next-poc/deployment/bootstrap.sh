@@ -91,15 +91,20 @@ for(const line of raw.split(/\r?\n/)){
   try{const j=JSON.parse(candidate); if(typeof j.textResponse==='string') text+=j.textResponse; if(Array.isArray(j.sources)) sources.push(...j.sources); if(j.error) errors.push(String(j.error));}catch{}
 }
 const uniq=[...new Set(sources.map(x=>x?.title||x?.source||x?.chunkSource||x?.docSource).filter(Boolean))];
-let parsed=null; try{parsed=JSON.parse(text.replace(/^```json\s*/,'').replace(/\s*```$/,''))}catch{}
+const normalized=text
+  .replace(/^\s*<think>[\s\S]*?<\/think>\s*/i,'')
+  .replace(/^```json\s*/i,'')
+  .replace(/\s*```\s*$/,'')
+  .trim();
+let parsed=null; try{parsed=JSON.parse(normalized)}catch{}
 const sections=['canonical_brief','business_context','market_customer','icp','positioning','offer','funnel','creative_strategy','paid_media_strategy','whatsapp_sales','measurement','final_synthesis','unknowns','evidence_used'];
 const present=parsed?sections.filter(k=>Object.prototype.hasOwnProperty.call(parsed,k)):[];
-console.log(`[ASTRA_NEXT_CAMPAIGN360] http=${http} duration_ms=${duration} chars=${text.length} sources=${uniq.length} json_valid=${!!parsed} sections=${present.length}/${sections.length} errors=${errors.length}`);
+console.log(`[ASTRA_NEXT_CAMPAIGN360] http=${http} duration_ms=${duration} chars=${text.length} normalized_chars=${normalized.length} sources=${uniq.length} json_valid=${!!parsed} sections=${present.length}/${sections.length} errors=${errors.length}`);
 console.log(`[ASTRA_NEXT_CAMPAIGN360] source_names=${JSON.stringify(uniq)}`);
 console.log(`[ASTRA_NEXT_CAMPAIGN360] errors=${JSON.stringify(errors)}`);
-const b64=Buffer.from(text,'utf8').toString('base64'); const size=2800; const n=Math.max(1,Math.ceil(b64.length/size));
+const b64=Buffer.from(normalized,'utf8').toString('base64'); const size=2800; const n=Math.max(1,Math.ceil(b64.length/size));
 for(let i=0;i<n;i++) console.log(`[ASTRA_NEXT_CAMPAIGN360_RESULT_B64 ${i+1}/${n}] ${b64.slice(i*size,(i+1)*size)}`);
-console.log(`[ASTRA_NEXT_CAMPAIGN360] status=${http==='200'&&text.length>0&&!!parsed&&present.length===sections.length?'PASS':'FAIL'}`);
+console.log(`[ASTRA_NEXT_CAMPAIGN360] status=${http==='200'&&normalized.length>0&&!!parsed&&present.length===sections.length?'PASS':'FAIL'}`);
 NODE
 else
   log "campaign360_skipped run=${RUN_CAMPAIGN360_POC:-false} kb_total=${KB_TOTAL} kb_fail=${KB_FAIL}"
