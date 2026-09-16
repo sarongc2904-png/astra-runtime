@@ -1,0 +1,1 @@
+This POC is additive and isolated on branch `astra-next-anythingllm-poc`. It must not be deployed over the existing ASTRA runtime until explicit acceptance evidence is produced and the user authorizes cutover.
