@@ -3,8 +3,9 @@ const fs = require('fs');
 
 const workspaceSlug = process.argv[2] || 'astra-next';
 const promptPath = process.argv[3];
-if (!promptPath) {
-  console.error('usage: node run_campaign360_sync.js <workspace-slug> <prompt-file>');
+const outputPath = process.argv[4];
+if (!promptPath || !outputPath) {
+  console.error('usage: node run_campaign360_sync.js <workspace-slug> <prompt-file> <output-file>');
   process.exit(2);
 }
 
@@ -29,13 +30,14 @@ async function main() {
     mode: 'chat',
     user: null,
     thread: null,
-    sessionId: 'astra-next-05-metodo360-control-v1',
+    sessionId: 'astra-next-05-metodo360-control-v1-sync',
     attachments: [],
     reset: true,
   });
   const durationMs = Date.now() - startedAt;
 
-  process.stdout.write(JSON.stringify({ duration_ms: durationMs, result }));
+  fs.writeFileSync(outputPath, JSON.stringify({ duration_ms: durationMs, result }, null, 2));
+  console.log(`[ASTRA_NEXT_SYNC_RUNNER] completed duration_ms=${durationMs} output=${outputPath}`);
 }
 
 main().catch((error) => {
