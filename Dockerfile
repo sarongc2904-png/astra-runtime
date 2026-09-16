@@ -2,6 +2,24 @@ FROM mintplexlabs/anythingllm:latest
 
 USER root
 
+# POC-only compatibility patch: AnythingLLM's OpenRouter adapter currently omits
+# max_tokens, which makes OpenRouter reserve the model's full output ceiling.
+# Inject a bounded max_tokens value while keeping the same provider/model.
+RUN node - <<'NODE'
+const fs = require('fs');
+const p = '/app/server/utils/AiProviders/openRouter/index.js';
+let s = fs.readFileSync(p, 'utf8');
+const needle = 'temperature,\n          // This is an OpenRouter specific option';
+const replacement = 'temperature,\n          max_tokens: Number(process.env.OPENROUTER_MAX_TOKENS || 8192),\n          // This is an OpenRouter specific option';
+if (!s.includes(needle)) throw new Error('OpenRouter non-stream patch target not found');
+s = s.replace(needle, replacement);
+const streamNeedle = 'temperature,\n        // This is an OpenRouter specific option';
+const streamReplacement = 'temperature,\n        max_tokens: Number(process.env.OPENROUTER_MAX_TOKENS || 8192),\n        // This is an OpenRouter specific option';
+if (!s.includes(streamNeedle)) throw new Error('OpenRouter stream patch target not found');
+s = s.replace(streamNeedle, streamReplacement);
+fs.writeFileSync(p, s);
+NODE
+
 COPY astra-next-poc/deployment/bootstrap.sh /usr/local/bin/astra-next-bootstrap.sh
 RUN chmod +x /usr/local/bin/astra-next-bootstrap.sh
 
