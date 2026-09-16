@@ -1,0 +1,20 @@
+{
+  "product_name": "Método 360",
+  "product_type": "minicurso grabado",
+  "price": 400,
+  "currency": "MXN",
+  "buyer": "dueñas de estéticas",
+  "geography": "México",
+  "business_objective": "vender el minicurso",
+  "mechanism": "Meta Ads para generar consultas y WhatsApp para convertir: consulta → conversación → cita",
+  "constraints": [
+    "No inventes métricas",
+    "No inventes resultados",
+    "No inventes CAC",
+    "No inventes ROAS",
+    "No inventes LTV",
+    "No inventes testimonios",
+    "No inventes evidencia"
+  ],
+  "explicit_unknowns": []
+}
