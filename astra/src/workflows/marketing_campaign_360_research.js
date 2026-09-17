@@ -1,14 +1,16 @@
 'use strict';
 
 // ASTRA-12 research-grounded Campaign360 wrapper.
-// Keeps the hardened DAG/fidelity engine unchanged, but adds one source-verified web
-// research pass and exposes it to every specialist through the existing evidence contract.
+// Keeps the hardened DAG/fidelity engine intact, adds one source-verified web
+// research pass, injects that evidence through the existing adapter contract,
+// then applies a deterministic provenance gate before COMPLETE is allowed.
 
 const H = require('./marketing_campaign_360_hardened');
 const briefFacts = require('./campaign_brief_facts');
 const { AgentV1Adapter } = require('../adapter/agent_v1_adapter');
 const webMarketResearch = require('../research/web_market_research');
 const researchPolicy = require('../research/research_policy');
+const researchProvenance = require('../research/research_provenance_validator');
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
 
@@ -123,6 +125,12 @@ function addResearchUsage(result, pack) {
   };
 }
 
+async function executeHardened(runtime, request, options) {
+  if (typeof runtime === 'function') return runtime(request, options);
+  if (runtime && typeof runtime.run === 'function') return runtime.run(request, options);
+  throw new Error('invalid hardened Campaign360 runtime');
+}
+
 async function run(rawRequest, options = {}) {
   if (options.webResearch === false) return H.run(rawRequest, options);
 
@@ -146,24 +154,42 @@ async function run(rawRequest, options = {}) {
       canonical_brief_facts: originalCanonicalFacts,
       research_policy: researchPolicy.provenancePolicySummary(),
       web_research: { status: 'FAILED', error: { code: err.code || 'WEB_MARKET_RESEARCH_FAILED', message: String(err.message || err) } },
+      research_provenance_violations: [], research_grounding: {},
       node_outputs: [], selected_methods_by_node: {}, synthesis: null,
       cost: { mode: options.mode || 'llm', model_calls: 0, retries: 0, tokens: { prompt: 0, completion: 0 }, web_research: { calls: 1, failed: true } },
     };
   }
 
+  // Anti-fabrication blockers become provenance requirements on this ASTRA-12 path.
+  // The original brief/facts remain untouched and are restored as the public canonical facts.
   const normalizedRequest = researchPolicy.normalizeResearchRequest(rawRequest);
   const baseAdapter = options.adapter || new AgentV1Adapter(options.adapterOpts || {});
   const adapter = new ResearchAugmentedAdapter(baseAdapter, pack);
-  const result = await H.run(normalizedRequest, Object.assign({}, options, { adapter }));
+  const runtime = options.hardenedRuntime || H;
+  const result = await executeHardened(runtime, normalizedRequest, Object.assign({}, options, { adapter }));
 
-  // Canonical user facts remain exactly derived from the original brief. The hardened
-  // engine's normalized policy facts are retained separately for auditability.
   result.operational_brief_facts = clone(result.canonical_brief_facts);
   result.canonical_brief_facts = originalCanonicalFacts;
   result.research_policy = researchPolicy.provenancePolicySummary();
   result.web_research = publicResearchPack(pack);
   attachExternalProvenance(result, pack);
   addResearchUsage(result, pack);
+
+  result.research_provenance_violations = [];
+  result.research_grounding = {};
+  if (result.workflow_state_status === 'COMPLETE') {
+    const check = researchProvenance.validate(result, pack);
+    result.research_grounding = check.grounding;
+    result.research_provenance_violations = check.violations;
+    if (check.violations.length) {
+      // The strategy may have been generated, but it is not valid ASTRA-12 output unless the
+      // market/ICP/offer actually cite source-verified WEB evidence and the offer is a proposal.
+      result.workflow_state_status = 'FAILED';
+      result.reason = 'RESEARCH_PROVENANCE_VIOLATION';
+      result.research_candidate_synthesis = result.synthesis;
+      result.synthesis = null;
+    }
+  }
   return result;
 }
 
@@ -174,4 +200,5 @@ module.exports = {
   externalHits,
   attachExternalProvenance,
   publicResearchPack,
+  executeHardened,
 };
