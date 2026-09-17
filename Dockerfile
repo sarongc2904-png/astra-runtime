@@ -2,7 +2,8 @@ FROM mintplexlabs/anythingllm:latest
 
 USER root
 
-# POC-only compatibility patch: bound OpenRouter output reservations and emit usage.
+# POC-only compatibility patch: bound OpenRouter output reservations, emit usage,
+# and register the ASTRA NEXT protected creative gateway before AnythingLLM's UI catch-all.
 RUN node - <<'NODE'
 const fs = require('fs');
 const p = '/app/server/utils/AiProviders/openRouter/index.js';
@@ -32,19 +33,29 @@ const occurrences = a.split(agentNeedle).length - 1;
 if (occurrences !== 2) throw new Error(`OpenRouter agent patch expected 2 targets, found ${occurrences}`);
 a = a.split(agentNeedle).join('{ provider: this, serviceTier: this.serviceTier, maxTokens: Number(process.env.OPENROUTER_AGENT_MAX_TOKENS || 4096) }');
 fs.writeFileSync(agentPath, a);
+
+const serverPath = '/app/server/index.js';
+let server = fs.readFileSync(serverPath, 'utf8');
+const routeMarker = 'browserExtensionEndpoints(apiRouter);\n\nif (process.env.NODE_ENV !== "development") {';
+const routeInsert = 'browserExtensionEndpoints(apiRouter);\n\n// ASTRA-NEXT-11: protected creative entrypoint. This route performs mandatory\n// knowledge preflight before any creative generation and is registered before\n// the production UI catch-all.\nconst { handleCreativeGateway } = require("/opt/astra-next-poc/runtime/creative_http_handler.js");\napp.post("/astra-next/creative", handleCreativeGateway);\n\nif (process.env.NODE_ENV !== "development") {';
+if (!server.includes(routeMarker)) throw new Error('AnythingLLM server route patch target not found');
+server = server.replace(routeMarker, routeInsert);
+fs.writeFileSync(serverPath, server);
 NODE
 
 COPY astra-next-poc/deployment/bootstrap.sh /usr/local/bin/astra-next-bootstrap.sh
 COPY astra-next-poc/deployment/entrypoint.sh /usr/local/bin/astra-next-entrypoint.sh
 RUN chmod +x /usr/local/bin/astra-next-bootstrap.sh /usr/local/bin/astra-next-entrypoint.sh
 
-RUN mkdir -p /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative /opt/astra-next-poc/runtime /opt/astra-next-poc/knowledge
+RUN mkdir -p /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative /opt/astra-next-poc/runtime /opt/astra-next-poc/knowledge /opt/astra-next-poc/benchmark
 COPY astra-next-poc/benchmark/adjudicate_campaign360.js /opt/astra-next-benchmark/adjudicate_campaign360.js
 COPY astra-next-poc/benchmark/run_campaign360_sync.js /opt/astra-next-benchmark/run_campaign360_sync.js
 COPY astra-next-poc/benchmark/run_knowledge_routing_audit.js /opt/astra-next-benchmark/run_knowledge_routing_audit.js
 COPY astra-next-poc/benchmark/run_grounded_creative_output_qa.js /opt/astra-next-benchmark/run_grounded_creative_output_qa.js
 COPY astra-next-poc/benchmark/run_creative_gateway_enforcement_qa.js /opt/astra-next-poc/benchmark/run_creative_gateway_enforcement_qa.js
+COPY astra-next-poc/benchmark/run_creative_http_gateway_qa.js /opt/astra-next-poc/benchmark/run_creative_http_gateway_qa.js
 COPY astra-next-poc/runtime/creative_gateway.js /opt/astra-next-poc/runtime/creative_gateway.js
+COPY astra-next-poc/runtime/creative_http_handler.js /opt/astra-next-poc/runtime/creative_http_handler.js
 COPY astra-next-poc/knowledge/creative_knowledge_router.js /opt/astra-next-poc/knowledge/creative_knowledge_router.js
 COPY astra-next-poc/knowledge/creative_knowledge_router.js /opt/astra-next-creative/creative_knowledge_router.js
 COPY astra-next-poc/knowledge/creative_source_manifest.json /opt/astra-next-creative/creative_source_manifest.json
