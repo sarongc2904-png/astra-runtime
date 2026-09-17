@@ -70,28 +70,40 @@ else
 fi
 
 if [ "${RUN_CAMPAIGN360_POC:-false}" = "true" ] && [ "$KB_TOTAL" -eq 7 ] && [ "$KB_FAIL" -eq 0 ]; then
-  log "campaign360_start case=metodo360_control_v1 manifest=ASTRA_NEXT_POC_KB_V1 gate=ASTRA-NEXT-05 mode=sync"
+  log "campaign360_start case=metodo360_control_v1 manifest=ASTRA_NEXT_POC_KB_V1 gate=ASTRA-NEXT-05 mode=sync-api"
   SYS_PROMPT='You are ASTRA NEXT Campaign360. Treat the canonical brief as immutable facts. Use the workspace knowledge as evidence. Never invent missing business facts. For every material assertion classify it as FACT, EVIDENCE, INFERENCE, RECOMMENDATION, or UNKNOWN. Every claim object must use the shape {"statement":"...","classification":"FACT|EVIDENCE|INFERENCE|RECOMMENDATION|UNKNOWN","evidence_ids":[]}. FACT claims may use an empty evidence_ids array only when directly supported by the canonical brief. Every EVIDENCE claim MUST contain one or more evidence_ids. Every evidence_id referenced by a claim MUST exactly match a unique evidence_id declared in evidence_used. evidence_used must contain unique evidence_id values and the sourceDocument for each cited source. Never classify a claim as EVIDENCE unless you can cite at least one valid evidence_id. If evidence is unavailable, classify the assertion as INFERENCE, RECOMMENDATION, or UNKNOWN instead. Produce a complete commercial campaign in Spanish (Mexico) covering exactly: canonical_brief, business_context, market_customer, icp, positioning, offer, funnel, creative_strategy, paid_media_strategy, whatsapp_sales, measurement, final_synthesis, unknowns, evidence_used. Preserve price, market, objective, conversion channel and audience exactly. Distinguish evidence from recommendation. Return valid JSON only.'
   UPDATE_BODY=$(node -e 'process.stdout.write(JSON.stringify({openAiPrompt:process.argv[1],openAiTemp:0.2,topN:12,similarityThreshold:0.15,chatMode:"chat"}))' "$SYS_PROMPT")
   curl -fsS -X POST http://127.0.0.1:3001/api/workspace/astra-next/update -H "$AUTH_HEADER" -H 'Content-Type: application/json' --data "$UPDATE_BODY" >/tmp/astra_workspace_update.json || true
 
-  CAMPAIGN_PROMPT='CANONICAL BRIEF — DO NOT ALTER: Business: infoproduct for estéticas. Product: mini curso Método 360. Price: 400 MXN. Market: México. Objective: sell the mini course. Conversion channel: WhatsApp. Core proposition: teach estéticas how to fill their appointment agenda. Requirement: create the complete Campaign360 using only these facts plus evidence retrieved from ASTRA_NEXT_POC_KB_V1. Any unsupported detail must be INFERENCE, RECOMMENDATION or UNKNOWN, never FACT. STRICT TRACEABILITY: every claim classified EVIDENCE must include evidence_ids with at least one ID; every cited ID must exist exactly once in evidence_used; every evidence_used item must have a unique evidence_id and sourceDocument. Do not emit EVIDENCE without resolvable evidence_ids. Return valid JSON only with all required sections.'
-  printf '%s' "$CAMPAIGN_PROMPT" >/tmp/campaign360.prompt.txt
-  rm -f /tmp/campaign360.sync.json /tmp/campaign360.normalized.json /tmp/astra_next_adjudication.json /tmp/campaign360.runner.log
-
-  if timeout 600s node /opt/astra-next-benchmark/run_campaign360_sync.js astra-next /tmp/campaign360.prompt.txt /tmp/campaign360.sync.json >/tmp/campaign360.runner.log 2>&1; then
-    RUN_EXIT=0
+  API_KEYS_JSON=$(curl -fsS http://127.0.0.1:3001/api/system/api-keys -H "$AUTH_HEADER" || true)
+  DEV_API_KEY=$(printf '%s' "$API_KEYS_JSON" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{const j=JSON.parse(d);const k=(j.apiKeys||[]).find(x=>x.name==="astra-next-poc");process.stdout.write(k?.secret||"")}catch{}})')
+  if [ -z "$DEV_API_KEY" ]; then
+    API_KEY_JSON=$(curl -fsS -X POST http://127.0.0.1:3001/api/system/generate-api-key -H "$AUTH_HEADER" -H 'Content-Type: application/json' --data '{"name":"astra-next-poc"}' || true)
+    DEV_API_KEY=$(printf '%s' "$API_KEY_JSON" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{const j=JSON.parse(d);process.stdout.write(j.apiKey?.secret||"")}catch{}})')
+  fi
+  if [ -z "$DEV_API_KEY" ]; then
+    log "ERROR developer_api_key_unavailable"
   else
-    RUN_EXIT=$?
+    log "developer_api_key_ready"
   fi
 
+  CAMPAIGN_PROMPT='CANONICAL BRIEF — DO NOT ALTER: Business: infoproduct for estéticas. Product: mini curso Método 360. Price: 400 MXN. Market: México. Objective: sell the mini course. Conversion channel: WhatsApp. Core proposition: teach estéticas how to fill their appointment agenda. Requirement: create the complete Campaign360 using only these facts plus evidence retrieved from ASTRA_NEXT_POC_KB_V1. Any unsupported detail must be INFERENCE, RECOMMENDATION or UNKNOWN, never FACT. STRICT TRACEABILITY: every claim classified EVIDENCE must include evidence_ids with at least one ID; every cited ID must exist exactly once in evidence_used; every evidence_used item must have a unique evidence_id and sourceDocument. Do not emit EVIDENCE without resolvable evidence_ids. Return valid JSON only with all required sections.'
+  CHAT_BODY=$(node -e 'process.stdout.write(JSON.stringify({message:process.argv[1],mode:"chat",sessionId:"astra-next-05-metodo360-control-v1",attachments:[],reset:true}))' "$CAMPAIGN_PROMPT")
+  rm -f /tmp/campaign360.sync.json /tmp/campaign360.normalized.json /tmp/astra_next_adjudication.json
+
+  START_MS=$(date +%s%3N)
+  if [ -n "$DEV_API_KEY" ]; then
+    HTTP_CODE=$(curl -sS --max-time 600 -o /tmp/campaign360.sync.json -w '%{http_code}' -X POST http://127.0.0.1:3001/api/v1/workspace/astra-next/chat -H "Authorization: Bearer ${DEV_API_KEY}" -H 'Content-Type: application/json' --data "$CHAT_BODY" || true)
+  else
+    HTTP_CODE=000
+  fi
+  END_MS=$(date +%s%3N); DURATION_MS=$((END_MS-START_MS))
+
   if [ -s /tmp/campaign360.sync.json ]; then
-    node - /tmp/campaign360.sync.json "$RUN_EXIT" <<'NODE'
+    node - /tmp/campaign360.sync.json "$HTTP_CODE" "$DURATION_MS" <<'NODE'
 const fs=require('fs');
-const p=process.argv[2], exitCode=Number(process.argv[3]);
-const wrapper=JSON.parse(fs.readFileSync(p,'utf8'));
-const duration=Number(wrapper.duration_ms||0);
-const result=wrapper.result||{};
+const p=process.argv[2], http=process.argv[3], duration=Number(process.argv[4]);
+const result=JSON.parse(fs.readFileSync(p,'utf8'));
 const text=typeof result.textResponse==='string'?result.textResponse:'';
 const sources=Array.isArray(result.sources)?result.sources:[];
 const errors=result.error?[String(result.error)]:[];
@@ -106,17 +118,16 @@ let parsed=null; try{parsed=JSON.parse(normalized)}catch{}
 if(parsed) fs.writeFileSync('/tmp/campaign360.normalized.json', JSON.stringify(parsed, null, 2));
 const sections=['canonical_brief','business_context','market_customer','icp','positioning','offer','funnel','creative_strategy','paid_media_strategy','whatsapp_sales','measurement','final_synthesis','unknowns','evidence_used'];
 const present=parsed?sections.filter(k=>Object.prototype.hasOwnProperty.call(parsed,k)):[];
-console.log(`[ASTRA_NEXT_CAMPAIGN360] mode=sync runner_exit=${exitCode} duration_ms=${duration} chars=${text.length} normalized_chars=${normalized.length} sources=${uniq.length} json_valid=${!!parsed} sections=${present.length}/${sections.length} errors=${errors.length}`);
+console.log(`[ASTRA_NEXT_CAMPAIGN360] mode=sync-api http=${http} duration_ms=${duration} chars=${text.length} normalized_chars=${normalized.length} sources=${uniq.length} json_valid=${!!parsed} sections=${present.length}/${sections.length} errors=${errors.length}`);
 console.log(`[ASTRA_NEXT_CAMPAIGN360] source_names=${JSON.stringify(uniq)}`);
 console.log(`[ASTRA_NEXT_CAMPAIGN360] errors=${JSON.stringify(errors)}`);
 console.log(`[ASTRA_NEXT_CAMPAIGN360_METRICS] ${JSON.stringify(metrics)}`);
 const b64=Buffer.from(normalized,'utf8').toString('base64'); const size=2800; const n=Math.max(1,Math.ceil(b64.length/size));
 for(let i=0;i<n;i++) console.log(`[ASTRA_NEXT_CAMPAIGN360_RESULT_B64 ${i+1}/${n}] ${b64.slice(i*size,(i+1)*size)}`);
-console.log(`[ASTRA_NEXT_CAMPAIGN360] status=${exitCode===0&&normalized.length>0&&!!parsed&&present.length===sections.length&&!result.error?'PASS':'FAIL'}`);
+console.log(`[ASTRA_NEXT_CAMPAIGN360] status=${http==='200'&&normalized.length>0&&!!parsed&&present.length===sections.length&&!result.error?'PASS':'FAIL'}`);
 NODE
   else
-    RUNNER_BODY=$(tr '\n' ' ' </tmp/campaign360.runner.log 2>/dev/null | head -c 1200 || true)
-    log "ERROR campaign360_sync_runner_failed exit=${RUN_EXIT} body=${RUNNER_BODY}"
+    log "ERROR campaign360_sync_api_failed http=${HTTP_CODE}"
   fi
 
   if [ -s /tmp/campaign360.normalized.json ]; then
