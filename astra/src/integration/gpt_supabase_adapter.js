@@ -33,6 +33,7 @@ function makeCampaignRuntime(options = {}, env = process.env) {
     const provider = providerFactory.createProvider(cfg);
     return H.run(input, {
       mode: 'llm', retrieve: true, webResearch: true, researchEnv: env,
+      onProgress: options.onProgress,
       llm: (s, u, o) => provider.runner(s, u, o),
     });
   };
