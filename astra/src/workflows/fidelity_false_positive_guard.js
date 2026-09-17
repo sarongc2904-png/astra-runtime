@@ -33,14 +33,29 @@ function isDescriptiveIcpPainFalsePositive(v, nodeId) {
   return true;
 }
 
-function adjudicateNodeViolations(nodeId, violations) {
+function normalizeComparable(s) {
+  return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[.,;:!?]+$/g, '').replace(/\s+/g, ' ').trim();
+}
+
+function isCanonicalObjectiveRestatement(v, facts) {
+  if (!v || v.category !== 'invented_result') return false;
+  const objectiveFact = facts && facts.business_objective;
+  if (!objectiveFact || objectiveFact.status !== 'USER_PROVIDED_FACT' || !objectiveFact.value) return false;
+  const clause = normalizeComparable(v.local_clause);
+  const objective = normalizeComparable(objectiveFact.value);
+  if (!clause || !objective) return false;
+  // Exact restatement only. This does not excuse embellished promises that merely contain the objective.
+  return clause === objective;
+}
+
+function adjudicateNodeViolations(nodeId, violations, facts) {
   const kept = [];
   const suppressed = [];
   for (const v of Array.isArray(violations) ? violations : []) {
-    if (isDescriptiveIcpPainFalsePositive(v, nodeId)) suppressed.push(v);
+    if (isDescriptiveIcpPainFalsePositive(v, nodeId) || isCanonicalObjectiveRestatement(v, facts)) suppressed.push(v);
     else kept.push(v);
   }
   return { violations: kept, suppressed };
 }
 
-module.exports = { adjudicateNodeViolations, isDescriptiveIcpPainFalsePositive };
+module.exports = { adjudicateNodeViolations, isDescriptiveIcpPainFalsePositive, isCanonicalObjectiveRestatement };
