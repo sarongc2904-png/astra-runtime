@@ -1,0 +1,29 @@
+name: ASTRA-12 Web Research Gate
+
+on:
+  pull_request:
+    branches: [astra-11-commercial-intelligence]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  astra12:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax checks
+        run: |
+          node --check astra/src/research/research_policy.js
+          node --check astra/src/research/web_market_research.js
+          node --check astra/src/workflows/marketing_campaign_360_research.js
+          node --check astra/src/integration/gpt_supabase_adapter.js
+          node --check astra/tests/astra12_web_market_research.test.js
+      - name: ASTRA-12 deterministic tests
+        run: node astra/tests/astra12_web_market_research.test.js
+      - name: Async diagnostics regression
+        run: node astra/tests/astra11_campaign_async.test.js
