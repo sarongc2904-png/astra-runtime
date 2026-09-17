@@ -1,6 +1,7 @@
 'use strict';
 const crypto = require('crypto');
 const router = require('./astra_tool_router');
+const diag = require('./diag');
 
 const DEFAULT_TTL_MS = 2 * 60 * 60 * 1000;
 const DEFAULT_MAX_JOBS = 500;
@@ -18,10 +19,16 @@ function prune(ttlMs = DEFAULT_TTL_MS, maxJobs = DEFAULT_MAX_JOBS) {
   for (let i = 0; i < ordered.length && jobs.size > maxJobs; i += 1) jobs.delete(ordered[i].job_id);
 }
 function publicJob(job, includeResult = false) {
+  const lastActivityAt = job.last_activity_at || job.updated_at;
+  const idleMs = job.status === 'RUNNING' && lastActivityAt ? Math.max(0, Date.now() - Date.parse(lastActivityAt)) : 0;
   const out = {
     job_id: job.job_id, status: job.status, created_at: job.created_at,
     started_at: job.started_at || null, completed_at: job.completed_at || null,
-    updated_at: job.updated_at, triggers_action: false,
+    updated_at: job.updated_at, last_activity_at: lastActivityAt || null,
+    current_phase: job.current_phase || null, current_node: job.current_node || null,
+    active_nodes: Array.isArray(job.active_nodes) ? clone(job.active_nodes) : [],
+    health: job.status === 'RUNNING' && idleMs >= 5 * 60 * 1000 ? 'POSSIBLY_STALLED' : (job.status === 'RUNNING' ? 'ACTIVE' : job.status),
+    idle_seconds: Math.floor(idleMs / 1000), triggers_action: false,
   };
   if (job.error) out.error = clone(job.error);
   if (job.reason) out.reason = job.reason;
@@ -42,12 +49,37 @@ function start(body, options = {}, env = process.env, headers = {}) {
   jobs.set(jobId, job);
   Promise.resolve().then(async () => {
     job.status = 'RUNNING'; job.started_at = nowIso(); job.updated_at = job.started_at;
+    job.last_activity_at = job.started_at; job.current_phase = 'STARTING'; job.current_node = null; job.active_nodes = []; job.completed_nodes = [];
+    const runDiagId = 'job-' + job.job_id;
+    diag.mark(runDiagId, 'JOB_RUNNING', { job_id: job.job_id });
+    const routeOptions = Object.assign({}, options, {
+      onProgress: progress => {
+        try {
+          const ts = nowIso();
+          job.last_activity_at = ts; job.updated_at = ts;
+          if (progress && progress.phase) job.current_phase = progress.phase;
+          if (progress && Object.prototype.hasOwnProperty.call(progress, 'current_node')) job.current_node = progress.current_node || null;
+          if (progress && Array.isArray(progress.active_nodes)) job.active_nodes = clone(progress.active_nodes);
+          if (progress && Array.isArray(progress.completed_nodes)) job.completed_nodes = clone(progress.completed_nodes);
+          diag.mark(runDiagId, 'JOB_PROGRESS', {
+            job_id: job.job_id,
+            phase: job.current_phase,
+            current_node: job.current_node,
+            active_nodes: job.active_nodes,
+            completed_nodes: job.completed_nodes,
+          });
+        } catch (_) {}
+      },
+    });
     try {
-      const routed = await router.route({ tool: 'runAstraCampaign360', body: job.request, headers }, options, env);
+      const routed = await router.route({ tool: 'runAstraCampaign360', body: job.request, headers }, routeOptions, env);
       job.result = clone(routed);
       const resultBody = routed.body || {};
       const failed = routed.statusCode >= 400 || resultBody.status === 'FAILED';
       job.status = failed ? 'FAILED' : 'COMPLETE';
+      job.current_phase = failed ? 'FAILED' : 'COMPLETE'; job.current_node = null; job.active_nodes = [];
+      if (Array.isArray(resultBody.completed_nodes)) job.completed_nodes = clone(resultBody.completed_nodes);
+      diag.mark(runDiagId, failed ? 'JOB_FAILED' : 'JOB_COMPLETE', { job_id: job.job_id, completed_nodes: job.completed_nodes || [] });
       if (failed) {
         const reason = typeof resultBody.reason === 'string' && resultBody.reason ? resultBody.reason : null;
         const violations = Array.isArray(resultBody.brief_fidelity_violations) ? resultBody.brief_fidelity_violations : [];
@@ -64,10 +96,12 @@ function start(body, options = {}, env = process.env, headers = {}) {
         if (firstViolation && typeof firstViolation.node === 'string' && firstViolation.node) job.failed_node = firstViolation.node;
       }
     } catch (err) {
-      job.status = 'FAILED';
+      job.status = 'FAILED'; job.current_phase = 'FAILED'; job.current_node = null; job.active_nodes = [];
       job.error = { code: err?.code || 'RUNTIME_FAILURE', message: String(err?.message || 'Campaign 360 async execution failed') };
+      diag.mark(runDiagId, 'JOB_EXCEPTION', { job_id: job.job_id, code: job.error.code });
     }
-    job.completed_at = nowIso(); job.updated_at = job.completed_at;
+    job.completed_at = nowIso(); job.updated_at = job.completed_at; job.last_activity_at = job.completed_at;
+    diag.mark(runDiagId, 'RUN_END', { job_id: job.job_id, status: job.status });
   });
   return { statusCode: 202, body: publicJob(job, false) };
 }
