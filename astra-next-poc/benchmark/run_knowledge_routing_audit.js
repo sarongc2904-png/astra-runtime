@@ -47,7 +47,9 @@ async function runCase(test) {
   const plan = router.buildPlan(test.input);
   const evidence = [];
   const remote = plan.queries.filter(q => q.family !== 'andromeda_local');
-  const remoteTopK = remote.length ? Math.max(2, Math.floor(plan.max_total_evidence_chunks / remote.length)) : 0;
+  const localCount = plan.queries.filter(q => q.family === 'andromeda_local').length;
+  const remoteBudget = Math.max(0, plan.max_total_evidence_chunks - localCount);
+  const remoteTopK = remote.length ? Math.max(1, Math.floor(remoteBudget / remote.length)) : 0;
 
   for (const q of plan.queries) {
     if (q.family === 'andromeda_local') {
@@ -57,9 +59,13 @@ async function runCase(test) {
     evidence.push(...await retrieve(q.family, q.query, Math.min(4, remoteTopK || 4)));
   }
 
+  if (evidence.length > plan.max_total_evidence_chunks) {
+    evidence.length = plan.max_total_evidence_chunks;
+  }
+
   const verdict = router.validateEvidence(test.input, evidence);
   const sources = uniqueSources(evidence);
-  let pass = verdict.ready === test.expectReady;
+  let pass = verdict.ready === test.expectReady && evidence.length <= plan.max_total_evidence_chunks;
   if (test.expectCopyOnly) pass = pass && plan.intent.copyOnly === true && plan.intent.wantsVisual === false;
 
   const out = {
@@ -68,11 +74,12 @@ async function runCase(test) {
     ready:verdict.ready,
     intent:plan.intent,
     evidence_count:evidence.length,
+    evidence_budget:plan.max_total_evidence_chunks,
     sources,
     source_counts:verdict.source_counts,
     violations:verdict.violations,
   };
-  console.log(`[ASTRA_NEXT_KR] case=${out.case} status=${out.status} ready=${out.ready} evidence=${out.evidence_count} sources=${JSON.stringify(out.sources)} counts=${JSON.stringify(out.source_counts)} violations=${JSON.stringify(out.violations)}`);
+  console.log(`[ASTRA_NEXT_KR] case=${out.case} status=${out.status} ready=${out.ready} evidence=${out.evidence_count}/${out.evidence_budget} sources=${JSON.stringify(out.sources)} counts=${JSON.stringify(out.source_counts)} violations=${JSON.stringify(out.violations)}`);
   return out;
 }
 
@@ -93,7 +100,6 @@ async function main() {
     }
   }
 
-  // KR-06: no retrieval means fail closed. This is deliberate and must PASS as a safety test.
   const kr06Input='Hazme un anuncio de Meta Ads para una estética.';
   const kr06Verdict=router.validateEvidence(kr06Input, []);
   const kr06Pass=kr06Verdict.ready===false && kr06Verdict.violations.length>0;
@@ -103,7 +109,7 @@ async function main() {
 
   const passed=results.filter(r=>r.status==='PASS').length;
   const failed=results.length-passed;
-  console.log(`[ASTRA_NEXT_08_KNOWLEDGE_ROUTING] status=${failed===0?'PASS':'FAIL'} passed=${passed} failed=${failed} total=${results.length} llm_calls=0`);
+  console.log(`[ASTRA_NEXT_08_KNOWLEDGE_ROUTING] status=${failed===0?'PASS':'FAIL'} passed=${passed} failed=${failed} total=${results.length} max_evidence_chunks=12 llm_calls=0`);
   if (failed) process.exitCode=1;
 }
 
