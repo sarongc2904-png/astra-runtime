@@ -53,10 +53,12 @@ async function prepareCreativeRequest(input, options = {}) {
     };
   }
 
-  const kbUrl = options.kbUrl || process.env.ASTRA_NEXT_KB_URL || '';
-  const kbKey = options.kbKey || process.env.ASTRA_NEXT_KB_API_KEY || '';
-  const andromedaPath = options.andromedaPath || process.env.ASTRA_NEXT_ANDROMEDA_SOURCE || '';
-  const maxEvidence = Math.min(options.maxEvidence || plan.max_total_evidence_chunks || DEFAULT_MAX_EVIDENCE, DEFAULT_MAX_EVIDENCE);
+  // Explicit overrides, including an intentionally empty value, must win over ENV.
+  // This is required for fail-closed behavior and deterministic testing.
+  const kbUrl = options.kbUrl ?? process.env.ASTRA_NEXT_KB_URL ?? '';
+  const kbKey = options.kbKey ?? process.env.ASTRA_NEXT_KB_API_KEY ?? '';
+  const andromedaPath = options.andromedaPath ?? process.env.ASTRA_NEXT_ANDROMEDA_SOURCE ?? '';
+  const maxEvidence = Math.min(options.maxEvidence ?? plan.max_total_evidence_chunks ?? DEFAULT_MAX_EVIDENCE, DEFAULT_MAX_EVIDENCE);
 
   if (!kbUrl || !kbKey) {
     return {
