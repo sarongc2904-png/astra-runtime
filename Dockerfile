@@ -2,10 +2,7 @@ FROM mintplexlabs/anythingllm:latest
 
 USER root
 
-# POC-only compatibility patch: AnythingLLM's OpenRouter chat adapter currently omits
-# max_tokens, which makes OpenRouter reserve the model's full output ceiling.
-# Inject a bounded max_tokens value while keeping the same provider/model.
-# Also emit exact OpenRouter usage for benchmark telemetry.
+# POC-only compatibility patch: bound OpenRouter output reservations and emit usage.
 RUN node - <<'NODE'
 const fs = require('fs');
 const p = '/app/server/utils/AiProviders/openRouter/index.js';
@@ -18,22 +15,16 @@ const streamNeedle = 'temperature,\n        // This is an OpenRouter specific op
 const streamReplacement = 'temperature,\n        max_tokens: Number(process.env.OPENROUTER_MAX_TOKENS || 8192),\n        // This is an OpenRouter specific option';
 if (!s.includes(streamNeedle)) throw new Error('OpenRouter stream patch target not found');
 s = s.replace(streamNeedle, streamReplacement);
-
 const syncMetricsNeedle = `total_tokens: result.output.usage.total_tokens || 0,\n        outputTps:`;
 const syncMetricsReplacement = `total_tokens: result.output.usage.total_tokens || 0,\n        cost: typeof result.output.usage.cost === "number" ? result.output.usage.cost : null,\n        cost_details: result.output.usage.cost_details || null,\n        outputTps:`;
 if (!s.includes(syncMetricsNeedle)) throw new Error('OpenRouter sync usage telemetry patch target not found');
 s = s.replace(syncMetricsNeedle, syncMetricsReplacement);
-
 const usageNeedle = `usage = {\n              prompt_tokens: chunk.usage.prompt_tokens,\n              completion_tokens: chunk.usage.completion_tokens,\n              total_tokens: chunk.usage.total_tokens,\n            };`;
 const usageReplacement = `usage = {\n              prompt_tokens: chunk.usage.prompt_tokens || 0,\n              completion_tokens: chunk.usage.completion_tokens || 0,\n              total_tokens: chunk.usage.total_tokens || 0,\n              cost: typeof chunk.usage.cost === "number" ? chunk.usage.cost : null,\n              cost_details: chunk.usage.cost_details || null,\n            };\n            console.log("[ASTRA_NEXT_OPENROUTER_USAGE] " + JSON.stringify(usage));`;
 if (!s.includes(usageNeedle)) throw new Error('OpenRouter stream usage telemetry patch target not found');
 s = s.replace(usageNeedle, usageReplacement);
 fs.writeFileSync(p, s);
 
-// Agent-mode OpenRouter uses the shared tooled helper. The helper supports an
-// explicit maxTokens option, but the OpenRouter provider does not pass it.
-// Bound only the agent output budget so low-credit accounts do not reserve the
-// model's full 65k output ceiling before a tool call can execute.
 const agentPath = '/app/server/utils/agents/aibitat/providers/openrouter.js';
 let a = fs.readFileSync(agentPath, 'utf8');
 const agentNeedle = '{ provider: this, serviceTier: this.serviceTier }';
@@ -47,11 +38,14 @@ COPY astra-next-poc/deployment/bootstrap.sh /usr/local/bin/astra-next-bootstrap.
 COPY astra-next-poc/deployment/entrypoint.sh /usr/local/bin/astra-next-entrypoint.sh
 RUN chmod +x /usr/local/bin/astra-next-bootstrap.sh /usr/local/bin/astra-next-entrypoint.sh
 
-RUN mkdir -p /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative
+RUN mkdir -p /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative /opt/astra-next-poc/runtime /opt/astra-next-poc/knowledge
 COPY astra-next-poc/benchmark/adjudicate_campaign360.js /opt/astra-next-benchmark/adjudicate_campaign360.js
 COPY astra-next-poc/benchmark/run_campaign360_sync.js /opt/astra-next-benchmark/run_campaign360_sync.js
 COPY astra-next-poc/benchmark/run_knowledge_routing_audit.js /opt/astra-next-benchmark/run_knowledge_routing_audit.js
 COPY astra-next-poc/benchmark/run_grounded_creative_output_qa.js /opt/astra-next-benchmark/run_grounded_creative_output_qa.js
+COPY astra-next-poc/benchmark/run_creative_gateway_enforcement_qa.js /opt/astra-next-poc/benchmark/run_creative_gateway_enforcement_qa.js
+COPY astra-next-poc/runtime/creative_gateway.js /opt/astra-next-poc/runtime/creative_gateway.js
+COPY astra-next-poc/knowledge/creative_knowledge_router.js /opt/astra-next-poc/knowledge/creative_knowledge_router.js
 COPY astra-next-poc/knowledge/creative_knowledge_router.js /opt/astra-next-creative/creative_knowledge_router.js
 COPY astra-next-poc/knowledge/creative_source_manifest.json /opt/astra-next-creative/creative_source_manifest.json
 COPY astra-next-poc/knowledge/META_ANDROMEDA_VERIFIED_2026.md /opt/astra-next-creative/META_ANDROMEDA_VERIFIED_2026.md
@@ -62,7 +56,7 @@ COPY astra/src/router/knowledge_query_planner.js /opt/astra-next-kb/04-knowledge
 COPY astra/src/creative/creative_knowledge.js /opt/astra-next-kb/05-creative-knowledge.js
 COPY astra/ASTRA_08A_DESIGN_KNOWLEDGE_COVERAGE_AUDIT_REPORT.md /opt/astra-next-kb/06-design-knowledge-audit.md
 COPY astra/knowledge_gap_ingestion/extraction_qa.json /opt/astra-next-kb/07-meta-ads-extraction-qa.json
-RUN chown -R anythingllm:anythingllm /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative && chmod -R a+rX /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative
+RUN chown -R anythingllm:anythingllm /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative /opt/astra-next-poc && chmod -R a+rX /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative /opt/astra-next-poc
 
 ENV ASTRA_NEXT_ANDROMEDA_SOURCE=/opt/astra-next-creative/META_ANDROMEDA_VERIFIED_2026.md
 ENV STORAGE_DIR=/app/server/storage
