@@ -20,6 +20,7 @@ const { MAX_EVIDENCE_PER_STEP } = require('../../config/context_budgets');
 const diag = require('../integration/diag'); // [ASTRA-DIAG] temporary instrumentation (ASTRA-10S)
 const briefFacts = require('./campaign_brief_facts'); // [Brief Fidelity] CANONICAL_BRIEF_FACTS
 const fidelity = require('./brief_fidelity_validator'); // [Brief Fidelity] node + final validators
+const fidelityGuard = require('./fidelity_false_positive_guard'); // narrow live false-positive adjudication
 const llmExec = require('../llm/llm_executor'); // [Final Synthesis Repair] bounded regeneration only
 
 // [Final Synthesis Repair — bounded regeneration] Deterministic repair (fidelity.repairFinalSynthesis)
@@ -199,12 +200,13 @@ async function processNode(n, ctx) {
   const REPAIRABLE_VIOLATION_TYPES = new Set(['UNLABELED_UPSTREAM_PROPOSAL_PROPAGATION', 'UNLABELED_PROPOSAL']);
   if (canonicalBriefFacts) {
     let { violations } = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, output, { nodeId: n.id, upstream_outputs: input.upstream_outputs });
+    violations = fidelityGuard.adjudicateNodeViolations(n.id, violations).violations;
     if (violations.length && violations.every(v => REPAIRABLE_VIOLATION_TYPES.has(v.type))) {
       const repaired = fidelity.repairUpstreamProposalStatus(canonicalBriefFacts, output, input.upstream_outputs);
       proposalStatusRepairs = repaired.repairs.map(repair => ({ node: n.id, ...repair }));
       const secondValidation = fidelity.validateOutputAgainstFacts(canonicalBriefFacts, repaired.output, { nodeId: n.id, upstream_outputs: input.upstream_outputs });
       output = repaired.output;
-      violations = secondValidation.violations;
+      violations = fidelityGuard.adjudicateNodeViolations(n.id, secondValidation.violations).violations;
     }
     if (violations.length) {
       const e = new Error('BRIEF_FIDELITY_VIOLATION at node ' + n.id + ': ' + violations.map(v => v.type).join(', '));
