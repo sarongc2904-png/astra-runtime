@@ -32,6 +32,7 @@ const RESEARCH_PROVENANCE_POLICY = [
   'Un dato investigado describe exclusivamente a la fuente, competidor o mercado observado; nunca se atribuye al negocio del usuario como resultado propio.',
   'Un dato sin respaldo permanece UNKNOWN.',
   'Toda estrategia, oferta, bono, apilamiento de valor, descuento propio o recomendación nueva debe identificarse como PROPUESTA.',
+  'En la etapa Oferta, ASTRA debe generar PROPUESTA de oferta, apilamiento de valor, bonos, reducción de riesgo y diferenciador sustentados en la investigación, sin sustituir precio, moneda ni otros hechos canónicos del usuario.',
 ].join(' ');
 
 function normalizeResearchRequest(rawRequest) {
@@ -51,6 +52,7 @@ function provenancePolicySummary() {
     inference: 'INFERENCE',
     new_strategy: 'PROPUESTA',
     unsupported: 'UNKNOWN',
+    offer_design: 'RESEARCH_GROUNDED_PROPOSAL_REQUIRED',
   };
 }
 
