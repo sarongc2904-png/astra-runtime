@@ -1,0 +1,37 @@
+{
+  "id": "ASTRA_NEXT_CREATIVE_KNOWLEDGE_V1",
+  "status": "AUDITED",
+  "source_project_ref": "ftoxermwkfebmnrudiuu",
+  "primary_corpus": "public.kb_chunks",
+  "secondary_corpus": "public.kb_chunks_v2",
+  "design_core": [
+    {"source_file":"GRAPHIC_DESIGN_SOLUTIONS_4E_ROBIN_LANDA.md","role":"graphic_design_principles","chunks":466,"embedded":466,"required_for":["graphic_design","layout","hierarchy","color","typography","composition"]},
+    {"source_file":"THE_ELEMENTS_OF_GRAPHIC_DESIGN_ALEX_WHITE.md","role":"formal_design_principles","chunks":183,"embedded":183,"required_for":["graphic_design","negative_space","hierarchy","typography","composition"]},
+    {"source_file":"HEY_WHIPPLE_SQUEEZE_THIS_LUKE_SULLIVAN.md","role":"advertising_copy_and_concept","chunks":243,"embedded":243,"required_for":["copywriting","advertising_concept","headline","creative_strategy"]},
+    {"source_file":"THE_ADVERTISING_CONCEPT_BOOK_PETE_BARRY.md","role":"advertising_concept_and_art_direction","chunks":217,"embedded":217,"required_for":["advertising_concept","visual_idea","headline_image_relationship","art_direction","copywriting"]}
+  ],
+  "meta_current": [
+    {"source_file":"20_META_ADS_2026.md","role":"verified_current_meta_rules","chunks":6,"embedded":6},
+    {"source_file":"Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]","source_id":"SRC_META_VELOCITY_FACEBOOK_COURSE","role":"meta_ads_strategy","chunks":35,"embedded":35},
+    {"source_file":"Estudio de Mercado Meta Ads Mexico.md","role":"mexico_market_context","chunks":6,"embedded":6}
+  ],
+  "known_gaps": [
+    {
+      "id":"KNOWLEDGE_GAP_ANDROMEDA",
+      "topic":"Meta Andromeda",
+      "status":"MISSING_DEDICATED_SOURCE",
+      "rule":"Do not claim Andromeda-specific doctrine as evidence until a dedicated verified source is ingested. Use current Meta sources only for claims they explicitly support."
+    }
+  ],
+  "routing_policy": {
+    "creative_output_requires_retrieval": true,
+    "minimum_distinct_design_sources": 2,
+    "visual_ad_requires_one_formal_design_source": true,
+    "visual_ad_requires_one_advertising_concept_source": true,
+    "meta_ad_requires_current_meta_source": true,
+    "explicit_andromeda_request_requires_dedicated_andromeda_source": true,
+    "fallback_when_required_source_missing":"BLOCK_OR_LABEL_KNOWLEDGE_GAP",
+    "whole_kb_dump": false,
+    "max_evidence_chunks_per_task": 12
+  }
+}
