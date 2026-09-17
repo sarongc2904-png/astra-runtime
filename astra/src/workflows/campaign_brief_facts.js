@@ -103,7 +103,7 @@ function captureConstraintsBlock(text) {
   if (sameLineTail) collected.push(sameLineTail);
   for (let i = startIdx + 1; i < lines.length; i++) {
     const line = lines[i];
-    if (STRUCTURAL_HEADING_STOP.test(line)) break;
+    if (STRUCTURAL_HEADING_STOP.test(line) || isKnownSectionHeading(line)) break;
     const trimmed = line.trim();
     if (!trimmed) continue; // blank lines inside the block are skipped, not treated as the end
     collected.push(trimmed.replace(/^[-*•]\s*/, ''));
@@ -146,20 +146,31 @@ function firstNaturalMatch(naturalText, patterns) {
 // AUDIENCIA
 // MERCADO / GEOGRAFÍA
 // rather than "Label: value" lines. Treat those blocks as first-class user-provided facts.
-const KNOWN_SECTION_HEADING = /^\s*(?:NEGOCIO\s*\/\s*PRODUCTO|OBJETIVO\s+PRINCIPAL|AUDIENCIA|OFERTA\s+ACTUAL|CANAL\s+PRINCIPAL|MERCADO\s*\/\s*GEOGRAF[IÍ]A|PRESUPUESTO|RESTRICCIONES?|INVESTIGACI[OÓ]N\s+OBLIGATORIA|REGLA\s+DE\s+PROCEDENCIA|SECUENCIA\s+OBLIGATORIA|ENTREGABLE\s+FINAL)\s*:?\s*$/i;
+const KNOWN_SECTION_HEADING = /^(?:NEGOCIO\s*\/\s*PRODUCTO|OBJETIVO\s+PRINCIPAL|AUDIENCIA|OFERTA\s+ACTUAL|CANAL\s+PRINCIPAL|MERCADO\s*\/\s*GEOGRAF[IÍ]A|PRESUPUESTO|RESTRICCIONES?|INVESTIGACI[OÓ]N\s+OBLIGATORIA|REGLA\s+DE\s+PROCEDENCIA|SECUENCIA\s+OBLIGATORIA|ENTREGABLE\s+FINAL)$/i;
+
+function normalizeHeadingLine(line) {
+  return String(line || '')
+    .trim()
+    .replace(/^#{1,6}\s*/, '')
+    .replace(/^\*\*(.+)\*\*$/, '$1')
+    .replace(/^__(.+)__$/, '$1')
+    .replace(/:\s*$/, '')
+    .trim();
+}
+function isKnownSectionHeading(line) { return KNOWN_SECTION_HEADING.test(normalizeHeadingLine(line)); }
 
 function captureSectionLines(text, headingRe) {
   const lines = String(text || '').split(/\r?\n/);
   let start = -1;
   for (let i = 0; i < lines.length; i++) {
-    if (headingRe.test(lines[i].trim())) { start = i + 1; break; }
+    if (headingRe.test(normalizeHeadingLine(lines[i]))) { start = i + 1; break; }
   }
   if (start === -1) return [];
   const out = [];
   for (let i = start; i < lines.length; i++) {
     const raw = lines[i];
     const trimmed = raw.trim();
-    if (KNOWN_SECTION_HEADING.test(trimmed)) break;
+    if (isKnownSectionHeading(trimmed)) break;
     if (!trimmed) {
       if (out.length) out.push('');
       continue;
@@ -204,6 +215,15 @@ function extractAudienceBuyer(lines) {
   }
   if (prefix && values.length) return cleanValue(prefix + values.join(', '));
   return null;
+}
+
+function extractProductNameFromSection(lines) {
+  const first = firstMeaningfulSectionLine(lines);
+  if (!first) return null;
+  const crm = first.match(/\b(CRM\s+con\s+IA)\b/i);
+  if (crm) return cleanValue(crm[1]);
+  const beforeFor = first.match(/^([^.!?]{2,100}?)(?:\s+para\b|\.|$)/i);
+  return beforeFor ? cleanValue(beforeFor[1]) : null;
 }
 
 function extractProductTypeFromSection(lines) {
@@ -263,18 +283,19 @@ function extract(rawRequest) {
   const text = String(rawRequest || '');
   const naturalText = collapseWhitespace(text);
 
-  const productSection = captureSectionLines(text, /^\s*NEGOCIO\s*\/\s*PRODUCTO\s*:?\s*$/i);
-  const objectiveSection = captureSectionLines(text, /^\s*OBJETIVO\s+PRINCIPAL\s*:?\s*$/i);
-  const audienceSection = captureSectionLines(text, /^\s*AUDIENCIA\s*:?\s*$/i);
-  const geographySection = captureSectionLines(text, /^\s*MERCADO\s*\/\s*GEOGRAF[IÍ]A\s*:?\s*$/i);
+  const productSection = captureSectionLines(text, /^NEGOCIO\s*\/\s*PRODUCTO$/i);
+  const objectiveSection = captureSectionLines(text, /^OBJETIVO\s+PRINCIPAL$/i);
+  const audienceSection = captureSectionLines(text, /^AUDIENCIA$/i);
+  const geographySection = captureSectionLines(text, /^MERCADO\s*\/\s*GEOGRAF[IÍ]A$/i);
 
   // product_name: the structured-brief opening ("Crea una campaña 360 para Método 360.") is the
   // authoritative source when present — it names the product independently of what "Producto:"
   // holds below it. Falls back to the labeled "Producto:"/"Product:" line (legacy meaning: the
   // label held the name directly, e.g. "Producto: Método 360"), then other natural forms.
+  const sectionProductName = extractProductNameFromSection(productSection);
   const openingProductName = firstNaturalMatch(naturalText, NATURAL_PATTERNS.product_name.slice(0, 1));
   const productoLabelRaw = firstLabeledMatch(text, FIELD_LABELS.product_name);
-  const product_name = openingProductName || productoLabelRaw || firstNaturalMatch(naturalText, NATURAL_PATTERNS.product_name.slice(1));
+  const product_name = sectionProductName || openingProductName || productoLabelRaw || firstNaturalMatch(naturalText, NATURAL_PATTERNS.product_name.slice(1));
   // product_type: "Tipo:" is unambiguous and always wins. Otherwise, if the opening sentence
   // already supplied product_name, "Producto:" is read as the type instead (structured-brief
   // contract: "Producto: minicurso grabado.") rather than being wasted as an unused duplicate of
