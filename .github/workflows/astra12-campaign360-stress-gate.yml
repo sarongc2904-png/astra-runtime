@@ -1,0 +1,27 @@
+name: ASTRA-12 Campaign360 Stress Gate
+
+on:
+  pull_request:
+    paths:
+      - 'astra/src/**'
+      - 'astra/tests/astra12_campaign360_stress_gate.test.js'
+      - '.github/workflows/astra12-campaign360-stress-gate.yml'
+  push:
+    branches:
+      - astra-11-commercial-intelligence
+    paths:
+      - 'astra/src/**'
+      - 'astra/tests/astra12_campaign360_stress_gate.test.js'
+      - '.github/workflows/astra12-campaign360-stress-gate.yml'
+
+jobs:
+  stress-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run 50-case Campaign360 offline stress gate
+        run: node astra/tests/astra12_campaign360_stress_gate.test.js
