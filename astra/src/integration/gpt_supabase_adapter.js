@@ -15,16 +15,14 @@ function campaignPayload(result) {
     current_research_required: result.synthesis ? result.synthesis.deliverable['17_current_research_required'] || [] : [],
     limitations: result.synthesis ? result.synthesis.deliverable['16_known_limitations'] || [] : [],
     usage: result.cost || {}, reason: result.reason || null, required_inputs: result.required_inputs || [],
-    // [Brief Fidelity diagnostic passthrough] marketing_campaign_360_hardened.js already computes
-    // these on a BRIEF_FIDELITY_VIOLATION (and on a clean COMPLETE); surface them so a GPT sees
-    // the exact violating field(s)/path(s) instead of only the generic reason string. Both are
-    // still routed through response.sanitize() below — no prompts/evidence text/secrets here.
     canonical_brief_facts: result.canonical_brief_facts || null,
     brief_fidelity_violations: result.brief_fidelity_violations || [],
-    // [ASTRA-12] Externally researched market evidence is first-class output. It is source-verified
-    // by the research provider before entering the DAG and remains separate from USER_PROVIDED_FACT.
+    // ASTRA-12: web research is independently source-verified, then a second deterministic gate
+    // proves that market_context, ICP and offer actually cited it before COMPLETE is surfaced.
     research_policy: result.research_policy || null,
     web_research: result.web_research || null,
+    research_grounding: result.research_grounding || {},
+    research_provenance_violations: result.research_provenance_violations || [],
   });
 }
 function makeCampaignRuntime(options = {}, env = process.env) {
