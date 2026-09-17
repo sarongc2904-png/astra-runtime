@@ -1,5 +1,5 @@
 'use strict';
-const H = require('../workflows/marketing_campaign_360_hardened');
+const H = require('../workflows/marketing_campaign_360_research');
 const CD = require('../creative/creative_director');
 const CG = require('../creative_generation/creative_generation_orchestrator');
 const runtimeConfig = require('../runtime/runtime_config');
@@ -15,12 +15,14 @@ function campaignPayload(result) {
     current_research_required: result.synthesis ? result.synthesis.deliverable['17_current_research_required'] || [] : [],
     limitations: result.synthesis ? result.synthesis.deliverable['16_known_limitations'] || [] : [],
     usage: result.cost || {}, reason: result.reason || null, required_inputs: result.required_inputs || [],
-    // [Brief Fidelity diagnostic passthrough] marketing_campaign_360_hardened.js already computes
-    // these on a BRIEF_FIDELITY_VIOLATION (and on a clean COMPLETE); surface them so a GPT sees
-    // the exact violating field(s)/path(s) instead of only the generic reason string. Both are
-    // still routed through response.sanitize() below — no prompts/evidence text/secrets here.
     canonical_brief_facts: result.canonical_brief_facts || null,
     brief_fidelity_violations: result.brief_fidelity_violations || [],
+    // ASTRA-12: web research is independently source-verified, then a second deterministic gate
+    // proves that market_context, ICP and offer actually cited it before COMPLETE is surfaced.
+    research_policy: result.research_policy || null,
+    web_research: result.web_research || null,
+    research_grounding: result.research_grounding || {},
+    research_provenance_violations: result.research_provenance_violations || [],
   });
 }
 function makeCampaignRuntime(options = {}, env = process.env) {
@@ -29,7 +31,10 @@ function makeCampaignRuntime(options = {}, env = process.env) {
     const cfg = runtimeConfig.load(env); const valid = runtimeConfig.validate(cfg);
     if (!valid.valid) { const e = new Error('runtime configuration invalid'); e.code = 'ENVIRONMENT_NOT_AVAILABLE'; throw e; }
     const provider = providerFactory.createProvider(cfg);
-    return H.run(input, { mode: 'llm', retrieve: true, llm: (s, u, o) => provider.runner(s, u, o) });
+    return H.run(input, {
+      mode: 'llm', retrieve: true, webResearch: true, researchEnv: env,
+      llm: (s, u, o) => provider.runner(s, u, o),
+    });
   };
 }
 function briefFromCreativeInput(input, body = {}) {
