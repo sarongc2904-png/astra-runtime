@@ -1,5 +1,5 @@
 'use strict';
-const H = require('../workflows/marketing_campaign_360_hardened');
+const H = require('../workflows/marketing_campaign_360_research');
 const CD = require('../creative/creative_director');
 const CG = require('../creative_generation/creative_generation_orchestrator');
 const runtimeConfig = require('../runtime/runtime_config');
@@ -21,6 +21,10 @@ function campaignPayload(result) {
     // still routed through response.sanitize() below — no prompts/evidence text/secrets here.
     canonical_brief_facts: result.canonical_brief_facts || null,
     brief_fidelity_violations: result.brief_fidelity_violations || [],
+    // [ASTRA-12] Externally researched market evidence is first-class output. It is source-verified
+    // by the research provider before entering the DAG and remains separate from USER_PROVIDED_FACT.
+    research_policy: result.research_policy || null,
+    web_research: result.web_research || null,
   });
 }
 function makeCampaignRuntime(options = {}, env = process.env) {
@@ -29,7 +33,10 @@ function makeCampaignRuntime(options = {}, env = process.env) {
     const cfg = runtimeConfig.load(env); const valid = runtimeConfig.validate(cfg);
     if (!valid.valid) { const e = new Error('runtime configuration invalid'); e.code = 'ENVIRONMENT_NOT_AVAILABLE'; throw e; }
     const provider = providerFactory.createProvider(cfg);
-    return H.run(input, { mode: 'llm', retrieve: true, llm: (s, u, o) => provider.runner(s, u, o) });
+    return H.run(input, {
+      mode: 'llm', retrieve: true, webResearch: true, researchEnv: env,
+      llm: (s, u, o) => provider.runner(s, u, o),
+    });
   };
 }
 function briefFromCreativeInput(input, body = {}) {
