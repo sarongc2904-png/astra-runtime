@@ -25,7 +25,11 @@ const SPECS = {
 };
 
 function evidenceBlock(evidence) {
-  return (evidence || []).map((e, i) => `[E${i + 1} chunk:${e.chunk_id} src:${e.source_pdf_name || e.source_id || '?'}]\n${String(e.text || '').replace(/\s+/g, ' ').trim().slice(0, 600)}`).join('\n\n').slice(0, MAX_EVIDENCE_PER_STEP);
+  return (evidence || []).map((e, i) => {
+    const external = /^WEB_\d+$/i.test(String(e.chunk_id || '')) || e.source_class === 'EXTERNAL_RESEARCH';
+    const sourceClass = external ? 'EXTERNAL_RESEARCH' : (e.source_class || 'INTERNAL_KNOWLEDGE');
+    return `[E${i + 1} chunk:${e.chunk_id} class:${sourceClass} src:${e.source_pdf_name || e.source_id || '?'}]\n${String(e.text || '').replace(/\s+/g, ' ').trim().slice(0, 600)}`;
+  }).join('\n\n').slice(0, MAX_EVIDENCE_PER_STEP);
 }
 
 // [Offer Constraint Adherence — confirmed live defect, job 58a4113f-9e0a-413f-b84f-094a7132298a]
@@ -94,6 +98,7 @@ function buildPrompt(input) {
     `- Use ONLY the supplied evidence, method metadata, task brief, canonical facts, and upstream outputs. Do NOT use outside knowledge.`,
     `- Tag every recommendation with support_class one of: ${SUPPORT_CLASSES.join(', ')}.`,
     `- DIRECTLY_SUPPORTED requires an evidence reference (cite E# / chunk). INFERENCE = reasoned from method/brief. ASSUMPTION = a stated gap needing USER_PROVIDED_FACTS.`,
+    `- EXTERNAL_RESEARCH evidence is verified web research. It may support market/competitor/review/testimonial claims only as attributed evidence; never reattribute it as the user's own result.`,
     `- For anything requiring CURRENT platform/provider/market facts you do not have (e.g. ${(spec.current || []).join(', ') || 'current market/pricing/competitor data'}), do NOT invent it: put it in current_research_required and mark CURRENT_RESEARCH_REQUIRED.`,
     `- Never invent benchmark numbers, guarantees, provider/API behavior, or current-platform doctrine. Preserve the method's stated limitations.`,
     `- Be specific to the actual business (${input.task_brief.business_type}). Non-generic. Downstream-usable.`,
@@ -117,6 +122,24 @@ function buildPrompt(input) {
 const OUT_SCHEMA = { required: ['findings', 'recommendations', 'decisions', 'assumptions', 'conflicts', 'confidence', 'current_research_required', 'downstream_payload'],
   arrays: ['findings', 'recommendations', 'decisions', 'assumptions', 'conflicts', 'current_research_required'] };
 
+function evidenceForRef(ref, evidence) {
+  const items = evidence || [];
+  const raw = String(ref || '').trim();
+  const direct = items.find(e => String(e && e.chunk_id || '').toUpperCase() === raw.toUpperCase());
+  if (direct) return direct;
+  const m = /^E(\d+)$/i.exec(raw);
+  if (!m) return null;
+  return items[Number(m[1]) - 1] || null;
+}
+
+function sourceClassForFinding(finding, evidence) {
+  if (finding.support_class !== 'DIRECTLY_SUPPORTED') return 'INFERENCE';
+  const item = evidenceForRef(finding.evidence_ref, evidence);
+  if (!item) return 'INTERNAL_KNOWLEDGE';
+  if (item.source_class === 'EXTERNAL_RESEARCH' || /^WEB_\d+$/i.test(String(item.chunk_id || ''))) return 'EXTERNAL_RESEARCH';
+  return item.source_class || 'INTERNAL_KNOWLEDGE';
+}
+
 async function runLLMSpecialist(input, opts = {}) {
   const { system, user } = buildPrompt(input);
   const res = await llm.execute({ system, user, schema: OUT_SCHEMA, model: opts.model, max_tokens: opts.max_tokens, llm: opts.llm });
@@ -124,9 +147,13 @@ async function runLLMSpecialist(input, opts = {}) {
   // unchanged on both branches so ASTRA-DIAG can report them even on terminal fail-closed failure.
   if (!res.ok) return { ok: false, fail_closed: true, error: res.error, attempts: res.attempts, retries: res.retries, usage: res.usage, usage_detail: res.usage_detail, finish_reason: res.finish_reason, llm_elapsed_ms: res.llm_elapsed_ms };
   const v = res.value;
-  // enforce support_class validity + provenance (DIRECTLY_SUPPORTED must cite evidence)
-  const evIds = new Set((input.knowledge_evidence || []).map(e => e.chunk_id));
-  const findings = (v.findings || []).map(f => ({ claim: String(f.claim || ''), source_class: (f.support_class === 'DIRECTLY_SUPPORTED') ? 'INTERNAL_KNOWLEDGE' : 'INFERENCE', support_class: SUPPORT_CLASSES.includes(f.support_class) ? f.support_class : 'INFERENCE', evidence_ref: f.evidence_ref || null }));
+  // Enforce support_class validity while preserving the provenance class of cited evidence.
+  const findings = (v.findings || []).map(f => ({
+    claim: String(f.claim || ''),
+    source_class: sourceClassForFinding(f, input.knowledge_evidence),
+    support_class: SUPPORT_CLASSES.includes(f.support_class) ? f.support_class : 'INFERENCE',
+    evidence_ref: f.evidence_ref || null,
+  }));
   const recommendations = (v.recommendations || []).map(r => ({ recommendation: String(r.recommendation || ''), support_class: SUPPORT_CLASSES.includes(r.support_class) ? r.support_class : 'INFERENCE', basis: r.basis || null }));
   const output = {
     task_id: input.task_id, specialist_type: input.specialist_type, status: 'COMPLETE',
@@ -145,4 +172,4 @@ async function runLLMSpecialist(input, opts = {}) {
   return { ok: true, output };
 }
 
-module.exports = { runLLMSpecialist, buildPrompt, SPECS, SUPPORT_CLASSES, OUT_SCHEMA };
+module.exports = { runLLMSpecialist, buildPrompt, SPECS, SUPPORT_CLASSES, OUT_SCHEMA, evidenceForRef, sourceClassForFinding };
