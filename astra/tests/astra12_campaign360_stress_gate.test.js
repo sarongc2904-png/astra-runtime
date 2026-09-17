@@ -98,6 +98,7 @@ const CASES = [
       reason: r.reason || null,
       required_inputs: Array.isArray(r.required_inputs) ? r.required_inputs : [],
       brief_fidelity_violations: Array.isArray(r.brief_fidelity_violations) ? r.brief_fidelity_violations : [],
+      error: r.error ? { code: r.error.code || null, message: r.error.message || null } : null,
       nodes: (r.node_outputs || []).map(x => x.work_unit_id),
       synthesis: !!(r.synthesis && r.synthesis.deliverable),
       elapsed_ms: Date.now() - t0,
@@ -113,7 +114,8 @@ const CASES = [
     const hasReason = typeof x.reason === 'string' && x.reason.length > 0;
     const hasInputs = Array.isArray(x.required_inputs) && x.required_inputs.length > 0;
     const hasViolations = Array.isArray(x.brief_fidelity_violations) && x.brief_fidelity_violations.length > 0;
-    return !(hasReason || hasInputs || hasViolations);
+    const hasError = !!(x.error && (x.error.code || x.error.message));
+    return !(hasReason || hasInputs || hasViolations || hasError);
   });
 
   assert.equal(CASES.length, 50, 'stress corpus must remain exactly 50 cases');
@@ -138,6 +140,7 @@ const CASES = [
       reason: x.reason,
       required_inputs: x.required_inputs,
       violation_count: x.brief_fidelity_violations.length,
+      error: x.error,
     })),
     elapsed_ms: Date.now() - started,
   }));
