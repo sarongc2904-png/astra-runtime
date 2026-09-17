@@ -17,11 +17,14 @@ const ANDROMEDA = new Set(['META_ANDROMEDA_VERIFIED_2026.md']);
 
 function classifyRequest(input = '') {
   const text = String(input).toLowerCase();
-  const wantsVisual = /(diseñ|design|creativ|anuncio|ad\b|banner|poster|imagen|visual|layout|tipograf|color|composici)/i.test(text);
   const wantsCopy = /(copy|headline|titular|texto|gancho|hook|slogan|tagline)/i.test(text);
+  const explicitVisual = /(diseñ|design|creativ|banner|poster|imagen|visual|layout|tipograf|color|composici|jerarqu|espacio negativo|direcci[oó]n de arte|art direction)/i.test(text);
+  const genericAd = /(anuncio|\bad\b)/i.test(text);
+  const copyOnly = wantsCopy && !explicitVisual;
+  const wantsVisual = explicitVisual || (genericAd && !copyOnly);
   const wantsMeta = /(meta ads|facebook ads|instagram ads|campaña|andromeda)/i.test(text);
   const wantsAndromeda = /andromeda/i.test(text);
-  return { wantsVisual, wantsCopy, wantsMeta, wantsAndromeda };
+  return { wantsVisual, wantsCopy, wantsMeta, wantsAndromeda, copyOnly };
 }
 
 function buildPlan(input = '') {
