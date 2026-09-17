@@ -44,11 +44,16 @@ fs.writeFileSync(agentPath, a);
 NODE
 
 COPY astra-next-poc/deployment/bootstrap.sh /usr/local/bin/astra-next-bootstrap.sh
-RUN chmod +x /usr/local/bin/astra-next-bootstrap.sh
+COPY astra-next-poc/deployment/entrypoint.sh /usr/local/bin/astra-next-entrypoint.sh
+RUN chmod +x /usr/local/bin/astra-next-bootstrap.sh /usr/local/bin/astra-next-entrypoint.sh
 
-RUN mkdir -p /opt/astra-next-kb /opt/astra-next-benchmark
+RUN mkdir -p /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative
 COPY astra-next-poc/benchmark/adjudicate_campaign360.js /opt/astra-next-benchmark/adjudicate_campaign360.js
 COPY astra-next-poc/benchmark/run_campaign360_sync.js /opt/astra-next-benchmark/run_campaign360_sync.js
+COPY astra-next-poc/benchmark/run_knowledge_routing_audit.js /opt/astra-next-benchmark/run_knowledge_routing_audit.js
+COPY astra-next-poc/knowledge/creative_knowledge_router.js /opt/astra-next-creative/creative_knowledge_router.js
+COPY astra-next-poc/knowledge/creative_source_manifest.json /opt/astra-next-creative/creative_source_manifest.json
+COPY astra-next-poc/knowledge/META_ANDROMEDA_VERIFIED_2026.md /opt/astra-next-creative/META_ANDROMEDA_VERIFIED_2026.md
 COPY astra/methods/registry.json /opt/astra-next-kb/01-method-registry.json
 COPY astra/ASTRA_03_KNOWLEDGE_METHOD_DISCOVERY_REPORT.md /opt/astra-next-kb/02-knowledge-method-discovery.md
 COPY astra/ASTRA_03B_MULTI_DOMAIN_KNOWLEDGE_SOURCE_INGESTION_REPORT.md /opt/astra-next-kb/03-multi-domain-ingestion-report.md
@@ -56,10 +61,11 @@ COPY astra/src/router/knowledge_query_planner.js /opt/astra-next-kb/04-knowledge
 COPY astra/src/creative/creative_knowledge.js /opt/astra-next-kb/05-creative-knowledge.js
 COPY astra/ASTRA_08A_DESIGN_KNOWLEDGE_COVERAGE_AUDIT_REPORT.md /opt/astra-next-kb/06-design-knowledge-audit.md
 COPY astra/knowledge_gap_ingestion/extraction_qa.json /opt/astra-next-kb/07-meta-ads-extraction-qa.json
-RUN chown -R anythingllm:anythingllm /opt/astra-next-kb /opt/astra-next-benchmark && chmod -R a+rX /opt/astra-next-kb /opt/astra-next-benchmark
+RUN chown -R anythingllm:anythingllm /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative && chmod -R a+rX /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative
 
+ENV ASTRA_NEXT_ANDROMEDA_SOURCE=/opt/astra-next-creative/META_ANDROMEDA_VERIFIED_2026.md
 ENV STORAGE_DIR=/app/server/storage
 EXPOSE 3001
 
 USER anythingllm
-ENTRYPOINT ["/usr/local/bin/astra-next-bootstrap.sh"]
+ENTRYPOINT ["/usr/local/bin/astra-next-entrypoint.sh"]
