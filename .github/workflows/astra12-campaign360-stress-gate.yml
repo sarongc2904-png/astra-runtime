@@ -6,6 +6,7 @@ on:
       - 'astra/src/**'
       - 'astra/tests/astra12_campaign360_stress_gate.test.js'
       - 'astra/tests/astra12_icp_pains_participle_fidelity.test.js'
+      - 'astra/tests/astra12_campaign360_structured_brief_facts.test.js'
       - '.github/workflows/astra12-campaign360-stress-gate.yml'
   push:
     branches:
@@ -14,6 +15,7 @@ on:
       - 'astra/src/**'
       - 'astra/tests/astra12_campaign360_stress_gate.test.js'
       - 'astra/tests/astra12_icp_pains_participle_fidelity.test.js'
+      - 'astra/tests/astra12_campaign360_structured_brief_facts.test.js'
       - '.github/workflows/astra12-campaign360-stress-gate.yml'
 
 jobs:
@@ -27,5 +29,7 @@ jobs:
           node-version: '20'
       - name: Run ICP pains fidelity regression
         run: node astra/tests/astra12_icp_pains_participle_fidelity.test.js
+      - name: Run structured brief facts regression
+        run: node astra/tests/astra12_campaign360_structured_brief_facts.test.js
       - name: Run 50-case Campaign360 offline stress gate
         run: node astra/tests/astra12_campaign360_stress_gate.test.js
