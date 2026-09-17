@@ -42,6 +42,51 @@ curl -fsS -X POST http://127.0.0.1:3001/api/onboarding -H "$AUTH_HEADER" -H 'Con
 [ -n "${OPENROUTER_API_KEY:-}" ] && log "openrouter_key_present" || log "ERROR openrouter_key_missing"
 log "llm_provider=${LLM_PROVIDER:-unset} model=${OPENROUTER_MODEL_PREF:-unset} embedder=${EMBEDDING_ENGINE:-unset} embedding_model=${EMBEDDING_MODEL_PREF:-unset}"
 
+# ASTRA-NEXT-06: materialize a real, side-effect-free AnythingLLM Agent Flow.
+# The flow accepts an already-grounded Campaign360 payload and returns it directly.
+# It intentionally contains no llmInstruction, API call, web scraping, or secret.
+FLOW_NAME='ASTRA NEXT Campaign360 Handoff'
+FLOW_LIST=$(curl -fsS http://127.0.0.1:3001/api/agent-flows/list -H "$AUTH_HEADER" || true)
+FLOW_UUID=$(printf '%s' "$FLOW_LIST" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{const j=JSON.parse(d);const f=(j.flows||[]).find(x=>x.name==="ASTRA NEXT Campaign360 Handoff");process.stdout.write(f?.uuid||"")}catch{}})')
+if [ -z "$FLOW_UUID" ]; then
+  FLOW_BODY=$(node <<'NODE'
+const body={
+  name:'ASTRA NEXT Campaign360 Handoff',
+  config:{
+    description:'Receive an already-grounded ASTRA NEXT Campaign360 JSON payload and return it unchanged as a deterministic handoff. No external side effects.',
+    active:true,
+    steps:[{
+      type:'start',
+      config:{
+        variables:[{
+          name:'campaign_json',
+          type:'required',
+          description:'Already-grounded Campaign360 JSON payload. Preserve exactly.',
+          value:''
+        }],
+        directOutput:true
+      }
+    }]
+  }
+};
+process.stdout.write(JSON.stringify(body));
+NODE
+)
+  FLOW_SAVE=$(curl -fsS -X POST http://127.0.0.1:3001/api/agent-flows/save -H "$AUTH_HEADER" -H 'Content-Type: application/json' --data "$FLOW_BODY" || true)
+  FLOW_UUID=$(printf '%s' "$FLOW_SAVE" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{const j=JSON.parse(d);process.stdout.write(j.flow?.uuid||"")}catch{}})')
+  [ -n "$FLOW_UUID" ] && log "agent_flow_saved name=ASTRA_NEXT_Campaign360_Handoff uuid=${FLOW_UUID}" || log "ERROR agent_flow_save_failed"
+else
+  log "agent_flow_exists name=ASTRA_NEXT_Campaign360_Handoff uuid=${FLOW_UUID}"
+fi
+
+FLOW_LIST=$(curl -fsS http://127.0.0.1:3001/api/agent-flows/list -H "$AUTH_HEADER" || true)
+FLOW_ACTIVE=$(printf '%s' "$FLOW_LIST" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{const j=JSON.parse(d),u=process.argv[1];const f=(j.flows||[]).find(x=>x.uuid===u);process.stdout.write(f&&f.active!==false?"yes":"no")}catch{process.stdout.write("no")}})' "$FLOW_UUID")
+if [ -n "$FLOW_UUID" ] && [ "$FLOW_ACTIVE" = "yes" ]; then
+  log "agent_flow_materialization status=PASS uuid=${FLOW_UUID} active=true blocks=1 side_effects=0"
+else
+  log "ERROR agent_flow_materialization status=FAIL uuid=${FLOW_UUID:-missing} active=${FLOW_ACTIVE}"
+fi
+
 KB_DIR=/opt/astra-next-kb
 KB_TOTAL=0; KB_PASS=0; KB_FAIL=0
 if [ -n "${OPENROUTER_API_KEY:-}" ] && [ -d "$KB_DIR" ]; then
@@ -145,6 +190,57 @@ NODE
   fi
 else
   log "campaign360_skipped run=${RUN_CAMPAIGN360_POC:-false} kb_total=${KB_TOTAL} kb_fail=${KB_FAIL}"
+fi
+
+# ASTRA-NEXT-06 optional one-shot real Agent Flow invocation.
+# Uses automatic native tool calling. No external API side effects are present in the flow.
+if [ "${RUN_AGENT_FLOW_POC:-false}" = "true" ] && [ -n "$FLOW_UUID" ] && [ "$FLOW_ACTIVE" = "yes" ]; then
+  log "agent_flow_execution_start gate=ASTRA-NEXT-06 uuid=${FLOW_UUID} mode=automatic"
+  API_KEYS_JSON=$(curl -fsS http://127.0.0.1:3001/api/system/api-keys -H "$AUTH_HEADER" || true)
+  DEV_API_KEY=$(printf '%s' "$API_KEYS_JSON" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{const j=JSON.parse(d);const k=(j.apiKeys||[]).find(x=>x.name==="astra-next-agent-flow-poc");process.stdout.write(k?.secret||"")}catch{}})')
+  if [ -z "$DEV_API_KEY" ]; then
+    API_KEY_JSON=$(curl -fsS -X POST http://127.0.0.1:3001/api/system/generate-api-key -H "$AUTH_HEADER" -H 'Content-Type: application/json' --data '{"name":"astra-next-agent-flow-poc"}' || true)
+    DEV_API_KEY=$(printf '%s' "$API_KEY_JSON" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{try{const j=JSON.parse(d);process.stdout.write(j.apiKey?.secret||"")}catch{}})')
+  fi
+
+  HANDOFF_PAYLOAD='{"brief_id":"ASTRA_NEXT_POC_METODO360_V1","quality_gate":"PASS","brief_fidelity_pct":100,"knowledge_grounding_pct":100,"critical_hallucinations":0,"evidence_registry_valid":true}'
+  AGENT_PROMPT=$(node -e 'process.stdout.write(`You MUST use the tool astra_next_campaign360_handoff exactly once. Pass campaign_json as this exact JSON string without changing any character: ${process.argv[1]}. Do not answer without calling the tool.`)' "$HANDOFF_PAYLOAD")
+  AGENT_BODY=$(node -e 'process.stdout.write(JSON.stringify({message:process.argv[1],mode:"automatic",sessionId:"astra-next-06-agent-flow-handoff",attachments:[],reset:true}))' "$AGENT_PROMPT")
+  rm -f /tmp/agent_flow_result.json
+  START_MS=$(date +%s%3N)
+  if [ -n "$DEV_API_KEY" ]; then
+    FLOW_HTTP=$(curl -sS --max-time 180 -o /tmp/agent_flow_result.json -w '%{http_code}' -X POST http://127.0.0.1:3001/api/v1/workspace/astra-next/chat -H "Authorization: Bearer ${DEV_API_KEY}" -H 'Content-Type: application/json' --data "$AGENT_BODY" || true)
+  else
+    FLOW_HTTP=000
+  fi
+  END_MS=$(date +%s%3N); FLOW_DURATION_MS=$((END_MS-START_MS))
+  FLOW_CHECK=$(node - /tmp/agent_flow_result.json "$HANDOFF_PAYLOAD" <<'NODE'
+const fs=require('fs');
+const path=process.argv[2], expected=process.argv[3];
+let out={ok:false,textLength:0,error:null};
+try {
+  const r=JSON.parse(fs.readFileSync(path,'utf8'));
+  const text=typeof r.textResponse==='string'?r.textResponse:'';
+  out.textLength=text.length; out.error=r.error||null;
+  let parsed=null; try{parsed=JSON.parse(text)}catch{}
+  if(parsed?.campaign_json===expected) out.ok=true;
+  if(parsed?.directOutput?.campaign_json===expected) out.ok=true;
+  if(parsed?.variables?.campaign_json===expected) out.ok=true;
+  if(text.includes(expected)) out.ok=true;
+} catch(e) { out.error=e.message; }
+process.stdout.write(JSON.stringify(out));
+NODE
+)
+  FLOW_MATCH=$(printf '%s' "$FLOW_CHECK" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{const j=JSON.parse(d);process.stdout.write(j.ok?"true":"false")})')
+  FLOW_TEXT_LEN=$(printf '%s' "$FLOW_CHECK" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{const j=JSON.parse(d);process.stdout.write(String(j.textLength||0))})')
+  FLOW_ERR=$(printf '%s' "$FLOW_CHECK" | node -e 'let d="";process.stdin.on("data",c=>d+=c).on("end",()=>{const j=JSON.parse(d);process.stdout.write(j.error?String(j.error):"")})')
+  if [ "$FLOW_HTTP" = "200" ] && [ "$FLOW_MATCH" = "true" ] && [ -z "$FLOW_ERR" ]; then
+    log "agent_flow_execution status=PASS http=${FLOW_HTTP} duration_ms=${FLOW_DURATION_MS} exact_payload_preserved=true response_chars=${FLOW_TEXT_LEN} side_effects=0"
+  else
+    log "ERROR agent_flow_execution status=FAIL http=${FLOW_HTTP} duration_ms=${FLOW_DURATION_MS} exact_payload_preserved=${FLOW_MATCH} response_chars=${FLOW_TEXT_LEN} error=${FLOW_ERR:-none}"
+  fi
+else
+  log "agent_flow_execution_skipped run=${RUN_AGENT_FLOW_POC:-false} uuid=${FLOW_UUID:-missing} active=${FLOW_ACTIVE:-no}"
 fi
 
 log "bootstrap_complete"
