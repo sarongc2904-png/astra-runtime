@@ -2,7 +2,7 @@ FROM mintplexlabs/anythingllm:latest
 
 USER root
 
-# POC-only compatibility patch: AnythingLLM's OpenRouter adapter currently omits
+# POC-only compatibility patch: AnythingLLM's OpenRouter chat adapter currently omits
 # max_tokens, which makes OpenRouter reserve the model's full output ceiling.
 # Inject a bounded max_tokens value while keeping the same provider/model.
 # Also emit exact OpenRouter usage for benchmark telemetry.
@@ -29,6 +29,18 @@ const usageReplacement = `usage = {\n              prompt_tokens: chunk.usage.pr
 if (!s.includes(usageNeedle)) throw new Error('OpenRouter stream usage telemetry patch target not found');
 s = s.replace(usageNeedle, usageReplacement);
 fs.writeFileSync(p, s);
+
+// Agent-mode OpenRouter uses the shared tooled helper. The helper supports an
+// explicit maxTokens option, but the OpenRouter provider does not pass it.
+// Bound only the agent output budget so low-credit accounts do not reserve the
+// model's full 65k output ceiling before a tool call can execute.
+const agentPath = '/app/server/utils/agents/aibitat/providers/openrouter.js';
+let a = fs.readFileSync(agentPath, 'utf8');
+const agentNeedle = '{ provider: this, serviceTier: this.serviceTier }';
+const occurrences = a.split(agentNeedle).length - 1;
+if (occurrences !== 2) throw new Error(`OpenRouter agent patch expected 2 targets, found ${occurrences}`);
+a = a.split(agentNeedle).join('{ provider: this, serviceTier: this.serviceTier, maxTokens: Number(process.env.OPENROUTER_AGENT_MAX_TOKENS || 4096) }');
+fs.writeFileSync(agentPath, a);
 NODE
 
 COPY astra-next-poc/deployment/bootstrap.sh /usr/local/bin/astra-next-bootstrap.sh
