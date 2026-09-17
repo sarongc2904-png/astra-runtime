@@ -54,6 +54,7 @@ COPY astra-next-poc/benchmark/run_knowledge_routing_audit.js /opt/astra-next-ben
 COPY astra-next-poc/benchmark/run_grounded_creative_output_qa.js /opt/astra-next-benchmark/run_grounded_creative_output_qa.js
 COPY astra-next-poc/benchmark/run_creative_gateway_enforcement_qa.js /opt/astra-next-poc/benchmark/run_creative_gateway_enforcement_qa.js
 COPY astra-next-poc/benchmark/run_creative_http_gateway_qa.js /opt/astra-next-poc/benchmark/run_creative_http_gateway_qa.js
+COPY astra-next-poc/benchmark/run_creative_http_e2e_qa.js /opt/astra-next-poc/benchmark/run_creative_http_e2e_qa.js
 COPY astra-next-poc/runtime/creative_gateway.js /opt/astra-next-poc/runtime/creative_gateway.js
 COPY astra-next-poc/runtime/creative_http_handler.js /opt/astra-next-poc/runtime/creative_http_handler.js
 COPY astra-next-poc/knowledge/creative_knowledge_router.js /opt/astra-next-poc/knowledge/creative_knowledge_router.js
