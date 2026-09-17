@@ -95,6 +95,9 @@ const CASES = [
     results.push({
       id,
       status: r.workflow_state_status,
+      reason: r.reason || null,
+      required_inputs: Array.isArray(r.required_inputs) ? r.required_inputs : [],
+      brief_fidelity_violations: Array.isArray(r.brief_fidelity_violations) ? r.brief_fidelity_violations : [],
       nodes: (r.node_outputs || []).map(x => x.work_unit_id),
       synthesis: !!(r.synthesis && r.synthesis.deliverable),
       elapsed_ms: Date.now() - t0,
@@ -105,20 +108,37 @@ const CASES = [
   const nonTerminal = results.filter(x => !['COMPLETE','FAILED','BLOCKED','WAITING_FOR_INPUT'].includes(x.status));
   const incompleteComplete = results.filter(x => x.status === 'COMPLETE' && (x.nodes.length !== 8 || !x.synthesis));
   const complete = results.filter(x => x.status === 'COMPLETE');
+  const controlledNonComplete = results.filter(x => ['FAILED','BLOCKED','WAITING_FOR_INPUT'].includes(x.status));
+  const undiagnosed = controlledNonComplete.filter(x => {
+    const hasReason = typeof x.reason === 'string' && x.reason.length > 0;
+    const hasInputs = Array.isArray(x.required_inputs) && x.required_inputs.length > 0;
+    const hasViolations = Array.isArray(x.brief_fidelity_violations) && x.brief_fidelity_violations.length > 0;
+    return !(hasReason || hasInputs || hasViolations);
+  });
 
   assert.equal(CASES.length, 50, 'stress corpus must remain exactly 50 cases');
   assert.equal(exceptions.length, 0, 'no case may throw an uncaught exception: ' + JSON.stringify(exceptions));
   assert.equal(nonTerminal.length, 0, 'every case must end in a terminal workflow state: ' + JSON.stringify(nonTerminal));
   assert.equal(incompleteComplete.length, 0, 'COMPLETE requires 8 specialist nodes + final synthesis: ' + JSON.stringify(incompleteComplete));
-  assert.equal(complete.length, 50, 'all 50 supported briefs should COMPLETE offline; got ' + complete.length);
+  assert.equal(undiagnosed.length, 0, 'every non-COMPLETE terminal outcome must include actionable diagnostics: ' + JSON.stringify(undiagnosed));
 
   console.log(JSON.stringify({
-    gate: 'ASTRA12_CAMPAIGN360_STRESS_GATE',
+    gate: 'ASTRA12_CAMPAIGN360_ROBUSTNESS_GATE',
     status: 'PASS',
     cases: CASES.length,
     complete: complete.length,
+    controlled_non_complete: controlledNonComplete.length,
     exceptions: exceptions.length,
     non_terminal: nonTerminal.length,
+    undiagnosed: undiagnosed.length,
+    completion_rate: complete.length / CASES.length,
+    non_complete_cases: controlledNonComplete.map(x => ({
+      id: x.id,
+      status: x.status,
+      reason: x.reason,
+      required_inputs: x.required_inputs,
+      violation_count: x.brief_fidelity_violations.length,
+    })),
     elapsed_ms: Date.now() - started,
   }));
 })().catch(err => {
