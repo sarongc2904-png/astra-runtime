@@ -133,8 +133,12 @@ async function executeHardened(runtime, request, options) {
 
 async function run(rawRequest, options = {}) {
   if (options.webResearch === false) return H.run(rawRequest, options);
+  const emitProgress = payload => {
+    try { if (typeof options.onProgress === 'function') options.onProgress(payload); } catch (_) {}
+  };
 
   const originalCanonicalFacts = briefFacts.extract(rawRequest);
+  emitProgress({ phase: 'WEB_RESEARCH', current_node: 'market_context', active_nodes: ['market_context'], completed_nodes: [] });
   const researchProvider = options.webResearchProvider || webMarketResearch;
   let pack;
   try {
@@ -146,6 +150,7 @@ async function run(rawRequest, options = {}) {
       timeoutMs: options.webResearchTimeoutMs,
     });
   } catch (err) {
+    emitProgress({ phase: 'FAILED', current_node: 'market_context', active_nodes: [], completed_nodes: [] });
     return {
       mode: options.mode || 'llm',
       workflow_id: 'WF_MC360H',
@@ -159,6 +164,8 @@ async function run(rawRequest, options = {}) {
       cost: { mode: options.mode || 'llm', model_calls: 0, retries: 0, tokens: { prompt: 0, completion: 0 }, web_research: { calls: 1, failed: true } },
     };
   }
+
+  emitProgress({ phase: 'WEB_RESEARCH_COMPLETE', current_node: null, active_nodes: [], completed_nodes: [] });
 
   // Anti-fabrication blockers become provenance requirements on this ASTRA-12 path.
   // The original brief/facts remain untouched and are restored as the public canonical facts.
@@ -178,6 +185,7 @@ async function run(rawRequest, options = {}) {
   result.research_provenance_violations = [];
   result.research_grounding = {};
   if (result.workflow_state_status === 'COMPLETE') {
+    emitProgress({ phase: 'RESEARCH_PROVENANCE', current_node: 'final_synthesis', active_nodes: ['final_synthesis'], completed_nodes: (result.node_outputs || []).map(x => x.work_unit_id) });
     const check = researchProvenance.validate(result, pack);
     result.research_grounding = check.grounding;
     result.research_provenance_violations = check.violations;
@@ -186,6 +194,7 @@ async function run(rawRequest, options = {}) {
       // market/ICP/offer actually cite source-verified WEB evidence and the offer is a proposal.
       result.workflow_state_status = 'FAILED';
       result.reason = 'RESEARCH_PROVENANCE_VIOLATION';
+      emitProgress({ phase: 'FAILED', current_node: 'final_synthesis', active_nodes: [], completed_nodes: (result.node_outputs || []).map(x => x.work_unit_id) });
       result.research_candidate_synthesis = result.synthesis;
       result.synthesis = null;
     }
