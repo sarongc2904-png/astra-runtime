@@ -14,6 +14,16 @@ function fixtureCampaign() {
     return { workflow_id: 'WF_ASYNC', workflow_state_status: 'COMPLETE', node_outputs: [{ work_unit_id: 'market_context' }], selected_methods_by_node: { market_context: { primary_method: 'METHOD_SMP' } }, synthesis: { deliverable: { '16_known_limitations': [], '17_current_research_required': [] } }, cost: { model_calls: 0 }, input_received: input };
   };
 }
+function fixtureFidelityFailure() {
+  return async () => ({
+    workflow_id: 'WF_ASYNC_FAILED', workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
+    canonical_brief_facts: { price: { value: '1497', status: 'USER_PROVIDED_FACT' } },
+    brief_fidelity_violations: [{ type: 'UNLABELED_PROPOSAL', node: 'offer', field_key: 'offer_structure', path: 'node_outputs.offer.downstream_payload.offer_structure' }],
+    node_outputs: [{ work_unit_id: 'market_context' }, { work_unit_id: 'icp' }],
+    selected_methods_by_node: { market_context: { primary_method: 'M1' }, icp: { primary_method: 'M2' } },
+    synthesis: null, cost: { model_calls: 3, tokens: { prompt: 100, completion: 50 } },
+  });
+}
 async function withServer(options, fn) {
   asyncJobs.resetForTests();
   const server = http.createServer(createHandler(options, ENV));
@@ -35,6 +45,27 @@ t('async status/result complete', () => withServer({ campaignRuntime: fixtureCam
   assert.equal(status.status, 200); assert.equal(s.status, 'COMPLETE');
   const result = await post(base, '/astra/campaign-360/async/result', { job_id: started.job_id }); const r = await result.json();
   assert.equal(result.status, 200); assert.equal(r.status, 'COMPLETE'); assert.equal(r.result.statusCode, 200); assert.equal(r.result.body.workflow_id, 'WF_ASYNC');
+}));
+t('async fidelity failure preserves structured diagnostics in status and result', () => withServer({ campaignRuntime: fixtureFidelityFailure() }, async base => {
+  const start = await post(base, '/astra/campaign-360/async/start', { input: 'campaign', project_id: 'owned' }); const started = await start.json();
+  await new Promise(r => setTimeout(r, 30));
+  const status = await post(base, '/astra/campaign-360/async/status', { job_id: started.job_id }); const s = await status.json();
+  assert.equal(status.status, 200); assert.equal(s.status, 'FAILED');
+  assert.equal(s.error.code, 'BRIEF_FIDELITY_VIOLATION');
+  assert.match(s.error.message, /BRIEF_FIDELITY_VIOLATION/);
+  assert.equal(s.reason, 'BRIEF_FIDELITY_VIOLATION');
+  assert.equal(s.failed_node, 'offer');
+  assert.deepStrictEqual(s.completed_nodes, ['market_context', 'icp']);
+  assert.equal(s.brief_fidelity_violations[0].path, 'node_outputs.offer.downstream_payload.offer_structure');
+  assert.equal(s.canonical_brief_facts.price.value, '1497');
+  assert.equal(s.usage.model_calls, 3);
+  const result = await post(base, '/astra/campaign-360/async/result', { job_id: started.job_id }); const r = await result.json();
+  assert.equal(r.status, 'FAILED');
+  assert.equal(r.error.code, 'BRIEF_FIDELITY_VIOLATION');
+  assert.equal(r.reason, 'BRIEF_FIDELITY_VIOLATION');
+  assert.equal(r.failed_node, 'offer');
+  assert.equal(r.result.body.reason, 'BRIEF_FIDELITY_VIOLATION');
+  assert.equal(r.result.body.brief_fidelity_violations[0].node, 'offer');
 }));
 t('invalid project stays fail-closed', () => withServer({ campaignRuntime: fixtureCampaign() }, async base => {
   const start = await post(base, '/astra/campaign-360/async/start', { input: 'campaign', project_id: 'not-owned' }); const started = await start.json();
