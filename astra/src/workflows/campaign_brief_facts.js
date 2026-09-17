@@ -139,6 +139,93 @@ function firstNaturalMatch(naturalText, patterns) {
   return null;
 }
 
+// ---------- structured multi-line section briefs ----------
+// Campaign360 production briefs commonly use heading-only blocks such as:
+// NEGOCIO / PRODUCTO
+// OBJETIVO PRINCIPAL
+// AUDIENCIA
+// MERCADO / GEOGRAFÍA
+// rather than "Label: value" lines. Treat those blocks as first-class user-provided facts.
+const KNOWN_SECTION_HEADING = /^\s*(?:NEGOCIO\s*\/\s*PRODUCTO|OBJETIVO\s+PRINCIPAL|AUDIENCIA|OFERTA\s+ACTUAL|CANAL\s+PRINCIPAL|MERCADO\s*\/\s*GEOGRAF[IÍ]A|PRESUPUESTO|RESTRICCIONES?|INVESTIGACI[OÓ]N\s+OBLIGATORIA|REGLA\s+DE\s+PROCEDENCIA|SECUENCIA\s+OBLIGATORIA|ENTREGABLE\s+FINAL)\s*:?\s*$/i;
+
+function captureSectionLines(text, headingRe) {
+  const lines = String(text || '').split(/\r?\n/);
+  let start = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (headingRe.test(lines[i].trim())) { start = i + 1; break; }
+  }
+  if (start === -1) return [];
+  const out = [];
+  for (let i = start; i < lines.length; i++) {
+    const raw = lines[i];
+    const trimmed = raw.trim();
+    if (KNOWN_SECTION_HEADING.test(trimmed)) break;
+    if (!trimmed) {
+      if (out.length) out.push('');
+      continue;
+    }
+    out.push(trimmed);
+  }
+  while (out.length && out[out.length - 1] === '') out.pop();
+  return out;
+}
+
+function firstMeaningfulSectionLine(lines) {
+  for (const line of lines || []) {
+    const v = cleanValue(String(line || '').replace(/^[-*•]\s*/, ''));
+    if (v) return v;
+  }
+  return null;
+}
+
+function extractAudienceBuyer(lines) {
+  if (!Array.isArray(lines) || !lines.length) return null;
+  const values = [];
+  let collectingBullets = false;
+  let prefix = null;
+  for (const raw of lines) {
+    const line = String(raw || '').trim();
+    if (!line) continue;
+    if (/^problema\s+principal\s*:/i.test(line)) break;
+    if (/^due[ñn]as?,\s*due[ñn]os?\s+y\s+administradores?\s+de\s*:\s*$/i.test(line)) {
+      prefix = 'Dueñas, dueños y administradores de ';
+      collectingBullets = true;
+      continue;
+    }
+    const bullet = line.match(/^[-*•]\s*(.+)$/);
+    if (collectingBullets && bullet) {
+      const v = cleanValue(bullet[1]);
+      if (v) values.push(v);
+      continue;
+    }
+    if (!prefix && /^(?:due[ñn]as?|due[ñn]os?|administradores?|propietarios?)/i.test(line)) {
+      return cleanValue(line);
+    }
+  }
+  if (prefix && values.length) return cleanValue(prefix + values.join(', '));
+  return null;
+}
+
+function extractProductTypeFromSection(lines) {
+  const joined = (lines || []).join(' ');
+  const explicit = joined.match(/\b(CRM\s+con\s+IA)\b/i);
+  if (explicit) return cleanValue(explicit[1]);
+  const first = firstMeaningfulSectionLine(lines);
+  if (!first) return null;
+  const m = first.match(/^([^.!?]{2,80}?)(?:\s+para\b|\.|$)/i);
+  return m ? cleanValue(m[1]) : null;
+}
+
+function extractMechanismFromSection(lines) {
+  if (!Array.isArray(lines) || !lines.length) return null;
+  const candidates = lines
+    .map(x => String(x || '').trim())
+    .filter(Boolean)
+    .filter(x => !/^[-*•]/.test(x))
+    .filter(x => /\b(?:sistema|centraliza|utiliza|usa|bot|clasifica|seguimiento|agenda|agendar|calendar|whatsapp)\b/i.test(x));
+  return candidates.length ? cleanValue(candidates.join(' ')) : null;
+}
+
 function parsePrice(raw) {
   if (!raw) return { amount: null, currency: null };
   const m = raw.match(/\$?\s*([\d][\d,.]*)\s*(mxn|usd|pesos?|d[oó]lares?|dollars?)?/i);
@@ -176,6 +263,11 @@ function extract(rawRequest) {
   const text = String(rawRequest || '');
   const naturalText = collapseWhitespace(text);
 
+  const productSection = captureSectionLines(text, /^\s*NEGOCIO\s*\/\s*PRODUCTO\s*:?\s*$/i);
+  const objectiveSection = captureSectionLines(text, /^\s*OBJETIVO\s+PRINCIPAL\s*:?\s*$/i);
+  const audienceSection = captureSectionLines(text, /^\s*AUDIENCIA\s*:?\s*$/i);
+  const geographySection = captureSectionLines(text, /^\s*MERCADO\s*\/\s*GEOGRAF[IÍ]A\s*:?\s*$/i);
+
   // product_name: the structured-brief opening ("Crea una campaña 360 para Método 360.") is the
   // authoritative source when present — it names the product independently of what "Producto:"
   // holds below it. Falls back to the labeled "Producto:"/"Product:" line (legacy meaning: the
@@ -189,13 +281,13 @@ function extract(rawRequest) {
   // product_name. If there was no opening product name, "Producto:" was already consumed above
   // as the legacy product_name and is not reused here.
   const tipoLabelRaw = firstLabeledMatch(text, FIELD_LABELS.product_type);
-  const product_type = tipoLabelRaw || (openingProductName ? productoLabelRaw : null) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.product_type);
+  const product_type = tipoLabelRaw || (openingProductName ? productoLabelRaw : null) || extractProductTypeFromSection(productSection) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.product_type);
 
   const priceRaw = firstLabeledMatch(text, FIELD_LABELS.price) || naturalPrice(naturalText);
   const { amount, currency } = parsePrice(priceRaw);
 
-  let geography = firstLabeledMatch(text, FIELD_LABELS.geography);
-  let buyer = firstLabeledMatch(text, FIELD_LABELS.buyer);
+  let geography = firstLabeledMatch(text, FIELD_LABELS.geography) || firstMeaningfulSectionLine(geographySection);
+  let buyer = firstLabeledMatch(text, FIELD_LABELS.buyer) || extractAudienceBuyer(audienceSection);
   // "Audiencia:" is buyer-bearing and frequently carries the geography in the same clause
   // ("Audiencia: dueñas de estéticas en México.") — split them; an explicit "Geografía:"/buyer
   // label elsewhere in the brief still takes precedence if already found.
@@ -213,8 +305,8 @@ function extract(rawRequest) {
   }
   if (!geography) geography = firstNaturalMatch(naturalText, NATURAL_PATTERNS.geography);
 
-  const business_objective = firstLabeledMatch(text, FIELD_LABELS.business_objective) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.business_objective);
-  const mechanism = firstLabeledMatch(text, FIELD_LABELS.mechanism) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.mechanism);
+  const business_objective = firstLabeledMatch(text, FIELD_LABELS.business_objective) || firstMeaningfulSectionLine(objectiveSection) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.business_objective);
+  const mechanism = firstLabeledMatch(text, FIELD_LABELS.mechanism) || extractMechanismFromSection(productSection) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.mechanism);
   // constraints: a same-line value ("Restricciones: presupuesto limitado") wins first (legacy,
   // unchanged); otherwise capture the full "Restricciones obligatorias:" block verbatim, line by
   // line, up to the next structural heading — nothing summarized, nothing invented.
