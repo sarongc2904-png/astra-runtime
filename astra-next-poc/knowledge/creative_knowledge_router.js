@@ -13,6 +13,7 @@ const META_CURRENT = new Set([
   'Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]',
   'Estudio de Mercado Meta Ads Mexico.md',
 ]);
+const ANDROMEDA = new Set(['META_ANDROMEDA_VERIFIED_2026.md']);
 
 function classifyRequest(input = '') {
   const text = String(input).toLowerCase();
@@ -36,12 +37,14 @@ function buildPlan(input = '') {
   if (intent.wantsMeta) {
     queries.push({family:'meta_current', query:`current Meta Ads creative delivery optimization evidence for: ${input}`});
   }
+  if (intent.wantsAndromeda) {
+    queries.push({family:'andromeda_local', query:`Meta Andromeda retrieval personalization creative diversity evidence for: ${input}`});
+  }
   return {
     policy:'NO_CREATIVE_WITHOUT_EVIDENCE',
     intent,
     queries,
     max_total_evidence_chunks:12,
-    andromeda_gap_required:intent.wantsAndromeda,
   };
 }
 
@@ -55,22 +58,23 @@ function validateEvidence(input, evidence = []) {
   const formal = [...sources].filter(s => FORMAL_DESIGN.has(s));
   const advertising = [...sources].filter(s => ADVERTISING.has(s));
   const meta = [...sources].filter(s => META_CURRENT.has(s));
+  const andromeda = [...sources].filter(s => ANDROMEDA.has(s));
   const violations = [];
 
   if (intent.wantsVisual && formal.length < 1) violations.push('MISSING_FORMAL_DESIGN_EVIDENCE');
   if ((intent.wantsVisual || intent.wantsCopy) && advertising.length < 1) violations.push('MISSING_ADVERTISING_CONCEPT_OR_COPY_EVIDENCE');
   if (intent.wantsVisual && new Set([...formal, ...advertising]).size < 2) violations.push('INSUFFICIENT_DISTINCT_DESIGN_SOURCES');
   if (intent.wantsMeta && meta.length < 1) violations.push('MISSING_CURRENT_META_EVIDENCE');
-  if (intent.wantsAndromeda) violations.push('KNOWLEDGE_GAP_ANDROMEDA');
+  if (intent.wantsAndromeda && andromeda.length < 1) violations.push('MISSING_VERIFIED_ANDROMEDA_EVIDENCE');
 
   const ready = violations.length === 0;
   return {
     status: ready ? 'READY_WITH_EVIDENCE' : 'BLOCKED_OR_GAP',
     ready,
-    source_counts:{formal_design:formal.length, advertising:advertising.length, meta_current:meta.length, distinct_total:sources.size},
+    source_counts:{formal_design:formal.length, advertising:advertising.length, meta_current:meta.length, andromeda:andromeda.length, distinct_total:sources.size},
     violations,
     rule:'A creative deliverable may not be marked READY unless required evidence families are present.',
   };
 }
 
-module.exports = { classifyRequest, buildPlan, validateEvidence, FORMAL_DESIGN, ADVERTISING, META_CURRENT };
+module.exports = { classifyRequest, buildPlan, validateEvidence, FORMAL_DESIGN, ADVERTISING, META_CURRENT, ANDROMEDA };
