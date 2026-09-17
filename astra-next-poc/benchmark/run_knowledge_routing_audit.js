@@ -1,12 +1,11 @@
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
-const router = require('../knowledge/creative_knowledge_router');
+const router = require(process.env.ASTRA_NEXT_CREATIVE_ROUTER || '/opt/astra-next-creative/creative_knowledge_router.js');
 
 const KB_URL = process.env.ASTRA_NEXT_KB_URL || '';
 const KB_KEY = process.env.ASTRA_NEXT_KB_API_KEY || '';
-const ANDROMEDA_PATH = process.env.ASTRA_NEXT_ANDROMEDA_SOURCE || path.join(__dirname, '../knowledge/META_ANDROMEDA_VERIFIED_2026.md');
+const ANDROMEDA_PATH = process.env.ASTRA_NEXT_ANDROMEDA_SOURCE || '/opt/astra-next-creative/META_ANDROMEDA_VERIFIED_2026.md';
 
 const cases = [
   { id:'KR-01', input:'Diseña una pieza minimalista para una clínica dental.', expectReady:true },
