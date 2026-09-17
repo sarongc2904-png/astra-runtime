@@ -3,6 +3,7 @@
 const assert = require('assert');
 const policy = require('../src/research/research_policy');
 const research = require('../src/research/web_market_research');
+const provenance = require('../src/research/research_provenance_validator');
 const wrapper = require('../src/workflows/marketing_campaign_360_research');
 const fidelity = require('../src/workflows/brief_fidelity_validator');
 const adapterIntegration = require('../src/integration/gpt_supabase_adapter');
@@ -28,6 +29,50 @@ Restricciones:
 - Cualquier dato no proporcionado debe mantenerse como UNKNOWN.
 - Cualquier nueva recomendación debe identificarse como PROPUESTA.
 `;
+
+function packFixture() {
+  return {
+    status: 'COMPLETE', source_class: 'EXTERNAL_RESEARCH', model: 'test-web-model', retrieved_at: '2026-09-17T20:00:00.000Z',
+    market_summary: 'Mercado investigado.', patterns: ['Automatización y agenda'], gaps: ['Implementación'], source_count: 3,
+    usage: { input_tokens: 100, output_tokens: 50, total_tokens: 150 },
+    evidence: [
+      { chunk_id: 'WEB_1', evidence_id: 'WEB_1', kind: 'review', text: 'Reseñas públicas mencionan respuesta tardía.', source_title: 'Reviews A', source_url: 'https://reviews.example.com/a', retrieved_at: '2026-09-17T20:00:00.000Z' },
+      { chunk_id: 'WEB_2', evidence_id: 'WEB_2', kind: 'pricing', text: 'Competidor publica precio mensual.', source_title: 'Competidor A', source_url: 'https://example.com/pricing', retrieved_at: '2026-09-17T20:00:00.000Z' },
+      { chunk_id: 'WEB_3', evidence_id: 'WEB_3', kind: 'offer', text: 'Competidor integra agenda.', source_title: 'Competidor B', source_url: 'https://example.org/features', retrieved_at: '2026-09-17T20:00:00.000Z' },
+    ],
+  };
+}
+
+function groundedNode(id, ref = 'E1', payload = {}) {
+  return {
+    work_unit_id: id,
+    evidence_chunk_ids: ['WEB_1', 'WEB_2', 'WEB_3', 'INT_1'],
+    output: {
+      findings: [{ claim: `${id} web finding`, support_class: 'DIRECTLY_SUPPORTED', source_class: 'INTERNAL_KNOWLEDGE', evidence_ref: ref }],
+      recommendations: [], downstream_payload: payload,
+    },
+  };
+}
+
+function completeRuntimeResult() {
+  return {
+    workflow_state_status: 'COMPLETE', workflow_id: 'WF_TEST',
+    canonical_brief_facts: { constraints: { value: 'operational', status: 'USER_PROVIDED_FACT' } },
+    node_outputs: [
+      groundedNode('market_context', 'E1', { problem_context: 'Contexto', market_assumptions: 'Supuestos', constraints: 'Reglas' }),
+      groundedNode('icp', 'E1', { pains: 'Dolores', desired_outcomes: 'Resultados deseados' }),
+      groundedNode('offer', 'E2', {
+        value_proposition: 'PROPUESTA: posicionamiento basado en investigación.',
+        offer_structure: 'PROPUESTA: oferta principal.', mechanism: 'PROPUESTA: mecanismo.',
+        risk_reduction: 'PROPUESTA: demo de 3 días.',
+        value_stack: 'PROPUESTA: CRM + clasificación de leads + agenda Google Calendar + onboarding.', constraints: 'Mantener 1,397 MXN.',
+      }),
+    ],
+    selected_methods_by_node: {},
+    synthesis: { deliverable: { '17_current_research_required': [], '16_known_limitations': [] } },
+    cost: { mode: 'llm', model_calls: 3, retries: 0, tokens: { prompt: 300, completion: 150 } },
+  };
+}
 
 t('research policy removes anti-fabrication blockers but preserves business facts', () => {
   const normalized = policy.normalizeResearchRequest(RAW_BRIEF);
@@ -104,45 +149,86 @@ t('web provider admits only source-verified evidence and tags EXTERNAL_RESEARCH'
 
 t('research augmented adapter prepends external evidence without mutating internal contract', async () => {
   const base = {
-    retrieveAsync: async () => ({
-      corpus: 'kb_chunks_v2', pipeline: 'Strategy-F', hits: [{ chunk_id: 'INT_1', text: 'internal', source_pdf_name: 'kb.pdf' }], evidenceText: 'internal', evidence_count: 1,
-    }),
+    retrieveAsync: async () => ({ corpus: 'kb_chunks_v2', pipeline: 'Strategy-F', hits: [{ chunk_id: 'INT_1', text: 'internal', source_pdf_name: 'kb.pdf' }], evidenceText: 'internal', evidence_count: 1 }),
   };
-  const pack = { evidence: [
-    { chunk_id: 'WEB_1', source_url: 'https://a.example', source_title: 'A', source_pdf_name: 'WEB_RESEARCH:A | https://a.example', text: 'Precio público observado', source_class: 'EXTERNAL_RESEARCH' },
-  ] };
-  const a = new wrapper.ResearchAugmentedAdapter(base, pack);
+  const a = new wrapper.ResearchAugmentedAdapter(base, packFixture());
   const r = await a.retrieveAsync('mercado', { top_k: 5 });
   assert.equal(r.hits[0].chunk_id, 'WEB_1');
   assert.equal(r.hits[0].source_class, 'EXTERNAL_RESEARCH');
-  assert.equal(r.hits[1].chunk_id, 'INT_1');
-  assert.match(r.evidenceText, /Precio público observado/);
+  assert.equal(r.hits[3].chunk_id, 'INT_1');
+  assert.match(r.evidenceText, /Reseñas públicas/);
 });
 
 t('external finding provenance is remapped from E-index to WEB source URL', () => {
-  const result = { node_outputs: [{
-    work_unit_id: 'offer', evidence_chunk_ids: ['WEB_1', 'INT_1'],
-    output: { findings: [{ claim: 'Precio competidor', support_class: 'DIRECTLY_SUPPORTED', source_class: 'INTERNAL_KNOWLEDGE', evidence_ref: 'E1' }] },
-  }] };
-  const pack = { evidence: [{ chunk_id: 'WEB_1', source_url: 'https://a.example', source_title: 'A' }] };
-  wrapper.attachExternalProvenance(result, pack);
+  const result = { node_outputs: [groundedNode('offer')] };
+  wrapper.attachExternalProvenance(result, packFixture());
   const f = result.node_outputs[0].output.findings[0];
   assert.equal(f.source_class, 'EXTERNAL_RESEARCH');
   assert.equal(f.external_evidence_ref, 'WEB_1');
-  assert.equal(f.source_url, 'https://a.example');
+  assert.equal(f.source_url, 'https://reviews.example.com/a');
 });
 
-t('Campaign360 public payload exposes research separately from canonical facts', () => {
+t('research provenance gate passes only when market ICP offer cite WEB and offer has PROPUESTA value stack', () => {
+  const result = completeRuntimeResult();
+  wrapper.attachExternalProvenance(result, packFixture());
+  const check = provenance.validate(result, packFixture());
+  assert.deepStrictEqual(check.violations, []);
+  assert.equal(check.grounding.market_context.external_evidence_count, 1);
+  assert.equal(check.grounding.icp.external_evidence_count, 1);
+  assert.equal(check.grounding.offer.external_evidence_count, 1);
+});
+
+t('research provenance gate fails when offer ignores WEB evidence', () => {
+  const result = completeRuntimeResult();
+  result.node_outputs.find(n => n.work_unit_id === 'offer').output.findings[0].evidence_ref = 'E4';
+  wrapper.attachExternalProvenance(result, packFixture());
+  const check = provenance.validate(result, packFixture());
+  assert(check.violations.some(v => v.type === 'EXTERNAL_RESEARCH_NOT_CITED' && v.node === 'offer'));
+});
+
+t('wrapper preserves original canonical facts and COMPLETE after deterministic research provenance PASS', async () => {
+  const researchProvider = { research: async () => packFixture() };
+  const hardenedRuntime = async (normalizedRequest, options) => {
+    assert.match(normalizedRequest, /POLÍTICA DE PROCEDENCIA ASTRA-12/);
+    assert(options.adapter instanceof wrapper.ResearchAugmentedAdapter);
+    return completeRuntimeResult();
+  };
+  const out = await wrapper.run(RAW_BRIEF, { mode: 'llm', webResearchProvider: researchProvider, hardenedRuntime, adapter: { retrieveAsync: async () => ({ hits: [], evidenceText: '' }) } });
+  assert.equal(out.workflow_state_status, 'COMPLETE');
+  assert.equal(out.reason || null, null);
+  assert.equal(out.web_research.status, 'COMPLETE');
+  assert.equal(out.research_provenance_violations.length, 0);
+  assert.equal(String(out.canonical_brief_facts.price.value), '1397');
+  assert.equal(out.cost.web_research.calls, 1);
+});
+
+t('wrapper fails closed when generated strategy did not use research evidence', async () => {
+  const researchProvider = { research: async () => packFixture() };
+  const hardenedRuntime = async () => {
+    const out = completeRuntimeResult();
+    for (const node of out.node_outputs) node.output.findings[0].evidence_ref = 'E4';
+    return out;
+  };
+  const out = await wrapper.run(RAW_BRIEF, { mode: 'llm', webResearchProvider: researchProvider, hardenedRuntime, adapter: { retrieveAsync: async () => ({ hits: [], evidenceText: '' }) } });
+  assert.equal(out.workflow_state_status, 'FAILED');
+  assert.equal(out.reason, 'RESEARCH_PROVENANCE_VIOLATION');
+  assert.equal(out.synthesis, null);
+  assert(out.research_provenance_violations.some(v => v.type === 'EXTERNAL_RESEARCH_NOT_CITED'));
+});
+
+t('Campaign360 public payload exposes research and provenance diagnostics separately from canonical facts', () => {
   const out = adapterIntegration.campaignPayload({
     workflow_state_status: 'COMPLETE', workflow_id: 'WF', node_outputs: [], selected_methods_by_node: {}, synthesis: null,
     canonical_brief_facts: { price: { value: '1397', currency: 'MXN', status: 'USER_PROVIDED_FACT' } },
     research_policy: policy.provenancePolicySummary(),
     web_research: { status: 'COMPLETE', evidence: [{ evidence_ref: 'WEB_1', source_url: 'https://a.example' }] },
-    cost: { model_calls: 1 },
+    research_grounding: { offer: { external_evidence_refs: ['WEB_1'], external_evidence_count: 1 } },
+    research_provenance_violations: [], cost: { model_calls: 1 },
   });
   assert.equal(out.canonical_brief_facts.price.value, '1397');
   assert.equal(out.research_policy.researched_facts, 'EXTERNAL_RESEARCH');
   assert.equal(out.web_research.status, 'COMPLETE');
+  assert.equal(out.research_grounding.offer.external_evidence_count, 1);
 });
 
 (async () => {
