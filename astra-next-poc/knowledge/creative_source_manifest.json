@@ -15,14 +15,14 @@
     {"source_file":"Velocity — Facebook Marketing / Facebook Ads [six-video transcript bundle]","source_id":"SRC_META_VELOCITY_FACEBOOK_COURSE","role":"meta_ads_strategy","chunks":35,"embedded":35},
     {"source_file":"Estudio de Mercado Meta Ads Mexico.md","role":"mexico_market_context","chunks":6,"embedded":6}
   ],
-  "known_gaps": [
-    {
-      "id":"KNOWLEDGE_GAP_ANDROMEDA",
-      "topic":"Meta Andromeda",
-      "status":"MISSING_DEDICATED_SOURCE",
-      "rule":"Do not claim Andromeda-specific doctrine as evidence until a dedicated verified source is ingested. Use current Meta sources only for claims they explicitly support."
-    }
-  ],
+  "andromeda": {
+    "source_file":"META_ANDROMEDA_VERIFIED_2026.md",
+    "role":"verified_meta_andromeda_facts_and_bounded_recommendations",
+    "status":"ACTIVE_LOCAL_VERSIONED_SOURCE",
+    "official_source_count":4,
+    "rule":"Facts are restricted to documented Meta claims; ASTRA recommendations are separately labeled and may not be attributed to Meta."
+  },
+  "known_gaps": [],
   "routing_policy": {
     "creative_output_requires_retrieval": true,
     "minimum_distinct_design_sources": 2,
