@@ -47,6 +47,88 @@ COPY astra-next-poc/deployment/bootstrap.sh /usr/local/bin/astra-next-bootstrap.
 COPY astra-next-poc/deployment/entrypoint.sh /usr/local/bin/astra-next-entrypoint.sh
 RUN chmod +x /usr/local/bin/astra-next-bootstrap.sh /usr/local/bin/astra-next-entrypoint.sh
 
+# ASTRA-NEXT-07 persistent KB gate. Keep the source bootstrap unchanged while
+# making runtime ingestion idempotent across redeploys. The marker lives inside
+# STORAGE_DIR, so it survives instance replacement on the Render persistent disk.
+RUN python3 - <<'PY'
+from pathlib import Path
+p = Path('/usr/local/bin/astra-next-bootstrap.sh')
+s = p.read_text()
+old = '''KB_DIR=/opt/astra-next-kb
+KB_TOTAL=0; KB_PASS=0; KB_FAIL=0
+if [ -n "${OPENROUTER_API_KEY:-}" ] && [ -d "$KB_DIR" ]; then
+  log "kb_ingestion_start manifest=ASTRA_NEXT_POC_KB_V1 workspace=astra-next"
+  for FILE in "$KB_DIR"/*; do
+    [ -f "$FILE" ] || continue
+    KB_TOTAL=$((KB_TOTAL + 1)); BASE=$(basename "$FILE"); TMP=$(mktemp)
+    HTTP_CODE=$(curl -sS -o "$TMP" -w '%{http_code}' -X POST http://127.0.0.1:3001/api/workspace/astra-next/upload-and-embed -H "$AUTH_HEADER" -F "file=@${FILE}" || true)
+    OK=no
+    if [ "$HTTP_CODE" = "200" ]; then
+      OK=$(node - "$TMP" <<'NODE'
+const fs=require('fs'); try{const j=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));process.stdout.write(j.success===true?'yes':'no')}catch{process.stdout.write('no')}
+NODE
+)
+    fi
+    if [ "$OK" = "yes" ]; then KB_PASS=$((KB_PASS+1)); log "kb_ingest_pass file=${BASE}"; else KB_FAIL=$((KB_FAIL+1)); BODY=$(tr '\\n' ' ' < "$TMP" | head -c 300); log "ERROR kb_ingest_fail file=${BASE} http=${HTTP_CODE} body=${BODY}"; fi
+    rm -f "$TMP"
+  done
+  if [ "$KB_TOTAL" -eq 7 ] && [ "$KB_FAIL" -eq 0 ]; then
+    log "kb_ingestion_complete status=PASS manifest=ASTRA_NEXT_POC_KB_V1 total=${KB_TOTAL} passed=${KB_PASS} failed=${KB_FAIL}"
+  else
+    log "ERROR kb_ingestion_complete status=FAIL manifest=ASTRA_NEXT_POC_KB_V1 total=${KB_TOTAL} passed=${KB_PASS} failed=${KB_FAIL}"
+  fi
+else
+  log "ERROR kb_ingestion_skipped reason=openrouter_or_kb_dir_missing"
+fi
+'''
+new = '''KB_DIR=/opt/astra-next-kb
+KB_MANIFEST=ASTRA_NEXT_POC_KB_V1
+KB_MARKER_DIR="${STORAGE_DIR:-/app/server/storage}/astra-next-state"
+KB_MARKER_FILE="${KB_MARKER_DIR}/${KB_MANIFEST}.sha256"
+KB_TOTAL=0; KB_PASS=0; KB_FAIL=0
+if [ -n "${OPENROUTER_API_KEY:-}" ] && [ -d "$KB_DIR" ]; then
+  KB_TOTAL=$(find "$KB_DIR" -maxdepth 1 -type f | wc -l | tr -d ' ')
+  KB_FINGERPRINT=$(find "$KB_DIR" -maxdepth 1 -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | awk '{print $1}')
+  INSTALLED_FINGERPRINT=""
+  [ -f "$KB_MARKER_FILE" ] && INSTALLED_FINGERPRINT=$(tr -d '\\r\\n' < "$KB_MARKER_FILE")
+  if [ "$KB_TOTAL" -eq 7 ] && [ -n "$KB_FINGERPRINT" ] && [ "$INSTALLED_FINGERPRINT" = "$KB_FINGERPRINT" ]; then
+    KB_PASS=$KB_TOTAL
+    log "kb_manifest_match manifest=${KB_MANIFEST} fingerprint=${KB_FINGERPRINT}"
+    log "kb_ingestion_skipped reason=manifest_unchanged manifest=${KB_MANIFEST} total=${KB_TOTAL}"
+  else
+    log "kb_ingestion_start manifest=${KB_MANIFEST} workspace=astra-next fingerprint=${KB_FINGERPRINT}"
+    KB_PASS=0; KB_FAIL=0
+    for FILE in "$KB_DIR"/*; do
+      [ -f "$FILE" ] || continue
+      BASE=$(basename "$FILE"); TMP=$(mktemp)
+      HTTP_CODE=$(curl -sS -o "$TMP" -w '%{http_code}' -X POST http://127.0.0.1:3001/api/workspace/astra-next/upload-and-embed -H "$AUTH_HEADER" -F "file=@${FILE}" || true)
+      OK=no
+      if [ "$HTTP_CODE" = "200" ]; then
+        OK=$(node - "$TMP" <<'NODE'
+const fs=require('fs'); try{const j=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));process.stdout.write(j.success===true?'yes':'no')}catch{process.stdout.write('no')}
+NODE
+)
+      fi
+      if [ "$OK" = "yes" ]; then KB_PASS=$((KB_PASS+1)); log "kb_ingest_pass file=${BASE}"; else KB_FAIL=$((KB_FAIL+1)); BODY=$(tr '\\n' ' ' < "$TMP" | head -c 300); log "ERROR kb_ingest_fail file=${BASE} http=${HTTP_CODE} body=${BODY}"; fi
+      rm -f "$TMP"
+    done
+    if [ "$KB_TOTAL" -eq 7 ] && [ "$KB_PASS" -eq 7 ] && [ "$KB_FAIL" -eq 0 ]; then
+      mkdir -p "$KB_MARKER_DIR"
+      printf '%s\\n' "$KB_FINGERPRINT" > "$KB_MARKER_FILE"
+      log "kb_ingestion_complete status=PASS manifest=${KB_MANIFEST} total=${KB_TOTAL} passed=${KB_PASS} failed=${KB_FAIL} marker_saved=true"
+    else
+      log "ERROR kb_ingestion_complete status=FAIL manifest=${KB_MANIFEST} total=${KB_TOTAL} passed=${KB_PASS} failed=${KB_FAIL} marker_saved=false"
+    fi
+  fi
+else
+  log "ERROR kb_ingestion_skipped reason=openrouter_or_kb_dir_missing"
+fi
+'''
+if old not in s:
+    raise SystemExit('ASTRA-NEXT-07 bootstrap KB block not found')
+p.write_text(s.replace(old, new, 1))
+PY
+
 RUN mkdir -p /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creative /opt/astra-next-poc/runtime /opt/astra-next-poc/knowledge /opt/astra-next-poc/benchmark
 COPY astra-next-poc/benchmark/adjudicate_campaign360.js /opt/astra-next-benchmark/adjudicate_campaign360.js
 COPY astra-next-poc/benchmark/run_campaign360_sync.js /opt/astra-next-benchmark/run_campaign360_sync.js
