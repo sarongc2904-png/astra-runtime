@@ -22,6 +22,7 @@ const briefFacts = require('./campaign_brief_facts'); // [Brief Fidelity] CANONI
 const fidelity = require('./brief_fidelity_validator'); // [Brief Fidelity] node + final validators
 const fidelityGuard = require('./fidelity_false_positive_guard'); // narrow live false-positive adjudication
 const llmExec = require('../llm/llm_executor'); // [Final Synthesis Repair] bounded regeneration only
+const synthesisMetaGuard = require('./synthesis_meta_guard'); // prune unsafe meta-only synthesis items
 
 // [Final Synthesis Repair — bounded regeneration] Deterministic repair (fidelity.repairFinalSynthesis)
 // is always tried FIRST and resolves every currently-known repairable case on its own (its
@@ -419,6 +420,19 @@ async function run(rawRequest, options = {}) {
   diag.mark(diagId, 'AFTER_FINAL_FIDELITY', { violations: finalCheck.violations.length });
   let finalSynthesis = synthesis;
   const finalSynthesisRepairs = [];
+
+  // Meta-only deterministic cleanup: assumptions/recommended-next-actions are aggregation surfaces,
+  // not core campaign strategy. If an unsafe item appears there, drop that item and revalidate.
+  // Core-section violations are never edited by this guard and still fail closed.
+  if (finalCheck.violations.length) {
+    const metaRepair = synthesisMetaGuard.pruneMetaViolations(finalSynthesis, finalCheck.violations);
+    if (metaRepair.repairs.length) {
+      finalSynthesis = metaRepair.synthesis;
+      finalSynthesisRepairs.push(...metaRepair.repairs);
+      finalCheck = fidelity.validateFinalSynthesis(canonicalBriefFacts, finalSynthesis, { rawRequest });
+      diag.mark(diagId, 'AFTER_META_GUARD', { repairs: metaRepair.repairs.length, remaining_violations: finalCheck.violations.length });
+    }
+  }
   let finalSynthesisRegenerationAttempts = 0;
   if (finalCheck.violations.length && finalCheck.violations.every(fidelity.isRepairableFinalSynthesisViolation)) {
     const repairResult = fidelity.repairFinalSynthesis(canonicalBriefFacts, finalSynthesis, finalCheck.violations, { rawRequest });
