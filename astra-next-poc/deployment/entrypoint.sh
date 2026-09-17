@@ -52,5 +52,19 @@ else
   echo "[ASTRA_NEXT_ENTRYPOINT] creative_gateway_qa_skipped run=false"
 fi
 
+if [ "${RUN_CREATIVE_HTTP_GATEWAY_QA:-false}" = "true" ]; then
+  echo "[ASTRA_NEXT_ENTRYPOINT] creative_http_gateway_qa_wait_for_api gate=ASTRA-NEXT-11"
+  if wait_for_api_stable; then
+    echo "[ASTRA_NEXT_ENTRYPOINT] creative_http_gateway_qa_start gate=ASTRA-NEXT-11 api_stable=true"
+    HTTP_GATEWAY_RC=0
+    node /opt/astra-next-poc/benchmark/run_creative_http_gateway_qa.js || HTTP_GATEWAY_RC=$?
+    echo "[ASTRA_NEXT_ENTRYPOINT] creative_http_gateway_qa_complete rc=${HTTP_GATEWAY_RC}"
+  else
+    echo "[ASTRA_NEXT_ENTRYPOINT] creative_http_gateway_qa_complete rc=2 reason=api_not_ready"
+  fi
+else
+  echo "[ASTRA_NEXT_ENTRYPOINT] creative_http_gateway_qa_skipped run=false"
+fi
+
 wait "$BOOT_PID"
 exit $?
