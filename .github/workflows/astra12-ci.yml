@@ -23,8 +23,12 @@ jobs:
           node --check astra/src/research/research_provenance_validator.js
           node --check astra/src/workflows/marketing_campaign_360_research.js
           node --check astra/src/integration/gpt_supabase_adapter.js
+          node --check astra/src/specialists/llm_specialists.js
           node --check astra/tests/astra12_web_market_research.test.js
+          node --check astra/tests/astra12_external_provenance.test.js
       - name: ASTRA-12 deterministic tests
         run: node astra/tests/astra12_web_market_research.test.js
+      - name: ASTRA-12 external provenance regression
+        run: node astra/tests/astra12_external_provenance.test.js
       - name: Async diagnostics regression
         run: node astra/tests/astra11_campaign_async.test.js
