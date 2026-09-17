@@ -51,6 +51,7 @@ RUN mkdir -p /opt/astra-next-kb /opt/astra-next-benchmark /opt/astra-next-creati
 COPY astra-next-poc/benchmark/adjudicate_campaign360.js /opt/astra-next-benchmark/adjudicate_campaign360.js
 COPY astra-next-poc/benchmark/run_campaign360_sync.js /opt/astra-next-benchmark/run_campaign360_sync.js
 COPY astra-next-poc/benchmark/run_knowledge_routing_audit.js /opt/astra-next-benchmark/run_knowledge_routing_audit.js
+COPY astra-next-poc/benchmark/run_grounded_creative_output_qa.js /opt/astra-next-benchmark/run_grounded_creative_output_qa.js
 COPY astra-next-poc/knowledge/creative_knowledge_router.js /opt/astra-next-creative/creative_knowledge_router.js
 COPY astra-next-poc/knowledge/creative_source_manifest.json /opt/astra-next-creative/creative_source_manifest.json
 COPY astra-next-poc/knowledge/META_ANDROMEDA_VERIFIED_2026.md /opt/astra-next-creative/META_ANDROMEDA_VERIFIED_2026.md
