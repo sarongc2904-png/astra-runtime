@@ -228,6 +228,9 @@ async function processNode(n, ctx) {
 
 async function run(rawRequest, options = {}) {
   const diagId = diag.newId(); // [ASTRA-DIAG] local to this run(); correlate via adjacent timestamps
+  const emitProgress = payload => {
+    try { if (typeof options.onProgress === 'function') options.onProgress(payload); } catch (_) {}
+  };
   const mode = options.mode || 'llm';
   const adapter = options.adapter || new AgentV1Adapter(options.adapterOpts || {});
   const registry = registryLoader.load(options.registryPath);
@@ -271,6 +274,7 @@ async function run(rawRequest, options = {}) {
   }
 
   wfState.transition(state, 'RUNNING');
+  emitProgress({ phase: 'NODE_EXECUTION', current_node: null, active_nodes: [], completed_nodes: [] });
 
   const cost = { mode, model_calls: 0, retries: 0, by_tier: {}, tokens: { prompt: 0, completion: 0 }, evidence_chars_total: 0, per_node: {} };
   const node_outputs = []; const selected_methods_by_node = {}; const done = {}; const proposal_status_repairs = [];
@@ -286,6 +290,12 @@ async function run(rawRequest, options = {}) {
   // wave actually finished first.
   for (const wave of WAVES) {
     const waveIds = new Set(wave.map(n => n.id));
+    emitProgress({
+      phase: 'NODE_EXECUTION',
+      current_node: wave.length === 1 ? wave[0].id : null,
+      active_nodes: wave.map(n => n.id),
+      completed_nodes: node_outputs.map(x => x.work_unit_id),
+    });
     // [FAILED-NODE USAGE ACCOUNTING] Promise.allSettled (not Promise.all) so a node-level
     // BRIEF_FIDELITY_VIOLATION in this wave never causes a sibling's ALREADY-INCURRED real LLM
     // call to silently vanish from `cost` — every settled promise (fulfilled or rejected) is
@@ -372,15 +382,24 @@ async function run(rawRequest, options = {}) {
       done[n.id] = r.output;
       node_outputs.push({ work_unit_id: n.id, method_used: r.primary, forced: r.forced, output: r.output, evidence_chunk_ids: r.bundle.map(e => e.chunk_id), evidence_count: r.bundle.length });
       wfState.setSelectedMethod(state, n.id, selected_methods_by_node[n.id]);
+      emitProgress({
+        phase: 'NODE_EXECUTION',
+        current_node: null,
+        active_nodes: [],
+        completed_nodes: node_outputs.map(x => x.work_unit_id),
+      });
     }
   }
 
   // synthesis (HIGH_REASONING tier recorded; deterministic reconciliation engine, no extra LLM call in slice)
+  diag.mark(diagId, 'BEFORE_SYNTHESIS', { completed_nodes: node_outputs.map(x => x.work_unit_id) });
+  emitProgress({ phase: 'FINAL_SYNTHESIS', current_node: 'final_synthesis', active_nodes: ['final_synthesis'], completed_nodes: node_outputs.map(x => x.work_unit_id) });
   const synthTier = modelRouter.route('STRATEGIC_SYNTHESIS'); cost.by_tier[synthTier.task_class] = (cost.by_tier[synthTier.task_class] || 0) + 1;
   // [Brief Fidelity] canonicalBriefFacts is already computed above — transported here so
   // synthesis_engine_v2 never asks for a USER_PROVIDED_FACT that's already known (synthV1, the
   // deterministic baseline, is untouched and does not take this parameter).
   const synthesis = (mode === 'llm' ? synthV2 : synthV1).synthesize({ brief, node_outputs, selected_methods_by_node, canonicalBriefFacts });
+  diag.mark(diagId, 'AFTER_SYNTHESIS', { coherent: !!synthesis.coherent, section_count: synthesis.section_count || null });
   if (!synthesis.coherent) { wfState.transition(state, 'BLOCKED'); throw new Error('synthesis incomplete: missing ' + synthesis.missing_sections.join(',')); }
 
   // [Final Synthesis Validator — Brief Fidelity] COMPLETE is prohibited if the reconciled output
@@ -392,7 +411,10 @@ async function run(rawRequest, options = {}) {
   // repairable violation survives deterministic repair, ONE bounded final-synthesis-only
   // regeneration is attempted (never a specialist rerun, never a new Campaign360); FAILED, with the
   // exact violation paths, if coherence still cannot be established — never a silent COMPLETE.
+  diag.mark(diagId, 'BEFORE_FINAL_FIDELITY');
+  emitProgress({ phase: 'FINAL_FIDELITY', current_node: 'final_synthesis', active_nodes: ['final_synthesis'], completed_nodes: node_outputs.map(x => x.work_unit_id) });
   let finalCheck = fidelity.validateFinalSynthesis(canonicalBriefFacts, synthesis, { rawRequest });
+  diag.mark(diagId, 'AFTER_FINAL_FIDELITY', { violations: finalCheck.violations.length });
   let finalSynthesis = synthesis;
   const finalSynthesisRepairs = [];
   let finalSynthesisRegenerationAttempts = 0;
@@ -420,6 +442,7 @@ async function run(rawRequest, options = {}) {
     }
   }
   if (finalCheck.violations.length) {
+    emitProgress({ phase: 'FAILED', current_node: 'final_synthesis', active_nodes: [], completed_nodes: node_outputs.map(x => x.work_unit_id) });
     wfState.transition(state, 'FAILED');
     return {
       mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id,
@@ -432,6 +455,8 @@ async function run(rawRequest, options = {}) {
   }
 
   wfState.transition(state, 'COMPLETE');
+  diag.mark(diagId, 'WORKFLOW_COMPLETE', { completed_nodes: node_outputs.map(x => x.work_unit_id).concat(['final_synthesis']) });
+  emitProgress({ phase: 'COMPLETE', current_node: null, active_nodes: [], completed_nodes: node_outputs.map(x => x.work_unit_id).concat(['final_synthesis']) });
   return {
     mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id, node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
     mandatory_nodes_executed: node_outputs.length + 1, mandatory_node_count: 9,

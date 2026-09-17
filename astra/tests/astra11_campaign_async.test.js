@@ -79,6 +79,29 @@ t('status/result require auth', () => withServer({}, async base => {
 t('unknown job returns 404', () => withServer({}, async base => {
   const res = await post(base, '/astra/campaign-360/async/result', { job_id: 'missing' }); assert.equal(res.status, 404);
 }));
+t('public job exposes live progress telemetry and stalled health', () => {
+  const now = new Date().toISOString();
+  const active = asyncJobs.publicJob({
+    job_id: 'job-active', status: 'RUNNING', created_at: now, started_at: now, updated_at: now,
+    last_activity_at: now, current_phase: 'NODE_EXECUTION', current_node: 'offer',
+    active_nodes: ['offer'], completed_nodes: ['market_context', 'icp'],
+  });
+  assert.equal(active.health, 'ACTIVE');
+  assert.equal(active.current_phase, 'NODE_EXECUTION');
+  assert.equal(active.current_node, 'offer');
+  assert.deepStrictEqual(active.active_nodes, ['offer']);
+  assert.deepStrictEqual(active.completed_nodes, ['market_context', 'icp']);
+  assert(active.idle_seconds >= 0);
+
+  const old = new Date(Date.now() - 6 * 60 * 1000).toISOString();
+  const stalled = asyncJobs.publicJob({
+    job_id: 'job-stalled', status: 'RUNNING', created_at: old, started_at: old, updated_at: old,
+    last_activity_at: old, current_phase: 'FINAL_SYNTHESIS', current_node: 'final_synthesis',
+    active_nodes: ['final_synthesis'], completed_nodes: ['market_context'],
+  });
+  assert.equal(stalled.health, 'POSSIBLY_STALLED');
+  assert(stalled.idle_seconds >= 300);
+});
 (async () => {
   for (const x of tests) { try { await x.fn(); pass += 1; console.log('PASS', x.name); } catch (err) { fail += 1; console.log('FAIL', x.name, '::', err.message); } }
   console.log(`ASTRA11_CAMPAIGN_ASYNC_TEST_RESULT pass=${pass} fail=${fail}`); if (fail) process.exit(1);
