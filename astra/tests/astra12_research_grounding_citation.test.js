@@ -9,10 +9,12 @@ const evidence = [
 
 const noExternal = [{ claim: 'Internal note', source_class: 'INTERNAL_KNOWLEDGE', support_class: 'DIRECTLY_SUPPORTED', evidence_ref: 'INT_1' }];
 const fixedIcp = S.ensureExternalResearchFinding('ICP_SPECIALIST', noExternal, evidence);
-assert.strictEqual(fixedIcp[0].evidence_ref, 'WEB_1');
-assert.strictEqual(fixedIcp[0].source_class, 'EXTERNAL_RESEARCH');
-assert.strictEqual(fixedIcp[0].support_class, 'DIRECTLY_SUPPORTED');
-assert(/^EVIDENCIA_EXTERNA:/.test(fixedIcp[0].claim));
+assert.strictEqual(fixedIcp[0].evidence_ref, 'INT_1');
+const icpExternal = fixedIcp.find(f => f.evidence_ref === 'WEB_1');
+assert(icpExternal, 'ICP must contain a WEB_1 finding');
+assert.strictEqual(icpExternal.source_class, 'EXTERNAL_RESEARCH');
+assert.strictEqual(icpExternal.support_class, 'DIRECTLY_SUPPORTED');
+assert(/^EVIDENCIA_EXTERNA:/.test(icpExternal.claim));
 
 const fixedOffer = S.ensureExternalResearchFinding('OFFER_SPECIALIST', [], evidence);
 assert.strictEqual(fixedOffer.length, 1);
