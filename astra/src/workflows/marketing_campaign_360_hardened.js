@@ -24,6 +24,7 @@ const fidelityGuard = require('./fidelity_false_positive_guard'); // narrow live
 const llmExec = require('../llm/llm_executor'); // [Final Synthesis Repair] bounded regeneration only
 const synthesisMetaGuard = require('./synthesis_meta_guard'); // prune unsafe meta-only synthesis items
 const adsFidelityNormalizer = require('./ads_fidelity_normalizer'); // deterministic META_ADS provenance/objective normalization
+const marketContextFidelityNormalizer = require('./market_context_fidelity_normalizer'); // restore explicit brief problem context
 
 // [Final Synthesis Repair — bounded regeneration] Deterministic repair (fidelity.repairFinalSynthesis)
 // is always tried FIRST and resolves every currently-known repairable case on its own (its
@@ -184,6 +185,15 @@ async function processNode(n, ctx) {
   }
 
   let proposalStatusRepairs = [];
+
+  // MARKET_CONTEXT must describe the explicit problem from the brief when one exists.
+  // It must not paraphrase the business objective into problem_context, because result-oriented
+  // objective language can become a false invented-result claim in a field with different semantics.
+  if (n.id === 'market_context') {
+    const normalizedMarket = marketContextFidelityNormalizer.normalizeMarketContextOutput(output, canonicalBriefFacts);
+    output = normalizedMarket.output;
+    proposalStatusRepairs.push(...normalizedMarket.repairs.map(repair => ({ node: n.id, ...repair })));
+  }
 
   // META_ADS has two schema-level invariants that should not depend on model wording:
   // 1) campaign_objective mirrors the immutable user-provided business objective exactly;
