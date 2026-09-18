@@ -99,6 +99,7 @@ function buildPrompt(input) {
     `- Tag every recommendation with support_class one of: ${SUPPORT_CLASSES.join(', ')}.`,
     `- DIRECTLY_SUPPORTED requires an evidence reference (cite E# / chunk). INFERENCE = reasoned from method/brief. ASSUMPTION = a stated gap needing USER_PROVIDED_FACTS.`,
     `- EXTERNAL_RESEARCH evidence is verified web research. It may support market/competitor/review/testimonial claims only as attributed evidence; never reattribute it as the user's own result.`,
+    `- For MARKET_CONTEXT_SPECIALIST, ICP_SPECIALIST, and OFFER_SPECIALIST: when any EXTERNAL_RESEARCH evidence is supplied, findings MUST contain at least one DIRECTLY_SUPPORTED finding citing that external item by E# or WEB_n.`,
     `- For anything requiring CURRENT platform/provider/market facts you do not have (e.g. ${(spec.current || []).join(', ') || 'current market/pricing/competitor data'}), do NOT invent it: put it in current_research_required and mark CURRENT_RESEARCH_REQUIRED.`,
     `- Never invent benchmark numbers, guarantees, provider/API behavior, or current-platform doctrine. Preserve the method's stated limitations.`,
     `- Be specific to the actual business (${input.task_brief.business_type}). Non-generic. Downstream-usable.`,
@@ -132,6 +133,33 @@ function evidenceForRef(ref, evidence) {
   return items[Number(m[1]) - 1] || null;
 }
 
+const RESEARCH_GROUNDED_SPECIALISTS = new Set(['MARKET_CONTEXT_SPECIALIST', 'ICP_SPECIALIST', 'OFFER_SPECIALIST']);
+function isExternalEvidenceItem(item) {
+  return !!item && (item.source_class === 'EXTERNAL_RESEARCH' || /^WEB_\d+$/i.test(String(item.chunk_id || '')));
+}
+function shortExternalClaim(item) {
+  const words = String(item && item.text || '').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
+  const body = words.slice(0, 22).join(' ');
+  return 'EVIDENCIA_EXTERNA: ' + body;
+}
+function ensureExternalResearchFinding(specialistType, findings, evidence) {
+  if (!RESEARCH_GROUNDED_SPECIALISTS.has(specialistType)) return findings;
+  const external = (evidence || []).find(isExternalEvidenceItem);
+  if (!external) return findings;
+  const alreadyGrounded = (findings || []).some(f =>
+    f && f.support_class === 'DIRECTLY_SUPPORTED' &&
+    isExternalEvidenceItem(evidenceForRef(f.evidence_ref, evidence))
+  );
+  if (alreadyGrounded) return findings;
+  const injected = {
+    claim: shortExternalClaim(external),
+    source_class: 'EXTERNAL_RESEARCH',
+    support_class: 'DIRECTLY_SUPPORTED',
+    evidence_ref: external.chunk_id,
+  };
+  return [injected].concat(findings || []).slice(0, 5);
+}
+
 function sourceClassForFinding(finding, evidence) {
   if (finding.support_class !== 'DIRECTLY_SUPPORTED') return 'INFERENCE';
   const item = evidenceForRef(finding.evidence_ref, evidence);
@@ -148,12 +176,13 @@ async function runLLMSpecialist(input, opts = {}) {
   if (!res.ok) return { ok: false, fail_closed: true, error: res.error, attempts: res.attempts, retries: res.retries, usage: res.usage, usage_detail: res.usage_detail, finish_reason: res.finish_reason, llm_elapsed_ms: res.llm_elapsed_ms };
   const v = res.value;
   // Enforce support_class validity while preserving the provenance class of cited evidence.
-  const findings = (v.findings || []).map(f => ({
+  let findings = (v.findings || []).map(f => ({
     claim: String(f.claim || ''),
     source_class: sourceClassForFinding(f, input.knowledge_evidence),
     support_class: SUPPORT_CLASSES.includes(f.support_class) ? f.support_class : 'INFERENCE',
     evidence_ref: f.evidence_ref || null,
   }));
+  findings = ensureExternalResearchFinding(input.specialist_type, findings, input.knowledge_evidence);
   const recommendations = (v.recommendations || []).map(r => ({ recommendation: String(r.recommendation || ''), support_class: SUPPORT_CLASSES.includes(r.support_class) ? r.support_class : 'INFERENCE', basis: r.basis || null }));
   const output = {
     task_id: input.task_id, specialist_type: input.specialist_type, status: 'COMPLETE',
@@ -172,4 +201,4 @@ async function runLLMSpecialist(input, opts = {}) {
   return { ok: true, output };
 }
 
-module.exports = { runLLMSpecialist, buildPrompt, SPECS, SUPPORT_CLASSES, OUT_SCHEMA, evidenceForRef, sourceClassForFinding };
+module.exports = { runLLMSpecialist, buildPrompt, SPECS, SUPPORT_CLASSES, OUT_SCHEMA, evidenceForRef, sourceClassForFinding, ensureExternalResearchFinding, isExternalEvidenceItem, shortExternalClaim };
