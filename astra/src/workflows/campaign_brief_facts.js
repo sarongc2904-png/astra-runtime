@@ -27,6 +27,7 @@ const FIELD_LABELS = {
   audience: [/^\s*audiencia\s*:\s*(.+)$/i, /^\s*audience\s*:\s*(.+)$/i, /^\s*target\s*audience\s*:\s*(.+)$/i],
   geography: [/^\s*geograf[ií]a\s*:\s*(.+)$/i, /^\s*pa[ií]s\s*:\s*(.+)$/i, /^\s*geography\s*:\s*(.+)$/i],
   business_objective: [/^\s*objetivo\s*:\s*(.+)$/i, /^\s*objective\s*:\s*(.+)$/i],
+  problem_context: [/^\s*problema(?:\s+principal)?\s*:\s*(.+)$/i, /^\s*problem(?:\s+context)?\s*:\s*(.+)$/i],
   mechanism: [/^\s*mecanismo\s+exacto\s*:\s*(.+)$/i, /^\s*exact\s+mechanism\s*:\s*(.+)$/i, /^\s*mecanismo\s*:\s*(.+)$/i, /^\s*mechanism\s*:\s*(.+)$/i, /^\s*funnel\s*:\s*(.+)$/i],
   constraints: [/^\s*restricciones?\s*:\s*(.+)$/i, /^\s*constraints?\s*:\s*(.+)$/i],
 };
@@ -189,6 +190,16 @@ function firstMeaningfulSectionLine(lines) {
   return null;
 }
 
+function extractProblemContextFromAudience(lines) {
+  if (!Array.isArray(lines) || !lines.length) return null;
+  for (const raw of lines) {
+    const line = String(raw || '').trim();
+    const m = line.match(/^problema\s+principal\s*:\s*(.+)$/i);
+    if (m && m[1]) return cleanValue(m[1]);
+  }
+  return null;
+}
+
 function extractAudienceBuyer(lines) {
   if (!Array.isArray(lines) || !lines.length) return null;
   const values = [];
@@ -327,6 +338,7 @@ function extract(rawRequest) {
   if (!geography) geography = firstNaturalMatch(naturalText, NATURAL_PATTERNS.geography);
 
   const business_objective = firstLabeledMatch(text, FIELD_LABELS.business_objective) || firstMeaningfulSectionLine(objectiveSection) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.business_objective);
+  const problem_context = firstLabeledMatch(text, FIELD_LABELS.problem_context) || extractProblemContextFromAudience(audienceSection);
   const mechanism = firstLabeledMatch(text, FIELD_LABELS.mechanism) || extractMechanismFromSection(productSection) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.mechanism);
   // constraints: a same-line value ("Restricciones: presupuesto limitado") wins first (legacy,
   // unchanged); otherwise capture the full "Restricciones obligatorias:" block verbatim, line by
@@ -341,6 +353,7 @@ function extract(rawRequest) {
     buyer: fact(buyer),
     geography: fact(geography),
     business_objective: fact(business_objective),
+    problem_context: fact(problem_context),
     mechanism: fact(mechanism),
     constraints: fact(constraintsRaw),
   };
