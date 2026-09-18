@@ -750,7 +750,7 @@ function isGuaranteedResultMatch(matchedText) {
 // garantizados", "no debemos prometer resultados garantizados") describes NOT making the claim,
 // not making it — scoped to the same clause, before the match, and only for a guarantee-category
 // match (never widened to any other invented_result phrasing).
-const GUARANTEE_SELF_NEGATION_CUE = /\bno\s+(?:te\s+|les?\s+|nos\s+)?$|\b(?:do\s+not|don['’]t|never)\s+$/i;
+const GUARANTEE_SELF_NEGATION_CUE = /\bno\s+(?:(?:se\s+)?(?:debe(?:s|mos|n)?|deber[ií]a(?:s|mos|n)?|puede(?:s|n)?|podr[ií]a(?:s|mos|n)?)\s+)?(?:te\s+|les?\s+|nos\s+)?$|\b(?:do\s+not|don['’]t|never)\s+(?:(?:need|have)\s+to\s+|should\s+|must\s+)?$/i;
 const GUARANTEE_ADVISORY_CUE = /\bevitar\b|\bevita\b|\bevitando\b|\bno\s+(?:debe(?:s|mos|n)?\s+)?prometer\b|\bavoid\b|\bavoiding\b|\bexclude\b|\bexcluding\b|\bdo\s+not\s+promise\b|\bdon['’]t\s+promise\b|\bnever\s+promise\b/i;
 function isGuaranteeNegationOrAdvisoryEscape(s, match) {
   if (!isGuaranteedResultMatch(match[0])) return false;
@@ -1245,6 +1245,7 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
           isDescriptiveStateMatch(semanticKey, s, match) ||
           isTechnicalDoubleBookRisk(s, match)
         )) continue;
+        if (p.type === 'guarantee' && isGuaranteeNegationOrAdvisoryEscape(s, match)) continue;
         if (p.type === 'invented_evidence' && (isOperationalAssetValidationMatch(s, match) || isStructuralProcessBeforeAfterMatch(s, match))) continue;
         // [CATEGORY-SCOPED COLLECTION CUE] confirmed regression: COLLECTION_REQUEST_CUE's
         // acquisition-verb vocabulary (conseguir/obtener/...) legitimately overlaps with common
