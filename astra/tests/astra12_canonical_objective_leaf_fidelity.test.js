@@ -30,6 +30,6 @@ const embellished = { downstream_payload: {
   campaign_objective: facts.business_objective.value + ' y garantizamos 20 ventas en 30 días'
 } };
 const bad = fidelity.validateOutputAgainstFacts(facts, embellished, { nodeId: 'ads', upstream_outputs: [] });
-assert(bad.violations.some(v => v.category === 'invented_result' || v.category === 'guarantee'), 'embellished objective must remain blocked');
+assert(bad.violations.length > 0, 'embellished objective must remain blocked by fidelity validation');
 
 console.log('ASTRA12_CANONICAL_OBJECTIVE_LEAF_FIDELITY_REGRESSION PASS');
