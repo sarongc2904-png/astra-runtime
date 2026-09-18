@@ -157,7 +157,8 @@ function ensureExternalResearchFinding(specialistType, findings, evidence) {
     support_class: 'DIRECTLY_SUPPORTED',
     evidence_ref: external.chunk_id,
   };
-  return [injected].concat(findings || []).slice(0, 5);
+  const current = findings || [];
+  return current.length >= 5 ? current.slice(0, 4).concat(injected) : current.concat(injected);
 }
 
 function sourceClassForFinding(finding, evidence) {
