@@ -23,6 +23,7 @@ const fidelity = require('./brief_fidelity_validator'); // [Brief Fidelity] node
 const fidelityGuard = require('./fidelity_false_positive_guard'); // narrow live false-positive adjudication
 const llmExec = require('../llm/llm_executor'); // [Final Synthesis Repair] bounded regeneration only
 const synthesisMetaGuard = require('./synthesis_meta_guard'); // prune unsafe meta-only synthesis items
+const adsFidelityNormalizer = require('./ads_fidelity_normalizer'); // deterministic META_ADS provenance/objective normalization
 
 // [Final Synthesis Repair — bounded regeneration] Deterministic repair (fidelity.repairFinalSynthesis)
 // is always tried FIRST and resolves every currently-known repairable case on its own (its
@@ -183,6 +184,17 @@ async function processNode(n, ctx) {
   }
 
   let proposalStatusRepairs = [];
+
+  // META_ADS has two schema-level invariants that should not depend on model wording:
+  // 1) campaign_objective mirrors the immutable user-provided business objective exactly;
+  // 2) newly designed Ads tactics are explicitly PROPUESTA per the provenance contract.
+  // This normalization runs BEFORE fidelity validation and never suppresses a validator result.
+  if (n.id === 'ads') {
+    const normalizedAds = adsFidelityNormalizer.normalizeAdsOutput(output, canonicalBriefFacts);
+    output = normalizedAds.output;
+    proposalStatusRepairs.push(...normalizedAds.repairs.map(repair => ({ node: n.id, ...repair })));
+  }
+
   // [Node Fidelity Validator] a node output that contradicts a USER_PROVIDED_FACT never
   // continues silently — fail-closed. The only repair allowed here preserves proposal status by
   // adding a marker to the exact clauses found by the same deterministic provenance detector.
