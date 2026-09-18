@@ -18,6 +18,32 @@ RESTRICCIONES
 `;
 
 const facts = briefFacts.extract(brief);
+assert.equal(facts.demo_duration.status, 'USER_PROVIDED_FACT');
+assert.equal(facts.demo_duration.value, '3 días');
+assert.equal(facts.current_cta.status, 'USER_PROVIDED_FACT');
+assert.equal(facts.current_cta.value, 'Quiero probar la demo de 3 días');
+
+const offerSubstitution = { downstream_payload: {
+  risk_reduction: 'PROPUESTA: probar una demo de 14 días sin tarjeta como experimento.'
+} };
+const offerSubstitutionCheck = fidelity.validateOutputAgainstFacts(facts, offerSubstitution, {
+  nodeId: 'offer', upstream_outputs: []
+});
+assert(
+  offerSubstitutionCheck.violations.some(v => v.type === 'DEMO_DURATION_SUBSTITUTION'),
+  'a different demo duration must never replace the current 3-day demo, even when labeled PROPUESTA'
+);
+
+const currentOffer = { downstream_payload: {
+  risk_reduction: 'Demo actual de 3 días con CTA: Quiero probar la demo de 3 días.'
+} };
+const currentOfferCheck = fidelity.validateOutputAgainstFacts(facts, currentOffer, {
+  nodeId: 'offer', upstream_outputs: []
+});
+assert(
+  !currentOfferCheck.violations.some(v => v.type === 'DEMO_DURATION_SUBSTITUTION'),
+  'the canonical 3-day demo must remain valid'
+);
 
 const upstream = [{
   work_unit_id: 'offer',
