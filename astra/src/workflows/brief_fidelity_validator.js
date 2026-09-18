@@ -931,7 +931,7 @@ const PROHIBITED_CONTENT_PATTERNS = [
   { type: 'urgency', re: /urgencia/i },
   { type: 'scarcity', re: /escasez|oferta\s+limitada/i },
   { type: 'deadline', re: /\bdeadline\b/i },
-  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado|guarantee[sd]?|guaranteed\s+results?/i },
+  { type: 'guarantee', re: /garantiz\w*|garant[ií]a\s+de\s+resultado|guarantee\w*|guaranteed\s+results?/i },
   { type: 'invented_metric', re: INVENTED_METRIC_CLAIM },
   { type: 'invented_result', re: INVENTED_RESULT_CLAIM },
   { type: 'invented_evidence', re: INVENTED_EVIDENCE_CLAIM },
@@ -943,12 +943,12 @@ const PROHIBITION_CATEGORY_TERMS = [
   { type: 'urgency', re: /urgencia/i },
   { type: 'scarcity', re: /escasez|oferta\s+limitada/i },
   { type: 'deadline', re: /\bdeadline\b/i },
-  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado|guarantee[sd]?|guaranteed\s+results?/i },
+  { type: 'guarantee', re: /garantiz\w*|garant[ií]a\s+de\s+resultado|guarantee\w*|guaranteed\s+results?/i },
   { type: 'invented_metric', re: /m[ée]tricas?|\b(cac|cpa|cpl|roas|mer|ltv)\b/i },
   { type: 'invented_result', re: /\bresultados?\b|\bresults?\b/i },
   { type: 'invented_evidence', re: /\bevidencia\b|\bevidence\b/i },
 ];
-const EXPLICIT_PROHIBITION_DIRECTIVE = /\bno\s+(?:invent\w*|usar|incluir|utilizar|mencionar|presentar|afirmar|agregar|incorporar|garantiza\w*)\b/i;
+const EXPLICIT_PROHIBITION_DIRECTIVE = /\bno\s+(?:invent\w*|usar|incluir|utilizar|mencionar|presentar|afirmar|agregar|incorporar|garantiz\w*)\b/i;
 function activeExplicitProhibitionCategories(constraintValue) {
   const active = new Set();
   for (const clause of norm(textOnly(constraintValue)).split(/[.!?;\n]/)) {
@@ -1036,6 +1036,18 @@ function collectTextLeaves(value, pathPrefix) {
   }
   return [{ text: String(value), leafPath: pathPrefix }];
 }
+function isCanonicalObjectiveLeaf(facts, leafPath, leafText) {
+  const objective = facts && facts.business_objective;
+  if (!objective || objective.status !== 'USER_PROVIDED_FACT' || !objective.value) return false;
+  const path = norm(String(leafPath || '')).replace(/\[\d+\]/g, '');
+  const objectiveBearing = /(?:^|\.)(?:business_objective|campaign_objective|objective|primary_objective|goal|primary_goal)$/.test(path);
+  if (!objectiveBearing) return false;
+  return normalizeObjectiveComparable(leafText) === normalizeObjectiveComparable(objective.value);
+}
+function normalizeObjectiveComparable(value) {
+  return norm(String(value || '')).replace(/[.,;:!?]+$/g, '').replace(/\s+/g, ' ').trim();
+}
+
 function checkExplicitProhibition(facts, key, rawVal) {
   const cf = facts.constraints;
   if (!cf || cf.status !== 'USER_PROVIDED_FACT') return [];
@@ -1062,6 +1074,12 @@ function checkExplicitProhibition(facts, key, rawVal) {
     // and only the compact matcher ever sees the pairing at all).
     const seen = new Set();
     for (const v of leafViolations) {
+      // A user-provided business objective is allowed to appear verbatim in fields whose schema
+      // role is explicitly "objective". checkExplicitProhibition splits clauses on commas, so the
+      // local_clause can be only a prefix of the canonical objective; adjudicate using the WHOLE
+      // leaf value + semantic leaf path, not the shortened clause fragment. This never exempts
+      // non-objective fields or an embellished/shortened objective.
+      if (v.category === 'invented_result' && isCanonicalObjectiveLeaf(facts, leaf.leafPath, leaf.text)) continue;
       const dedupeKey = `${v.category}|${v.occurrence_start}`;
       if (seen.has(dedupeKey)) continue;
       seen.add(dedupeKey);
