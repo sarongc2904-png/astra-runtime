@@ -931,7 +931,7 @@ const PROHIBITED_CONTENT_PATTERNS = [
   { type: 'urgency', re: /urgencia/i },
   { type: 'scarcity', re: /escasez|oferta\s+limitada/i },
   { type: 'deadline', re: /\bdeadline\b/i },
-  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado|guarantee[sd]?|guaranteed\s+results?/i },
+  { type: 'guarantee', re: /garantiz\w*|garant[ií]a\s+de\s+resultado|guarantee\w*|guaranteed\s+results?/i },
   { type: 'invented_metric', re: INVENTED_METRIC_CLAIM },
   { type: 'invented_result', re: INVENTED_RESULT_CLAIM },
   { type: 'invented_evidence', re: INVENTED_EVIDENCE_CLAIM },
