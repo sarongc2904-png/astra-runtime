@@ -298,6 +298,7 @@ function extract(rawRequest) {
   const objectiveSection = captureSectionLines(text, /^OBJETIVO\s+PRINCIPAL$/i);
   const audienceSection = captureSectionLines(text, /^AUDIENCIA$/i);
   const geographySection = captureSectionLines(text, /^MERCADO\s*\/\s*GEOGRAF[IÍ]A$/i);
+  const offerSection = captureSectionLines(text, /^OFERTA\s+ACTUAL$/i);
 
   // product_name: the structured-brief opening ("Crea una campaña 360 para Método 360.") is the
   // authoritative source when present — it names the product independently of what "Producto:"
@@ -340,6 +341,11 @@ function extract(rawRequest) {
   const business_objective = firstLabeledMatch(text, FIELD_LABELS.business_objective) || firstMeaningfulSectionLine(objectiveSection) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.business_objective);
   const problem_context = firstLabeledMatch(text, FIELD_LABELS.problem_context) || extractProblemContextFromAudience(audienceSection);
   const mechanism = firstLabeledMatch(text, FIELD_LABELS.mechanism) || extractMechanismFromSection(productSection) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.mechanism);
+  const offerText = (offerSection || []).join('\n');
+  const demoMatch = offerText.match(/^\s*demo\s+actual\s*:\s*(.+)$/im);
+  const ctaMatch = offerText.match(/^\s*cta\s+actual\s*:\s*(.+)$/im);
+  const demo_duration = demoMatch ? cleanValue(demoMatch[1]) : null;
+  const current_cta = ctaMatch ? cleanValue(cleanValue(ctaMatch[1]).replace(/^[\s\"'“”‘’]+|[\s\"'“”‘’]+$/g, '')) : null;
   // constraints: a same-line value ("Restricciones: presupuesto limitado") wins first (legacy,
   // unchanged); otherwise capture the full "Restricciones obligatorias:" block verbatim, line by
   // line, up to the next structural heading — nothing summarized, nothing invented.
@@ -355,6 +361,8 @@ function extract(rawRequest) {
     business_objective: fact(business_objective),
     problem_context: fact(problem_context),
     mechanism: fact(mechanism),
+    demo_duration: fact(demo_duration),
+    current_cta: fact(current_cta),
     constraints: fact(constraintsRaw),
   };
   const explicit_unknowns = Object.entries(facts).filter(([, f]) => f.status === 'UNKNOWN').map(([k]) => k).sort();
