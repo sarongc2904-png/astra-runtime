@@ -1036,6 +1036,18 @@ function collectTextLeaves(value, pathPrefix) {
   }
   return [{ text: String(value), leafPath: pathPrefix }];
 }
+function isCanonicalObjectiveLeaf(facts, leafPath, leafText) {
+  const objective = facts && facts.business_objective;
+  if (!objective || objective.status !== 'USER_PROVIDED_FACT' || !objective.value) return false;
+  const path = norm(String(leafPath || '')).replace(/\[\d+\]/g, '');
+  const objectiveBearing = /(?:^|\.)(?:business_objective|campaign_objective|objective|primary_objective|goal|primary_goal)$/.test(path);
+  if (!objectiveBearing) return false;
+  return normalizeObjectiveComparable(leafText) === normalizeObjectiveComparable(objective.value);
+}
+function normalizeObjectiveComparable(value) {
+  return norm(String(value || '')).replace(/[.,;:!?]+$/g, '').replace(/\s+/g, ' ').trim();
+}
+
 function checkExplicitProhibition(facts, key, rawVal) {
   const cf = facts.constraints;
   if (!cf || cf.status !== 'USER_PROVIDED_FACT') return [];
@@ -1062,6 +1074,12 @@ function checkExplicitProhibition(facts, key, rawVal) {
     // and only the compact matcher ever sees the pairing at all).
     const seen = new Set();
     for (const v of leafViolations) {
+      // A user-provided business objective is allowed to appear verbatim in fields whose schema
+      // role is explicitly "objective". checkExplicitProhibition splits clauses on commas, so the
+      // local_clause can be only a prefix of the canonical objective; adjudicate using the WHOLE
+      // leaf value + semantic leaf path, not the shortened clause fragment. This never exempts
+      // non-objective fields or an embellished/shortened objective.
+      if (v.category === 'invented_result' && isCanonicalObjectiveLeaf(facts, leaf.leafPath, leaf.text)) continue;
       const dedupeKey = `${v.category}|${v.occurrence_start}`;
       if (seen.has(dedupeKey)) continue;
       seen.add(dedupeKey);
