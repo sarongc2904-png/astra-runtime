@@ -1124,6 +1124,22 @@ function semanticLeafFieldKey(fieldKey, leafPath) {
   }
   return fieldKey;
 }
+function isTechnicalDoubleBookRisk(clause, match) {
+  if (!match) return false;
+  const matched = norm(String(match[0] || ''));
+  if (!/^(?:double|doubl(?:e|ed|ing))$/.test(matched)) return false;
+  const raw = String(clause || '');
+  const around = norm(raw.slice(Math.max(0, match.index - 48), Math.min(raw.length, match.index + String(match[0] || '').length + 64)));
+  // Narrow operational-failure description only: calendar/scheduling context + booking/timezone
+  // language, with no advertiser voice, result magnitude, or commercial outcome term.
+  if (!/\b(?:calendar|calendario|booking|book|timezone|time\s*zone|zona\s+horaria|schedule|scheduling|agenda)\b/.test(around)) return false;
+  if (!/\b(?:book|booking|timezone|time\s*zone|zona\s+horaria|mismatch|conflict|collision|error|failure|riesgo|risk)\b/.test(around)) return false;
+  if (ADVERTISER_CLAIM_VOICE_CUE.test(raw)) return false;
+  if (new RegExp(RESULT_MAGNITUDE, 'i').test(raw)) return false;
+  if (new RegExp('\\b(?:' + RESULT_OUTCOME_TERMS + ')\\b', 'i').test(raw)) return false;
+  return true;
+}
+
 function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCategories) {
   const violations = [];
   const semanticKey = semanticLeafFieldKey(key, leafPath);
@@ -1226,7 +1242,8 @@ function checkExplicitProhibitionOnLeaf(key, valRawSentences, leafPath, activeCa
           isMeasurementPurposeClause(s, match.index) || hasGoalIntentContext(s) ||
           isDesiredOutcomeQualitativeGoal(semanticKey, s, match) ||
           isGuaranteeNegationOrAdvisoryEscape(s, match) ||
-          isDescriptiveStateMatch(semanticKey, s, match)
+          isDescriptiveStateMatch(semanticKey, s, match) ||
+          isTechnicalDoubleBookRisk(s, match)
         )) continue;
         if (p.type === 'invented_evidence' && (isOperationalAssetValidationMatch(s, match) || isStructuralProcessBeforeAfterMatch(s, match))) continue;
         // [CATEGORY-SCOPED COLLECTION CUE] confirmed regression: COLLECTION_REQUEST_CUE's
