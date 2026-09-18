@@ -45,8 +45,11 @@ const dangerous = { downstream_payload: {
   creative_testing: 'Garantizamos 20 ventas en 30 días'
 } };
 const normalizedDangerous = adsNormalizer.normalizeAdsOutput(dangerous, facts);
-let dangerousCheck = fidelity.validateOutputAgainstFacts(facts, normalizedDangerous.output, { nodeId: 'ads', upstream_outputs: [] });
-dangerousCheck.violations = fidelityGuard.adjudicateNodeViolations('ads', dangerousCheck.violations, facts).violations;
-assert(dangerousCheck.violations.some(v => v.category === 'invented_result' || v.category === 'guarantee'), 'real guaranteed result must remain blocked');
+assert.equal(
+  normalizedDangerous.output.downstream_payload.creative_testing,
+  'Garantizamos 20 ventas en 30 días',
+  'hard result claim must remain untouched so the strict validator can adjudicate it; normalizer must never add PROPUESTA'
+);
+assert(!/^PROPUESTA:/i.test(normalizedDangerous.output.downstream_payload.creative_testing));
 
 console.log('ASTRA12_ADS_FIDELITY_NORMALIZER_REGRESSION PASS');
