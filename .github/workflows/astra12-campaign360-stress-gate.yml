@@ -10,6 +10,7 @@ on:
       - 'astra/tests/astra12_final_synthesis_meta_guard.test.js'
       - 'astra/tests/astra12_ads_fidelity_normalizer.test.js'
       - 'astra/tests/astra12_market_context_problem_fidelity.test.js'
+      - 'astra/tests/astra12_canonical_objective_leaf_fidelity.test.js'
       - '.github/workflows/astra12-campaign360-stress-gate.yml'
   push:
     branches:
@@ -22,6 +23,7 @@ on:
       - 'astra/tests/astra12_final_synthesis_meta_guard.test.js'
       - 'astra/tests/astra12_ads_fidelity_normalizer.test.js'
       - 'astra/tests/astra12_market_context_problem_fidelity.test.js'
+      - 'astra/tests/astra12_canonical_objective_leaf_fidelity.test.js'
       - '.github/workflows/astra12-campaign360-stress-gate.yml'
 
 jobs:
@@ -43,5 +45,7 @@ jobs:
         run: node astra/tests/astra12_ads_fidelity_normalizer.test.js
       - name: Run market-context problem fidelity regression
         run: node astra/tests/astra12_market_context_problem_fidelity.test.js
+      - name: Run canonical objective leaf fidelity regression
+        run: node astra/tests/astra12_canonical_objective_leaf_fidelity.test.js
       - name: Run 50-case Campaign360 offline stress gate
         run: node astra/tests/astra12_campaign360_stress_gate.test.js
