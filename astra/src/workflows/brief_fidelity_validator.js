@@ -948,7 +948,7 @@ const PROHIBITION_CATEGORY_TERMS = [
   { type: 'invented_result', re: /\bresultados?\b|\bresults?\b/i },
   { type: 'invented_evidence', re: /\bevidencia\b|\bevidence\b/i },
 ];
-const EXPLICIT_PROHIBITION_DIRECTIVE = /\bno\s+(?:invent\w*|usar|incluir|utilizar|mencionar|presentar|afirmar|agregar|incorporar|garantiza\w*)\b/i;
+const EXPLICIT_PROHIBITION_DIRECTIVE = /\bno\s+(?:invent\w*|usar|incluir|utilizar|mencionar|presentar|afirmar|agregar|incorporar|garantiz\w*)\b/i;
 function activeExplicitProhibitionCategories(constraintValue) {
   const active = new Set();
   for (const clause of norm(textOnly(constraintValue)).split(/[.!?;\n]/)) {
