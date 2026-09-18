@@ -13,7 +13,7 @@ Canal principal: WhatsApp.
 El bot clasifica prospectos y agenda citas en Google Calendar.
 
 RESTRICCIONES
-- No garantizar ventas, ingresos, citas, ROAS ni crecimiento.
+- No inventar resultados comerciales ni garantizar ventas, ingresos, citas, ROAS ni crecimiento.
 - Cualquier estrategia nueva debe marcarse como PROPUESTA.
 `;
 
