@@ -88,6 +88,7 @@ function buildPrompt(input) {
     `CANONICAL_BRIEF_FACTS (immutable ground truth for this business — see rules below): ${JSON.stringify(canonicalFacts)}`,
     `CANONICAL FACT RULES (mandatory, override anything else in this prompt if they conflict):`,
     `- Every field above with status USER_PROVIDED_FACT is immutable: never substitute, deny, degrade to UNKNOWN, or reinterpret it.`,
+    `- If demo_duration or current_cta is USER_PROVIDED_FACT, treat it as part of the CURRENT OFFER. Do not invent or propose a different current demo duration or CTA; downstream Funnel must preserve the current value exactly.`,
     `- A field with status UNKNOWN must remain UNKNOWN unless the supplied evidence authorizes a clearly labeled INFERENCE.`,
     `- Any new idea not contained in the facts or evidence above MUST begin explicitly with "PROPUESTA:". Never present a PROPUESTA as a fact.`,
     `- Any upstream content already labeled PROPUESTA is tainted as proposal. Any reuse, paraphrase, derivative, operationalization or downstream dependency of that idea MUST retain explicit PROPUESTA status. Never convert upstream PROPUESTA into an unmarked fact/decision.`,
