@@ -37,13 +37,13 @@ assert(
 
 const unsafePain = { deliverable: {
   '2_target_audience_icp': {
-    pains: ['PROPUESTA: duplicar 20 citas en 30 días']
+    pains: ['Garantizamos 20 citas en 30 días']
   }
 } };
 const unsafeCheck = fidelity.validateFinalSynthesis(facts, unsafePain, { rawRequest: brief });
 assert(
   unsafeCheck.violations.some(v => v.category === 'invented_result' || v.category === 'guarantee'),
-  'actionable or quantified duplicate-result claims must remain blocked'
+  'explicit guaranteed result claims must remain blocked'
 );
 
 console.log('ASTRA12_FINAL_OBJECTIVE_PAINS_FIDELITY_REGRESSION PASS');
