@@ -1704,6 +1704,35 @@ function repairUpstreamProposalStatus(facts, output, upstreamOutputs = []) {
   return { output: repairedOutput, repairs };
 }
 
+
+function checkDemoDurationSubstitution(facts, key, rawValue, nodeId) {
+  if (!['offer', 'funnel'].includes(nodeId)) return [];
+  const df = facts && facts.demo_duration;
+  if (!df || df.status !== 'USER_PROVIDED_FACT' || !df.value) return [];
+  const canonicalMatch = norm(df.value).match(/\b(\d+)\s*dias?\b/);
+  if (!canonicalMatch) return [];
+  const canonicalDays = canonicalMatch[1];
+  const text = norm(textOnly(rawValue));
+  const violations = [];
+  const re = /\b(\d+)\s*dias?\b/g;
+  for (const match of text.matchAll(re)) {
+    if (match[1] === canonicalDays) continue;
+    const start = Math.max(0, match.index - 48);
+    const end = Math.min(text.length, match.index + match[0].length + 48);
+    const context = text.slice(start, end);
+    if (!/\b(?:demo|prueba|trial)\b|\bsin\s+tarjeta\b/.test(context)) continue;
+    violations.push({
+      type: 'DEMO_DURATION_SUBSTITUTION',
+      fact_field: 'demo_duration',
+      canonical_value: df.value,
+      found_value: match[0],
+      field_key: key,
+      local_clause: context.trim(),
+    });
+  }
+  return violations;
+}
+
 function validateOutputAgainstFacts(facts, output, { nodeId, upstream_outputs = [] } = {}) {
   const entries = relevantFields(output);
   const normEntries = entries.map(([k, v]) => [k, norm(stringify(v))]);
@@ -1716,6 +1745,7 @@ function validateOutputAgainstFacts(facts, output, { nodeId, upstream_outputs = 
     const markerIndex = firstMarkerIndex(textVal);
     const siblingEntries = normEntries.filter(([k]) => k !== key);
     for (const v of checkFieldSubstitutions(facts, key, rawVal, siblingEntries)) violations.push(v);
+    for (const v of checkDemoDurationSubstitution(facts, key, rawVal, nodeId || null)) violations.push(v);
     for (const v of checkKnownFactDenial(facts, key, textVal)) violations.push(v);
     for (const v of checkUnlabeledProposal(facts, key, textVal, markerIndex)) violations.push(v);
     for (const v of checkExplicitProhibition(facts, key, rawVal)) violations.push(v);
