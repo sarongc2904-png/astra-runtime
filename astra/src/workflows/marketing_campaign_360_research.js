@@ -11,6 +11,7 @@ const { AgentV1Adapter } = require('../adapter/agent_v1_adapter');
 const webMarketResearch = require('../research/web_market_research');
 const researchPolicy = require('../research/research_policy');
 const researchProvenance = require('../research/research_provenance_validator');
+const diag = require('../integration/diag');
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
 
@@ -189,6 +190,13 @@ async function run(rawRequest, options = {}) {
     const check = researchProvenance.validate(result, pack);
     result.research_grounding = check.grounding;
     result.research_provenance_violations = check.violations;
+    diag.mark(result.workflow_id || 'WF_MC360H', 'RESEARCH_PROVENANCE_CHECK', {
+      violation_count: check.violations.length,
+      violations: check.violations.map(v => ({ type: v.type, node: v.node || null, field_key: v.field_key || null })),
+      grounding: Object.fromEntries(Object.entries(check.grounding || {}).map(([node, g]) => [node, { external_evidence_count: g && g.external_evidence_count || 0 }])),
+      web_evidence_count: Array.isArray(pack.evidence) ? pack.evidence.length : 0,
+      source_count: pack.source_count || 0,
+    });
     if (check.violations.length) {
       // The strategy may have been generated, but it is not valid ASTRA-12 output unless the
       // market/ICP/offer actually cite source-verified WEB evidence and the offer is a proposal.
