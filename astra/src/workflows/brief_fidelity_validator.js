@@ -1040,12 +1040,27 @@ function isCanonicalObjectiveLeaf(facts, leafPath, leafText) {
   const objective = facts && facts.business_objective;
   if (!objective || objective.status !== 'USER_PROVIDED_FACT' || !objective.value) return false;
   const path = norm(String(leafPath || '')).replace(/\[\d+\]/g, '');
-  const objectiveBearing = /(?:^|\.)(?:business_objective|campaign_objective|objective|primary_objective|goal|primary_goal)$/.test(path);
+  const objectiveBearing = /(?:^|\.)(?:\d+_)?(?:business_objective|campaign_objective|objective|primary_objective|goal|primary_goal)$/.test(path);
   if (!objectiveBearing) return false;
   return normalizeObjectiveComparable(leafText) === normalizeObjectiveComparable(objective.value);
 }
 function normalizeObjectiveComparable(value) {
   return norm(String(value || '')).replace(/[.,;:!?]+$/g, '').replace(/\s+/g, ' ').trim();
+}
+const DESCRIPTIVE_DUPLICATE_PARTICIPLE_RE = /^(?:duplicad[oa]s?|triplicad[oa]s?|doubled|tripled)$/i;
+const DESCRIPTIVE_DUPLICATE_ADVERTISER_RE = /\b(?:tu|tus|te|usted|ustedes|contigo|you|your|we\s+will|we['’]ll|garantiz\w*|guarantee\w*)\b/i;
+const DESCRIPTIVE_DUPLICATE_MAGNITUDE_RE = /\b\d+(?:[.,]\d+)?\s*(?:%|x|mxn|usd|pesos?|d[oó]lares?|d[ií]as?|semanas?|meses?|citas?|appointments?|leads?|clientes?|ventas?|sales?)\b/i;
+const DESCRIPTIVE_DUPLICATE_ACTION_RE = /\b(?:duplicar|triplicar|duplica|triplica|double|triple)\b/i;
+function isDescriptivePainParticipleLeaf(fieldKey, leafPath, violation) {
+  if (!violation || violation.category !== 'invented_result') return false;
+  const semanticKey = semanticLeafFieldKey(fieldKey, leafPath);
+  if (norm(semanticKey) !== 'pains') return false;
+  const matched = String(violation.matched_text || '').trim();
+  const clause = String(violation.local_clause || '').trim();
+  if (!DESCRIPTIVE_DUPLICATE_PARTICIPLE_RE.test(matched) || !clause) return false;
+  if (DESCRIPTIVE_DUPLICATE_ADVERTISER_RE.test(clause) || DESCRIPTIVE_DUPLICATE_MAGNITUDE_RE.test(clause) || DESCRIPTIVE_DUPLICATE_ACTION_RE.test(clause)) return false;
+  const idx = clause.toLowerCase().indexOf(matched.toLowerCase());
+  return idx > 0;
 }
 
 function checkExplicitProhibition(facts, key, rawVal) {
@@ -1080,6 +1095,7 @@ function checkExplicitProhibition(facts, key, rawVal) {
       // leaf value + semantic leaf path, not the shortened clause fragment. This never exempts
       // non-objective fields or an embellished/shortened objective.
       if (v.category === 'invented_result' && isCanonicalObjectiveLeaf(facts, leaf.leafPath, leaf.text)) continue;
+      if (isDescriptivePainParticipleLeaf(key, leaf.leafPath, v)) continue;
       const dedupeKey = `${v.category}|${v.occurrence_start}`;
       if (seen.has(dedupeKey)) continue;
       seen.add(dedupeKey);
