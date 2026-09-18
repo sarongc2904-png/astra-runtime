@@ -16,6 +16,7 @@ on:
       - 'astra/tests/astra12_negated_guarantee_fidelity.test.js'
       - 'astra/tests/astra12_research_grounding_citation.test.js'
       - 'astra/tests/astra12_offer_funnel_proposal_propagation.test.js'
+      - 'astra/tests/astra12_fidelity_hypothesis_mode.test.js'
       - '.github/workflows/astra12-campaign360-stress-gate.yml'
   push:
     branches:
@@ -63,5 +64,7 @@ jobs:
         run: node astra/tests/astra12_research_grounding_citation.test.js
       - name: Run Offer to Funnel proposal propagation regression
         run: node astra/tests/astra12_offer_funnel_proposal_propagation.test.js
+      - name: Run fidelity hypothesis mode regression
+        run: node astra/tests/astra12_fidelity_hypothesis_mode.test.js
       - name: Run 50-case Campaign360 offline stress gate
         run: node astra/tests/astra12_campaign360_stress_gate.test.js
