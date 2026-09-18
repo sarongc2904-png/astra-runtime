@@ -345,7 +345,7 @@ function extract(rawRequest) {
   const demoMatch = offerText.match(/^\s*demo\s+actual\s*:\s*(.+)$/im);
   const ctaMatch = offerText.match(/^\s*cta\s+actual\s*:\s*(.+)$/im);
   const demo_duration = demoMatch ? cleanValue(demoMatch[1]) : null;
-  const current_cta = ctaMatch ? cleanValue(ctaMatch[1].replace(/^[“\"']|[”\"']$/g, '')) : null;
+  const current_cta = ctaMatch ? cleanValue(cleanValue(ctaMatch[1]).replace(/^[“\"']|[”\"']$/g, '')) : null;
   // constraints: a same-line value ("Restricciones: presupuesto limitado") wins first (legacy,
   // unchanged); otherwise capture the full "Restricciones obligatorias:" block verbatim, line by
   // line, up to the next structural heading — nothing summarized, nothing invented.
