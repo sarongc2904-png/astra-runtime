@@ -943,7 +943,7 @@ const PROHIBITION_CATEGORY_TERMS = [
   { type: 'urgency', re: /urgencia/i },
   { type: 'scarcity', re: /escasez|oferta\s+limitada/i },
   { type: 'deadline', re: /\bdeadline\b/i },
-  { type: 'guarantee', re: /garantizamos|garant[ií]a\s+de\s+resultado|guarantee[sd]?|guaranteed\s+results?/i },
+  { type: 'guarantee', re: /garantiz\w*|garant[ií]a\s+de\s+resultado|guarantee\w*|guaranteed\s+results?/i },
   { type: 'invented_metric', re: /m[ée]tricas?|\b(cac|cpa|cpl|roas|mer|ltv)\b/i },
   { type: 'invented_result', re: /\bresultados?\b|\bresults?\b/i },
   { type: 'invented_evidence', re: /\bevidencia\b|\bevidence\b/i },
