@@ -7,6 +7,7 @@
 const PROPOSAL_PREFIX_RE = /^\s*(?:PROPUESTA|PROPOSAL|HIP[ÓO]TESIS|HYPOTHESIS)\s*:/i;
 const UNKNOWN_RE = /^\s*(?:UNKNOWN|CURRENT_RESEARCH_REQUIRED)\b/i;
 const TACTICAL_FIELDS = new Set(['audience_approach', 'structure', 'creative_testing', 'qualification', 'measurement']);
+const HARD_CLAIM_RE = /\b(?:garantiz\w*|guarantee\w*|\d+(?:[.,]\d+)?\s*(?:%|x|ventas?|sales?|clientes?|clients?|citas?|appointments?|leads?)\b)/i;
 
 function clone(v) { return v == null ? v : JSON.parse(JSON.stringify(v)); }
 
@@ -14,6 +15,9 @@ function markProposal(value) {
   if (typeof value === 'string') {
     const s = value.trim();
     if (!s || PROPOSAL_PREFIX_RE.test(s) || UNKNOWN_RE.test(s)) return value;
+    // Never convert a hard result/guarantee claim into a "proposal" escape hatch.
+    // Leave it untouched so the existing strict fidelity validator can block it.
+    if (HARD_CLAIM_RE.test(s)) return value;
     return 'PROPUESTA: ' + s;
   }
   if (Array.isArray(value)) return value.map(markProposal);
