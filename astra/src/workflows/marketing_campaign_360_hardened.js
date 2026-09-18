@@ -25,6 +25,7 @@ const llmExec = require('../llm/llm_executor'); // [Final Synthesis Repair] boun
 const synthesisMetaGuard = require('./synthesis_meta_guard'); // prune unsafe meta-only synthesis items
 const adsFidelityNormalizer = require('./ads_fidelity_normalizer'); // deterministic META_ADS provenance/objective normalization
 const marketContextFidelityNormalizer = require('./market_context_fidelity_normalizer'); // restore explicit brief problem context
+const fidelityHypothesisPolicy = require('./fidelity_hypothesis_policy'); // non-blocking ambiguity/provenance policy
 
 // [Final Synthesis Repair — bounded regeneration] Deterministic repair (fidelity.repairFinalSynthesis)
 // is always tried FIRST and resolves every currently-known repairable case on its own (its
@@ -185,6 +186,7 @@ async function processNode(n, ctx) {
   }
 
   let proposalStatusRepairs = [];
+  let fidelityHypotheses = [];
 
   // MARKET_CONTEXT must describe the explicit problem from the brief when one exists.
   // It must not paraphrase the business objective into problem_context, because result-oriented
@@ -232,6 +234,11 @@ async function processNode(n, ctx) {
       violations = fidelityGuard.adjudicateNodeViolations(n.id, secondValidation.violations, canonicalBriefFacts).violations;
     }
     if (violations.length) {
+      const classified = fidelityHypothesisPolicy.classify(violations, n.id);
+      fidelityHypotheses.push(...classified.hypotheses);
+      violations = classified.hard;
+    }
+    if (violations.length) {
       const e = new Error('BRIEF_FIDELITY_VIOLATION at node ' + n.id + ': ' + violations.map(v => v.type).join(', '));
       e.wfTransition = 'FAILED'; e.code = 'BRIEF_FIDELITY_VIOLATION'; e.briefFidelityViolations = violations;
       e.proposalStatusRepairs = proposalStatusRepairs;
@@ -246,7 +253,7 @@ async function processNode(n, ctx) {
   }
 
   return {
-    node: n, output, primary, forced: !!n.forced, selInfo, bundle, tier, evidenceChars, llmUsage, proposalStatusRepairs,
+    node: n, output, primary, forced: !!n.forced, selInfo, bundle, tier, evidenceChars, llmUsage, proposalStatusRepairs, fidelityHypotheses,
     selectedMethod: { primary_method: primary, forced: !!n.forced, secondary: selInfo.secondary || [], scorer: n.forced ? 'FORCED' : 'v2' },
   };
 }
@@ -302,7 +309,7 @@ async function run(rawRequest, options = {}) {
   emitProgress({ phase: 'NODE_EXECUTION', current_node: null, active_nodes: [], completed_nodes: [] });
 
   const cost = { mode, model_calls: 0, retries: 0, by_tier: {}, tokens: { prompt: 0, completion: 0 }, evidence_chars_total: 0, per_node: {} };
-  const node_outputs = []; const selected_methods_by_node = {}; const done = {}; const proposal_status_repairs = [];
+  const node_outputs = []; const selected_methods_by_node = {}; const done = {}; const proposal_status_repairs = []; const fidelity_hypotheses = [];
   const nodeCtx = { done, adapter, doRetrieve, registry, brief, biz, mode, injectedLLM, diagId, canonicalBriefFacts };
 
   // [ASTRA-10X] Execute by topological wave: nodes within a wave run concurrently (Promise.all);
@@ -387,6 +394,7 @@ async function run(rawRequest, options = {}) {
         node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
         workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
         brief_fidelity_violations: firstFidelityError.briefFidelityViolations || [],
+        fidelity_hypotheses,
         node_outputs, selected_methods_by_node, proposal_status_repairs: proposal_status_repairs.concat(firstFidelityError.proposalStatusRepairs || []), synthesis: null, cost, _state: state,
       };
     }
@@ -396,6 +404,7 @@ async function run(rawRequest, options = {}) {
       if (!waveIds.has(n.id)) continue;
       const r = byId.get(n.id);
       proposal_status_repairs.push(...r.proposalStatusRepairs);
+      fidelity_hypotheses.push(...(r.fidelityHypotheses || []));
       selected_methods_by_node[n.id] = r.selectedMethod;
       cost.evidence_chars_total += r.evidenceChars;
       cost.by_tier[r.tier.task_class] = (cost.by_tier[r.tier.task_class] || 0) + 1;
@@ -480,6 +489,11 @@ async function run(rawRequest, options = {}) {
     }
   }
   if (finalCheck.violations.length) {
+    const classifiedFinal = fidelityHypothesisPolicy.classify(finalCheck.violations, 'final_synthesis');
+    fidelity_hypotheses.push(...classifiedFinal.hypotheses);
+    finalCheck = { ...finalCheck, violations: classifiedFinal.hard };
+  }
+  if (finalCheck.violations.length) {
     emitProgress({ phase: 'FAILED', current_node: 'final_synthesis', active_nodes: [], completed_nodes: node_outputs.map(x => x.work_unit_id) });
     wfState.transition(state, 'FAILED');
     return {
@@ -487,7 +501,7 @@ async function run(rawRequest, options = {}) {
       node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
       workflow_state_status: 'FAILED', reason: 'BRIEF_FIDELITY_VIOLATION',
       brief_fidelity_violations: finalCheck.violations,
-      node_outputs, selected_methods_by_node, proposal_status_repairs, final_synthesis_repairs: finalSynthesisRepairs,
+      node_outputs, selected_methods_by_node, proposal_status_repairs, fidelity_hypotheses, final_synthesis_repairs: finalSynthesisRepairs,
       synthesis: finalSynthesis, cost, _state: state,
     };
   }
@@ -499,7 +513,7 @@ async function run(rawRequest, options = {}) {
     mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id, node_order: base.NODES.map(n => n.id).concat(['final_synthesis']),
     mandatory_nodes_executed: node_outputs.length + 1, mandatory_node_count: 9,
     bindings: { ads: selected_methods_by_node.ads.primary_method, whatsapp_conversion: selected_methods_by_node.whatsapp_conversion.primary_method },
-    node_outputs, selected_methods_by_node, proposal_status_repairs, final_synthesis_repairs: finalSynthesisRepairs,
+    node_outputs, selected_methods_by_node, proposal_status_repairs, fidelity_hypotheses, final_synthesis_repairs: finalSynthesisRepairs,
     synthesis: finalSynthesis, cost, workflow_state_status: state.status, _state: state,
   };
 }
