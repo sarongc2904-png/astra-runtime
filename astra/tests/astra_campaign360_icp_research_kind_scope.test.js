@@ -9,6 +9,7 @@ const pack = {
     { chunk_id:'WEB_3', kind:'objection', source_url:'https://example.com/o', source_title:'objection', text:'Concern about setup complexity' },
     { chunk_id:'WEB_4', kind:'offer', source_url:'https://example.com/offer', source_title:'offer', text:'Competitor offers 14-day trial' },
     { chunk_id:'WEB_5', kind:'language', source_url:'https://example.com/l', source_title:'language', text:'Customers say mensajes pendientes' },
+    { chunk_id:'WEB_6', kind:'review', source_url:'https://example.com/r', source_title:'review', text:'Reviewer says $400 MXN feels expensive but setup matters' },
   ],
 };
 
@@ -21,6 +22,7 @@ assert(icp.hits.some(h => h.chunk_id === 'WEB_2'), 'ICP should receive pain evid
 assert(icp.hits.some(h => h.chunk_id === 'WEB_3'), 'ICP should receive objection evidence');
 assert(icp.hits.some(h => h.chunk_id === 'WEB_5'), 'ICP should receive language evidence');
 assert(!String(icp.evidenceText).includes('$400'), 'ICP evidence text must not contain competitor price');
+assert(String(icp.evidenceText).includes('[PRECIO_EXTERNO_OCULTO_PARA_ICP]') || !icp.hits.some(h => h.chunk_id === 'WEB_6'), 'ICP review money must be redacted when included');
 
 const offer = R.mergeRetrieval(internal, pack, { campaign360_node_id:'offer' });
 assert(offer.hits.some(h => h.chunk_id === 'WEB_1'), 'Offer should receive pricing evidence');
