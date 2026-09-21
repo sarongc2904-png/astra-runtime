@@ -15,8 +15,16 @@ const diag = require('../integration/diag');
 
 function clone(value) { return value == null ? value : JSON.parse(JSON.stringify(value)); }
 
-function externalHits(pack, limit = 4) {
-  return (pack && Array.isArray(pack.evidence) ? pack.evidence : []).slice(0, limit).map((e, i) => ({
+const EXTERNAL_RESEARCH_KIND_SCOPE = Object.freeze({
+  market_context: null, // all verified market evidence
+  icp: new Set(['pain', 'objection', 'language', 'review', 'testimonial', 'trend', 'other']),
+  offer: new Set(['competitor', 'pricing', 'offer', 'discount', 'review', 'objection', 'trend', 'other']),
+});
+
+function externalHits(pack, limit = 4, allowedKinds = null) {
+  const all = pack && Array.isArray(pack.evidence) ? pack.evidence : [];
+  const filtered = allowedKinds instanceof Set ? all.filter(e => allowedKinds.has(String(e && e.kind || 'other').toLowerCase())) : all;
+  return filtered.slice(0, limit).map((e, i) => ({
     evidence_id: e.evidence_id || e.chunk_id || `WEB_${i + 1}`,
     source_class: 'EXTERNAL_RESEARCH',
     rank: i + 1,
@@ -38,8 +46,16 @@ function shouldInjectExternalResearch(options = {}) {
   return EXTERNAL_RESEARCH_NODES.has(nodeId);
 }
 
+function externalResearchKindsForNode(options = {}) {
+  const nodeId = String(options.campaign360_node_id || '').trim();
+  return Object.prototype.hasOwnProperty.call(EXTERNAL_RESEARCH_KIND_SCOPE, nodeId)
+    ? EXTERNAL_RESEARCH_KIND_SCOPE[nodeId]
+    : new Set();
+}
+
 function mergeRetrieval(internal, pack, options = {}) {
-  const web = shouldInjectExternalResearch(options) ? externalHits(pack) : [];
+  const allowedKinds = externalResearchKindsForNode(options);
+  const web = shouldInjectExternalResearch(options) ? externalHits(pack, 4, allowedKinds) : [];
   const internalHits = Array.isArray(internal && internal.hits) ? internal.hits : [];
   const hits = web.concat(internalHits);
   const webText = web.map(h => `[${h.chunk_id}] ${h.text} SOURCE: ${h.source_id}`).join('\n');
@@ -224,6 +240,8 @@ module.exports = {
   externalHits,
   shouldInjectExternalResearch,
   EXTERNAL_RESEARCH_NODES,
+  EXTERNAL_RESEARCH_KIND_SCOPE,
+  externalResearchKindsForNode,
   attachExternalProvenance,
   publicResearchPack,
   executeHardened,
