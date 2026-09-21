@@ -178,8 +178,14 @@ async function research({ rawRequest, canonicalBriefFacts = {}, env = process.en
   } finally { clearTimeout(timer); }
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
-    const e = new Error(`web market research provider failed (${response.status})`);
+    const providerMessage = cleanText(
+      payload && payload.error && (payload.error.message || payload.error.code) || '',
+      240
+    );
+    const e = new Error(`web market research provider failed (${response.status})${providerMessage ? ': ' + providerMessage : ''}`);
     e.code = 'WEB_MARKET_RESEARCH_PROVIDER_FAILED';
+    e.http_status = response.status;
+    e.retryable = response.status === 408 || response.status === 409 || response.status === 429 || response.status >= 500;
     throw e;
   }
   const outputText = extractOutputText(payload);
