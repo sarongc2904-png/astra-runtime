@@ -171,7 +171,9 @@ const RETRYABLE_WEB_RESEARCH_ERRORS = new Set([
 ]);
 
 function isRetryableWebResearchError(err) {
-  return !!err && RETRYABLE_WEB_RESEARCH_ERRORS.has(String(err.code || ''));
+  if (!err || !RETRYABLE_WEB_RESEARCH_ERRORS.has(String(err.code || ''))) return false;
+  if (err.retryable === false) return false;
+  return true;
 }
 
 async function run(rawRequest, options = {}) {
