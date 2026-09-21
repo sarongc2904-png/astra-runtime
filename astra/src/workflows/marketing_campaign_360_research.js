@@ -162,6 +162,18 @@ async function executeHardened(runtime, request, options) {
   throw new Error('invalid hardened Campaign360 runtime');
 }
 
+const RETRYABLE_WEB_RESEARCH_ERRORS = new Set([
+  'WEB_MARKET_RESEARCH_TIMEOUT',
+  'WEB_MARKET_RESEARCH_REQUEST_FAILED',
+  'WEB_MARKET_RESEARCH_PROVIDER_FAILED',
+  'WEB_MARKET_RESEARCH_EMPTY',
+  'WEB_MARKET_RESEARCH_INVALID_JSON',
+]);
+
+function isRetryableWebResearchError(err) {
+  return !!err && RETRYABLE_WEB_RESEARCH_ERRORS.has(String(err.code || ''));
+}
+
 async function run(rawRequest, options = {}) {
   if (options.webResearch === false) return H.run(rawRequest, options);
   const emitProgress = payload => {
@@ -172,27 +184,47 @@ async function run(rawRequest, options = {}) {
   emitProgress({ phase: 'WEB_RESEARCH', current_node: 'market_context', active_nodes: ['market_context'], completed_nodes: [] });
   const researchProvider = options.webResearchProvider || webMarketResearch;
   let pack;
-  try {
-    pack = await researchProvider.research({
-      rawRequest,
-      canonicalBriefFacts: originalCanonicalFacts,
-      env: options.researchEnv || process.env,
-      fetchImpl: options.fetchImpl,
-      timeoutMs: options.webResearchTimeoutMs,
-    });
-  } catch (err) {
+  const maxResearchAttempts = Math.max(1, Math.min(2, Number(options.webResearchAttempts || 2)));
+  let researchErr = null;
+  let researchAttempts = 0;
+  for (let attempt = 1; attempt <= maxResearchAttempts; attempt++) {
+    researchAttempts = attempt;
+    try {
+      pack = await researchProvider.research({
+        rawRequest,
+        canonicalBriefFacts: originalCanonicalFacts,
+        env: options.researchEnv || process.env,
+        fetchImpl: options.fetchImpl,
+        timeoutMs: options.webResearchTimeoutMs,
+      });
+      researchErr = null;
+      break;
+    } catch (err) {
+      researchErr = err;
+      if (!isRetryableWebResearchError(err) || attempt >= maxResearchAttempts) break;
+      emitProgress({ phase: 'WEB_RESEARCH_RETRY', current_node: 'market_context', active_nodes: ['market_context'], completed_nodes: [], attempt: attempt + 1, error_code: err.code || 'WEB_MARKET_RESEARCH_FAILED' });
+    }
+  }
+  if (researchErr) {
+    const specificCode = researchErr.code || 'WEB_MARKET_RESEARCH_FAILED';
     emitProgress({ phase: 'FAILED', current_node: 'market_context', active_nodes: [], completed_nodes: [] });
     return {
       mode: options.mode || 'llm',
       workflow_id: 'WF_MC360H',
       workflow_state_status: 'FAILED',
-      reason: 'WEB_MARKET_RESEARCH_FAILED',
+      reason: specificCode,
+      failure_category: 'WEB_MARKET_RESEARCH',
       canonical_brief_facts: originalCanonicalFacts,
       research_policy: researchPolicy.provenancePolicySummary(),
-      web_research: { status: 'FAILED', error: { code: err.code || 'WEB_MARKET_RESEARCH_FAILED', message: String(err.message || err) } },
+      web_research: {
+        status: 'FAILED',
+        attempts: researchAttempts,
+        retryable: isRetryableWebResearchError(researchErr),
+        error: { code: specificCode, message: String(researchErr.message || researchErr) },
+      },
       research_provenance_violations: [], research_grounding: {},
       node_outputs: [], selected_methods_by_node: {}, synthesis: null,
-      cost: { mode: options.mode || 'llm', model_calls: 0, retries: 0, tokens: { prompt: 0, completion: 0 }, web_research: { calls: 1, failed: true } },
+      cost: { mode: options.mode || 'llm', model_calls: 0, retries: Math.max(0, researchAttempts - 1), tokens: { prompt: 0, completion: 0 }, web_research: { calls: researchAttempts, failed: true } },
     };
   }
 
@@ -253,4 +285,6 @@ module.exports = {
   attachExternalProvenance,
   publicResearchPack,
   executeHardened,
+  RETRYABLE_WEB_RESEARCH_ERRORS,
+  isRetryableWebResearchError,
 };
