@@ -46,6 +46,10 @@ function shouldInjectExternalResearch(options = {}) {
   return EXTERNAL_RESEARCH_NODES.has(nodeId);
 }
 
+function redactExternalMoneyForICP(text) {
+  return String(text || '').replace(/\$\s*[\d][\d,.]*(?:\s*(?:MXN|USD|pesos?|d[oó]lares?))?/gi, '[PRECIO_EXTERNO_OCULTO_PARA_ICP]');
+}
+
 function externalResearchKindsForNode(options = {}) {
   const nodeId = String(options.campaign360_node_id || '').trim();
   return Object.prototype.hasOwnProperty.call(EXTERNAL_RESEARCH_KIND_SCOPE, nodeId)
@@ -55,7 +59,10 @@ function externalResearchKindsForNode(options = {}) {
 
 function mergeRetrieval(internal, pack, options = {}) {
   const allowedKinds = externalResearchKindsForNode(options);
-  const web = shouldInjectExternalResearch(options) ? externalHits(pack, 4, allowedKinds) : [];
+  let web = shouldInjectExternalResearch(options) ? externalHits(pack, 4, allowedKinds) : [];
+  if (String(options.campaign360_node_id || '').trim() === 'icp') {
+    web = web.map(h => ({ ...h, text: redactExternalMoneyForICP(h.text) }));
+  }
   const internalHits = Array.isArray(internal && internal.hits) ? internal.hits : [];
   const hits = web.concat(internalHits);
   const webText = web.map(h => `[${h.chunk_id}] ${h.text} SOURCE: ${h.source_id}`).join('\n');
@@ -242,6 +249,7 @@ module.exports = {
   EXTERNAL_RESEARCH_NODES,
   EXTERNAL_RESEARCH_KIND_SCOPE,
   externalResearchKindsForNode,
+  redactExternalMoneyForICP,
   attachExternalProvenance,
   publicResearchPack,
   executeHardened,
