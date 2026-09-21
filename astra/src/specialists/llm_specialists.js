@@ -100,6 +100,7 @@ function buildPrompt(input) {
     `- Tag every recommendation with support_class one of: ${SUPPORT_CLASSES.join(', ')}.`,
     `- DIRECTLY_SUPPORTED requires an evidence reference (cite E# / chunk). INFERENCE = reasoned from method/brief. ASSUMPTION = a stated gap needing USER_PROVIDED_FACTS.`,
     `- EXTERNAL_RESEARCH evidence is verified web research. It may support market/competitor/review/testimonial claims only as attributed evidence; never reattribute it as the user's own result.`,
+    `- Competitor prices from EXTERNAL_RESEARCH are contextual evidence only. Never treat them as the user's price, qualification threshold, offer price, or canonical business fact. MARKET_CONTEXT may cite exact competitor amounts in findings only; do not copy them into downstream_payload.`,
     `- For MARKET_CONTEXT_SPECIALIST, ICP_SPECIALIST, and OFFER_SPECIALIST: when any EXTERNAL_RESEARCH evidence is supplied, findings MUST contain at least one DIRECTLY_SUPPORTED finding citing that external item by E# or WEB_n.`,
     `- For anything requiring CURRENT platform/provider/market facts you do not have (e.g. ${(spec.current || []).join(', ') || 'current market/pricing/competitor data'}), do NOT invent it: put it in current_research_required and mark CURRENT_RESEARCH_REQUIRED.`,
     `- Never invent benchmark numbers, guarantees, provider/API behavior, or current-platform doctrine. Preserve the method's stated limitations.`,
