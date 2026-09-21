@@ -276,6 +276,9 @@ const DENIAL_PATTERNS = {
   product_name: [/producto\s+por\s+definir/, /producto\s+desconocid/],
   product_type: [/producto\s+por\s+definir/, /tipo\s+de\s+producto\s+por\s+definir/],
   mechanism: [/mecanismo\s+por\s+definir/, /mecanismo\s+desconocid/],
+  demo_duration: [/demo(?:\s+actual)?\s+(?:desconocid|por\s+definir|por\s+confirmar)/, /duraci[oó]n\s+de\s+la\s+demo\s+(?:desconocid|por\s+definir)/],
+  monthly_price: [/precio\s+mensual\s+(?:desconocid|por\s+definir|por\s+confirmar)/, /plan\s+mensual\s+(?:desconocid|por\s+definir)/],
+  annual_price: [/precio\s+anual\s+(?:desconocid|por\s+definir|por\s+confirmar)/, /plan\s+anual\s+(?:desconocid|por\s+definir)/],
 };
 function checkKnownFactDenial(facts, key, val) {
   const violations = [];
@@ -314,6 +317,9 @@ const UNKNOWN_ASSERTION_FIELD_KEYS = {
   buyer: new Set(['buyer']),
   geography: new Set(['geography']),
   mechanism: new Set(['mechanism']),
+  demo_duration: new Set(['demo_duration', 'demo_actual']),
+  monthly_price: new Set(['monthly_price', 'precio_mensual']),
+  annual_price: new Set(['annual_price', 'plan_anual', 'precio_anual']),
 };
 // Empty, whitespace/punctuation-only, or literally UNKNOWN/CURRENT_RESEARCH_REQUIRED: the fact is
 // honestly left unresolved rather than silently asserted.

@@ -294,6 +294,32 @@ async function run(rawRequest, options = {}) {
   const workflow = { workflow_id: 'WF_MC360H', intent: 'MARKETING_CAMPAIGN_360', steps };
   const state = wfState.create({ user_goal: rawRequest, task_brief: brief, workflow });
 
+  // [Brief Authority Conflict Gate] Two incompatible explicit user facts must never be silently
+  // reconciled, downgraded to UNKNOWN, or resolved by research/LLM inference. Stop before any
+  // retrieval/model spend and return the exact conflicting field/evidence for clarification.
+  const internalConflicts = Object.entries(canonicalBriefFacts)
+    .filter(([, value]) => value && typeof value === 'object' && value.status === 'CONFLICTO_INTERNO')
+    .map(([field, value]) => ({
+      field,
+      status: 'CONFLICTO_INTERNO',
+      candidates: value.candidates || [],
+      evidence: value.evidence || [],
+      recommendation: value.recommendation || 'Solicitar aclaración; no elegir un valor final automáticamente.',
+    }));
+  if (internalConflicts.length) {
+    wfState.transition(state, 'WAITING_FOR_INPUT');
+    return {
+      mode, intent, brief, canonical_brief_facts: canonicalBriefFacts, workflow_id: workflow.workflow_id,
+      workflow_state_status: 'WAITING_FOR_INPUT',
+      reason: 'BRIEF_INTERNAL_CONFLICT',
+      brief_internal_conflicts: internalConflicts,
+      required_inputs: internalConflicts.map(x => x.field),
+      node_outputs: [], selected_methods_by_node: {}, synthesis: null,
+      cost: { mode, model_calls: 0, retries: 0, tokens: { prompt: 0, completion: 0 } },
+      _state: state,
+    };
+  }
+
   // Guard (ASTRA-06): incomplete business information -> WAITING_FOR_INPUT (never fabricate business facts).
   // Fires only when BOTH the business is unspecified AND no domain/deliverable signal was detected
   // (a clear deliverable like "digital infoproduct" proceeds even if the business noun is implicit).
