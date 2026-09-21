@@ -9,6 +9,18 @@ const DESIGN_TYPES = Object.freeze([
   'COHORT_COMPARISON', 'OPERATIONAL_PROCESS_TEST',
 ]);
 
+// Public/API aliases are normalised to the canonical internal taxonomy. This keeps callers
+// from failing merely because they use common experiment terminology while preserving the
+// exact same causal/measurement rules after normalisation.
+const DESIGN_TYPE_ALIASES = Object.freeze({
+  'A/B_TEST': 'CONTROL_VS_TREATMENT',
+  'AB_TEST': 'CONTROL_VS_TREATMENT',
+  'A_B_TEST': 'CONTROL_VS_TREATMENT',
+  'SPLIT_TEST': 'CONTROL_VS_TREATMENT',
+  'CONTROL_TREATMENT': 'CONTROL_VS_TREATMENT',
+  'CONTROL_V_TREATMENT': 'CONTROL_VS_TREATMENT',
+});
+
 const PERMITS = Object.freeze({
   CONTROL_VS_TREATMENT: { descriptive: true, causal_possible: true, note: 'causal evaluation possible ONLY if scope, allocation, contamination and measurement are all valid' },
   HOLDOUT: { descriptive: true, causal_possible: true, note: 'a holdout is a controlled comparison — causal evaluation possible under the same conditions as CONTROL_VS_TREATMENT' },
@@ -20,7 +32,10 @@ const PERMITS = Object.freeze({
 
 // buildDesign({ design_type, allocation, treatment, control, unit_of_assignment, contamination_status, measurement_valid })
 function buildDesign(x) {
-  const type = DESIGN_TYPES.includes(String(x.design_type).toUpperCase()) ? String(x.design_type).toUpperCase() : null;
+  const rawType = x.design_type == null ? '' : String(x.design_type).trim().toUpperCase();
+  const normalizedInput = rawType.replace(/[\s-]+/g, '_');
+  const resolvedType = DESIGN_TYPE_ALIASES[normalizedInput] || normalizedInput;
+  const type = DESIGN_TYPES.includes(resolvedType) ? resolvedType : null;
   const permits = type ? PERMITS[type] : { descriptive: false, causal_possible: false, note: 'unrecognised design type' };
 
   const allocation = x.allocation ? String(x.allocation).toUpperCase() : 'UNKNOWN'; // RANDOM / DETERMINISTIC_SPLIT / TIME_BASED / SELF_SELECTED / UNKNOWN
@@ -48,6 +63,8 @@ function buildDesign(x) {
   const body = {
     schema_version: 'ucdm-experiment-1.0.0', kind: 'ExperimentDesign',
     design_type: type || 'UNKNOWN',
+    input_design_type: rawType || null,
+    design_type_was_aliased: Boolean(type && normalizedInput !== type),
     is_controlled: controlled,
     allocation, unit_of_assignment: unit,
     treatment_summary: x.treatment ? String(x.treatment) : null,
@@ -70,4 +87,4 @@ function validateDesign(d) {
   return { valid: errors.length === 0, errors };
 }
 
-module.exports = { DESIGN_TYPES, PERMITS, buildDesign, validateDesign };
+module.exports = { DESIGN_TYPES, DESIGN_TYPE_ALIASES, PERMITS, buildDesign, validateDesign };
