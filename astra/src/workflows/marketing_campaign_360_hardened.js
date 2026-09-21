@@ -120,9 +120,10 @@ async function processNode(n, ctx) {
     diag.mark(diagId, 'BEFORE_RETRIEVAL', { node: n.id });
     // Prefer the non-blocking path (candidate H) when the injected/real adapter offers it; fall back
     // to the synchronous retrieve() unchanged for any adapter (e.g. test mocks) that does not.
-    const r = adapter.retrieveAsync ? await adapter.retrieveAsync(q, { top_k: 5 }) : adapter.retrieve(q, { top_k: 5 });
+    const retrievalOptions = { top_k: 5, campaign360_node_id: n.id, specialist_type: SPEC_TYPE[n.id] };
+    const r = adapter.retrieveAsync ? await adapter.retrieveAsync(q, retrievalOptions) : adapter.retrieve(q, retrievalOptions);
     diag.mark(diagId, 'AFTER_RETRIEVAL', { node: n.id, hits: (r.hits || []).length });
-    evidence = r.hits.map(h => ({ chunk_id: h.chunk_id, source_id: h.source_id, source_pdf_name: h.source_pdf_name, text: h.text, cosine: h.cosine, source_class: 'INTERNAL_KNOWLEDGE' }));
+    evidence = r.hits.map(h => ({ chunk_id: h.chunk_id, source_id: h.source_id, source_pdf_name: h.source_pdf_name, text: h.text, cosine: h.cosine, source_class: h.source_class || (/^WEB_\d+$/i.test(String(h.chunk_id || '')) ? 'EXTERNAL_RESEARCH' : 'INTERNAL_KNOWLEDGE') }));
     evidenceChars = (r.evidenceText || '').length;
     if (evidence.length === 0) { const e = new Error('missing required evidence for node ' + n.id); e.wfTransition = 'BLOCKED'; throw e; }
   }

@@ -31,8 +31,15 @@ function externalHits(pack, limit = 4) {
   }));
 }
 
-function mergeRetrieval(internal, pack) {
-  const web = externalHits(pack);
+const EXTERNAL_RESEARCH_NODES = new Set(['market_context', 'icp', 'offer']);
+
+function shouldInjectExternalResearch(options = {}) {
+  const nodeId = String(options.campaign360_node_id || '').trim();
+  return EXTERNAL_RESEARCH_NODES.has(nodeId);
+}
+
+function mergeRetrieval(internal, pack, options = {}) {
+  const web = shouldInjectExternalResearch(options) ? externalHits(pack) : [];
   const internalHits = Array.isArray(internal && internal.hits) ? internal.hits : [];
   const hits = web.concat(internalHits);
   const webText = web.map(h => `[${h.chunk_id}] ${h.text} SOURCE: ${h.source_id}`).join('\n');
@@ -46,12 +53,12 @@ function mergeRetrieval(internal, pack) {
 
 class ResearchAugmentedAdapter {
   constructor(baseAdapter, pack) { this.base = baseAdapter; this.pack = pack; }
-  retrieve(query, options = {}) { return mergeRetrieval(this.base.retrieve(query, options), this.pack); }
+  retrieve(query, options = {}) { return mergeRetrieval(this.base.retrieve(query, options), this.pack, options); }
   async retrieveAsync(query, options = {}) {
     const r = typeof this.base.retrieveAsync === 'function'
       ? await this.base.retrieveAsync(query, options)
       : this.base.retrieve(query, options);
-    return mergeRetrieval(r, this.pack);
+    return mergeRetrieval(r, this.pack, options);
   }
   config() { return typeof this.base.config === 'function' ? this.base.config() : {}; }
   getRuntimeContract() { return typeof this.base.getRuntimeContract === 'function' ? this.base.getRuntimeContract() : {}; }
@@ -215,6 +222,8 @@ module.exports = {
   ResearchAugmentedAdapter,
   mergeRetrieval,
   externalHits,
+  shouldInjectExternalResearch,
+  EXTERNAL_RESEARCH_NODES,
   attachExternalProvenance,
   publicResearchPack,
   executeHardened,
