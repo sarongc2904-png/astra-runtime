@@ -9,7 +9,73 @@
 // Ads ... WhatsApp ..."). A field never present in either form stays UNKNOWN — never invented.
 const crypto = require('crypto');
 
-const FACT_STATUS = Object.freeze(['USER_PROVIDED_FACT', 'INFERENCE', 'PROPOSAL', 'UNKNOWN']);
+const FACT_STATUS = Object.freeze(['USER_PROVIDED_FACT', 'INFERENCE', 'PROPOSAL', 'UNKNOWN', 'CONFLICTO_INTERNO']);
+
+const AUTHORITY_ORDER = Object.freeze([
+  'DATO_INTERNO_EXPLICITO',
+  'DATO_INTERNO_IMPLICITO_FUERTEMENTE_ANCLADO',
+  'DATO_CONFIRMADO_EN_CONTEXTO_ESTRUCTURADO',
+  'INVESTIGACION_EXTERNA',
+  'INFERENCIA',
+  'PROPUESTA',
+  'UNKNOWN',
+]);
+
+function unknownFact() {
+  return Object.freeze({ value: null, status: 'UNKNOWN', provenance: 'UNKNOWN', confidence: 'NONE' });
+}
+function explicitFact(value, evidenceText) {
+  if (!value) return unknownFact();
+  return Object.freeze({
+    value,
+    status: 'USER_PROVIDED_FACT',
+    provenance: 'DATO_INTERNO',
+    confidence: 'EXPLICITO',
+    authority: 'DATO_INTERNO_EXPLICITO',
+    evidence: evidenceText ? [String(evidenceText)] : [],
+  });
+}
+function conflictFact(field, candidates) {
+  return Object.freeze({
+    value: null,
+    status: 'CONFLICTO_INTERNO',
+    provenance: 'DATO_INTERNO',
+    confidence: 'CONFLICTO',
+    authority: 'DATO_INTERNO_EXPLICITO',
+    conflict_field: field,
+    candidates: candidates.map(c => c.value),
+    evidence: candidates.map(c => c.evidence),
+    recommendation: 'Solicitar aclaración; no elegir un valor final automáticamente.',
+  });
+}
+function normalizeComparable(v) {
+  return String(v == null ? '' : v).trim().toLowerCase().replace(/\s+/g, ' ');
+}
+function resolveExplicitCandidates(field, candidates) {
+  const clean = (candidates || []).filter(c => c && c.value != null && String(c.value).trim() !== '');
+  if (!clean.length) return unknownFact();
+  const unique = [];
+  for (const c of clean) {
+    const k = normalizeComparable(c.value);
+    if (!unique.some(u => normalizeComparable(u.value) === k)) unique.push(c);
+  }
+  if (unique.length > 1) return conflictFact(field, unique);
+  return explicitFact(unique[0].value, unique[0].evidence);
+}
+function collectLabeledCandidates(text, patterns, transform = cleanValue) {
+  const out = [];
+  for (const line of String(text || '').split(/\r?\n/)) {
+    for (const re of patterns) {
+      const m = line.match(re);
+      if (m && m[1] && m[1].trim()) {
+        const value = transform(m[1]);
+        if (value != null) out.push({ value, evidence: line.trim() });
+        break;
+      }
+    }
+  }
+  return out;
+}
 
 // ---------- labeled fields: one canonical field per line, "Label: value" ----------
 // NOTE on "Producto:": historically this label held the product NAME ("Producto: Método 360"),
@@ -147,7 +213,7 @@ function firstNaturalMatch(naturalText, patterns) {
 // AUDIENCIA
 // MERCADO / GEOGRAFÍA
 // rather than "Label: value" lines. Treat those blocks as first-class user-provided facts.
-const KNOWN_SECTION_HEADING = /^(?:NEGOCIO\s*\/\s*PRODUCTO|OBJETIVO\s+PRINCIPAL|AUDIENCIA|OFERTA\s+ACTUAL|CANAL\s+PRINCIPAL|MERCADO\s*\/\s*GEOGRAF[IÍ]A|PRESUPUESTO|RESTRICCIONES?|INVESTIGACI[OÓ]N\s+OBLIGATORIA|REGLA\s+DE\s+PROCEDENCIA|SECUENCIA\s+OBLIGATORIA|ENTREGABLE\s+FINAL)$/i;
+const KNOWN_SECTION_HEADING = /^(?:NEGOCIO\s*\/\s*PRODUCTO|OBJETIVO\s+PRINCIPAL|AUDIENCIA|OFERTA\s+ACTUAL|CONTROL\s+ACTUAL|OFERTA\s+DE\s+ENTRADA(?:\s+A\s+VALIDAR)?|OFERTA\s+PRINCIPAL|OFERTA\s+ANUAL|CANAL\s+PRINCIPAL|MERCADO\s*\/\s*GEOGRAF[IÍ]A|PRESUPUESTO|RESTRICCIONES?|INVESTIGACI[OÓ]N\s+OBLIGATORIA|REGLA\s+DE\s+PROCEDENCIA|SECUENCIA\s+OBLIGATORIA|ENTREGABLE\s+FINAL)$/i;
 
 function normalizeHeadingLine(line) {
   return String(line || '')
@@ -276,7 +342,7 @@ function naturalPrice(naturalText) {
   return m ? m[0] : null;
 }
 
-function fact(value) { return value ? Object.freeze({ value, status: 'USER_PROVIDED_FACT' }) : Object.freeze({ value: null, status: 'UNKNOWN' }); }
+function fact(value, evidenceText) { return value ? explicitFact(value, evidenceText) : unknownFact(); }
 
 // extract(rawRequest) -> frozen CanonicalBriefFacts. Never throws; a field absent from BOTH the
 // labeled and natural-language forms stays UNKNOWN — never invented. Deterministic: identical
@@ -317,7 +383,9 @@ function extract(rawRequest) {
   const product_type = tipoLabelRaw || (openingProductName ? productoLabelRaw : null) || extractProductTypeFromSection(productSection) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.product_type);
 
   const priceRaw = firstLabeledMatch(text, FIELD_LABELS.price) || naturalPrice(naturalText);
-  const { amount, currency } = parsePrice(priceRaw);
+  const parsedPrincipalPrice = parsePrice(priceRaw);
+  const amount = parsedPrincipalPrice.amount;
+  const currency = parsedPrincipalPrice.currency;
 
   let geography = firstLabeledMatch(text, FIELD_LABELS.geography) || firstMeaningfulSectionLine(geographySection);
   let buyer = firstLabeledMatch(text, FIELD_LABELS.buyer) || extractAudienceBuyer(audienceSection);
@@ -342,10 +410,28 @@ function extract(rawRequest) {
   const problem_context = firstLabeledMatch(text, FIELD_LABELS.problem_context) || extractProblemContextFromAudience(audienceSection);
   const mechanism = firstLabeledMatch(text, FIELD_LABELS.mechanism) || extractMechanismFromSection(productSection) || firstNaturalMatch(naturalText, NATURAL_PATTERNS.mechanism);
   const offerText = (offerSection || []).join('\n');
-  const demoMatch = offerText.match(/^\s*demo\s+actual\s*:\s*(.+)$/im);
-  const ctaMatch = offerText.match(/^\s*cta\s+actual\s*:\s*(.+)$/im);
-  const demo_duration = demoMatch ? cleanValue(demoMatch[1]) : null;
-  const current_cta = ctaMatch ? cleanValue(cleanValue(ctaMatch[1]).replace(/^[\s\"'“”‘’]+|[\s\"'“”‘’]+$/g, '')) : null;
+
+  // [Brief Authority] Current commercial facts are extracted globally from the raw brief, not
+  // only from OFERTA ACTUAL. This prevents a valid "Demo actual: 3 días" under CONTROL ACTUAL
+  // (or another structured block) from being silently degraded to UNKNOWN.
+  const demoFact = resolveExplicitCandidates('demo_duration', collectLabeledCandidates(text, [
+    /^\s*demo\s+actual\s*:\s*(.+)$/i,
+    /^\s*prueba\s+actual\s*:\s*(.+)$/i,
+  ]));
+  const monthlyPriceFact = resolveExplicitCandidates('monthly_price', collectLabeledCandidates(text, [
+    /^\s*precio\s+mensual\s*:\s*(.+)$/i,
+    /^\s*plan\s+mensual\s*:\s*(.+)$/i,
+  ], raw => parsePrice(raw).amount));
+  const annualPriceFact = resolveExplicitCandidates('annual_price', collectLabeledCandidates(text, [
+    /^\s*plan\s+anual\s*:\s*(.+)$/i,
+    /^\s*precio\s+anual\s*:\s*(.+)$/i,
+    /^\s*oferta\s+anual\s*:\s*(.+)$/i,
+  ], raw => parsePrice(raw).amount));
+
+  const ctaCandidates = collectLabeledCandidates(text, [/^\s*cta\s+actual\s*:\s*(.+)$/i], raw =>
+    cleanValue(cleanValue(raw).replace(/^[\s\"'“”‘’]+|[\s\"'“”‘’]+$/g, ''))
+  );
+  const ctaFact = resolveExplicitCandidates('current_cta', ctaCandidates);
   // constraints: a same-line value ("Restricciones: presupuesto limitado") wins first (legacy,
   // unchanged); otherwise capture the full "Restricciones obligatorias:" block verbatim, line by
   // line, up to the next structural heading — nothing summarized, nothing invented.
@@ -354,15 +440,23 @@ function extract(rawRequest) {
   const facts = {
     product_name: fact(product_name),
     product_type: fact(product_type),
-    price: amount ? Object.freeze({ value: amount, status: 'USER_PROVIDED_FACT' }) : Object.freeze({ value: null, status: 'UNKNOWN' }),
-    currency: currency ? Object.freeze({ value: currency, status: 'USER_PROVIDED_FACT' }) : Object.freeze({ value: null, status: 'UNKNOWN' }),
+    // Existing principal price remains backward compatible. When an explicit monthly price is
+    // supplied, it has authority over a generic/natural first-dollar match (which might otherwise
+    // accidentally pick an entry offer such as $197).
+    price: monthlyPriceFact.status === 'USER_PROVIDED_FACT'
+      ? monthlyPriceFact
+      : (monthlyPriceFact.status === 'CONFLICTO_INTERNO' ? monthlyPriceFact : (amount ? explicitFact(amount, priceRaw) : unknownFact())),
+    currency: currency ? explicitFact(currency, priceRaw) : unknownFact(),
+    monthly_price: monthlyPriceFact,
+    annual_price: annualPriceFact,
     buyer: fact(buyer),
     geography: fact(geography),
     business_objective: fact(business_objective),
     problem_context: fact(problem_context),
     mechanism: fact(mechanism),
-    demo_duration: fact(demo_duration),
-    current_cta: fact(current_cta),
+    demo_duration: demoFact,
+    demo_actual: demoFact,
+    current_cta: ctaFact,
     constraints: fact(constraintsRaw),
   };
   const explicit_unknowns = Object.entries(facts).filter(([, f]) => f.status === 'UNKNOWN').map(([k]) => k).sort();
@@ -386,4 +480,4 @@ function firstNaturalMatchPair(naturalText, patterns) {
   return null;
 }
 
-module.exports = { FACT_STATUS, extract };
+module.exports = { FACT_STATUS, AUTHORITY_ORDER, extract, resolveExplicitCandidates };
