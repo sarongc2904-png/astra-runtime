@@ -23,7 +23,10 @@ function isDescriptiveIcpPainFalsePositive(v, nodeId) {
   const matched = String(v.matched_text || '').trim();
   const clause = String(v.local_clause || '').trim();
   if (!PARTICIPLE_RE.test(matched) || !clause) return false;
-  if (ADVERTISER_VOICE_RE.test(clause) || GUARANTEE_RE.test(clause) || MAGNITUDE_RE.test(clause)) return false;
+  // In an ICP pain, a possessive/second-person reference (e.g. "tus mensajes duplicados")
+  // does not turn a past participle/adjective into an advertiser promise. The dangerous
+  // imperative/infinitive forms are handled separately below and remain blocked.
+  if (GUARANTEE_RE.test(clause) || MAGNITUDE_RE.test(clause)) return false;
   if (INFINITIVE_OR_IMPERATIVE_RE.test(clause)) return false;
 
   const idx = clause.toLowerCase().indexOf(matched.toLowerCase());
